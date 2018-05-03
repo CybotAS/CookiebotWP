@@ -6,7 +6,7 @@
 */ 
 
 function cookiebot_addon_ga_google_analytics() {
-	//Check if MonsterInsights is loaded.
+	//Check if GA Google Analytics is loaded.
 	if(!function_exists('ga_google_analytics_init')) { return; }
 	//Check if Cookiebot is activated and active.
 	if(!function_exists('cookiebot_active') || !cookiebot_active()) { return; } 
