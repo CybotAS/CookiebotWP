@@ -1,4 +1,4 @@
-# Cookiebot Addons
+# Cookiebot Wordpress Addons
 
 
 Cookiebot Addons are plugins for Wordpress that make other plugins, such as MonsterInsights or GADWP, compatible with Cookiebot. 
@@ -23,4 +23,4 @@ $scriptTag = '<script'.cookiebot_assist('statistics').'>';
 }
 ```
 
-The developer of the plugin can see more details on [Cookiebot Help Step 3](https://www.cookiebot.com/goto/help/)
+The developer of the plugin can see more details on [Cookiebot Help Step 3](https://www.cookiebot.com/goto/help/).
