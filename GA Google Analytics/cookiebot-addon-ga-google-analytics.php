@@ -20,7 +20,6 @@ function cookiebot_addon_ga_google_analytics() {
 	if ( has_action( 'wp_head', 'ga_google_analytics_tracking_code' ) ) {
 		add_action( 'wp_head', 'start_buffer', 9 );
 		add_action( 'wp_head', 'end_buffer', 11 );
-		//add_action( 'wp_footer', 'footer' );
 	} elseif ( has_action( 'wp_footer', 'ga_google_analytics_tracking_code' ) ) {
 		add_action( 'wp_footer', 'start_buffer', 9 );
 		add_action( 'wp_footer', 'end_buffer', 11 );
