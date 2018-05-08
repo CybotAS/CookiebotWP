@@ -17,7 +17,7 @@ If you favourite plugins doesn’t support Cookiebot you are always welcome to a
 Cookiebot provides a helper function to check if there is an active, working version of Cookiebot on the website.
 The easiest way for at developer to implement Cookiebot support is to add a check for Cookiebot where tags are outputted to the visitor. 
 
-This can be done following way;
+This can be done following way:
 
 ```php
 $scriptTag = ";
@@ -32,7 +32,7 @@ The following properties are available on the CookieConsent object:
 
 | Name                | Type | Default | Description                                                                                                                                                                                                            |
 |---------------------|:----:|:-------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| consent.necessary   | bool | true    | True if current user has accepted necessary cookies. The property is read only.                                                                                                                                        |
+| consent.necessary   | bool | true    | True if current user has accepted necessary cookies. <br> The property is read only.                                                                                                                                        |
 | consent.preferences | bool | false   | True if current user has accepted preference cookies. The property is read only.                                                                                                                                       |
 | consent.statistics  | bool | false   | True if current user has accepted statistics cookies. The property is read only.                                                                                                                                       |
 | consent.marketing   | bool | false   | True if current user has accepted marketing cookies. The property is read only.                                                                                                                                        |
