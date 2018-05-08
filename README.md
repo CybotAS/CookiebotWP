@@ -14,12 +14,12 @@ MonsterInsights and GADWP are about to release a GDPR compliance addon, which su
 
 # Roadmap
 
-Following plugins are in pipeline
-* MonsterInsights (discontinued)
-* GADWP (discontinued)
-* GA Google Analytics (https://wordpress.org/plugins/ga-google-analytics/)
-* Google Analyticator (https://wordpress.org/plugins/google-analyticator/)
-* Jetpack by Wordpress.com (https://wordpress.org/plugins/jetpack/)
+Following plugins are in pipeline:
+* ~~MonsterInsights (discontinued)~~
+* ~~GADWP (discontinued)~~
+* GA Google Analytics (https://wordpress.org/plugins/ga-google-analytics/) (released and tested)
+* Google Analyticator (https://wordpress.org/plugins/google-analyticator/) (in development)
+* Jetpack by Wordpress.com (https://wordpress.org/plugins/jetpack/) (in pipeline)
 * To be continued..
 
 If you have a plugin that you would like integration for, please submit a request in the [Issues](https://github.com/CybotAS/CookiebotAddons/issues) section.
