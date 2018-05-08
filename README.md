@@ -95,11 +95,11 @@ else
     //The user has not accepted cookies - set strictly necessary cookies only
 }
 ```
-The developer of the plugin can see more details on https://www.cookiebot.com/goto/developer/
+More details are available at https://www.cookiebot.com/goto/developer/
 
 # Need to get in touch?
 
-There are several ways you can get in touch with us. 
-We are available on the Making Wordpress Slack workspace. 
-Username: Kenan
+There are several ways you can get in touch with us. <br>
+We are available on the Making Wordpress Slack workspace. <br>
+Username: Kenan <br>
 You can also reach us through our helpdesk at www.cookiebot.com/goto/helpdesk/
