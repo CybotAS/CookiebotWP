@@ -12,7 +12,7 @@ MonsterInsights and GADWP are about to release a GDPR compliance addon, which su
 2. Go to the admin page of your WP installation and activate the plugin
 3. You are done, verify that it works
 
-# How do I make other plugins support Cookiebot?
+# How do I make my plugin support Cookiebot?
 If you favourite plugins doesn’t support Cookiebot you are always welcome to ask the author to add support for Cookiebot.
 Cookiebot provides a helper function to check if there is an active, working version of Cookiebot on the website.
 The easiest way for at developer to implement Cookiebot support is to add a check for Cookiebot where tags are outputted to the visitor. 
