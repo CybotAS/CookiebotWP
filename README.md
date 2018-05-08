@@ -26,7 +26,7 @@ $scriptTag = '<script'.cookiebot_assist('statistics').'>';
 }
 ```
 
-A users consent state can be be aquired through Cookiebots JS API:
+A users consent state can be be aquired through Cookiebots JS API.
 
 The following properties are available on the CookieConsent object:
 
