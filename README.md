@@ -33,13 +33,13 @@ The following properties are available on the CookieConsent object:
 | Name                | Type | Default | Description                                                                                                                                                                                                            |
 |---------------------|:----:|:-------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | consent.necessary   | bool | true    | True if current user has accepted necessary cookies. <br> The property is read only.                                                                                                                                        |
-| consent.preferences | bool | false   | True if current user has accepted preference cookies. The property is read only.                                                                                                                                       |
-| consent.statistics  | bool | false   | True if current user has accepted statistics cookies. The property is read only.                                                                                                                                       |
-| consent.marketing   | bool | false   | True if current user has accepted marketing cookies. The property is read only.                                                                                                                                        |
-| consented           | bool | false   | True if the user has accepted cookies. The property is read only.                                                                                                                                                      |
-| declined            | bool | false   | True if the user has declined the use of cookies. The property is read only.                                                                                                                                           |
+| consent.preferences | bool | false   | True if current user has accepted preference cookies. <br> The property is read only.                                                                                                                                       |
+| consent.statistics  | bool | false   | True if current user has accepted statistics cookies. <br> The property is read only.                                                                                                                                       |
+| consent.marketing   | bool | false   | True if current user has accepted marketing cookies. <br> The property is read only.                                                                                                                                        |
+| consented           | bool | false   | True if the user has accepted cookies. <br> The property is read only.                                                                                                                                                      |
+| declined            | bool | false   | True if the user has declined the use of cookies. <br> The property is read only.                                                                                                                                           |
 | hasResponse         | bool | false   | True if the user has responded to the dialog with either 'accept' or 'decline'.                                                                                                                                        |
-| doNotTrack          | bool | false   | True if the user has enabled the web browser's 'Do not track' (DNT) setting. If DNT is enabled Cookiebot will not set the third party cookie CookieConsentBulkTicket used for bulk consent. The property is read only. |
+| doNotTrack          | bool | false   | True if the user has enabled the web browser's 'Do not track' (DNT) setting. <br> If DNT is enabled Cookiebot will not set the third party cookie CookieConsentBulkTicket used for bulk consent. <br> The property is read only. |
 
 And through PHP:
 
@@ -96,3 +96,10 @@ else
 }
 ```
 The developer of the plugin can see more details on https://www.cookiebot.com/goto/developer/
+
+# Need to get in touch?
+
+There are several ways you can get in touch with us. 
+We are available on the Making Wordpress Slack workspace. 
+Username: Kenan
+You can also reach us through our helpdesk at www.cookiebot.com/goto/helpdesk/
