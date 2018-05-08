@@ -12,6 +12,19 @@ MonsterInsights and GADWP are about to release a GDPR compliance addon, which su
 2. Go to the admin page of your WP installation and activate the plugin
 3. You are done, verify that it works
 
+# Roadmap
+
+Following plugins are in pipeline:
+* ~~MonsterInsights (discontinued)~~
+* ~~GADWP (discontinued)~~
+* GA Google Analytics (https://wordpress.org/plugins/ga-google-analytics/) (released and tested)
+* Google Analyticator (https://wordpress.org/plugins/google-analyticator/) (in development)
+* Jetpack by Wordpress.com (https://wordpress.org/plugins/jetpack/) (in pipeline)
+* To be continued..
+
+If you have a plugin that you would like integration for, please submit a request in the [Issues](https://github.com/CybotAS/CookiebotAddons/issues) section.
+
+
 # How do I make my plugin support Cookiebot?
 If you favourite plugins doesn’t support Cookiebot you are always welcome to ask the author to add support for Cookiebot.
 Cookiebot provides a helper function to check if there is an active, working version of Cookiebot on the website.
