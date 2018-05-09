@@ -3,7 +3,7 @@
  * Plugin Name:    Cookiebot Addon for `GA Google Analytics`
  * Description: Adding support for Cookiebot
  * Author: Johan Holst Nielsen
- * Version: 1.5.3
+ * Version: 1.5.4
  */
 
 function cookiebot_addon_ga_google_analytics() {
@@ -18,11 +18,11 @@ function cookiebot_addon_ga_google_analytics() {
 
 	//Remove GA Google action and replace it with our own
 	if ( has_action( 'wp_head', 'ga_google_analytics_tracking_code' ) ) {
-		add_action( 'wp_head', 'start_buffer', 9 );
-		add_action( 'wp_head', 'end_buffer', 11 );
+		add_action( 'wp_head', 'cookiebot_addon_ga_start_buffer', 9 );
+		add_action( 'wp_head', 'cookiebot_addon_ga_end_buffer', 11 );
 	} elseif ( has_action( 'wp_footer', 'ga_google_analytics_tracking_code' ) ) {
-		add_action( 'wp_footer', 'start_buffer', 9 );
-		add_action( 'wp_footer', 'end_buffer', 11 );
+		add_action( 'wp_footer', 'cookiebot_addon_ga_start_buffer', 9 );
+		add_action( 'wp_footer', 'cookiebot_addon_ga_end_buffer', 11 );
 	}
 }
 
@@ -31,8 +31,8 @@ function cookiebot_addon_ga_google_analytics() {
  *
  * @since 1.0.0
  */
-function start_buffer() {
-	ob_start( 'manipulate_script' );
+function cookiebot_addon_ga_start_buffer() {
+	ob_start( 'cookiebot_addon_ga_manipulate_script' );
 }
 
 /**
@@ -40,7 +40,7 @@ function start_buffer() {
  *
  * @since 1.0.0
  */
-function end_buffer() {
+function cookiebot_addon_ga_end_buffer() {
 	ob_end_flush();
 }
 
@@ -53,7 +53,7 @@ function end_buffer() {
  *
  * @since 1.0.0
  */
-function manipulate_script( $buffer ) {
+function cookiebot_addon_ga_manipulate_script( $buffer ) {
 	/**
 	 * Get wp head scripts from the cache
 	 */
