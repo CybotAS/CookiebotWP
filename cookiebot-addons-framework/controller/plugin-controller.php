@@ -36,6 +36,8 @@ class Plugin_Controller {
 	 *
 	 * All the addon plugins are defined there.
 	 *
+	 * The file is located at the root map of this plugin
+	 *
 	 * @since 1.0.0
 	 */
 	private function load_plugins() {
@@ -47,7 +49,7 @@ class Plugin_Controller {
 	 * Dynamically Loads addon plugin configuration class
 	 *
 	 * For example:
-	 * /controller/addons/ga-analyticator/ga-analyticator.php
+	 * /controller/addons/google-analyticator/google-analyticator.php
 	 *
 	 * @param $class    string  Plugin class name
 	 *
