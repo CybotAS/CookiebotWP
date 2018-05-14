@@ -64,7 +64,7 @@ class Cookiebot_Buffer_Output Implements Cookiebot_Buffer_Output_Interface {
 	 * @since 1.0.0
 	 */
 	public function cookiebot_stop_buffer() {
-		ob_flush();
+		ob_end_flush();
 	}
 
 	/**
