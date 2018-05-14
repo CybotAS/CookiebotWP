@@ -20,6 +20,13 @@ class Cookiebot_Script_Loader_Tag {
 	 */
 	protected static $_instance = null;
 
+	/**
+	 * Returns instance of this class
+	 *
+	 * @return Cookiebot_Script_Loader_Tag
+	 *
+	 * @since 1.0.0
+	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
@@ -28,10 +35,24 @@ class Cookiebot_Script_Loader_Tag {
 		return self::$_instance;
 	}
 
+	/**
+	 * Cookiebot_Script_Loader_Tag constructor.
+	 * Adds filter to enhance script attribute
+	 *
+	 * @since 1.0.0
+	 */
 	public function __construct() {
 		add_filter( 'script_loader_tag', array( $this, 'cookiebot_add_consent_attribute_to_tag' ), 10, 3 );
 	}
 
+	/**
+	 * Adds enqueue script handle tag to the array of tags.
+	 * So that the script can be updated with cookieconsent attribute.
+	 *
+	 * @param $tag  string
+	 *
+	 * @since 1.0.0
+	 */
 	public function add_tag( $tag ) {
 		$this->tags[] = $tag;
 	}
