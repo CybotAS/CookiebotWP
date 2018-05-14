@@ -29,9 +29,9 @@ class Ga_Google_Analytics {
 
 		//Remove GA Google action and replace it with our own
 		if ( has_action( 'wp_head', 'ga_google_analytics_tracking_code' ) ) {
-			cookie_buffer_output( 'wp_head', 10 );
+			cookiebot_buffer_output( 'wp_head', 10 );
 		} elseif ( has_action( 'wp_footer', 'ga_google_analytics_tracking_code' ) ) {
-			cookie_buffer_output( 'wp_footer', 10 );
+			cookiebot_buffer_output( 'wp_footer', 10 );
 		}
 	}
 }

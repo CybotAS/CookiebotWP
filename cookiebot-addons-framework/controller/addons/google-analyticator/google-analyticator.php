@@ -18,14 +18,14 @@ class Google_Analyticator {
 		 * ga scripts are loaded in wp_head priority set to 99
 		 */
 		if ( has_action( 'wp_head', 'add_google_analytics' ) ) {
-			cookie_buffer_output( 'wp_head', 99 );
+			cookiebot_buffer_output( 'wp_head', 99 );
 		}
 
 		/**
 		 * ga scripts are loaded in login_head priority set to 99
 		 */
 		if ( has_action( 'login_head', 'add_google_analytics' ) ) {
-			cookie_buffer_output( 'login_head', 99 );
+			cookiebot_buffer_output( 'login_head', 99 );
 		}
 
 		/**

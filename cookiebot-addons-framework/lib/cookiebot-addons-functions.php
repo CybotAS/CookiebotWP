@@ -21,6 +21,6 @@ function cookiebot_script_loader_tag( $tag ) {
  *
  * @since 1.0.0
  */
-function cookie_buffer_output( $tag, $priority ) {
+function cookiebot_buffer_output( $tag, $priority ) {
 	new \cookiebot_addons_framework\lib\Cookiebot_Buffer_Output( $tag, $priority );
 }
