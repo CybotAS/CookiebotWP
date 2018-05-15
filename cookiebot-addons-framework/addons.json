@@ -1,0 +1,10 @@
+{
+  "Ga_Google_Analytics": {
+    "file": "ga-google-analytics\/ga-google-analytics.php",
+    "class": "ga_google_analytics\\Ga_Google_Analytics"
+  },
+  "Ga_Analyticator": {
+    "file": "google-analyticator\/google-analyticator.php",
+    "class": "google_analyticator\\Google_Analyticator"
+  }
+}

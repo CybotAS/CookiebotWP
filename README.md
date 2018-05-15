@@ -4,22 +4,22 @@
 Cookiebot Addons are plugins for Wordpress that make other plugins compatible with Cookiebot. 
 The addons hook into the original plugin and render the cookie setting tags as advised by the Cookiebot guidelines at https://www.cookiebot.com/goto/help/.
 
-# News on MonsterInsights and GADWP
-MonsterInsights and GADWP are about to release a GDPR compliance addon, which supports Cookiebot. We'll provide a link here once the addon is released. 
+# News on GADWP
+GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'll provide a link here once the addon is released. 
 
 # Installation
-1. Copy the plugin of your choice to your WP plugins folder
+1. Copy the framework plugin to your WP plugins folder
 2. Go to the admin page of your WP installation and activate the plugin
 3. You are done, verify that it works
 
 # Roadmap
 
 Following plugins are in pipeline:
-* ~~MonsterInsights (discontinued)~~
+* MonsterInsights (https://www.monsterinsights.com/addon/eu-compliance/)(MonsterInsights released Cookiebot support)
 * ~~GADWP (discontinued)~~
 * GA Google Analytics (https://wordpress.org/plugins/ga-google-analytics/) (released and tested)
-* Google Analyticator (https://wordpress.org/plugins/google-analyticator/) (in development)
-* Jetpack by Wordpress.com (https://wordpress.org/plugins/jetpack/) (in pipeline)
+* Google Analyticator (https://wordpress.org/plugins/google-analyticator/) (released and tested)
+* Jetpack by Wordpress.com (https://wordpress.org/plugins/jetpack/) (in development)
 * To be continued..
 
 If you have a plugin that you would like integration for, please submit a request in the [Issues](https://github.com/CybotAS/CookiebotAddons/issues) section.
