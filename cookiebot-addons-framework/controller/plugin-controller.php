@@ -9,14 +9,14 @@ class Plugin_Controller {
 	 *
 	 * @var array
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	private $plugins;
 
 	/**
 	 * Load addons if the plugin is activated
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function check_addons() {
 		$this->load_plugins();
@@ -38,7 +38,7 @@ class Plugin_Controller {
 	 *
 	 * The file is located at the root map of this plugin
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	private function load_plugins() {
 		$file          = file_get_contents( CAF_DIR . 'addons.json' );
@@ -53,7 +53,7 @@ class Plugin_Controller {
 	 *
 	 * @param $class    string  Plugin class name
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	private function load_addon( $class ) {
 		$full_class_name = 'cookiebot_addons_framework\\controller\\addons\\' . $class;

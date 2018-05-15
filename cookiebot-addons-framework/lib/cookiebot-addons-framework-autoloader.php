@@ -3,21 +3,21 @@
 /**
  * Class Cookiebot_Addons_Framework_Autoloader
  *
- * @since 1.0.0
+ * @since 1.1.0
  */
 class Cookiebot_Addons_Framework_Autoloader {
 
 	/**
 	 * plugin root namespace
 	 *
-	 * @sice 1.0.0
+	 * @sice 1.1.0
 	 */
 	const ROOT_NAMESPACE = 'cookiebot_addons_framework\\';
 
 	/**
 	 * Register autoload method
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function __construct() {
 		spl_autoload_register( array( $this, 'cookiebot_autoloader_callback' ) );
@@ -29,7 +29,7 @@ class Cookiebot_Addons_Framework_Autoloader {
 	 *
 	 * @param $class
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function cookiebot_autoloader_callback($class) {
 		if ( strpos( $class, self::ROOT_NAMESPACE ) === 0 ) {
@@ -49,6 +49,6 @@ class Cookiebot_Addons_Framework_Autoloader {
 /**
  * Start autoloader
  *
- * @since 1.0.0
+ * @since 1.1.0
  */
 new Cookiebot_Addons_Framework_Autoloader();

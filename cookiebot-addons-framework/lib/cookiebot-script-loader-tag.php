@@ -9,14 +9,14 @@ class Cookiebot_Script_Loader_Tag {
 	 *
 	 * @var array
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	private $tags = array();
 
 	/**
 	 * @var   Cookiebot_Script_Loader_Tag The single instance of the class
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	protected static $_instance = null;
 
@@ -25,7 +25,7 @@ class Cookiebot_Script_Loader_Tag {
 	 *
 	 * @return Cookiebot_Script_Loader_Tag
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -39,7 +39,7 @@ class Cookiebot_Script_Loader_Tag {
 	 * Cookiebot_Script_Loader_Tag constructor.
 	 * Adds filter to enhance script attribute
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function __construct() {
 		add_filter( 'script_loader_tag', array( $this, 'cookiebot_add_consent_attribute_to_tag' ), 10, 3 );
@@ -51,7 +51,7 @@ class Cookiebot_Script_Loader_Tag {
 	 *
 	 * @param $tag  string
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function add_tag( $tag ) {
 		$this->tags[] = $tag;
@@ -66,7 +66,7 @@ class Cookiebot_Script_Loader_Tag {
 	 *
 	 * @return string
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function cookiebot_add_consent_attribute_to_tag( $tag, $handle, $src ) {
 		if ( in_array( $handle, $this->tags ) ) {

@@ -6,7 +6,7 @@
  *
  * @param $tag  string  Handle tag name
  *
- * @since 1.0.0
+ * @since 1.1.0
  */
 function cookiebot_script_loader_tag( $tag ) {
 	$script_loader_tag = \cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag::instance();
@@ -19,7 +19,7 @@ function cookiebot_script_loader_tag( $tag ) {
  * @param $tag  string  Action hook name
  * @param $priority integer Action hook priority
  *
- * @since 1.0.0
+ * @since 1.1.0
  */
 function cookiebot_buffer_output( $tag, $priority ) {
 	new \cookiebot_addons_framework\lib\Cookiebot_Buffer_Output( $tag, $priority );

@@ -15,7 +15,7 @@ class Ga_Google_Analytics {
 	/**
 	 * Manipulate the scripts if they are loaded.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function cookiebot_addon_ga_google_analytics() {
 		//Check if GA Google Analytics is loaded.

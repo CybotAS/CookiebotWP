@@ -9,7 +9,7 @@ class Cookiebot_Buffer_Output Implements Cookiebot_Buffer_Output_Interface {
 	 *
 	 * @var integer
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	private $priority;
 
@@ -18,7 +18,7 @@ class Cookiebot_Buffer_Output Implements Cookiebot_Buffer_Output_Interface {
 	 *
 	 * @var string
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	private $tag;
 
@@ -27,7 +27,7 @@ class Cookiebot_Buffer_Output Implements Cookiebot_Buffer_Output_Interface {
 	 *
 	 * @var string
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	private $transient_name;
 
@@ -37,7 +37,7 @@ class Cookiebot_Buffer_Output Implements Cookiebot_Buffer_Output_Interface {
 	 * @param $tag  string  Action hook name
 	 * @param $priority string  Action hook priority
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function __construct( $tag, $priority ) {
 		$this->priority = $priority;
@@ -52,7 +52,7 @@ class Cookiebot_Buffer_Output Implements Cookiebot_Buffer_Output_Interface {
 	/**
 	 * Start reading the buffer/output
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function cookiebot_start_buffer() {
 		ob_start( array( $this, 'manipulate_script' ) );
@@ -61,7 +61,7 @@ class Cookiebot_Buffer_Output Implements Cookiebot_Buffer_Output_Interface {
 	/**
 	 * Stop reading the output and output buffered data through manipulate script filter.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function cookiebot_stop_buffer() {
 		ob_end_flush();
@@ -74,7 +74,7 @@ class Cookiebot_Buffer_Output Implements Cookiebot_Buffer_Output_Interface {
 	 *
 	 * @return null|string|string[]
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function manipulate_script( $buffer ) {
 		/**

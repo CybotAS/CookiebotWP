@@ -11,7 +11,7 @@ class Google_Analyticator {
 	/**
 	 * Check for google analyticator action hooks
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function cookiebot_addon_google_analyticator() {
 		/**
@@ -35,7 +35,7 @@ class Google_Analyticator {
 			/**
 			 * Catch external js file and add cookiebot attributes to it
 			 *
-			 * @since 1.0.0
+			 * @since 1.1.0
 			 */
 			cookiebot_script_loader_tag( 'ga-external-tracking' );
 		}
