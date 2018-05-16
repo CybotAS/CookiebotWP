@@ -59,7 +59,7 @@ class Jetpack {
 				 * Displays a message to give a consent for marketing-cookies
 				 */
 				$data .= '<div class="cookieconsent-optout-marketing">
-						  ' . printf( __( 'Please <a href="%s">accept marketing-cookies</a> to watch this video.', 'cookiebot_addons' ), 'javascript:Cookiebot.renew()' ) . '
+						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept marketing-cookies</a> to watch this video.', 'cookiebot_addons' ) . '
 						</div>';
 
 				/**
