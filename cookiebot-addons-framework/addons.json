@@ -6,5 +6,9 @@
   "Ga_Analyticator": {
     "file": "google-analyticator\/google-analyticator.php",
     "class": "google_analyticator\\Google_Analyticator"
+  },
+  "Jetpack": {
+    "file": "jetpack\/jetpack.php",
+    "class": "jetpack\\Jetpack"
   }
 }
