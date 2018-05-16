@@ -31,7 +31,7 @@ class Jetpack {
 
 	public function manipulate_iframe( $buffer ) {
 		/**
-		 * Get wp head scripts from the cache
+		 * Get jetpack google maps widget data from the cache
 		 */
 		$updated_scripts = get_transient( 'jetpack_google_maps_widget' );
 
@@ -49,13 +49,18 @@ class Jetpack {
 			 */
 			$updated_scripts = preg_replace_callback( $pattern, function ( $matches ) {
 				/**
-				 * Matched script data
+				 * Matched iframe data
 				 */
 				$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
 
-				$data = preg_replace( '/\<iframe/', '<iframe data-cookieconsent="marketing"', $data );
+				$data = str_replace( 'src=', 'data-cookieconsent="marketing" data-src=', $data );
 
-				$data = str_replace( 'src=', 'data-src=', $data);
+				/**
+				 * Displays a message to give a consent for marketing-cookies
+				 */
+				$data .= '<div class="cookieconsent-optout-marketing">
+						  ' . printf( __( 'Please <a href="%s">accept marketing-cookies</a> to watch this video.', 'cookiebot_addons' ), 'javascript:Cookiebot.renew()' ) . '
+						</div>';
 
 				/**
 				 * Return updated script data
