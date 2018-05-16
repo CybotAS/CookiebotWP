@@ -21,6 +21,10 @@ class Plugin_Controller {
 	public function check_addons() {
 		$this->load_plugins();
 
+		if ( ! function_exists( 'is_plugin_active' ) ){
+			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		}
+
 		foreach ( $this->plugins as $plugin_class => $plugin ) {
 			/**
 			 * Load addon code if the plugin is active
