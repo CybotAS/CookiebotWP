@@ -25,3 +25,31 @@ function cookiebot_script_loader_tag( $tag, $type = 'statistics' ) {
 function cookiebot_buffer_output( $tag, $priority ) {
 	new \cookiebot_addons_framework\lib\Cookiebot_Buffer_Output( $tag, $priority );
 }
+
+/**
+ * Returns checked consent in an array
+ *
+ * @return array    array of checked consents
+ *
+ * @since 1.2.0
+ */
+function cookiebot_get_accepted_cookie_states() {
+	$cookie_consent = \cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent::instance();
+
+	return $cookie_consent->get_cookie_states();
+}
+
+/**
+ * Check if given consent type is accepted
+ *
+ * @param $state    string  Consent type
+ *
+ * @return bool
+ *
+ * @since 1.2.0
+ */
+function cookiebot_is_cookie_state_accepted( $state ) {
+	$cookie_consent = \cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent::instance();
+
+	return $cookie_consent->is_cookie_state_accepted( $state );
+}
