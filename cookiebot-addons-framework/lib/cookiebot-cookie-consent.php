@@ -5,6 +5,14 @@ namespace cookiebot_addons_framework\lib;
 class Cookiebot_Cookie_Consent {
 
 	/**
+	 * Array of cookiebot consent states
+	 *
+	 * It can have 4 items:
+	 * - necessary
+	 * - preferences
+	 * - statistics
+	 * - marketing
+	 *
 	 * @var array  consent state
 	 *
 	 * @since 1.2.0
