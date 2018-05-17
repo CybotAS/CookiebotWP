@@ -71,7 +71,7 @@ class Google_Maps_Widget {
 				$data = str_replace( 'src=', 'data-cookieconsent="marketing" data-src=', $data);
 
 				$data .= '<div class="cookieconsent-optout-marketing">
-						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept marketing-cookies</a> to watch this video.', 'cookiebot_addons' )  . '
+						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept marketing-cookies</a> to watch this google map.', 'cookiebot_addons' )  . '
 						</div>';
 				/**
 				 * Return updated iframe tag
