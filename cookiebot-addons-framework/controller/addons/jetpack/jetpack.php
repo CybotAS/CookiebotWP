@@ -36,5 +36,10 @@ class Jetpack {
 		 * Load configuration for visitor cookies
 		 */
 		new Visitor_Cookies();
+
+		/**
+		 * Load configuration for googleplus badge
+		 */
+		new Googleplus_Badge();
 	}
 }
