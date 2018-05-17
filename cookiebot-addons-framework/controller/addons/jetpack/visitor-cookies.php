@@ -13,7 +13,19 @@ class Visitor_Cookies {
 			$this->disable_comment_cookies();
 			$this->do_not_save_mobile_or_web_view();
 			$this->disable_eu_cookie_law();
+			$this->disable_comment_subscriptions();
 		}
+	}
+
+	/**
+	 * Set comment subscribe cookie time to zero so it expires.
+	 *
+	 * @since 1.2.0
+	 */
+	protected function disable_comment_subscriptions() {
+		add_filter( 'comment_cookie_lifetime', function ( $time ) {
+			return 0;
+		} );
 	}
 
 	/**
