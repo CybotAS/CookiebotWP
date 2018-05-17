@@ -5,12 +5,13 @@
  * So the script can have cookiebot attributes
  *
  * @param $tag  string  Handle tag name
+ * @param $type string  marketing|statistics|preferences|necessary
  *
  * @since 1.1.0
  */
-function cookiebot_script_loader_tag( $tag ) {
+function cookiebot_script_loader_tag( $tag, $type = 'statistics' ) {
 	$script_loader_tag = \cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag::instance();
-	$script_loader_tag->add_tag( $tag );
+	$script_loader_tag->add_tag( $tag, $type );
 }
 
 /**

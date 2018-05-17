@@ -49,12 +49,13 @@ class Cookiebot_Script_Loader_Tag {
 	 * Adds enqueue script handle tag to the array of tags.
 	 * So that the script can be updated with cookieconsent attribute.
 	 *
-	 * @param $tag  string
+	 * @param $tag  string  Enqueue script handle name
+	 * @param $type string  marketing|statistics|preferences|necessary
 	 *
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 */
-	public function add_tag( $tag ) {
-		$this->tags[] = $tag;
+	public function add_tag( $tag, $type ) {
+		$this->tags[$tag] = $type;
 	}
 
 	/**
@@ -66,11 +67,11 @@ class Cookiebot_Script_Loader_Tag {
 	 *
 	 * @return string
 	 *
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 */
 	public function cookiebot_add_consent_attribute_to_tag( $tag, $handle, $src ) {
-		if ( in_array( $handle, $this->tags ) ) {
-			return '<script src="' . $src . '" type="text/plain" data-cookieconsent="statistics"></script>';
+		if ( array_key_exists( $handle, $this->tags ) ) {
+			return '<script src="' . $src . '" type="text/plain" data-cookieconsent="' . $this->tags[ $handle ] . '"></script>';
 		}
 
 		return $tag;
