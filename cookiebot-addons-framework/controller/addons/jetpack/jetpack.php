@@ -40,5 +40,10 @@ class Jetpack {
 		 * @since 1.2.0
 		 */
 		new Facebook_Widget();
+
+		/**
+		 * Load configuration for visitor cookies
+		 */
+		new Visitor_Cookies();
 	}
 }
