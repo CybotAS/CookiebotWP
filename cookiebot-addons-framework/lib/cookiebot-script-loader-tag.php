@@ -50,7 +50,7 @@ class Cookiebot_Script_Loader_Tag {
 	 * So that the script can be updated with cookieconsent attribute.
 	 *
 	 * @param $tag  string  Enqueue script handle name
-	 * @param $type string  marketing|statistics|preferences|necessary
+	 * @param $type string
 	 *
 	 * @since 1.2.0
 	 */

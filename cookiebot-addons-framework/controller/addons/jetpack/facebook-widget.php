@@ -48,7 +48,7 @@ class Facebook_Widget {
 	public function cookie_consent_div( $view, $widget ) {
 		if ( $widget == 'facebook-likebox' && $view == 'widget_view' ) {
 			echo '<div class="cookieconsent-optout-marketing">
-						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept marketing-cookies</a> to watch this video.', 'cookiebot_addons' ) . '
+						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept marketing-cookies</a> to watch this facebook page.', 'cookiebot_addons' ) . '
 						</div>';
 		}
 	}
