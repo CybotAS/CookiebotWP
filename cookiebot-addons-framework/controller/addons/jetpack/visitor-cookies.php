@@ -12,7 +12,17 @@ class Visitor_Cookies {
 		if ( ! cookiebot_is_cookie_state_accepted( 'preferences' ) ) {
 			$this->disable_comment_cookies();
 			$this->do_not_save_mobile_or_web_view();
+			$this->disable_eu_cookie_law();
 		}
+	}
+
+	/**
+	 * Disable eu cookie law script
+	 *
+	 * @since 1.2.0
+	 */
+	protected function disable_eu_cookie_law() {
+		cookiebot_script_loader_tag( 'eu-cookie-law-script', 'preferences' );
 	}
 
 	/**

@@ -18,15 +18,6 @@ class Jetpack {
 	 * @since 1.2.0
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'cookiebot_addon_jetpack' ), 5 );
-	}
-
-	/**
-	 * Check for google analyticator action hooks
-	 *
-	 * @since 1.2.0
-	 */
-	public function cookiebot_addon_jetpack() {
 		/**
 		 * Load configuration for google maps widget
 		 *
