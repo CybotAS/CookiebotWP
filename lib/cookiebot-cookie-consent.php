@@ -112,7 +112,7 @@ class Cookiebot_Cookie_Consent {
 	 * @since 1.2.0
 	 */
 	private function add_state( $state ) {
-		if ( in_array( $state, $this->states ) ) {
+		if ( ! in_array( $state, $this->states ) ) {
 			$this->states[] = $state;
 		}
 	}
@@ -125,6 +125,10 @@ class Cookiebot_Cookie_Consent {
 	 * @since 1.2.0
 	 */
 	public function get_cookie_states() {
+		if ( count( $this->states ) == 0 ) {
+			$this->scan_cookie();
+		}
+
 		return $this->states;
 	}
 
@@ -135,7 +139,7 @@ class Cookiebot_Cookie_Consent {
 	 *
 	 * @return bool
 	 */
-	public function is_cookie_state_accepted($state) {
+	public function is_cookie_state_accepted( $state ) {
 		return in_array( $state, $this->states );
 	}
 }
