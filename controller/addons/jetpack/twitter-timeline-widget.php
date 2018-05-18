@@ -5,7 +5,7 @@ namespace cookiebot_addons_framework\controller\addons\jetpack;
 class Twitter_Timeline_Widget {
 
 	/**
-	 * Googleplus_Badge constructor.
+	 * Twitter_Timeline_Widget constructor.
 	 *
 	 * @since 1.2.0
 	 */

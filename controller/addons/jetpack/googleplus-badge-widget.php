@@ -5,7 +5,7 @@ namespace cookiebot_addons_framework\controller\addons\jetpack;
 class Googleplus_Badge_Widget {
 
 	/**
-	 * Googleplus_Badge constructor.
+	 * Googleplus_Badge_Widget constructor.
 	 *
 	 * @since 1.2.0
 	 */
