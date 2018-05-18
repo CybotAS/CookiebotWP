@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons_framework\controller\addons\jetpack;
 
-class Internet_Defense_league {
+class Internet_Defense_league_Widget {
 
 	/**
 	 * Internet_Defense_league constructor.

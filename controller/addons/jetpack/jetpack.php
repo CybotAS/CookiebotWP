@@ -38,13 +38,18 @@ class Jetpack {
 		new Visitor_Cookies();
 
 		/**
-		 * Load configuration for googleplus badge
+		 * Load configuration for googleplus badge widget
 		 */
-		new Googleplus_Badge();
+		new Googleplus_Badge_Widget();
 
 		/**
-		 * Load configuration for internet defense league
+		 * Load configuration for internet defense league widget
 		 */
-		new Internet_Defense_league();
+		new Internet_Defense_league_Widget();
+
+		/**
+		 * Load configuration for twitter timeline widget
+		 */
+		new Twitter_Timeline_Widget();
 	}
 }
