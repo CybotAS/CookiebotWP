@@ -55,7 +55,10 @@ class Visitor_Cookies {
 		/**
 		 * Remove action comment cookies in wordpress core
 		 */
-		remove_action( 'set_comment_cookies', 'wp_set_comment_cookies' );
+		if ( has_action( 'set_comment_cookies', 'wp_set_comment_cookies' ) ) {
+			remove_action( 'set_comment_cookies', 'wp_set_comment_cookies' );
+		}
+
 	}
 
 	/**
@@ -67,7 +70,9 @@ class Visitor_Cookies {
 	 * @since 1.2.0
 	 */
 	protected function do_not_save_mobile_or_web_view() {
-		remove_action( 'init', 'jetpack_mobile_request_handler' );
+		if ( has_action( 'init', 'jetpack_mobile_request_handler' ) ) {
+			remove_action( 'init', 'jetpack_mobile_request_handler' );
+		}
 
 		/**
 		 * Show message to accept preferences consent to save

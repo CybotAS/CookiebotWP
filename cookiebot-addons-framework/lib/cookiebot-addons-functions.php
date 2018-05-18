@@ -60,28 +60,23 @@ function cookiebot_is_cookie_state_accepted( $state ) {
  * @param $action   string  action name
  * @param $class    string  class name
  * @param $method   string  method name
+ * @param $priority integer action priority number
  *
  * @since 1.2.0
  */
-function cookiebot_remove_class_action( $action, $class, $method ) {
-	global $wp_filter ;
-	if (isset($wp_filter[$action])) {
-		$len = strlen($method) ;
-		foreach ($wp_filter[$action] as $pri => $actions) {
+function cookiebot_remove_class_action( $action, $class, $method, $priority = 10 ) {
+	global $wp_filter;
 
-			foreach ($actions as $name => $def) {
-
-				if (substr($name,-$len) == $method) {
-
-					if (is_array($def['function'])) {
-
-						if (get_class($def['function'][0]) == $class) {
-
-							if (is_object($wp_filter[$action]) && isset($wp_filter[$action]->callbacks)) {
-								unset($wp_filter[$action]->callbacks[$pri][$name]) ;
-							} else {
-								unset($wp_filter[$action][$pri][$name]) ;
-							}
+	if ( isset( $wp_filter[ $action ] ) ) {
+		$len = strlen( $method );
+		foreach ( $wp_filter[ $action ][ $priority ] as $name => $def ) {
+			if ( substr( $name, - $len ) == $method ) {
+				if ( is_array( $def['function'] ) ) {
+					if ( get_class( $def['function'][0] ) == $class ) {
+						if ( is_object( $wp_filter[ $action ] ) && isset( $wp_filter[ $action ]->callbacks ) ) {
+							$wp_filter[$action]->remove_filter( $action, $name, $priority );
+						} else {
+							unset( $wp_filter[ $action ][ $priority ][ $name ] );
 						}
 					}
 				}

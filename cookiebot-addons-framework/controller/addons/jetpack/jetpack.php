@@ -41,5 +41,10 @@ class Jetpack {
 		 * Load configuration for googleplus badge
 		 */
 		new Googleplus_Badge();
+
+		/**
+		 * Load configuration for internet defense league
+		 */
+		new Internet_Defense_league();
 	}
 }
