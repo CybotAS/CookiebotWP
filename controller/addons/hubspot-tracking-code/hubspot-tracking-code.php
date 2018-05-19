@@ -1,8 +1,8 @@
 <?php
 
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-
 namespace cookiebot_addons_framework\controller\addons\hubspot_tracking_code;
+
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 class Hubspot_Tracking_Code {
 
