@@ -10,5 +10,9 @@
   "Jetpack": {
     "file": "jetpack\/jetpack.php",
     "class": "jetpack\\Jetpack"
+  },
+  "Hubspot_Tracking_Code": {
+    "file": "hubspot-tracking-code\/hubspot-tracking-code.php",
+    "class": "hubspot_tracking_code\\Hubspot_Tracking_Code"
   }
 }
