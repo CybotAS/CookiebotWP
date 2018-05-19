@@ -4,7 +4,7 @@
 Cookiebot Addons are plugins for Wordpress that make other plugins compatible with Cookiebot. 
 The addons hook into the original plugin and render the cookie setting tags as advised by the Cookiebot guidelines at https://www.cookiebot.com/goto/help/.
 
-In the meanwhile, we are working with WP Core on what we believe is the real solution. A framework in WP Core that can signal the consent state to other plugins,
+Concurrently we are working with WP Core on what we believe is the real solution. A framework in WP Core that can signal the consent state to other plugins,
 so that they can handle their cookie setting code without explicit support for Cookiebot, or other cookie plugins.
 
 https://core.trac.wordpress.org/ticket/44043 
