@@ -31,9 +31,14 @@ class Hubspot_Tracking_Code {
 			return;
 		}
 
-		// Replace original HubSpot Tracking Code with own one
+		// Replace original HubSpot Tracking Code with own one and delete cookie if
+		// it was perviously set.
 		if ( is_plugin_active('hubspot-tracking-code/hubspot-tracking-code.php') ) {
 			new Hubspot_Tracking_Code_Buffer_Output( 'wp_footer', 10 );
+
+			if ( isset($_COOKIE['hubspotutk']) ) {
+				unset( $_COOKIE['hubspotutk'] );
+			}
 		}
 	}
 }
