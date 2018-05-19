@@ -51,7 +51,7 @@ $scriptTag = '<script'.cookiebot_assist('statistics').'>';
 
 A users consent state can be be aquired through Cookiebots JS API.
 
-The following properties are available on the CookieConsent object:
+The following properties are available on the Cookiebot object:
 
 | Name                | Type | Default | Description                                                                                                                                                                                                            |
 |---------------------|:----:|:-------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -63,6 +63,15 @@ The following properties are available on the CookieConsent object:
 | declined            | bool | false   | True if the user has declined the use of cookies. <br> The property is read only.                                                                                                                                           |
 | hasResponse         | bool | false   | True if the user has responded to the dialog with either 'accept' or 'decline'.                                                                                                                                        |
 | doNotTrack          | bool | false   | True if the user has enabled the web browser's 'Do not track' (DNT) setting. <br> If DNT is enabled Cookiebot will not set the third party cookie CookieConsentBulkTicket used for bulk consent. <br> The property is read only. |
+
+Callbacks
+
+| Name                			| Description                                                                                                                                                                                                            |
+|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| CookiebotCallback_OnLoad   	| The asynchronous callback is triggered when the cookie banner has loaded to get the user's consent.                                                                                                                                        |
+| CookiebotCallback_OnAccept	| The asynchronous callback is triggered when the user clicks the accept-button of the cookie consent dialog and whenever a consented user loads a page.                                                                                     |                                                 |
+| CookiebotCallback_OnDecline	| The asynchronous callback is triggered when the user declines the use of cookies by clicking the decline-button in the cookie consent dialog. The callback is also triggered whenever a user that has declined the use of cookies loads a page. |                                                                                                                                      |
+
 
 And through PHP:
 
