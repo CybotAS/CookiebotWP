@@ -30,6 +30,10 @@ Following plugins are in pipeline:
 
 If you have a plugin that you would like integration for, please submit a request in the [Issues](https://github.com/CybotAS/CookiebotAddons/issues) section.
 
+# Contributions
+Everyone is welcome to make a pull request with new addon support, or to fix existing addons.
+Shout out to @fschaeffler for the HubSpot Tracking Code integration. Way to go!
+
 
 # How do I make my plugin support Cookiebot?
 If you favourite plugins doesn’t support Cookiebot you are always welcome to ask the author to add support for Cookiebot.
