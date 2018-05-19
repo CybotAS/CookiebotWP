@@ -36,7 +36,7 @@ class Hubspot_Tracking_Code {
 		if ( is_plugin_active('hubspot-tracking-code/hubspot-tracking-code.php') ) {
 			new Hubspot_Tracking_Code_Buffer_Output( 'wp_footer', 10 );
 
-			if ( isset($_COOKIE['hubspotutk']) ) {
+			if ( ! cookiebot_is_cookie_state_accepted( 'marketing' ) && isset($_COOKIE['hubspotutk']) ) {
 				unset( $_COOKIE['hubspotutk'] );
 			}
 		}
