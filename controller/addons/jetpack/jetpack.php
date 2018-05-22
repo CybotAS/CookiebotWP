@@ -51,5 +51,10 @@ class Jetpack {
 		 * Load configuration for twitter timeline widget
 		 */
 		new Twitter_Timeline_Widget();
+
+		/**
+		 * Load configuration for goodreads widget
+		 */
+		new Goodreads_Widget();
 	}
 }

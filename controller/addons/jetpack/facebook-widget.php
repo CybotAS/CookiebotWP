@@ -15,8 +15,10 @@ class Facebook_Widget {
 	 * @since 1.2.0
 	 */
 	public function __construct() {
-		$this->add_consent_attribute_to_facebook_embed_javascript();
-		$this->add_cookie_consent_div();
+		if( is_active_widget(false, false, 'facebook-likebox', true) ) {
+			$this->add_consent_attribute_to_facebook_embed_javascript();
+			$this->add_cookie_consent_div();
+		}
 	}
 
 	/**

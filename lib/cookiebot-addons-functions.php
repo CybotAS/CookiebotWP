@@ -19,11 +19,12 @@ function cookiebot_script_loader_tag( $tag, $type = 'statistics' ) {
  *
  * @param $tag  string  Action hook name
  * @param $priority integer Action hook priority
+ * @param $keywords array   Array to search for in the scripts
  *
  * @since 1.1.0
  */
-function cookiebot_buffer_output( $tag, $priority ) {
-	new \cookiebot_addons_framework\lib\Cookiebot_Buffer_Output( $tag, $priority );
+function cookiebot_buffer_output( $tag, $priority, $keywords = array() ) {
+	new \cookiebot_addons_framework\lib\Cookiebot_Buffer_Output( $tag, $priority, $keywords );
 }
 
 /**

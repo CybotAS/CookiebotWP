@@ -23,6 +23,15 @@ class Cookiebot_Buffer_Output Implements Cookiebot_Buffer_Output_Interface {
 	private $tag;
 
 	/**
+	 * Keywords to allow in the scripts
+	 *
+	 * @var array array
+	 *
+	 * @since 1.2.0
+	 */
+	private $keywords;
+
+	/**
 	 * Transient unique name
 	 *
 	 * @var string
@@ -36,12 +45,14 @@ class Cookiebot_Buffer_Output Implements Cookiebot_Buffer_Output_Interface {
 	 *
 	 * @param $tag  string  Action hook name
 	 * @param $priority string  Action hook priority
+	 * @param $keywords array   Keywords to look for in the scripts
 	 *
 	 * @since 1.1.0
 	 */
-	public function __construct( $tag, $priority ) {
+	public function __construct( $tag, $priority, $keywords = array() ) {
 		$this->priority = $priority;
 		$this->tag      = $tag;
+		$this->keywords = $keywords;
 
 		$this->transient_name = 'cookiebot_' . $this->tag . '_' . $this->priority;
 
@@ -101,16 +112,18 @@ class Cookiebot_Buffer_Output Implements Cookiebot_Buffer_Output_Interface {
 				$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
 
 				/**
-				 * Keywords to look for
+				 * Keywords to look for (default)
 				 **/
-				$needles = array( 'gtag', 'google-analytics', '_gaq', 'www.googletagmanager.com/gtag/js?id=' );
+				if( count( $this->keywords ) == 0 ) {
+					$this->keywords = array( 'gtag', 'google-analytics', '_gaq', 'www.googletagmanager.com/gtag/js?id=' );
+				}
 
 				/**
 				 * Check if the script contains the keywords, checks keywords one by one
 				 *
 				 * If one match, then the rest of the keywords will be skipped.
 				 **/
-				foreach ( $needles as $needle ) {
+				foreach ( $this->keywords as $needle ) {
 					/**
 					 * The script contains the needle
 					 **/
