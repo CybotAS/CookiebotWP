@@ -19,8 +19,12 @@ GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'
 
 # Roadmap
 
-Following plugins are in pipeline:
-* MonsterInsights (https://www.monsterinsights.com/addon/eu-compliance/) (MonsterInsights released Cookiebot support)
+Following plugins have native (built-in) support for Cookiebot:
+* [MonsterInsights](https://www.monsterinsights.com/addon/eu-compliance/)
+* [PixelYourSite](https://wordpress.org/plugins/pixelyoursite/)
+
+Following addons are in pipeline:
+
 * ~~GADWP (discontinued)~~
 * GA Google Analytics (https://wordpress.org/plugins/ga-google-analytics/) (released and tested)
 * Google Analyticator (https://wordpress.org/plugins/google-analyticator/) (released and tested)
