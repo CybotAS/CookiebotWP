@@ -39,7 +39,25 @@ class Cookiebot_Addons_Framework {
 		 *
 		 * @since 1.1.0
 		 */
-		add_action( 'plugins_loaded', array( new Plugin_Controller(), 'check_addons' ) );
+		add_action( 'plugins_loaded', array( new Plugin_Controller( $this->get_plugins() ), 'check_addons' ) );
+	}
+
+	/**
+	 * Loads plugins from json file
+	 *
+	 * All the addon plugins are defined there.
+	 *
+	 * The file is located at the root map of this plugin
+	 *
+	 * @return array    List of supported plugins
+	 *
+	 * @since 1.1.0
+	 */
+	private function get_plugins() {
+		$file    = file_get_contents( CAF_DIR . 'addons.json' );
+		$plugins = json_decode( $file );
+
+		return $plugins;
 	}
 }
 

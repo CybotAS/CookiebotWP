@@ -4,9 +4,22 @@ namespace cookiebot_addons_framework\controller\addons\hubspot_tracking_code;
 
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
-class Hubspot_Tracking_Code {
+use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Abstract;
+use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
+use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent;
+use cookiebot_addons_framework\lib\Cookiebot_Buffer_Output;
 
-	public function __construct() {
+class Hubspot_Tracking_Code extends Cookiebot_Addons_Abstract {
+
+	/**
+	 * Hubspot_Tracking_Code constructor.
+	 *
+	 * @param Cookiebot_Script_Loader_Tag $script_loader_tag
+	 * @param Cookiebot_Cookie_Consent $cookie_consent
+	 * @param Cookiebot_Buffer_Output $buffer_output
+	 */
+	public function __construct( Cookiebot_Script_Loader_Tag $script_loader_tag, Cookiebot_Cookie_Consent $cookie_consent, Cookiebot_Buffer_Output $buffer_output ) {
+		parent::__construct( $script_loader_tag, $cookie_consent, $buffer_output );
 		/**
 		 * We add the action after wp_loaded and replace the original
 		 * HubSpot Tracking Code action with our own adjusted version.
@@ -21,8 +34,8 @@ class Hubspot_Tracking_Code {
 	 */
 	public function cookiebot_addon_hubspot_tracking_code() {
 		// Check if HubSpot Tracking Code is loaded
-		$options = get_option('hs_settings');
-		if ( !isset($options['hs_portal']) || $options['hs_portal'] == '' ) {
+		$options = get_option( 'hs_settings' );
+		if ( ! isset( $options['hs_portal'] ) || $options['hs_portal'] == '' ) {
 			return;
 		}
 
@@ -33,10 +46,10 @@ class Hubspot_Tracking_Code {
 
 		// Replace original HubSpot Tracking Code with own one and delete cookie if
 		// it was perviously set.
-		if ( is_plugin_active('hubspot-tracking-code/hubspot-tracking-code.php') ) {
-			new Hubspot_Tracking_Code_Buffer_Output( 'wp_footer', 10 );
+		if ( is_plugin_active( 'hubspot-tracking-code/hubspot-tracking-code.php' ) ) {
+			$this->buffer_output->add_tag( 'wp_footer', 10, array( 'hs-script-loader' => 'marketing' ) );
 
-			if ( ! cookiebot_is_cookie_state_accepted( 'marketing' ) && isset($_COOKIE['hubspotutk']) ) {
+			if ( ! $this->cookie_consent->is_cookie_state_accepted( 'marketing' ) && isset( $_COOKIE['hubspotutk'] ) ) {
 				unset( $_COOKIE['hubspotutk'] );
 			}
 		}

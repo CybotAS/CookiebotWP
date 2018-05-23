@@ -2,6 +2,10 @@
 
 namespace cookiebot_addons_framework\controller;
 
+use cookiebot_addons_framework\lib\Cookiebot_Buffer_Output;
+use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent;
+use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
+
 class Plugin_Controller {
 
 	/**
@@ -14,39 +18,98 @@ class Plugin_Controller {
 	private $plugins;
 
 	/**
-	 * Load addons if the plugin is activated
+	 * Is used to manipulate enqueue script attributes
 	 *
-	 * @since 1.1.0
+	 * @var Cookiebot_Script_Loader_Tag
+	 *
+	 * @since 1.2.0
+	 */
+	public $script_loader_tag;
+
+	/**
+	 * Is used to manipulate the data in the buffer
+	 *
+	 * @var Cookiebot_Buffer_Output
+	 *
+	 * @since 1.2.0
+	 */
+	public $buffer_output;
+
+	/**
+	 * Is used to get cookie consent
+	 *
+	 * @var Cookiebot_Cookie_Consent
+	 *
+	 * @since 1.2.0
+	 */
+	public $cookie_consent;
+
+	/**
+	 * Plugin_Controller constructor.
+	 *
+	 * @param $plugins  array   List of supported plugins
+	 *
+	 * @since 1.2.0
+	 */
+	public function __construct( $plugins ) {
+		$this->plugins = $plugins;
+	}
+
+	/**
+	 * Load addon configuration if the plugin is activated
+	 *
+	 * @since 1.2.0
 	 */
 	public function check_addons() {
-		$this->load_plugins();
-
-		if ( ! function_exists( 'is_plugin_active' ) ){
+		if ( ! function_exists( 'is_plugin_active' ) ) {
 			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 		}
 
+		/**
+		 * Initialize default features: script_loader_tag, cookie_consent, buffer output
+		 */
+		$this->init_cookiebot_functions();
+
+		/**
+		 * Check plugins one by one and load configuration if it is active
+		 */
 		foreach ( $this->plugins as $plugin_class => $plugin ) {
 			/**
 			 * Load addon code if the plugin is active
 			 */
 			if ( is_plugin_active( $plugin->file ) ) {
-				$this->load_addon( $plugin->class );
+				$this->load_addon_configuration( $plugin->class );
 			}
 		}
+
+		/**
+		 * After WordPress is fully loaded
+		 *
+		 * Run buffer output actions - this runs after scanning of every addons
+		 */
+		add_action( 'parse_request', array( $this, 'run_buffer_output_manipulations' ) );
 	}
 
 	/**
-	 * Loads plugins from json file
+	 * Load functions to use in Dependency Injection
 	 *
-	 * All the addon plugins are defined there.
-	 *
-	 * The file is located at the root map of this plugin
-	 *
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 */
-	private function load_plugins() {
-		$file          = file_get_contents( CAF_DIR . 'addons.json' );
-		$this->plugins = json_decode( $file );
+	private function init_cookiebot_functions() {
+		/**
+		 * Initialize script loader tag class
+		 */
+		$this->script_loader_tag = new Cookiebot_Script_Loader_Tag();
+
+		/**
+		 * Initialize cookie consent class
+		 */
+		$this->cookie_consent = new Cookiebot_Cookie_Consent();
+
+		/**
+		 * Initialize buffer output
+		 */
+		$this->buffer_output = new Cookiebot_Buffer_Output();
 	}
 
 	/**
@@ -57,9 +120,9 @@ class Plugin_Controller {
 	 *
 	 * @param $class    string  Plugin class name
 	 *
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 */
-	private function load_addon( $class ) {
+	private function load_addon_configuration( $class ) {
 		$full_class_name = 'cookiebot_addons_framework\\controller\\addons\\' . $class;
 
 		/**
@@ -67,7 +130,18 @@ class Plugin_Controller {
 		 */
 
 		if ( class_exists( $full_class_name ) ) {
-			new $full_class_name;
+			new $full_class_name( $this->script_loader_tag, $this->cookie_consent, $this->buffer_output );
+		}
+	}
+
+	/**
+	 * Runs every added action hooks to manipulate script tag
+	 *
+	 * @since 1.2.0
+	 */
+	public function run_buffer_output_manipulations() {
+		if ( $this->buffer_output->has_action() ) {
+			$this->buffer_output->run_actions();
 		}
 	}
 }

@@ -2,16 +2,30 @@
 
 namespace cookiebot_addons_framework\controller\addons\jetpack;
 
+use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
+
 class Googleplus_Badge_Widget {
+
+	/**
+	 * @var Cookiebot_Script_Loader_Tag
+	 */
+	protected $script_loader_tag;
 
 	/**
 	 * Googleplus_Badge_Widget constructor.
 	 *
+	 * @param   $script_loader_tag  Cookiebot_Script_Loader_Tag
+	 *
 	 * @since 1.2.0
 	 */
-	public function __construct() {
-		$this->disable_javascript_file();
-		$this->div_to_enable_marketing_consent();
+	public function __construct( Cookiebot_Script_Loader_Tag $script_loader_tag ) {
+
+		if ( is_active_widget( false, false, 'googleplus-badge', true ) ) {
+			$this->script_loader_tag = $script_loader_tag;
+
+			$this->disable_javascript_file();
+			$this->div_to_enable_marketing_consent();
+		}
 	}
 
 	/**
@@ -20,7 +34,7 @@ class Googleplus_Badge_Widget {
 	 * @since 1.2.0
 	 */
 	protected function disable_javascript_file() {
-		cookiebot_script_loader_tag( 'googleplus-widget', 'marketing' );
+		$this->script_loader_tag->add_tag( 'googleplus-widget', 'marketing' );
 	}
 
 	/**
@@ -40,7 +54,7 @@ class Googleplus_Badge_Widget {
 	 *
 	 * @since 1.2.0
 	 */
-	public function display_div_message_to_go_to_consent_settings($view, $widget) {
+	public function display_div_message_to_go_to_consent_settings( $view, $widget ) {
 		if ( $widget == 'googleplus-badge' && $view == 'widget_view' ) {
 			echo '<div class="cookieconsent-optout-marketing">
 						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept marketing-cookies</a> to watch this googleplus badge.', 'cookiebot_addons' ) . '

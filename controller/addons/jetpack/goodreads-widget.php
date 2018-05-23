@@ -2,6 +2,8 @@
 
 namespace cookiebot_addons_framework\controller\addons\jetpack;
 
+use cookiebot_addons_framework\lib\Cookiebot_Buffer_Output;
+
 class Goodreads_Widget {
 
 	protected $widget_id;
@@ -15,11 +17,11 @@ class Goodreads_Widget {
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct() {
+	public function __construct( Cookiebot_Buffer_Output $buffer_output ) {
 		if ( is_active_widget( false, false, 'wpcom-goodreads', true ) ) {
 			$this->transient_name = 'wpcom-goodreads';
 
-			$this->keywords = array( 'www.goodreads.com' );
+			$this->keywords = array( 'www.goodreads.com' => 'marketing' );
 			$this->block_javascript_file();
 			$this->output_manipulated();
 		}
@@ -49,6 +51,11 @@ class Goodreads_Widget {
 		}
 	}
 
+	/**
+	 * Return widget output after dynamic sidebar is fully processed
+	 *
+	 * @since 1.2.0
+	 */
 	public function output_manipulated() {
 		add_action( 'dynamic_sidebar_after', function ( $index ) {
 			ob_end_flush();
@@ -56,10 +63,13 @@ class Goodreads_Widget {
 	}
 
 	/**
-	 * TODO refactor
+	 * Custom manipulation of the script
+	 *
 	 * @param $buffer
 	 *
 	 * @return mixed|null|string|string[]
+	 *
+	 * @since 1.2.0
 	 */
 	public function manipulate_script($buffer) {
 		/**
@@ -71,44 +81,8 @@ class Goodreads_Widget {
 		 * If cache is not set then build it
 		 */
 		if ( $updated_scripts === false ) {
-			/**
-			 * Pattern to get all scripts
-			 */
-			$pattern = "/\<script(.*?)?\>(.|\s)*?\<\/script\>/i";
 
-			/**
-			 * Get all scripts and add cookieconsent if it does match with the criterion
-			 */
-			$updated_scripts = preg_replace_callback( $pattern, function ( $matches ) {
-				/**
-				 * Matched script data
-				 */
-				$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
-
-				/**
-				 * Check if the script contains the keywords, checks keywords one by one
-				 *
-				 * If one match, then the rest of the keywords will be skipped.
-				 **/
-				foreach ( $this->keywords as $needle ) {
-					/**
-					 * The script contains the needle
-					 **/
-					if ( strpos( $data, $needle ) !== false ) {
-						$data = preg_replace( '/\<script/', '<script type="text/plain" data-cookieconsent="marketing"', $data );
-
-						/**
-						 * matched already so we can skip other keywords
-						 **/
-						continue;
-					}
-				}
-
-				/**
-				 * Return updated script data
-				 */
-				return $data;
-			}, $buffer );
+			$updated_scripts = cookiebot_manipulate_script($buffer, $this->keywords);
 
 			/**
 			 * Set cache for 15 minutes

@@ -20,28 +20,6 @@ class Cookiebot_Cookie_Consent {
 	private $states = array();
 
 	/**
-	 * @var   Cookiebot_Cookie_Consent The single instance of the class
-	 *
-	 * @since 1.2.0
-	 */
-	protected static $_instance = null;
-
-	/**
-	 * Returns instance of this class
-	 *
-	 * @return Cookiebot_Cookie_Consent
-	 *
-	 * @since 1.2.0
-	 */
-	public static function instance() {
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
-
-	/**
 	 * Scan cookiebot cookie
 	 *
 	 * @since 1.2.0

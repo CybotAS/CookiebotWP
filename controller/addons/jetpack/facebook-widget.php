@@ -2,6 +2,8 @@
 
 namespace cookiebot_addons_framework\controller\addons\jetpack;
 
+use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
+
 /**
  * This class is used to add cookiebot consent to facebook widget
  *
@@ -10,12 +12,23 @@ namespace cookiebot_addons_framework\controller\addons\jetpack;
 class Facebook_Widget {
 
 	/**
-	 * Facebook_Widget constructor.
+	 * @var Cookiebot_Script_Loader_Tag
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct() {
-		if( is_active_widget(false, false, 'facebook-likebox', true) ) {
+	private $script_loader_tag;
+
+	/**
+	 * Facebook_Widget constructor.
+	 *
+	 * @param $script_loader_tag Cookiebot_Script_Loader_Tag
+	 *
+	 * @since 1.2.0
+	 */
+	public function __construct( Cookiebot_Script_Loader_Tag $script_loader_tag ) {
+		if ( is_active_widget( false, false, 'facebook-likebox', true ) ) {
+			$this->script_loader_tag = $script_loader_tag;
+
 			$this->add_consent_attribute_to_facebook_embed_javascript();
 			$this->add_cookie_consent_div();
 		}
@@ -27,7 +40,7 @@ class Facebook_Widget {
 	 * @since 1.2.0
 	 */
 	protected function add_consent_attribute_to_facebook_embed_javascript() {
-		cookiebot_script_loader_tag( 'jetpack-facebook-embed', 'marketing' );
+		$this->script_loader_tag->add_tag( 'jetpack-facebook-embed', 'marketing' );
 	}
 
 	/**

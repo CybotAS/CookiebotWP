@@ -12,11 +12,13 @@ class Google_Maps_Widget {
 	 * @since 1.2.0
 	 */
 	public function __construct() {
-		/**
-		 * Replace attributes of the google maps widget iframe
-		 */
-		add_action( 'jetpack_contact_info_widget_start', array( $this, 'start_buffer' ) );
-		add_action( 'jetpack_contact_info_widget_end', array( $this, 'stop_buffer' ) );
+		if( is_active_widget(false, false, 'widget_contact_info', true) ) {
+			/**
+			 * Replace attributes of the google maps widget iframe
+			 */
+			add_action( 'jetpack_contact_info_widget_start', array( $this, 'start_buffer' ) );
+			add_action( 'jetpack_contact_info_widget_end', array( $this, 'stop_buffer' ) );
+		}
 	}
 
 	/**

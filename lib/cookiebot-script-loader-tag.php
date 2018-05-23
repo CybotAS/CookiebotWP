@@ -14,28 +14,6 @@ class Cookiebot_Script_Loader_Tag {
 	private $tags = array();
 
 	/**
-	 * @var   Cookiebot_Script_Loader_Tag The single instance of the class
-	 *
-	 * @since 1.1.0
-	 */
-	protected static $_instance = null;
-
-	/**
-	 * Returns instance of this class
-	 *
-	 * @return Cookiebot_Script_Loader_Tag
-	 *
-	 * @since 1.1.0
-	 */
-	public static function instance() {
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
-
-	/**
 	 * Cookiebot_Script_Loader_Tag constructor.
 	 * Adds filter to enhance script attribute
 	 *

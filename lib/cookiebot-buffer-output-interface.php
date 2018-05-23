@@ -7,12 +7,9 @@ Interface Cookiebot_Buffer_Output_Interface {
 	/**
 	 * Cookiebot_Buffer_Output_Interface constructor.
 	 *
-	 * @param $tag  string  Action hook name
-	 * @param $priority integer Action hook priority
-	 *
 	 * @since 1.1.0
 	 */
-	public function __construct( $tag, $priority );
+	public function __construct();
 
 	/**
 	 * Start buffering

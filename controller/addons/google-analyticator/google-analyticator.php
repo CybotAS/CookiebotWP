@@ -2,9 +2,22 @@
 
 namespace cookiebot_addons_framework\controller\addons\google_analyticator;
 
-class Google_Analyticator {
+use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Abstract;
+use cookiebot_addons_framework\lib\Cookiebot_Buffer_Output;
+use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent;
+use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
 
-	public function __construct() {
+class Google_Analyticator extends Cookiebot_Addons_Abstract {
+	/**
+	 * Google_Analyticator constructor.
+	 *
+	 * @param Cookiebot_Script_Loader_Tag $script_loader_tag
+	 * @param Cookiebot_Cookie_Consent $cookie_consent
+	 * @param Cookiebot_Buffer_Output $buffer_output
+	 */
+	public function __construct( Cookiebot_Script_Loader_Tag $script_loader_tag, Cookiebot_Cookie_Consent $cookie_consent, Cookiebot_Buffer_Output $buffer_output ) {
+		parent::__construct( $script_loader_tag, $cookie_consent, $buffer_output );
+
 		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_google_analyticator' ), 5 );
 	}
 
@@ -18,14 +31,14 @@ class Google_Analyticator {
 		 * ga scripts are loaded in wp_head priority set to 99
 		 */
 		if ( has_action( 'wp_head', 'add_google_analytics' ) ) {
-			cookiebot_buffer_output( 'wp_head', 99 );
+			$this->buffer_output->add_tag( 'wp_head', 99 );
 		}
 
 		/**
 		 * ga scripts are loaded in login_head priority set to 99
 		 */
 		if ( has_action( 'login_head', 'add_google_analytics' ) ) {
-			cookiebot_buffer_output( 'login_head', 99 );
+			$this->buffer_output->add_tag( 'login_head', 99 );
 		}
 
 		/**
@@ -37,7 +50,7 @@ class Google_Analyticator {
 			 *
 			 * @since 1.1.0
 			 */
-			cookiebot_script_loader_tag( 'ga-external-tracking' );
+			$this->script_loader_tag->add_tag( 'ga-external-tracking', 'statistics' );
 		}
 	}
 }
