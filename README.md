@@ -26,10 +26,10 @@ Following plugins have native (built-in) support for Cookiebot:
 Following addons are in pipeline:
 
 * ~~GADWP (discontinued)~~
-* GA Google Analytics (https://wordpress.org/plugins/ga-google-analytics/) (released and tested)
-* Google Analyticator (https://wordpress.org/plugins/google-analyticator/) (released and tested)
-* Jetpack by Wordpress.com (https://wordpress.org/plugins/jetpack/) (in development)
-* HubSpot Tracking Code (https://wordpress.org/plugins/hubspot-tracking-code/) (released and tested)
+* [GA Google Analytics](https://wordpress.org/plugins/ga-google-analytics/) (released and tested)
+* [Google Analyticator](https://wordpress.org/plugins/google-analyticator/) (released and tested)
+* [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/) (in development)
+* [HubSpot Tracking Code](https://wordpress.org/plugins/hubspot-tracking-code/) (released and tested)
 * To be continued..
 
 If you have a plugin that you would like integration for, please submit a request in the [Issues](https://github.com/CybotAS/CookiebotAddons/issues) section.
