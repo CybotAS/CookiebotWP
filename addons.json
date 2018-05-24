@@ -1,18 +1,18 @@
 {
   "Ga_Google_Analytics": {
     "file": "ga-google-analytics\/ga-google-analytics.php",
-    "class": "ga_google_analytics\\Ga_Google_Analytics"
+    "class": "cookiebot_addons_framework\\controller\\addons\\ga_google_analytics\\Ga_Google_Analytics"
   },
   "Ga_Analyticator": {
     "file": "google-analyticator\/google-analyticator.php",
-    "class": "google_analyticator\\Google_Analyticator"
+    "class": "cookiebot_addons_framework\\controller\\addons\\google_analyticator\\Google_Analyticator"
   },
   "Jetpack": {
     "file": "jetpack\/jetpack.php",
-    "class": "jetpack\\Jetpack"
+    "class": "cookiebot_addons_framework\\controller\\addons\\jetpack\\Jetpack"
   },
   "Hubspot_Tracking_Code": {
     "file": "hubspot-tracking-code\/hubspot-tracking-code.php",
-    "class": "hubspot_tracking_code\\Hubspot_Tracking_Code"
+    "class": "cookiebot_addons_framework\\controller\\addons\\hubspot_tracking_code\\Hubspot_Tracking_Code"
   }
 }

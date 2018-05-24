@@ -9,8 +9,12 @@
 namespace cookiebot_addons_framework;
 
 use cookiebot_addons_framework\controller\Plugin_Controller;
+use cookiebot_addons_framework\lib\Cookiebot_Buffer_Output;
+use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent;
+use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
 use DI\Container;
 use DI\ContainerBuilder;
+use DI;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -38,9 +42,16 @@ include_once CAF_DIR . 'vendor/autoload.php';
 
 class Cookiebot_Addons_Framework {
 
+	/**
+	 * IoC Container - is used for dependency injections
+	 *
+	 * @var \DI\Container
+	 */
 	public $container;
 
 	public function __construct() {
+		$this->build_container();
+
 		/**
 		 * Load plugin controller to check if addons are active
 		 * If active then load the plugin addon configuration class
@@ -48,7 +59,23 @@ class Cookiebot_Addons_Framework {
 		 *
 		 * @since 1.1.0
 		 */
-		add_action( 'plugins_loaded', array( new Plugin_Controller( $this->get_plugins() ), 'check_addons' ) );
+		add_action( 'plugins_loaded', array( new Plugin_Controller( $this->container ), 'check_addons' ) );
+	}
+
+	/**
+	 * Build IoC container
+	 */
+	protected function build_container() {
+		$builder = new ContainerBuilder();
+
+		$builder->addDefinitions( [
+			'script_loader_tag' => DI\object('cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag'),
+			'cookie_consent'    => DI\object('cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent'),
+			'buffer_output'     => DI\object('cookiebot_addons_framework\lib\Cookiebot_Buffer_Output'),
+			'plugins'           => DI\value( $this->get_plugins() )
+		] );
+
+		$this->container = $builder->build();
 	}
 
 	/**

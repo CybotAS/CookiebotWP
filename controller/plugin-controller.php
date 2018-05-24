@@ -9,13 +9,13 @@ use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
 class Plugin_Controller {
 
 	/**
-	 * Array of addon plugins
+	 * IoC container - Dependency Injection
 	 *
-	 * @var array
+	 * @var \DI\Container
 	 *
 	 * @since 1.1.0
 	 */
-	private $plugins;
+	private $container;
 
 	/**
 	 * Is used to manipulate enqueue script attributes
@@ -47,16 +47,19 @@ class Plugin_Controller {
 	/**
 	 * Plugin_Controller constructor.
 	 *
-	 * @param $plugins  array   List of supported plugins
+	 * @param $container  object IoC Container
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct( $plugins ) {
-		$this->plugins = $plugins;
+	public function __construct( $container ) {
+		$this->container = $container;
 	}
 
 	/**
 	 * Load addon configuration if the plugin is activated
+	 *
+	 * @throws \DI\DependencyException
+	 * @throws \DI\NotFoundException
 	 *
 	 * @since 1.2.0
 	 */
@@ -66,14 +69,9 @@ class Plugin_Controller {
 		}
 
 		/**
-		 * Initialize default features: script_loader_tag, cookie_consent, buffer output
-		 */
-		$this->init_cookiebot_functions();
-
-		/**
 		 * Check plugins one by one and load configuration if it is active
 		 */
-		foreach ( $this->plugins as $plugin_class => $plugin ) {
+		foreach ( $this->container->get( 'plugins' ) as $plugin_class => $plugin ) {
 			/**
 			 * Load addon code if the plugin is active
 			 */
@@ -91,28 +89,6 @@ class Plugin_Controller {
 	}
 
 	/**
-	 * Load functions to use in Dependency Injection
-	 *
-	 * @since 1.2.0
-	 */
-	private function init_cookiebot_functions() {
-		/**
-		 * Initialize script loader tag class
-		 */
-		$this->script_loader_tag = new Cookiebot_Script_Loader_Tag();
-
-		/**
-		 * Initialize cookie consent class
-		 */
-		$this->cookie_consent = new Cookiebot_Cookie_Consent();
-
-		/**
-		 * Initialize buffer output
-		 */
-		$this->buffer_output = new Cookiebot_Buffer_Output();
-	}
-
-	/**
 	 * Dynamically Loads addon plugin configuration class
 	 *
 	 * For example:
@@ -120,29 +96,33 @@ class Plugin_Controller {
 	 *
 	 * @param $class    string  Plugin class name
 	 *
+	 * @throws \DI\DependencyException
+	 * @throws \DI\NotFoundException
+	 *
 	 * @since 1.2.0
 	 */
 	private function load_addon_configuration( $class ) {
-		$full_class_name = 'cookiebot_addons_framework\\controller\\addons\\' . $class;
-
 		/**
 		 * Load addon class
 		 */
-
-		if ( class_exists( $full_class_name ) ) {
-			$addon = new $full_class_name( $this->script_loader_tag, $this->cookie_consent, $this->buffer_output );
-			$addon->load_configuration($this->script_loader_tag, $this->cookie_consent, $this->buffer_output);
+		if ( class_exists( $class ) ) {
+			new $class( $this->container->get( 'script_loader_tag' ), $this->container->get( 'cookie_consent' ), $this->container->get( 'buffer_output' ) );
 		}
 	}
 
 	/**
 	 * Runs every added action hooks to manipulate script tag
 	 *
+	 * @throws \DI\DependencyException
+	 * @throws \DI\NotFoundException
+	 *
 	 * @since 1.2.0
 	 */
 	public function run_buffer_output_manipulations() {
-		if ( $this->buffer_output->has_action() ) {
-			$this->buffer_output->run_actions();
+		$buffer_output = $this->container->get( 'buffer_output' );
+
+		if ( $buffer_output->has_action() ) {
+			$buffer_output->run_actions();
 		}
 	}
 }
