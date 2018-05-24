@@ -3,11 +3,27 @@
 namespace cookiebot_addons_framework\controller\addons\ga_google_analytics;
 
 use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Abstract;
+use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons_framework\lib\Cookiebot_Buffer_Output;
 use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
 use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent;
 
-class Ga_Google_Analytics extends Cookiebot_Addons_Abstract {
+class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
+
+	/**
+	 * @var Cookiebot_Script_Loader_Tag
+	 */
+	protected $script_loader_tag;
+
+	/**
+	 * @var Cookiebot_Cookie_Consent
+	 */
+	protected $cookie_consent;
+
+	/**
+	 * @var Cookiebot_Buffer_Output
+	 */
+	protected $buffer_output;
 
 	/**
 	 * Ga_Google_Analytics constructor.
@@ -17,7 +33,9 @@ class Ga_Google_Analytics extends Cookiebot_Addons_Abstract {
 	 * @param Cookiebot_Buffer_Output $buffer_output
 	 */
 	public function __construct( Cookiebot_Script_Loader_Tag $script_loader_tag, Cookiebot_Cookie_Consent $cookie_consent, Cookiebot_Buffer_Output $buffer_output ) {
-		parent::__construct( $script_loader_tag, $cookie_consent, $buffer_output );
+		$this->script_loader_tag = $script_loader_tag;
+		$this->cookie_consent    = $cookie_consent;
+		$this->buffer_output     = $buffer_output;
 
 		/**
 		 * We add the action after wp_loaded and replace the original GA Google

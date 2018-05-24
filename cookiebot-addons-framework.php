@@ -9,6 +9,8 @@
 namespace cookiebot_addons_framework;
 
 use cookiebot_addons_framework\controller\Plugin_Controller;
+use DI\Container;
+use DI\ContainerBuilder;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -29,7 +31,14 @@ include_once CAF_DIR . 'lib/cookiebot-addons-framework-autoloader.php';
  */
 include_once CAF_DIR . 'lib/cookiebot-addons-functions.php';
 
+/**
+ * Load composer
+ */
+include_once CAF_DIR . 'vendor/autoload.php';
+
 class Cookiebot_Addons_Framework {
+
+	public $container;
 
 	public function __construct() {
 		/**

@@ -130,7 +130,8 @@ class Plugin_Controller {
 		 */
 
 		if ( class_exists( $full_class_name ) ) {
-			new $full_class_name( $this->script_loader_tag, $this->cookie_consent, $this->buffer_output );
+			$addon = new $full_class_name( $this->script_loader_tag, $this->cookie_consent, $this->buffer_output );
+			$addon->load_configuration($this->script_loader_tag, $this->cookie_consent, $this->buffer_output);
 		}
 	}
 
