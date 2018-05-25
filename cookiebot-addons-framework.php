@@ -69,7 +69,7 @@ class Cookiebot_Addons_Framework {
 		$builder = new ContainerBuilder();
 
 		$builder->addDefinitions( [
-			'script_loader_tag' => DI\object('cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag'),
+			'Cookiebot_Script_Loader_Tag_Interface' => DI\object('cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag'),
 			'cookie_consent'    => DI\object('cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent'),
 			'buffer_output'     => DI\object('cookiebot_addons_framework\lib\Cookiebot_Buffer_Output'),
 			'plugins'           => DI\value( $this->get_plugins() )

@@ -106,7 +106,9 @@ class Plugin_Controller {
 		 * Load addon class
 		 */
 		if ( class_exists( $class ) ) {
-			new $class( $this->container->get( 'script_loader_tag' ), $this->container->get( 'cookie_consent' ), $this->container->get( 'buffer_output' ) );
+			$this->container->set( $class, \DI\object( $class ) );
+			\DI\create();
+			//new $class( $this->container->get( 'script_loader_tag' ), $this->container->get( 'cookie_consent' ), $this->container->get( 'buffer_output' ) );
 		}
 	}
 

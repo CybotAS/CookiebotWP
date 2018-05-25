@@ -7,6 +7,7 @@ use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons_framework\lib\Cookiebot_Buffer_Output;
 use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
 use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent;
+use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag_Interface;
 
 class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
 
@@ -28,11 +29,11 @@ class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
 	/**
 	 * Ga_Google_Analytics constructor.
 	 *
-	 * @param Cookiebot_Script_Loader_Tag $script_loader_tag
+	 * @param Cookiebot_Script_Loader_Tag_Interface $script_loader_tag
 	 * @param Cookiebot_Cookie_Consent $cookie_consent
 	 * @param Cookiebot_Buffer_Output $buffer_output
 	 */
-	public function __construct( Cookiebot_Script_Loader_Tag $script_loader_tag, Cookiebot_Cookie_Consent $cookie_consent, Cookiebot_Buffer_Output $buffer_output ) {
+	public function __construct( Cookiebot_Script_Loader_Tag_Interface $script_loader_tag, Cookiebot_Cookie_Consent $cookie_consent, Cookiebot_Buffer_Output $buffer_output ) {
 		$this->script_loader_tag = $script_loader_tag;
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;

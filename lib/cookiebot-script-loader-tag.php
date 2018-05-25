@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons_framework\lib;
 
-class Cookiebot_Script_Loader_Tag {
+class Cookiebot_Script_Loader_Tag implements Cookiebot_Script_Loader_Tag_Interface {
 
 	/**
 	 * List of tags to load in cookiebot attributes
