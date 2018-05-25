@@ -30,6 +30,7 @@ Following addons are in pipeline:
 * [Google Analyticator](https://wordpress.org/plugins/google-analyticator/) (released and tested)
 * [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/) (in development)
 * [HubSpot Tracking Code](https://wordpress.org/plugins/hubspot-tracking-code/) (released and tested)
+* [AddToAny Share Buttons](https://wordpress.org/plugins/add-to-any/) (released and tested)
 * To be continued..
 
 If you have a plugin that you would like integration for, please submit a request in the [Issues](https://github.com/CybotAS/CookiebotAddons/issues) section.

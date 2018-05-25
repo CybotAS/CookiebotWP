@@ -3,7 +3,7 @@
  * Plugin Name: Cookiebot Addons Framework
  * Description: Adding support for Cookiebot
  * Author: Johan Holst Nielsen & Aytac Kokus
- * Version: 1.1.0
+ * Version: 1.2.0
  */
 
 namespace cookiebot_addons_framework;
