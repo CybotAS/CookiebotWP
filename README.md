@@ -28,7 +28,7 @@ Following addons are in pipeline:
 * ~~GADWP (discontinued)~~
 * [GA Google Analytics](https://wordpress.org/plugins/ga-google-analytics/) (released and tested)
 * [Google Analyticator](https://wordpress.org/plugins/google-analyticator/) (released and tested)
-* [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/) (in development)
+* [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/) (released and tested)
 * [HubSpot Tracking Code](https://wordpress.org/plugins/hubspot-tracking-code/) (released and tested)
 * [AddToAny Share Buttons](https://wordpress.org/plugins/add-to-any/) (released and tested)
 * To be continued..
