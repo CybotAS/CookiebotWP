@@ -30,13 +30,20 @@ Following addons are in pipeline:
 * [Google Analyticator](https://wordpress.org/plugins/google-analyticator/) (released and tested)
 * [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/) (in development)
 * [HubSpot Tracking Code](https://wordpress.org/plugins/hubspot-tracking-code/) (released and tested)
+* [AddToAny Share Buttons](https://wordpress.org/plugins/add-to-any/) (released and tested)
 * To be continued..
 
 If you have a plugin that you would like integration for, please submit a request in the [Issues](https://github.com/CybotAS/CookiebotAddons/issues) section.
 
 # Contributions
 Everyone is welcome to make a pull request with new addon support, or to fix existing addons.
-Shout out to @fschaeffler for the HubSpot Tracking Code integration. Way to go!
+
+Shout out to 
+
+[@fschaeffler](https://github.com/fschaeffler) for the HubSpot Tracking Code integration. 
+[@irondan](https://github.com/irondan) for the AddToAny integration.
+
+Way to go!
 
 
 # How do I make my plugin support Cookiebot?
