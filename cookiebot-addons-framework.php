@@ -80,6 +80,20 @@ class Cookiebot_Addons_Framework {
 	}
 
 	/**
+	 * Loads plugins from json file
+	 *
+	 * All the addon plugins are defined there.
+	 *
+	 * The file is located at the root map of this plugin
+	 *
+	 * @since 1.3.0
+	 */
+	protected function get_plugins() {
+		$file          = file_get_contents( CAF_DIR . 'addons.json' );
+		$this->plugins = json_decode( $file );
+	}
+
+	/**
 	 * Build IoC container
 	 *
 	 * @since 1.3.0
@@ -96,20 +110,6 @@ class Cookiebot_Addons_Framework {
 		] );
 
 		$this->container = $builder->build();
-	}
-
-	/**
-	 * Loads plugins from json file
-	 *
-	 * All the addon plugins are defined there.
-	 *
-	 * The file is located at the root map of this plugin
-	 *
-	 * @since 1.3.0
-	 */
-	protected function get_plugins() {
-		$file          = file_get_contents( CAF_DIR . 'addons.json' );
-		$this->plugins = json_decode( $file );
 	}
 
 	/**

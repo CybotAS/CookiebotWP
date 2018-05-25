@@ -53,7 +53,7 @@ class Plugin_Controller {
 			if ( $addon->is_addon_enabled() && $addon->is_plugin_installed() ) {
 				$addon->load_configuration();
 			} else {
-				// unset not used addon???
+				// unset not used addon
 				$this->container->set( $plugin->class, '' );
 				unset( $addon );
 			}

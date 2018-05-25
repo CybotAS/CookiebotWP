@@ -51,6 +51,7 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function __construct( Cookiebot_Settings_Interface $settings, Cookiebot_Script_Loader_Tag_Interface $script_loader_tag, Cookiebot_Cookie_Consent_Interface $cookie_consent, Cookiebot_Buffer_Output_Interface $buffer_output ) {
+		$this->settings          = $settings;
 		$this->script_loader_tag = $script_loader_tag;
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
@@ -105,7 +106,7 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_addon_name() {
-		return 'addToAny Share Buttons';
+		return 'Hubspot Tracking Code';
 	}
 
 	/**
@@ -133,6 +134,7 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	 */
 	public function is_addon_enabled() {
 		// get status in service interface
+		return true;
 	}
 
 	/**
@@ -142,5 +144,6 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	 */
 	public function is_plugin_installed() {
 		// service get if plugin is installed
+		return true;
 	}
 }
