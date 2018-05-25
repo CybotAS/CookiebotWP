@@ -1,4 +1,8 @@
 {
+  "Add_To_Any": {
+    "file": "add-to-any\/add-to-any.php",
+    "class": "add_to_any\\Add_To_Any"
+  },
   "Ga_Google_Analytics": {
     "file": "ga-google-analytics\/ga-google-analytics.php",
     "class": "ga_google_analytics\\Ga_Google_Analytics"
