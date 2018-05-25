@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons_framework\lib;
 
-class Cookiebot_Cookie_Consent {
+class Cookiebot_Cookie_Consent implements Cookiebot_Cookie_Consent_Interface {
 
 	/**
 	 * Array of cookiebot consent states
@@ -33,7 +33,7 @@ class Cookiebot_Cookie_Consent {
 	 *
 	 * @since 1.2.0
 	 */
-	private function scan_cookie() {
+	public function scan_cookie() {
 		//default - set strictly necessary cookies
 		$this->add_state( 'necessary' );
 
@@ -89,7 +89,7 @@ class Cookiebot_Cookie_Consent {
 	 *
 	 * @since 1.2.0
 	 */
-	private function add_state( $state ) {
+	public function add_state( $state ) {
 		if ( ! in_array( $state, $this->states ) ) {
 			$this->states[] = $state;
 		}

@@ -18,33 +18,6 @@ class Plugin_Controller {
 	private $container;
 
 	/**
-	 * Is used to manipulate enqueue script attributes
-	 *
-	 * @var Cookiebot_Script_Loader_Tag
-	 *
-	 * @since 1.2.0
-	 */
-	public $script_loader_tag;
-
-	/**
-	 * Is used to manipulate the data in the buffer
-	 *
-	 * @var Cookiebot_Buffer_Output
-	 *
-	 * @since 1.2.0
-	 */
-	public $buffer_output;
-
-	/**
-	 * Is used to get cookie consent
-	 *
-	 * @var Cookiebot_Cookie_Consent
-	 *
-	 * @since 1.2.0
-	 */
-	public $cookie_consent;
-
-	/**
 	 * Plugin_Controller constructor.
 	 *
 	 * @param $container  object IoC Container
@@ -71,12 +44,14 @@ class Plugin_Controller {
 		/**
 		 * Check plugins one by one and load configuration if it is active
 		 */
-		foreach ( $this->container->get( 'plugins' ) as $plugin_class => $plugin ) {
+		foreach ( $this->container->get( 'plugins' ) as $plugin ) {
+			$addon = $this->container->get( $plugin->class );
+
 			/**
 			 * Load addon code if the plugin is active
 			 */
 			if ( is_plugin_active( $plugin->file ) ) {
-				$this->load_addon_configuration( $plugin->class );
+				$addon->load_configuration();
 			}
 		}
 
@@ -89,39 +64,15 @@ class Plugin_Controller {
 	}
 
 	/**
-	 * Dynamically Loads addon plugin configuration class
-	 *
-	 * For example:
-	 * /controller/addons/google-analyticator/google-analyticator.php
-	 *
-	 * @param $class    string  Plugin class name
-	 *
-	 * @throws \DI\DependencyException
-	 * @throws \DI\NotFoundException
-	 *
-	 * @since 1.2.0
-	 */
-	private function load_addon_configuration( $class ) {
-		/**
-		 * Load addon class
-		 */
-		if ( class_exists( $class ) ) {
-			$this->container->set( $class, \DI\object( $class ) );
-			\DI\create();
-			//new $class( $this->container->get( 'script_loader_tag' ), $this->container->get( 'cookie_consent' ), $this->container->get( 'buffer_output' ) );
-		}
-	}
-
-	/**
 	 * Runs every added action hooks to manipulate script tag
 	 *
 	 * @throws \DI\DependencyException
 	 * @throws \DI\NotFoundException
 	 *
-	 * @since 1.2.0
+	 * @since 1.3.0
 	 */
 	public function run_buffer_output_manipulations() {
-		$buffer_output = $this->container->get( 'buffer_output' );
+		$buffer_output = $this->container->get( 'Cookiebot_Buffer_Output_Interface' );
 
 		if ( $buffer_output->has_action() ) {
 			$buffer_output->run_actions();

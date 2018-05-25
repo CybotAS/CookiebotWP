@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons_framework\lib;
+namespace cookiebot_addons_framework\lib\buffer;
 
 class Cookiebot_Buffer_Output_Tag {
 

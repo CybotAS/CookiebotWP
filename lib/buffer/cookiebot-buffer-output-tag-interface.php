@@ -1,8 +1,8 @@
 <?php
 
-namespace cookiebot_addons_framework\lib;
+namespace cookiebot_addons_framework\lib\buffer;
 
-Interface Cookiebot_Buffer_Output_Interface {
+Interface Cookiebot_Buffer_Output_Tag_Interface {
 
 	/**
 	 * Cookiebot_Buffer_Output_Interface constructor.

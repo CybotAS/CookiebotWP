@@ -4,41 +4,49 @@ namespace cookiebot_addons_framework\controller\addons\hubspot_tracking_code;
 
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
-use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Abstract;
 use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
-use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent;
-use cookiebot_addons_framework\lib\Cookiebot_Buffer_Output;
+use cookiebot_addons_framework\lib\script_loader_tag\Cookiebot_Script_Loader_Tag_Interface;
+use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent_Interface;
+use cookiebot_addons_framework\lib\buffer\Cookiebot_Buffer_Output_Interface;
 
 class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 
 	/**
-	 * @var Cookiebot_Script_Loader_Tag
+	 * @var Cookiebot_Script_Loader_Tag_Interface
 	 */
 	protected $script_loader_tag;
 
 	/**
-	 * @var Cookiebot_Cookie_Consent
+	 * @var Cookiebot_Cookie_Consent_Interface
 	 */
 	protected $cookie_consent;
 
 	/**
-	 * @var Cookiebot_Buffer_Output
+	 * @var Cookiebot_Buffer_Output_Interface
 	 */
 	protected $buffer_output;
 
 	/**
-	 * Hubspot_Tracking_Code constructor.
+	 * Jetpack constructor.
 	 *
-	 * @param Cookiebot_Script_Loader_Tag $script_loader_tag
-	 * @param Cookiebot_Cookie_Consent $cookie_consent
-	 * @param Cookiebot_Buffer_Output $buffer_output
+	 * @param $script_loader_tag Cookiebot_Script_Loader_Tag_Interface
+	 * @param $cookie_consent Cookiebot_Cookie_Consent_Interface
+	 * @param $buffer_output Cookiebot_Buffer_Output_Interface
+	 *
+	 * @since 1.2.0
 	 */
-	public function __construct( Cookiebot_Script_Loader_Tag $script_loader_tag, Cookiebot_Cookie_Consent $cookie_consent, Cookiebot_Buffer_Output $buffer_output ) {
+	public function __construct( Cookiebot_Script_Loader_Tag_Interface $script_loader_tag, Cookiebot_Cookie_Consent_Interface $cookie_consent, Cookiebot_Buffer_Output_Interface $buffer_output ) {
 		$this->script_loader_tag = $script_loader_tag;
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
+	}
 
+	/**
+	 * Loads addon configuration
+	 *
+	 * @since 1.3.0
+	 */
+	public function load_configuration() {
 		/**
 		 * We add the action after wp_loaded and replace the original
 		 * HubSpot Tracking Code action with our own adjusted version.

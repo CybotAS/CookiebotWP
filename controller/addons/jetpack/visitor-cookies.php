@@ -3,12 +3,14 @@
 namespace cookiebot_addons_framework\controller\addons\jetpack;
 
 use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent;
+use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent_Interface;
 use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
+use cookiebot_addons_framework\lib\script_loader_tag\Cookiebot_Script_Loader_Tag_Interface;
 
 class Visitor_Cookies {
 
 	/**
-	 * @var Cookiebot_Script_Loader_Tag
+	 * @var Cookiebot_Script_Loader_Tag_Interface
 	 */
 	private $script_loader_tag;
 
@@ -20,12 +22,12 @@ class Visitor_Cookies {
 	/**
 	 * Visitor_Cookies constructor.
 	 *
-	 * @param Cookiebot_Script_Loader_Tag $script_loader_tag
-	 * @param Cookiebot_Cookie_Consent  $cookie_consent
+	 * @param Cookiebot_Script_Loader_Tag_Interface $script_loader_tag
+	 * @param Cookiebot_Cookie_Consent_Interface  $cookie_consent
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct(Cookiebot_Script_Loader_Tag $script_loader_tag, Cookiebot_Cookie_Consent $cookie_consent) {
+	public function __construct(Cookiebot_Script_Loader_Tag_Interface $script_loader_tag, Cookiebot_Cookie_Consent_Interface $cookie_consent) {
 		/**
 		 * When preferences consent is not given
 		 * Then disable comment cookies

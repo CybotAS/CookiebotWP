@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons_framework\lib;
+namespace cookiebot_addons_framework\lib\script_loader_tag;
 
 Interface Cookiebot_Script_Loader_Tag_Interface {
 

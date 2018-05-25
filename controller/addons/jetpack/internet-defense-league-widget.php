@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons_framework\controller\addons\jetpack;
 
-use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent;
+use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent_Interface;
 
 class Internet_Defense_league_Widget {
 
@@ -14,11 +14,11 @@ class Internet_Defense_league_Widget {
 	/**
 	 * Internet_Defense_league_Widget constructor.
 	 *
-	 * @param $cookie_consent \cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent
+	 * @param $cookie_consent \cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent_Interface
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct( Cookiebot_Cookie_Consent $cookie_consent ) {
+	public function __construct( Cookiebot_Cookie_Consent_Interface $cookie_consent ) {
 		if ( is_active_widget( false, false, 'internet_defense_league_widget', true ) ) {
 			$this->cookie_consent = $cookie_consent;
 

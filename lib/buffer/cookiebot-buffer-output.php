@@ -1,8 +1,8 @@
 <?php
 
-namespace cookiebot_addons_framework\lib;
+namespace cookiebot_addons_framework\lib\buffer;
 
-class Cookiebot_Buffer_Output {
+class Cookiebot_Buffer_Output implements Cookiebot_Buffer_Output_Interface {
 
 	/**
 	 * Hook tag names
