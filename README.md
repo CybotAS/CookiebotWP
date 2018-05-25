@@ -37,7 +37,14 @@ If you have a plugin that you would like integration for, please submit a reques
 
 # Contributions
 Everyone is welcome to make a pull request with new addon support, or to fix existing addons.
-Shout out to @fschaeffler for the HubSpot Tracking Code integration. Way to go!
+
+Shout out to
+
+[@fschaeffler](https://github.com/fschaeffler) for the HubSpot Tracking Code integration. 
+
+[@irondan](https://github.com/irondan) for the AddToAny integration.
+
+Way to go!
 
 
 # How do I make my plugin support Cookiebot?
