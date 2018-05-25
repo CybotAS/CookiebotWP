@@ -91,6 +91,7 @@ class Cookiebot_Addons_Framework {
 			'Cookiebot_Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons_framework\lib\script_loader_tag\Cookiebot_Script_Loader_Tag' ),
 			'Cookiebot_Cookie_Consent_Interface'    => DI\object( 'cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent' ),
 			'Cookiebot_Buffer_Output_Interface'     => DI\object( 'cookiebot_addons_framework\lib\buffer\Cookiebot_Buffer_Output' ),
+			'Cookiebot_Settings_Interface'          => DI\object( 'cookiebot_addons_framework\lib\Cookiebot_Settings' ),
 			'plugins'                               => DI\value( $this->plugins )
 		] );
 
@@ -129,10 +130,10 @@ class Cookiebot_Addons_Framework {
 			 */
 			$this->container->set( $plugin->class, \DI\object( $plugin->class )
 				->constructor(
+					$this->container->get( 'Cookiebot_Settings_Interface' ),
 					$this->container->get( 'Cookiebot_Script_Loader_Tag_Interface' ),
 					$this->container->get( 'Cookiebot_Cookie_Consent_Interface' ),
-					$this->container->get( 'Cookiebot_Buffer_Output_Interface' )
-				)
+					$this->container->get( 'Cookiebot_Buffer_Output_Interface' ) )
 			);
 		}
 	}
