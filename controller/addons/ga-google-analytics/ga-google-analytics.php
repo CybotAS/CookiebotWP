@@ -3,36 +3,36 @@
 namespace cookiebot_addons_framework\controller\addons\ga_google_analytics;
 
 use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons_framework\lib\buffer\Cookiebot_Buffer_Output_Interface;
-use cookiebot_addons_framework\lib\script_loader_tag\Cookiebot_Script_Loader_Tag_Interface;
-use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\Cookiebot_Settings_Interface;
+use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
+use cookiebot_addons_framework\lib\Settings_Service_Interface;
 
 class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
 
 	/**
-	 * @var Cookiebot_Settings_Interface
+	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $settings;
 
 	/**
-	 * @var Cookiebot_Script_Loader_Tag_Interface
+	 * @var Script_Loader_Tag_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $script_loader_tag;
 
 	/**
-	 * @var Cookiebot_Cookie_Consent_Interface
+	 * @var Cookie_Consent_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $cookie_consent;
 
 	/**
-	 * @var Cookiebot_Buffer_Output_Interface
+	 * @var Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
@@ -41,14 +41,14 @@ class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
 	/**
 	 * Jetpack constructor.
 	 *
-	 * @param $settings Cookiebot_Settings_Interface
-	 * @param $script_loader_tag Cookiebot_Script_Loader_Tag_Interface
-	 * @param $cookie_consent Cookiebot_Cookie_Consent_Interface
-	 * @param $buffer_output Cookiebot_Buffer_Output_Interface
+	 * @param $settings Settings_Service_Interface
+	 * @param $script_loader_tag Script_Loader_Tag_Interface
+	 * @param $cookie_consent Cookie_Consent_Interface
+	 * @param $buffer_output Buffer_Output_Interface
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct( Cookiebot_Settings_Interface $settings, Cookiebot_Script_Loader_Tag_Interface $script_loader_tag, Cookiebot_Cookie_Consent_Interface $cookie_consent, Cookiebot_Buffer_Output_Interface $buffer_output ) {
+	public function __construct( Settings_Service_Interface $settings, Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent, Buffer_Output_Interface $buffer_output ) {
 		$this->settings          = $settings;
 		$this->script_loader_tag = $script_loader_tag;
 		$this->cookie_consent    = $cookie_consent;
@@ -61,7 +61,6 @@ class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function load_configuration() {
-
 		/**
 		 * We add the action after wp_loaded and replace the original GA Google
 		 * Analytics action with our own adjusted version.

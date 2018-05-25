@@ -2,22 +2,22 @@
 
 namespace cookiebot_addons_framework\controller\addons;
 
-use cookiebot_addons_framework\lib\buffer\Cookiebot_Buffer_Output_Interface;
-use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\Cookiebot_Settings_Interface;
-use cookiebot_addons_framework\lib\script_loader_tag\Cookiebot_Script_Loader_Tag_Interface;
+use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
+use cookiebot_addons_framework\lib\Settings_Service_Interface;
+use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
 
 Interface Cookiebot_Addons_Interface {
 
 	/**
 	 * Cookiebot_Addons_Interface constructor.
 	 *
-	 * @param Cookiebot_Settings_Interface $settings
-	 * @param Cookiebot_Script_Loader_Tag_Interface $script_loader_tag
-	 * @param Cookiebot_Cookie_Consent_Interface $cookie_consent
-	 * @param Cookiebot_Buffer_Output_Interface $buffer_output
+	 * @param Settings_Service_Interface $settings
+	 * @param Script_Loader_Tag_Interface $script_loader_tag
+	 * @param Cookie_Consent_Interface $cookie_consent
+	 * @param Buffer_Output_Interface $buffer_output
 	 */
-	public function __construct( Cookiebot_Settings_Interface $settings, Cookiebot_Script_Loader_Tag_Interface $script_loader_tag, Cookiebot_Cookie_Consent_Interface $cookie_consent, Cookiebot_Buffer_Output_Interface $buffer_output );
+	public function __construct( Settings_Service_Interface $settings, Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent, Buffer_Output_Interface $buffer_output );
 
 	/**
 	 * Loads addon configuration

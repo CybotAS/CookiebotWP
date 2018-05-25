@@ -2,32 +2,30 @@
 
 namespace cookiebot_addons_framework\controller\addons\jetpack;
 
-use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent;
-use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
-use cookiebot_addons_framework\lib\script_loader_tag\Cookiebot_Script_Loader_Tag_Interface;
+use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
+use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
 
 class Visitor_Cookies {
 
 	/**
-	 * @var Cookiebot_Script_Loader_Tag_Interface
+	 * @var Script_Loader_Tag_Interface
 	 */
 	private $script_loader_tag;
 
 	/**
-	 * @var Cookiebot_Cookie_Consent
+	 * @var Cookie_Consent_Interface
 	 */
 	private $cookie_consent;
 
 	/**
 	 * Visitor_Cookies constructor.
 	 *
-	 * @param Cookiebot_Script_Loader_Tag_Interface $script_loader_tag
-	 * @param Cookiebot_Cookie_Consent_Interface  $cookie_consent
+	 * @param Script_Loader_Tag_Interface $script_loader_tag
+	 * @param Cookie_Consent_Interface  $cookie_consent
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct(Cookiebot_Script_Loader_Tag_Interface $script_loader_tag, Cookiebot_Cookie_Consent_Interface $cookie_consent) {
+	public function __construct(Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent) {
 		/**
 		 * When preferences consent is not given
 		 * Then disable comment cookies

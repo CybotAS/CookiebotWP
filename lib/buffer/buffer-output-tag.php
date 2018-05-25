@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons_framework\lib\buffer;
 
-class Cookiebot_Buffer_Output_Tag {
+class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 
 	/**
 	 * Hook priority

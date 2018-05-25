@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons_framework\lib;
 
-Interface Cookiebot_Cookie_Consent_Interface {
+Interface Cookie_Consent_Interface {
 
 	/**
 	 * Scans cookiebot consent cookie and fills in $states with accepted consents.

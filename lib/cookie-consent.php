@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons_framework\lib;
 
-class Cookiebot_Cookie_Consent implements Cookiebot_Cookie_Consent_Interface {
+class Cookie_Consent implements Cookie_Consent_Interface {
 
 	/**
 	 * Array of cookiebot consent states

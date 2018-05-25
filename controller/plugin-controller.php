@@ -2,10 +2,6 @@
 
 namespace cookiebot_addons_framework\controller;
 
-use cookiebot_addons_framework\lib\Cookiebot_Buffer_Output;
-use cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent;
-use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
-
 class Plugin_Controller {
 
 	/**
@@ -53,6 +49,11 @@ class Plugin_Controller {
 			if ( $addon->is_addon_enabled() && $addon->is_plugin_installed() ) {
 				$addon->load_configuration();
 			}
+
+			/**
+			 * Remove class to save memory
+			 */
+			unset( $addon );
 		}
 
 		/**
@@ -72,7 +73,7 @@ class Plugin_Controller {
 	 * @since 1.3.0
 	 */
 	public function run_buffer_output_manipulations() {
-		$buffer_output = $this->container->get( 'Cookiebot_Buffer_Output_Interface' );
+		$buffer_output = $this->container->get( 'Buffer_Output_Interface' );
 
 		if ( $buffer_output->has_action() ) {
 			$buffer_output->run_actions();

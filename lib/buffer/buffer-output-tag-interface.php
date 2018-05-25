@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons_framework\lib\buffer;
 
-Interface Cookiebot_Buffer_Output_Tag_Interface {
+Interface Buffer_Output_Tag_Interface {
 
 	/**
 	 * Cookiebot_Buffer_Output_Interface constructor.

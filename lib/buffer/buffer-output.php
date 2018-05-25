@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons_framework\lib\buffer;
 
-class Cookiebot_Buffer_Output implements Cookiebot_Buffer_Output_Interface {
+class Buffer_Output implements Buffer_Output_Interface {
 
 	/**
 	 * Hook tag names
@@ -21,7 +21,7 @@ class Cookiebot_Buffer_Output implements Cookiebot_Buffer_Output_Interface {
 	 * @since 1.2.0
 	 */
 	public function add_tag( $tag_name, $priority, $keywords = array() ) {
-		$tag       = new Cookiebot_Buffer_Output_Tag( $tag_name, $priority, $keywords );
+		$tag       = new Buffer_Output_Tag( $tag_name, $priority, $keywords );
 		$unique_id = $tag->tag . '_' . $tag->priority;
 
 		/**

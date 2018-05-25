@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons_framework\lib\script_loader_tag;
 
-Interface Cookiebot_Script_Loader_Tag_Interface {
+Interface Script_Loader_Tag_Interface {
 
 	/**
 	 * @param $tag

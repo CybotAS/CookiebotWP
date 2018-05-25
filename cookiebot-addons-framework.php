@@ -24,12 +24,12 @@ define( 'CAF_DIR', __DIR__ . DIRECTORY_SEPARATOR );
 /**
  * Register autoloader to load files/classes dynamically
  */
-include_once CAF_DIR . 'lib/cookiebot-addons-framework-autoloader.php';
+include_once CAF_DIR . 'lib/autoloader.php';
 
 /**
  * Load global functions for this plugin
  */
-include_once CAF_DIR . 'lib/cookiebot-addons-functions.php';
+include_once CAF_DIR . 'lib/helper.php';
 
 /**
  * Load composer
@@ -102,10 +102,10 @@ class Cookiebot_Addons_Framework {
 		$builder = new ContainerBuilder();
 
 		$builder->addDefinitions( [
-			'Cookiebot_Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons_framework\lib\script_loader_tag\Cookiebot_Script_Loader_Tag' ),
-			'Cookiebot_Cookie_Consent_Interface'    => DI\object( 'cookiebot_addons_framework\lib\Cookiebot_Cookie_Consent' ),
-			'Cookiebot_Buffer_Output_Interface'     => DI\object( 'cookiebot_addons_framework\lib\buffer\Cookiebot_Buffer_Output' ),
-			'Cookiebot_Settings_Interface'          => DI\object( 'cookiebot_addons_framework\lib\Cookiebot_Settings' ),
+			'Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag' ),
+			'Cookie_Consent_Interface'    => DI\object( 'cookiebot_addons_framework\lib\Cookie_Consent' ),
+			'Buffer_Output_Interface'     => DI\object( 'cookiebot_addons_framework\lib\buffer\Buffer_Output' ),
+			'Settings_Service_Interface'          => DI\object( 'cookiebot_addons_framework\lib\Settings_Service' ),
 			'plugins'                               => DI\value( $this->plugins )
 		] );
 
@@ -130,10 +130,10 @@ class Cookiebot_Addons_Framework {
 			 */
 			$this->container->set( $plugin->class, \DI\object( $plugin->class )
 				->constructor(
-					$this->container->get( 'Cookiebot_Settings_Interface' ),
-					$this->container->get( 'Cookiebot_Script_Loader_Tag_Interface' ),
-					$this->container->get( 'Cookiebot_Cookie_Consent_Interface' ),
-					$this->container->get( 'Cookiebot_Buffer_Output_Interface' ) )
+					$this->container->get( 'Settings_Service_Interface' ),
+					$this->container->get( 'Script_Loader_Tag_Interface' ),
+					$this->container->get( 'Cookie_Consent_Interface' ),
+					$this->container->get( 'Buffer_Output_Interface' ) )
 			);
 		}
 	}

@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons_framework\controller\addons\jetpack;
 
-use cookiebot_addons_framework\lib\buffer\Cookiebot_Buffer_Output_Interface;
+use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
 
 class Goodreads_Widget {
 
@@ -17,7 +17,7 @@ class Goodreads_Widget {
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct( Cookiebot_Buffer_Output_Interface $buffer_output ) {
+	public function __construct( Buffer_Output_Interface $buffer_output ) {
 		if ( is_active_widget( false, false, 'wpcom-goodreads', true ) ) {
 			$this->transient_name = 'wpcom-goodreads';
 

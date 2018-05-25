@@ -2,8 +2,7 @@
 
 namespace cookiebot_addons_framework\controller\addons\jetpack;
 
-use cookiebot_addons_framework\lib\Cookiebot_Script_Loader_Tag;
-use cookiebot_addons_framework\lib\script_loader_tag\Cookiebot_Script_Loader_Tag_Interface;
+use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
 
 /**
  * This class is used to add cookiebot consent to facebook widget
@@ -13,7 +12,7 @@ use cookiebot_addons_framework\lib\script_loader_tag\Cookiebot_Script_Loader_Tag
 class Facebook_Widget {
 
 	/**
-	 * @var Cookiebot_Script_Loader_Tag
+	 * @var Script_Loader_Tag_Interface
 	 *
 	 * @since 1.2.0
 	 */
@@ -22,11 +21,11 @@ class Facebook_Widget {
 	/**
 	 * Facebook_Widget constructor.
 	 *
-	 * @param $script_loader_tag Cookiebot_Script_Loader_Tag_Interface
+	 * @param $script_loader_tag Script_Loader_Tag_Interface
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct( Cookiebot_Script_Loader_Tag_Interface $script_loader_tag ) {
+	public function __construct( Script_Loader_Tag_Interface $script_loader_tag ) {
 		if ( is_active_widget( false, false, 'facebook-likebox', true ) ) {
 			$this->script_loader_tag = $script_loader_tag;
 
