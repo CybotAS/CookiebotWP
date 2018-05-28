@@ -29,7 +29,7 @@ class Plugin_Controller {
 			/**
 			 * Load addon code if the plugin is active
 			 */
-			if ( is_plugin_active( $plugin->file ) ) {
+			if ( is_null( $plugin->file ) ||  is_plugin_active( $plugin->file ) ) {
 				$this->load_addon( $plugin->class );
 			}
 		}

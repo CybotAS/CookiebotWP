@@ -16,7 +16,7 @@
     "class": "hubspot_tracking_code\\Hubspot_Tracking_Code"
   },
   "Embed_Autocorrect": {
-    "file": "cookiebot\/cookiebot.php",
+    "file": null,
     "class": "embed_autocorrect\\Embed_Autocorrect"
   }
 }
