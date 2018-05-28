@@ -30,7 +30,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_enabled( $addon ) {
-		return ( get_option( 'cookiebot-addons-active-' . sanitize_key( $addon ), 'yes' ) == 'yes' ) ? true : false;
+		return true;
 	}
 
 	/**
@@ -43,7 +43,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_installed( $addon ) {
-		return validate_plugin( $addon );
+		return ( is_wp_error( validate_plugin( $addon ) ) || ! is_plugin_active( $addon ) ) ? false : true;
 	}
 
 	/**
@@ -77,7 +77,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_addons( ) {
+	public function get_addons() {
 		foreach ( $this->container->get( 'plugins' ) as $addon ) {
 			yield $this->container->get( $addon->class );
 		}

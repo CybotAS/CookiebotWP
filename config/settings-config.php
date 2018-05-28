@@ -65,18 +65,18 @@ class Settings_Config {
 
 		foreach ( $this->settings_service->get_addons() as $addon ) {
 			if ( $addon->is_addon_enabled() && $addon->is_addon_installed() && 'not_installed_plugins' !== $_GET['tab'] ) {
-				add_settings_field( "addon_enabled", $addon->get_addon_name(), array(
+				add_settings_field( $addon->get_addon_name(), $addon->get_addon_name(), array(
 					$this,
 					"available_addon_callback"
 				), "cookiebot-addons", "installed_plugins", array( 'addon' => $addon ) );
-				register_setting( "installed_plugins", "addon_enabled" );
+				register_setting( "cookiebot_installed_plugins", "addon_enabled" );
 			} else if ( 'not_installed_plugins' === $_GET['tab'] && ( ! $addon->is_addon_enabled() || ! $addon->is_addon_installed() ) ) {
 				// not installed plugins
 				add_settings_field( "uninstalled_" . $addon->get_addon_name(), $addon->get_addon_name(), array(
 					$this,
 					"unavailable_addon_callback"
 				), "cookiebot-addons", "not_installed_plugins", array( 'addon' => $addon ) );
-				register_setting( "not_installed_plugins", "background_picture", "handle_file_upload" );
+				register_setting( "cookiebot_not_installed_plugins", "background_picture", "handle_file_upload" );
 			}
 		}
 	}
