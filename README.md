@@ -33,6 +33,7 @@ Released and tested addons:
 
 Following addons are in pipeline:
 
+* Autocorrection of embedded YouTube and Vimeo videos
 * [Analytify](https://wordpress.org/plugins/wp-analytify/)
 * [Custom Facebook Feed from Smashballoon](https://da.wordpress.org/plugins/custom-facebook-feed/)
 * [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
