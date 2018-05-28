@@ -8,6 +8,7 @@
 
 namespace cookiebot_addons_framework;
 
+use cookiebot_addons_framework\config\Settings_Config;
 use cookiebot_addons_framework\controller\Plugin_Controller;
 use DI\ContainerBuilder;
 use DI;
@@ -77,6 +78,12 @@ class Cookiebot_Addons_Framework {
 		 * @since 1.1.0
 		 */
 		add_action( 'plugins_loaded', array( new Plugin_Controller( $this->container ), 'check_addons' ) );
+
+		/**
+		 * Load settings config
+		 */
+		$settings = new Settings_Config( $this->container->get( 'Settings_Service_Interface' ) );
+		$settings->load();
 	}
 
 	/**
@@ -105,11 +112,13 @@ class Cookiebot_Addons_Framework {
 			'Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag' ),
 			'Cookie_Consent_Interface'    => DI\object( 'cookiebot_addons_framework\lib\Cookie_Consent' ),
 			'Buffer_Output_Interface'     => DI\object( 'cookiebot_addons_framework\lib\buffer\Buffer_Output' ),
-			'Settings_Service_Interface'          => DI\object( 'cookiebot_addons_framework\lib\Settings_Service' ),
-			'plugins'                               => DI\value( $this->plugins )
+			'plugins'                     => DI\value( $this->plugins )
 		] );
 
 		$this->container = $builder->build();
+
+		$this->container->set( 'Settings_Service_Interface', DI\object( 'cookiebot_addons_framework\lib\Settings_Service' )
+			->constructor( $this->container ) );
 	}
 
 	/**
