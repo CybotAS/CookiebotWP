@@ -28,7 +28,7 @@ class Custom_Facebook_Feed {
 
 		//Remove cff_js action and replace it with our own
 		if ( has_action( 'wp_footer', 'cff_js' ) ) {
-			cookiebot_buffer_output( 'wp_footer', 99 );
+			cookiebot_buffer_output( 'wp_footer', 10, array( 'cfflinkhashtags' ) );
 		}
 
 		// External js, so manipulate attributes
