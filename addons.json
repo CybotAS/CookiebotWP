@@ -1,17 +1,21 @@
 {
   "Ga_Google_Analytics": {
+		"name": "GA Google Analytics",
     "file": "ga-google-analytics\/ga-google-analytics.php",
     "class": "ga_google_analytics\\Ga_Google_Analytics"
   },
   "Ga_Analyticator": {
+		"name": "GA Analyticator",
     "file": "google-analyticator\/google-analyticator.php",
     "class": "google_analyticator\\Google_Analyticator"
   },
   "Jetpack": {
+		"name" : "Jetpack",
     "file": "jetpack\/jetpack.php",
     "class": "jetpack\\Jetpack"
   },
   "Hubspot_Tracking_Code": {
+		"name": "Hubspot Tracking Code",
     "file": "hubspot-tracking-code\/hubspot-tracking-code.php",
     "class": "hubspot_tracking_code\\Hubspot_Tracking_Code"
   }
