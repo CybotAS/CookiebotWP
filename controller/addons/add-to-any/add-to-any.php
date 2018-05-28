@@ -102,13 +102,17 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 		return 'addToAny Share Buttons';
 	}
 
+	public function get_addon_file() {
+		return 'add-to-any/add-to-any.php';
+	}
+
 	/**
 	 * The addon is checked in the backend, so update the status to 1.
 	 *
 	 * @since 1.3.0
 	 */
 	public function enable_addon() {
-		$this->settings->activate_addon();
+		$this->settings->activate_addon( $this->get_addon_file() );
 	}
 
 	/**
@@ -117,7 +121,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function disable_addon() {
-		$this->settings->disable_addon();
+		$this->settings->disable_addon( $this->get_addon_file() );
 	}
 
 	/**
@@ -125,8 +129,8 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function is_addon_enabled( $plugin ) {
-		return $this->settings->is_addon_enabled($plugin);
+	public function is_addon_enabled() {
+		return $this->settings->is_addon_enabled( $this->get_addon_file() );
 	}
 
 	/**
@@ -134,7 +138,11 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function is_addon_installed( $plugin ) {
-		return $this->settings->is_addon_installed($plugin);
+	public function is_addon_installed() {
+		return $this->settings->is_addon_installed( $this->get_addon_file() );
+	}
+
+	public function save_changes() {
+
 	}
 }

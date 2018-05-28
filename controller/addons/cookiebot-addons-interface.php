@@ -54,12 +54,12 @@ Interface Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function is_addon_enabled( $addon );
+	public function is_addon_enabled();
 
 	/**
 	 * Checks if addon is installed
 	 *
 	 * @since 1.3.0
 	 */
-	public function is_addon_installed( $addon );
+	public function is_addon_installed();
 }

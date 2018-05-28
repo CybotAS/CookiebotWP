@@ -19,6 +19,8 @@ Interface Settings_Service_Interface {
 
 	public function get_active_addons();
 
+	public function get_addons();
+
 	public function get_addon_list();
 
 	public function get_checked_addons();

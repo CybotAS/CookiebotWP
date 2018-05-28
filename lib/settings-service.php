@@ -68,6 +68,16 @@ class Settings_Service implements Settings_Service_Interface {
 		//TODO disable addon
 	}
 
+	public function get_addons() {
+		return $this->container->get( 'plugins' );
+	}
+
+	public function get_addon_by_generator( ) {
+		foreach ( $this->get_addons() as $addon ) {
+			yield $this->container->get( $addon->class );
+		}
+	}
+
 	/**
 	 * Returns active addons
 	 *
@@ -86,7 +96,7 @@ class Settings_Service implements Settings_Service_Interface {
 			/**
 			 * Load addon code if the plugin is active and addon is activated
 			 */
-			if ( $addon->is_addon_enabled( $plugin->class ) && ! is_wp_error( $addon->is_addon_installed( $plugin->file ) ) ) {
+			if ( $addon->is_addon_enabled() && ! is_wp_error( $addon->is_addon_installed() ) ) {
 				$active_addons[] = $addon;
 			}
 		}

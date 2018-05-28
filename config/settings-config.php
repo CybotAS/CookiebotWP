@@ -17,7 +17,7 @@ class Settings_Config {
 
 	public function load() {
 		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
-		//add_action( 'admin_init', array( $this, 'register_settings' ) );
+		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_wp_admin_style' ) );
 	}
 
@@ -32,39 +32,40 @@ class Settings_Config {
 	 * TODO Refactor use Settings_Service_Interface to load checkbox fields
 	 */
 	public function register_settings() {
-		add_settings_section( "installed_plugins", "Header Options", array(
-			$this,
-			"display_header_options_content"
-		), "cookiebot-addons" );
+		if ( 'not_installed_plugins' === $_GET['tab'] ) {
+			add_settings_section( "not_installed_plugins", "Unavailable plugins", array(
+				$this,
+				"header_uninstalled_plugins"
+			), "cookiebot-addons" );
+		} else {
+			add_settings_section( "installed_plugins", "Available plugins", array(
+				$this,
+				"header_installed_plugins"
+			), "cookiebot-addons" );
+		}
 
-		add_settings_section( "not_installed_plugins", "Header Options", array(
-			$this,
-			"display_header_options_content"
-		), "cookiebot-addons" );
-
-		foreach ( $this->container->get( 'plugins' ) as $plugin ) {
-			$addon = $this->container->get( $plugin->class );
-
-			if ( $addon->is_plugin_installed() && $_GET['tab'] !== 'not_installed_plugins' ) {
-				// installed plugins
+		foreach ( $this->settings_service->get_addon_by_generator() as $addon ) {
+			if ( $addon->is_addon_enabled() && $addon->is_addon_installed() && 'not_installed_plugins' !== $_GET['tab'] ) {
 				add_settings_field( "addon_enabled", $addon->get_addon_name(), array(
 					$this,
-					"checkbox_element_callback"
+					"available_addon_callback"
 				), "cookiebot-addons", "installed_plugins", array( 'addon' => $addon ) );
 				register_setting( "installed_plugins", "addon_enabled" );
-			} else if ( ! $addon->is_plugin_installed() && $_GET['tab'] == 'not_installed_plugins' ) {
+			} else if ( 'not_installed_plugins' === $_GET['tab'] && ( ! $addon->is_addon_enabled() || ! $addon->is_addon_installed() ) ) {
 				// not installed plugins
-				add_settings_field( "background_picture", "Picture File Upload", array(
+				add_settings_field( "uninstalled_" . $addon->get_addon_name(), $addon->get_addon_name(), array(
 					$this,
-					"checkbox_element_callback"
-				), "cookiebot-addons", "installed_plugins", array( 'addon' => $addon ) );
+					"unavailable_addon_callback"
+				), "cookiebot-addons", "not_installed_plugins", array( 'addon' => $addon ) );
 				register_setting( "not_installed_plugins", "background_picture", "handle_file_upload" );
 			}
 		}
 	}
 
 	/**
+	 * Load css styling to the settings page
 	 *
+	 * @since 1.3.0
 	 */
 	public function add_wp_admin_style( $hook ) {
 		if ( $hook != 'settings_page_cookiebot-addons' ) {
@@ -74,28 +75,51 @@ class Settings_Config {
 		wp_enqueue_style( 'cookiebot_addons_custom_css', plugins_url( 'style/css/admin_styles.css', dirname( __FILE__ ) ) );
 	}
 
-	public function display_header_options_content() {
-		echo "The header of the Cookiebot addons";
+	public function header_installed_plugins() {
+		?>
+        <p>
+			<?php _e( 'Below is a list of addons for Cookiebot. Addons help you making contributed plugins GDPR compliant.', 'cookiebot-addons' ); ?>
+            <br/>
+			<?php _e( 'Deactive addons if you want to handle GDPR compliance yourself or using another plugin.', 'cookiebot-addons' ); ?>
+        </p>
+		<?php
 	}
 
-	public function checkbox_element_callback( $args ) {
-		$addon   = $args['addon'];
-		$options = get_option( 'sandbox_theme_input_examples' );
-		$label   = $addon->get_addon_name();
+	public function header_uninstalled_plugins() {
+		?>
+        <p>
+			<?php _e( 'Following addons are unavailable. This is usual because the addon is not useable because the main plugin is not activated or installed.' ); ?>
+        </p>
+		<?php
+	}
 
-		$html = '<input type="checkbox" id="checkbox_example" name="sandbox_theme_input_examples[checkbox_example]" value="1"' . checked( 1, $options['checkbox_example'], false ) . '/>';
-		$html .= '&nbsp;';
+	public function unavailable_addon_callback( $args ) {
+		$addon = $args['addon'];
 
-		echo $html;
-	} // end sandbox_checkbox_element_callback
+		?>
+        <div class="postbox cookiebot-addon">
+            <i><?php _e( 'Unavailable', 'cookiebot-addons' ); ?></i>
+        </div>
+		<?php
+	}
+
+	public function available_addon_callback( $args ) {
+		$addon = $args['addon'];
+
+		?>
+        <div class="postbox cookiebot-addon">
+            <i><?php _e( 'Available', 'cookiebot-addons' ); ?></i>
+        </div>
+		<?php
+	}
 
 
 	/**
-     * TODO This will be used for settings through Settings_Service_Interface
-     *
+	 * TODO This will be used for settings through Settings_Service_Interface
+	 *
 	 * @param string $active_tab
 	 */
-	public function settings_page_refactored_version( $active_tab = '' ) {
+	public function setting_page( $active_tab = '' ) {
 		?>
         <!-- Create a header in the default WordPress 'wrap' container -->
         <div class="wrap">
@@ -146,7 +170,7 @@ class Settings_Config {
 	 *
 	 * @since 1.2.0
 	 */
-	function setting_page() {
+	function setting_page123() {
 		if ( isset( $_GET['action'] ) && ( $_GET['action'] == 'deactivate' || $_GET['action'] == 'activate' ) ) {
 			$active = ( $_GET['action'] == 'activate' ) ? 'yes' : 'no';
 			update_option( 'cookiebot-addons-active-' . sanitize_key( $_GET['addon'] ), $active );
