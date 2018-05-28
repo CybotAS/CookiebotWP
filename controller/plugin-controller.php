@@ -45,7 +45,7 @@ class Plugin_Controller {
 	public function load_active_addons() {
 		$addons = $this->get_addon_list();
 		foreach( $addons['available'] as $plugin_class=>$plugin ) {
-			if ( is_plugin_active( $plugin['file'] ) ) {
+			if ( is_plugin_active( $plugin['file'] ) && get_option('cookiebot-addons-active-'.sanitize_key($plugin_class),'yes') == 'yes' ) {
 				$this->load_addon( $plugin['class'] );
 			}
 		}
