@@ -115,7 +115,7 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function enable_addon() {
-		// enable in service interface
+		$this->settings->activate_addon();
 	}
 
 	/**
@@ -124,7 +124,7 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function disable_addon() {
-		// disable in service interface
+		$this->settings->disable_addon();
 	}
 
 	/**
@@ -132,9 +132,8 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function is_addon_enabled() {
-		// get status in service interface
-		return true;
+	public function is_addon_enabled( $plugin ) {
+		return $this->settings->is_addon_enabled($plugin);
 	}
 
 	/**
@@ -142,8 +141,7 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function is_plugin_installed() {
-		// service get if plugin is installed
-		return true;
+	public function is_addon_installed( $plugin ) {
+		return $this->settings->is_addon_installed($plugin);
 	}
 }

@@ -1,21 +1,26 @@
 {
   "Add_To_Any": {
+    "name": "Add To Any Share Buttons",
     "file": "add-to-any\/add-to-any.php",
     "class": "cookiebot_addons_framework\\controller\\addons\\add_to_any\\Add_To_Any"
   },
   "Ga_Google_Analytics": {
+    "name": "GA Google Analytics",
     "file": "ga-google-analytics\/ga-google-analytics.php",
     "class": "cookiebot_addons_framework\\controller\\addons\\ga_google_analytics\\Ga_Google_Analytics"
   },
   "Ga_Analyticator": {
+    "name": "GA Analyticator",
     "file": "google-analyticator\/google-analyticator.php",
     "class": "cookiebot_addons_framework\\controller\\addons\\google_analyticator\\Google_Analyticator"
   },
   "Jetpack": {
+    "name": "Jetpack",
     "file": "jetpack\/jetpack.php",
     "class": "cookiebot_addons_framework\\controller\\addons\\jetpack\\Jetpack"
   },
   "Hubspot_Tracking_Code": {
+    "name": "Hubspot Tracking Code",
     "file": "hubspot-tracking-code\/hubspot-tracking-code.php",
     "class": "cookiebot_addons_framework\\controller\\addons\\hubspot_tracking_code\\Hubspot_Tracking_Code"
   }

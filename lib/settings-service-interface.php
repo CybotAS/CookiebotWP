@@ -15,4 +15,11 @@ Interface Settings_Service_Interface {
 	 */
 	public function is_addon_enabled( $addon );
 
+	public function is_addon_installed( $addon );
+
+	public function get_active_addons();
+
+	public function get_addon_list();
+
+	public function get_checked_addons();
 }

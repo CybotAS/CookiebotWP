@@ -77,7 +77,10 @@ class Cookiebot_Addons_Framework {
 		 *
 		 * @since 1.1.0
 		 */
-		add_action( 'plugins_loaded', array( new Plugin_Controller( $this->container ), 'check_addons' ) );
+		add_action( 'plugins_loaded', array(
+			new Plugin_Controller( $this->container->get( 'Settings_Service_Interface' ) ),
+			'load_active_addons'
+		) );
 
 		/**
 		 * Load settings config
@@ -96,7 +99,7 @@ class Cookiebot_Addons_Framework {
 	 * @since 1.3.0
 	 */
 	protected function get_plugins() {
-		$file          = file_get_contents( CAF_DIR . 'addons.json' );
+		$file = file_get_contents( CAF_DIR . 'addons.json' );
 		$this->plugins = json_decode( $file );
 	}
 
@@ -146,6 +149,7 @@ class Cookiebot_Addons_Framework {
 			);
 		}
 	}
+
 }
 
 /**

@@ -2,29 +2,35 @@
 
 namespace cookiebot_addons_framework\config;
 
+use cookiebot_addons_framework\lib\Settings_Service_Interface;
+
 class Settings_Config {
 
 	/**
-	 * @var \DI\Container
+	 * @var Settings_Service_Interface
 	 */
 	protected $settings_service;
 
-	public function __construct( $settings_service ) {
+	public function __construct( Settings_Service_Interface $settings_service ) {
 		$this->settings_service = $settings_service;
 	}
 
 	public function load() {
 		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
-		add_action( 'admin_init', array( $this, 'register_settings' ) );
+		//add_action( 'admin_init', array( $this, 'register_settings' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'add_wp_admin_style' ) );
 	}
 
 	public function add_submenu() {
-		add_options_page( 'Cookiebot addons', 'Cookiebot addons', 'manage_options', 'cookiebot-addons', array(
+		add_options_page( 'Cookiebot Addons', __( 'Cookiebot Addons', 'cookiebot-addons' ), 'manage_options', 'cookiebot-addons', array(
 			$this,
-			'settings_page'
+			'setting_page'
 		) );
 	}
 
+	/**
+	 * TODO Refactor use Settings_Service_Interface to load checkbox fields
+	 */
 	public function register_settings() {
 		add_settings_section( "installed_plugins", "Header Options", array(
 			$this,
@@ -57,6 +63,17 @@ class Settings_Config {
 		}
 	}
 
+	/**
+	 *
+	 */
+	public function add_wp_admin_style( $hook ) {
+		if ( $hook != 'settings_page_cookiebot-addons' ) {
+			return;
+		}
+
+		wp_enqueue_style( 'cookiebot_addons_custom_css', plugins_url( 'style/css/admin_styles.css', dirname( __FILE__ ) ) );
+	}
+
 	public function display_header_options_content() {
 		echo "The header of the Cookiebot addons";
 	}
@@ -73,7 +90,12 @@ class Settings_Config {
 	} // end sandbox_checkbox_element_callback
 
 
-	public function settings_page( $active_tab = '' ) {
+	/**
+     * TODO This will be used for settings through Settings_Service_Interface
+     *
+	 * @param string $active_tab
+	 */
+	public function settings_page_refactored_version( $active_tab = '' ) {
 		?>
         <!-- Create a header in the default WordPress 'wrap' container -->
         <div class="wrap">
@@ -116,6 +138,78 @@ class Settings_Config {
             </form>
 
         </div><!-- /.wrap -->
+		<?php
+	}
+
+	/**
+	 * Settign page for Cookiebot addons
+	 *
+	 * @since 1.2.0
+	 */
+	function setting_page() {
+		if ( isset( $_GET['action'] ) && ( $_GET['action'] == 'deactivate' || $_GET['action'] == 'activate' ) ) {
+			$active = ( $_GET['action'] == 'activate' ) ? 'yes' : 'no';
+			update_option( 'cookiebot-addons-active-' . sanitize_key( $_GET['addon'] ), $active );
+
+
+			$status = ( $active == 'yes' ) ? 'The addon is now activated' : 'The addon is now deactivated';
+			?>
+            <div class="updated notice is-dismissible">
+                <p><?php _e( $status, 'cookiebot-addons' ); ?></p>
+            </div>
+			<?php
+		}
+
+		$addons = $this->settings_service->get_addon_list();
+
+		?>
+        <div class="wrap">
+            <h1><?php _e( 'Cookiebot Addons', 'cookiebot-addons' ); ?></h1>
+            <p>
+				<?php _e( 'Below is a list of addons for Cookiebot. Addons help you making contributed plugins GDPR compliant.', 'cookiebot-addons' ); ?>
+                <br/>
+				<?php _e( 'Deactive addons if you want to handle GDPR compliance yourself or using another plugin.', 'cookiebot-addons' ); ?>
+            </p>
+			<?php
+
+			foreach ( $addons['available'] as $plugin_class => $plugin ) {
+				?>
+                <div class="postbox cookiebot-addon">
+                    <h2><?php echo $plugin['name']; ?></h2>
+					<?php
+					if ( get_option( 'cookiebot-addons-active-' . sanitize_key( $plugin_class ), 'yes' ) == 'yes' ) {
+						?>
+                        <a href="<?php echo admin_url( 'options-general.php?page=cookiebot-addons&action=deactivate&addon=' . $plugin_class ); ?>">
+							<?php _e( 'Deactivate addon', 'cookiebot-addons' ); ?>
+                        </a>
+						<?php
+					} else {
+						?>
+                        <a href="<?php echo admin_url( 'options-general.php?page=cookiebot-addons&action=activate&addon=' . $plugin_class ); ?>">
+							<?php _e( 'Activate addon', 'cookiebot-addons' ); ?>
+                        </a>
+						<?php
+					}
+					?>
+                </div>
+				<?php
+			}
+			?>
+            <h2><?php _e( 'Unavailable Addons', 'cookiebot-addons' ); ?></h2>
+            <p>
+				<?php _e( 'Following addons are unavailable. This is usual because the addon is not useable because the main plugin is not activated.' ); ?>
+            </p>
+			<?php
+			foreach ( $addons['unavailable'] as $plugin_class => $plugin ) {
+				?>
+                <div class="postbox cookiebot-addon">
+                    <h2><?php echo $plugin['name']; ?></h2>
+                    <i><?php _e( 'Unavailable', 'cookiebot-addons' ); ?></i>
+                </div>
+				<?php
+			}
+			?>
+        </div>
 		<?php
 	}
 }

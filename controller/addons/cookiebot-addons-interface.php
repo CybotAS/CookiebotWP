@@ -30,26 +30,36 @@ Interface Cookiebot_Addons_Interface {
 	 * Return addon/plugin name
 	 *
 	 * @return string
+	 *
+	 * @since 1.3.0
 	 */
 	public function get_addon_name();
 
 	/**
 	 * The addon is checked in the backend, so update the status to 1.
+	 *
+	 * @since 1.3.0
 	 */
 	public function enable_addon();
 
 	/**
 	 * The addon is unchecked in the backend, so update the status to 0.
+	 *
+	 * @since 1.3.0
 	 */
 	public function disable_addon();
 
 	/**
 	 * Check if plugin is activated and checked in the backend
+	 *
+	 * @since 1.3.0
 	 */
-	public function is_addon_enabled();
+	public function is_addon_enabled( $addon );
 
 	/**
 	 * Checks if addon is installed
+	 *
+	 * @since 1.3.0
 	 */
-	public function is_plugin_installed();
+	public function is_addon_installed( $addon );
 }

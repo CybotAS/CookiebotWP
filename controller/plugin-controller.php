@@ -2,58 +2,56 @@
 
 namespace cookiebot_addons_framework\controller;
 
+use cookiebot_addons_framework\lib\Settings_Service;
+use cookiebot_addons_framework\lib\Settings_Service_Interface;
+
 class Plugin_Controller {
 
 	/**
 	 * IoC container - Dependency Injection
 	 *
-	 * @var \DI\Container
+	 * @var Settings_Service
 	 *
 	 * @since 1.1.0
 	 */
-	private $container;
+	private $settings_service;
 
 	/**
 	 * Plugin_Controller constructor.
 	 *
-	 * @param $container  object IoC Container
+	 * @param $settings_service  Settings_Service_Interface IoC Container
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct( $container ) {
-		$this->container = $container;
+	public function __construct( Settings_Service_Interface $settings_service ) {
+		$this->settings_service = $settings_service;
+
+		$this->load_init_files();
+	}
+
+	/**
+	 * Load init files to use 'validate_plugin' and 'is_plugin_active'
+	 *
+	 * @since 1.3.0
+	 */
+	protected function load_init_files() {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		}
 	}
 
 	/**
 	 * Load addon configuration if the plugin is activated
 	 *
-	 * @throws \DI\DependencyException
-	 * @throws \DI\NotFoundException
-	 *
+	 * @version 1.3.0
 	 * @since 1.2.0
 	 */
-	public function check_addons() {
-		if ( ! function_exists( 'is_plugin_active' ) ) {
-			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-		}
-
+	public function load_active_addons() {
 		/**
 		 * Check plugins one by one and load configuration if it is active
 		 */
-		foreach ( $this->container->get( 'plugins' ) as $plugin ) {
-			$addon = $this->container->get( $plugin->class );
-
-			/**
-			 * Load addon code if the plugin is active
-			 */
-			if ( $addon->is_addon_enabled() && $addon->is_plugin_installed() ) {
-				$addon->load_configuration();
-			}
-
-			/**
-			 * Remove class to save memory
-			 */
-			unset( $addon );
+		foreach ( $this->settings_service->get_active_addons() as $plugin ) {
+			$plugin->load_configuration();
 		}
 
 		/**
@@ -67,13 +65,10 @@ class Plugin_Controller {
 	/**
 	 * Runs every added action hooks to manipulate script tag
 	 *
-	 * @throws \DI\DependencyException
-	 * @throws \DI\NotFoundException
-	 *
 	 * @since 1.3.0
 	 */
 	public function run_buffer_output_manipulations() {
-		$buffer_output = $this->container->get( 'Buffer_Output_Interface' );
+		$buffer_output = $this->settings_service->container->get( 'Buffer_Output_Interface' );
 
 		if ( $buffer_output->has_action() ) {
 			$buffer_output->run_actions();
