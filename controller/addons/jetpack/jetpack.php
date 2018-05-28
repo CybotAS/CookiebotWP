@@ -130,6 +130,24 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		return 'Jetpack';
 	}
 
+	/**
+	 * Option name in the database
+	 *
+	 * @return string
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_option_name() {
+		return 'hubspot_tracking_code';
+	}
+
+	/**
+	 * Addon file name
+	 *
+	 * @return string
+	 *
+	 * @since 1.3.0
+	 */
 	public function get_addon_file() {
 		return 'jetpack/jetpack.php';
 	}

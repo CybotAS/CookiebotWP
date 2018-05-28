@@ -109,6 +109,24 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 		return 'Hubspot Tracking Code';
 	}
 
+	/**
+	 * Option name in the database
+	 *
+	 * @return string
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_option_name() {
+		return 'hubspot_tracking_code';
+	}
+
+	/**
+	 * Addon file name
+	 *
+	 * @return string
+	 *
+	 * @since 1.3.0
+	 */
 	public function get_addon_file() {
 		return 'hubspot-tracking-code/hubspot-tracking-code.php';
 	}
@@ -150,6 +168,10 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	}
 
 	public function save_changes() {
+
+	}
+
+	public function get_addon_status() {
 
 	}
 }

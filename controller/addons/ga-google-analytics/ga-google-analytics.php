@@ -102,6 +102,24 @@ class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
 		return 'GA Google Analytics';
 	}
 
+	/**
+	 * Option name in the database
+	 *
+	 * @return string
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_option_name() {
+		return 'hubspot_tracking_code';
+	}
+
+	/**
+	 * Addon file name
+	 *
+	 * @return string
+	 *
+	 * @since 1.3.0
+	 */
 	public function get_addon_file() {
 		return 'ga-google-analytics/ga-google-analytics.php';
 	}

@@ -102,6 +102,24 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 		return 'addToAny Share Buttons';
 	}
 
+	/**
+	 * Option name in the database
+	 *
+	 * @return string
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_option_name() {
+		return 'hubspot_tracking_code';
+	}
+
+	/**
+	 * Addon file name
+	 *
+	 * @return string
+	 *
+	 * @since 1.3.0
+	 */
 	public function get_addon_file() {
 		return 'add-to-any/add-to-any.php';
 	}

@@ -68,12 +68,17 @@ class Settings_Service implements Settings_Service_Interface {
 		//TODO disable addon
 	}
 
-	public function get_addons() {
-		return $this->container->get( 'plugins' );
-	}
-
-	public function get_addon_by_generator( ) {
-		foreach ( $this->get_addons() as $addon ) {
+	/**
+	 * Returns addons one by one through a generator
+	 *
+	 * @return \Generator
+	 * @throws \DI\DependencyException
+	 * @throws \DI\NotFoundException
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_addons( ) {
+		foreach ( $this->container->get( 'plugins' ) as $addon ) {
 			yield $this->container->get( $addon->class );
 		}
 	}
@@ -102,43 +107,5 @@ class Settings_Service implements Settings_Service_Interface {
 		}
 
 		return $active_addons;
-	}
-
-	/**
-	 * Returns all supported addons
-	 *
-	 * @return array
-	 * @throws \DI\DependencyException
-	 * @throws \DI\NotFoundException
-	 */
-	public function get_addon_list() {
-		$addons = [];
-
-		foreach ( $this->container->get( 'plugins' ) as $plugin_class => $plugin ) {
-			$addons[ ( is_plugin_active( $plugin->file ) ? 'available' : 'unavailable' ) ][ $plugin_class ] = [
-				'name'      => $plugin->name,
-				'file'      => $plugin->file,
-				'class'     => $plugin->class,
-				'available' => ( is_plugin_active( $plugin->file ) ? true : false ),
-			];
-		}
-
-		return $addons;
-	}
-
-	/**
-	 * Get list of active addons
-	 *
-	 * TODO test this method
-	 *
-	 * @since 1.2.0
-	 */
-	public function get_checked_addons() {
-		$activePlugins = get_option( 'cookiebot-addons-activated', '' );
-		if ( ! empty( $activePlugins ) ) {
-			return explode( ';', $activePlugins );
-		}
-
-		return false;
 	}
 }
