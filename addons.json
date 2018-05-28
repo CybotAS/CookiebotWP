@@ -15,4 +15,9 @@
     "file": "hubspot-tracking-code\/hubspot-tracking-code.php",
     "class": "hubspot_tracking_code\\Hubspot_Tracking_Code"
   }
+  "Embed_Autocorrect": {
+    "file": "embed-autocorrect\/embed-autocorrect.php",
+    "class": "embed_autocorrect\\Embed_Autocorrect"
+  }
+}
 }
