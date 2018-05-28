@@ -87,7 +87,7 @@ function cookiebot_manipulate_script( $buffer, $keywords ) {
 }
 
 /**
- * Compares array to string to add checked attribute in checkboxes
+ * Compares array to string to add checked attribute in checkbox
  *
  * @param $helper
  * @param $current

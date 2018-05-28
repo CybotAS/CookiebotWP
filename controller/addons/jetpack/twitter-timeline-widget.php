@@ -33,7 +33,7 @@ class Twitter_Timeline_Widget {
 	 * @since 1.2.0
 	 */
 	protected function disable_javascript_file() {
-		$this->script_loader_tag->add_tag( 'jetpack-twitter-timeline', 'marketing' );
+		$this->script_loader_tag->add_tag( 'jetpack-twitter-timeline', array( 'marketing' ) );
 	}
 
 	/**

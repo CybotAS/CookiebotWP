@@ -87,7 +87,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 
 		// External js, so manipulate attributes
 		if ( has_action( 'wp_enqueue_scripts', 'A2A_SHARE_SAVE_enqueue_script' ) ) {
-			$this->script_loader_tag->add_tag( 'addtoany', 'marketing' );
+			$this->script_loader_tag->add_tag( 'addtoany', $this->get_cookie_types() );
 		}
 	}
 

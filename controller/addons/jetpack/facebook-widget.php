@@ -40,7 +40,7 @@ class Facebook_Widget {
 	 * @since 1.2.0
 	 */
 	protected function add_consent_attribute_to_facebook_embed_javascript() {
-		$this->script_loader_tag->add_tag( 'jetpack-facebook-embed', 'marketing' );
+		$this->script_loader_tag->add_tag( 'jetpack-facebook-embed', array('marketing') );
 	}
 
 	/**

@@ -65,6 +65,15 @@ class Settings_Service implements Settings_Service_Interface {
 		return ( is_plugin_active( $addon ) ) ? true : false;
 	}
 
+	/**
+	 * Returns all cookie type for given addon
+	 *
+	 * @param $addon    string  option name
+	 *
+	 * @return array
+	 *
+	 * @since 1.3.0
+	 */
 	public function get_cookie_types( $addon ) {
 		$option = get_option( 'cookiebot_available_addons' );
 
@@ -78,16 +87,20 @@ class Settings_Service implements Settings_Service_Interface {
 	/**
 	 * Returns addons one by one through a generator
 	 *
-	 * @return \Generator
+	 * @return array
 	 * @throws \DI\DependencyException
 	 * @throws \DI\NotFoundException
 	 *
 	 * @since 1.3.0
 	 */
 	public function get_addons() {
+		$addons = array();
+
 		foreach ( $this->container->get( 'plugins' ) as $addon ) {
-			yield $this->container->get( $addon->class );
+			$addons[] = $this->container->get( $addon->class );
 		}
+
+		return $addons;
 	}
 
 	/**
@@ -106,7 +119,7 @@ class Settings_Service implements Settings_Service_Interface {
 			/**
 			 * Load addon code if the plugin is active and addon is activated
 			 */
-			if ( $addon->is_addon_enabled() && ! is_wp_error( $addon->is_addon_installed() ) && $addon->is_addon_activated() ) {
+			if ( $addon->is_addon_enabled( $addon->get_option_name() ) && $addon->is_addon_installed( $addon->get_addon_file() ) && $addon->is_addon_activated( $addon->get_addon_file() ) ) {
 				$active_addons[] = $addon;
 			}
 		}

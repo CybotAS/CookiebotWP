@@ -28,12 +28,12 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 * So that the script can be updated with cookieconsent attribute.
 	 *
 	 * @param $tag  string  Enqueue script handle name
-	 * @param $type string
+	 * @param $type array
 	 *
 	 * @since 1.2.0
 	 */
 	public function add_tag( $tag, $type ) {
-		$this->tags[$tag] = $type;
+		$this->tags[ $tag ] = $type;
 	}
 
 	/**
@@ -49,7 +49,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 */
 	public function cookiebot_add_consent_attribute_to_tag( $tag, $handle, $src ) {
 		if ( array_key_exists( $handle, $this->tags ) ) {
-			return '<script src="' . $src . '" type="text/plain" data-cookieconsent="' . $this->tags[ $handle ] . '"></script>';
+			return '<script src="' . $src . '" type="text/plain" data-cookieconsent="' . implode( ',', $this->tags[ $handle ] ) . '"></script>';
 		}
 
 		return $tag;

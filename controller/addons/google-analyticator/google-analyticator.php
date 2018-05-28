@@ -93,7 +93,7 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 			 *
 			 * @since 1.1.0
 			 */
-			$this->script_loader_tag->add_tag( 'ga-external-tracking', 'statistics' );
+			$this->script_loader_tag->add_tag( 'ga-external-tracking', array( 'statistics' ) );
 		}
 	}
 

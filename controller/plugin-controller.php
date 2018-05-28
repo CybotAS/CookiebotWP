@@ -2,7 +2,8 @@
 
 namespace cookiebot_addons_framework\controller;
 
-use cookiebot_addons_framework\lib\Settings_Service;
+use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
 use cookiebot_addons_framework\lib\Settings_Service_Interface;
 
 class Plugin_Controller {
@@ -10,7 +11,7 @@ class Plugin_Controller {
 	/**
 	 * IoC container - Dependency Injection
 	 *
-	 * @var Settings_Service
+	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.1.0
 	 */
@@ -41,7 +42,10 @@ class Plugin_Controller {
 	}
 
 	/**
-	 * Load addon configuration if the plugin is activated
+	 *  Load addon configuration if the plugin is activated
+	 *
+	 * @throws \DI\DependencyException
+	 * @throws \DI\NotFoundException
 	 *
 	 * @version 1.3.0
 	 * @since 1.2.0
@@ -49,6 +53,8 @@ class Plugin_Controller {
 	public function load_active_addons() {
 		/**
 		 * Check plugins one by one and load configuration if it is active
+		 *
+		 * @var $plugin Cookiebot_Addons_Interface
 		 */
 		foreach ( $this->settings_service->get_active_addons() as $plugin ) {
 			$plugin->load_configuration();
@@ -68,6 +74,9 @@ class Plugin_Controller {
 	 * @since 1.3.0
 	 */
 	public function run_buffer_output_manipulations() {
+		/**
+		 * @var $buffer_output Buffer_Output_Interface
+		 */
 		$buffer_output = $this->settings_service->container->get( 'Buffer_Output_Interface' );
 
 		if ( $buffer_output->has_action() ) {

@@ -21,11 +21,11 @@ class Visitor_Cookies {
 	 * Visitor_Cookies constructor.
 	 *
 	 * @param Script_Loader_Tag_Interface $script_loader_tag
-	 * @param Cookie_Consent_Interface  $cookie_consent
+	 * @param Cookie_Consent_Interface $cookie_consent
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct(Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent) {
+	public function __construct( Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent ) {
 		/**
 		 * When preferences consent is not given
 		 * Then disable comment cookies
@@ -57,7 +57,7 @@ class Visitor_Cookies {
 	 * @since 1.2.0
 	 */
 	protected function disable_eu_cookie_law() {
-		$this->script_loader_tag->add_tag('eu-cookie-law-script', 'preferences');
+		$this->script_loader_tag->add_tag( 'eu-cookie-law-script', array( 'preferences' ) );
 	}
 
 	/**
