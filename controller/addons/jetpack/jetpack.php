@@ -163,30 +163,12 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * The addon is checked in the backend, so update the status to 1.
-	 *
-	 * @since 1.3.0
-	 */
-	public function enable_addon() {
-		$this->settings->activate_addon( $this->get_option_name() );
-	}
-
-	/**
-	 * The addon is unchecked in the backend, so update the status to 0.
-	 *
-	 * @since 1.3.0
-	 */
-	public function disable_addon() {
-		$this->settings->disable_addon( $this->get_addon_file() );
-	}
-
-	/**
 	 * Check if plugin is activated and checked in the backend
 	 *
 	 * @since 1.3.0
 	 */
 	public function is_addon_enabled() {
-		return $this->settings->is_addon_enabled( $this->get_addon_file() );
+		return $this->settings->is_addon_enabled( $this->get_option_name() );
 	}
 
 	/**

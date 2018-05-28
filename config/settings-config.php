@@ -64,8 +64,10 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function register_settings() {
-		if ( isset( $_GET['page'] ) && $_GET['page'] == 'cookiebot-addons' ) {
-			if ( 'unavailable_addons' === $_GET['tab'] ) {
+		global $pagenow;
+
+		if ( ( isset( $_GET['page'] ) && $_GET['page'] == 'cookiebot-addons' ) || $pagenow == 'options.php' ) {
+			if ( isset( $_GET['tab'] ) && 'unavailable_addons' === $_GET['tab'] ) {
 				$this->register_unavailable_addons();
 			} else {
 				$this->register_available_addons();

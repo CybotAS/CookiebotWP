@@ -98,13 +98,11 @@ function cookiebot_manipulate_script( $buffer, $keywords ) {
  *
  * @since 1.3.0
  */
-function cookiebot_checked_selected_helper( $helper, $current, $echo = true, $type = 'checked') {
-	if ( (string) $helper === (string) $current ) {
+function cookiebot_checked_selected_helper( $helper, $current, $echo = true, $type = 'checked' ) {
+	if ( is_array( $helper ) && in_array( $current, $helper ) ) {
 		$result = " $type='$type'";
-	} elseif ( is_array( $helper ) ) {
-		if ( in_array( $current, $helper ) ) {
-			$result = " $type='$type'";
-		}
+	} elseif ( is_string( $helper) && is_string( $current) && $helper === $current ) {
+		$result = " $type='$type'";
 	} else {
 		$result = '';
 	}
