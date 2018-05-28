@@ -7,3 +7,11 @@
 	margin:0;
 	font-size: 16px;
 }
+
+form.not_installed_plugins p.submit{
+	display: none;
+}
+
+ul.cookietypes li {
+	display: inline;
+}

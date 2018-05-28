@@ -110,7 +110,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_option_name() {
-		return 'hubspot_tracking_code';
+		return 'add_to_any';
 	}
 
 	/**
@@ -125,21 +125,13 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * The addon is checked in the backend, so update the status to 1.
+	 * Returns checked cookie types
+	 * @return mixed
 	 *
 	 * @since 1.3.0
 	 */
-	public function enable_addon() {
-		$this->settings->activate_addon( $this->get_addon_file() );
-	}
-
-	/**
-	 * The addon is unchecked in the backend, so update the status to 0.
-	 *
-	 * @since 1.3.0
-	 */
-	public function disable_addon() {
-		$this->settings->disable_addon( $this->get_addon_file() );
+	public function get_cookie_types() {
+		return $this->settings->get_cookie_types( $this->get_option_name() );
 	}
 
 	/**
@@ -148,7 +140,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_enabled() {
-		return $this->settings->is_addon_enabled( $this->get_addon_file() );
+		return $this->settings->is_addon_enabled( $this->get_option_name() );
 	}
 
 	/**
@@ -160,7 +152,12 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 		return $this->settings->is_addon_installed( $this->get_addon_file() );
 	}
 
-	public function save_changes() {
-
+	/**
+	 * Checks if addon is activated
+	 *
+	 * @since 1.3.0
+	 */
+	public function is_addon_activated() {
+		return $this->settings->is_addon_activated( $this->get_addon_file() );
 	}
 }

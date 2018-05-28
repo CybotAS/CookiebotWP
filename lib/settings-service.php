@@ -30,6 +30,12 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_enabled( $addon ) {
+		$option = get_option( 'cookiebot_available_addons' );
+
+		if ( isset( $option[ $addon ] ) && ! isset( $option[ $addon ]['enabled'] ) ) {
+			return false;
+		}
+
 		return true;
 	}
 
@@ -43,29 +49,30 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_installed( $addon ) {
-		return ( is_wp_error( validate_plugin( $addon ) ) || ! is_plugin_active( $addon ) ) ? false : true;
+		return ( is_wp_error( validate_plugin( $addon ) ) ) ? false : true;
 	}
 
 	/**
-	 * Enable the addon - checked the addon
+	 * Returns true if the addon plugin is activated
 	 *
 	 * @param $addon
 	 *
+	 * @return bool
+	 *
 	 * @since 1.3.0
 	 */
-	public function enable_addon( $addon ) {
-		//TODO enable addon
+	public function is_addon_activated( $addon ) {
+		return ( is_plugin_active( $addon ) ) ? true : false;
 	}
 
-	/**
-	 * Disable the addon - unchecked the addon
-	 *
-	 * @param $addon
-	 *
-	 * @since 1.3.0
-	 */
-	public function disable_addon( $addon ) {
-		//TODO disable addon
+	public function get_cookie_types( $addon ) {
+		$option = get_option( 'cookiebot_available_addons' );
+
+		if ( isset( $option[ $addon ]['cookie_type'] ) && is_array( $option[ $addon ]['cookie_type'] ) ) {
+			return $option[ $addon ]['cookie_type'];
+		}
+
+		return array();
 	}
 
 	/**
@@ -95,13 +102,11 @@ class Settings_Service implements Settings_Service_Interface {
 	public function get_active_addons() {
 		$active_addons = array();
 
-		foreach ( $this->container->get( 'plugins' ) as $plugin_class => $plugin ) {
-			$addon = $this->container->get( $plugin->class );
-
+		foreach ( $this->get_addons() as $addon ) {
 			/**
 			 * Load addon code if the plugin is active and addon is activated
 			 */
-			if ( $addon->is_addon_enabled() && ! is_wp_error( $addon->is_addon_installed() ) ) {
+			if ( $addon->is_addon_enabled() && ! is_wp_error( $addon->is_addon_installed() ) && $addon->is_addon_activated() ) {
 				$active_addons[] = $addon;
 			}
 		}

@@ -138,7 +138,7 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_option_name() {
-		return 'hubspot_tracking_code';
+		return 'jetpack';
 	}
 
 	/**
@@ -153,12 +153,22 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	}
 
 	/**
+	 * Returns checked cookie types
+	 * @return mixed
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_cookie_types() {
+		return $this->settings->get_cookie_types( $this->get_option_name() );
+	}
+
+	/**
 	 * The addon is checked in the backend, so update the status to 1.
 	 *
 	 * @since 1.3.0
 	 */
 	public function enable_addon() {
-		$this->settings->activate_addon( $this->get_addon_file() );
+		$this->settings->activate_addon( $this->get_option_name() );
 	}
 
 	/**
@@ -188,7 +198,12 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		return $this->settings->is_addon_installed( $this->get_addon_file() );
 	}
 
-	public function save_changes() {
-
+	/**
+	 * Checks if addon is activated
+	 *
+	 * @since 1.3.0
+	 */
+	public function is_addon_activated() {
+		return $this->settings->is_addon_activated( $this->get_addon_file() );
 	}
 }

@@ -5,11 +5,16 @@ namespace cookiebot_addons_framework\lib\buffer;
 Interface Buffer_Output_Tag_Interface {
 
 	/**
-	 * Cookiebot_Buffer_Output_Interface constructor.
+	 * Buffer_Output_Tag_Interface constructor.
 	 *
+	 * @param $tag
+	 * @param $priority
+	 * @param array $keywords
+	 *
+	 * @version 1.3.0
 	 * @since 1.1.0
 	 */
-	public function __construct();
+	public function __construct( $tag, $priority, $keywords = array() );
 
 	/**
 	 * Start buffering

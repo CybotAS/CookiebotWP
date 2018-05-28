@@ -85,3 +85,34 @@ function cookiebot_manipulate_script( $buffer, $keywords ) {
 
 	return $updated_scripts;
 }
+
+/**
+ * Compares array to string to add checked attribute in checkboxes
+ *
+ * @param $helper
+ * @param $current
+ * @param bool $echo
+ * @param string $type
+ *
+ * @return string
+ *
+ * @since 1.3.0
+ */
+function cookiebot_checked_selected_helper( $helper, $current, $echo = true, $type = 'checked') {
+	if ( (string) $helper === (string) $current ) {
+		$result = " $type='$type'";
+	} elseif ( is_array( $helper ) ) {
+		if ( in_array( $current, $helper ) ) {
+			$result = " $type='$type'";
+		}
+	} else {
+		$result = '';
+	}
+
+
+	if ( $echo ) {
+		echo $result;
+	}
+
+	return $result;
+}
