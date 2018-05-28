@@ -52,12 +52,13 @@ Interface Settings_Service_Interface {
 	 * Returns all cookie type for given addon
 	 *
 	 * @param $addon    string  option name
+	 * @param $default  array   default cookie types
 	 *
 	 * @return array
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_cookie_types( $addon );
+	public function get_cookie_types( $addon, $default = array() );
 
 	/**
 	 * Returns addons one by one through a generator

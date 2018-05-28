@@ -69,19 +69,20 @@ class Settings_Service implements Settings_Service_Interface {
 	 * Returns all cookie type for given addon
 	 *
 	 * @param $addon    string  option name
+	 * @param $default  array   default cookie types
 	 *
 	 * @return array
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_cookie_types( $addon ) {
+	public function get_cookie_types( $addon, $default = array() ) {
 		$option = get_option( 'cookiebot_available_addons' );
 
 		if ( isset( $option[ $addon ]['cookie_type'] ) && is_array( $option[ $addon ]['cookie_type'] ) ) {
 			return $option[ $addon ]['cookie_type'];
 		}
 
-		return array();
+		return $default;
 	}
 
 	/**
