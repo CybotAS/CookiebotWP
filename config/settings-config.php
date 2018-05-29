@@ -154,6 +154,11 @@ class Settings_Config {
 		}
 	}
 
+	/**
+	 * Jetpack tab - header
+     *
+     * @since 1.3.0
+	 */
 	public function header_jetpack_addon() {
 		?>
         <p>
@@ -162,6 +167,13 @@ class Settings_Config {
 		<?php
 	}
 
+	/**
+     * Jetpack tab - widget callback
+     *
+	 * @param $args array   Information about the widget addon and the option
+     *
+     * @since 1.3.0
+	 */
 	public function jetpack_addon_callback( $args ) {
 		$option = $args['option'];
 		$addon  = $args['addon'];

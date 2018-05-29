@@ -35,7 +35,7 @@ include_once CAF_DIR . 'lib/helper.php';
 /**
  * Load composer
  */
-include_once CAF_DIR . 'vendor/autoload.php';
+include_once CAF_DIR . 'lib/ioc/autoload.php';
 
 class Cookiebot_Addons_Framework {
 

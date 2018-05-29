@@ -244,6 +244,16 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		return $this->settings->is_widget_enabled( $this->get_widget_option(), $option );
 	}
 
+	/**
+	 * Checks if a widget placeholder is enabled
+	 *
+	 * @param $option   string  widget option name
+	 *
+	 * @return boolean  true    If widget placeholder is checked
+	 *                  false   If widget placeholder is not checked
+	 *
+	 * @since 1.3.0
+	 */
 	public function is_widget_placeholder_enabled( $option ) {
 		return $this->settings->is_widget_placeholder_enabled( $this->get_widget_option(), $option );
 	}
