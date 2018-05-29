@@ -1,23 +1,42 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\jetpack;
+namespace cookiebot_addons_framework\controller\addons\jetpack\widget;
 
 class Google_Maps_Widget {
+
+	/**
+	 * @var array   list of supported cookie types
+	 *
+	 * @since 1.3.0
+	 */
+	protected $cookie_types;
 
 	/**
 	 * This class is used to support facebook page widget in jetpack
 	 *
 	 * Google_Maps_Widget constructor.
 	 *
+	 * @param   $widget_enabled boolean             true - if the widget is activated
+	 * @param   $cookie_types   array               List of supported cookie types
+	 * @param   $placeholder_enabled   boolean      true - display placeholder div
+	 *
+	 * @version 1.3.0
 	 * @since 1.2.0
 	 */
-	public function __construct() {
-		if( is_active_widget(false, false, 'widget_contact_info', true) ) {
+	public function __construct( $widget_enabled, $cookie_types, $placeholder_enabled ) {
+		if ( is_active_widget( false, false, 'widget_contact_info', true ) ) {
 			/**
-			 * Replace attributes of the google maps widget iframe
+			 * Widget is disabled in the backend
 			 */
-			add_action( 'jetpack_contact_info_widget_start', array( $this, 'start_buffer' ) );
-			add_action( 'jetpack_contact_info_widget_end', array( $this, 'stop_buffer' ) );
+			if ( $widget_enabled ) {
+				$this->cookie_types = $cookie_types;
+
+				/**
+				 * Replace attributes of the google maps widget iframe
+				 */
+				add_action( 'jetpack_contact_info_widget_start', array( $this, 'start_buffer' ) );
+				add_action( 'jetpack_contact_info_widget_end', array( $this, 'stop_buffer' ) );
+			}
 		}
 	}
 
@@ -70,11 +89,12 @@ class Google_Maps_Widget {
 
 				$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
 
-				$data = str_replace( 'src=', 'data-cookieconsent="marketing" data-src=', $data);
+				$data = str_replace( 'src=', 'data-cookieconsent="' . cookiebot_output_cookie_types( $this->cookie_types ) . '" data-src=', $data );
 
 				$data .= '<div class="cookieconsent-optout-marketing">
-						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept marketing-cookies</a> to watch this google map.', 'cookiebot_addons' )  . '
+						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept marketing-cookies</a> to watch this google map.', 'cookiebot_addons' ) . '
 						</div>';
+
 				/**
 				 * Return updated iframe tag
 				 */

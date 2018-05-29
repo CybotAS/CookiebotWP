@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\jetpack;
+namespace cookiebot_addons_framework\controller\addons\jetpack\widget;
 
 use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
 
@@ -12,6 +12,13 @@ use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface
 class Facebook_Widget {
 
 	/**
+	 * @var array   list of supported cookie types
+	 *
+	 * @since 1.3.0
+	 */
+	protected $cookie_types;
+
+	/**
 	 * @var Script_Loader_Tag_Interface
 	 *
 	 * @since 1.2.0
@@ -21,16 +28,32 @@ class Facebook_Widget {
 	/**
 	 * Facebook_Widget constructor.
 	 *
-	 * @param $script_loader_tag Script_Loader_Tag_Interface
+	 * @param   $widget_enabled boolean     true if the widget is activated
+	 * @param   $cookie_types   array       List of supported cookie types
+	 * @param   $placeholder_enabled   boolean      true - display placeholder div
+	 * @param   $script_loader_tag Script_Loader_Tag_Interface
 	 *
+	 * @version 1.3.0
 	 * @since 1.2.0
 	 */
-	public function __construct( Script_Loader_Tag_Interface $script_loader_tag ) {
+	public function __construct( $widget_enabled, $cookie_types, $placeholder_enabled, Script_Loader_Tag_Interface $script_loader_tag ) {
 		if ( is_active_widget( false, false, 'facebook-likebox', true ) ) {
-			$this->script_loader_tag = $script_loader_tag;
+			if ( $widget_enabled ) {
+				$this->cookie_types = $cookie_types;
+				$this->script_loader_tag = $script_loader_tag;
 
-			$this->add_consent_attribute_to_facebook_embed_javascript();
-			$this->add_cookie_consent_div();
+				/**
+				 * Manipulate script attribute
+				 */
+				$this->add_consent_attribute_to_facebook_embed_javascript();
+
+				/**
+				 * Display placeholder if allowed in the backend settings
+				 */
+				if( $placeholder_enabled ) {
+					$this->add_cookie_consent_div();
+				}
+			}
 		}
 	}
 
@@ -40,7 +63,7 @@ class Facebook_Widget {
 	 * @since 1.2.0
 	 */
 	protected function add_consent_attribute_to_facebook_embed_javascript() {
-		$this->script_loader_tag->add_tag( 'jetpack-facebook-embed', array('marketing') );
+		$this->script_loader_tag->add_tag( 'jetpack-facebook-embed', $this->cookie_types );
 	}
 
 	/**

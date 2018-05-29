@@ -2,6 +2,12 @@
 
 namespace cookiebot_addons_framework\controller\addons\jetpack;
 
+use cookiebot_addons_framework\controller\addons\jetpack\widget\Google_Maps_Widget;
+use cookiebot_addons_framework\controller\addons\jetpack\widget\Facebook_Widget;
+use cookiebot_addons_framework\controller\addons\jetpack\widget\Googleplus_Badge_Widget;
+use cookiebot_addons_framework\controller\addons\jetpack\widget\Goodreads_Widget;
+use cookiebot_addons_framework\controller\addons\jetpack\widget\Internet_Defense_league_Widget;
+use cookiebot_addons_framework\controller\addons\jetpack\widget\Twitter_Timeline_Widget;
 use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
 use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
@@ -74,14 +80,23 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		 *
 		 * @since 1.2.0
 		 */
-		new Google_Maps_Widget();
+		new Google_Maps_Widget(
+			$this->is_widget_enabled( 'google_maps' ),
+			$this->get_widget_cookie_types( 'google_maps' ),
+			$this->is_widget_placeholder_enabled( 'google_maps ' )
+		);
 
 		/**
 		 * Load configuration for facebook page widget
 		 *
 		 * @since 1.2.0
 		 */
-		new Facebook_Widget( $this->script_loader_tag );
+		new Facebook_Widget(
+			$this->is_widget_enabled( 'facebook' ),
+			$this->get_widget_cookie_types( 'facebook' ),
+			$this->is_widget_placeholder_enabled( 'facebook ' ),
+			$this->script_loader_tag
+		);
 
 		/**
 		 * Load configuration for visitor cookies
@@ -95,28 +110,48 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		 *
 		 * @since 1.2.0
 		 */
-		new Googleplus_Badge_Widget( $this->script_loader_tag );
+		new Googleplus_Badge_Widget(
+			$this->is_widget_enabled( 'googleplus_badge' ),
+			$this->get_widget_cookie_types( 'googleplus_badge' ),
+			$this->is_widget_placeholder_enabled( 'googleplus_badge ' ),
+			$this->script_loader_tag
+		);
 
 		/**
 		 * Load configuration for internet defense league widget
 		 *
 		 * @since 1.2.0
 		 */
-		new Internet_Defense_league_Widget( $this->cookie_consent );
+		new Internet_Defense_league_Widget(
+			$this->is_widget_enabled( 'internet_defense_league' ),
+			$this->get_widget_cookie_types( 'internet_defense_league' ),
+			$this->is_widget_placeholder_enabled( 'internet_defense_league ' ),
+			$this->cookie_consent
+		);
 
 		/**
 		 * Load configuration for twitter timeline widget
 		 *
 		 * @since 1.2.0
 		 */
-		new Twitter_Timeline_Widget( $this->script_loader_tag );
+		new Twitter_Timeline_Widget(
+			$this->is_widget_enabled( 'twitter_timeline' ),
+			$this->get_widget_cookie_types( 'twitter_timeline' ),
+			$this->is_widget_placeholder_enabled( 'twitter_timeline ' ),
+			$this->script_loader_tag
+		);
 
 		/**
 		 * Load configuration for goodreads widget
 		 *
 		 * @since 1.2.0
 		 */
-		new Goodreads_Widget( $this->buffer_output );
+		new Goodreads_Widget(
+			$this->is_widget_enabled( 'goodreads' ),
+			$this->get_widget_cookie_types( 'goodreads' ),
+			$this->is_widget_placeholder_enabled( 'goodreads ' ),
+			$this->buffer_output
+		);
 	}
 
 	/**

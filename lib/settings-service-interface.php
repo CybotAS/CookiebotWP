@@ -9,7 +9,7 @@ Interface Settings_Service_Interface {
 	/**
 	 * Settings_Service constructor.
 	 *
-	 * @param $container
+	 * @param $container \DI\Container
 	 *
 	 * @since 1.3.0
 	 */

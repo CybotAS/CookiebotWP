@@ -346,7 +346,7 @@ class Settings_Config {
 				$active_tab = 'unavailable_addons';
 			} else {
 				$active_tab = 'available_addons';
-			} // end if/else ?>
+			} ?>
 
             <h2 class="nav-tab-wrapper">
                 <a href="?page=cookiebot-addons&tab=available_addons"

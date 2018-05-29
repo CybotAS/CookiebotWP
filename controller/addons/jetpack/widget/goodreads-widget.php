@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\jetpack;
+namespace cookiebot_addons_framework\controller\addons\jetpack\widget;
 
 use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
 
@@ -15,15 +15,22 @@ class Goodreads_Widget {
 	/**
 	 * Goodreads_Widget constructor.
 	 *
+	 * @param   $widget_enabled boolean                 true if the widget is activated
+	 * @param   $cookie_types   array                   List of supported cookie types
+	 * @param   $placeholder_enabled   boolean          true - display placeholder div
+	 * @param   $buffer_output  Buffer_Output_Interface Buffer class to edit the output
+	 *
 	 * @since 1.2.0
 	 */
-	public function __construct( Buffer_Output_Interface $buffer_output ) {
+	public function __construct( $widget_enabled, $cookie_types, $placeholder_enabled, Buffer_Output_Interface $buffer_output ) {
 		if ( is_active_widget( false, false, 'wpcom-goodreads', true ) ) {
-			$this->transient_name = 'wpcom-goodreads';
+			if ( $widget_enabled ) {
+				$this->transient_name = 'wpcom-goodreads';
 
-			$this->keywords = array( 'www.goodreads.com' => 'marketing' );
-			$this->block_javascript_file();
-			$this->output_manipulated();
+				$this->keywords = array( 'www.goodreads.com' => $cookie_types );
+				$this->block_javascript_file();
+				$this->output_manipulated();
+			}
 		}
 	}
 
@@ -71,7 +78,7 @@ class Goodreads_Widget {
 	 *
 	 * @since 1.2.0
 	 */
-	public function manipulate_script($buffer) {
+	public function manipulate_script( $buffer ) {
 		/**
 		 * Get wp head scripts from the cache
 		 */
@@ -82,7 +89,7 @@ class Goodreads_Widget {
 		 */
 		if ( $updated_scripts === false ) {
 
-			$updated_scripts = cookiebot_manipulate_script($buffer, $this->keywords);
+			$updated_scripts = cookiebot_manipulate_script( $buffer, $this->keywords );
 
 			/**
 			 * Set cache for 15 minutes

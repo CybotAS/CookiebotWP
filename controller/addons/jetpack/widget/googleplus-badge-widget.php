@@ -1,10 +1,17 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\jetpack;
+namespace cookiebot_addons_framework\controller\addons\jetpack\widget;
 
 use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
 
 class Googleplus_Badge_Widget {
+
+	/**
+	 * @var array   list of supported cookie types
+	 *
+	 * @since 1.3.0
+	 */
+	protected $cookie_types;
 
 	/**
 	 * @var Script_Loader_Tag_Interface
@@ -14,17 +21,26 @@ class Googleplus_Badge_Widget {
 	/**
 	 * Googleplus_Badge_Widget constructor.
 	 *
+	 * @param   $widget_enabled boolean     true if the widget is activated
+	 * @param   $cookie_types   array       List of supported cookie types
+	 * @param   $placeholder_enabled   boolean      true - display placeholder div
 	 * @param   $script_loader_tag  Script_Loader_Tag_Interface
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct( Script_Loader_Tag_Interface $script_loader_tag ) {
-
+	public function __construct( $widget_enabled, $cookie_types, $placeholder_enabled, Script_Loader_Tag_Interface $script_loader_tag ) {
 		if ( is_active_widget( false, false, 'googleplus-badge', true ) ) {
-			$this->script_loader_tag = $script_loader_tag;
 
-			$this->disable_javascript_file();
-			$this->div_to_enable_marketing_consent();
+			if( $widget_enabled ) {
+				$this->cookie_types = $cookie_types;
+				$this->script_loader_tag = $script_loader_tag;
+
+				$this->disable_javascript_file();
+
+				if( $placeholder_enabled ) {
+					$this->div_to_enable_marketing_consent();
+				}
+			}
 		}
 	}
 
@@ -34,7 +50,7 @@ class Googleplus_Badge_Widget {
 	 * @since 1.2.0
 	 */
 	protected function disable_javascript_file() {
-		$this->script_loader_tag->add_tag( 'googleplus-widget', array('marketing') );
+		$this->script_loader_tag->add_tag( 'googleplus-widget', $this->cookie_types );
 	}
 
 	/**

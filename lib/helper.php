@@ -67,7 +67,7 @@ function cookiebot_manipulate_script( $buffer, $keywords ) {
 			 * The script contains the needle
 			 **/
 			if ( strpos( $data, $needle ) !== false ) {
-				$data = preg_replace( '/\<script/', '<script type="text/plain" data-cookieconsent="' . $cookie_type . '"', $data );
+				$data = preg_replace( '/\<script/', '<script type="text/plain" data-cookieconsent="' . cookiebot_output_cookie_types( $cookie_type ) . '"', $data );
 				$data = preg_replace( '/type\=\"text\/javascript\"/', '', $data );
 
 				/**
@@ -101,7 +101,7 @@ function cookiebot_manipulate_script( $buffer, $keywords ) {
 function cookiebot_checked_selected_helper( $helper, $current, $echo = true, $type = 'checked' ) {
 	if ( is_array( $helper ) && in_array( $current, $helper ) ) {
 		$result = " $type='$type'";
-	} elseif ( is_string( $helper) && is_string( $current) && $helper === $current ) {
+	} elseif ( is_string( $helper ) && is_string( $current ) && $helper === $current ) {
 		$result = " $type='$type'";
 	} else {
 		$result = '';
@@ -113,4 +113,24 @@ function cookiebot_checked_selected_helper( $helper, $current, $echo = true, $ty
 	}
 
 	return $result;
+}
+
+/**
+ * Returns cookie types in a string
+ * Default is statistics
+ *
+ * @param $cookie_types
+ *
+ * @return string
+ *
+ * @since 1.3.0
+ */
+function cookiebot_output_cookie_types( $cookie_types ) {
+	if ( is_array( $cookie_types ) && count( $cookie_types ) > 0 ) {
+		return implode( ',', $cookie_types );
+	} elseif ( is_string( $cookie_types ) && $cookie_types != '' ) {
+		return $cookie_types;
+	}
+
+	return 'statistics';
 }
