@@ -18,5 +18,9 @@
   "Hubspot_Tracking_Code": {
     "file": "hubspot-tracking-code\/hubspot-tracking-code.php",
     "class": "hubspot_tracking_code\\Hubspot_Tracking_Code"
+  },
+  "Custom_Facebook_Feed": {
+    "file": "custom-facebook-feed\/custom-facebook-feed.php",
+    "class": "custom_facebook_feed\\Custom_Facebook_Feed"
   }
 }
