@@ -22,5 +22,9 @@
   "Custom_Facebook_Feed": {
     "file": "custom-facebook-feed\/custom-facebook-feed.php",
     "class": "custom_facebook_feed\\Custom_Facebook_Feed"
+  },
+  "Embed_Autocorrect": {
+    "file": null,
+    "class": "embed_autocorrect\\Embed_Autocorrect"
   }
 }
