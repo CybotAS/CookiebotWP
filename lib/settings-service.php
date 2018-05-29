@@ -120,7 +120,7 @@ class Settings_Service implements Settings_Service_Interface {
 			/**
 			 * Load addon code if the plugin is active and addon is activated
 			 */
-			if ( $addon->is_addon_enabled( $addon->get_option_name() ) && $addon->is_addon_installed( $addon->get_addon_file() ) && $addon->is_addon_activated( $addon->get_addon_file() ) ) {
+			if ( $addon->is_addon_enabled() && $addon->is_addon_installed() && $addon->is_addon_activated() ) {
 				$active_addons[] = $addon;
 			}
 		}
