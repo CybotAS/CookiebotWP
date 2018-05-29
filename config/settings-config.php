@@ -69,6 +69,8 @@ class Settings_Config {
 		if ( ( isset( $_GET['page'] ) && $_GET['page'] == 'cookiebot-addons' ) || $pagenow == 'options.php' ) {
 			if ( isset( $_GET['tab'] ) && 'unavailable_addons' === $_GET['tab'] ) {
 				$this->register_unavailable_addons();
+			} elseif ( ( isset( $_GET['tab'] ) && 'jetpack' === $_GET['tab'] ) || $pagenow == 'options.php' ) {
+				$this->register_jetpack_addon();
 			} else {
 				$this->register_available_addons();
 			}
@@ -99,6 +101,37 @@ class Settings_Config {
 	}
 
 	/**
+	 * Register jetpack addon - new tab for jetpack specific settings
+	 *
+	 * @since 1.3.0
+	 */
+	private function register_jetpack_addon() {
+		add_settings_section( "jetpack_addon", "Jetpack", array(
+			$this,
+			"header_jetpack_addon"
+		), "cookiebot-addons" );
+
+		foreach ( $this->settings_service->get_addons() as $addon ) {
+			if ( 'Jetpack' === ( new \ReflectionClass( $addon ) )->getShortName() ) {
+				if ( $addon->is_addon_installed() && $addon->is_addon_activated() ) {
+					foreach ( $addon->get_widgets() as $option => $widget ) {
+						add_settings_field( $option, $widget, array(
+							$this,
+							"jetpack_addon_callback"
+						), "cookiebot-addons", "jetpack_addon", array(
+							'option' => $option,
+							'label'  => $widget,
+							'addon'  => $addon
+						) );
+
+						register_setting( 'cookiebot_jetpack_addon', 'cookiebot_jetpack_addon' );
+					}
+				}
+			}
+		}
+	}
+
+	/**
 	 * Registers unavailabe addons
 	 *
 	 * @since 1.3.0
@@ -119,6 +152,62 @@ class Settings_Config {
 				register_setting( $addon->get_option_name(), "cookiebot_unavailable_addons" );
 			}
 		}
+	}
+
+	public function header_jetpack_addon() {
+		?>
+        <p>
+			<?php _e( 'Jetpack settings.', 'cookiebot-addons' ); ?>
+        </p>
+		<?php
+	}
+
+	public function jetpack_addon_callback( $args ) {
+		$option = $args['option'];
+		$addon  = $args['addon'];
+
+		?>
+        <div class="postbox cookiebot-addon">
+            <p>
+                <label for="<?php echo 'enabled_' . $option; ?>"><?php _e( 'Enable', 'cookie-addons' ); ?></label>
+                <input type="checkbox" id="<?php echo 'enabled_' . $option; ?>"
+                       name="cookiebot_jetpack_addon[<?php echo $option; ?>][enabled]"
+                       value="1" <?php checked( 1, $addon->is_widget_enabled( $option ), true ); ?> />
+            </p>
+            <p>
+                <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot-addons' ); ?></span><br>
+            <ul class="cookietypes">
+                <li><input type="checkbox" id="cookie_type_necessary_<?php echo $option; ?>"
+                           value="necessary"
+                           name="cookiebot_jetpack_addon[<?php echo $option; ?>][cookie_type][]"
+						<?php cookiebot_checked_selected_helper( $addon->get_widget_cookie_types( $option ), 'necessary' ); ?>>
+                    <label>Necessary</label>
+                </li>
+                <li><input type="checkbox" id="cookie_type_preferences_<?php echo $option; ?>"
+                           value="preferences"
+						<?php cookiebot_checked_selected_helper( $addon->get_widget_cookie_types( $option ), 'preferences' ); ?>
+                           name="cookiebot_jetpack_addon[<?php echo $option; ?>][cookie_type][]"><label>Preferences</label>
+                </li>
+                <li><input type="checkbox" id="cookie_type_statistics_<?php echo $option; ?>"
+                           value="statistics"
+						<?php cookiebot_checked_selected_helper( $addon->get_widget_cookie_types( $option ), 'statistics' ); ?>
+                           name="cookiebot_jetpack_addon[<?php echo $option; ?>][cookie_type][]"><label>Statistics</label>
+                </li>
+                <li><input type="checkbox" id="cookie_type_marketing_<?php echo $option; ?>"
+                           value="marketing"
+						<?php cookiebot_checked_selected_helper( $addon->get_widget_cookie_types( $option ), 'marketing' ); ?>
+                           name="cookiebot_jetpack_addon[<?php echo $option; ?>][cookie_type][]"><label>Marketing</label>
+                </li>
+            </ul>
+            </p>
+            <p>
+                <label for=""><?php _e( 'Display a placeholder', 'cookiebot-addons' ); ?></label>
+                <input type="checkbox" id="" name="cookiebot_jetpack_addon[<?php echo $option; ?>][placeholder]"
+                       value="1" <?php checked( 1, $addon->is_widget_placeholder_enabled( $option ), true ); ?>>
+            </p>
+
+        </div>
+		<?php
 	}
 
 	/**
@@ -152,40 +241,37 @@ class Settings_Config {
 
 		?>
         <div class="postbox cookiebot-addon">
-            <label for="<?php echo 'enabled_' . $addon->get_option_name(); ?>"><?php _e( 'Enable', 'cookie-addons' ); ?></label>
-            <input type="checkbox" id="<?php echo 'enabled_' . $addon->get_option_name(); ?>"
-                   name="cookiebot_available_addons[<?php echo $addon->get_option_name() ?>][enabled]"
-                   value="1" <?php checked( 1, $addon->is_addon_enabled( $addon->get_option_name() ), true ); ?> />
-
-            <br><br>
-
-
+            <p>
+                <label for="<?php echo 'enabled_' . $addon->get_option_name(); ?>"><?php _e( 'Enable', 'cookie-addons' ); ?></label>
+                <input type="checkbox" id="<?php echo 'enabled_' . $addon->get_option_name(); ?>"
+                       name="cookiebot_available_addons[<?php echo $addon->get_option_name() ?>][enabled]"
+                       value="1" <?php checked( 1, $addon->is_addon_enabled(), true ); ?> />
+            </p>
             <p>
                 <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot-addons' ); ?></span><br>
             <ul class="cookietypes">
                 <li><input type="checkbox" id="cookie_type_necessary_<?php echo $addon->get_option_name(); ?>"
                            value="necessary"
-                           name="cookiebot_available_addons[<?php echo $addon->get_option_name() ?>][cookie_type][]"
-						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types( $addon->get_option_name() ), 'necessary' ); ?>>
+                           name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][cookie_type][]"
+						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types(), 'necessary' ); ?>>
                     <label>Necessary</label>
                 </li>
                 <li><input type="checkbox" id="cookie_type_preferences_<?php echo $addon->get_option_name(); ?>"
                            value="preferences"
-						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types( $addon->get_option_name() ), 'preferences' ); ?>
-                           name="cookiebot_available_addons[<?php echo $addon->get_option_name() ?>][cookie_type][]"><label>Preferences</label>
+						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types(), 'preferences' ); ?>
+                           name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][cookie_type][]"><label>Preferences</label>
                 </li>
                 <li><input type="checkbox" id="cookie_type_statistics_<?php echo $addon->get_option_name(); ?>"
                            value="statistics"
-						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types( $addon->get_option_name() ), 'statistics' ); ?>
-                           name="cookiebot_available_addons[<?php echo $addon->get_option_name() ?>][cookie_type][]"><label>Statistics</label>
+						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types(), 'statistics' ); ?>
+                           name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][cookie_type][]"><label>Statistics</label>
                 </li>
                 <li><input type="checkbox" id="cookie_type_marketing_<?php echo $addon->get_option_name(); ?>"
                            value="marketing"
-						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types( $addon->get_option_name() ), 'marketing' ); ?>
-                           name="cookiebot_available_addons[<?php echo $addon->get_option_name() ?>][cookie_type][]"><label>Marketing</label>
+						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types(), 'marketing' ); ?>
+                           name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][cookie_type][]"><label>Marketing</label>
                 </li>
             </ul>
-
             </p>
         </div>
 		<?php
@@ -257,6 +343,15 @@ class Settings_Config {
                 <a href="?page=cookiebot-addons&tab=unavailable_addons"
                    class="nav-tab <?php echo $active_tab == 'unavailable_addons' ? 'nav-tab-active' : ''; ?>">Unavailable
                     Addons</a>
+				<?php
+				if ( is_plugin_active( 'jetpack/jetpack.php' ) ) {
+					?>
+                    <a href="?page=cookiebot-addons&tab=jetpack"
+                       class="nav-tab <?php echo $active_tab == 'jetpack' ? 'nav-tab-active' : ''; ?>">jetpack</a>
+					<?php
+				}
+				?>
+
             </h2>
 
             <form method="post" action="options.php" class="<?php echo $active_tab; ?>">
@@ -264,6 +359,9 @@ class Settings_Config {
 
 				if ( $active_tab == 'available_addons' ) {
 					settings_fields( 'cookiebot_available_addons' );
+					do_settings_sections( 'cookiebot-addons' );
+				} elseif ( $active_tab == 'jetpack' ) {
+					settings_fields( 'cookiebot_jetpack_addon' );
 					do_settings_sections( 'cookiebot-addons' );
 				} else {
 					settings_fields( 'cookiebot_not_installed_options' );

@@ -188,4 +188,63 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_addon_file() );
 	}
+
+	/**
+	 * Returns all supported widgets
+	 *
+	 * @return array
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_widgets() {
+		return array(
+			'google_maps'             => 'Google maps',
+			'facebook'                => 'Facebook',
+			'googleplus_badge'        => 'Google Plus Badge',
+			'internet_defense_league' => 'Internet defense league',
+			'twitter_timeline'        => 'Twitter timeline',
+			'goodreads'               => 'Goodreads'
+		);
+	}
+
+	/**
+	 * Returns widget option key for in the database
+	 *
+	 * @return string
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_widget_option() {
+		return 'cookiebot_jetpack_addon';
+	}
+
+	/**
+	 * Returns cookie types for a widget
+	 *
+	 * @param $option
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_widget_cookie_types( $option ) {
+		return $this->settings->get_widget_cookie_types( $this->get_widget_option(), $option );
+	}
+
+	/**
+	 * Checks if a widget is enabled
+	 *
+	 * @param $option
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.3.0
+	 */
+	public function is_widget_enabled( $option ) {
+		return $this->settings->is_widget_enabled( $this->get_widget_option(), $option );
+	}
+
+	public function is_widget_placeholder_enabled( $option ) {
+		return $this->settings->is_widget_placeholder_enabled( $this->get_widget_option(), $option );
+	}
 }

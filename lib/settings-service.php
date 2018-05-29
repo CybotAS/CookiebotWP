@@ -127,4 +127,61 @@ class Settings_Service implements Settings_Service_Interface {
 
 		return $active_addons;
 	}
+
+	/**
+	 * Returns widget cookie types
+	 *
+	 * @param $option_key
+	 * @param $widget
+	 * @param array $default
+	 *
+	 * @return array
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_widget_cookie_types( $option_key, $widget, $default = array() ) {
+		$option = get_option( $option_key );
+
+		if ( isset( $option[ $widget ]['cookie_type'] ) && is_array( $option[ $widget ]['cookie_type'] ) ) {
+			return $option[ $widget ]['cookie_type'];
+		}
+
+		return $default;
+	}
+
+	/**
+	 * Is widget enabled
+	 *
+	 * @param $option_key
+	 * @param $widget
+	 *
+	 * @return bool
+	 */
+	public function is_widget_enabled( $option_key, $widget ) {
+		$option = get_option( $option_key );
+
+		if ( isset( $option[ $widget ] ) && ! isset( $option[ $widget ]['enabled'] ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Is placeholder enabled for a widget
+	 *
+	 * @param $option_key
+	 * @param $widget
+	 *
+	 * @return bool
+	 */
+	public function is_widget_placeholder_enabled( $option_key, $widget ) {
+		$option = get_option( $option_key );
+
+		if ( isset( $option[ $widget ] ) && ! isset( $option[ $widget ]['placeholder'] ) ) {
+			return false;
+		}
+
+		return true;
+	}
 }
