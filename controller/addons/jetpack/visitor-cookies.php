@@ -2,14 +2,37 @@
 
 namespace cookiebot_addons_framework\controller\addons\jetpack;
 
+use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
+use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
+
 class Visitor_Cookies {
 
-	public function __construct() {
+	/**
+	 * @var Script_Loader_Tag_Interface
+	 */
+	private $script_loader_tag;
+
+	/**
+	 * @var Cookie_Consent_Interface
+	 */
+	private $cookie_consent;
+
+	/**
+	 * Visitor_Cookies constructor.
+	 *
+	 * @param Script_Loader_Tag_Interface $script_loader_tag
+	 * @param Cookie_Consent_Interface $cookie_consent
+	 *
+	 * @since 1.2.0
+	 */
+	public function __construct( Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent ) {
 		/**
 		 * When preferences consent is not given
 		 * Then disable comment cookies
 		 */
-		if ( ! cookiebot_is_cookie_state_accepted( 'preferences' ) ) {
+		if ( ! $cookie_consent->is_cookie_state_accepted( 'preferences' ) ) {
+			$this->script_loader_tag = $script_loader_tag;
+
 			$this->disable_comment_cookies();
 			$this->do_not_save_mobile_or_web_view();
 			$this->disable_eu_cookie_law();
@@ -34,7 +57,7 @@ class Visitor_Cookies {
 	 * @since 1.2.0
 	 */
 	protected function disable_eu_cookie_law() {
-		cookiebot_script_loader_tag( 'eu-cookie-law-script', 'preferences' );
+		$this->script_loader_tag->add_tag( 'eu-cookie-law-script', array( 'preferences' ) );
 	}
 
 	/**

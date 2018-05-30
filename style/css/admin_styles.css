@@ -1,0 +1,17 @@
+.cookiebot-addon.postbox {
+	padding: 12px 0 12px 15px;
+}
+.cookiebot-addon.postbox h2 {	
+	padding-top:0;
+	padding-bottom:10px;
+	margin:0;
+	font-size: 16px;
+}
+
+form.not_installed_plugins p.submit{
+	display: none;
+}
+
+ul.cookietypes li {
+	display: inline;
+}

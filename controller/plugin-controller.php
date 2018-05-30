@@ -2,72 +2,85 @@
 
 namespace cookiebot_addons_framework\controller;
 
+use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons_framework\lib\Settings_Service_Interface;
+
 class Plugin_Controller {
 
 	/**
-	 * Array of addon plugins
+	 * IoC container - Dependency Injection
 	 *
-	 * @var array
+	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.1.0
 	 */
-	private $plugins;
+	private $settings_service;
 
 	/**
-	 * Load addons if the plugin is activated
+	 * Plugin_Controller constructor.
 	 *
-	 * @since 1.1.0
+	 * @param $settings_service  Settings_Service_Interface IoC Container
+	 *
+	 * @since 1.2.0
 	 */
-	public function check_addons() {
-		$this->load_plugins();
+	public function __construct( Settings_Service_Interface $settings_service ) {
+		$this->settings_service = $settings_service;
 
-		if ( ! function_exists( 'is_plugin_active' ) ){
+		$this->load_init_files();
+	}
+
+	/**
+	 * Load init files to use 'validate_plugin' and 'is_plugin_active'
+	 *
+	 * @since 1.3.0
+	 */
+	protected function load_init_files() {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
 			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 		}
+	}
 
-		foreach ( $this->plugins as $plugin_class => $plugin ) {
-			/**
-			 * Load addon code if the plugin is active
-			 */
-			if ( is_null( $plugin->file ) ||  is_plugin_active( $plugin->file ) ) {
-				$this->load_addon( $plugin->class );
-			}
+	/**
+	 *  Load addon configuration if the plugin is activated
+	 *
+	 * @throws \DI\DependencyException
+	 * @throws \DI\NotFoundException
+	 *
+	 * @version 1.3.0
+	 * @since 1.2.0
+	 */
+	public function load_active_addons() {
+		/**
+		 * Check plugins one by one and load configuration if it is active
+		 *
+		 * @var $plugin Cookiebot_Addons_Interface
+		 */
+		foreach ( $this->settings_service->get_active_addons() as $plugin ) {
+			$plugin->load_configuration();
 		}
-	}
-
-	/**
-	 * Loads plugins from json file
-	 *
-	 * All the addon plugins are defined there.
-	 *
-	 * The file is located at the root map of this plugin
-	 *
-	 * @since 1.1.0
-	 */
-	private function load_plugins() {
-		$file          = file_get_contents( CAF_DIR . 'addons.json' );
-		$this->plugins = json_decode( $file );
-	}
-
-	/**
-	 * Dynamically Loads addon plugin configuration class
-	 *
-	 * For example:
-	 * /controller/addons/google-analyticator/google-analyticator.php
-	 *
-	 * @param $class    string  Plugin class name
-	 *
-	 * @since 1.1.0
-	 */
-	private function load_addon( $class ) {
-		$full_class_name = 'cookiebot_addons_framework\\controller\\addons\\' . $class;
 
 		/**
-		 * Load addon class
+		 * After WordPress is fully loaded
+		 *
+		 * Run buffer output actions - this runs after scanning of every addons
 		 */
+		add_action( 'parse_request', array( $this, 'run_buffer_output_manipulations' ) );
+	}
 
-		if ( class_exists( $full_class_name ) ) {
-			new $full_class_name;
+	/**
+	 * Runs every added action hooks to manipulate script tag
+	 *
+	 * @since 1.3.0
+	 */
+	public function run_buffer_output_manipulations() {
+		/**
+		 * @var $buffer_output Buffer_Output_Interface
+		 */
+		$buffer_output = $this->settings_service->container->get( 'Buffer_Output_Interface' );
+
+		if ( $buffer_output->has_action() ) {
+			$buffer_output->run_actions();
 		}
 	}
 }

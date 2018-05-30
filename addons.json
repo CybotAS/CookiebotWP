@@ -1,30 +1,29 @@
 {
   "Add_To_Any": {
-    "file": "add-to-any\/add-to-any.php",
-    "class": "add_to_any\\Add_To_Any"
+    "name": "Add To Any Share Buttons",
+    "class": "cookiebot_addons_framework\\controller\\addons\\add_to_any\\Add_To_Any"
   },
   "Ga_Google_Analytics": {
-    "file": "ga-google-analytics\/ga-google-analytics.php",
-    "class": "ga_google_analytics\\Ga_Google_Analytics"
+    "name": "GA Google Analytics",
+    "class": "cookiebot_addons_framework\\controller\\addons\\ga_google_analytics\\Ga_Google_Analytics"
   },
   "Ga_Analyticator": {
-    "file": "google-analyticator\/google-analyticator.php",
-    "class": "google_analyticator\\Google_Analyticator"
+    "name": "GA Analyticator",
+    "class": "cookiebot_addons_framework\\controller\\addons\\google_analyticator\\Google_Analyticator"
   },
   "Jetpack": {
-    "file": "jetpack\/jetpack.php",
-    "class": "jetpack\\Jetpack"
+    "name": "Jetpack",
+    "class": "cookiebot_addons_framework\\controller\\addons\\jetpack\\Jetpack"
   },
   "Hubspot_Tracking_Code": {
-    "file": "hubspot-tracking-code\/hubspot-tracking-code.php",
-    "class": "hubspot_tracking_code\\Hubspot_Tracking_Code"
+    "name": "Hubspot Tracking Code",
+    "class": "cookiebot_addons_framework\\controller\\addons\\hubspot_tracking_code\\Hubspot_Tracking_Code"
   },
   "Custom_Facebook_Feed": {
-    "file": "custom-facebook-feed\/custom-facebook-feed.php",
-    "class": "custom_facebook_feed\\Custom_Facebook_Feed"
-  },
+    "name": "Custom Facebook Feed",
+    "class": "cookiebot_addons_framework\\controller\\addons\\custom_facebook_feed\\Custom_Facebook_Feed"
   "Embed_Autocorrect": {
     "file": null,
-    "class": "embed_autocorrect\\Embed_Autocorrect"
+    "class": "cookiebot_addons_framework\\controller\\addons\\embed_autocorrect\\Embed_Autocorrect"
   }
 }
