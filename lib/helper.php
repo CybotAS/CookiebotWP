@@ -134,3 +134,26 @@ function cookiebot_output_cookie_types( $cookie_types ) {
 
 	return 'statistics';
 }
+
+/**
+ * Return 1 cookie type if more than 1 is selected
+ *
+ * @param $cookie_types
+ *
+ * @return string
+ *
+ * @since 1.3.0
+ */
+function cookiebot_get_one_cookie_type( $cookie_types ) {
+	if ( is_array( $cookie_types ) ) {
+		if ( in_array( 'marketing', $cookie_types ) ) {
+			return 'marketing';
+		}elseif( in_array('statistics', $cookie_types) ) {
+			return 'statistics';
+		}elseif( in_array( 'preferences', $cookie_types) ) {
+			return 'preferences';
+		}
+	}
+
+	return '';
+}

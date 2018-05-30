@@ -39,7 +39,7 @@ class Facebook_Widget {
 	public function __construct( $widget_enabled, $cookie_types, $placeholder_enabled, Script_Loader_Tag_Interface $script_loader_tag ) {
 		if ( is_active_widget( false, false, 'facebook-likebox', true ) ) {
 			if ( $widget_enabled ) {
-				$this->cookie_types = $cookie_types;
+				$this->cookie_types      = $cookie_types;
 				$this->script_loader_tag = $script_loader_tag;
 
 				/**
@@ -50,7 +50,7 @@ class Facebook_Widget {
 				/**
 				 * Display placeholder if allowed in the backend settings
 				 */
-				if( $placeholder_enabled ) {
+				if ( $placeholder_enabled ) {
 					$this->add_cookie_consent_div();
 				}
 			}
@@ -85,9 +85,11 @@ class Facebook_Widget {
 	 */
 	public function cookie_consent_div( $view, $widget ) {
 		if ( $widget == 'facebook-likebox' && $view == 'widget_view' ) {
-			echo '<div class="cookieconsent-optout-marketing">
-						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept marketing-cookies</a> to watch this facebook page.', 'cookiebot_addons' ) . '
+			if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
+				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->cookie_types ) . '">
+						  ' . printf( __( 'Please <a href="javascript:Cookiebot.renew()">accept %s cookies</a> to watch this facebook page.', 'cookiebot_addons' ), cookiebot_output_cookie_types( $this->cookie_types ) ) . '
 						</div>';
+			}
 		}
 	}
 }
