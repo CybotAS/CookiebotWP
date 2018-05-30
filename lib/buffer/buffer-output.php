@@ -20,8 +20,8 @@ class Buffer_Output implements Buffer_Output_Interface {
 	 *
 	 * @since 1.2.0
 	 */
-	public function add_tag( $tag_name, $priority, $keywords = array() ) {
-		$tag       = new Buffer_Output_Tag( $tag_name, $priority, $keywords );
+	public function add_tag( $tag_name, $priority, $keywords = array(), $use_cache=true) {
+		$tag       = new Buffer_Output_Tag( $tag_name, $priority, $keywords, $use_cache );
 		$unique_id = $tag->tag . '_' . $tag->priority;
 
 		/**
