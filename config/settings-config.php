@@ -69,10 +69,14 @@ class Settings_Config {
 		if ( ( isset( $_GET['page'] ) && $_GET['page'] == 'cookiebot-addons' ) || $pagenow == 'options.php' ) {
 			if ( isset( $_GET['tab'] ) && 'unavailable_addons' === $_GET['tab'] ) {
 				$this->register_unavailable_addons();
-			} elseif ( ( isset( $_GET['tab'] ) && 'jetpack' === $_GET['tab'] ) || $pagenow == 'options.php' ) {
+			} elseif ( ( isset( $_GET['tab'] ) && 'jetpack' === $_GET['tab'] ) ) {
 				$this->register_jetpack_addon();
 			} else {
 				$this->register_available_addons();
+			}
+
+			if( $pagenow == 'options.php'  ) {
+				$this->register_jetpack_addon();
 			}
 		}
 	}
