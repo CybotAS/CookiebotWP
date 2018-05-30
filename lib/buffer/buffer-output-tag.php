@@ -41,18 +41,30 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 	private $transient_name;
 
 	/**
+	 * 
+	 * Use transient cache
+	 * 
+	 * @var boolean
+	 * 
+	 * @since 1.2.0
+	 */
+	private	$use_cache;
+
+	/**
 	 * Cookiebot_Buffer_Output_Tag constructor.
 	 *
 	 * @param $tag
 	 * @param $priority
 	 * @param array $keywords
+	 * @param boolean $use_cache
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct( $tag, $priority, $keywords = array() ) {
+	public function __construct( $tag, $priority, $keywords = array(), $use_cache = true ) {
 		$this->tag      = $tag;
 		$this->priority = $priority;
 		$this->keywords = $keywords;
+		$this->use_cache = $use_cache;
 
 		/**
 		 * Keywords to look for (default)
@@ -109,21 +121,25 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 		/**
 		 * Get wp head scripts from the cache
 		 */
-		$updated_scripts = get_transient( $this->transient_name );
-
+		if( $this->use_cache ) {
+			$updated_scripts = get_transient( $this->transient_name );
+		}
+		
 		/**
 		 * If cache is not set then build it
 		 */
-		if ( $updated_scripts === false ) {
+		if ( !$this->use_cache || $updated_scripts === false ) {
 			/**
 			 * Get all scripts and add cookieconsent if it does match with the criterion
 			 */
 			$updated_scripts = cookiebot_manipulate_script( $buffer, $this->keywords );
-
-			/**
-			 * Set cache for 15 minutes
-			 */
-			set_transient( $this->transient_name, $updated_scripts, 60 * 15 );
+			
+			if( $this->use_cache ) {
+				/**
+				 * Set cache for 15 minutes
+				 */
+				set_transient( $this->transient_name, $updated_scripts, 60 * 15 );
+			}
 		}
 
 		return $updated_scripts;
