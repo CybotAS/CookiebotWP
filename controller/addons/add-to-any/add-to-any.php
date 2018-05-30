@@ -61,7 +61,9 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function load_configuration() {
-		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_add_to_any' ), 5 );
+		if( $this->is_addon_enabled() ) {
+			add_action( 'wp_loaded', array( $this, 'cookiebot_addon_add_to_any' ), 5 );
+		}
 	}
 
 	/**
@@ -114,13 +116,13 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * Addon file name
+	 * Plugin file name
 	 *
 	 * @return string
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_addon_file() {
+	public function get_plugin_file() {
 		return 'add-to-any/add-to-any.php';
 	}
 
@@ -149,7 +151,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_installed() {
-		return $this->settings->is_addon_installed( $this->get_addon_file() );
+		return $this->settings->is_addon_installed( $this->get_plugin_file() );
 	}
 
 	/**
@@ -158,6 +160,6 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_activated() {
-		return $this->settings->is_addon_activated( $this->get_addon_file() );
+		return $this->settings->is_addon_activated( $this->get_plugin_file() );
 	}
 }

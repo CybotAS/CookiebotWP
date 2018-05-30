@@ -49,7 +49,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_installed( $addon ) {
-		return ( is_wp_error( validate_plugin( $addon ) ) ) ? false : true;
+		return ( $addon !== false && is_wp_error( validate_plugin( $addon ) ) ) ? false : true;
 	}
 
 	/**
@@ -62,7 +62,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_activated( $addon ) {
-		return ( is_plugin_active( $addon ) ) ? true : false;
+		return ( $addon === false || is_plugin_active( $addon ) ) ? true : false;
 	}
 
 	/**

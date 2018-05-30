@@ -1,29 +1,23 @@
 {
   "Add_To_Any": {
-    "name": "Add To Any Share Buttons",
     "class": "cookiebot_addons_framework\\controller\\addons\\add_to_any\\Add_To_Any"
   },
   "Ga_Google_Analytics": {
-    "name": "GA Google Analytics",
     "class": "cookiebot_addons_framework\\controller\\addons\\ga_google_analytics\\Ga_Google_Analytics"
   },
   "Ga_Analyticator": {
-    "name": "GA Analyticator",
     "class": "cookiebot_addons_framework\\controller\\addons\\google_analyticator\\Google_Analyticator"
   },
   "Jetpack": {
-    "name": "Jetpack",
     "class": "cookiebot_addons_framework\\controller\\addons\\jetpack\\Jetpack"
   },
   "Hubspot_Tracking_Code": {
-    "name": "Hubspot Tracking Code",
     "class": "cookiebot_addons_framework\\controller\\addons\\hubspot_tracking_code\\Hubspot_Tracking_Code"
   },
   "Custom_Facebook_Feed": {
-    "name": "Custom Facebook Feed",
     "class": "cookiebot_addons_framework\\controller\\addons\\custom_facebook_feed\\Custom_Facebook_Feed"
+  },
   "Embed_Autocorrect": {
-    "file": null,
     "class": "cookiebot_addons_framework\\controller\\addons\\embed_autocorrect\\Embed_Autocorrect"
   }
 }
