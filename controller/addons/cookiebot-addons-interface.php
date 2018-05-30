@@ -45,13 +45,13 @@ Interface Cookiebot_Addons_Interface {
 	public function get_option_name();
 
 	/**
-	 * Addon file name
+	 * Plugin file name
 	 *
 	 * @return string
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_addon_file();
+	public function get_plugin_file();
 
 	/**
 	 * Returns checked cookie types

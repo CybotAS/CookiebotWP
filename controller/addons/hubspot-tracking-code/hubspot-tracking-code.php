@@ -67,7 +67,9 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 		 * We add the action after wp_loaded and replace the original
 		 * HubSpot Tracking Code action with our own adjusted version.
 		 */
-		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_hubspot_tracking_code' ), 10 );
+		if( $this->is_addon_enabled() ) {
+			add_action( 'wp_loaded', array( $this, 'cookiebot_addon_hubspot_tracking_code' ), 10 );
+		}
 	}
 
 	/**
@@ -121,13 +123,13 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * Addon file name
+	 * Plugin file name
 	 *
 	 * @return string
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_addon_file() {
+	public function get_plugin_file() {
 		return 'hubspot-tracking-code/hubspot-tracking-code.php';
 	}
 
@@ -156,7 +158,7 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_installed() {
-		return $this->settings->is_addon_installed( $this->get_addon_file() );
+		return $this->settings->is_addon_installed( $this->get_plugin_file() );
 	}
 
 	/**
@@ -165,6 +167,6 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_activated() {
-		return $this->settings->is_addon_activated( $this->get_addon_file() );
+		return $this->settings->is_addon_activated( $this->get_plugin_file() );
 	}
 }
