@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\ga_google_analytics;
+namespace cookiebot_addons_framework\controller\addons\custom_facebook_feed;
 
 use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
@@ -85,12 +85,12 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 
 		//Remove cff_js action and replace it with our own
 		if ( has_action( 'wp_footer', 'cff_js' ) ) {
-			$this->buffer_output->add_tag( 'wp_footer', 10, array( 'cfflinkhashtags' ) );
+			$this->buffer_output->add_tag( 'wp_footer', 10, array( 'cfflinkhashtags' => $this->get_cookie_types() ) );
 		}
 
 		// External js, so manipulate attributes
 		if ( has_action( 'wp_enqueue_scripts', 'cff_scripts_method' ) ) {
-			$this->script_loader_tag->add_tag( 'cffscripts', array( 'marketing' ) );
+			$this->script_loader_tag->add_tag( 'cffscripts', $this->get_cookie_types() );
 		}
 	}
 

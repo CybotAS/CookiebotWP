@@ -74,14 +74,24 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 		 * ga scripts are loaded in wp_head priority set to 99
 		 */
 		if ( has_action( 'wp_head', 'add_google_analytics' ) ) {
-			$this->buffer_output->add_tag( 'wp_head', 99 );
+			$this->buffer_output->add_tag( 'wp_head', 99, array(
+				'gtag'                                 => $this->get_cookie_types(),
+				'google-analytics'                     => $this->get_cookie_types(),
+				'_gaq'                                 => $this->get_cookie_types(),
+				'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
+			) );
 		}
 
 		/**
 		 * ga scripts are loaded in login_head priority set to 99
 		 */
 		if ( has_action( 'login_head', 'add_google_analytics' ) ) {
-			$this->buffer_output->add_tag( 'login_head', 99 );
+			$this->buffer_output->add_tag( 'login_head', 99, array(
+				'gtag'                                 => $this->get_cookie_types(),
+				'google-analytics'                     => $this->get_cookie_types(),
+				'_gaq'                                 => $this->get_cookie_types(),
+				'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
+			) );
 		}
 
 		/**
@@ -93,7 +103,7 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 			 *
 			 * @since 1.1.0
 			 */
-			$this->script_loader_tag->add_tag( 'ga-external-tracking', array( 'statistics' ) );
+			$this->script_loader_tag->add_tag( 'ga-external-tracking', $this->get_cookie_types() );
 		}
 	}
 
@@ -132,7 +142,7 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 
 	/**
 	 * Returns checked cookie types
-	 * @return mixed
+	 * @return array
 	 *
 	 * @since 1.3.0
 	 */

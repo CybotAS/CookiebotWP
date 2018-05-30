@@ -74,7 +74,7 @@ class Googleplus_Badge_Widget {
 		if ( $widget == 'googleplus-badge' && $view == 'widget_view' ) {
 			if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
 				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->cookie_types ) . '">
-						  ' . printf( __( 'Please <a href="javascript:Cookiebot.renew()">accept %s cookies</a> to watch this googleplus badge.', 'cookiebot_addons' ), cookiebot_output_cookie_types( $this->cookie_types ) ) . '
+						  ' . sprintf( __( 'Please <a href="javascript:Cookiebot.renew()">accept %s cookies</a> to watch this googleplus badge.', 'cookiebot_addons' ), cookiebot_output_cookie_types( $this->cookie_types ) ) . '
 						</div>';
 			}
 

@@ -30,13 +30,13 @@ class Twitter_Timeline_Widget {
 	 */
 	public function __construct( $widget_enabled, $cookie_types, $placeholder_enabled, Script_Loader_Tag_Interface $script_loader_tag ) {
 		if ( is_active_widget( false, false, 'twitter_timeline', true ) ) {
-			if( $widget_enabled ) {
-				$this->cookie_types = $cookie_types;
+			if ( $widget_enabled ) {
+				$this->cookie_types      = $cookie_types;
 				$this->script_loader_tag = $script_loader_tag;
 
 				$this->disable_javascript_file();
 
-				if( $placeholder_enabled ) {
+				if ( $placeholder_enabled ) {
 					$this->div_to_enable_marketing_consent();
 				}
 			}
@@ -72,9 +72,11 @@ class Twitter_Timeline_Widget {
 	 */
 	public function display_div_message_to_go_to_consent_settings( $view, $widget ) {
 		if ( $widget == 'twitter_timeline' && $view == 'widget_view' ) {
-			echo '<div class="cookieconsent-optout-marketing">
-						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept marketing-cookies</a> to watch the twitter timeline.', 'cookiebot_addons' ) . '
+			if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
+				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->cookie_types ) . '">
+						  ' . sprintf( __( 'Please <a href="javascript:Cookiebot.renew()">accept %s cookies</a> to watch the twitter timeline.', 'cookiebot_addons' ), cookiebot_output_cookie_types( $this->cookie_types ) ) . '
 						</div>';
+			}
 		}
 	}
 }
