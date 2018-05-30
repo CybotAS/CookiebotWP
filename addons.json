@@ -18,5 +18,9 @@
   "Hubspot_Tracking_Code": {
     "name": "Hubspot Tracking Code",
     "class": "cookiebot_addons_framework\\controller\\addons\\hubspot_tracking_code\\Hubspot_Tracking_Code"
+  },
+  "Custom_Facebook_Feed": {
+    "name": "Custom Facebook Feed",
+    "class": "cookiebot_addons_framework\\controller\\addons\\custom_facebook_feed\\Custom_Facebook_Feed"
   }
 }
