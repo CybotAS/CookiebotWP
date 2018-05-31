@@ -65,9 +65,7 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 		 * We add the action after wp_loaded and replace the original GA Google
 		 * Analytics action with our own adjusted version.
 		 */
-		if( $this->is_addon_enabled() ) {
-			add_action( 'wp_loaded', array( $this, 'cookiebot_addon_custom_facebook_feed' ), 5 );
-		}
+		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_custom_facebook_feed' ), 5 );
 	}
 
 	/**

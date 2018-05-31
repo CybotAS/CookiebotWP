@@ -320,9 +320,9 @@ class Settings_Config {
         <div class="postbox cookiebot-addon">
             <i><?php
 				if ( ! $addon->is_addon_installed() ) {
-					_e( 'The addon is not installed.', 'cookiebot-addons' );
+					_e( 'The plugin is not installed.', 'cookiebot-addons' );
 				} else if ( ! $addon->is_addon_activated() ) {
-					_e( 'The addon is not activated.', 'cookiebot-addons' );
+					_e( 'The plugin is not activated.', 'cookiebot-addons' );
 				}
 				?></i>
         </div>
@@ -355,10 +355,10 @@ class Settings_Config {
             <h2 class="nav-tab-wrapper">
                 <a href="?page=cookiebot-addons&tab=available_addons"
                    class="nav-tab <?php echo $active_tab == 'available_addons' ? 'nav-tab-active' : ''; ?>">Available
-                    Addons</a>
+                    Plugins</a>
                 <a href="?page=cookiebot-addons&tab=unavailable_addons"
                    class="nav-tab <?php echo $active_tab == 'unavailable_addons' ? 'nav-tab-active' : ''; ?>">Unavailable
-                    Addons</a>
+                    Plugins</a>
 				<?php
 				if ( is_plugin_active( 'jetpack/jetpack.php' ) ) {
 					?>

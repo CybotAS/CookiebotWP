@@ -61,9 +61,7 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function load_configuration() {
-		if( $this->is_addon_enabled() ) {
 			add_action( 'wp_loaded', array( $this, 'cookiebot_addon_google_analyticator' ), 5 );
-		}
 	}
 
 	/**

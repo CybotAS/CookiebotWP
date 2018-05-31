@@ -75,85 +75,83 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function load_configuration() {
-		if( $this->is_addon_enabled() ) {
-			/**
-			 * Load configuration for google maps widget
-			 *
-			 * @since 1.2.0
-			 */
-			new Google_Maps_Widget(
-				$this->is_widget_enabled( 'google_maps' ),
-				$this->get_widget_cookie_types( 'google_maps' ),
-				$this->is_widget_placeholder_enabled( 'google_maps ' )
-			);
+		/**
+		 * Load configuration for google maps widget
+		 *
+		 * @since 1.2.0
+		 */
+		new Google_Maps_Widget(
+			$this->is_widget_enabled( 'google_maps' ),
+			$this->get_widget_cookie_types( 'google_maps' ),
+			$this->is_widget_placeholder_enabled( 'google_maps ' )
+		);
 
-			/**
-			 * Load configuration for facebook page widget
-			 *
-			 * @since 1.2.0
-			 */
-			new Facebook_Widget(
-				$this->is_widget_enabled( 'facebook' ),
-				$this->get_widget_cookie_types( 'facebook' ),
-				$this->is_widget_placeholder_enabled( 'facebook ' ),
-				$this->script_loader_tag
-			);
+		/**
+		 * Load configuration for facebook page widget
+		 *
+		 * @since 1.2.0
+		 */
+		new Facebook_Widget(
+			$this->is_widget_enabled( 'facebook' ),
+			$this->get_widget_cookie_types( 'facebook' ),
+			$this->is_widget_placeholder_enabled( 'facebook ' ),
+			$this->script_loader_tag
+		);
 
-			/**
-			 * Load configuration for visitor cookies
-			 *
-			 * @since 1.2.0
-			 */
-			new Visitor_Cookies( $this->script_loader_tag, $this->cookie_consent );
+		/**
+		 * Load configuration for visitor cookies
+		 *
+		 * @since 1.2.0
+		 */
+		new Visitor_Cookies( $this->script_loader_tag, $this->cookie_consent );
 
-			/**
-			 * Load configuration for googleplus badge widget
-			 *
-			 * @since 1.2.0
-			 */
-			new Googleplus_Badge_Widget(
-				$this->is_widget_enabled( 'googleplus_badge' ),
-				$this->get_widget_cookie_types( 'googleplus_badge' ),
-				$this->is_widget_placeholder_enabled( 'googleplus_badge ' ),
-				$this->script_loader_tag
-			);
+		/**
+		 * Load configuration for googleplus badge widget
+		 *
+		 * @since 1.2.0
+		 */
+		new Googleplus_Badge_Widget(
+			$this->is_widget_enabled( 'googleplus_badge' ),
+			$this->get_widget_cookie_types( 'googleplus_badge' ),
+			$this->is_widget_placeholder_enabled( 'googleplus_badge ' ),
+			$this->script_loader_tag
+		);
 
-			/**
-			 * Load configuration for internet defense league widget
-			 *
-			 * @since 1.2.0
-			 */
-			new Internet_Defense_league_Widget(
-				$this->is_widget_enabled( 'internet_defense_league' ),
-				$this->get_widget_cookie_types( 'internet_defense_league' ),
-				$this->is_widget_placeholder_enabled( 'internet_defense_league ' ),
-				$this->cookie_consent
-			);
+		/**
+		 * Load configuration for internet defense league widget
+		 *
+		 * @since 1.2.0
+		 */
+		new Internet_Defense_league_Widget(
+			$this->is_widget_enabled( 'internet_defense_league' ),
+			$this->get_widget_cookie_types( 'internet_defense_league' ),
+			$this->is_widget_placeholder_enabled( 'internet_defense_league ' ),
+			$this->cookie_consent
+		);
 
-			/**
-			 * Load configuration for twitter timeline widget
-			 *
-			 * @since 1.2.0
-			 */
-			new Twitter_Timeline_Widget(
-				$this->is_widget_enabled( 'twitter_timeline' ),
-				$this->get_widget_cookie_types( 'twitter_timeline' ),
-				$this->is_widget_placeholder_enabled( 'twitter_timeline ' ),
-				$this->script_loader_tag
-			);
+		/**
+		 * Load configuration for twitter timeline widget
+		 *
+		 * @since 1.2.0
+		 */
+		new Twitter_Timeline_Widget(
+			$this->is_widget_enabled( 'twitter_timeline' ),
+			$this->get_widget_cookie_types( 'twitter_timeline' ),
+			$this->is_widget_placeholder_enabled( 'twitter_timeline ' ),
+			$this->script_loader_tag
+		);
 
-			/**
-			 * Load configuration for goodreads widget
-			 *
-			 * @since 1.2.0
-			 */
-			new Goodreads_Widget(
-				$this->is_widget_enabled( 'goodreads' ),
-				$this->get_widget_cookie_types( 'goodreads' ),
-				$this->is_widget_placeholder_enabled( 'goodreads ' ),
-				$this->buffer_output
-			);
-		}
+		/**
+		 * Load configuration for goodreads widget
+		 *
+		 * @since 1.2.0
+		 */
+		new Goodreads_Widget(
+			$this->is_widget_enabled( 'goodreads' ),
+			$this->get_widget_cookie_types( 'goodreads' ),
+			$this->is_widget_placeholder_enabled( 'goodreads ' ),
+			$this->buffer_output
+		);
 	}
 
 	/**
