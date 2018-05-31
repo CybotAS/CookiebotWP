@@ -67,9 +67,7 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 		 * We add the action after wp_loaded and replace the original
 		 * HubSpot Tracking Code action with our own adjusted version.
 		 */
-		if( $this->is_addon_enabled() ) {
-			add_action( 'wp_loaded', array( $this, 'cookiebot_addon_hubspot_tracking_code' ), 10 );
-		}
+		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_hubspot_tracking_code' ), 10 );
 	}
 
 	/**

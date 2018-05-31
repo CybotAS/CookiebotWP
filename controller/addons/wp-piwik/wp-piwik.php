@@ -65,11 +65,9 @@ class Wp_Piwik implements Cookiebot_Addons_Interface {
 	 */
 	public function load_configuration() {
 		/**
-		 * We add the action after wp_loaded and check coockie settings from wp-piwik
+		 * We add the action after wp_loaded and check cookie settings from wp-piwik
 		 */
-		if ( $this->is_addon_enabled() ) {
-			add_action( 'wp_loaded', array( $this, 'cookiebot_addon_wp_piwik' ), 10 );
-		}
+		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_wp_piwik' ), 10 );
 	}
 
 	/**
