@@ -35,6 +35,19 @@ Interface Cookie_Consent_Interface {
 	 * @param $state    string  Cookie state to check if it is accepted
 	 *
 	 * @return bool
+	 *
+	 * @since 1.2.0
 	 */
 	public function is_cookie_state_accepted( $state );
+
+	/**
+	 * Checks if the cookie states are accepted.
+	 *
+	 * @param $states    array  Cookie states to check if it is accepted.
+	 *
+	 * @return bool
+	 *
+	 * @since 1.3.0
+	 */
+	public function are_cookie_states_accepted( $states );
 }

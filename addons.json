@@ -22,5 +22,8 @@
   },
   "Instagram_Feed": {
     "class": "cookiebot_addons_framework\\controller\\addons\\instagram_feed\\Instagram_Feed"
+  },
+  "WP_Piwik": {
+    "class": "cookiebot_addons_framework\\controller\\addons\\wp_piwik\\Wp_Piwik"
   }
 }
