@@ -19,5 +19,8 @@
   },
   "Embed_Autocorrect": {
     "class": "cookiebot_addons_framework\\controller\\addons\\embed_autocorrect\\Embed_Autocorrect"
+  },
+  "WP_Piwik": {
+    "class": "cookiebot_addons_framework\\controller\\addons\\wp_piwik\\Wp_Piwik"
   }
 }

@@ -111,6 +111,27 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	}
 
 	/**
+	 * Checks if the cookie states are accepted.
+	 *
+	 * @param $states    array  Cookie states to check if it is accepted.
+	 *
+	 * @return bool
+	 *
+	 * @since 1.3.0
+	 */
+	public function are_cookie_states_accepted( $states ) {
+		if ( is_array( $states ) ) {
+			foreach ( $states as $state ) {
+				if ( ! in_array( $state, $this->states ) ) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Checks if the cookie state is accepted
 	 *
 	 * @param $state    string  Cookie state to check if it is accepted
