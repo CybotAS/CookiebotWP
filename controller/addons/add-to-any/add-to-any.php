@@ -61,9 +61,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function load_configuration() {
-		if( $this->is_addon_enabled() ) {
-			add_action( 'wp_loaded', array( $this, 'cookiebot_addon_add_to_any' ), 5 );
-		}
+		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_add_to_any' ), 5 );
 	}
 
 	/**
@@ -82,9 +80,30 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		// Disable Add To Any if marketing not allowed
+		// Disable Add To Any if cookie consent not allowed
 		if ( ! $this->cookie_consent->is_cookie_state_accepted( 'marketing' ) ) {
 			add_filter( 'addtoany_script_disabled', '__return_true' );
+
+			/**
+			 * Block head script
+			 */
+			if ( has_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' ) ) {
+				remove_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' );
+			}
+
+			/**
+			 * Block footer script
+			 */
+			if ( has_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' ) ) {
+				remove_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' );
+			}
+
+			/**
+			 * Block content addition
+			 */
+			if ( has_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' ) ) {
+				remove_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' );
+			}
 		}
 
 		// External js, so manipulate attributes
