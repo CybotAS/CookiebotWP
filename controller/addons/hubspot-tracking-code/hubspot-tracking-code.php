@@ -90,7 +90,17 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 		// Replace original HubSpot Tracking Code with own one and delete cookie if
 		// it was perviously set.
 		if ( is_plugin_active( 'hubspot-tracking-code/hubspot-tracking-code.php' ) ) {
-			$this->buffer_output->add_tag( 'wp_footer', 10, array( 'hs-script-loader' => $this->get_cookie_types() ) );
+			if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+				/**
+				 * Consent given - cache
+				 */
+				$this->buffer_output->add_tag( 'wp_footer', 10, array( 'hs-script-loader' => $this->get_cookie_types() ) );
+			}else{
+				/**
+				 * Consent not given - no cache
+				 */
+				$this->buffer_output->add_tag( 'wp_footer', 10, array( 'hs-script-loader' => $this->get_cookie_types() ), false );
+			}
 
 			if ( ! $this->cookie_consent->is_cookie_state_accepted( 'marketing' ) && isset( $_COOKIE['hubspotutk'] ) ) {
 				unset( $_COOKIE['hubspotutk'] );
