@@ -94,7 +94,7 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_addon_name() {
-		return 'addToAny Share Buttons';
+		return 'WD google analytics';
 	}
 
 	/**
@@ -105,7 +105,7 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_option_name() {
-		return 'add_to_any';
+		return 'wd_google_analytics';
 	}
 
 	/**
@@ -116,7 +116,7 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_plugin_file() {
-		return 'add-to-any/add-to-any.php';
+		return 'wd-google-analytics/google-analytics-wd.php';
 	}
 
 	/**
