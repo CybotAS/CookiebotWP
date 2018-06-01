@@ -71,6 +71,7 @@ class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
 	/**
 	 * Manipulate the scripts if they are loaded.
 	 *
+	 * @version 1.3.0
 	 * @since 1.1.0
 	 */
 	public function cookiebot_addon_ga_google_analytics() {
