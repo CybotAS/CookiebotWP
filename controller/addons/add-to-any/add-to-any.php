@@ -81,7 +81,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 		}
 
 		// Disable Add To Any if cookie consent not allowed
-		if ( ! $this->cookie_consent->is_cookie_state_accepted( 'marketing' ) ) {
+		if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			add_filter( 'addtoany_script_disabled', '__return_true' );
 
 			/**
