@@ -125,7 +125,7 @@ class Cookiebot_Addons_Framework {
 	}
 
 	/**
-	 * Assign addon class to the container to use it later (lazy loading)
+	 * Assign addon class to the container to use it later
 	 *
 	 * @throws DI\DependencyException
 	 * @throws DI\NotFoundException
