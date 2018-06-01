@@ -34,6 +34,8 @@ include_once CAF_DIR . 'lib/helper.php';
 
 /**
  * Load composer
+ *
+ * "php-di/php-di": "5.0"
  */
 include_once CAF_DIR . 'lib/ioc/autoload.php';
 
