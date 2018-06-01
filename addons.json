@@ -8,6 +8,9 @@
   "Ga_Analyticator": {
     "class": "cookiebot_addons_framework\\controller\\addons\\google_analyticator\\Google_Analyticator"
   },
+  "Wd_Google_Analytics": {
+    "class": "cookiebot_addons_framework\\controller\\addons\\wd_google_analytics\\Wd_Google_Analytics"
+  },
   "Jetpack": {
     "class": "cookiebot_addons_framework\\controller\\addons\\jetpack\\Jetpack"
   },
