@@ -71,6 +71,7 @@ class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
 	/**
 	 * Manipulate the scripts if they are loaded.
 	 *
+	 * @version 1.3.0
 	 * @since 1.1.0
 	 */
 	public function cookiebot_addon_ga_google_analytics() {
@@ -85,19 +86,50 @@ class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
 
 		//Remove GA Google action and replace it with our own
 		if ( has_action( 'wp_head', 'ga_google_analytics_tracking_code' ) ) {
-			$this->buffer_output->add_tag( 'wp_head', 10, array(
-				'gtag'                                 => $this->get_cookie_types(),
-				'google-analytics'                     => $this->get_cookie_types(),
-				'_gaq'                                 => $this->get_cookie_types(),
-				'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
-			) );
+			if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+				/**
+				 * Consent given - cache
+				 */
+				$this->buffer_output->add_tag( 'wp_head', 10, array(
+					'gtag'                                 => $this->get_cookie_types(),
+					'google-analytics'                     => $this->get_cookie_types(),
+					'_gaq'                                 => $this->get_cookie_types(),
+					'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
+				) );
+			} else {
+				/**
+				 * Consent not given - no cache
+				 */
+				$this->buffer_output->add_tag( 'wp_head', 10, array(
+					'gtag'                                 => $this->get_cookie_types(),
+					'google-analytics'                     => $this->get_cookie_types(),
+					'_gaq'                                 => $this->get_cookie_types(),
+					'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
+				), false );
+			}
+
 		} elseif ( has_action( 'wp_footer', 'ga_google_analytics_tracking_code' ) ) {
-			$this->buffer_output->add_tag( 'wp_footer', 10, array(
-				'gtag'                                 => $this->get_cookie_types(),
-				'google-analytics'                     => $this->get_cookie_types(),
-				'_gaq'                                 => $this->get_cookie_types(),
-				'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
-			) );
+			if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+				/**
+				 * Consent given - cache
+				 */
+				$this->buffer_output->add_tag( 'wp_footer', 10, array(
+					'gtag'                                 => $this->get_cookie_types(),
+					'google-analytics'                     => $this->get_cookie_types(),
+					'_gaq'                                 => $this->get_cookie_types(),
+					'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
+				) );
+			} else {
+				/**
+				 * Consent not given - no cache
+				 */
+				$this->buffer_output->add_tag( 'wp_footer', 10, array(
+					'gtag'                                 => $this->get_cookie_types(),
+					'google-analytics'                     => $this->get_cookie_types(),
+					'_gaq'                                 => $this->get_cookie_types(),
+					'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
+				), false );
+			}
 		}
 	}
 

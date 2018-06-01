@@ -71,26 +71,6 @@ class Wp_Piwik implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * Check if plugin is activated and checked in the backend
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_enabled() {
-		return $this->settings->is_addon_enabled( $this->get_option_name() );
-	}
-
-	/**
-	 * Option name in the database
-	 *
-	 * @return string
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_option_name() {
-		return 'wp_piwik';
-	}
-
-	/**
 	 * Manipulate the scripts if they are loaded.
 	 *
 	 * @since 1.3.0
@@ -109,6 +89,26 @@ class Wp_Piwik implements Cookiebot_Addons_Interface {
 				update_option( 'wp-piwik_global-disable_cookies', 0 );
 			}
 		}
+	}
+
+	/**
+	 * Check if plugin is activated and checked in the backend
+	 *
+	 * @since 1.3.0
+	 */
+	public function is_addon_enabled() {
+		return $this->settings->is_addon_enabled( $this->get_option_name() );
+	}
+
+	/**
+	 * Option name in the database
+	 *
+	 * @return string
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_option_name() {
+		return 'wp_piwik';
 	}
 
 	/**

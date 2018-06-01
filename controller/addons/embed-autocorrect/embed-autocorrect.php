@@ -74,6 +74,11 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_embed_autocorrect() {
+		// Check if Cookiebot is activated and active.
+		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
+			return;
+		}
+
 		//add filters to handle autocorrection in content
 		add_filter( 'the_content', array(
 			$this,

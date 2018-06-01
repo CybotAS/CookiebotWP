@@ -125,7 +125,7 @@ class Cookiebot_Addons_Framework {
 	}
 
 	/**
-	 * Assign addon class to the container to use it later (lazy loading)
+	 * Assign addon class to the container to use it later
 	 *
 	 * @throws DI\DependencyException
 	 * @throws DI\NotFoundException
@@ -134,7 +134,7 @@ class Cookiebot_Addons_Framework {
 	 */
 	protected function assign_addons_to_container() {
 		/**
-		 * Check plugins one by one and load configuration if it is active
+		 * Check plugins one by one and load addon configuration
 		 */
 		foreach ( $this->plugins as $plugin_class => $plugin ) {
 			/**
