@@ -25,7 +25,7 @@ Following plugins have native (built-in) support for Cookiebot:
 
 Released and tested addons:
 
-* Embed-autocorrect (Facebook, Twitter, Youtube and Vimeo)
+* Autocorrection of embedded Facebook, Twitter, Youtube and Vimeo videos
 * [GA Google Analytics](https://wordpress.org/plugins/ga-google-analytics/)
 * [Google Analyticator](https://wordpress.org/plugins/google-analyticator/)
 * [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/)
@@ -38,9 +38,11 @@ Released and tested addons:
 
 Following addons are in pipeline:
 
-* Autocorrection of embedded YouTube and Vimeo videos
 * [Analytify](https://wordpress.org/plugins/wp-analytify/)
 * [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
+* [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
+* [Pixel Caffeine]( https://wordpress.org/plugins/pixel-caffeine/)
+* [Analytify](https://wordpress.org/plugins/wp-analytify/)
 * [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
 * To be continued..
 
