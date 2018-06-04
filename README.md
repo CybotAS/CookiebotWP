@@ -53,11 +53,11 @@ Everyone is welcome to make a pull request with new addon support, or to fix exi
 
 Shout out to
 
-[@fschaeffler](https://github.com/fschaeffler) HubSpot Tracking Code. 
+[@fschaeffler](https://github.com/fschaeffler) - HubSpot Tracking Code 
 
-[@irondan](https://github.com/irondan) AddToAny.
+[@irondan](https://github.com/irondan) - AddToAny
 
-[@Jursdotme](https://github.com/Jursdotme) for Custom Facebook Feed from Smashballoon
+[@Jursdotme](https://github.com/Jursdotme) - Custom Facebook Feed from Smashballoon
 
 Way to go!
 
