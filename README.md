@@ -58,6 +58,8 @@ Shout out to
 
 [@irondan](https://github.com/irondan) for the AddToAny integration.
 
+[Rasmus Jürs](https://github.com/Jursdotme) for Custom Facebook Feed integration.
+
 Way to go!
 
 
