@@ -38,7 +38,6 @@ Released and tested addons:
 
 Following addons are in pipeline:
 
-* [Analytify](https://wordpress.org/plugins/wp-analytify/)
 * [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
 * [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
 * [Pixel Caffeine]( https://wordpress.org/plugins/pixel-caffeine/)
@@ -54,9 +53,11 @@ Everyone is welcome to make a pull request with new addon support, or to fix exi
 
 Shout out to
 
-[@fschaeffler](https://github.com/fschaeffler) for the HubSpot Tracking Code integration. 
+[@fschaeffler](https://github.com/fschaeffler) HubSpot Tracking Code. 
 
-[@irondan](https://github.com/irondan) for the AddToAny integration.
+[@irondan](https://github.com/irondan) AddToAny.
+
+[@Jursdotme](https://github.com/Jursdotme) for Custom Facebook Feed from Smashballoon
 
 Way to go!
 
