@@ -8,27 +8,41 @@
  * @param $method   string  method name
  * @param $priority integer action priority number
  *
+ * @return boolean  True    if the action hook is deleted
+ *                  False   If the action hook is not deleted
+ *
  * @since 1.2.0
  */
 function cookiebot_remove_class_action( $action, $class, $method, $priority = 10 ) {
 	global $wp_filter;
+	$deleted = false;
 
-	if ( isset( $wp_filter[ $action ] ) ) {
+	if ( isset( $wp_filter[ $action ] ) && isset( $wp_filter[ $action ][ $priority ] ) ) {
 		$len = strlen( $method );
 		foreach ( $wp_filter[ $action ][ $priority ] as $name => $def ) {
 			if ( substr( $name, - $len ) == $method ) {
 				if ( is_array( $def['function'] ) ) {
-					if ( get_class( $def['function'][0] ) == $class ) {
+					if ( is_string( $def['function'][0] ) !== false ) {
+						$def_class = $def['function'][0];
+					} else {
+						$def_class = get_class( $def['function'][0] );
+					}
+
+					if ( $def_class == $class ) {
 						if ( is_object( $wp_filter[ $action ] ) && isset( $wp_filter[ $action ]->callbacks ) ) {
 							$wp_filter[ $action ]->remove_filter( $action, $name, $priority );
+							$deleted = true;
 						} else {
 							unset( $wp_filter[ $action ][ $priority ][ $name ] );
+							$deleted = true;
 						}
 					}
 				}
 			}
 		}
 	}
+
+	return $deleted;
 }
 
 /**
@@ -148,9 +162,9 @@ function cookiebot_get_one_cookie_type( $cookie_types ) {
 	if ( is_array( $cookie_types ) ) {
 		if ( in_array( 'marketing', $cookie_types ) ) {
 			return 'marketing';
-		}elseif( in_array('statistics', $cookie_types) ) {
+		} elseif ( in_array( 'statistics', $cookie_types ) ) {
 			return 'statistics';
-		}elseif( in_array( 'preferences', $cookie_types) ) {
+		} elseif ( in_array( 'preferences', $cookie_types ) ) {
 			return 'preferences';
 		}
 	}
