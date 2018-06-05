@@ -58,8 +58,6 @@ Shout out to
 
 [@Jursdotme](https://github.com/Jursdotme) - Custom Facebook Feed from Smashballoon
 
-[Rasmus Jürs](https://github.com/Jursdotme) for Custom Facebook Feed integration.
-
 Way to go!
 
 
