@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Cookiebot Addons Framework
+ * Plugin Name: Cookiebot Addons
  * Description: Adding support for Cookiebot
  * Author: Johan Holst Nielsen & Aytac Kokus & Sebastian Kurznyowski
  * Version: 1.5.0
