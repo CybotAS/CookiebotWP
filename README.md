@@ -13,7 +13,7 @@ https://core.trac.wordpress.org/ticket/44043
 GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'll provide a link here once the addon is released. 
 
 # Installation
-1. Copy the framework plugin to your WP plugins folder
+1. Get the [latest release](https://github.com/CybotAS/CookiebotAddons/releases/latest) of the framework plugin to your WP plugins folder
 2. Go to the admin page of your WP installation and activate the plugin
 3. You are done, verify that it works
 
