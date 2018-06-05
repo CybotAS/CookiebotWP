@@ -13,28 +13,28 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	/**
 	 * @var Settings_Service_Interface
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	protected $settings;
 
 	/**
 	 * @var Script_Loader_Tag_Interface
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	protected $script_loader_tag;
 
 	/**
 	 * @var Cookie_Consent_Interface
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	protected $cookie_consent;
 
 	/**
 	 * @var Buffer_Output_Interface
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	protected $buffer_output;
 
@@ -46,7 +46,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	 * @param $cookie_consent Cookie_Consent_Interface
 	 * @param $buffer_output Buffer_Output_Interface
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	public function __construct( Settings_Service_Interface $settings, Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent, Buffer_Output_Interface $buffer_output ) {
 		$this->settings          = $settings;
@@ -58,7 +58,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	/**
 	 * Loads addon configuration
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	public function load_configuration() {
 		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_analytify' ), 5 );
@@ -67,7 +67,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	/**
 	 * Disable scripts if state not accepted
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	public function cookiebot_addon_analytify() {
 		// Check if Analytify is loaded.
@@ -91,7 +91,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	 *
 	 * @return string
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	public function get_addon_name() {
 		return 'Analytify';
@@ -102,7 +102,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	 *
 	 * @return string
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	public function get_option_name() {
 		return 'analytify';
@@ -113,7 +113,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	 *
 	 * @return string
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	public function get_plugin_file() {
 		return 'wp-analytify/wp-analytify.php';
@@ -123,7 +123,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	 * Returns checked cookie types
 	 * @return mixed
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	public function get_cookie_types() {
 		return $this->settings->get_cookie_types( $this->get_option_name() );
@@ -132,7 +132,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	/**
 	 * Check if plugin is activated and checked in the backend
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	public function is_addon_enabled() {
 		return $this->settings->is_addon_enabled( $this->get_option_name() );
@@ -141,7 +141,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	/**
 	 * Checks if addon is installed
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	public function is_addon_installed() {
 		return $this->settings->is_addon_installed( $this->get_plugin_file() );
@@ -150,7 +150,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	/**
 	 * Checks if addon is activated
 	 *
-	 * @since 1.3.0
+	 * @since 1.5.0
 	 */
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
