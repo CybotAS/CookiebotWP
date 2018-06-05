@@ -31,5 +31,8 @@
   },
   "Pixel_Caffeine": {
     "class": "cookiebot_addons_framework\\controller\\addons\\pixel_caffeine\\Pixel_Caffeine"
+  },
+  "Wp_Analytify": {
+    "class": "cookiebot_addons_framework\\controller\\addons\\wp_analytify\\Wp_Analytify"
   }
 }
