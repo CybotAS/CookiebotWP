@@ -42,7 +42,6 @@ Following addons are in pipeline:
 * [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
 * [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
 * [Analytify](https://wordpress.org/plugins/wp-analytify/)
-* [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
 * To be continued..
 
 
