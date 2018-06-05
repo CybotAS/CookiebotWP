@@ -35,13 +35,13 @@ Released and tested addons:
 * [WD Google Analytics](https://wordpress.org/plugins/wd-google-analytics/)
 * [Custom Facebook Feed from Smashballoon](https://da.wordpress.org/plugins/custom-facebook-feed/)
 * [AddToAny Share Buttons](https://nl.wordpress.org/plugins/add-to-any/)
+* [Pixel Caffeine]( https://wordpress.org/plugins/pixel-caffeine/)
 
 Following addons are in pipeline:
 
 * [Analytify](https://wordpress.org/plugins/wp-analytify/)
 * [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
 * [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
-* [Pixel Caffeine]( https://wordpress.org/plugins/pixel-caffeine/)
 * [Analytify](https://wordpress.org/plugins/wp-analytify/)
 * [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
 * To be continued..
