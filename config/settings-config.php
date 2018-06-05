@@ -363,7 +363,7 @@ class Settings_Config {
 				if ( is_plugin_active( 'jetpack/jetpack.php' ) ) {
 					?>
                     <a href="?page=cookiebot-addons&tab=jetpack"
-                       class="nav-tab <?php echo $active_tab == 'jetpack' ? 'nav-tab-active' : ''; ?>">jetpack</a>
+                       class="nav-tab <?php echo $active_tab == 'jetpack' ? 'nav-tab-active' : ''; ?>">Jetpack</a>
 					<?php
 				}
 				?>
