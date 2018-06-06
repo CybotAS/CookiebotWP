@@ -35,7 +35,7 @@
   "Wp_Analytify": {
     "class": "cookiebot_addons_framework\\controller\\addons\\wp_analytify\\Wp_Analytify"
   },
-  "Google_Analytics_Async": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\google_analytics_async\\Google_Analytics_Async"
+  "Google_Analytics_Plus": {
+    "class": "cookiebot_addons_framework\\controller\\addons\\google_analytics_plus\\Google_Analytics_Plus"
   }
 }

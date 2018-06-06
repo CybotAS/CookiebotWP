@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\google_analytics_async;
+namespace cookiebot_addons_framework\controller\addons\google_analytics_plus;
 
 use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
@@ -8,7 +8,7 @@ use cookiebot_addons_framework\lib\Settings_Service_Interface;
 use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
 
-class Google_Analytics_Async implements Cookiebot_Addons_Interface {
+class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 
 	/**
 	 * @var Settings_Service_Interface
@@ -105,7 +105,7 @@ class Google_Analytics_Async implements Cookiebot_Addons_Interface {
 	 * @since 1.5.0
 	 */
 	public function get_option_name() {
-		return 'google_analytics_async';
+		return 'google_analytics_plus';
 	}
 
 	/**
