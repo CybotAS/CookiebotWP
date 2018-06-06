@@ -9,7 +9,7 @@ use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
 use cookiebot_addons_framework\lib\Settings_Service_Interface;
 
 class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
-		/**
+	/**
 	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.3.0
@@ -53,7 +53,7 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
 	}
-	
+
 	/**
 	 * Loads addon configuration
 	 *
@@ -66,7 +66,7 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 		 */
 		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_facebook_for_woocommerce_tracking_code' ), 5 );
 	}
-	
+
 	/**
 	 * Manipulate the scripts if they are loaded.
 	 *
@@ -74,67 +74,63 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 */
 	public function cookiebot_addon_facebook_for_woocommerce_tracking_code() {
 		//Check Facebook for Wooocommerce is active
-		if( !class_exists( 'Facebook_For_Woocommerce' ) ) { 
+		if ( ! class_exists( 'WC_Facebookcommerce' ) ) {
 			return;
 		}
-		
-		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+
+		$consent_given = $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() );
+
+		$this->buffer_output->add_tag( 'wp_head', 10, array(
+			'fbq(\'track\',' => $this->get_cookie_types()
+		), $consent_given );
+
+
+		$this->buffer_output->add_tag( 'woocommerce_after_single_product', 2, array(
+			'fbq(\'ViewContent\'' => $this->get_cookie_types()
+		), false );
+
+		$this->buffer_output->add_tag( 'woocommerce_after_shop_loop', 10, array(
+			'fbq(\'ViewCategory\'' => $this->get_cookie_types()
+		), false );
+
+		$this->buffer_output->add_tag( 'pre_get_posts', 10, array(
+			'fbq(\'Search\'' => $this->get_cookie_types()
+		), false );
+
+		$this->buffer_output->add_tag( 'woocommerce_after_cart', 10, array(
+			'fbq(\'AddToCart\'' => $this->get_cookie_types()
+		), false );
+
+		$this->buffer_output->add_tag( 'woocommerce_add_to_cart', 2, array(
+			'fbq(\'AddToCart\'' => $this->get_cookie_types()
+		), false );
+
+		$this->buffer_output->add_tag( 'wc_ajax_fb_inject_add_to_cart_event', 2, array(
+			'fbq(\'AddToCart\'' => $this->get_cookie_types()
+		), false );
+
+		$this->buffer_output->add_tag( 'woocommerce_after_checkout_form', 10, array(
+			'fbq(\'InitiateCheckout\'' => $this->get_cookie_types()
+		), false );
+
+		$this->buffer_output->add_tag( 'woocommerce_thankyou', 2, array(
+			'fbq(\'Purchase\'' => $this->get_cookie_types()
+		), false );
+
+		$this->buffer_output->add_tag( 'woocommerce_payment_complete', 2, array(
+			'fbq(\'Purchase\'' => $this->get_cookie_types()
+		), false );
+
+
+		if( ! $consent_given ) {
 			/**
-			 * Consent given - cache
+			 * inject base pixel
 			 */
-			$this->buffer_output->add_tag( 'wp_head', 10, array(
-				'fbq(\'track\',' => $this->get_cookie_types() 
-			) );
+			cookiebot_remove_class_action( 'wp_footer', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel_noscript' );
+			cookiebot_remove_class_action( 'wp_head', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel' );
 		}
-		else {
-			$this->buffer_output->add_tag( 'wp_head', 10, array(
-				'fbq(\'track\',' => $this->get_cookie_types() 
-			), false );
-		}
-		
-		$this->buffer_output->add_tag( 'woocommerce_after_single_product', 2, array( 
-			'fbq(\'ViewContent\'' => $this->get_cookie_types() 
-		), false );
-		
-		$this->buffer_output->add_tag( 'woocommerce_after_shop_loop', 10, array( 
-			'fbq(\'ViewCategory\'' => $this->get_cookie_types() 
-		), false );
-		
-		$this->buffer_output->add_tag( 'pre_get_posts', 10, array( 
-			'fbq(\'Search\'' => $this->get_cookie_types() 
-		), false );
-		
-		$this->buffer_output->add_tag( 'woocommerce_after_cart', 10, array( 
-			'fbq(\'AddToCart\'' => $this->get_cookie_types() 
-		), false );
-		
-		$this->buffer_output->add_tag( 'woocommerce_add_to_cart', 2, array( 
-			'fbq(\'AddToCart\'' => $this->get_cookie_types() 
-		), false );
-		
-		$this->buffer_output->add_tag( 'wc_ajax_fb_inject_add_to_cart_event', 2, array( 
-			'fbq(\'AddToCart\'' => $this->get_cookie_types() 
-		), false );
-		
-		$this->buffer_output->add_tag( 'woocommerce_after_checkout_form', 10, array( 
-			'fbq(\'InitiateCheckout\'' => $this->get_cookie_types() 
-		), false );
-		
-		$this->buffer_output->add_tag( 'woocommerce_thankyou', 2, array( 
-			'fbq(\'Purchase\'' => $this->get_cookie_types() 
-		), false );
-		
-		$this->buffer_output->add_tag( 'woocommerce_payment_complete', 2, array( 
-			'fbq(\'Purchase\'' => $this->get_cookie_types() 
-		), false );
-		
-		
-		/* Remove nopixel actions */
-		//@todo - handle noscript pixels - they are added within a class.
-		//remove_action( 'wp_footer', 'inject_base_pixel_noscript' );
-		
 	}
-	
+
 	/**
 	 * Return addon/plugin name
 	 *
