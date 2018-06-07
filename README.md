@@ -38,8 +38,8 @@ Released and tested addons:
     * Google Maps
     * Facebook
     * Google Plus Badge
-    * Internet defense league	
-    * Twitter timeline	
+    * Internet Defense League	
+    * Twitter Timeline	
     * Goodreads
 * [Pixel Caffeine]( https://wordpress.org/plugins/pixel-caffeine/)
 * [WD Google Analytics](https://wordpress.org/plugins/wd-google-analytics/)
