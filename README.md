@@ -26,18 +26,17 @@ Following plugins have native (built-in) support for Cookiebot:
 Released and tested addons:
 
 * Autocorrection of embedded Facebook, Twitter, Youtube and Vimeo videos
+* [AddToAny Share Buttons](https://wordpress.org/plugins/add-to-any/)
+* [Analytify](https://wordpress.org/plugins/wp-analytify/)
+* [Custom Facebook Feed from Smashballoon](https://da.wordpress.org/plugins/custom-facebook-feed/)
 * [GA Google Analytics](https://wordpress.org/plugins/ga-google-analytics/)
 * [Google Analyticator](https://wordpress.org/plugins/google-analyticator/)
-* [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/)
-* [HubSpot Tracking Code](https://wordpress.org/plugins/hubspot-tracking-code/)
-* [AddToAny Share Buttons](https://wordpress.org/plugins/add-to-any/)
-* [WP-Matomo](https://nl.wordpress.org/plugins/wp-piwik/)
-* [WD Google Analytics](https://wordpress.org/plugins/wd-google-analytics/)
-* [Custom Facebook Feed from Smashballoon](https://da.wordpress.org/plugins/custom-facebook-feed/)
-* [AddToAny Share Buttons](https://nl.wordpress.org/plugins/add-to-any/)
-* [Pixel Caffeine]( https://wordpress.org/plugins/pixel-caffeine/)
-* [Analytify](https://wordpress.org/plugins/wp-analytify/)
 * [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
+* [HubSpot Tracking Code](https://wordpress.org/plugins/hubspot-tracking-code/)
+* [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/)
+* [Pixel Caffeine]( https://wordpress.org/plugins/pixel-caffeine/)
+* [WD Google Analytics](https://wordpress.org/plugins/wd-google-analytics/)
+* [WP-Matomo](https://nl.wordpress.org/plugins/wp-piwik/)
 
 Following addons are in pipeline:
 
