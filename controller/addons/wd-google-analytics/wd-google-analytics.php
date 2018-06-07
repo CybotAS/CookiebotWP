@@ -80,10 +80,13 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		// Disable WD google analytics wp_head hook if consent not given
-		if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-			cookiebot_remove_class_action( 'wp_head', 'GAWD', 'gawd_tracking_code', 99);
+		// consent is given
+		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+			return;
 		}
+
+		// Disable WD google analytics wp_head hook if consent not given
+		cookiebot_remove_class_action( 'wp_head', 'GAWD', 'gawd_tracking_code', 99);
 	}
 
 	/**

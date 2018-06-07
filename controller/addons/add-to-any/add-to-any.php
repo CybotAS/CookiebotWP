@@ -80,30 +80,33 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		// Disable Add To Any if cookie consent not allowed
-		if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-			add_filter( 'addtoany_script_disabled', '__return_true' );
+		// consent is given
+		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ){
+			return;
+		}
 
-			/**
-			 * Block head script
-			 */
-			if ( has_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' ) ) {
-				remove_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' );
-			}
 
-			/**
-			 * Block footer script
-			 */
-			if ( has_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' ) ) {
-				remove_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' );
-			}
+		add_filter( 'addtoany_script_disabled', '__return_true' );
 
-			/**
-			 * Block content addition
-			 */
-			if ( has_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' ) ) {
-				remove_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' );
-			}
+		/**
+		 * Block head script
+		 */
+		if ( has_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' ) ) {
+			remove_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' );
+		}
+
+		/**
+		 * Block footer script
+		 */
+		if ( has_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' ) ) {
+			remove_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' );
+		}
+
+		/**
+		 * Block content addition
+		 */
+		if ( has_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' ) ) {
+			remove_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' );
 		}
 
 		// External js, so manipulate attributes

@@ -80,10 +80,13 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		// Disable Analytify if cookie consent not allowed
-		if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-			cookiebot_remove_class_action( 'wp_head', 'Google_Analytics_Async', 'tracking_code_output' );
+		// consent is given
+		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+			return;
 		}
+
+		// Disable Analytify if cookie consent not allowed
+		cookiebot_remove_class_action( 'wp_head', 'Google_Analytics_Async', 'tracking_code_output' );
 	}
 
 	/**
