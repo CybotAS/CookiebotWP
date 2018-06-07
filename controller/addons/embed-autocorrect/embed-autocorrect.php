@@ -79,6 +79,11 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			return;
 		}
 
+		// consent is given
+		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+			return;
+		}
+
 		//add filters to handle autocorrection in content
 		add_filter( 'the_content', array(
 			$this,

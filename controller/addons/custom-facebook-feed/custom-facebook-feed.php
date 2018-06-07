@@ -83,34 +83,25 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 			return;
 		}
 
+		// consent is given
+		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+			return;
+		}
+
 		//Remove cff_js action and replace it with our own
 		if ( has_action( 'wp_footer', 'cff_js' ) ) {
-			if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-				/**
-				 * Consent given - cache
-				 */
-				$this->buffer_output->add_tag( 'wp_footer', 10, array( 'cfflinkhashtags' => $this->get_cookie_types() ) );
-			} else {
-				/**
-				 * Consent not given - no cache
-				 */
-				$this->buffer_output->add_tag( 'wp_footer', 10, array( 'cfflinkhashtags' => $this->get_cookie_types() ), false );
-			}
+			/**
+			 * Consent not given - no cache
+			 */
+			$this->buffer_output->add_tag( 'wp_footer', 10, array( 'cfflinkhashtags' => $this->get_cookie_types() ), false );
 		}
 
 		// External js, so manipulate attributes
 		if ( has_action( 'wp_enqueue_scripts', 'cff_scripts_method' ) ) {
-			if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-				/**
-				 * Consent given - cache
-				 */
-				$this->script_loader_tag->add_tag( 'cffscripts', $this->get_cookie_types() );
-			} else {
-				/**
-				 * Consent not given - no cache
-				 */
-				$this->script_loader_tag->add_tag( 'cffscripts', $this->get_cookie_types(), false );
-			}
+			/**
+			 * Consent not given - no cache
+			 */
+			$this->script_loader_tag->add_tag( 'cffscripts', $this->get_cookie_types(), false );
 		}
 	}
 

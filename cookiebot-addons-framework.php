@@ -3,7 +3,10 @@
  * Plugin Name: Cookiebot Addons
  * Description: Adding support for Cookiebot
  * Author: Johan Holst Nielsen & Aytac Kokus & Sebastian Kurznyowski
- * Version: 1.5.0
+ * Author URI: https://www.cookiebot.com
+ * Text Domain: cookiebot-addons
+ * Domain Path: /languages
+ * Version: 1.6.0
  */
 
 namespace cookiebot_addons_framework;
@@ -21,6 +24,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * __DIR__ of this plugin
  */
 define( 'CAF_DIR', __DIR__ . DIRECTORY_SEPARATOR );
+
+define( 'CAF_BASE_NAME', dirname( plugin_basename( __FILE__ ) ) );
 
 /**
  * Register autoloader to load files/classes dynamically
@@ -101,7 +106,7 @@ class Cookiebot_Addons_Framework {
 	 * @since 1.3.0
 	 */
 	protected function get_plugins() {
-		$file = file_get_contents( CAF_DIR . 'addons.json' );
+		$file          = file_get_contents( CAF_DIR . 'addons.json' );
 		$this->plugins = json_decode( $file );
 	}
 

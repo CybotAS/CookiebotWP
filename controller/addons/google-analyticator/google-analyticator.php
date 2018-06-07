@@ -75,58 +75,39 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 			return;
 		}
 
+		// consent is given
+		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+			return;
+		}
+
 		/**
 		 * ga scripts are loaded in wp_head priority set to 99
 		 */
 		if ( has_action( 'wp_head', 'add_google_analytics' ) ) {
-			if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-				/**
-				 * Consent given - cache
-				 */
-				$this->buffer_output->add_tag( 'wp_head', 99, array(
-					'gtag'                                 => $this->get_cookie_types(),
-					'google-analytics'                     => $this->get_cookie_types(),
-					'_gaq'                                 => $this->get_cookie_types(),
-					'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
-				) );
-			}else{
-				/**
-				 * Consent not given - no cache
-				 */
-				$this->buffer_output->add_tag( 'wp_head', 99, array(
-					'gtag'                                 => $this->get_cookie_types(),
-					'google-analytics'                     => $this->get_cookie_types(),
-					'_gaq'                                 => $this->get_cookie_types(),
-					'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
-				), false );
-			}
+			/**
+			 * Consent not given - no cache
+			 */
+			$this->buffer_output->add_tag( 'wp_head', 99, array(
+				'gtag'                                 => $this->get_cookie_types(),
+				'google-analytics'                     => $this->get_cookie_types(),
+				'_gaq'                                 => $this->get_cookie_types(),
+				'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
+			), false );
 		}
 
 		/**
 		 * ga scripts are loaded in login_head priority set to 99
 		 */
 		if ( has_action( 'login_head', 'add_google_analytics' ) ) {
-			if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-				/**
-				 * Consent given - cache
-				 */
-				$this->buffer_output->add_tag( 'login_head', 99, array(
-					'gtag'                                 => $this->get_cookie_types(),
-					'google-analytics'                     => $this->get_cookie_types(),
-					'_gaq'                                 => $this->get_cookie_types(),
-					'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
-				) );
-			}else{
-				/**
-				 * Consent not given - no cache
-				 */
-				$this->buffer_output->add_tag( 'login_head', 99, array(
-					'gtag'                                 => $this->get_cookie_types(),
-					'google-analytics'                     => $this->get_cookie_types(),
-					'_gaq'                                 => $this->get_cookie_types(),
-					'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
-				) );
-			}
+			/**
+			 * Consent not given - no cache
+			 */
+			$this->buffer_output->add_tag( 'login_head', 99, array(
+				'gtag'                                 => $this->get_cookie_types(),
+				'google-analytics'                     => $this->get_cookie_types(),
+				'_gaq'                                 => $this->get_cookie_types(),
+				'www.googletagmanager.com/gtag/js?id=' => $this->get_cookie_types()
+			) );
 		}
 
 		/**

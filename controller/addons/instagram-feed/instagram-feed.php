@@ -80,6 +80,11 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 			return;
 		}
 
+		// consent is given
+		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+			return;
+		}
+
 		// External js, so manipulate attributes
 		if ( has_action( 'wp_enqueue_scripts', 'sb_instagram_scripts_enqueue' ) ) {
 			$this->script_loader_tag->add_tag( 'sb_instagram_scripts', $this->get_cookie_types() );

@@ -80,12 +80,15 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 			return;
 		}
 
+		// consent is given
+		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+			return;
+		}
+
 		$this->script_loader_tag->add_tag( 'aepc-pixel-events', array( 'facebook' => $this->get_cookie_types() ) );
 
-		if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-			cookiebot_remove_class_action( 'wp_head', 'AEPC_Pixel_Scripts', 'pixel_init', 99 );
-			cookiebot_remove_class_action( 'wp_footer', 'AEPC_Pixel_Scripts', 'pixel_init', 1 );
-		}
+		cookiebot_remove_class_action( 'wp_head', 'AEPC_Pixel_Scripts', 'pixel_init', 99 );
+		cookiebot_remove_class_action( 'wp_footer', 'AEPC_Pixel_Scripts', 'pixel_init', 1 );
 
 	}
 

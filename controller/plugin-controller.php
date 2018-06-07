@@ -28,6 +28,7 @@ class Plugin_Controller {
 		$this->settings_service = $settings_service;
 
 		$this->load_init_files();
+		$this->load_translations();
 	}
 
 	/**
@@ -82,5 +83,14 @@ class Plugin_Controller {
 		if ( $buffer_output->has_action() ) {
 			$buffer_output->run_actions();
 		}
+	}
+
+	/**
+	 * Load translation files
+	 *
+	 * @since 1.6.0
+	 */
+	protected function load_translations() {
+		load_plugin_textdomain( 'cookiebot-addons', false,  CAF_BASE_NAME . '/languages/'  );
 	}
 }
