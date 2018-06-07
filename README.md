@@ -34,6 +34,13 @@ Released and tested addons:
 * [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
 * [HubSpot Tracking Code](https://wordpress.org/plugins/hubspot-tracking-code/)
 * [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/)
+  * Supported widgets:
+    * Google Maps
+    * Facebook
+    * Google Plus Badge
+    * Internet defense league	
+    * Twitter timeline	
+    * Goodreads
 * [Pixel Caffeine]( https://wordpress.org/plugins/pixel-caffeine/)
 * [WD Google Analytics](https://wordpress.org/plugins/wd-google-analytics/)
 * [WP-Matomo](https://nl.wordpress.org/plugins/wp-piwik/)
