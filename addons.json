@@ -29,6 +29,9 @@
   "WP_Piwik": {
     "class": "cookiebot_addons_framework\\controller\\addons\\wp_piwik\\Wp_Piwik"
   },
+  "Facebook_For_Woocommerce": {
+    "class": "cookiebot_addons_framework\\controller\\addons\\facebook_for_woocommerce\\Facebook_For_Woocommerce"
+  },
   "Pixel_Caffeine": {
     "class": "cookiebot_addons_framework\\controller\\addons\\pixel_caffeine\\Pixel_Caffeine"
   },
