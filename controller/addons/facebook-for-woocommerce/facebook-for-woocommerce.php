@@ -78,7 +78,13 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		$consent_given = $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() );
+		/** Check if consent is given  */
+		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+			return;
+		}
+
+		/** @var  $consent_given boolean    consent is not given */
+		$consent_given = false;
 
 		$this->buffer_output->add_tag( 'wp_head', 10, array(
 			'fbq(\'track\',' => $this->get_cookie_types()
@@ -121,14 +127,11 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 			'fbq(\'Purchase\'' => $this->get_cookie_types()
 		), false );
 
-
-		if( ! $consent_given ) {
-			/**
-			 * inject base pixel
-			 */
-			cookiebot_remove_class_action( 'wp_footer', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel_noscript' );
-			cookiebot_remove_class_action( 'wp_head', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel' );
-		}
+		/**
+		 * inject base pixel
+		 */
+		cookiebot_remove_class_action( 'wp_footer', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel_noscript' );
+		cookiebot_remove_class_action( 'wp_head', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel' );
 	}
 
 	/**
