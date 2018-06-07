@@ -13,7 +13,7 @@ https://core.trac.wordpress.org/ticket/44043
 GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'll provide a link here once the addon is released. 
 
 # Installation
-1. Copy the framework plugin to your WP plugins folder
+1. Get the [latest release](https://github.com/CybotAS/CookiebotAddons/releases/latest) of the framework plugin to your WP plugins folder
 2. Go to the admin page of your WP installation and activate the plugin
 3. You are done, verify that it works
 
@@ -25,21 +25,29 @@ Following plugins have native (built-in) support for Cookiebot:
 
 Released and tested addons:
 
+* Autocorrection of embedded Facebook, Twitter, Youtube and Vimeo videos
+* [AddToAny Share Buttons](https://wordpress.org/plugins/add-to-any/)
+* [Analytify](https://wordpress.org/plugins/wp-analytify/)
+* [Custom Facebook Feed from Smashballoon](https://da.wordpress.org/plugins/custom-facebook-feed/)
 * [GA Google Analytics](https://wordpress.org/plugins/ga-google-analytics/)
 * [Google Analyticator](https://wordpress.org/plugins/google-analyticator/)
-* [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/)
+* [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
 * [HubSpot Tracking Code](https://wordpress.org/plugins/hubspot-tracking-code/)
-* [AddToAny Share Buttons](https://wordpress.org/plugins/add-to-any/)
+* [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/)
+  * Supported widgets:
+    * Google Maps
+    * Facebook
+    * Google Plus Badge
+    * Internet Defense League	
+    * Twitter Timeline	
+    * Goodreads
+* [Pixel Caffeine]( https://wordpress.org/plugins/pixel-caffeine/)
+* [WD Google Analytics](https://wordpress.org/plugins/wd-google-analytics/)
+* [WP-Matomo](https://nl.wordpress.org/plugins/wp-piwik/)
 
 Following addons are in pipeline:
 
-* Autocorrection of embedded YouTube and Vimeo videos
-* [Analytify](https://wordpress.org/plugins/wp-analytify/)
-* [Custom Facebook Feed from Smashballoon](https://da.wordpress.org/plugins/custom-facebook-feed/)
 * [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
-* [WD Google Analytics](https://wordpress.org/plugins/wd-google-analytics/)
-* [WP-Matomo](https://nl.wordpress.org/plugins/wp-piwik/)
-* [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
 * To be continued..
 
 
@@ -50,9 +58,11 @@ Everyone is welcome to make a pull request with new addon support, or to fix exi
 
 Shout out to
 
-[@fschaeffler](https://github.com/fschaeffler) for the HubSpot Tracking Code integration. 
+[@fschaeffler](https://github.com/fschaeffler) - HubSpot Tracking Code 
 
-[@irondan](https://github.com/irondan) for the AddToAny integration.
+[@irondan](https://github.com/irondan) - AddToAny
+
+[@Jursdotme](https://github.com/Jursdotme) - Custom Facebook Feed from Smashballoon
 
 Way to go!
 

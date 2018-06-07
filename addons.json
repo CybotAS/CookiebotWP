@@ -31,5 +31,14 @@
   },
   "Facebook_For_Woocommerce": {
     "class": "cookiebot_addons_framework\\controller\\addons\\facebook_for_woocommerce\\Facebook_For_Woocommerce"
+  },
+  "Pixel_Caffeine": {
+    "class": "cookiebot_addons_framework\\controller\\addons\\pixel_caffeine\\Pixel_Caffeine"
+  },
+  "Wp_Analytify": {
+    "class": "cookiebot_addons_framework\\controller\\addons\\wp_analytify\\Wp_Analytify"
+  },
+  "Google_Analytics_Plus": {
+    "class": "cookiebot_addons_framework\\controller\\addons\\google_analytics_plus\\Google_Analytics_Plus"
   }
 }

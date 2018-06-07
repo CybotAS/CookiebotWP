@@ -234,11 +234,11 @@ class Settings_Config {
 	public function header_available_addons() {
 		?>
         <p>
-			<?php _e( 'Below is a list of addons for Cookiebot. Addons help you making contributed plugins GDPR compliant.', 'cookiebot-addons' ); ?>
+			<?php _e( 'Below is a list of addons for Cookiebot. Addons help you make installed plugins GDPR compliant.', 'cookiebot-addons' ); ?>
             <br/>
 			<?php _e( 'These addons are available because you have the corresponding plugins installed and activated.', 'cookiebot-addons' ); ?>
             <br/>
-			<?php _e( 'Deactive addons if you want to handle GDPR compliance yourself or using another plugin.', 'cookiebot-addons' ); ?>
+			<?php _e( 'Deactivate an addon if you want to handle GDPR compliance yourself, or through another plugin.', 'cookiebot-addons' ); ?>
         </p>
 		<?php
 	}
@@ -301,7 +301,7 @@ class Settings_Config {
 	public function header_unavailable_addons() {
 		?>
         <p>
-			<?php _e( 'Following addons are unavailable. This is usual because the addon is not useable because the main plugin is not activated or installed.' ); ?>
+			<?php _e( 'The following addons are unavailable. This is because the corresponding plugin is not installed.', 'cookiebot-addons' ); ?>
         </p>
 		<?php
 	}
@@ -363,7 +363,7 @@ class Settings_Config {
 				if ( is_plugin_active( 'jetpack/jetpack.php' ) ) {
 					?>
                     <a href="?page=cookiebot-addons&tab=jetpack"
-                       class="nav-tab <?php echo $active_tab == 'jetpack' ? 'nav-tab-active' : ''; ?>">jetpack</a>
+                       class="nav-tab <?php echo $active_tab == 'jetpack' ? 'nav-tab-active' : ''; ?>">Jetpack</a>
 					<?php
 				}
 				?>
