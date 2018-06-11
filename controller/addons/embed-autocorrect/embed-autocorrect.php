@@ -80,7 +80,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		}
 
 		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
 
@@ -196,5 +196,17 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 */
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
+	}
+
+	public function has_placeholder() {
+		return $this->settings->has_placeholder( $this->get_option_name() );
+	}
+
+	public function get_placeholders() {
+		return $this->settings->get_placeholders( $this->get_option_name() );
+	}
+
+	public function is_placeholder_enabled() {
+		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
 }

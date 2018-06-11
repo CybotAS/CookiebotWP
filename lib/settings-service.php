@@ -184,4 +184,34 @@ class Settings_Service implements Settings_Service_Interface {
 
 		return true;
 	}
+
+	public function get_placeholders( $option_key ) {
+		$option = get_option( 'cookiebot_available_addons' );
+
+		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) ) {
+			return $option[ $option_key ]['placeholder']['languages'];
+		}
+
+		return false;
+	}
+
+	public function has_placeholder( $option_key ) {
+		$option = get_option( 'cookiebot_available_addons' );
+
+		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public function is_placeholder_enabled( $option_key ) {
+		$option = get_option( 'cookiebot_available_addons' );
+
+		if ( isset( $option[ $option_key ]['placeholder']['enabled'] ) ) {
+			return true;
+		}
+
+		return false;
+	}
 }

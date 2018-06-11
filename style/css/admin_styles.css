@@ -15,3 +15,15 @@ form.not_installed_plugins p.submit{
 ul.cookietypes li {
 	display: inline;
 }
+
+.placeholder{
+	margin: 0 15px 15px 0;
+	background: lightgrey;
+	padding: 15px;
+}
+
+.placeholder_enable,
+.placeholder_select_div{
+	width: 100%;
+	display: block;
+}
