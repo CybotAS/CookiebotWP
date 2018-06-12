@@ -22,7 +22,7 @@ function init() {
  * @since 1.8.0
  */
 function placeholder_toggle() {
-    jQuery( '.placeholder_enable' ).on( 'change', function () {
+    jQuery( document ).on( 'change', '.placeholder_enable', function () {
         var status = jQuery( this ).is( ':checked' );
         var addon = jQuery( this ).data( 'addon' );
 
@@ -92,7 +92,7 @@ function add_placeholder_language_content( addon ) {
  * @since 1.8.0
  */
 function placeholder_select_language() {
-    jQuery( '.placeholder_select_language' ).on( 'change', function () {
+    jQuery( document ).on( 'change', '.placeholder_select_language', function () {
         var new_value = jQuery( this ).val();
         var select_name = jQuery( this ).attr( 'name' );
 

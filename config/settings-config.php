@@ -100,7 +100,10 @@ class Settings_Config {
 					"available_addon_callback"
 				), "cookiebot-addons", "available_addons", array( 'addon' => $addon ) );
 
-				register_setting( 'cookiebot_available_addons', "cookiebot_available_addons" );
+				register_setting( 'cookiebot_available_addons', "cookiebot_available_addons", array(
+					$this,
+					'sanitize_cookiebot'
+				) );
 			}
 		}
 	}
@@ -295,14 +298,13 @@ class Settings_Config {
                        class="placeholder_enable"
                        data-addon="<?php echo $addon->get_option_name(); ?>"
                        name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][enabled]"
-                       <?php checked(1, $addon->is_placeholder_enabled() ); ?>
+					<?php checked( 1, $addon->is_placeholder_enabled() ); ?>
                        value="1">
             </p>
 
-            <div class="placeholder" data-addon="<?php echo $addon->get_option_name(); ?>">
+            <div class="placeholder" data-addon="<?php echo $addon->get_option_name(); ?>" <?php echo ( ! $addon->is_placeholder_enabled() ) ? 'style="display:none"' : ''; ?>>
 				<?php if ( $addon->has_placeholder() ): ?>
 					<?php foreach ( $addon->get_placeholders() as $placeholder_lang => $placeholder_value ): ?>
-                    <?php var_dump( $placeholder_lang, $placeholder_value); ?>
                         <div class="placeholder_content">
                             <p>
                                 <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
@@ -313,6 +315,7 @@ class Settings_Config {
 										$cookiebot   = cookiebot();
 										$currentLang = $cookiebot->get_language( true );
 										?>
+                                        <option value=""><?php _e( 'Default (Autodetect)', 'cookiebot' ); ?></option>
                                         <option value="_wp"<?php echo ( $placeholder_lang == '_wp' ) ? ' selected' : ''; ?>><?php _e( 'Use Wordpress Language', 'cookiebot-addons' ); ?></option>
 										<?php
 										foreach ( $cookiebot->get_supported_languages() as $key => $value ) {
@@ -325,7 +328,7 @@ class Settings_Config {
                             </p>
                             <p>
                         <textarea cols="60" rows="5"
-                                  name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][default]"><?php echo $placeholder_value; ?></textarea>
+                                  name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][<?php echo $placeholder_lang; ?>]"><?php echo $placeholder_value; ?></textarea>
                             </p>
                         </div>
 					<?php endforeach; ?>
@@ -340,6 +343,7 @@ class Settings_Config {
 									$cookiebot   = cookiebot();
 									$currentLang = $cookiebot->get_language( true );
 									?>
+                                    <option value=""><?php _e( 'Default (Autodetect)', 'cookiebot' ); ?></option>
                                     <option value="_wp"<?php echo ( $currentLang == '_wp' ) ? ' selected' : ''; ?>><?php _e( 'Use Wordpress Language', 'cookiebot-addons' ); ?></option>
 									<?php
 									foreach ( $cookiebot->get_supported_languages() as $key => $value ) {
@@ -349,10 +353,9 @@ class Settings_Config {
 								?>
                             </select>
                         </p>
-                        <br>
                         <p>
-                        <textarea cols="60" rows="5"
-                                  name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][default]"></textarea>
+                        <textarea cols="80" rows="5"
+                                  name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][default]"><?php echo $addon->get_default_placeholder(); ?></textarea>
                         </p>
                     </div>
 				<?php endif; ?>
