@@ -140,31 +140,6 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * Default placeholder content
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this video.';
-	}
-
-	/**
-	 * Get placeholder content
-	 *
-	 * This function will check following features:
-	 * - Current language
-	 *
-	 * @return bool|mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_placeholder() {
-		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_cookie_types() ) );
-	}
-
-	/**
 	 * Option name in the database
 	 *
 	 * @return string
@@ -221,6 +196,31 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 */
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
+	}
+
+	/**
+	 * Default placeholder content
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_default_placeholder() {
+		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this video.';
+	}
+
+	/**
+	 * Get placeholder content
+	 *
+	 * This function will check following features:
+	 * - Current language
+	 *
+	 * @return bool|mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholder() {
+		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_cookie_types() ) );
 	}
 
 	/**

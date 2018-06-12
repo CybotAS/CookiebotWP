@@ -188,6 +188,45 @@ class Settings_Service implements Settings_Service_Interface {
 	}
 
 	/**
+	 * Checks if addon has placeholders
+	 *
+	 * @param $option_key
+	 *
+	 * @return bool
+	 *
+	 * @since 1.8.0
+	 */
+	public function widget_has_placeholder( $option_key, $widget_key ) {
+		$option = get_option( $option_key );
+
+		if ( isset( $option[ $widget_key ]['placeholder']['languages'] ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Returns widget placeholders
+	 *
+	 * @param $option_key
+	 * @param $widget_key
+	 *
+	 * @return bool
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_widget_placeholders( $option_key, $widget_key ) {
+		$option = get_option( $option_key );
+
+		if ( isset( $option[ $widget_key ]['placeholder']['languages'] ) ) {
+			return $option[ $widget_key ]['placeholder']['languages'];
+		}
+
+		return false;
+	}
+
+	/**
 	 * Returns all placeholders
 	 *
 	 * @param $option_key
@@ -267,7 +306,38 @@ class Settings_Service implements Settings_Service_Interface {
 				if ( isset( $option[ $option_key ]['placeholder'][ $currentLang ] ) ) {
 					return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder'][ $currentLang ], $cookies );
 				} else {
+					return $this->placeholder_merge_tag( $default_placeholder, $cookies );
+				}
+			}
+		}
 
+		return false;
+	}
+
+	/**
+	 * returns the placeholder if it does exist
+	 *
+	 * @param $option_key
+	 * @param $default_placeholder
+	 * @param $cookies
+	 *
+	 * @return bool|mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_widget_placeholder( $option_key, $widget_key, $default_placeholder, $cookies ) {
+		$option = get_option( $option_key );
+
+		if ( isset( $option[ $widget_key ]['placeholder']['enabled'] ) ) {
+			if ( function_exists( 'cookiebot' ) ) {
+				$cookiebot   = cookiebot();
+				$currentLang = $cookiebot->get_language( true );
+
+				// get current lang text
+				if ( isset( $option[ $widget_key ]['placeholder'][ $currentLang ] ) ) {
+					return $this->placeholder_merge_tag( $option[ $widget_key ]['placeholder'][ $currentLang ], $cookies );
+				} else {
+					return $this->placeholder_merge_tag( $default_placeholder, $cookies );
 				}
 			}
 		}

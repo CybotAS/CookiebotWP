@@ -52,6 +52,8 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	 */
 	protected $buffer_output;
 
+	protected $widgets = array();
+
 	/**
 	 * Jetpack constructor.
 	 *
@@ -67,6 +69,9 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		$this->script_loader_tag = $script_loader_tag;
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
+
+		// set widgets
+		$this->set_widgets();
 	}
 
 	/**
@@ -81,87 +86,72 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		}
 
 		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
 
+		// load widgets
+		$this->load_widgets();
+	}
+
+	/**
+	 * Sets every widget into this class
+	 *
+	 * @since 1.8.0
+	 */
+	public function set_widgets() {
 		/**
 		 * Load configuration for google maps widget
 		 *
 		 * @since 1.2.0
 		 */
-		new Google_Maps_Widget(
-			$this->is_widget_enabled( 'google_maps' ),
-			$this->get_widget_cookie_types( 'google_maps' ),
-			$this->is_widget_placeholder_enabled( 'google_maps ' )
-		);
-
-		/**
-		 * Load configuration for facebook page widget
-		 *
-		 * @since 1.2.0
-		 */
-		new Facebook_Widget(
-			$this->is_widget_enabled( 'facebook' ),
-			$this->get_widget_cookie_types( 'facebook' ),
-			$this->is_widget_placeholder_enabled( 'facebook ' ),
-			$this->script_loader_tag
-		);
-
-		/**
-		 * Load configuration for visitor cookies
-		 *
-		 * @since 1.2.0
-		 */
-		new Visitor_Cookies( $this->script_loader_tag, $this->cookie_consent );
-
-		/**
-		 * Load configuration for googleplus badge widget
-		 *
-		 * @since 1.2.0
-		 */
-		new Googleplus_Badge_Widget(
-			$this->is_widget_enabled( 'googleplus_badge' ),
-			$this->get_widget_cookie_types( 'googleplus_badge' ),
-			$this->is_widget_placeholder_enabled( 'googleplus_badge ' ),
-			$this->script_loader_tag
-		);
+		$this->widgets[] = new Google_Maps_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
 
 		/**
 		 * Load configuration for internet defense league widget
 		 *
 		 * @since 1.2.0
 		 */
-		new Internet_Defense_league_Widget(
-			$this->is_widget_enabled( 'internet_defense_league' ),
-			$this->get_widget_cookie_types( 'internet_defense_league' ),
-			$this->is_widget_placeholder_enabled( 'internet_defense_league ' ),
-			$this->cookie_consent
-		);
+		$this->widgets[] = new Internet_Defense_league_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
+
+		/**
+		 * Load configuration for visitor cookies
+		 *
+		 * @since 1.2.0
+		 */
+		$this->widgets[] = new Visitor_Cookies( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
+
+		/**
+		 * Load configuration for googleplus badge widget
+		 *
+		 * @since 1.2.0
+		 */
+		$this->widgets[] = new Googleplus_Badge_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
 
 		/**
 		 * Load configuration for twitter timeline widget
 		 *
 		 * @since 1.2.0
 		 */
-		new Twitter_Timeline_Widget(
-			$this->is_widget_enabled( 'twitter_timeline' ),
-			$this->get_widget_cookie_types( 'twitter_timeline' ),
-			$this->is_widget_placeholder_enabled( 'twitter_timeline ' ),
-			$this->script_loader_tag
-		);
+		$this->widgets[] = new Twitter_Timeline_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
 
 		/**
 		 * Load configuration for goodreads widget
 		 *
 		 * @since 1.2.0
 		 */
-		new Goodreads_Widget(
-			$this->is_widget_enabled( 'goodreads' ),
-			$this->get_widget_cookie_types( 'goodreads' ),
-			$this->is_widget_placeholder_enabled( 'goodreads ' ),
-			$this->buffer_output
-		);
+		$this->widgets[] = new Goodreads_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
+	}
+
+	/**
+	 * Load widgets configuration
+	 *
+	 * @since 1.8.0
+	 */
+	public function load_widgets() {
+		foreach( $this->get_widgets() as $widget ) {
+			$widget->load_configuration();
+		}
 	}
 
 	/**
@@ -184,6 +174,17 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	 */
 	public function get_option_name() {
 		return 'jetpack';
+	}
+
+	/**
+	 * Returns widget option key for in the database
+	 *
+	 * @return string
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_widget_option() {
+		return 'cookiebot_jetpack_addon';
 	}
 
 	/**
@@ -242,65 +243,7 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_widgets() {
-		return array(
-			'google_maps'             => 'Google maps',
-			'facebook'                => 'Facebook',
-			'googleplus_badge'        => 'Google Plus Badge',
-			'internet_defense_league' => 'Internet defense league',
-			'twitter_timeline'        => 'Twitter timeline',
-			'goodreads'               => 'Goodreads'
-		);
-	}
-
-	/**
-	 * Returns widget option key for in the database
-	 *
-	 * @return string
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_widget_option() {
-		return 'cookiebot_jetpack_addon';
-	}
-
-	/**
-	 * Returns cookie types for a widget
-	 *
-	 * @param $option
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_widget_cookie_types( $option ) {
-		return $this->settings->get_widget_cookie_types( $this->get_widget_option(), $option );
-	}
-
-	/**
-	 * Checks if a widget is enabled
-	 *
-	 * @param $option
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_widget_enabled( $option ) {
-		return $this->settings->is_widget_enabled( $this->get_widget_option(), $option );
-	}
-
-	/**
-	 * Checks if a widget placeholder is enabled
-	 *
-	 * @param $option   string  widget option name
-	 *
-	 * @return boolean  true    If widget placeholder is checked
-	 *                  false   If widget placeholder is not checked
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_widget_placeholder_enabled( $option ) {
-		return $this->settings->is_widget_placeholder_enabled( $this->get_widget_option(), $option );
+		return $this->widgets;
 	}
 
 	/**

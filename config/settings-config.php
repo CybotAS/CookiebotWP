@@ -122,13 +122,13 @@ class Settings_Config {
 		foreach ( $this->settings_service->get_addons() as $addon ) {
 			if ( 'Jetpack' === ( new \ReflectionClass( $addon ) )->getShortName() ) {
 				if ( $addon->is_addon_installed() && $addon->is_addon_activated() ) {
-					foreach ( $addon->get_widgets() as $option => $widget ) {
-						add_settings_field( $option, $widget, array(
+
+					foreach ( $addon->get_widgets() as $widget ) {
+						add_settings_field( $widget->get_widget_option_name(), $widget->get_label(), array(
 							$this,
 							"jetpack_addon_callback"
 						), "cookiebot-addons", "jetpack_addon", array(
-							'option' => $option,
-							'label'  => $widget,
+							'widget' => $widget,
 							'addon'  => $addon
 						) );
 
@@ -183,49 +183,118 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function jetpack_addon_callback( $args ) {
-		$option = $args['option'];
+		$widget = $args['widget'];
 		$addon  = $args['addon'];
 
 		?>
         <div class="postbox cookiebot-addon">
             <p>
-                <label for="<?php echo 'enabled_' . $option; ?>"><?php _e( 'Enable', 'cookie-addons' ); ?></label>
-                <input type="checkbox" id="<?php echo 'enabled_' . $option; ?>"
-                       name="cookiebot_jetpack_addon[<?php echo $option; ?>][enabled]"
-                       value="1" <?php checked( 1, $addon->is_widget_enabled( $option ), true ); ?> />
+                <label for="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"><?php _e( 'Enable', 'cookie-addons' ); ?></label>
+                <input type="checkbox" id="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"
+                       name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][enabled]"
+                       value="1" <?php checked( 1, $widget->is_widget_enabled(), true ); ?> />
             </p>
             <p>
                 <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot-addons' ); ?></span><br>
             <ul class="cookietypes">
-                <li><input type="checkbox" id="cookie_type_necessary_<?php echo $option; ?>"
+                <li><input type="checkbox" id="cookie_type_necessary_<?php echo $widget->get_widget_option_name(); ?>"
                            value="necessary"
-                           name="cookiebot_jetpack_addon[<?php echo $option; ?>][cookie_type][]"
-						<?php cookiebot_checked_selected_helper( $addon->get_widget_cookie_types( $option ), 'necessary' ); ?>>
+                           name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"
+						<?php cookiebot_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'necessary' ); ?>>
                     <label>Necessary</label>
                 </li>
-                <li><input type="checkbox" id="cookie_type_preferences_<?php echo $option; ?>"
+                <li><input type="checkbox" id="cookie_type_preferences_<?php echo $widget->get_widget_option_name(); ?>"
                            value="preferences"
-						<?php cookiebot_checked_selected_helper( $addon->get_widget_cookie_types( $option ), 'preferences' ); ?>
-                           name="cookiebot_jetpack_addon[<?php echo $option; ?>][cookie_type][]"><label>Preferences</label>
+						<?php cookiebot_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'preferences' ); ?>
+                           name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Preferences</label>
                 </li>
-                <li><input type="checkbox" id="cookie_type_statistics_<?php echo $option; ?>"
+                <li><input type="checkbox" id="cookie_type_statistics_<?php echo $widget->get_widget_option_name(); ?>"
                            value="statistics"
-						<?php cookiebot_checked_selected_helper( $addon->get_widget_cookie_types( $option ), 'statistics' ); ?>
-                           name="cookiebot_jetpack_addon[<?php echo $option; ?>][cookie_type][]"><label>Statistics</label>
+						<?php cookiebot_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'statistics' ); ?>
+                           name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Statistics</label>
                 </li>
-                <li><input type="checkbox" id="cookie_type_marketing_<?php echo $option; ?>"
+                <li><input type="checkbox" id="cookie_type_marketing_<?php echo $widget->get_widget_option_name(); ?>"
                            value="marketing"
-						<?php cookiebot_checked_selected_helper( $addon->get_widget_cookie_types( $option ), 'marketing' ); ?>
-                           name="cookiebot_jetpack_addon[<?php echo $option; ?>][cookie_type][]"><label>Marketing</label>
+						<?php cookiebot_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'marketing' ); ?>
+                           name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Marketing</label>
                 </li>
             </ul>
             </p>
+
             <p>
-                <label for=""><?php _e( 'Display a placeholder', 'cookiebot-addons' ); ?></label>
-                <input type="checkbox" id="" name="cookiebot_jetpack_addon[<?php echo $option; ?>][placeholder]"
-                       value="1" <?php checked( 1, $addon->is_widget_placeholder_enabled( $option ), true ); ?>>
+                <label><?php _e( 'Display a placeholder', 'cookiebot-addons' ); ?></label>
+                <input type="checkbox"
+                       class="placeholder_enable"
+                       data-addon="<?php echo $widget->get_widget_option_name(); ?>"
+                       name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][enabled]"
+			        <?php checked( 1, $widget->is_widget_placeholder_enabled() ); ?>
+                       value="1">
             </p>
 
+            <div class="placeholder"
+                 data-addon="<?php echo $widget->get_widget_option_name(); ?>" <?php echo ( ! $widget->is_widget_placeholder_enabled() ) ? 'style="display:none"' : ''; ?>>
+				<?php if ( $widget->widget_has_placeholder() ): ?>
+					<?php foreach ( $widget->get_widget_placeholders() as $placeholder_lang => $placeholder_value ): ?>
+                        <div class="placeholder_content">
+                            <p>
+                                <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
+                                <select class="placeholder_select_language"
+                                        name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][<?php echo $placeholder_lang; ?>]">
+									<?php
+									if ( function_exists( 'cookiebot' ) ) {
+										$cookiebot   = cookiebot();
+										$currentLang = $cookiebot->get_language( true );
+										?>
+                                        <option value=""><?php _e( 'Default (Autodetect)', 'cookiebot' ); ?></option>
+                                        <option value="_wp"<?php echo ( $placeholder_lang == '_wp' ) ? ' selected' : ''; ?>><?php _e( 'Use Wordpress Language', 'cookiebot-addons' ); ?></option>
+										<?php
+										foreach ( $cookiebot->get_supported_languages() as $key => $value ) {
+											$selected = ( $key == $placeholder_lang ) ? 'selected' : '';
+											echo '<option value="' . $key . '"  ' . $selected . '>' . $value . '</option>';
+										}
+									}
+									?>
+                                </select>
+                            </p>
+                            <p>
+                        <textarea cols="60" rows="5"
+                                  name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][<?php echo $placeholder_lang; ?>]"><?php echo $placeholder_value; ?></textarea>
+                            </p>
+                        </div>
+					<?php endforeach; ?>
+				<?php else: ?>
+                    <div class="placeholder_content">
+                        <p>
+                            <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
+                            <select class="placeholder_select_language"
+                                    name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][default]">
+								<?php
+								if ( function_exists( 'cookiebot' ) ) {
+									$cookiebot   = cookiebot();
+									$currentLang = $cookiebot->get_language( true );
+									?>
+                                    <option value=""><?php _e( 'Default (Autodetect)', 'cookiebot' ); ?></option>
+                                    <option value="_wp"<?php echo ( $currentLang == '_wp' ) ? ' selected' : ''; ?>><?php _e( 'Use Wordpress Language', 'cookiebot-addons' ); ?></option>
+									<?php
+									foreach ( $cookiebot->get_supported_languages() as $key => $value ) {
+										echo '<option value="' . $key . '">' . $value . '</option>';
+									}
+								}
+								?>
+                            </select>
+                        </p>
+                        <p>
+                        <textarea cols="80" rows="5"
+                                  name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][default]"><?php echo $widget->get_default_placeholder(); ?></textarea>
+                        </p>
+                    </div>
+				<?php endif; ?>
+
+                <p class="add_placeholder_language">
+                    <button class="btn_add_language button button-secondary"
+                            data-addon="<?php echo $widget->get_widget_option_name(); ?>"><?php _e( '+ Add language', 'cookiebot-addons' ); ?></button>
+                </p>
+            </div>
         </div>
 		<?php
 	}
@@ -302,7 +371,8 @@ class Settings_Config {
                        value="1">
             </p>
 
-            <div class="placeholder" data-addon="<?php echo $addon->get_option_name(); ?>" <?php echo ( ! $addon->is_placeholder_enabled() ) ? 'style="display:none"' : ''; ?>>
+            <div class="placeholder"
+                 data-addon="<?php echo $addon->get_option_name(); ?>" <?php echo ( ! $addon->is_placeholder_enabled() ) ? 'style="display:none"' : ''; ?>>
 				<?php if ( $addon->has_placeholder() ): ?>
 					<?php foreach ( $addon->get_placeholders() as $placeholder_lang => $placeholder_value ): ?>
                         <div class="placeholder_content">
