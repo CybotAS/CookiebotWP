@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\host_analyticsjs_local;
+namespace cookiebot_addons_framework\controller\addons\caos_host_analyticsjs_local;
 
 use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
@@ -8,7 +8,7 @@ use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
 use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons_framework\lib\Settings_Service_Interface;
 
-class Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
+class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 
 	/**
 	 * @var Settings_Service_Interface
@@ -144,7 +144,7 @@ class Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_option_name() {
-		return 'host_analyticsjs_local';
+		return 'caos_host_analyticsjs_local';
 	}
 
 	/**

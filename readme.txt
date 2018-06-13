@@ -39,7 +39,9 @@ Following plugins are supported:
     * Goodreads
 * [Pixel Caffeine]( https://wordpress.org/plugins/pixel-caffeine/)
 * [WD Google Analytics](https://wordpress.org/plugins/wd-google-analytics/)
-* [WP-Matomo](https://nl.wordpress.org/plugins/wp-piwik/)
+* [WP-Matomo](https://wordpress.org/plugins/wp-piwik/)
+* [Complete Analytics Optimization Suite (CAOS)](https://wordpress.org/plugins/host-analyticsjs-local/)
+* [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
 
 Following plugins have native (built-in) support for Cookiebot:
 * [MonsterInsights](https://www.monsterinsights.com/addon/eu-compliance/)
