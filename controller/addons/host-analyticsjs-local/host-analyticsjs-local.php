@@ -80,11 +80,10 @@ class Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 			return;
 		}
 		
-		/* Ensure*/
-			
+		/* Priority need to be more than 0 so we are able to hook in before output begins */
 		$scriptPriority = $this->cookiebot_addon_host_analyticsjs_local_priority();
 		if( $scriptPriority <= 0 ) {
-			//We need to force script priority to 2 be sure we can hook in before the script is outputted
+			//Force priority to 2
 			$scriptPriority = 2;
 			update_option( 'sgal_enqueue_order', $scriptPriority );
 		}
