@@ -43,11 +43,11 @@ Released and tested addons:
     * Goodreads
 * [Pixel Caffeine]( https://wordpress.org/plugins/pixel-caffeine/)
 * [WD Google Analytics](https://wordpress.org/plugins/wd-google-analytics/)
-* [WP-Matomo](https://nl.wordpress.org/plugins/wp-piwik/)
+* [WP-Matomo](https://wordpress.org/plugins/wp-piwik/)
+* [Complete Analytics Optimization Suite (CAOS)](https://wordpress.org/plugins/host-analyticsjs-local/)
+* [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
 
 Following addons are in pipeline:
-
-* [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
 * To be continued..
 
 
