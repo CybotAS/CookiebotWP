@@ -40,5 +40,8 @@
   },
   "Google_Analytics_Plus": {
     "class": "cookiebot_addons_framework\\controller\\addons\\google_analytics_plus\\Google_Analytics_Plus"
+  },
+  "CAOS_Host_Analyticsjs_Local": {
+    "class": "cookiebot_addons_framework\\controller\\addons\\caos_host_analyticsjs_local\\CAOS_Host_Analyticsjs_Local"
   }
 }
