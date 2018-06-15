@@ -271,39 +271,41 @@ final class Cookiebot_WP {
 					<tr valign="top">
 						<th scope="row"><?php _e('Cookiebot Language','cookiebot'); ?></th>
 						<td>
-							<select name="cookiebot-language" id="cookiebot-language">
-								<?php
-								$currentLang = $this->get_language(true);
-								?>
-								<option value=""><?php _e('Default (Autodetect)','cookiebot'); ?></option>
-								<option value="_wp"<?php echo ($currentLang == '_wp') ? ' selected' : ''; ?>><?php _e('Use Wordpress Language','cookiebot'); ?></option>
-								<?php
-								$supportedLanguages = $this->get_supported_languages();
-								foreach($supportedLanguages as $langCode=>$langName) {
-									echo '<option value="'.$langCode.'"'.(($currentLang==$langCode) ? ' selected' : '').'>'.$langName.'</option>';
-								}
-								?>
-							</select>
-							<p class="description">
-								<strong style="color:red;<?php echo ($currentLang=='') ? 'display:none;' : '' ?>" id="info_lang_specified">
+							<div>
+								<select name="cookiebot-language" id="cookiebot-language">
+									<?php
+									$currentLang = $this->get_language(true);
+									?>
+									<option value=""><?php _e('Default (Autodetect)','cookiebot'); ?></option>
+									<option value="_wp"<?php echo ($currentLang == '_wp') ? ' selected' : ''; ?>><?php _e('Use Wordpress Language','cookiebot'); ?></option>
+									<?php
+									$supportedLanguages = $this->get_supported_languages();
+									foreach($supportedLanguages as $langCode=>$langName) {
+										echo '<option value="'.$langCode.'"'.(($currentLang==$langCode) ? ' selected' : '').'>'.$langName.'</option>';
+									}
+									?>
+								</select>
+							</div>
+							<div class="notice inline notice-warning notice-alt cookiebot-notice" style="padding:12px;font-size:13px;display:inline-block;">
+								<div style="<?php echo ($currentLang=='') ? 'display:none;' : '' ?>" id="info_lang_specified">
 									<?php _e('You need to add the language in the Cookiebot administration tool.'); ?>
-								</strong>
-								<strong style="color:red;<?php echo ($currentLang=='') ? '' : 'display:none;' ?>" id="info_lang_autodetect">
+								</div>
+								<div style="<?php echo ($currentLang=='') ? '' : 'display:none;' ?>" id="info_lang_autodetect">
 									<?php _e('You need to add all languages that you want auto-detected in the Cookiebot administration tool.'); ?> <br/>
 									<?php _e('The auto-detect checkbox needs to be enabled in the Cookiebot administration tool.'); ?><br/>
 									<?php _e('If the auto-detected language is not supported, Cookiebot will use the default language.'); ?>
-								</strong>
+								</div>
 								<br />
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-do-I-set-the-language-of-the-consent-banner-dialog-" target="_blank">
 									<?php _e('Read more here'); ?>
 								</a>
 								<br />
 								<a href="#" id="show_add_language_guide"><?php _e('Show guide to add languages'); ?></a>
-							</p>
-							<div id="add_language_guide" style="display:none;">
-								<img src="<?php echo plugin_dir_url( __FILE__ ); ?>/assets/guide_add_language.gif" alt="Add language in Cookiebot administration tool" />
-								<br />
-								<a href="#" id="hide_add_language_guide"><?php _e('Hide guide'); ?></a>
+								<div id="add_language_guide" style="display:none;">
+									<img src="<?php echo plugin_dir_url( __FILE__ ); ?>/assets/guide_add_language.gif" alt="Add language in Cookiebot administration tool" />
+									<br />
+									<a href="#" id="hide_add_language_guide"><?php _e('Hide guide'); ?></a>
+								</div>
 							</div>
 							<script>
 								jQuery(document).ready(function($) {
