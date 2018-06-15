@@ -39,7 +39,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function add_submenu() {
-		add_options_page( 'Cookiebot Addons', __( 'Cookiebot Addons', 'cookiebot-addons' ), 'manage_options', 'cookiebot-addons', array(
+		add_submenu_page('cookiebot', 'Prior Consent', __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array(
 			$this,
 			'setting_page'
 		) );
@@ -51,7 +51,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function add_wp_admin_style( $hook ) {
-		if ( $hook != 'settings_page_cookiebot-addons' ) {
+		if ( $hook != 'cookiebot_page_cookiebot-addons' ) {
 			return;
 		}
 
@@ -342,7 +342,7 @@ class Settings_Config {
         <div class="wrap">
 
             <div id="icon-themes" class="icon32"></div>
-            <h2>Cookiebot addons</h2>
+            <h2>Prior consent</h2>
 
 			<?php if ( isset( $_GET['tab'] ) ) {
 				$active_tab = $_GET['tab'];

@@ -1,14 +1,4 @@
 <?php
-/**
- * Plugin Name: Cookiebot Addons
- * Description: Adding support for Cookiebot
- * Author: Johan Holst Nielsen & Aytac Kokus & Sebastian Kurznyowski
- * Author URI: https://www.cookiebot.com
- * Text Domain: cookiebot-addons
- * Domain Path: /languages
- * Version: 1.6.0
- */
-
 namespace cookiebot_addons_framework;
 
 use cookiebot_addons_framework\config\Settings_Config;
