@@ -193,12 +193,6 @@ class Settings_Config {
             <p>
                 <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot-addons' ); ?></span><br>
             <ul class="cookietypes">
-                <li><input type="checkbox" id="cookie_type_necessary_<?php echo $option; ?>"
-                           value="necessary"
-                           name="cookiebot_jetpack_addon[<?php echo $option; ?>][cookie_type][]"
-						<?php cookiebot_checked_selected_helper( $addon->get_widget_cookie_types( $option ), 'necessary' ); ?>>
-                    <label>Necessary</label>
-                </li>
                 <li><input type="checkbox" id="cookie_type_preferences_<?php echo $option; ?>"
                            value="preferences"
 						<?php cookiebot_checked_selected_helper( $addon->get_widget_cookie_types( $option ), 'preferences' ); ?>
@@ -266,12 +260,6 @@ class Settings_Config {
             <p>
                 <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot-addons' ); ?></span><br>
             <ul class="cookietypes">
-                <li><input type="checkbox" id="cookie_type_necessary_<?php echo $addon->get_option_name(); ?>"
-                           value="necessary"
-                           name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][cookie_type][]"
-						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types(), 'necessary' ); ?>>
-                    <label>Necessary</label>
-                </li>
                 <li><input type="checkbox" id="cookie_type_preferences_<?php echo $addon->get_option_name(); ?>"
                            value="preferences"
 						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types(), 'preferences' ); ?>
