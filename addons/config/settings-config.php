@@ -166,7 +166,7 @@ class Settings_Config {
 	public function header_jetpack_addon() {
 		?>
         <p>
-			<?php _e( 'Jetpack settings.', 'cookiebot-addons' ); ?>
+			<?php _e( 'Jetpack settings.', 'cookiebot' ); ?>
         </p>
 		<?php
 	}
@@ -185,13 +185,13 @@ class Settings_Config {
 		?>
         <div class="postbox cookiebot-addon">
             <p>
-                <label for="<?php echo 'enabled_' . $option; ?>"><?php _e( 'Enable', 'cookie-addons' ); ?></label>
+                <label for="<?php echo 'enabled_' . $option; ?>"><?php _e( 'Enable', 'cookie' ); ?></label>
                 <input type="checkbox" id="<?php echo 'enabled_' . $option; ?>"
                        name="cookiebot_jetpack_addon[<?php echo $option; ?>][enabled]"
                        value="1" <?php checked( 1, $addon->is_widget_enabled( $option ), true ); ?> />
             </p>
             <p>
-                <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot-addons' ); ?></span><br>
+                <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></span><br>
             <ul class="cookietypes">
                 <li><input type="checkbox" id="cookie_type_preferences_<?php echo $option; ?>"
                            value="preferences"
@@ -211,7 +211,7 @@ class Settings_Config {
             </ul>
             </p>
             <p>
-                <label for=""><?php _e( 'Display a placeholder', 'cookiebot-addons' ); ?></label>
+                <label for=""><?php _e( 'Display a placeholder', 'cookiebot' ); ?></label>
                 <input type="checkbox" id="" name="cookiebot_jetpack_addon[<?php echo $option; ?>][placeholder]"
                        value="1" <?php checked( 1, $addon->is_widget_placeholder_enabled( $option ), true ); ?>>
             </p>
@@ -228,11 +228,11 @@ class Settings_Config {
 	public function header_available_addons() {
 		?>
         <p>
-			<?php _e( 'Below is a list of addons for Cookiebot. Addons help you make installed plugins GDPR compliant.', 'cookiebot-addons' ); ?>
+			<?php _e( 'Below is a list of addons for Cookiebot. Addons help you make installed plugins GDPR compliant.', 'cookiebot' ); ?>
             <br/>
-			<?php _e( 'These addons are available because you have the corresponding plugins installed and activated.', 'cookiebot-addons' ); ?>
+			<?php _e( 'These addons are available because you have the corresponding plugins installed and activated.', 'cookiebot' ); ?>
             <br/>
-			<?php _e( 'Deactivate an addon if you want to handle GDPR compliance yourself, or through another plugin.', 'cookiebot-addons' ); ?>
+			<?php _e( 'Deactivate an addon if you want to handle GDPR compliance yourself, or through another plugin.', 'cookiebot' ); ?>
         </p>
 		<?php
 	}
@@ -252,13 +252,13 @@ class Settings_Config {
 		?>
         <div class="postbox cookiebot-addon">
             <p>
-                <label for="<?php echo 'enabled_' . $addon->get_option_name(); ?>"><?php _e( 'Enable', 'cookie-addons' ); ?></label>
+                <label for="<?php echo 'enabled_' . $addon->get_option_name(); ?>"><?php _e( 'Enable', 'cookie' ); ?></label>
                 <input type="checkbox" id="<?php echo 'enabled_' . $addon->get_option_name(); ?>"
                        name="cookiebot_available_addons[<?php echo $addon->get_option_name() ?>][enabled]"
                        value="1" <?php checked( 1, $addon->is_addon_enabled(), true ); ?> />
             </p>
             <p>
-                <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot-addons' ); ?></span><br>
+                <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></span><br>
             <ul class="cookietypes">
                 <li><input type="checkbox" id="cookie_type_preferences_<?php echo $addon->get_option_name(); ?>"
                            value="preferences"
@@ -289,7 +289,7 @@ class Settings_Config {
 	public function header_unavailable_addons() {
 		?>
         <p>
-			<?php _e( 'The following addons are unavailable. This is because the corresponding plugin is not installed.', 'cookiebot-addons' ); ?>
+			<?php _e( 'The following addons are unavailable. This is because the corresponding plugin is not installed.', 'cookiebot' ); ?>
         </p>
 		<?php
 	}
@@ -308,9 +308,9 @@ class Settings_Config {
         <div class="postbox cookiebot-addon">
             <i><?php
 				if ( ! $addon->is_addon_installed() ) {
-					_e( 'The plugin is not installed.', 'cookiebot-addons' );
+					_e( 'The plugin is not installed.', 'cookiebot' );
 				} else if ( ! $addon->is_addon_activated() ) {
-					_e( 'The plugin is not activated.', 'cookiebot-addons' );
+					_e( 'The plugin is not activated.', 'cookiebot' );
 				}
 				?></i>
         </div>

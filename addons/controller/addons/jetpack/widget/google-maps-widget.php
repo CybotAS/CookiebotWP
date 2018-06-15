@@ -93,7 +93,7 @@ class Google_Maps_Widget {
 
 				if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
 					$data .= '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->cookie_types ) . '">
-						  ' . sprintf( __( 'Please <a href="javascript:Cookiebot.renew()">accept %s cookies</a> to watch this google map.', 'cookiebot_addons' ), cookiebot_output_cookie_types( $this->cookie_types ) ) . '
+						  ' . sprintf( __( 'Please <a href="javascript:Cookiebot.renew()">accept %s cookies</a> to watch this google map.', 'cookiebot' ), cookiebot_output_cookie_types( $this->cookie_types ) ) . '
 						</div>';	
 				}
 				

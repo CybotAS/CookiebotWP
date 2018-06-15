@@ -77,6 +77,19 @@ final class Cookiebot_WP {
 		if(is_admin() || (defined('DOING_CRON') && DOING_CRON)) {
 			add_filter('auto_update_plugin', array($this,'automatic_updates'), 10, 2);
 		}
+		
+		//Load text domain
+		add_action('plugins_loaded', array($this,'load_textdomain'));
+	}
+	
+	/**
+	 * Cookiebot_WP Load text domain
+	 * 
+	 * @version 2.0.0
+	 * @since		2.0.0
+	 */
+	function load_textdomain() {
+		load_plugin_textdomain( 'cookiebot', false, basename( dirname( __FILE__ ) ) . '/langs' ); 
 	}
 	
 	/**

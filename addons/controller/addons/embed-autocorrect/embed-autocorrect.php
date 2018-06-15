@@ -105,7 +105,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function cookiebot_addon_embed_autocorrect_content( $content ) {
 		//Make sure Cookiebot is active and the user has enabled autocorrection
 		$cookieContentNotice = '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->get_cookie_types() ) . '">';
-		$cookieContentNotice .= sprintf( __( 'Please <a href="javascript:Cookiebot.renew()">accept %s cookies</a> to watch this video.', 'cookiebot-addons' ), cookiebot_output_cookie_types( $this->get_cookie_types() ) );
+		$cookieContentNotice .= sprintf( __( 'Please <a href="javascript:Cookiebot.renew()">accept %s cookies</a> to watch this video.', 'cookiebot' ), cookiebot_output_cookie_types( $this->get_cookie_types() ) );
 		$cookieContentNotice .= '</div>';
 
 		//Match twitter.

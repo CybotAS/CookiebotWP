@@ -110,7 +110,7 @@ class Visitor_Cookies {
 	 */
 	public function view_accept_preferences_consent() {
 		echo '<div class="cookieconsent-optout-preferences">
-						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept preferences-cookies</a> to switch to full page.', 'cookiebot_addons' ) . '
+						  ' . __( 'Please <a href="javascript:Cookiebot.renew()">accept preferences-cookies</a> to switch to full page.', 'cookiebot' ) . '
 						</div>';
 	}
 }
