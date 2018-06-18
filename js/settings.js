@@ -14,6 +14,7 @@ function init() {
     placeholder_select_language();
     placeholder_toggle();
     button_add_placeholder_language();
+    button_delete_language();
 }
 
 /**
@@ -82,7 +83,10 @@ function button_add_placeholder_language() {
  */
 function add_placeholder_language_content( addon ) {
     jQuery( '.placeholder[data-addon="' + addon + '"] .placeholder_content:first' ).each( function () {
-        jQuery( '.placeholder[data-addon="' + addon + '"]' ).prepend( jQuery( this ).html() );
+        var data = jQuery( this ).html();
+        jQuery( data ).prepend( '<p>test</p>' );
+        console.log( data );
+        jQuery( '.placeholder[data-addon="' + addon + '"]' ).prepend( data );
     } )
 }
 
@@ -106,4 +110,14 @@ function placeholder_select_language() {
         // rename textarea
         jQuery( this ).parent().next().find( 'textarea' ).attr( 'name', select_name );
     } )
+}
+
+function button_delete_language() {
+    jQuery( document ).on( 'click', '.submitdelete', function ( e ) {
+        e.preventDefault();
+
+        jQuery( this ).parent().parent().remove();
+
+        return false;
+    } );
 }

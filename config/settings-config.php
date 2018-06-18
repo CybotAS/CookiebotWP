@@ -227,15 +227,16 @@ class Settings_Config {
                        class="placeholder_enable"
                        data-addon="<?php echo $widget->get_widget_option_name(); ?>"
                        name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][enabled]"
-			        <?php checked( 1, $widget->is_widget_placeholder_enabled() ); ?>
+					<?php checked( 1, $widget->is_widget_placeholder_enabled() ); ?>
                        value="1">
             </p>
 
             <div class="placeholder"
                  data-addon="<?php echo $widget->get_widget_option_name(); ?>" <?php echo ( ! $widget->is_widget_placeholder_enabled() ) ? 'style="display:none"' : ''; ?>>
 				<?php if ( $widget->widget_has_placeholder() ): ?>
+					<?php $count = 0; ?>
 					<?php foreach ( $widget->get_widget_placeholders() as $placeholder_lang => $placeholder_value ): ?>
-                        <div class="placeholder_content">
+                        <div class="placeholder_content submitbox">
                             <p>
                                 <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
                                 <select class="placeholder_select_language"
@@ -255,12 +256,16 @@ class Settings_Config {
 									}
 									?>
                                 </select>
+								<?php if ( $count != 0 ): ?>
+                                    <a href="" class="submitdelete deletion"><?php _e( 'Remove language', 'cookiebot-addons' ); ?></a>
+								<?php endif; ?>
                             </p>
                             <p>
                         <textarea cols="60" rows="5"
                                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][<?php echo $placeholder_lang; ?>]"><?php echo $placeholder_value; ?></textarea>
                             </p>
                         </div>
+						<?php $count ++; ?>
 					<?php endforeach; ?>
 				<?php else: ?>
                     <div class="placeholder_content">
@@ -374,8 +379,9 @@ class Settings_Config {
             <div class="placeholder"
                  data-addon="<?php echo $addon->get_option_name(); ?>" <?php echo ( ! $addon->is_placeholder_enabled() ) ? 'style="display:none"' : ''; ?>>
 				<?php if ( $addon->has_placeholder() ): ?>
+					<?php $count = 0; ?>
 					<?php foreach ( $addon->get_placeholders() as $placeholder_lang => $placeholder_value ): ?>
-                        <div class="placeholder_content">
+                        <div class="placeholder_content submitbox">
                             <p>
                                 <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
                                 <select class="placeholder_select_language"
@@ -395,12 +401,16 @@ class Settings_Config {
 									}
 									?>
                                 </select>
+	                            <?php if ( $count != 0 ): ?>
+                                    <a href="" class="submitdelete deletion"><?php _e( 'Remove language', 'cookiebot-addons' ); ?></a>
+	                            <?php endif; ?>
                             </p>
                             <p>
                         <textarea cols="60" rows="5"
                                   name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][<?php echo $placeholder_lang; ?>]"><?php echo $placeholder_value; ?></textarea>
                             </p>
                         </div>
+						<?php $count ++; ?>
 					<?php endforeach; ?>
 				<?php else: ?>
                     <div class="placeholder_content">
