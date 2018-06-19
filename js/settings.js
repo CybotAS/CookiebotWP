@@ -82,12 +82,12 @@ function button_add_placeholder_language() {
  * @since 1.8.0
  */
 function add_placeholder_language_content( addon ) {
-    jQuery( '.placeholder[data-addon="' + addon + '"] .placeholder_content:first' ).each( function () {
-        var data = jQuery( this ).html();
-        jQuery( data ).prepend( '<p>test</p>' );
-        console.log( data );
-        jQuery( '.placeholder[data-addon="' + addon + '"]' ).prepend( data );
-    } )
+    var data = jQuery( '.placeholder[data-addon="' + addon + '"] .placeholder_content:first' )[ 0 ].outerHTML;
+
+
+    jQuery( '.placeholder[data-addon="' + addon + '"] .add_placeholder_language' ).before( data );
+
+    jQuery( '.placeholder[data-addon="' + addon + '"] .placeholder_content:last select' ).after( php.remove_link );
 }
 
 /**

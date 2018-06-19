@@ -180,7 +180,7 @@ class Settings_Service implements Settings_Service_Interface {
 	public function is_widget_placeholder_enabled( $option_key, $widget ) {
 		$option = get_option( $option_key );
 
-		if ( isset( $option[ $widget ] ) && ! isset( $option[ $widget ]['placeholder'] ) ) {
+		if ( isset( $option[ $widget ] ) && ! isset( $option[ $widget ]['placeholder']['enabled'] ) ) {
 			return false;
 		}
 

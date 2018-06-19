@@ -56,6 +56,7 @@ class Settings_Config {
 		}
 
 		wp_enqueue_script( 'cookiebot_addons_custom_js', plugins_url( 'js/settings.js', dirname( __FILE__ ) ), array( 'jquery' ), '1.8', true );
+		wp_localize_script('cookiebot_addons_custom_js', 'php', array('remove_link' => ' <a href="" class="submitdelete deletion">'. __( 'Remove language', 'cookiebot-addons' ) . '</a>') );
 		wp_enqueue_style( 'cookiebot_addons_custom_css', plugins_url( 'style/css/admin_styles.css', dirname( __FILE__ ) ) );
 	}
 
