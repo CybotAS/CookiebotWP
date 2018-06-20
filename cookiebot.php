@@ -296,11 +296,13 @@ final class Cookiebot_WP {
 									<?php _e('If the auto-detected language is not supported, Cookiebot will use the default language.'); ?>
 								</div>
 								<br />
+								
+								<a href="#" id="show_add_language_guide"><?php _e('Show guide to add languages'); ?></a>
+								&nbsp;
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-do-I-set-the-language-of-the-consent-banner-dialog-" target="_blank">
 									<?php _e('Read more here'); ?>
-								</a>
-								<br />
-								<a href="#" id="show_add_language_guide"><?php _e('Show guide to add languages'); ?></a>
+								</a>								
+								
 								<div id="add_language_guide" style="display:none;">
 									<img src="<?php echo plugin_dir_url( __FILE__ ); ?>/assets/guide_add_language.gif" alt="Add language in Cookiebot administration tool" />
 									<br />
