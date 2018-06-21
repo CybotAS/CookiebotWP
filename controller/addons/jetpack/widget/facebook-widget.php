@@ -88,7 +88,7 @@ class Facebook_Widget {
 				 * Display placeholder if allowed in the backend settings
 				 */
 				if ( $this->is_widget_placeholder_enabled() ) {
-					$this->add_cookie_consent_div();
+					add_action( 'jetpack_stats_extra', array( $this, 'cookie_consent_div' ), 10, 2 );
 				}
 			}
 		}
@@ -194,21 +194,12 @@ class Facebook_Widget {
 	}
 
 	/**
-	 * Add div to re-check cookiebot settings
-	 *
-	 * @since 1.2.0
-	 */
-	protected function add_cookie_consent_div() {
-		add_action( 'jetpack_stats_extra', array( $this, 'cookie_consent_div' ), 10, 2 );
-	}
-
-	/**
-	 * Output link to Cookiebot settings
+	 * Show consent message when the consent is not given.
 	 *
 	 * @param $view     string
 	 * @param $widget   string
 	 *
-	 * @since 1.2.0
+	 * @since 1.6.0
 	 */
 	public function cookie_consent_div( $view, $widget ) {
 		if ( $widget == 'facebook-likebox' && $view == 'widget_view' ) {

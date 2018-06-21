@@ -85,6 +85,13 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 						cookiebot_remove_class_action( 'wp_footer', 'Jetpack_Internet_Defense_League_Widget', 'footer_script' );
 					}
 				}, 9 );
+
+				/**
+				 * Display placeholder if allowed in the backend settings
+				 */
+				if ( $this->is_widget_placeholder_enabled() ) {
+					add_action( 'jetpack_stats_extra', array( $this, 'cookie_consent_div' ), 10, 2 );
+				}
 			}
 		}
 	}
@@ -176,5 +183,23 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	 */
 	public function get_widget_placeholder() {
 		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_widget_cookie_types() ) );
+	}
+
+	/**
+	 * Show consent message when the consent is not given.
+	 *
+	 * @param $view     string
+	 * @param $widget   string
+	 *
+	 * @since 1.6.0
+	 */
+	public function cookie_consent_div( $view, $widget ) {
+		if ( $widget == 'internet_defense_league' && $view == 'widget_view' ) {
+			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
+				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">
+						  ' . $this->get_widget_placeholder() . '
+						</div>';
+			}
+		}
 	}
 }
