@@ -170,7 +170,7 @@ class Twitter_Timeline_Widget {
 	 * @since 1.8.0
 	 */
 	public function get_widget_placeholder() {
-		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), $this->get_widget_cookie_types() );
+		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_widget_cookie_types() ) );
 	}
 
 	/**
@@ -202,9 +202,7 @@ class Twitter_Timeline_Widget {
 	public function display_div_message_to_go_to_consent_settings( $view, $widget ) {
 		if ( $widget == 'twitter_timeline' && $view == 'widget_view' ) {
 			if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
-				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->cookie_types ) . '">
-						  ' . $this->get_widget_placeholder() . '
-						</div>';
+				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->cookie_types ) . '">' . $this->get_widget_placeholder() . '</div>';
 			}
 		}
 	}

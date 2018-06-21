@@ -81,7 +81,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 					 *
 					 * @since 1.2.0
 					 */
-					if ( ! $this->cookie_consent->is_cookie_state_accepted( 'marketing' ) ) {
+					if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() ) ) {
 						cookiebot_remove_class_action( 'wp_footer', 'Jetpack_Internet_Defense_League_Widget', 'footer_script' );
 					}
 				}, 9 );
@@ -175,6 +175,6 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_widget_placeholder() {
-		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), $this->get_widget_cookie_types() );
+		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_widget_cookie_types() ) );
 	}
 }

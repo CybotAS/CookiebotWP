@@ -141,6 +141,13 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		 * @since 1.2.0
 		 */
 		$this->widgets[] = new Goodreads_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
+
+		/**
+		 * Load configuration for facebook widget
+		 *
+		 * @since 1.2.0
+		 */
+		$this->widgets[] = new Facebook_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
 	}
 
 	/**

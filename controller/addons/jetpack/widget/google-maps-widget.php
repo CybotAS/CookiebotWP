@@ -176,7 +176,7 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_widget_placeholder() {
-		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), $this->get_widget_cookie_types() );
+		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_widget_cookie_types() ) );
 	}
 
 	/**

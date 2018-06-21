@@ -180,7 +180,7 @@ class Facebook_Widget {
 	 * @since 1.8.0
 	 */
 	public function get_widget_placeholder() {
-		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), $this->get_widget_cookie_types() );
+		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_widget_cookie_types() ) );
 	}
 
 
@@ -190,7 +190,7 @@ class Facebook_Widget {
 	 * @since 1.2.0
 	 */
 	protected function add_consent_attribute_to_facebook_embed_javascript() {
-		$this->script_loader_tag->add_tag( 'jetpack-facebook-embed', $this->cookie_types );
+		$this->script_loader_tag->add_tag( 'jetpack-facebook-embed', $this->get_widget_cookie_types() );
 	}
 
 	/**
@@ -212,8 +212,8 @@ class Facebook_Widget {
 	 */
 	public function cookie_consent_div( $view, $widget ) {
 		if ( $widget == 'facebook-likebox' && $view == 'widget_view' ) {
-			if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
-				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->cookie_types ) . '">
+			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
+				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">
 						  ' . $this->get_widget_placeholder() . '
 						</div>';
 			}

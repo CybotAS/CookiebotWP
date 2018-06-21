@@ -325,7 +325,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_widget_placeholder( $option_key, $widget_key, $default_placeholder, $cookies ) {
+	public function get_widget_placeholder( $option_key, $widget_key, $default_placeholder, $cookies = '') {
 		$option = get_option( $option_key );
 
 		if ( isset( $option[ $widget_key ]['placeholder']['enabled'] ) ) {
