@@ -137,7 +137,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	 * @return string
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this video.';
+		return 'Please accept [renew_consent]%s[/renew_consent] cookies to enable internet defense league.';
 	}
 
 	/**

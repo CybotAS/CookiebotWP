@@ -135,7 +135,7 @@ class Facebook_Widget {
 	 * @return string
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this video.';
+		return 'Please accept [renew_consent]%s[/renew_consent] cookies to see facebook widget.';
 	}
 
 	/**
