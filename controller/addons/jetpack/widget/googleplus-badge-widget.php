@@ -83,7 +83,7 @@ class Googleplus_Badge_Widget {
 				$this->disable_javascript_file();
 
 				if ( $this->is_widget_placeholder_enabled() ) {
-					$this->div_to_enable_marketing_consent();
+					add_action( 'jetpack_stats_extra', array( $this, 'display_div_message_to_go_to_consent_settings' ), 10, 2 );
 				}
 			}
 		}
@@ -130,7 +130,7 @@ class Googleplus_Badge_Widget {
 	 * @return string
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this video.';
+		return 'Please accept [renew_consent]%s[/renew_consent] cookies to enable google plus badge.';
 	}
 
 	/**
@@ -185,15 +185,6 @@ class Googleplus_Badge_Widget {
 	 */
 	protected function disable_javascript_file() {
 		$this->script_loader_tag->add_tag( 'googleplus-widget', $this->cookie_types );
-	}
-
-	/**
-	 * Add message to go to consent settings when marketing consent is not accepted
-	 *
-	 * @since 1.2.0
-	 */
-	protected function div_to_enable_marketing_consent() {
-		add_action( 'jetpack_stats_extra', array( $this, 'display_div_message_to_go_to_consent_settings' ), 10, 2 );
 	}
 
 	/**

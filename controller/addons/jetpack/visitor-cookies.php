@@ -234,7 +234,9 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 		/**
 		 * Show message to accept preferences consent to save
 		 */
-		add_action( 'wp_mobile_theme_footer', array( $this, 'view_accept_preferences_consent' ) );
+		if( $this->is_widget_placeholder_enabled() ) {
+			add_action( 'wp_mobile_theme_footer', array( $this, 'view_accept_preferences_consent' ) );
+		}
 	}
 
 	/**

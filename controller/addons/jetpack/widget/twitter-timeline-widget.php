@@ -78,7 +78,7 @@ class Twitter_Timeline_Widget {
 				$this->disable_javascript_file();
 
 				if ( $this->is_widget_placeholder_enabled() ) {
-					$this->div_to_enable_marketing_consent();
+					add_action( 'jetpack_stats_extra', array( $this, 'display_div_message_to_go_to_consent_settings' ), 10, 2 );
 				}
 			}
 		}
@@ -125,7 +125,7 @@ class Twitter_Timeline_Widget {
 	 * @return string
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this video.';
+		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this twitterline.';
 	}
 
 	/**
@@ -183,15 +183,6 @@ class Twitter_Timeline_Widget {
 	}
 
 	/**
-	 * Add message to go to consent settings when marketing consent is not accepted
-	 *
-	 * @since 1.2.0
-	 */
-	protected function div_to_enable_marketing_consent() {
-		add_action( 'jetpack_stats_extra', array( $this, 'display_div_message_to_go_to_consent_settings' ), 10, 2 );
-	}
-
-	/**
 	 * Show a messsage to go to consent settings
 	 *
 	 * @param $view     string
@@ -201,8 +192,8 @@ class Twitter_Timeline_Widget {
 	 */
 	public function display_div_message_to_go_to_consent_settings( $view, $widget ) {
 		if ( $widget == 'twitter_timeline' && $view == 'widget_view' ) {
-			if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
-				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->cookie_types ) . '">' . $this->get_widget_placeholder() . '</div>';
+			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
+				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">' . $this->get_widget_placeholder() . '</div>';
 			}
 		}
 	}

@@ -86,6 +86,10 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 				 */
 				add_action( 'jetpack_contact_info_widget_start', array( $this, 'start_buffer' ) );
 				add_action( 'jetpack_contact_info_widget_end', array( $this, 'stop_buffer' ) );
+
+				if ( $this->is_widget_placeholder_enabled() ) {
+					add_action( 'jetpack_stats_extra', array( $this, 'cookie_consent_div' ), 10, 2 );
+				}
 			}
 		}
 	}
@@ -131,7 +135,7 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 	 * @return string
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this video.';
+		return 'Please accept [renew_consent]%s[/renew_consent] cookies to enable google maps.';
 	}
 
 	/**
@@ -230,13 +234,6 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 
 				$data = str_replace( 'src=', 'data-cookieconsent="' . cookiebot_output_cookie_types( $this->cookie_types ) . '" data-src=', $data );
 
-				if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
-					$data .= '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->cookie_types ) . '">
-						  ' . $this->get_widget_placeholder() . '
-						</div>';
-				}
-
-
 				/**
 				 * Return updated iframe tag
 				 */
@@ -250,5 +247,23 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 		}
 
 		return $updated_scripts;
+	}
+
+	/**
+	 * Show consent message when the consent is not given.
+	 *
+	 * @param $view     string
+	 * @param $widget   string
+	 *
+	 * @since 1.6.0
+	 */
+	public function cookie_consent_div( $view, $widget ) {
+		if ( $widget == 'contact_info' && $view == 'widget_view' ) {
+			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
+				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">
+						  ' . $this->get_widget_placeholder() . '
+						</div>';
+			}
+		}
 	}
 }
