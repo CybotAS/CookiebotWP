@@ -29,7 +29,7 @@ For example
 
 4. Copy class from another addon and rename everything accordingly
 
-5. Go to 'load_configuration' method and rename the callback function to make it more sensible. Then work in that function to block the cookies. You can find more information about how to block cookies in [this documentation](how-to-block-cookies.md).
+5. Go to 'load_configuration' method and rename the callback function to make it more sense. Then work in that function to block the cookies. You can find more information about how to block cookies in [this documentation](how-to-block-cookies.md).
 
 6. Test if the cookies are blocked.
 
