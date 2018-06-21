@@ -5,6 +5,9 @@
   "Ga_Google_Analytics": {
     "class": "cookiebot_addons_framework\\controller\\addons\\ga_google_analytics\\Ga_Google_Analytics"
   },
+  "Google_Analytics": {
+    "class": "cookiebot_addons_framework\\controller\\addons\\google_analytics\\Google_Analytics"
+  },
   "Ga_Analyticator": {
     "class": "cookiebot_addons_framework\\controller\\addons\\google_analyticator\\Google_Analyticator"
   },
