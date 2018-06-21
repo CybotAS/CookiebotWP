@@ -36,6 +36,27 @@ Interface Cookiebot_Addons_Interface {
 	public function get_addon_name();
 
 	/**
+	 * Default placeholder content
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_default_placeholder();
+
+	/**
+	 * Get placeholder content
+	 *
+	 * This function will check following features:
+	 * - Current language
+	 *
+	 * @return bool|mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholder();
+
+	/**
 	 * Option name in the database
 	 *
 	 * @return string
@@ -81,4 +102,31 @@ Interface Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_activated();
+
+	/**
+	 * Checks if it does have custom placeholder content
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function has_placeholder();
+
+	/**
+	 * returns all placeholder contents
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholders();
+
+	/**
+	 * Return true if the placeholder is enabled
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function is_placeholder_enabled();
 }

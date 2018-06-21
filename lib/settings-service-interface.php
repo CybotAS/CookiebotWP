@@ -81,4 +81,17 @@ Interface Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_active_addons();
+
+	/**
+	 * returns the placeholder if it does exist
+	 *
+	 * @param $option_key
+	 * @param $default_placeholder
+	 * @param $cookies
+	 *
+	 * @return bool|mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholder( $option_key, $default_placeholder, $cookies );
 }
