@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent
 * Requires at least: 4.4
 * Tested up to: 4.9
-* Stable tag: 1.6.1
+* Stable tag: 2.0.0
 * Requires PHP: 5.4
 * License: GPLv2 or later
 
@@ -138,6 +138,12 @@ Cookiebot works with GTM, however you should not use this plugin, but the manual
 
 
 ## Changelog ##
+
+### 2.0.0 - 2019-06-21 ###
+* Merge Cookiebot and Cookiebot Addons plugins. Cookiebot plugin now ships with addons for making other plugins compliant.
+
+### 1.6.2 - 2018-06-21 ###
+* Fix check for WP Rocket.
 
 ### 1.6.1 - 2018-06-11 ###
 * Fixing shortcode when using WP Rocket 

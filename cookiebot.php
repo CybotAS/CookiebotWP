@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR Compliant Cookie Consent and Notice
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supporting prior consent, cookie declaration, and documentation of consents. Easy to install, implement and configure.
 Author: Cybot A/S
-Version: 1.6.1
+Version: 2.0.0
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '1.6.1';
+	public $version = '2.0.0';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -54,6 +54,17 @@ final class Cookiebot_WP {
 	 * @access  public
 	 */
 	function __construct() {
+		add_action('wp_loaded', array($this, 'cookiebot_init'), 10);
+	}
+	
+	/**
+	 * Cookiebot_WP Init Cookiebot.
+	 *
+	 * @version 1.6.2
+	 * @since   1.6.2
+	 * @access  public
+	 */
+	function cookiebot_init() {	
 		// Set up localisation
 		//load_plugin_textdomain('cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
 		if(is_admin()) {
@@ -77,9 +88,6 @@ final class Cookiebot_WP {
 		if(is_admin() || (defined('DOING_CRON') && DOING_CRON)) {
 			add_filter('auto_update_plugin', array($this,'automatic_updates'), 10, 2);
 		}
-		
-		//Load text domain
-		add_action('plugins_loaded', array($this,'load_textdomain'));
 	}
 	
 	/**
