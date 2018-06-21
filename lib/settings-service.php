@@ -9,6 +9,8 @@ class Settings_Service implements Settings_Service_Interface {
 	 */
 	public $container;
 
+	CONST OPTION_NAME = 'cookiebot_available_addons';
+
 	/**
 	 * Settings_Service constructor.
 	 *
@@ -30,7 +32,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_enabled( $addon ) {
-		$option = get_option( 'cookiebot_available_addons' );
+		$option = get_option( static::OPTION_NAME );
 
 		if ( isset( $option[ $addon ]['enabled'] ) ) {
 			return true;
@@ -76,7 +78,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_cookie_types( $addon, $default = array() ) {
-		$option = get_option( 'cookiebot_available_addons' );
+		$option = get_option( static::OPTION_NAME );
 
 		if ( isset( $option[ $addon ]['cookie_type'] ) && is_array( $option[ $addon ]['cookie_type'] ) ) {
 			return $option[ $addon ]['cookie_type'];
@@ -178,10 +180,194 @@ class Settings_Service implements Settings_Service_Interface {
 	public function is_widget_placeholder_enabled( $option_key, $widget ) {
 		$option = get_option( $option_key );
 
-		if ( isset( $option[ $widget ] ) && ! isset( $option[ $widget ]['placeholder'] ) ) {
+		if ( isset( $option[ $widget ] ) && ! isset( $option[ $widget ]['placeholder']['enabled'] ) ) {
 			return false;
 		}
 
 		return true;
+	}
+
+	/**
+	 * Checks if addon has placeholders
+	 *
+	 * @param $option_key
+	 *
+	 * @return bool
+	 *
+	 * @since 1.8.0
+	 */
+	public function widget_has_placeholder( $option_key, $widget_key ) {
+		$option = get_option( $option_key );
+
+		if ( isset( $option[ $widget_key ]['placeholder']['languages'] ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Returns widget placeholders
+	 *
+	 * @param $option_key
+	 * @param $widget_key
+	 *
+	 * @return bool
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_widget_placeholders( $option_key, $widget_key ) {
+		$option = get_option( $option_key );
+
+		if ( isset( $option[ $widget_key ]['placeholder']['languages'] ) ) {
+			return $option[ $widget_key ]['placeholder']['languages'];
+		}
+
+		return false;
+	}
+
+	/**
+	 * Returns all placeholders
+	 *
+	 * @param $option_key
+	 *
+	 * @return bool
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholders( $option_key ) {
+		$option = get_option( static::OPTION_NAME );
+
+		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) ) {
+			return $option[ $option_key ]['placeholder']['languages'];
+		}
+
+		return false;
+	}
+
+	/**
+	 * Checks if addon has placeholders
+	 *
+	 * @param $option_key
+	 *
+	 * @return bool
+	 *
+	 * @since 1.8.0
+	 */
+	public function has_placeholder( $option_key ) {
+		$option = get_option( static::OPTION_NAME );
+
+		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * returns true if the addon placeholder is enabled
+	 *
+	 * @param $option_key
+	 *
+	 * @return bool
+	 *
+	 * @since 1.8.0
+	 */
+	public function is_placeholder_enabled( $option_key ) {
+		$option = get_option( static::OPTION_NAME );
+
+		if ( isset( $option[ $option_key ]['placeholder']['enabled'] ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * returns the placeholder if it does exist
+	 *
+	 * @param $option_key
+	 * @param $default_placeholder
+	 * @param $cookies
+	 *
+	 * @return bool|mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholder( $option_key, $default_placeholder, $cookies ) {
+		$option = get_option( static::OPTION_NAME );
+
+		if ( isset( $option[ $option_key ]['placeholder']['enabled'] ) ) {
+			if ( function_exists( 'cookiebot' ) ) {
+				$cookiebot   = cookiebot();
+				$currentLang = $cookiebot->get_language( true );
+
+				// get current lang text
+				if ( isset( $option[ $option_key ]['placeholder'][ $currentLang ] ) ) {
+					return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder'][ $currentLang ], $cookies );
+				} else {
+					return $this->placeholder_merge_tag( $default_placeholder, $cookies );
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * returns the placeholder if it does exist
+	 *
+	 * @param $option_key
+	 * @param $default_placeholder
+	 * @param $cookies
+	 *
+	 * @return bool|mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_widget_placeholder( $option_key, $widget_key, $default_placeholder, $cookies = '') {
+		$option = get_option( $option_key );
+
+		if ( isset( $option[ $widget_key ]['placeholder']['enabled'] ) ) {
+			if ( function_exists( 'cookiebot' ) ) {
+				$cookiebot   = cookiebot();
+				$currentLang = $cookiebot->get_language( true );
+
+				// get current lang text
+				if ( isset( $option[ $widget_key ]['placeholder'][ $currentLang ] ) ) {
+					return $this->placeholder_merge_tag( $option[ $widget_key ]['placeholder'][ $currentLang ], $cookies );
+				} else {
+					return $this->placeholder_merge_tag( $default_placeholder, $cookies );
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Merges placeholder tags with values
+	 *
+	 * @param $placeholder
+	 * @param $cookies
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.8.0
+	 */
+	private function placeholder_merge_tag( $placeholder, $cookies ) {
+		if ( strpos( $placeholder, '%s' ) !== false ) {
+			$placeholder = str_replace( '%s', $cookies, $placeholder );
+		}
+
+		if ( strpos( $placeholder, '[renew_consent]' ) !== false ) {
+			$placeholder = str_replace( '[renew_consent]', '<a href="javascript:Cookiebot.renew()">', $placeholder );
+		}
+
+		if ( strpos( $placeholder, '[/renew_consent]' ) !== false ) {
+			$placeholder = str_replace( '[/renew_consent]', '</a>', $placeholder );
+		}
+
+		return $placeholder;
 	}
 }

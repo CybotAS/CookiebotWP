@@ -146,6 +146,31 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	}
 
 	/**
+	 * Default placeholder content
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_default_placeholder() {
+		return 'Please accept [renew_consent]%s[/renew_consent] cookies to enable facebook shopping feature.';
+	}
+
+	/**
+	 * Get placeholder content
+	 *
+	 * This function will check following features:
+	 * - Current language
+	 *
+	 * @return bool|mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholder() {
+		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_cookie_types() ) );
+	}
+
+	/**
 	 * Option name in the database
 	 *
 	 * @return string
@@ -212,5 +237,38 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 */
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
+	}
+
+	/**
+	 * Checks if it does have custom placeholder content
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function has_placeholder() {
+		return $this->settings->has_placeholder( $this->get_option_name() );
+	}
+
+	/**
+	 * returns all placeholder contents
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholders() {
+		return $this->settings->get_placeholders( $this->get_option_name() );
+	}
+
+	/**
+	 * Return true if the placeholder is enabled
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function is_placeholder_enabled() {
+		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
 }

@@ -46,6 +46,7 @@ Released and tested addons:
 * [WP-Matomo](https://wordpress.org/plugins/wp-piwik/)
 * [Complete Analytics Optimization Suite (CAOS)](https://wordpress.org/plugins/host-analyticsjs-local/)
 * [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
+* [Googleanalytics](https://wordpress.org/plugins/googleanalytics/)
 
 Following addons are in pipeline:
 * To be continued..
