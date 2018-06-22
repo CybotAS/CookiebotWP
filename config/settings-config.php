@@ -1,8 +1,8 @@
 <?php
 
-namespace cookiebot_addons_framework\config;
+namespace cookiebot_addons\config;
 
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
 
 class Settings_Config {
 

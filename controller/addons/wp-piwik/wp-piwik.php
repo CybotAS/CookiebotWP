@@ -1,14 +1,14 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\wp_piwik;
+namespace cookiebot_addons\controller\addons\wp_piwik;
 
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
-use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
+use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
 use WP_Piwik\Settings;
 
 class Wp_Piwik implements Cookiebot_Addons_Interface {

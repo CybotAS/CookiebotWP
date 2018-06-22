@@ -1,12 +1,12 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\jetpack;
+namespace cookiebot_addons\controller\addons\jetpack;
 
-use cookiebot_addons_framework\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
-use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
+use cookiebot_addons\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
+use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
 
 class Visitor_Cookies implements Jetpack_Widget_Interface {
 

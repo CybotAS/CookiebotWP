@@ -1,12 +1,12 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\add_to_any;
+namespace cookiebot_addons\controller\addons\add_to_any;
 
-use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
-use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
+use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 
 class Add_To_Any implements Cookiebot_Addons_Interface {
 

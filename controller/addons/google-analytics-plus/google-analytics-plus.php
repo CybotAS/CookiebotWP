@@ -1,12 +1,12 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\google_analytics_plus;
+namespace cookiebot_addons\controller\addons\google_analytics_plus;
 
-use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
-use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
+use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 
 class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 

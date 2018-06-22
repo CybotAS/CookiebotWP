@@ -1,11 +1,11 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\jetpack\widget;
+namespace cookiebot_addons\controller\addons\jetpack\widget;
 
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
-use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
+use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 
 class Googleplus_Badge_Widget {
 

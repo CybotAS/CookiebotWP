@@ -1,50 +1,50 @@
 {
   "Add_To_Any": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\add_to_any\\Add_To_Any"
+    "class": "cookiebot_addons\\controller\\addons\\add_to_any\\Add_To_Any"
   },
   "Ga_Google_Analytics": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\ga_google_analytics\\Ga_Google_Analytics"
+    "class": "cookiebot_addons\\controller\\addons\\ga_google_analytics\\Ga_Google_Analytics"
   },
   "Google_Analytics": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\google_analytics\\Google_Analytics"
+    "class": "cookiebot_addons\\controller\\addons\\google_analytics\\Google_Analytics"
   },
   "Ga_Analyticator": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\google_analyticator\\Google_Analyticator"
+    "class": "cookiebot_addons\\controller\\addons\\google_analyticator\\Google_Analyticator"
   },
   "Wd_Google_Analytics": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\wd_google_analytics\\Wd_Google_Analytics"
+    "class": "cookiebot_addons\\controller\\addons\\wd_google_analytics\\Wd_Google_Analytics"
   },
   "Jetpack": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\jetpack\\Jetpack"
+    "class": "cookiebot_addons\\controller\\addons\\jetpack\\Jetpack"
   },
   "Hubspot_Tracking_Code": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\hubspot_tracking_code\\Hubspot_Tracking_Code"
+    "class": "cookiebot_addons\\controller\\addons\\hubspot_tracking_code\\Hubspot_Tracking_Code"
   },
   "Custom_Facebook_Feed": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\custom_facebook_feed\\Custom_Facebook_Feed"
+    "class": "cookiebot_addons\\controller\\addons\\custom_facebook_feed\\Custom_Facebook_Feed"
   },
   "Embed_Autocorrect": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\embed_autocorrect\\Embed_Autocorrect"
+    "class": "cookiebot_addons\\controller\\addons\\embed_autocorrect\\Embed_Autocorrect"
   },
   "Instagram_Feed": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\instagram_feed\\Instagram_Feed"
+    "class": "cookiebot_addons\\controller\\addons\\instagram_feed\\Instagram_Feed"
   },
   "WP_Piwik": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\wp_piwik\\Wp_Piwik"
+    "class": "cookiebot_addons\\controller\\addons\\wp_piwik\\Wp_Piwik"
   },
   "Facebook_For_Woocommerce": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\facebook_for_woocommerce\\Facebook_For_Woocommerce"
+    "class": "cookiebot_addons\\controller\\addons\\facebook_for_woocommerce\\Facebook_For_Woocommerce"
   },
   "Pixel_Caffeine": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\pixel_caffeine\\Pixel_Caffeine"
+    "class": "cookiebot_addons\\controller\\addons\\pixel_caffeine\\Pixel_Caffeine"
   },
   "Wp_Analytify": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\wp_analytify\\Wp_Analytify"
+    "class": "cookiebot_addons\\controller\\addons\\wp_analytify\\Wp_Analytify"
   },
   "Google_Analytics_Plus": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\google_analytics_plus\\Google_Analytics_Plus"
+    "class": "cookiebot_addons\\controller\\addons\\google_analytics_plus\\Google_Analytics_Plus"
   },
   "CAOS_Host_Analyticsjs_Local": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\caos_host_analyticsjs_local\\CAOS_Host_Analyticsjs_Local"
+    "class": "cookiebot_addons\\controller\\addons\\caos_host_analyticsjs_local\\CAOS_Host_Analyticsjs_Local"
   }
 }

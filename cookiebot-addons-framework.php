@@ -1,8 +1,8 @@
 <?php
-namespace cookiebot_addons_framework;
+namespace cookiebot_addons;
 
-use cookiebot_addons_framework\config\Settings_Config;
-use cookiebot_addons_framework\controller\Plugin_Controller;
+use cookiebot_addons\config\Settings_Config;
+use cookiebot_addons\controller\Plugin_Controller;
 use DI\ContainerBuilder;
 use DI;
 
@@ -34,7 +34,7 @@ include_once CAF_DIR . 'lib/helper.php';
  */
 include_once CAF_DIR . 'lib/ioc/autoload.php';
 
-class Cookiebot_Addons_Framework {
+class Cookiebot_Addons {
 
 	/**
 	 * IoC Container - is used for dependency injections
@@ -55,7 +55,7 @@ class Cookiebot_Addons_Framework {
 	public $plugins;
 
 	/**
-	 * Cookiebot_Addons_Framework constructor.
+	 * Cookiebot_Addons constructor.
 	 *
 	 * @throws DI\DependencyException
 	 * @throws DI\NotFoundException
@@ -109,15 +109,15 @@ class Cookiebot_Addons_Framework {
 		$builder = new ContainerBuilder();
 
 		$builder->addDefinitions( [
-			'Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag' ),
-			'Cookie_Consent_Interface'    => DI\object( 'cookiebot_addons_framework\lib\Cookie_Consent' ),
-			'Buffer_Output_Interface'     => DI\object( 'cookiebot_addons_framework\lib\buffer\Buffer_Output' ),
+			'Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag' ),
+			'Cookie_Consent_Interface'    => DI\object( 'cookiebot_addons\lib\Cookie_Consent' ),
+			'Buffer_Output_Interface'     => DI\object( 'cookiebot_addons\lib\buffer\Buffer_Output' ),
 			'plugins'                     => DI\value( $this->plugins )
 		] );
 
 		$this->container = $builder->build();
 
-		$this->container->set( 'Settings_Service_Interface', DI\object( 'cookiebot_addons_framework\lib\Settings_Service' )
+		$this->container->set( 'Settings_Service_Interface', DI\object( 'cookiebot_addons\lib\Settings_Service' )
 			->constructor( $this->container ) );
 	}
 
@@ -152,4 +152,4 @@ class Cookiebot_Addons_Framework {
 /**
  * Initiate the cookiebot addons framework plugin
  */
-new Cookiebot_Addons_Framework();
+new Cookiebot_Addons();

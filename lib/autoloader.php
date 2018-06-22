@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Class Cookiebot_Addons_Framework_Autoloader
+ * Class Cookiebot_Addons_Autoloader
  *
  * @since 1.1.0
  */
-class Cookiebot_Addons_Framework_Autoloader {
+class Cookiebot_Addons_Autoloader {
 
 	/**
 	 * plugin root namespace
 	 *
 	 * @sice 1.1.0
 	 */
-	const ROOT_NAMESPACE = 'cookiebot_addons_framework\\';
+	const ROOT_NAMESPACE = 'cookiebot_addons\\';
 
 	/**
 	 * Register autoload method
@@ -51,4 +51,4 @@ class Cookiebot_Addons_Framework_Autoloader {
  *
  * @since 1.1.0
  */
-new Cookiebot_Addons_Framework_Autoloader();
+new Cookiebot_Addons_Autoloader();
