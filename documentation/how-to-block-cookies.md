@@ -1,6 +1,8 @@
 # How to block cookies
 
-Cookiebot Addons Framework uses different way to block cookies from 3rd party plugins. In this documentation we will explain you with the classes and functions we use to block those.
+Cookiebot Addons uses different techniques to block cookies from 3rd party plugins. 
+
+This document contains explainations of the classes and functions that are available.
 
 List of included interfaces in every addon
 --
@@ -9,30 +11,37 @@ List of included interfaces in every addon
 - [Cookie_Consent_Interface](#cookie-consent-interface)
 - [Buffer_Output_Interface](#buffer-output-interface)
 
-List of helpers to block cookies differently
+List of helpers to block cookies
 ---
 - [remove_action](#remove-action)
 - [cookiebot_remove_class_action](#cookiebot-remove-class-action)
 
 # Settings Service Interface
 
-Settings Service is used to get settings information. For example to see if the addon is installed or not. For example to get the placeholder text.
+The Settings Service is used to store and retrieve settings. 
 
-For example this will return the selected cookie types in the backend:
+Example settings: 
+
+- Check if the addon is installed or not.
+- Get the placeholder text that should be displayed to renew ones consent.
+- Get the tracking types that the addon needs consent for, if it should be executed
+
+This will return the configured cookie types for an addon:
 ```
 $this->settings->get_cookie_types( $this->get_option_name() );
 ```
 
 # Script Loader Tag Interface
 
-Script Loader Tag is used to manipulate the enqeueud scripts. It will add cookiebot script attributes to the script tag so the cookiebot can block the script while the consent is not given.
+Script Loader Tag is used to manipulate the enqeueud scripts. It will add cookiebot script attributes to the script tag so the cookiebot can block the script while consent is not given.
 
-For example:
-This will manipulate scripts added with the handle 'addtoany'. The second parameter will send the cookie types that were selected in the backend. Those types will be implemented into the script attributes.
+Example:
+
+Below function will manipulate scripts added with the handle 'addtoany'. The second parameter will send the cookie types that were selected in the backend. Those types will be implemented into the data-cookieconsent attribute.
 ```
 $this->script_loader_tag->add_tag( 'addtoany', $this->get_cookie_types() );
 
-// this will change the script tag into this
+// will change the script tag into this
 <script text='text/plain' data-cookieconsent='statistics,marketing'>
 ```
 
