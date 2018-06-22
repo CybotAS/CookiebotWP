@@ -1,6 +1,6 @@
 # How to add new addon
 
-The steps you need to take to add new addon
+Steps
 ---
 
 1. Add new addon to addons.json
