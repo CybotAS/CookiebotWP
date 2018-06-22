@@ -76,32 +76,20 @@ class Hubspot_Leadin implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_hubspot_tracking_code() {
-		// Check if HubSpot Tracking Code is loaded
-		$options = get_option( 'hs_settings' );
-		if ( ! isset( $options['hs_portal'] ) || $options['hs_portal'] == '' ) {
-			return;
-		}
-
 		// Check if Cookiebot is activated and active.
 		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
 			return;
 		}
 
 		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
 
-		// Replace original HubSpot Tracking Code with own one and delete cookie if
-		// it was perviously set.
-		if ( is_plugin_active( 'hubspot-tracking-code/hubspot-tracking-code.php' ) ) {
-			/**
-			 * Consent not given - no cache
-			 */
-			$this->buffer_output->add_tag( 'wp_footer', 10, array( 'hs-script-loader' => $this->get_cookie_types() ), false );
-
-			if ( ! $this->cookie_consent->is_cookie_state_accepted( 'marketing' ) && isset( $_COOKIE['hubspotutk'] ) ) {
-				unset( $_COOKIE['hubspotutk'] );
+		if ( $this->is_addon_enabled() && $this->is_addon_activated() ) {
+			if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+				// block the script untill the consent is given
+				$this->script_loader_tag->add_tag( 'leadin-scriptloader-js', $this->get_cookie_types() );
 			}
 		}
 	}
@@ -114,7 +102,7 @@ class Hubspot_Leadin implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_addon_name() {
-		return 'Hubspot Tracking Code';
+		return 'HubSpot - Free Marketing Plugin for WordPress';
 	}
 
 	/**
@@ -125,7 +113,7 @@ class Hubspot_Leadin implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_option_name() {
-		return 'hubspot_tracking_code';
+		return 'hubspot_leadin';
 	}
 
 	/**
@@ -136,7 +124,7 @@ class Hubspot_Leadin implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_plugin_file() {
-		return 'hubspot-tracking-code/hubspot-tracking-code.php';
+		return 'leadin/leadin.php';
 	}
 
 	/**
