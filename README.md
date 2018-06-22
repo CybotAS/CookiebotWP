@@ -49,6 +49,7 @@ Released and tested addons:
 * [Complete Analytics Optimization Suite (CAOS)](https://wordpress.org/plugins/host-analyticsjs-local/)
 * [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
 * [Googleanalytics](https://wordpress.org/plugins/googleanalytics/)
+* [HubSpot – Free Marketing Plugin for WordPress](https://wordpress.org/plugins/leadin/)
 
 Following addons are in pipeline:
 * To be continued..
