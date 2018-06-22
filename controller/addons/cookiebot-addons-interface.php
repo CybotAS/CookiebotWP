@@ -81,6 +81,14 @@ Interface Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_cookie_types();
+	
+	/**
+	 * Returns default cookie types
+	 * @return mixed
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_default_cookie_types();
 
 	/**
 	 * Check if plugin is activated and checked in the backend

@@ -39,7 +39,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function add_submenu() {
-		add_options_page( 'Cookiebot Addons', __( 'Cookiebot Addons', 'cookiebot-addons' ), 'manage_options', 'cookiebot-addons', array(
+		add_submenu_page('cookiebot', 'Prior Consent', __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array(
 			$this,
 			'setting_page'
 		) );
@@ -51,7 +51,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function add_wp_admin_style_script( $hook ) {
-		if ( $hook != 'settings_page_cookiebot-addons' ) {
+		if ( $hook != 'cookiebot_page_cookiebot-addons' ) {
 			return;
 		}
 
@@ -171,7 +171,7 @@ class Settings_Config {
 	public function header_jetpack_addon() {
 		?>
         <p>
-			<?php _e( 'Jetpack settings.', 'cookiebot-addons' ); ?>
+			<?php _e( 'Jetpack settings.', 'cookiebot' ); ?>
         </p>
 		<?php
 	}
@@ -190,20 +190,14 @@ class Settings_Config {
 		?>
         <div class="postbox cookiebot-addon">
             <p>
-                <label for="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"><?php _e( 'Enable', 'cookie-addons' ); ?></label>
+                <label for="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"><?php _e( 'Enable', 'cookiebot' ); ?></label>
                 <input type="checkbox" id="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"
                        name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][enabled]"
                        value="1" <?php checked( 1, $widget->is_widget_enabled(), true ); ?> />
             </p>
             <p>
-                <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot-addons' ); ?></span><br>
+                <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></span><br>
             <ul class="cookietypes">
-                <li><input type="checkbox" id="cookie_type_necessary_<?php echo $widget->get_widget_option_name(); ?>"
-                           value="necessary"
-                           name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"
-						<?php cookiebot_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'necessary' ); ?>>
-                    <label>Necessary</label>
-                </li>
                 <li><input type="checkbox" id="cookie_type_preferences_<?php echo $widget->get_widget_option_name(); ?>"
                            value="preferences"
 						<?php cookiebot_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'preferences' ); ?>
@@ -223,7 +217,7 @@ class Settings_Config {
             </p>
 
             <p>
-                <label><?php _e( 'Display a placeholder', 'cookiebot-addons' ); ?></label>
+                <label><?php _e( 'Display a placeholder', 'cookiebot' ); ?></label>
                 <input type="checkbox"
                        class="placeholder_enable"
                        data-addon="<?php echo $widget->get_widget_option_name(); ?>"
@@ -313,11 +307,11 @@ class Settings_Config {
 	public function header_available_addons() {
 		?>
         <p>
-			<?php _e( 'Below is a list of addons for Cookiebot. Addons help you make installed plugins GDPR compliant.', 'cookiebot-addons' ); ?>
+			<?php _e( 'Below is a list of addons for Cookiebot. Addons help you make installed plugins GDPR compliant.', 'cookiebot' ); ?>
             <br/>
-			<?php _e( 'These addons are available because you have the corresponding plugins installed and activated.', 'cookiebot-addons' ); ?>
+			<?php _e( 'These addons are available because you have the corresponding plugins installed and activated.', 'cookiebot' ); ?>
             <br/>
-			<?php _e( 'Deactivate an addon if you want to handle GDPR compliance yourself, or through another plugin.', 'cookiebot-addons' ); ?>
+			<?php _e( 'Deactivate an addon if you want to handle GDPR compliance yourself, or through another plugin.', 'cookiebot' ); ?>
         </p>
 		<?php
 	}
@@ -337,19 +331,13 @@ class Settings_Config {
 		?>
         <div class="postbox cookiebot-addon">
             <p>
-                <label for="<?php echo 'enabled_' . $addon->get_option_name(); ?>"><?php _e( 'Enable', 'cookie-addons' ); ?></label>
+                <label for="<?php echo 'enabled_' . $addon->get_option_name(); ?>"><?php _e( 'Enable', 'cookie' ); ?></label>
                 <input type="checkbox" id="<?php echo 'enabled_' . $addon->get_option_name(); ?>"
                        name="cookiebot_available_addons[<?php echo $addon->get_option_name() ?>][enabled]"
                        value="1" <?php checked( 1, $addon->is_addon_enabled(), true ); ?> />
             </p>
-            <p><?php _e( 'Check one or multiple cookie types:', 'cookiebot-addons' ); ?></p>
+            <p><?php _e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></p>
             <ul class="cookietypes">
-                <li><input type="checkbox" id="cookie_type_necessary_<?php echo $addon->get_option_name(); ?>"
-                           value="necessary"
-                           name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][cookie_type][]"
-						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types(), 'necessary' ); ?>>
-                    <label>Necessary</label>
-                </li>
                 <li><input type="checkbox" id="cookie_type_preferences_<?php echo $addon->get_option_name(); ?>"
                            value="preferences"
 						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types(), 'preferences' ); ?>
@@ -458,7 +446,7 @@ class Settings_Config {
 	public function header_unavailable_addons() {
 		?>
         <p>
-			<?php _e( 'The following addons are unavailable. This is because the corresponding plugin is not installed.', 'cookiebot-addons' ); ?>
+			<?php _e( 'The following addons are unavailable. This is because the corresponding plugin is not installed.', 'cookiebot' ); ?>
         </p>
 		<?php
 	}
@@ -477,9 +465,9 @@ class Settings_Config {
         <div class="postbox cookiebot-addon">
             <i><?php
 				if ( ! $addon->is_addon_installed() ) {
-					_e( 'The plugin is not installed.', 'cookiebot-addons' );
+					_e( 'The plugin is not installed.', 'cookiebot' );
 				} else if ( ! $addon->is_addon_activated() ) {
-					_e( 'The plugin is not activated.', 'cookiebot-addons' );
+					_e( 'The plugin is not activated.', 'cookiebot' );
 				}
 				?></i>
         </div>
@@ -499,8 +487,25 @@ class Settings_Config {
         <div class="wrap">
 
             <div id="icon-themes" class="icon32"></div>
-            <h2>Cookiebot addons</h2>
+            <h2><?php _e('Prior consent','cookiebot'); ?></h2>
+            <div class="notice inline notice-warning notice-alt cookiebot-notice">
+							<p>
+								<?php _e('These add-ons are produced by an open-source community of developers. This is done to help make it easier for Wordpress users to implement ‘prior consent’ for cookies and trackers set by plugins that do not offer this as a built-in functionality.'); ?>
+							</p>
+							<p>
+								<?php _e('The add-ons are currently the best alternative to a Wordpress Core framework that can signal the user’s consent state to other plugins (if and when this will be implemented is unknown) and to those plugins who do not yet offer native support for Cookiebot built into the plugin itself.'); ?>
+							</p>
+							<p>
+								<?php _e('We do not assume any responsibility for the use of these add-ons. If one of the plugins that the add-ons hook into makes a ‘breaking change’, there may be a period of time where the add-on will not work properly until it has been updated to accommodate the changes in the plugin.'); ?>
+							</p>
+							<p>
+								<strong>
+									<?php echo sprintf(__('If your favourite plugin isn\'t supported you\'re welcome to contribute or request on our <a href="%s" target="_blank">Github development page.</a>'),'https://github.com/CybotAS/CookiebotAddons'); ?>
+								</strong>
+							</p>
 
+            </div>
+            
 			<?php if ( isset( $_GET['tab'] ) ) {
 				$active_tab = $_GET['tab'];
 			} else if ( $active_tab == 'unavailable_addons' ) {
