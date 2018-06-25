@@ -10,7 +10,9 @@ https://core.trac.wordpress.org/ticket/44043
 # News on GADWP
 GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'll provide a link here once the addon is released. 
 
-# Travis CI Status [![Build Status](https://travis-ci.org/CybotAS/CookiebotAddons.svg?branch=develop)](https://travis-ci.org/CybotAS/CookiebotAddons)
+# Travis CI Status 
+
+[![Build Status](https://travis-ci.org/CybotAS/CookiebotAddons.svg?branch=develop)](https://travis-ci.org/CybotAS/CookiebotAddons)
 
 # Installation (for regular users)
 Regular users should use [Cookiebot Wordpress plugin](https://wordpress.org/plugins/cookiebot) which includes Cookiebot Addons.
