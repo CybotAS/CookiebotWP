@@ -1,14 +1,16 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\custom_facebook_feed;
+namespace cookiebot_addons_framework\controller\addons\hubspot_leadin;
+
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
 use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
+use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
 use cookiebot_addons_framework\lib\Settings_Service_Interface;
 
-class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
+class Hubspot_Leadin implements Cookiebot_Addons_Interface {
 
 	/**
 	 * @var Settings_Service_Interface
@@ -46,7 +48,7 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 	 * @param $cookie_consent Cookie_Consent_Interface
 	 * @param $buffer_output Buffer_Output_Interface
 	 *
-	 * @since 1.2.0
+	 * @since 1.3.0
 	 */
 	public function __construct( Settings_Service_Interface $settings, Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent, Buffer_Output_Interface $buffer_output ) {
 		$this->settings          = $settings;
@@ -62,46 +64,33 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 	 */
 	public function load_configuration() {
 		/**
-		 * We add the action after wp_loaded and replace the original GA Google
-		 * Analytics action with our own adjusted version.
+		 * We add the action after wp_loaded and replace the original
+		 * HubSpot Tracking Code action with our own adjusted version.
 		 */
-		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_custom_facebook_feed' ), 5 );
+		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_hubspot_tracking_code' ), 10 );
 	}
 
 	/**
 	 * Manipulate the scripts if they are loaded.
 	 *
-	 * @since 1.1.0
+	 * @since 1.3.0
 	 */
-	public function cookiebot_addon_custom_facebook_feed() {
-		//Check if Custom Facebook Feed is loaded.
-		if ( ! shortcode_exists( 'custom-facebook-feed' ) ) {
-			return;
-		}
-		//Check if Cookiebot is activated and active.
+	public function cookiebot_addon_hubspot_tracking_code() {
+		// Check if Cookiebot is activated and active.
 		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
 			return;
 		}
 
 		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
 
-		//Remove cff_js action and replace it with our own
-		if ( has_action( 'wp_footer', 'cff_js' ) ) {
-			/**
-			 * Consent not given - no cache
-			 */
-			$this->buffer_output->add_tag( 'wp_footer', 10, array( 'cfflinkhashtags' => $this->get_cookie_types() ), false );
-		}
-
-		// External js, so manipulate attributes
-		if ( has_action( 'wp_enqueue_scripts', 'cff_scripts_method' ) ) {
-			/**
-			 * Consent not given - no cache
-			 */
-			$this->script_loader_tag->add_tag( 'cffscripts', $this->get_cookie_types(), false );
+		if ( $this->is_addon_enabled() && $this->is_addon_activated() ) {
+			if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+				// block the script untill the consent is given
+				$this->script_loader_tag->add_tag( 'leadin-scriptloader-js', $this->get_cookie_types() );
+			}
 		}
 	}
 
@@ -113,7 +102,7 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_addon_name() {
-		return 'Custom Facebook Feed';
+		return 'HubSpot - Free Marketing Plugin for WordPress';
 	}
 
 	/**
@@ -124,7 +113,7 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_option_name() {
-		return 'custom_facebook_feed';
+		return 'hubspot_leadin';
 	}
 
 	/**
@@ -135,7 +124,7 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_plugin_file() {
-		return 'custom-facebook-feed/custom-facebook-feed.php';
+		return 'leadin/leadin.php';
 	}
 
 	/**
@@ -145,17 +134,7 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_cookie_types() {
-		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
-	}
-	
-	/**
-	 * Returns default cookie types
-	 * @return array
-	 * 
-	 * @since 1.5.0
-	 */
-	public function get_default_cookie_types() {
-		return array( 'marketing' );
+		return $this->settings->get_cookie_types( $this->get_option_name() );
 	}
 
 	/**

@@ -34,11 +34,11 @@ class Settings_Service implements Settings_Service_Interface {
 	public function is_addon_enabled( $addon ) {
 		$option = get_option( static::OPTION_NAME );
 
-		if ( isset( $option[ $addon ] ) && ! isset( $option[ $addon ]['enabled'] ) ) {
-			return false;
+		if ( isset( $option[ $addon ]['enabled'] ) ) {
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	/**

@@ -199,7 +199,17 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_cookie_types() {
-		return $this->settings->get_cookie_types( $this->get_option_name() );
+		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
+	}
+	
+	/**
+	 * Returns default cookie types
+	 * @return array
+	 * 
+	 * @since 1.5.0
+	 */
+	public function get_default_cookie_types() {
+		return array( 'marketing' );
 	}
 
 	/**

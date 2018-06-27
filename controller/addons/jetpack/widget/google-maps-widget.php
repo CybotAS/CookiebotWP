@@ -233,7 +233,7 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 				$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
 
 				$data = str_replace( 'src=', 'data-cookieconsent="' . cookiebot_output_cookie_types( $this->cookie_types ) . '" data-src=', $data );
-
+        
 				/**
 				 * Return updated iframe tag
 				 */

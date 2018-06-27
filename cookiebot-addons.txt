@@ -1,0 +1,6 @@
+<?php
+/*
+Plugin Name: DEVELOPMENT - Cookiebot Addons Standalone
+Description: This plugin is used when developing new addons for Cookiebot. Enabling this plugin load Cookiebot Addons in this standalone plugin.
+*/
+include_once('cookiebot-addons-framework.php');

@@ -28,7 +28,7 @@ class Plugin_Controller {
 		$this->settings_service = $settings_service;
 
 		$this->load_init_files();
-		$this->load_translations();
+		//$this->load_translations();
 	}
 
 	/**
@@ -90,7 +90,7 @@ class Plugin_Controller {
 	 *
 	 * @since 1.6.0
 	 */
-	protected function load_translations() {
-		load_plugin_textdomain( 'cookiebot-addons', false,  CAF_BASE_NAME . '/languages/'  );
-	}
+	//protected function load_translations() {
+	//	load_plugin_textdomain( 'cookiebot', false, 'lang/'  );
+	//}
 }

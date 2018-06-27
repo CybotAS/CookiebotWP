@@ -1,6 +1,4 @@
 # Cookiebot Wordpress Addons
-
-
 Cookiebot Addons are plugins for Wordpress that make other plugins compatible with Cookiebot. 
 The addons hook into the original plugin and render the cookie setting tags as advised by the Cookiebot guidelines at https://www.cookiebot.com/goto/help/. Please note this plugin will not function if the Cookiebot script is loaded through Google Tag Manager, we are working on this issue and it will be resolved in the next update.
 
@@ -12,21 +10,30 @@ https://core.trac.wordpress.org/ticket/44043
 # News on GADWP
 GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'll provide a link here once the addon is released. 
 
+# Travis CI Status 
+
+[![Build Status](https://travis-ci.org/CybotAS/CookiebotAddons.svg?branch=develop)](https://travis-ci.org/CybotAS/CookiebotAddons)
+
 Table of contents
 =================
 
 <!--ts-->
-   * [Installation](#installation)
+   * [Installation for regular users](#installation-(for-regular-users))
+   * [Installation for development purpose](#installation-(for-development-purpose))
    * [How do I make my plugin support Cookiebot?](#how-do-i-make-my-plugin-support-cookiebot?)
    * [Roadmap](#roadmap)
    * [Contributions](#contributions)
    * [Need to get in touch?](#need-to-get-in-touch?)
 <!--te-->
 
-# Installation
+# Installation (for regular users)
+Regular users should use [Cookiebot Wordpress plugin](https://wordpress.org/plugins/cookiebot) which includes Cookiebot Addons.
+
+# Installation (for development purpose)
 1. Get the [latest release](https://github.com/CybotAS/CookiebotAddons/releases/latest) of the framework plugin to your WP plugins folder
-2. Go to the admin page of your WP installation and activate the plugin
-3. You are done, verify that it works
+2. Rename cookiebot-addons.txt to cookiebot-addons.php
+3. Go to the admin page of your WP installation and activate the plugin
+4. You are done, verify that it works
 
 # How do I make my plugin support Cookiebot?
 See [the Cookiebot API readme for more details about the Cookiebot API](CookiebotAPI.md)
@@ -67,6 +74,7 @@ Released and tested addons:
 * [Complete Analytics Optimization Suite (CAOS)](https://wordpress.org/plugins/host-analyticsjs-local/)
 * [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
 * [Googleanalytics](https://wordpress.org/plugins/googleanalytics/)
+* [HubSpot – Free Marketing Plugin for WordPress](https://wordpress.org/plugins/leadin/)
 
 Following addons are in pipeline:
 * To be continued..
