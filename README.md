@@ -17,6 +17,9 @@ GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'
 2. Go to the admin page of your WP installation and activate the plugin
 3. You are done, verify that it works
 
+# How do I make my plugin support Cookiebot?
+See [the Cookiebot API readme for more details about the Cookiebot API](CookiebotAPI.md)
+
 # Roadmap
 
 Following plugins have native (built-in) support for Cookiebot:
@@ -66,10 +69,6 @@ Shout out to
 [@Jursdotme](https://github.com/Jursdotme) - Custom Facebook Feed from Smashballoon
 
 Way to go!
-
-
-# How do I make my plugin support Cookiebot?
-See [the Cookiebot API readme for more details about the Cookiebot API](CookiebotAPI.md)
 
 # Need to get in touch?
 

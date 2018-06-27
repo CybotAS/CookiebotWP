@@ -10,8 +10,8 @@ Cookiebot Addons settings page has 3 tabs:
 - [Unavailable plugins](#unavailable-plugins)
 - [Jetpack](#jetpack)
 
-# available plugins
-In this screenshot you see plugins that are installed and activated.
+# Available plugins
+In this screenshot you see the plugins that are installed and activated.
 
 ![available plugins][available-plugin]
 
@@ -21,12 +21,12 @@ Besides that you can also pick the cookie types you want for that addon.
 
 and last but not least, you can configure the placeholder in multiple languages when the consent is not given.
 
-# unavailable plugins
-In this screenshot you see plugins which are not activated or installed.
+# Unavailable plugins
+In this screenshot you see the plugins which are not activated or installed.
 
 ![unavailable plugins][unavailable-plugin]
 
-# jetpack
+# Jetpack
 Jetpack has one more tab to configure the widgets. 
 
 ![jetpack][jetpack]
