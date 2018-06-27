@@ -221,4 +221,14 @@ class Hubspot_Leadin implements Cookiebot_Addons_Interface {
 	public function is_placeholder_enabled() {
 		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
+
+	/**
+	 * Returns default cookie types
+	 * @return mixed
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_default_cookie_types() {
+		return array( 'statistics' );
+	}
 }
