@@ -14,6 +14,18 @@ GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'
 
 [![Build Status](https://travis-ci.org/CybotAS/CookiebotAddons.svg?branch=develop)](https://travis-ci.org/CybotAS/CookiebotAddons)
 
+Table of contents
+=================
+
+<!--ts-->
+   * [Installation for regular users](#installation-(for-regular-users))
+   * [Installation for development purpose](#installation-(for-development-purpose))
+   * [How do I make my plugin support Cookiebot?](#how-do-i-make-my-plugin-support-cookiebot?)
+   * [Roadmap](#roadmap)
+   * [Contributions](#contributions)
+   * [Need to get in touch?](#need-to-get-in-touch?)
+<!--te-->
+
 # Installation (for regular users)
 Regular users should use [Cookiebot Wordpress plugin](https://wordpress.org/plugins/cookiebot) which includes Cookiebot Addons.
 
@@ -22,6 +34,15 @@ Regular users should use [Cookiebot Wordpress plugin](https://wordpress.org/plug
 2. Rename cookiebot-addons.txt to cookiebot-addons.php
 3. Go to the admin page of your WP installation and activate the plugin
 4. You are done, verify that it works
+
+# How do I make my plugin support Cookiebot?
+See [the Cookiebot API readme for more details about the Cookiebot API](CookiebotAPI.md)
+
+See [How to block cookies](documentation/how-to-block-cookies.md)
+
+See [How to add new addon](documentation/how-to-add-new-addon.md)
+
+See [Admin UI](documentation/admin-ui.md)
 
 # Roadmap
 
@@ -73,10 +94,6 @@ Shout out to
 [@Jursdotme](https://github.com/Jursdotme) - Custom Facebook Feed from Smashballoon
 
 Way to go!
-
-
-# How do I make my plugin support Cookiebot?
-See [the Cookiebot API readme for more details about the Cookiebot API](CookiebotAPI.md)
 
 # Need to get in touch?
 
