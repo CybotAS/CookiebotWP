@@ -12,6 +12,17 @@ https://core.trac.wordpress.org/ticket/44043
 # News on GADWP
 GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'll provide a link here once the addon is released. 
 
+Table of contents
+=================
+
+<!--ts-->
+   * [Installation](#installation)
+   * [How do I make my plugin support Cookiebot?](#how-do-i-make-my-plugin-support-cookiebot?)
+   * [Roadmap](#roadmap)
+   * [Contributions](#contributions)
+   * [Need to get in touch?](#need-to-get-in-touch?)
+<!--te-->
+
 # Installation
 1. Get the [latest release](https://github.com/CybotAS/CookiebotAddons/releases/latest) of the framework plugin to your WP plugins folder
 2. Go to the admin page of your WP installation and activate the plugin
@@ -19,6 +30,12 @@ GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'
 
 # How do I make my plugin support Cookiebot?
 See [the Cookiebot API readme for more details about the Cookiebot API](CookiebotAPI.md)
+
+See [How to block cookies](documentation/how-to-block-cookies.md)
+
+See [How to add new addon](documentation/how-to-add-new-addon.md)
+
+See [Admin UI](documentation/admin-ui.md)
 
 # Roadmap
 
