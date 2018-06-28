@@ -39,10 +39,13 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function add_submenu() {
-		add_submenu_page('cookiebot', 'Prior Consent', __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array(
+		/*add_submenu_page('cookiebot', 'Prior Consent', __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot_addons', array(
 			$this,
 			'setting_page'
-		) );
+		) );*/
+		
+		add_submenu_page('cookiebot',__('Prior Consent','cookiebot'),__('Prior Consent','cookiebot'), 'manage_options', 'cookiebot-addons',array($this,'setting_page'));
+		
 	}
 
 	/**

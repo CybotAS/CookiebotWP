@@ -131,6 +131,16 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	}
 
 	/**
+	 * Returns default cookie types
+	 * @return array
+	 * 
+	 * @since 1.5.0
+	 */
+	public function get_default_cookie_types() {
+		return array( 'statistics' );
+	}
+
+	/**
 	 * Check if plugin is activated and checked in the backend
 	 *
 	 * @since 1.3.0

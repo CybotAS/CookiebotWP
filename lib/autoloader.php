@@ -37,7 +37,7 @@ class Cookiebot_Addons_Autoloader {
 			$path = strtolower( $path );
 			$path = str_replace( '_', '-', $path );
 			$path = str_replace( '\\', DIRECTORY_SEPARATOR, $path ) . '.php';
-			$path = CAF_DIR . DIRECTORY_SEPARATOR . $path;
+			$path = COOKIEBOT_ADDONS_DIR . DIRECTORY_SEPARATOR . $path;
 
 			if ( file_exists( $path ) ) {
 				include $path;

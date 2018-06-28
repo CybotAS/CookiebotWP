@@ -10,29 +10,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
+
 /**
  * __DIR__ of this plugin
  */
-define( 'CAF_DIR', __DIR__ . DIRECTORY_SEPARATOR );
+define( 'COOKIEBOT_ADDONS_DIR', __DIR__ . DIRECTORY_SEPARATOR );
 
-define( 'CAF_BASE_NAME', dirname( plugin_basename( __FILE__ ) ) );
+define( 'COOKIEBOT_ADDONS_BASE_NAME', dirname( plugin_basename( __FILE__ ) ) );
 
 /**
  * Register autoloader to load files/classes dynamically
  */
-include_once CAF_DIR . 'lib/autoloader.php';
+include_once COOKIEBOT_ADDONS_DIR . 'lib/autoloader.php';
 
 /**
  * Load global functions for this plugin
  */
-include_once CAF_DIR . 'lib/helper.php';
+include_once COOKIEBOT_ADDONS_DIR . 'lib/helper.php';
 
 /**
  * Load composer
  *
  * "php-di/php-di": "5.0"
  */
-include_once CAF_DIR . 'lib/ioc/autoload.php';
+include_once COOKIEBOT_ADDONS_DIR . 'lib/ioc/autoload.php';
 
 class Cookiebot_Addons {
 
@@ -96,7 +97,7 @@ class Cookiebot_Addons {
 	 * @since 1.3.0
 	 */
 	protected function get_plugins() {
-		$file          = file_get_contents( CAF_DIR . 'addons.json' );
+		$file          = file_get_contents( COOKIEBOT_ADDONS_DIR . 'addons.json' );
 		$this->plugins = json_decode( $file );
 	}
 
