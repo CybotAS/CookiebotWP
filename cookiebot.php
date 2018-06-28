@@ -54,7 +54,7 @@ final class Cookiebot_WP {
 	 * @access  public
 	 */
 	function __construct() {
-		add_action('wp_loaded', array($this, 'cookiebot_init'), 10);
+		add_action('plugins_loaded', array($this, 'cookiebot_init'), 5);
 	}
 	
 	/**
@@ -65,16 +65,39 @@ final class Cookiebot_WP {
 	 * @access  public
 	 */
 	function cookiebot_init() {	
-		// Set up localisation
-		//load_plugin_textdomain('cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
+		/* Load Cookiebot Addons Framework */
+		$dismissAddons = false;
+		if(defined('CAF_DIR')) {
+			$dismissAddons = true;
+			add_action('admin_notices', function() {
+					?>
+					<div class="update-nag notice">
+						<p>
+							You have Cookiebot Addons installed.<br />
+							In this and future releases of Cookiebot all available Addons are bundled directly with the Cookiebot plugin.<br />
+							To ensure up-to-date addons - please disable and remove your Cookiebot Addons plugin and configure you addons under "Prior consent" in the Cookiebot menu.
+						</p>
+					</div>
+					<?php
+				});
+		}
+		else {
+			if((!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true) && $dismissAddons !== true) {
+				include_once('addons/cookiebot-addons-init.php');
+			}
+		}
 		if(is_admin()) {
-			add_action('admin_menu', array($this,'add_menu'));
+			add_action('admin_menu', array($this,'add_menu'),1);
 			add_action('admin_init', array($this,'register_cookiebot_settings'));
 			add_action('wp_dashboard_setup',  array($this,'add_dashboard_widgets'));
 			//adding cookie banner in admin area too
 			add_action('admin_head', array($this,'add_js'));
-		
 		}
+		
+
+		// Set up localisation
+		load_plugin_textdomain('cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
+		
 		//add JS
 		add_action('wp_head', array($this,'add_js'));
 		add_shortcode('cookie_declaration', array($this,'show_declaration'));
@@ -582,7 +605,3 @@ if(!function_exists('cookiebot')) {
 }
 
 cookiebot();
-
-
-/* Load Cookiebot Addons Framework */
-include_once('addons/cookiebot-addons-framework.php');
