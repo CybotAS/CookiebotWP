@@ -82,8 +82,21 @@ final class Cookiebot_WP {
 				});
 		}
 		else {
-			if((!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true) && $dismissAddons !== true) {
-				include_once('addons/cookiebot-addons-init.php');
+			if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED')) 
+						&& $dismissAddons !== true ) {
+					
+					include_once('addons/cookiebot-addons-init.php');
+			}
+			else {
+				add_action('admin_notices', function() {
+					?>
+					<div class="update-nag notice">
+						<p>
+							You are using Cookiebot Addons Standalone.
+						</p>
+					</div>
+					<?php
+				});
 			}
 		}
 		if(is_admin()) {
