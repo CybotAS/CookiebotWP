@@ -1,11 +1,11 @@
 <?php
 
-namespace appsaloon\tests\unit;
+namespace cookiebot_addons_framework\tests\unit;
 
 /**
  * Class SampleTest
  *
- * @package Klasse_Plugin_Boilerplate
+ * @package \cookiebot_addons_framework\Cookiebot_Addons_Framework
  */
 
 
@@ -17,9 +17,11 @@ namespace appsaloon\tests\unit;
  */
 class SampleTest extends \WP_UnitTestCase {
 
-	public $test_obj;
-
 	public function setUp() {
 		Parent::setUp();
+	}
+
+	public function test_is_true() {
+		$this->assertTrue( true );
 	}
 }
