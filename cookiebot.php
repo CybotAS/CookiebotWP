@@ -71,7 +71,7 @@ final class Cookiebot_WP {
 			$dismissAddons = true;
 			add_action('admin_notices', function() {
 					?>
-					<div class="update-nag notice">
+					<div class="notice notice-warning">
 						<p>
 							You have Cookiebot Addons installed.<br />
 							In this and future releases of Cookiebot all available Addons are bundled directly with the Cookiebot plugin.<br />
@@ -84,13 +84,12 @@ final class Cookiebot_WP {
 		else {
 			if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED')) 
 						&& $dismissAddons !== true ) {
-					
 					include_once('addons/cookiebot-addons-init.php');
 			}
 			else {
 				add_action('admin_notices', function() {
 					?>
-					<div class="update-nag notice">
+					<div class="notice notice-warning">
 						<p>
 							You are using Cookiebot Addons Standalone.
 						</p>
