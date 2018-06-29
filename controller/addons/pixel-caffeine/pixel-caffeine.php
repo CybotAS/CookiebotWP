@@ -87,8 +87,8 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 
 		$this->script_loader_tag->add_tag( 'aepc-pixel-events', array( 'facebook' => $this->get_cookie_types() ) );
 
-		cookiebot_remove_class_action( 'wp_head', 'AEPC_Pixel_Scripts', 'pixel_init', 99 );
-		cookiebot_remove_class_action( 'wp_footer', 'AEPC_Pixel_Scripts', 'pixel_init', 1 );
+		cookiebot_addons_remove_class_action( 'wp_head', 'AEPC_Pixel_Scripts', 'pixel_init', 99 );
+		cookiebot_addons_remove_class_action( 'wp_footer', 'AEPC_Pixel_Scripts', 'pixel_init', 1 );
 
 	}
 
@@ -194,7 +194,7 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_placeholder() {
-		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_cookie_types() ) );
+		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) );
 	}
 
 	/**

@@ -130,8 +130,8 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 		/**
 		 * inject base pixel
 		 */
-		cookiebot_remove_class_action( 'wp_footer', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel_noscript' );
-		cookiebot_remove_class_action( 'wp_head', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel' );
+		cookiebot_addons_remove_class_action( 'wp_footer', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel_noscript' );
+		cookiebot_addons_remove_class_action( 'wp_head', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel' );
 	}
 
 	/**
@@ -167,7 +167,7 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_placeholder() {
-		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_cookie_types() ) );
+		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) );
 	}
 
 	/**

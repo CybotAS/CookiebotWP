@@ -120,7 +120,7 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 			/**
 			 * Get all scripts and add cookieconsent if it does match with the criterion
 			 */
-			$updated_scripts = cookiebot_manipulate_script( $buffer, $this->keywords );
+			$updated_scripts = cookiebot_addons_manipulate_script( $buffer, $this->keywords );
 			
 			if( $this->use_cache ) {
 				/**

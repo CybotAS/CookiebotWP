@@ -203,17 +203,17 @@ class Settings_Config {
             <ul class="cookietypes">
                 <li><input type="checkbox" id="cookie_type_preferences_<?php echo $widget->get_widget_option_name(); ?>"
                            value="preferences"
-						<?php cookiebot_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'preferences' ); ?>
+						<?php cookiebot_addons_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'preferences' ); ?>
                            name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Preferences</label>
                 </li>
                 <li><input type="checkbox" id="cookie_type_statistics_<?php echo $widget->get_widget_option_name(); ?>"
                            value="statistics"
-						<?php cookiebot_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'statistics' ); ?>
+						<?php cookiebot_addons_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'statistics' ); ?>
                            name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Statistics</label>
                 </li>
                 <li><input type="checkbox" id="cookie_type_marketing_<?php echo $widget->get_widget_option_name(); ?>"
                            value="marketing"
-						<?php cookiebot_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'marketing' ); ?>
+						<?php cookiebot_addons_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'marketing' ); ?>
                            name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Marketing</label>
                 </li>
             </ul>
@@ -343,17 +343,17 @@ class Settings_Config {
             <ul class="cookietypes">
                 <li><input type="checkbox" id="cookie_type_preferences_<?php echo $addon->get_option_name(); ?>"
                            value="preferences"
-						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types(), 'preferences' ); ?>
+						<?php cookiebot_addons_checked_selected_helper( $addon->get_cookie_types(), 'preferences' ); ?>
                            name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][cookie_type][]"><label>Preferences</label>
                 </li>
                 <li><input type="checkbox" id="cookie_type_statistics_<?php echo $addon->get_option_name(); ?>"
                            value="statistics"
-						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types(), 'statistics' ); ?>
+						<?php cookiebot_addons_checked_selected_helper( $addon->get_cookie_types(), 'statistics' ); ?>
                            name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][cookie_type][]"><label>Statistics</label>
                 </li>
                 <li><input type="checkbox" id="cookie_type_marketing_<?php echo $addon->get_option_name(); ?>"
                            value="marketing"
-						<?php cookiebot_checked_selected_helper( $addon->get_cookie_types(), 'marketing' ); ?>
+						<?php cookiebot_addons_checked_selected_helper( $addon->get_cookie_types(), 'marketing' ); ?>
                            name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][cookie_type][]"><label>Marketing</label>
                 </li>
             </ul>

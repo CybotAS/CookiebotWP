@@ -13,7 +13,7 @@
  *
  * @since 1.2.0
  */
-function cookiebot_remove_class_action( $action, $class, $method, $priority = 10 ) {
+function cookiebot_addons_remove_class_action( $action, $class, $method, $priority = 10 ) {
 	global $wp_filter;
 	$deleted = false;
 
@@ -56,7 +56,7 @@ function cookiebot_remove_class_action( $action, $class, $method, $priority = 10
  *
  * @since 1.2.0
  */
-function cookiebot_manipulate_script( $buffer, $keywords ) {
+function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
 	/**
 	 * Pattern to get all scripts
 	 */
@@ -81,7 +81,7 @@ function cookiebot_manipulate_script( $buffer, $keywords ) {
 			 * The script contains the needle
 			 **/
 			if ( strpos( $data, $needle ) !== false ) {
-				$data = preg_replace( '/\<script/', '<script type="text/plain" data-cookieconsent="' . cookiebot_output_cookie_types( $cookie_type ) . '"', $data );
+				$data = preg_replace( '/\<script/', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $cookie_type ) . '"', $data );
 				$data = preg_replace( '/type\=\"text\/javascript\"/', '', $data );
 
 				/**
@@ -112,7 +112,7 @@ function cookiebot_manipulate_script( $buffer, $keywords ) {
  *
  * @since 1.3.0
  */
-function cookiebot_checked_selected_helper( $helper, $current, $echo = true, $type = 'checked' ) {
+function cookiebot_addons_checked_selected_helper( $helper, $current, $echo = true, $type = 'checked' ) {
 	if ( is_array( $helper ) && in_array( $current, $helper ) ) {
 		$result = " $type='$type'";
 	} elseif ( is_string( $helper ) && is_string( $current ) && $helper === $current ) {
@@ -139,7 +139,7 @@ function cookiebot_checked_selected_helper( $helper, $current, $echo = true, $ty
  *
  * @since 1.3.0
  */
-function cookiebot_output_cookie_types( $cookie_types ) {
+function cookiebot_addons_output_cookie_types( $cookie_types ) {
 	if ( is_array( $cookie_types ) && count( $cookie_types ) > 0 ) {
 		return implode( ',', $cookie_types );
 	} elseif ( is_string( $cookie_types ) && $cookie_types != '' ) {
@@ -158,7 +158,7 @@ function cookiebot_output_cookie_types( $cookie_types ) {
  *
  * @since 1.3.0
  */
-function cookiebot_get_one_cookie_type( $cookie_types ) {
+function cookiebot_addons_get_one_cookie_type( $cookie_types ) {
 	if ( is_array( $cookie_types ) ) {
 		if ( in_array( 'marketing', $cookie_types ) ) {
 			return 'marketing';

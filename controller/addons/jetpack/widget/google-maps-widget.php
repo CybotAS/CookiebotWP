@@ -180,7 +180,7 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_widget_placeholder() {
-		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_widget_cookie_types() ) );
+		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_widget_cookie_types() ) );
 	}
 
 	/**
@@ -232,7 +232,7 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 
 				$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
 
-				$data = str_replace( 'src=', 'data-cookieconsent="' . cookiebot_output_cookie_types( $this->cookie_types ) . '" data-src=', $data );
+				$data = str_replace( 'src=', 'data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->cookie_types ) . '" data-src=', $data );
         
 				/**
 				 * Return updated iframe tag
@@ -260,7 +260,7 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 	public function cookie_consent_div( $view, $widget ) {
 		if ( $widget == 'contact_info' && $view == 'widget_view' ) {
 			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
-				echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">
+				echo '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">
 						  ' . $this->get_widget_placeholder() . '
 						</div>';
 			}
