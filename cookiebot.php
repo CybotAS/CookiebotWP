@@ -73,9 +73,9 @@ final class Cookiebot_WP {
 					?>
 					<div class="notice notice-warning">
 						<p>
-							You have Cookiebot Addons installed.<br />
-							In this and future releases of Cookiebot all available Addons are bundled directly with the Cookiebot plugin.<br />
-							To ensure up-to-date addons - please disable and remove your Cookiebot Addons plugin and configure you addons under "Prior consent" in the Cookiebot menu.
+							<?php _e( 'You have Cookiebot Addons installed.', 'cookiebot' ); ?><br />
+							<?php _e( 'In this and future releases of Cookiebot all available Addons are bundled directly with the Cookiebot plugin.', 'cookiebot' ); ?><br />
+							<?php _e( 'To ensure up-to-date addons - please disable and remove your Cookiebot Addons plugin and configure you addons under "Prior consent" in the Cookiebot menu.', 'cookiebot' ); ?>
 						</p>
 					</div>
 					<?php
@@ -91,7 +91,7 @@ final class Cookiebot_WP {
 					?>
 					<div class="notice notice-warning">
 						<p>
-							You are using Cookiebot Addons Standalone.
+							<?php _e( 'You are using Cookiebot Addons Standalone.', 'cookiebot' ); ?>
 						</p>
 					</div>
 					<?php
