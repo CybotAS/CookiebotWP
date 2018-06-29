@@ -1,11 +1,11 @@
 <?php
 
-namespace cookiebot_addons_framework\tests\unit;
+namespace cookiebot_addons\tests\unit;
 
 /**
  * Class SampleTest
  *
- * @package \cookiebot_addons_framework\Cookiebot_Addons_Framework
+ * @package \cookiebot_addons\Cookiebot_Addons_Framework
  */
 
 

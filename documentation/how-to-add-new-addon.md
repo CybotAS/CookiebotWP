@@ -16,7 +16,7 @@ Example
 
     ```json
     "Add_To_Any": {
-        "class": "cookiebot_addons_framework\\controller\\addons\\add_to_any\\Add_To_Any"
+        "class": "cookiebot_addons\\controller\\addons\\add_to_any\\Add_To_Any"
       },
     ```
 

@@ -16,11 +16,8 @@
 /**
  * Manually load the plugin being tested.
  */
-function _manually_load_plugin() {
-	// plugin
-	require dirname( dirname( __FILE__ ) ) . '/cookiebot-addons-framework.php';
-}
-tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
+
+require dirname( dirname( __FILE__ ) ) . '/cookiebot-addons-init.php';
 
 // Start up the WP testing environment.
 //require $_tests_dir . '/includes/bootstrap.php';

@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons_framework\tests\unit;
+namespace cookiebot_addons\tests\unit;
 
 class Test_Get_Option_Name extends \WP_UnitTestCase {
 
