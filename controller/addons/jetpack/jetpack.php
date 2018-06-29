@@ -1,24 +1,24 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\jetpack;
+namespace cookiebot_addons\controller\addons\jetpack;
 
-use cookiebot_addons_framework\controller\addons\jetpack\widget\Google_Maps_Widget;
-use cookiebot_addons_framework\controller\addons\jetpack\widget\Facebook_Widget;
-use cookiebot_addons_framework\controller\addons\jetpack\widget\Googleplus_Badge_Widget;
-use cookiebot_addons_framework\controller\addons\jetpack\widget\Goodreads_Widget;
-use cookiebot_addons_framework\controller\addons\jetpack\widget\Internet_Defense_league_Widget;
-use cookiebot_addons_framework\controller\addons\jetpack\widget\Twitter_Timeline_Widget;
-use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
-use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
+use cookiebot_addons\controller\addons\jetpack\widget\Google_Maps_Widget;
+use cookiebot_addons\controller\addons\jetpack\widget\Facebook_Widget;
+use cookiebot_addons\controller\addons\jetpack\widget\Googleplus_Badge_Widget;
+use cookiebot_addons\controller\addons\jetpack\widget\Goodreads_Widget;
+use cookiebot_addons\controller\addons\jetpack\widget\Internet_Defense_league_Widget;
+use cookiebot_addons\controller\addons\jetpack\widget\Twitter_Timeline_Widget;
+use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
+use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
 
 /**
  * This class is used to support jetpack in cookiebot
  *
  * Class Jetpack
- * @package cookiebot_addons_framework\controller\addons\jetpack
+ * @package cookiebot_addons\controller\addons\jetpack
  *
  * @since 1.3.0
  */
@@ -285,7 +285,7 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_placeholder() {
-		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_cookie_types() ) );
+		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) );
 	}
 
 	/**

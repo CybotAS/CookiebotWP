@@ -1,12 +1,12 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\wp_analytify;
+namespace cookiebot_addons\controller\addons\wp_analytify;
 
-use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
-use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
+use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 
 class Wp_Analytify implements Cookiebot_Addons_Interface {
 
@@ -86,7 +86,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 		}
 
 		// Disable Analytify if cookie consent not allowed
-		cookiebot_remove_class_action( 'wp_head', 'WP_Analytify', 'analytify_add_analytics_code' );
+		cookiebot_addons_remove_class_action( 'wp_head', 'WP_Analytify', 'analytify_add_analytics_code' );
 	}
 
 	/**
@@ -191,7 +191,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_placeholder() {
-		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_cookie_types() ) );
+		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) );
 	}
 
 	/**

@@ -1,12 +1,12 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\jetpack;
+namespace cookiebot_addons\controller\addons\jetpack;
 
-use cookiebot_addons_framework\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
-use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
+use cookiebot_addons\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
+use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
 
 class Visitor_Cookies implements Jetpack_Widget_Interface {
 
@@ -207,7 +207,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 		/**
 		 * Remove action comment cookies in jetpack
 		 */
-		cookiebot_remove_class_action( 'comment_post', 'Highlander_Comments_Base', 'set_comment_cookies' );
+		cookiebot_addons_remove_class_action( 'comment_post', 'Highlander_Comments_Base', 'set_comment_cookies' );
 
 		/**
 		 * Remove action comment cookies in wordpress core
@@ -245,7 +245,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 1.2.0
 	 */
 	public function view_accept_preferences_consent() {
-		echo '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">
+		echo '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">
 						  ' . $this->get_default_placeholder() . '
 						</div>';
 	}

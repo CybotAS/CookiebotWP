@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Class Cookiebot_Addons_Framework_Autoloader
+ * Class Cookiebot_Addons_Autoloader
  *
  * @since 1.1.0
  */
-class Cookiebot_Addons_Framework_Autoloader {
+class Cookiebot_Addons_Autoloader {
 
 	/**
 	 * plugin root namespace
 	 *
 	 * @sice 1.1.0
 	 */
-	const ROOT_NAMESPACE = 'cookiebot_addons_framework\\';
+	const ROOT_NAMESPACE = 'cookiebot_addons\\';
 
 	/**
 	 * Register autoload method
@@ -37,7 +37,7 @@ class Cookiebot_Addons_Framework_Autoloader {
 			$path = strtolower( $path );
 			$path = str_replace( '_', '-', $path );
 			$path = str_replace( '\\', DIRECTORY_SEPARATOR, $path ) . '.php';
-			$path = CAF_DIR . DIRECTORY_SEPARATOR . $path;
+			$path = COOKIEBOT_ADDONS_DIR . DIRECTORY_SEPARATOR . $path;
 
 			if ( file_exists( $path ) ) {
 				include $path;
@@ -51,4 +51,4 @@ class Cookiebot_Addons_Framework_Autoloader {
  *
  * @since 1.1.0
  */
-new Cookiebot_Addons_Framework_Autoloader();
+new Cookiebot_Addons_Autoloader();

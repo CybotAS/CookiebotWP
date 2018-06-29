@@ -1,10 +1,10 @@
 <?php
 
-namespace cookiebot_addons_framework\controller;
+namespace cookiebot_addons\controller;
 
-use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
+use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
 
 class Plugin_Controller {
 
