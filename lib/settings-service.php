@@ -300,7 +300,7 @@ class Settings_Service implements Settings_Service_Interface {
 		if ( isset( $option[ $option_key ]['placeholder']['enabled'] ) ) {
 			if ( function_exists( 'cookiebot' ) ) {
 				$cookiebot   = cookiebot();
-				$currentLang = $cookiebot->get_language( true );
+				$currentLang = $cookiebot->get_language( false );
 
 				if ( $currentLang == false || $currentLang == '' ) {
 					$currentLang = 'default';
