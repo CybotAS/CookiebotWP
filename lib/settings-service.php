@@ -302,9 +302,13 @@ class Settings_Service implements Settings_Service_Interface {
 				$cookiebot   = cookiebot();
 				$currentLang = $cookiebot->get_language( true );
 
+				if ( $currentLang == false || $currentLang == '' ) {
+					$currentLang = 'default';
+				}
+
 				// get current lang text
-				if ( isset( $option[ $option_key ]['placeholder'][ $currentLang ] ) ) {
-					return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder'][ $currentLang ], $cookies );
+				if ( isset( $option[ $option_key ]['placeholder']['languages'][ $currentLang ] ) ) {
+					return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages'][ $currentLang ], $cookies );
 				} else {
 					return $this->placeholder_merge_tag( $default_placeholder, $cookies );
 				}
