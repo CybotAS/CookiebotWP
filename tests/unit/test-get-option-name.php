@@ -6,11 +6,7 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 
 	protected $plugins;
 
-	private $container;
-
 	public function setUp() {
-		Parent::setUp();
-
 		$this->get_plugins();
 	}
 
@@ -18,7 +14,7 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	 * Load the addons through json file.
 	 */
 	private function get_plugins() {
-		$file          = file_get_contents( CAF_DIR . 'addons.json' );
+		$file          = file_get_contents( COOKIEBOT_ADDONS_DIR . 'addons.json' );
 		$this->plugins = json_decode( $file );
 	}
 
@@ -35,7 +31,7 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	/**
 	 * get_option_name is unique in every addon.
 	 */
-	public function test_get_option_name_unique() {
+	public function get_option_name_unique() {
 		$options = array();
 
 		foreach ( $this->plugins as $plugin ) {

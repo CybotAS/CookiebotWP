@@ -18,7 +18,6 @@ namespace cookiebot_addons\tests\unit;
 class SampleTest extends \WP_UnitTestCase {
 
 	public function setUp() {
-		Parent::setUp();
 	}
 
 	public function test_is_true() {
