@@ -18,12 +18,12 @@ Table of contents
 =================
 
 <!--ts-->
-   * [Installation for regular users](#installation-(for-regular-users))
-   * [Installation for development purpose](#installation-(for-development-purpose))
-   * [How do I make my plugin support Cookiebot?](#how-do-i-make-my-plugin-support-cookiebot?)
+   * [Installation for regular users](#installation-for-regular-users)
+   * [Installation for development purpose](#installation-for-development-purpose)
+   * [How do I make my plugin support Cookiebot?](#how-do-i-make-my-plugin-support-cookiebot)
    * [Roadmap](#roadmap)
    * [Contributions](#contributions)
-   * [Need to get in touch?](#need-to-get-in-touch?)
+   * [Need to get in touch?](#need-to-get-in-touch)
 <!--te-->
 
 # Installation (for regular users)

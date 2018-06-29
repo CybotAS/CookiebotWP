@@ -2,8 +2,6 @@
 
 namespace cookiebot_addons\controller\addons\hubspot_leadin;
 
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\Cookie_Consent_Interface;
@@ -231,5 +229,15 @@ class Hubspot_Leadin implements Cookiebot_Addons_Interface {
 	 */
 	public function is_placeholder_enabled() {
 		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
+	}
+
+	/**
+	 * Returns default cookie types
+	 * @return mixed
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_default_cookie_types() {
+		return array( 'statistics' );
 	}
 }

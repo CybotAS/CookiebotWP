@@ -1,4 +1,5 @@
 <?php
+
 namespace cookiebot_addons;
 
 use cookiebot_addons\config\Settings_Config;
@@ -147,7 +148,6 @@ class Cookiebot_Addons {
 			);
 		}
 	}
-
 }
 
 /**
