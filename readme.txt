@@ -35,11 +35,23 @@ Although Cookiebot enables your website to become fully compliant, [especially o
 
 * If you are using plugins that set cookies which require consent (which most do), you have to: 
   * Ask the plugin developers if they are planning on becoming GDPR compliant, or if they would like to integrate with Cookiebot. 
-  *  [Check out our Github repository](https://github.com/CybotAS/CookiebotAddons), where we are developing integrations for Cookiebot, until the plugin developers choose to do this themselves, [or WP Core enables such functionality](https://core.trac.wordpress.org/ticket/44043)
+  * Check if there already exists an addon for your plugin in the "Prior consent" submenu.
+  * [Check out our Github repository](https://github.com/CybotAS/CookiebotAddons), where we are developing integrations for Cookiebot, until the plugin developers choose to do this themselves, [or WP Core enables such functionality](https://core.trac.wordpress.org/ticket/44043)
 
 Once Cookiebot is installed, and we've scanned your site, you can check the [cookie report](https://manage.cookiebot.com/goto/reports), to identify all cookies being set on your website. If the cookies are coming from content that you have inserted manually, then you can mark up that content [as described in our help section step 3](https://www.cookiebot.com/goto/help/).
 
-Embedded videos and iframes, which set cookies, can be marked up as explain in our [Iframe cookie consent with YouTube example](https://support.cookiebot.com/hc/en-us/articles/360003790854-Iframe-cookie-consent-with-YouTube-example). We do not auto-correct already inserted videos on your pages, however we will implement this feature in our [Cookiebot Addons plugin](https://github.com/CybotAS/CookiebotAddons), which is due to be released in the near future.
+Embedded videos and iframes, which set cookies, can be marked up as explain in our [Iframe cookie consent with YouTube example](https://support.cookiebot.com/hc/en-us/articles/360003790854-Iframe-cookie-consent-with-YouTube-example).
+
+
+### Cookiebot Addons ####
+Add-ons are produced by an open-source community of developers. This is done to help make it easier for Wordpress users to implement ‘prior consent’ for cookies and trackers set by plugins that do not offer this as a built-in functionality.
+
+The add-ons are currently the best alternative to a Wordpress Core framework that can signal the user’s consent state to other plugins (if and when this will be implemented is unknown) and to those plugins who do not yet offer native support for Cookiebot built into the plugin itself.
+
+We do not assume any responsibility for the use of these add-ons. If one of the plugins that the add-ons hook into makes a ‘breaking change’, there may be a period of time where the add-on will not work properly until it has been updated to accommodate the changes in the plugin.
+
+If your favourite plugin isn't supported you're welcome to contribute or request on our [Github development page](https://github.com/CybotAS/CookiebotAddons).
+
 
 ## Installation ##
 First, install the plugin on your WordPress site.
@@ -140,7 +152,7 @@ Cookiebot works with GTM, however you should not use this plugin, but the manual
 ## Changelog ##
 
 ### 2.0.0 - 2019-06-21 ###
-* Merge Cookiebot and Cookiebot Addons plugins. Cookiebot plugin now ships with addons for making other plugins compliant.
+* Merge Cookiebot and Cookiebot Addons plugins. Cookiebot plugin now bundled with addons making other plugins GDPR compliant.
 
 ### 1.6.2 - 2018-06-21 ###
 * Fix check for WP Rocket.
