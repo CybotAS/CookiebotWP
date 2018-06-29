@@ -136,6 +136,17 @@ class Hubspot_Leadin implements Cookiebot_Addons_Interface {
 	public function get_cookie_types() {
 		return $this->settings->get_cookie_types( $this->get_option_name() );
 	}
+	
+	/**
+	 * Returns default cookie types
+	 * @return array
+	 * 
+	 * @since 1.5.0
+	 */
+	public function get_default_cookie_types() {
+		return array( 'marketing', 'statistics' );
+	}
+
 
 	/**
 	 * Check if plugin is activated and checked in the backend
