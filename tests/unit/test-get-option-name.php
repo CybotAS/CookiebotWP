@@ -14,7 +14,7 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	 * Load the addons through json file.
 	 */
 	private function get_plugins() {
-		$file          = file_get_contents( CAF_DIR . 'addons.json' );
+		$file          = file_get_contents( COOKIEBOT_ADDONS_DIR . 'addons.json' );
 		$this->plugins = json_decode( $file );
 	}
 
