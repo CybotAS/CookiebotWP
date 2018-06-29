@@ -18,7 +18,7 @@
     "class": "cookiebot_addons\\controller\\addons\\jetpack\\Jetpack"
   },
   "Hubspot_Leadin": {
-    "class": "cookiebot_addons_framework\\controller\\addons\\hubspot_leadin\\Hubspot_Leadin"
+    "class": "cookiebot_addons\\controller\\addons\\hubspot_leadin\\Hubspot_Leadin"
   },
   "Hubspot_Tracking_Code": {
     "class": "cookiebot_addons\\controller\\addons\\hubspot_tracking_code\\Hubspot_Tracking_Code"
