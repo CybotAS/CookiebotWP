@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\jetpack\widget;
+namespace cookiebot_addons\controller\addons\jetpack\widget;
 
 Interface Jetpack_Widget_Interface {
 

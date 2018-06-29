@@ -1,8 +1,8 @@
 <?php
 
-namespace cookiebot_addons_framework\lib;
+namespace cookiebot_addons\lib;
 
-use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 
 Interface Settings_Service_Interface {
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace cookiebot_addons_framework\controller\addons\embed_autocorrect;
+namespace cookiebot_addons\controller\addons\embed_autocorrect;
 
-use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
-use cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cookiebot_addons_framework\lib\Cookie_Consent_Interface;
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
+use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
 
 class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 
@@ -104,14 +104,14 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 */
 	public function cookiebot_addon_embed_autocorrect_content( $content ) {
 		//Make sure Cookiebot is active and the user has enabled autocorrection
-		$cookieContentNotice = '<div class="cookieconsent-optout-' . cookiebot_get_one_cookie_type( $this->get_cookie_types() ) . '">';
+		$cookieContentNotice = '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_cookie_types() ) . '">';
 		$cookieContentNotice .= $this->get_placeholder();
 		$cookieContentNotice .= '</div>';
 
 		//Match twitter.
 		preg_match_all( '#\<(script).+src=".+platform.twitter.com\/widgets\.js.+\<\/(script)\>#mis', $content, $matches );
 		if ( ! empty( $matches[0][0] ) ) {
-			$adjusted_content = str_replace( '<script', '<script type="text/plain" data-cookieconsent="' . cookiebot_output_cookie_types( $this->get_cookie_types() ) . '"', $matches[0][0] );
+			$adjusted_content = str_replace( '<script', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '"', $matches[0][0] );
 			$adjusted_content = $cookieContentNotice . $adjusted_content;
 			$content          = str_replace( $matches[0][0], $adjusted_content, $content );
 		}
@@ -121,7 +121,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		preg_match_all( '/<iframe[^>]*src=\"[^\"]*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com)\/[^>]*>.*?<\\/iframe>/mi', $content, $matches );
 		foreach ( $matches[0] as $match ) {
 			//Replace - and add cookie consent notice.
-			$adjusted = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $match );
+			$adjusted = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $match );
 			$content  = str_replace( $match, $adjusted . $cookieContentNotice, $content );
 		}
 
@@ -230,7 +230,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_placeholder() {
-		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_output_cookie_types( $this->get_cookie_types() ) );
+		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) );
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons_framework\lib\buffer;
+namespace cookiebot_addons\lib\buffer;
 
 class Buffer_Output implements Buffer_Output_Interface {
 

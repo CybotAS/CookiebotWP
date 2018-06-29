@@ -32,8 +32,9 @@ Regular users should use [Cookiebot Wordpress plugin](https://wordpress.org/plug
 # Installation (for development purpose)
 1. Get the [latest release](https://github.com/CybotAS/CookiebotAddons/releases/latest) of the framework plugin to your WP plugins folder
 2. Rename cookiebot-addons.txt to cookiebot-addons.php
-3. Go to the admin page of your WP installation and activate the plugin
-4. You are done, verify that it works
+3. Add "define('COOKIEBOT_ADDONS_STANDALONE',true);" to your wp-config.php
+4. Go to the admin page of your WP installation and activate the plugin
+5. You are done, verify that it works
 
 # How do I make my plugin support Cookiebot?
 See [the Cookiebot API readme for more details about the Cookiebot API](CookiebotAPI.md)

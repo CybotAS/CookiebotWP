@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons_framework\lib;
+namespace cookiebot_addons\lib;
 
 Interface Cookie_Consent_Interface {
 
