@@ -141,7 +141,7 @@ function cookiebot_addons_checked_selected_helper( $helper, $current, $echo = tr
  */
 function cookiebot_addons_output_cookie_types( $cookie_types ) {
 	if ( is_array( $cookie_types ) && count( $cookie_types ) > 0 ) {
-		return implode( ',', $cookie_types );
+		return implode( ', ', $cookie_types );
 	} elseif ( is_string( $cookie_types ) && $cookie_types != '' ) {
 		return $cookie_types;
 	}
