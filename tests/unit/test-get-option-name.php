@@ -34,10 +34,10 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	public function test_get_option_name_unique() {
 		$options = array();
 
-		$settingsMock = $this->createMock( 'cookiebot_addons\lib\Settings_Service_Interface' );
-		$scriptLoaderTagMock = $this->createMock( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface' );
-		$cookieConsentMock = $this->createMock( 'cookiebot_addons\lib\Cookie_Consent_Interface' );
-		$bufferOutputMock = $this->createMock( 'cookiebot_addons\lib\buffer\Buffer_Output_Interface' );
+		$settingsMock = $this->getMockBuilder( 'cookiebot_addons\lib\Settings_Service_Interface' )->getMock();
+		$scriptLoaderTagMock = $this->getMockBuilder( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface' )->getMock();
+		$cookieConsentMock = $this->getMockBuilder( 'cookiebot_addons\lib\Cookie_Consent_Interface' )->getMock();
+		$bufferOutputMock = $this->getMockBuilder( 'cookiebot_addons\lib\buffer\Buffer_Output_Interface' )->getMock();g
 
 		foreach ( $this->plugins as $plugin ) {
 			$p = new $plugin->class( $settingsMock, $scriptLoaderTagMock, $cookieConsentMock, $bufferOutputMock );
