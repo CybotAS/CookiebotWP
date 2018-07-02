@@ -2,6 +2,11 @@
 
 namespace cookiebot_addons\tests\unit;
 
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
+use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
+
 class Test_Get_Option_Name extends \WP_UnitTestCase {
 
 	protected $plugins;
@@ -29,17 +34,24 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * get_option_name is unique in every addon.
+	 * Check if get_option_name is unique in every addon.
 	 */
-	public function get_option_name_unique() {
+	public function test_get_option_name_unique() {
 		$options = array();
 
-		foreach ( $this->plugins as $plugin ) {
-			$p = new $plugin->class(null, null, null, null);
+		$settingsMock = $this->createMock( Settings_Service_Interface::class );
+		$scriptLoaderTagMock = $this->createMock( Script_Loader_Tag_Interface::class );
+		$cookieConsentMock = $this->createMock( Cookie_Consent_Interface::class );
+		$bufferOutputMock = $this->createMock( Buffer_Output_Interface::class );
 
+		foreach ( $this->plugins as $plugin ) {
+			$p = new $plugin->class( $settingsMock, $scriptLoaderTagMock, $cookieConsentMock, $bufferOutputMock );
+
+			// test if the option_name exists in the options array
 			$this->assertNotContains( $p->get_option_name(), $options );
 
-			$options[] = $p;
+			// add name to options array
+			$options[] = $p->get_option_name();
 		}
 	}
 
