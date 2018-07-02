@@ -4,7 +4,26 @@ namespace cookiebot_addons\tests\unit;
 
 class Test_Get_Option_Name extends \WP_UnitTestCase {
 
+	/**
+	 * The list of all addons, decoded to array
+	 *
+	 * @var array
+	 */
 	protected $plugins;
+
+	/**
+	 * The file path of addons json
+	 *
+	 * @var string
+	 */
+	protected $file_path;
+
+	/**
+	 * The list of all addons, json encoded
+	 *
+	 * @var string
+	 */
+	protected $file;
 
 	public function setUp() {
 		$this->get_plugins();
@@ -14,8 +33,9 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	 * Load the addons through json file.
 	 */
 	private function get_plugins() {
-		$file          = file_get_contents( COOKIEBOT_ADDONS_DIR . 'addons.json' );
-		$this->plugins = json_decode( $file );
+		$this->file_path = dirname( dirname( __DIR__ ) ) . '/addons.json';
+		$this->file     = file_get_contents( $this->file_path );
+		$this->plugins  = json_decode( $this->file );
 	}
 
 	/**
@@ -34,10 +54,10 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	public function test_get_option_name_unique() {
 		$options = array();
 
-		$settingsMock = $this->getMockBuilder( 'cookiebot_addons\lib\Settings_Service_Interface' )->getMock();
+		$settingsMock        = $this->getMockBuilder( 'cookiebot_addons\lib\Settings_Service_Interface' )->getMock();
 		$scriptLoaderTagMock = $this->getMockBuilder( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface' )->getMock();
-		$cookieConsentMock = $this->getMockBuilder( 'cookiebot_addons\lib\Cookie_Consent_Interface' )->getMock();
-		$bufferOutputMock = $this->getMockBuilder( 'cookiebot_addons\lib\buffer\Buffer_Output_Interface' )->getMock();g
+		$cookieConsentMock   = $this->getMockBuilder( 'cookiebot_addons\lib\Cookie_Consent_Interface' )->getMock();
+		$bufferOutputMock    = $this->getMockBuilder( 'cookiebot_addons\lib\buffer\Buffer_Output_Interface' )->getMock();
 
 		foreach ( $this->plugins as $plugin ) {
 			$p = new $plugin->class( $settingsMock, $scriptLoaderTagMock, $cookieConsentMock, $bufferOutputMock );
