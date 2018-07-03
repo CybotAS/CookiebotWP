@@ -187,8 +187,6 @@ function cookiebot_addons_get_language() {
 	 */
 	$lang = apply_filters( 'cookiebot_addons_language', $lang );
 
-	$lang = str_replace( '-', '_', $lang );
-
 	return $lang;
 }
 
