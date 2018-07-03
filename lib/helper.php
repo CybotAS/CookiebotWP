@@ -171,3 +171,53 @@ function cookiebot_addons_get_one_cookie_type( $cookie_types ) {
 
 	return '';
 }
+
+/**
+ * Returns current site language
+ *
+ * @return mixed|string
+ *
+ * @since 1.9.0
+ */
+function cookiebot_addons_get_language() {
+	$lang = get_locale(); //Gets language in en-US format
+
+	/**
+	 *  Add support for 3rd party plugins
+	 */
+	$lang = apply_filters( 'cookiebot_addons_language', $lang );
+
+	$lang = str_replace( '-', '_', $lang );
+
+	return $lang;
+}
+
+/**
+ * Get supported languages by the cookiebot
+ *
+ * @return array
+ *
+ * @since 1.9.0
+ */
+function cookiebot_addons_get_supported_languages() {
+	$cookiebot = cookiebot();
+
+	return $cookiebot->get_supported_languages();
+}
+
+function cookiebot_addons_get_dropdown_languages( $class, $name, $selected ) {
+	$args     = array(
+		'name'                     => $name,
+		'selected'                 => $selected,
+		'show_option_site_default' => true,
+		'echo'                     => false,
+		'languages'                => get_available_languages()
+	);
+	$dropdown = wp_dropdown_languages( $args );
+
+	$output = str_replace( 'select ', 'select class="' . $class . '" ', $dropdown );
+
+	$output = str_replace( 'value="" ', 'value="en_US" ', $output );
+
+	return $output;
+}

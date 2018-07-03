@@ -298,21 +298,7 @@ class Settings_Service implements Settings_Service_Interface {
 		$option = get_option( static::OPTION_NAME );
 
 		if ( isset( $option[ $option_key ]['placeholder']['enabled'] ) ) {
-			if ( function_exists( 'cookiebot' ) ) {
-				$cookiebot   = cookiebot();
-				$currentLang = $cookiebot->get_language( false );
-
-				if ( $currentLang == false || $currentLang == '' ) {
-					$currentLang = 'default';
-				}
-
-				// get current lang text
-				if ( isset( $option[ $option_key ]['placeholder']['languages'][ $currentLang ] ) ) {
-					return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages'][ $currentLang ], $cookies );
-				} else {
-					return $this->placeholder_merge_tag( $default_placeholder, $cookies );
-				}
-			}
+			return $this->get_translated_placeholder( $option, $option_key, $default_placeholder, $cookies );
 		}
 
 		return false;
@@ -329,24 +315,53 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_widget_placeholder( $option_key, $widget_key, $default_placeholder, $cookies = '') {
+	public function get_widget_placeholder( $option_key, $widget_key, $default_placeholder, $cookies = '' ) {
 		$option = get_option( $option_key );
 
 		if ( isset( $option[ $widget_key ]['placeholder']['enabled'] ) ) {
-			if ( function_exists( 'cookiebot' ) ) {
-				$cookiebot   = cookiebot();
-				$currentLang = $cookiebot->get_language( true );
-
-				// get current lang text
-				if ( isset( $option[ $widget_key ]['placeholder'][ $currentLang ] ) ) {
-					return $this->placeholder_merge_tag( $option[ $widget_key ]['placeholder'][ $currentLang ], $cookies );
-				} else {
-					return $this->placeholder_merge_tag( $default_placeholder, $cookies );
-				}
-			}
+			return $this->get_translated_placeholder( $option, $widget_key, $default_placeholder, $cookies );
 		}
 
 		return false;
+	}
+
+	/**
+	 * @param $option
+	 * @param $option_key
+	 * @param $default_placeholder
+	 * @param $cookies
+	 *
+	 * @return mixed
+	 *
+	 * @since  1.8.0
+	 */
+	private function get_translated_placeholder( $option, $option_key, $default_placeholder, $cookies ) {
+		$current_lang = cookiebot_addons_get_language();
+
+		if ( $current_lang == false || $current_lang == '' ) {
+			$current_lang = 'site-default';
+		}
+
+		/**
+		 * Loop every language and match current language
+		 */
+		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) && is_array( $option[ $option_key ]['placeholder']['languages'] ) ) {
+			foreach ( $option[ $option_key ]['placeholder']['languages'] as $key => $value ) {
+
+				/**
+				 * if current lang match with the prefix language in the database then get the text
+				 */
+				if ( $key == $current_lang ) {
+					return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages'][ $key ], $cookies );
+				}
+			}
+			die;
+		}
+
+		/**
+		 * Returns default text if no match found.
+		 */
+		return $this->placeholder_merge_tag( $default_placeholder, $cookies );
 	}
 
 	/**

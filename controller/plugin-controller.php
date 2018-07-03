@@ -28,7 +28,6 @@ class Plugin_Controller {
 		$this->settings_service = $settings_service;
 
 		$this->load_init_files();
-		//$this->load_translations();
 	}
 
 	/**
@@ -39,6 +38,8 @@ class Plugin_Controller {
 	protected function load_init_files() {
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+			require_once( ABSPATH . '/wp-includes/l10n.php' );
+			require_once( ABSPATH . '/wp-admin/includes/translation-install.php' );
 		}
 	}
 
@@ -84,13 +85,4 @@ class Plugin_Controller {
 			$buffer_output->run_actions();
 		}
 	}
-
-	/**
-	 * Load translation files
-	 *
-	 * @since 1.6.0
-	 */
-	//protected function load_translations() {
-	//	load_plugin_textdomain( 'cookiebot', false, 'lang/'  );
-	//}
 }
