@@ -267,7 +267,7 @@ class Settings_Config {
                         </p>
                         <p>
                         <textarea cols="80" rows="5"
-                                  name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][default]"><?php echo $widget->get_default_placeholder(); ?></textarea>
+                                  name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][site-default]"><?php echo $widget->get_default_placeholder(); ?></textarea>
                         </p>
                     </div>
 				<?php endif; ?>
@@ -378,7 +378,7 @@ class Settings_Config {
                         <p>
                             <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
                             <select class="placeholder_select_language"
-                                    name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][default]">
+                                    name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][site-default]">
 								<?php
 								if ( function_exists( 'cookiebot' ) ) {
 									?>
@@ -397,7 +397,7 @@ class Settings_Config {
                         </p>
                         <p>
                         <textarea cols="80" rows="5"
-                                  name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][default]"><?php echo $addon->get_default_placeholder(); ?></textarea>
+                                  name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][site-default]"><?php echo $addon->get_default_placeholder(); ?></textarea>
                         </p>
                     </div>
 				<?php endif; ?>

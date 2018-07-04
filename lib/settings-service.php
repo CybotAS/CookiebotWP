@@ -358,7 +358,14 @@ class Settings_Service implements Settings_Service_Interface {
 		}
 
 		/**
-		 * Returns default text if no match found.
+		 * Returns site-default text if no match found.
+		 */
+		if( isset( $option[ $option_key ]['placeholder']['languages'][ 'site-default' ] ) ) {
+			return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages'][ 'site-default' ], $cookies );
+		}
+
+		/**
+		 * Returns addon default placeholder (code)
 		 */
 		return $this->placeholder_merge_tag( $default_placeholder, $cookies );
 	}
