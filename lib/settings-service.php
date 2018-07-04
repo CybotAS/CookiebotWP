@@ -355,7 +355,6 @@ class Settings_Service implements Settings_Service_Interface {
 					return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages'][ $key ], $cookies );
 				}
 			}
-			die;
 		}
 
 		/**
