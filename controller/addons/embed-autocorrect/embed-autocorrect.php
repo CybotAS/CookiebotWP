@@ -104,7 +104,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 */
 	public function cookiebot_addon_embed_autocorrect_content( $content ) {
 		//Make sure Cookiebot is active and the user has enabled autocorrection
-		$cookieContentNotice = '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_cookie_types() ) . '">';
+		$cookieContentNotice = '<div class="' . cookiebot_addons_get_cookie_types_for_class( $this->get_cookie_types() ) . '">';
 		$cookieContentNotice .= $this->get_placeholder();
 		$cookieContentNotice .= '</div>';
 
