@@ -172,19 +172,6 @@ function cookiebot_addons_get_one_cookie_type( $cookie_types ) {
 	return '';
 }
 
-function cookiebot_addons_get_cookie_types_for_class( $cookie_types ) {
-	$cookie_consent_class = '';
-
-	foreach ( $cookie_types as $cookie ) {
-		if ( '' != $cookie_consent_class ) {
-			$cookie_consent_class .= ' ';
-		}
-		$cookie_consent_class .= 'cookieconsent-optout-' . $cookie;
-	}
-
-	return $cookie_consent_class;
-}
-
 /**
  * Returns current site language
  *

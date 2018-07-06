@@ -196,7 +196,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	public function cookie_consent_div( $view, $widget ) {
 		if ( $widget == 'internet_defense_league' && $view == 'widget_view' ) {
 			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
-				echo '<div class="' . cookiebot_addons_get_cookie_types_for_class( $this->get_widget_cookie_types() ) . '">
+				echo '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">
 						  ' . $this->get_widget_placeholder() . '
 						</div>';
 			}
