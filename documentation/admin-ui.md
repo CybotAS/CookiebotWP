@@ -24,6 +24,11 @@ Example settings:
 - Select required cookie types
 - Add placeholder text in multi languages
 
+In order to create unique placeholder experience, we have added 2 merge tags you can use in the placeholder text:
+- ```%cookie_types``` Displays required cookie types to enable the addon.
+
+- ```%src``` -> src url for youtube, facebook, vimeo and twitter videos. Currently it only works for Embed addon.
+
 # Unavailable plugins
 
 In this screenshot you see the plugins which are not activated or installed.

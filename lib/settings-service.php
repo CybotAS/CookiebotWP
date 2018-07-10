@@ -385,11 +385,11 @@ class Settings_Service implements Settings_Service_Interface {
 	 */
 	private function placeholder_merge_tag( $placeholder, $cookies, $src ) {
 		if ( strpos( $placeholder, '%s' ) !== false ) {
-			$placeholder = str_replace( '%s', $cookies, $placeholder );
+			$placeholder = str_replace( '%cookie_types', $cookies, $placeholder );
 		}
 		
 		if ( strpos( $placeholder, '%url' ) !== false ) {
-			$placeholder = str_replace( '%url', $src, $placeholder );
+			$placeholder = str_replace( '%src', $src, $placeholder );
 		}
 		
 		if ( strpos( $placeholder, '[renew_consent]' ) !== false ) {
