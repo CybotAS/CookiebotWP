@@ -109,9 +109,9 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		//Match twitter.
 		preg_match_all( '#\<(script).+src=".+platform.twitter.com\/widgets\.js.+\<\/(script)\>#mis', $content, $matches );
 		if ( ! empty( $matches[0][0] ) ) {
-			$start = strpos( $matches[0][0], 'href="https://twitter.com/TwitterVideo/' ) + 6;
-			$end   = strpos( $matches[0][0], '"', $start );
-			$src   = substr( $matches[0][0], $start, $end - $start );
+			$start = strpos( $content, 'href="https://twitter.com/TwitterVideo/' ) + 6;
+			$end   = strpos( $content, '"', $start );
+			$src   = substr( $content, $start, $end - $start );
 			
 			$adjusted_content = str_replace( '<script', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '"', $matches[0][0] );
 			$adjusted_content = $this->generate_placeholder_with_src( $src ) . $adjusted_content;
