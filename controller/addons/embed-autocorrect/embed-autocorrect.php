@@ -9,42 +9,42 @@ use cookiebot_addons\lib\Cookie_Consent_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
 
 class Embed_Autocorrect implements Cookiebot_Addons_Interface {
-
+	
 	/**
 	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $settings;
-
+	
 	/**
 	 * @var Script_Loader_Tag_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $script_loader_tag;
-
+	
 	/**
 	 * @var Cookie_Consent_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $cookie_consent;
-
+	
 	/**
 	 * @var Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $buffer_output;
-
+	
 	/**
 	 * Jetpack constructor.
 	 *
-	 * @param $settings Settings_Service_Interface
+	 * @param $settings          Settings_Service_Interface
 	 * @param $script_loader_tag Script_Loader_Tag_Interface
-	 * @param $cookie_consent Cookie_Consent_Interface
-	 * @param $buffer_output Buffer_Output_Interface
+	 * @param $cookie_consent    Cookie_Consent_Interface
+	 * @param $buffer_output     Buffer_Output_Interface
 	 *
 	 * @since 1.2.0
 	 */
@@ -54,7 +54,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
 	}
-
+	
 	/**
 	 * Loads addon configuration
 	 *
@@ -67,7 +67,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		 */
 		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_embed_autocorrect' ) );
 	}
-
+	
 	/**
 	 * Check for embed autocorrect action hooks
 	 *
@@ -78,25 +78,25 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
 			return;
 		}
-
+		
 		// consent is given
 		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
-
+		
 		//add filters to handle autocorrection in content
 		add_filter( 'the_content', array(
 			$this,
 			'cookiebot_addon_embed_autocorrect_content'
 		), 1000 ); //Ensure it is executed as the last filter
-
+		
 		//add filters to handle autocorrection in widget text
 		add_filter( 'widget_text', array(
 			$this,
 			'cookiebot_addon_embed_autocorrect_content'
 		), 1000 ); //Ensure it is executed as the last filter
 	}
-
+	
 	/**
 	 * Autocorrection of Vimeo and Youtube tags to make them GDPR compatible
 	 *
@@ -104,30 +104,54 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 */
 	public function cookiebot_addon_embed_autocorrect_content( $content ) {
 		//Make sure Cookiebot is active and the user has enabled autocorrection
-		$cookieContentNotice = '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_cookie_types() ) . '">';
-		$cookieContentNotice .= $this->get_placeholder();
-		$cookieContentNotice .= '</div>';
-
+		
+		
 		//Match twitter.
 		preg_match_all( '#\<(script).+src=".+platform.twitter.com\/widgets\.js.+\<\/(script)\>#mis', $content, $matches );
 		if ( ! empty( $matches[0][0] ) ) {
+			$start = strpos( $content, 'href="https://twitter.com/TwitterVideo/' ) + 6;
+			$end   = strpos( $content, '"', $start );
+			$src   = substr( $content, $start, $end - $start );
+			
 			$adjusted_content = str_replace( '<script', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '"', $matches[0][0] );
-			$adjusted_content = $cookieContentNotice . $adjusted_content;
+			$adjusted_content = $this->generate_placeholder_with_src( $src ) . $adjusted_content;
 			$content          = str_replace( $matches[0][0], $adjusted_content, $content );
 		}
 		unset( $matches );
-
+		
 		//Match all youtube, vimeo and facebook iframes.
 		preg_match_all( '/<iframe[^>]*src=\"[^\"]*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com)\/[^>]*>.*?<\\/iframe>/mi', $content, $matches );
 		foreach ( $matches[0] as $match ) {
+			/**
+			 * Get the source attribute value
+			 */
+			$start = strpos( $match, ' src="' ) + 6;
+			$end   = strpos( $match, '"', $start );
+			$src   = substr( $match, $start, $end - $start );
+			
 			//Replace - and add cookie consent notice.
 			$adjusted = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $match );
-			$content  = str_replace( $match, $adjusted . $cookieContentNotice, $content );
+			$content  = str_replace( $match, $adjusted . $this->generate_placeholder_with_src( $src ), $content );
 		}
-
+		
 		return $content;
 	}
-
+	
+	/**
+	 * Generates placeholder for given source
+	 *
+	 * @param $src
+	 *
+	 * @return string
+	 */
+	public function generate_placeholder_with_src( $src = '' ) {
+		$cookieContentNotice = '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_cookie_types() ) . '">';
+		$cookieContentNotice .= $this->get_placeholder( $src );
+		$cookieContentNotice .= '</div>';
+		
+		return $cookieContentNotice;
+	}
+	
 	/**
 	 * Return addon/plugin name
 	 *
@@ -138,7 +162,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function get_addon_name() {
 		return 'Embed autocorrect';
 	}
-
+	
 	/**
 	 * Option name in the database
 	 *
@@ -149,7 +173,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function get_option_name() {
 		return 'embed_autocorrect';
 	}
-
+	
 	/**
 	 * Plugin file path
 	 *
@@ -160,7 +184,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function get_plugin_file() {
 		return false;
 	}
-
+	
 	/**
 	 * Returns checked cookie types
 	 * @return mixed
@@ -170,11 +194,11 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function get_cookie_types() {
 		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
 	}
-
+	
 	/**
 	 * Returns default cookie types
 	 * @return array
-	 * 
+	 *
 	 * @since 1.5.0
 	 */
 	public function get_default_cookie_types() {
@@ -189,7 +213,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function is_addon_enabled() {
 		return $this->settings->is_addon_enabled( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * Checks if addon is installed
 	 *
@@ -198,7 +222,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function is_addon_installed() {
 		return $this->settings->is_addon_installed( $this->get_plugin_file() );
 	}
-
+	
 	/**
 	 * Checks if addon is activated
 	 *
@@ -207,7 +231,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
 	}
-
+	
 	/**
 	 * Default placeholder content
 	 *
@@ -218,21 +242,23 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function get_default_placeholder() {
 		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this video.';
 	}
-
+	
 	/**
 	 * Get placeholder content
 	 *
 	 * This function will check following features:
 	 * - Current language
 	 *
+	 * @param $src
+	 *
 	 * @return bool|mixed
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_placeholder() {
-		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) );
+	public function get_placeholder( $src = '' ) {
+		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
 	}
-
+	
 	/**
 	 * Checks if it does have custom placeholder content
 	 *
@@ -243,7 +269,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function has_placeholder() {
 		return $this->settings->has_placeholder( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * returns all placeholder contents
 	 *
@@ -254,7 +280,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function get_placeholders() {
 		return $this->settings->get_placeholders( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * Return true if the placeholder is enabled
 	 *

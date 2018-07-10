@@ -43,9 +43,12 @@ class Settings_Config {
 			$this,
 			'setting_page'
 		) );*/
-		
-		add_submenu_page('cookiebot',__('Prior Consent','cookiebot'),__('Prior Consent','cookiebot'), 'manage_options', 'cookiebot-addons',array($this,'setting_page'));
-		
+
+		add_submenu_page( 'cookiebot', __( 'Prior Consent', 'cookiebot' ), __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array(
+			$this,
+			'setting_page'
+		) );
+
 	}
 
 	/**
@@ -59,7 +62,7 @@ class Settings_Config {
 		}
 
 		wp_enqueue_script( 'cookiebot_addons_custom_js', plugins_url( 'js/settings.js', dirname( __FILE__ ) ), array( 'jquery' ), '1.8', true );
-		wp_localize_script('cookiebot_addons_custom_js', 'php', array('remove_link' => ' <a href="" class="submitdelete deletion">'. __( 'Remove language', 'cookiebot-addons' ) . '</a>') );
+		wp_localize_script( 'cookiebot_addons_custom_js', 'php', array( 'remove_link' => ' <a href="" class="submitdelete deletion">' . __( 'Remove language', 'cookiebot-addons' ) . '</a>' ) );
 		wp_enqueue_style( 'cookiebot_addons_custom_css', plugins_url( 'style/css/admin_styles.css', dirname( __FILE__ ) ) );
 	}
 
@@ -237,25 +240,13 @@ class Settings_Config {
                         <div class="placeholder_content submitbox">
                             <p>
                                 <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
-                                <select class="placeholder_select_language"
-                                        name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][<?php echo $placeholder_lang; ?>]">
-									<?php
-									if ( function_exists( 'cookiebot' ) ) {
-										$cookiebot   = cookiebot();
-										$currentLang = $cookiebot->get_language( true );
-										?>
-                                        <option value=""><?php _e( 'Default (Autodetect)', 'cookiebot' ); ?></option>
-                                        <option value="_wp"<?php echo ( $placeholder_lang == '_wp' ) ? ' selected' : ''; ?>><?php _e( 'Use Wordpress Language', 'cookiebot-addons' ); ?></option>
-										<?php
-										foreach ( $cookiebot->get_supported_languages() as $key => $value ) {
-											$selected = ( $key == $placeholder_lang ) ? 'selected' : '';
-											echo '<option value="' . $key . '"  ' . $selected . '>' . $value . '</option>';
-										}
-									}
-									?>
-                                </select>
+								<?php
+								$name = 'cookiebot_jetpack_addon[' . $widget->get_widget_option_name() . '][placeholder][languages][' . $placeholder_lang . ']';
+								echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, $placeholder_lang );
+								?>
 								<?php if ( $count != 0 ): ?>
-                                    <a href="" class="submitdelete deletion"><?php _e( 'Remove language', 'cookiebot-addons' ); ?></a>
+                                    <a href=""
+                                       class="submitdelete deletion"><?php _e( 'Remove language', 'cookiebot-addons' ); ?></a>
 								<?php endif; ?>
                             </p>
                             <p>
@@ -269,26 +260,14 @@ class Settings_Config {
                     <div class="placeholder_content">
                         <p>
                             <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
-                            <select class="placeholder_select_language"
-                                    name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][default]">
-								<?php
-								if ( function_exists( 'cookiebot' ) ) {
-									$cookiebot   = cookiebot();
-									$currentLang = $cookiebot->get_language( true );
-									?>
-                                    <option value=""><?php _e( 'Default (Autodetect)', 'cookiebot' ); ?></option>
-                                    <option value="_wp"<?php echo ( $currentLang == '_wp' ) ? ' selected' : ''; ?>><?php _e( 'Use Wordpress Language', 'cookiebot-addons' ); ?></option>
-									<?php
-									foreach ( $cookiebot->get_supported_languages() as $key => $value ) {
-										echo '<option value="' . $key . '">' . $value . '</option>';
-									}
-								}
-								?>
-                            </select>
+							<?php
+							$name = 'cookiebot_jetpack_addon[' . $widget->get_widget_option_name() . '][placeholder][languages][site-default]';
+							echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, '' );
+							?>
                         </p>
                         <p>
                         <textarea cols="80" rows="5"
-                                  name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][default]"><?php echo $widget->get_default_placeholder(); ?></textarea>
+                                  name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][site-default]"><?php echo $widget->get_default_placeholder(); ?></textarea>
                         </p>
                     </div>
 				<?php endif; ?>
@@ -331,6 +310,8 @@ class Settings_Config {
 	public function available_addon_callback( $args ) {
 		$addon = $args['addon'];
 
+		require_once( ABSPATH . '/wp-includes/l10n.php' );
+		require_once( ABSPATH . '/wp-admin/includes/translation-install.php' );
 		?>
         <div class="postbox cookiebot-addon">
             <p>
@@ -376,26 +357,14 @@ class Settings_Config {
                         <div class="placeholder_content submitbox">
                             <p>
                                 <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
-                                <select class="placeholder_select_language"
-                                        name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][<?php echo $placeholder_lang; ?>]">
-									<?php
-									if ( function_exists( 'cookiebot' ) ) {
-										$cookiebot   = cookiebot();
-										$currentLang = $cookiebot->get_language( true );
-										?>
-                                        <option value=""><?php _e( 'Default (Autodetect)', 'cookiebot' ); ?></option>
-                                        <option value="_wp"<?php echo ( $placeholder_lang == '_wp' ) ? ' selected' : ''; ?>><?php _e( 'Use Wordpress Language', 'cookiebot-addons' ); ?></option>
-										<?php
-										foreach ( $cookiebot->get_supported_languages() as $key => $value ) {
-											$selected = ( $key == $placeholder_lang ) ? 'selected' : '';
-											echo '<option value="' . $key . '"  ' . $selected . '>' . $value . '</option>';
-										}
-									}
-									?>
-                                </select>
-	                            <?php if ( $count != 0 ): ?>
-                                    <a href="" class="submitdelete deletion"><?php _e( 'Remove language', 'cookiebot-addons' ); ?></a>
-	                            <?php endif; ?>
+								<?php
+								$name = 'cookiebot_available_addons[' . $addon->get_option_name() . '][placeholder][languages][' . $placeholder_lang . ']';
+								echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, $placeholder_lang );
+								?>
+								<?php if ( $count != 0 ): ?>
+                                    <a href=""
+                                       class="submitdelete deletion"><?php _e( 'Remove language', 'cookiebot-addons' ); ?></a>
+								<?php endif; ?>
                             </p>
                             <p>
                         <textarea cols="60" rows="5"
@@ -409,25 +378,26 @@ class Settings_Config {
                         <p>
                             <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
                             <select class="placeholder_select_language"
-                                    name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][default]">
+                                    name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][site-default]">
 								<?php
 								if ( function_exists( 'cookiebot' ) ) {
-									$cookiebot   = cookiebot();
-									$currentLang = $cookiebot->get_language( true );
 									?>
                                     <option value=""><?php _e( 'Default (Autodetect)', 'cookiebot' ); ?></option>
-                                    <option value="_wp"<?php echo ( $currentLang == '_wp' ) ? ' selected' : ''; ?>><?php _e( 'Use Wordpress Language', 'cookiebot-addons' ); ?></option>
 									<?php
-									foreach ( $cookiebot->get_supported_languages() as $key => $value ) {
+									foreach ( wp_get_available_translations() as $key => $value ) {
 										echo '<option value="' . $key . '">' . $value . '</option>';
 									}
 								}
 								?>
                             </select>
+							<?php
+							$name = 'cookiebot_available_addons[' . $addon->get_option_name() . '][placeholder][languages][site-default]';
+							echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, '' );
+							?>
                         </p>
                         <p>
                         <textarea cols="80" rows="5"
-                                  name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][default]"><?php echo $addon->get_default_placeholder(); ?></textarea>
+                                  name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][site-default]"><?php echo $addon->get_default_placeholder(); ?></textarea>
                         </p>
                     </div>
 				<?php endif; ?>
@@ -490,25 +460,25 @@ class Settings_Config {
         <div class="wrap">
 
             <div id="icon-themes" class="icon32"></div>
-            <h2><?php _e('Prior consent','cookiebot'); ?></h2>
+            <h2><?php _e( 'Prior consent', 'cookiebot' ); ?></h2>
             <div class="notice inline notice-warning notice-alt cookiebot-notice">
-							<p>
-								<?php _e('These add-ons are produced by an open-source community of developers. This is done to help make it easier for Wordpress users to implement ‘prior consent’ for cookies and trackers set by plugins that do not offer this as a built-in functionality.'); ?>
-							</p>
-							<p>
-								<?php _e('The add-ons are currently the best alternative to a Wordpress Core framework that can signal the user’s consent state to other plugins (if and when this will be implemented is unknown) and to those plugins who do not yet offer native support for Cookiebot built into the plugin itself.'); ?>
-							</p>
-							<p>
-								<?php _e('We do not assume any responsibility for the use of these add-ons. If one of the plugins that the add-ons hook into makes a ‘breaking change’, there may be a period of time where the add-on will not work properly until it has been updated to accommodate the changes in the plugin.'); ?>
-							</p>
-							<p>
-								<strong>
-									<?php echo sprintf(__('If your favourite plugin isn\'t supported you\'re welcome to contribute or request on our <a href="%s" target="_blank">Github development page.</a>'),'https://github.com/CybotAS/CookiebotAddons'); ?>
-								</strong>
-							</p>
+                <p>
+					<?php _e( 'These add-ons are produced by an open-source community of developers. This is done to help make it easier for Wordpress users to implement ‘prior consent’ for cookies and trackers set by plugins that do not offer this as a built-in functionality.' ); ?>
+                </p>
+                <p>
+					<?php _e( 'The add-ons are currently the best alternative to a Wordpress Core framework that can signal the user’s consent state to other plugins (if and when this will be implemented is unknown) and to those plugins who do not yet offer native support for Cookiebot built into the plugin itself.' ); ?>
+                </p>
+                <p>
+					<?php _e( 'We do not assume any responsibility for the use of these add-ons. If one of the plugins that the add-ons hook into makes a ‘breaking change’, there may be a period of time where the add-on will not work properly until it has been updated to accommodate the changes in the plugin.' ); ?>
+                </p>
+                <p>
+                    <strong>
+						<?php echo sprintf( __( 'If your favourite plugin isn\'t supported you\'re welcome to contribute or request on our <a href="%s" target="_blank">Github development page.</a>' ), 'https://github.com/CybotAS/CookiebotAddons' ); ?>
+                    </strong>
+                </p>
 
             </div>
-            
+
 			<?php if ( isset( $_GET['tab'] ) ) {
 				$active_tab = $_GET['tab'];
 			} else if ( $active_tab == 'unavailable_addons' ) {
