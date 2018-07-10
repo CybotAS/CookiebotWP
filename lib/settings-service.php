@@ -384,11 +384,11 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.8.0
 	 */
 	private function placeholder_merge_tag( $placeholder, $cookies, $src ) {
-		if ( strpos( $placeholder, '%s' ) !== false ) {
+		if ( strpos( $placeholder, '%cookie_types' ) !== false ) {
 			$placeholder = str_replace( '%cookie_types', $cookies, $placeholder );
 		}
 		
-		if ( strpos( $placeholder, '%url' ) !== false ) {
+		if ( strpos( $placeholder, '%src' ) !== false ) {
 			$placeholder = str_replace( '%src', $src, $placeholder );
 		}
 		
