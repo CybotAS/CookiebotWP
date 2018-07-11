@@ -24,10 +24,39 @@ Example settings:
 - Select required cookie types
 - Add placeholder text in multi languages
 
-In order to create unique placeholder experience, we have added 2 merge tags you can use in the placeholder text:
-- ```%cookie_types``` Displays required cookie types to enable the addon.
+In order to create unique placeholder experience, we have added few merge tags you can use in the placeholder text:
+- ```%cookie_types``` 
+Displays required cookie types to enable the addon.
 
-- ```%src``` -> src url for youtube, facebook, vimeo and twitter videos. Currently it only works for Embed addon.
+- ```%src``` 
+src url for youtube, facebook, vimeo and twitter videos. Currently it only works for Embed addon.
+
+- ```[renew_consent]``` and ```[/renew_consent]``` 
+Both tag will be replaced by a link element with a href to the cookiebot settings box, so the visitor can enable or disable the cookie types. 
+
+
+On top of that, there are also few filters to manipulate the placeholders:
+
+#### Twitter
+
+- ```add_filter('cookiebot_addons_embed_twitter_source', $source)```   
+
+This filter is used to manipulate the source attribute for twitter videos
+
+- ```add_filter('cookiebot_addons_embed_twitter_placeholder', $content, $source, $cookie_types)```
+
+This filter is used to manipulate the placeholder output
+
+#### Youtube, Vimeo and Facebook
+
+- ```add_filter('cookiebot_addons_embed_source', $source)```   
+
+This filter is used to manipulate the source attribute for twitter videos
+
+- ```add_filter('cookiebot_addons_embed_placeholder', $content, $source, $cookie_types)```
+
+This filter is used to manipulate the placeholder output
+
 
 # Unavailable plugins
 
