@@ -50,6 +50,10 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 
 	/**
 	 * Check if get_option_name is unique in every addon.
+	 * @covers \cookiebot_addons\lib\Settings_Service_Interface
+	 * @covers \cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface
+	 * @covers \cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface
+	 * @covers \cookiebot_addons\lib\buffer\Buffer_Output_Interface
 	 */
 	public function test_get_option_name_unique() {
 		$options = array();

@@ -114,8 +114,18 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			$src   = substr( $content, $start, $end - $start );
 			
 			$adjusted_content = str_replace( '<script', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '"', $matches[0][0] );
-			$adjusted_content = $this->generate_placeholder_with_src( $src ) . $adjusted_content;
-			$content          = str_replace( $matches[0][0], $adjusted_content, $content );
+			$adjusted_content = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_twitter_source', $src ) ) . $adjusted_content;
+			
+			/**
+			 * Modify placeholder by Filter
+			 *
+			 * @param   $adjusted_content    string  Current placeholder text
+			 * @param   $src                 string  Source attribute from the embedded video
+			 * @param   $this                array   Array of required cookie types
+			 */
+			$adjusted_content = apply_filters( 'cookiebot_addons_embed_twitter_placeholder', $adjusted_content, $src, $this->get_cookie_types() );
+			
+			$content = str_replace( $matches[0][0], $adjusted_content, $content );
 		}
 		unset( $matches );
 		
@@ -131,7 +141,23 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			
 			//Replace - and add cookie consent notice.
 			$adjusted = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $match );
-			$content  = str_replace( $match, $adjusted . $this->generate_placeholder_with_src( $src ), $content );
+			
+			/**
+			 * Generate placeholder
+			 */
+			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
+			
+			/**
+			 * Modify placeholder by Filter
+			 *
+			 * @param   $placeholder    string  Current placeholder text
+			 * @param   $src            string  Source attribute from the embedded video
+			 * @param   $this           array   Array of required cookie types
+			 */
+			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
+			
+			$adjusted .= $placeholder;
+			$content  = str_replace( $match, $adjusted, $content );
 		}
 		
 		return $content;
