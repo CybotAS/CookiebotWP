@@ -40,10 +40,10 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 	/**
 	 * @covers \cookiebot_addons|controller\addons\google_analyticator\Google_Analyticator
 	 */
-	public function test_google_analyticator() {
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/ga-google-analytics/trunk/inc/plugin-core.php' );
-		
-		$this->assertNotFalse( strpos( $content, 'add_action(\'wp_head\', \'add_google_analytics\',99);' ) );
-		$this->assertNotFalse( strpos( $content, 'add_action(\'login_head\', \'add_google_analytics\', 99);' ) );
-	}
+//	public function test_google_analyticator() {
+//		$content = file_get_contents( 'http://plugins.svn.wordpress.org/ga-google-analytics/trunk/inc/plugin-core.php' );
+//
+//		$this->assertNotFalse( strpos( $content, 'add_action(\'wp_head\', \'add_google_analytics\',99);' ) );
+//		$this->assertNotFalse( strpos( $content, 'add_action(\'login_head\', \'add_google_analytics\', 99);' ) );
+//	}
 }
