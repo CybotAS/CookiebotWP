@@ -51,7 +51,7 @@ This filter is used to manipulate the placeholder output
 
 - ```add_filter('cookiebot_addons_embed_source', $source)```   
 
-This filter is used to manipulate the source attribute for twitter videos
+This filter is used to manipulate the source attribute for embedded video
 
 - ```add_filter('cookiebot_addons_embed_placeholder', $content, $source, $cookie_types)```
 
