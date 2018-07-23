@@ -124,12 +124,16 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function cookiebot_addon_embed_autocorrect_javascript() {
 		?><style type="text/css">video.wp-video-shortcode__disabled,audio.wp-audio-shortcode__disabled { display:none; }</style>
 		<script>
+		var itemSrc;
 		window.addEventListener('CookiebotOnAccept',function (e) {
 			if(<?php echo 'Cookiebot.consent.'.implode(' && Cookiebot.consent.',$this->get_cookie_types()); ?>) {
 				jQuery('.wp-video-shortcode__disabled').addClass('wp-video-shortcode').removeClass('wp-video-shortcode__disabled');
 				jQuery('.wp-audio-shortcode__disabled').addClass('wp-audio-shortcode').removeClass('wp-audio-shortcode__disabled');
 				jQuery('video.wp-video-shortcode, audio.wp-audio-shortcode').each(function() {
-						jQuery(this).find('source').attr('src',jQuery(this).find('source').attr('data-src'));
+						itemSrc = jQuery(this).find('source').attr('data-src');
+						if(itemSrc!='') {
+							jQuery(this).find('source').attr('src',itemSrc);
+						}
 					}
 				);
 				window.wp.mediaelement.initialize();
