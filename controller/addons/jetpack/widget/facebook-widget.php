@@ -210,4 +210,15 @@ class Facebook_Widget {
 			}
 		}
 	}
+	
+	/**
+	 * Adds extra information under the label
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_extra_information() {
+		return '<p>' . __( 'Facebook widget.', 'cookiebot-addons' ) . '</p>';
+	}
 }
