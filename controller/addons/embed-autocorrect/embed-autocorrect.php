@@ -95,7 +95,49 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			$this,
 			'cookiebot_addon_embed_autocorrect_content'
 		), 1000 ); //Ensure it is executed as the last filter
+		
+		
+		//add fitler to handle video shortcodes
+		add_filter( 'wp_video_shortcode', array(
+			$this,
+			'cookiebot_addon_embed_autocorrect_handle_video'
+		), 1000 ); 
+		
+		//add fitler to handle audio shortcodes
+		add_filter( 'wp_audio_shortcode', array(
+			$this,
+			'cookiebot_addon_embed_autocorrect_handle_audio'
+		), 1000 ); 
+		
+		add_action( 'wp_head', array(
+			$this,
+			'cookiebot_addon_embed_autocorrect_javascript'
+		) );
+
 	}
+	
+	/**
+	 * Add javascript to handle videos as loaded
+	 *
+	 * @since 1.1.0
+	 */
+	public function cookiebot_addon_embed_autocorrect_javascript() {
+		?><style type="text/css">video.wp-video-shortcode__disabled,audio.wp-audio-shortcode__disabled { display:none; }</style>
+		<script>
+		window.addEventListener('CookiebotOnAccept',function (e) {
+			if(<?php echo 'Cookiebot.consent.'.implode(' && Cookiebot.consent.',$this->get_cookie_types()); ?>) {
+				jQuery('.wp-video-shortcode__disabled').addClass('wp-video-shortcode').removeClass('wp-video-shortcode__disabled');
+				jQuery('.wp-audio-shortcode__disabled').addClass('wp-audio-shortcode').removeClass('wp-audio-shortcode__disabled');
+				jQuery('video.wp-video-shortcode, audio.wp-audio-shortcode').each(function() {
+						jQuery(this).find('source').attr('src',jQuery(this).find('source').attr('data-src'));
+					}
+				);
+				window.wp.mediaelement.initialize();
+			}
+		}, false ); 
+		</script><?php
+	}
+	
 	
 	/**
 	 * Autocorrection of Vimeo and Youtube tags to make them GDPR compatible
@@ -155,12 +197,45 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			 * @param   $this           array   Array of required cookie types
 			 */
 			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
+			$adjusted_content = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_twitter_source', $src ) ) . $adjusted_content;
 			
 			$adjusted .= $placeholder;
 			$content  = str_replace( $match, $adjusted, $content );
 		}
 		
 		return $content;
+	}
+	
+	/**
+	 * Implementation of filter wp_video_shortcode - fixing code for cookiebot.
+	 */
+	public function cookiebot_addon_embed_autocorrect_handle_video($output, $atts, $video, $post_id, $library) {
+		/**
+		 * Generate placeholder
+		 */
+		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
+		$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
+			
+		$output = str_replace( 'wp-video-shortcode','wp-video-shortcode__disabled', $output );
+		$output = str_replace( ' src=', 'data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $output );
+		$output.= $placeholder;
+		return $output;
+	}
+	
+	/**
+	 * Implementation of filter wp_audio_shortcode - fixing code for cookiebot.
+	 */
+	public function cookiebot_addon_embed_autocorrect_handle_audio($output, $atts, $video, $post_id, $library) {
+		/**
+		 * Generate placeholder
+		 */
+		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
+		$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
+			
+		$output = str_replace( 'wp-audio-shortcode','wp-audio-shortcode__disabled', $output );
+		$output = str_replace( ' src=', 'data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $output );
+		$output.= $placeholder;
+		return $output;
 	}
 	
 	/**
