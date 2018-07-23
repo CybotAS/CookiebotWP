@@ -9,42 +9,42 @@ use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
 
 class Google_Analytics implements Cookiebot_Addons_Interface {
-
+	
 	/**
 	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $settings;
-
+	
 	/**
 	 * @var Script_Loader_Tag_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $script_loader_tag;
-
+	
 	/**
 	 * @var Cookie_Consent_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $cookie_consent;
-
+	
 	/**
 	 * @var Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $buffer_output;
-
+	
 	/**
 	 * Jetpack constructor.
 	 *
-	 * @param $settings Settings_Service_Interface
+	 * @param $settings          Settings_Service_Interface
 	 * @param $script_loader_tag Script_Loader_Tag_Interface
-	 * @param $cookie_consent Cookie_Consent_Interface
-	 * @param $buffer_output Buffer_Output_Interface
+	 * @param $cookie_consent    Cookie_Consent_Interface
+	 * @param $buffer_output     Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
@@ -54,7 +54,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
 	}
-
+	
 	/**
 	 * Loads addon configuration
 	 *
@@ -63,7 +63,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function load_configuration() {
 		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_google_analyticator' ), 5 );
 	}
-
+	
 	/**
 	 * Check for google analyticator action hooks
 	 *
@@ -74,19 +74,19 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
 			return;
 		}
-
+		
 		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
-
-		if( $this->is_addon_enabled() ) {
+		
+		if ( $this->is_addon_enabled() ) {
 			// disable scripts
-			remove_action('wp_enqueue_scripts', 'Ga_Frontend::platform_sharethis');
-			remove_action('wp_footer', 'Ga_Frontend::insert_ga_script');
+			remove_action( 'wp_enqueue_scripts', 'Ga_Frontend::platform_sharethis' );
+			remove_action( 'wp_footer', 'Ga_Frontend::insert_ga_script' );
 		}
 	}
-
+	
 	/**
 	 * Return addon/plugin name
 	 *
@@ -97,7 +97,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function get_addon_name() {
 		return 'Google Analytics';
 	}
-
+	
 	/**
 	 * Option name in the database
 	 *
@@ -108,7 +108,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function get_option_name() {
 		return 'google_analytics';
 	}
-
+	
 	/**
 	 * plugin file name
 	 *
@@ -119,7 +119,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function get_plugin_file() {
 		return 'googleanalytics/googleanalytics.php';
 	}
-
+	
 	/**
 	 * Returns checked cookie types
 	 * @return array
@@ -129,17 +129,17 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function get_cookie_types() {
 		return $this->settings->get_cookie_types( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * Returns default cookie types
 	 * @return array
-	 * 
+	 *
 	 * @since 1.5.0
 	 */
 	public function get_default_cookie_types() {
 		return array( 'statistics' );
 	}
-
+	
 	/**
 	 * Check if plugin is activated and checked in the backend
 	 *
@@ -148,7 +148,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function is_addon_enabled() {
 		return $this->settings->is_addon_enabled( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * Checks if addon is installed
 	 *
@@ -157,7 +157,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function is_addon_installed() {
 		return $this->settings->is_addon_installed( $this->get_plugin_file() );
 	}
-
+	
 	/**
 	 * Checks if addon is activated
 	 *
@@ -166,7 +166,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
 	}
-
+	
 	/**
 	 * Default placeholder content
 	 *
@@ -193,7 +193,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function get_placeholder( $src = '' ) {
 		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
 	}
-
+	
 	/**
 	 * Checks if it does have custom placeholder content
 	 *
@@ -204,7 +204,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function has_placeholder() {
 		return $this->settings->has_placeholder( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * returns all placeholder contents
 	 *
@@ -215,7 +215,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function get_placeholders() {
 		return $this->settings->get_placeholders( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * Return true if the placeholder is enabled
 	 *
@@ -235,6 +235,6 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>Google Analytics is a simple, easy-to-use tool that helps website owners measure how users interact with website content.</p>';
+		return '<p>' . __( 'Google Analytics is a simple, easy-to-use tool that helps website owners measure how users interact with website content', 'cookiebot-addons' ) . '</p>';
 	}
 }
