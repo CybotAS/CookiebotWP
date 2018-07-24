@@ -266,4 +266,15 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 			}
 		}
 	}
+	
+	/**
+	 * Adds extra information under the label
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_extra_information() {
+		return false;
+	}
 }

@@ -1,50 +1,50 @@
 <?php
 
-namespace cookiebot_addons\controller\addons\wd_google_analytics;
+namespace cookiebot_addons\controller\addons\ninja_forms;
 
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons\lib\Cookie_Consent_Interface;
-use cookiebot_addons\lib\Settings_Service_Interface;
 use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
 use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
 
-class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
-
+class Ninja_Forms implements Cookiebot_Addons_Interface {
+	
 	/**
 	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $settings;
-
+	
 	/**
 	 * @var Script_Loader_Tag_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $script_loader_tag;
-
+	
 	/**
 	 * @var Cookie_Consent_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $cookie_consent;
-
+	
 	/**
 	 * @var Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $buffer_output;
-
+	
 	/**
 	 * Jetpack constructor.
 	 *
-	 * @param $settings Settings_Service_Interface
+	 * @param $settings          Settings_Service_Interface
 	 * @param $script_loader_tag Script_Loader_Tag_Interface
-	 * @param $cookie_consent Cookie_Consent_Interface
-	 * @param $buffer_output Buffer_Output_Interface
+	 * @param $cookie_consent    Cookie_Consent_Interface
+	 * @param $buffer_output     Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
@@ -54,41 +54,44 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
 	}
-
+	
 	/**
 	 * Loads addon configuration
 	 *
 	 * @since 1.3.0
 	 */
 	public function load_configuration() {
-		add_action( 'wp_loaded', array( $this, 'disable_cookies' ), 5 );
+		/**
+		 * We add the action after wp_loaded and replace the original
+		 * HubSpot Tracking Code action with our own adjusted version.
+		 */
+		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_ninja_forms' ), 10 );
 	}
-
+	
 	/**
-	 * Disable scripts if state not accepted
+	 * Manipulate the scripts if they are loaded.
 	 *
 	 * @since 1.3.0
 	 */
-	public function disable_cookies() {
-		// Check if WD google analytics is loaded.
-		if ( ! defined( 'GWD_NAME' ) ) {
-			return;
-		}
-
+	public function cookiebot_addon_ninja_forms() {
 		// Check if Cookiebot is activated and active.
 		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
 			return;
 		}
-
+		
 		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
-
-		// Disable WD google analytics wp_head hook if consent not given
-		cookiebot_addons_remove_class_action( 'wp_head', 'GAWD', 'gawd_tracking_code', 99);
+		
+		if ( $this->is_addon_enabled() && $this->is_addon_activated() ) {
+			/**
+			 * block google captcha script
+			 */
+			$this->script_loader_tag->add_tag( 'nf-google-recaptcha', $this->get_cookie_types() );
+		}
 	}
-
+	
 	/**
 	 * Return addon/plugin name
 	 *
@@ -97,9 +100,9 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_addon_name() {
-		return 'WD google analytics';
+		return 'Ninja forms';
 	}
-
+	
 	/**
 	 * Option name in the database
 	 *
@@ -108,9 +111,9 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_option_name() {
-		return 'wd_google_analytics';
+		return 'ninja_forms';
 	}
-
+	
 	/**
 	 * Plugin file name
 	 *
@@ -119,9 +122,9 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_plugin_file() {
-		return 'wd-google-analytics/google-analytics-wd.php';
+		return 'ninja-forms/ninja-forms.php';
 	}
-
+	
 	/**
 	 * Returns checked cookie types
 	 * @return mixed
@@ -129,19 +132,20 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_cookie_types() {
-		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
+		return $this->settings->get_cookie_types( $this->get_option_name() );
 	}
 	
 	/**
 	 * Returns default cookie types
 	 * @return array
-	 * 
+	 *
 	 * @since 1.5.0
 	 */
 	public function get_default_cookie_types() {
-		return array( 'statistics' );
+		return array( 'marketing', 'statistics' );
 	}
-
+	
+	
 	/**
 	 * Check if plugin is activated and checked in the backend
 	 *
@@ -150,7 +154,7 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	public function is_addon_enabled() {
 		return $this->settings->is_addon_enabled( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * Checks if addon is installed
 	 *
@@ -159,7 +163,7 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	public function is_addon_installed() {
 		return $this->settings->is_addon_installed( $this->get_plugin_file() );
 	}
-
+	
 	/**
 	 * Checks if addon is activated
 	 *
@@ -168,7 +172,7 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
 	}
-
+	
 	/**
 	 * Default placeholder content
 	 *
@@ -177,7 +181,7 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this video.';
+		return 'Please accept [renew_consent]%s[/renew_consent] cookies to enable captcha.';
 	}
 	
 	/**
@@ -206,7 +210,7 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	public function has_placeholder() {
 		return $this->settings->has_placeholder( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * returns all placeholder contents
 	 *
@@ -217,7 +221,7 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	public function get_placeholders() {
 		return $this->settings->get_placeholders( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * Return true if the placeholder is enabled
 	 *
@@ -248,6 +252,6 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/wd-google-analytics/trunk/google-analytics-wd.php';
+		return 'http://plugins.svn.wordpress.org/ninja-forms/trunk/ninja-forms@.php';
 	}
 }

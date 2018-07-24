@@ -248,6 +248,6 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_svn_url() {
-		return false;
+		return 'http://plugins.svn.wordpress.org/wp-analytify/trunk/wp-analytify.php';
 	}
 }
