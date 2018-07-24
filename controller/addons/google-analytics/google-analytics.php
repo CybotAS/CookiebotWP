@@ -237,4 +237,15 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	public function get_extra_information() {
 		return '<p>' . __( 'Google Analytics is used to track how visitor interact with website content.', 'cookiebot-addons' ) . '</p>';
 	}
+	
+	/**
+	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+	 *
+	 * @return boolean
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_svn_url() {
+		return 'http://plugins.svn.wordpress.org/googleanalytics/trunk/googleanalytics.php';
+	}
 }
