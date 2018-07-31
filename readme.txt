@@ -144,7 +144,7 @@ if(function_exists('cookiebot_active') && cookiebot_active()) {
 The developer of the plugin can see more details on [our Github repository](https://github.com/CybotAS/CookiebotAddons)
 
 ### Can I use Cookiebot with GTM? ### 
-Cookiebot works with GTM, however you should not use this plugin, but the manual approach.
+Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" option on the Cookiebot plugin settings page. 
 
 [Please see our article on how to depoloy Cookiebot with GTM](https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment).
 
