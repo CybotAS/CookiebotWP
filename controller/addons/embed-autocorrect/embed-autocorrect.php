@@ -122,24 +122,19 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @since 1.1.0
 	 */
 	public function cookiebot_addon_embed_autocorrect_javascript() {
-		?><style type="text/css">video.wp-video-shortcode__disabled,audio.wp-audio-shortcode__disabled { display:none; }</style>
-		<script>
-		var itemSrc;
-		window.addEventListener('CookiebotOnAccept',function (e) {
-			if(<?php echo 'Cookiebot.consent.'.implode(' && Cookiebot.consent.',$this->get_cookie_types()); ?>) {
-				jQuery('.wp-video-shortcode__disabled').addClass('wp-video-shortcode').removeClass('wp-video-shortcode__disabled');
-				jQuery('.wp-audio-shortcode__disabled').addClass('wp-audio-shortcode').removeClass('wp-audio-shortcode__disabled');
-				jQuery('video.wp-video-shortcode, audio.wp-audio-shortcode').each(function() {
-						itemSrc = jQuery(this).find('source').attr('data-src');
-						if(itemSrc!='') {
-							jQuery(this).find('source').attr('src',itemSrc);
-						}
-					}
-				);
-				window.wp.mediaelement.initialize();
-			}
-		}, false ); 
-		</script><?php
+		$library = apply_filters( 'wp_video_shortcode_library', 'mediaelement' );
+		if($library === 'mediaelement') {
+			?><style type="text/css">video.wp-video-shortcode__disabled,audio.wp-audio-shortcode__disabled { display:none; }</style>
+			<script>
+			window.addEventListener('CookiebotOnTagsExecuted',function (e) {
+				if(<?php echo 'Cookiebot.consent.'.implode(' && Cookiebot.consent.',$this->get_cookie_types()); ?>) {
+					jQuery('.wp-video-shortcode__disabled').addClass('wp-video-shortcode').removeClass('wp-video-shortcode__disabled');
+					jQuery('.wp-audio-shortcode__disabled').addClass('wp-audio-shortcode').removeClass('wp-audio-shortcode__disabled');
+					window.wp.mediaelement.initialize();
+				}
+			}, false ); 
+			</script><?php
+		}
 	}
 	
 	
@@ -221,7 +216,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
 			
 		$output = str_replace( 'wp-video-shortcode','wp-video-shortcode__disabled', $output );
-		$output = str_replace( ' src=', 'data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $output );
+		$output = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $output );
 		$output.= $placeholder;
 		return $output;
 	}
@@ -237,7 +232,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
 			
 		$output = str_replace( 'wp-audio-shortcode','wp-audio-shortcode__disabled', $output );
-		$output = str_replace( ' src=', 'data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $output );
+		$output = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $output );
 		$output.= $placeholder;
 		return $output;
 	}
