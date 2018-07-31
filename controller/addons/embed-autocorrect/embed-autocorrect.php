@@ -196,7 +196,6 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			 * @param   $this           array   Array of required cookie types
 			 */
 			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
-			$adjusted_content = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_twitter_source', $src ) ) . $adjusted_content;
 			
 			$adjusted .= $placeholder;
 			$content  = str_replace( $match, $adjusted, $content );
@@ -214,6 +213,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		 */
 		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
 		$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
+			
 			
 		$output = str_replace( 'wp-video-shortcode','wp-video-shortcode__disabled', $output );
 		$output = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $output );

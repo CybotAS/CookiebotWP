@@ -87,4 +87,3 @@ $addon  = $args['addon'];
 		</p>
 	</div>
 </div>
-<?php

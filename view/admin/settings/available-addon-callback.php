@@ -99,4 +99,3 @@ require_once( ABSPATH . '/wp-admin/includes/translation-install.php' );
             </p>
         </div>
     </div>
-<?php
