@@ -89,6 +89,21 @@ class Ninja_Forms implements Cookiebot_Addons_Interface {
 			 * block google captcha script
 			 */
 			$this->script_loader_tag->add_tag( 'nf-google-recaptcha', $this->get_cookie_types() );
+			
+			/**
+			 * Display placeholder message
+			 */
+			if ( $this->is_placeholder_enabled() ) {
+				add_filter( 'ninja_forms_display_fields', function ( $fields ) {
+					foreach ( $fields as $key => $field ) {
+						if ( $field['type'] == 'recaptcha' ) {
+							$fields[ $key ]['afterField'] = $this->get_placeholder();
+						}
+					}
+					
+					return $fields;
+				}, 10, 1 );
+			}
 		}
 	}
 	
