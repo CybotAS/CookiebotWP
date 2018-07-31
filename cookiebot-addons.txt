@@ -5,5 +5,7 @@ Description: This plugin is used when developing new addons for Cookiebot. Enabl
 */
 if(defined('COOKIEBOT_ADDONS_STANDALONE')) {
 	define('COOKIE_ADDONS_LOADED',true);
-	include_once('cookiebot-addons-init.php');
+	if(!defined('COOKIEBOT_ADDONS_DIR')) {
+		include_once('cookiebot-addons-init.php');
+	}
 }
