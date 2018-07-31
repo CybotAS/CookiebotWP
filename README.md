@@ -76,6 +76,7 @@ Released and tested addons:
 * [Facebook for WooCommerce](https://woocommerce.com/products/facebook/)
 * [Googleanalytics](https://wordpress.org/plugins/googleanalytics/)
 * [HubSpot – Free Marketing Plugin for WordPress](https://wordpress.org/plugins/leadin/)
+* [Ninja forms](https://wordpress.org/plugins/ninja-forms/)
 
 Following addons are in pipeline:
 * To be continued..

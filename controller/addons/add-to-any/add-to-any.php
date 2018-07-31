@@ -265,4 +265,15 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function get_extra_information() {
 		return '<p>' . __( 'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.', 'cookiebot-addons' ) . '</p>';
 	}
+	
+	/**
+	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_svn_url() {
+		return 'http://plugins.svn.wordpress.org/add-to-any/trunk/add-to-any.php';
+	}
 }

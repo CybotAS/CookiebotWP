@@ -5,13 +5,6 @@ namespace cookiebot_addons\tests\unit;
 class Test_Get_Option_Name extends \WP_UnitTestCase {
 
 	/**
-	 * The list of all addons, decoded to array
-	 *
-	 * @var array
-	 */
-	protected $plugins;
-
-	/**
 	 * The file path of addons json
 	 *
 	 * @var string
@@ -28,7 +21,7 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	public function setUp() {
 		$this->get_plugins();
 	}
-
+	
 	/**
 	 * Load the addons through json file.
 	 */

@@ -239,4 +239,15 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	public function get_extra_information() {
 		return '<p>' . __( 'Google Analytics is a simple, easy-to-use tool that helps website owners measure how users interact with website content', 'cookiebot-addons' ) . '</p>';
 	}
+	
+	/**
+	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+	 *
+	 * @return boolean
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_svn_url() {
+		return false;
+	}
 }

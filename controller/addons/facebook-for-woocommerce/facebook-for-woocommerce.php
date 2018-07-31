@@ -273,4 +273,26 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	public function is_placeholder_enabled() {
 		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
+	
+	/**
+	 * Adds extra information under the label
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_extra_information() {
+	
+	}
+	
+	/**
+	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_svn_url() {
+		return 'https://github.com/facebookincubator/facebook-for-woocommerce/blob/master/facebook-commerce.php';
+	}
 }
