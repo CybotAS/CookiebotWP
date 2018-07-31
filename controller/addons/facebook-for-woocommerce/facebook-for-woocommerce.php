@@ -153,7 +153,7 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%s[/renew_consent] cookies to enable facebook shopping feature.';
+		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.';
 	}
 	
 	/**
@@ -294,5 +294,16 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 */
 	public function get_svn_url() {
 		return 'https://github.com/facebookincubator/facebook-for-woocommerce/blob/master/facebook-commerce.php';
+	}
+	
+	/**
+	 * Placeholder helper overlay in the settings page.
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholder_helper() {
+		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
 }

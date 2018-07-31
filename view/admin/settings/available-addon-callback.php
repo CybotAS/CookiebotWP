@@ -60,6 +60,7 @@ require_once( ABSPATH . '/wp-admin/includes/translation-install.php' );
                         <p>
                         <textarea cols="60" rows="5"
                                   name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][<?php echo $placeholder_lang; ?>]"><?php echo $placeholder_value; ?></textarea>
+                            <span class="help-tip" title="<?php echo $addon->get_placeholder_helper(); ?>"></span>
                         </p>
                     </div>
 					<?php $count ++; ?>
@@ -89,6 +90,7 @@ require_once( ABSPATH . '/wp-admin/includes/translation-install.php' );
                     <p>
                         <textarea cols="80" rows="5"
                                   name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][site-default]"><?php echo $addon->get_default_placeholder(); ?></textarea>
+                        <span class="help-tip" title="<?php echo $addon->get_placeholder_helper(); ?>"></span>
                     </p>
                 </div>
 			<?php endif; ?>

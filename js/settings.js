@@ -15,6 +15,7 @@ function init() {
     placeholder_toggle();
     button_add_placeholder_language();
     button_delete_language();
+    tooltip();
 }
 
 /**
@@ -88,6 +89,8 @@ function add_placeholder_language_content( addon ) {
     jQuery( '.placeholder[data-addon="' + addon + '"] .add_placeholder_language' ).before( data );
 
     jQuery( '.placeholder[data-addon="' + addon + '"] .placeholder_content:last select' ).after( php.remove_link );
+
+    tooltip();
 }
 
 /**
@@ -112,6 +115,11 @@ function placeholder_select_language() {
     } )
 }
 
+/**
+ * Delete language
+ *
+ * @since 1.8.0
+ */
 function button_delete_language() {
     jQuery( document ).on( 'click', '.submitdelete', function ( e ) {
         e.preventDefault();
@@ -119,5 +127,19 @@ function button_delete_language() {
         jQuery( this ).parent().parent().remove();
 
         return false;
+    } );
+}
+
+/**
+ * Show tooltip
+ *
+ * @since 1.8.0
+ */
+function tooltip() {
+    jQuery( '.help-tip' ).tipTip( {
+        'maxWidth': 300,
+        'fadeIn': 50,
+        'fadeOut': 50,
+        'delay': 200
     } );
 }

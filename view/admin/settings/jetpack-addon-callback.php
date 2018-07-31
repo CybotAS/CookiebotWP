@@ -61,6 +61,7 @@ $addon  = $args['addon'];
 					<p>
                         <textarea cols="60" rows="5"
                                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][<?php echo $placeholder_lang; ?>]"><?php echo $placeholder_value; ?></textarea>
+                        <span class="help-tip" title="<?php echo $addon->get_placeholder_helper(); ?>"></span>
 					</p>
 				</div>
 				<?php $count ++; ?>
@@ -77,6 +78,7 @@ $addon  = $args['addon'];
 				<p>
                         <textarea cols="80" rows="5"
                                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][site-default]"><?php echo $widget->get_default_placeholder(); ?></textarea>
+                    <span class="help-tip" title="<?php echo $addon->get_placeholder_helper(); ?>"></span>
 				</p>
 			</div>
 		<?php endif; ?>

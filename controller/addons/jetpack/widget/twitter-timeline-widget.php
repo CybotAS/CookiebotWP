@@ -125,7 +125,7 @@ class Twitter_Timeline_Widget {
 	 * @return string
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this twitterline.';
+		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this twitterline.';
 	}
 
 	/**
@@ -207,5 +207,16 @@ class Twitter_Timeline_Widget {
 	 */
 	public function get_extra_information() {
 		return false;
+	}
+	
+	/**
+	 * Placeholder helper overlay in the settings page.
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholder_helper() {
+		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
 }

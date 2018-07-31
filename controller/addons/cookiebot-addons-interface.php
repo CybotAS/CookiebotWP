@@ -157,4 +157,13 @@ Interface Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_svn_url();
+	
+	/**
+	 * Placeholder helper overlay in the settings page.
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholder_helper();
 }

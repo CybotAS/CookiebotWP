@@ -203,6 +203,17 @@ function cookiebot_addons_get_supported_languages() {
 	return $cookiebot->get_supported_languages();
 }
 
+/**
+ * Show languages in a select field
+ *
+ * @param $class
+ * @param $name
+ * @param $selected
+ *
+ * @return mixed
+ *
+ * @since 1.8.0
+ */
 function cookiebot_addons_get_dropdown_languages( $class, $name, $selected ) {
 	$args     = array(
 		'name'                     => $name,

@@ -177,7 +177,7 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%s[/renew_consent] cookies to watch this video.';
+		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
 	}
 	
 	/**
@@ -249,5 +249,16 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	 */
 	public function get_svn_url() {
 		return false;
+	}
+	
+	/**
+	 * Placeholder helper overlay in the settings page.
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholder_helper() {
+		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
 }
