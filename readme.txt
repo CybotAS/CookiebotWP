@@ -153,6 +153,7 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 ### 2.0.1 - 2018-08-01 ###
 * Disable load of Addons if server runs PHP < 5.4.
+* Fix placeholder in addons
 
 ### 2.0.0 - 2018-07-30 ###
 * Merge Cookiebot and Cookiebot Addons plugins. Cookiebot plugin now bundled with addons making other plugins GDPR compliant.
