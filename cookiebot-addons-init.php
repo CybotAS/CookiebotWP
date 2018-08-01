@@ -109,13 +109,15 @@ class Cookiebot_Addons {
 	 */
 	protected function build_container() {
 		$builder = new ContainerBuilder();
-
-		$builder->addDefinitions( [
-			'Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag' ),
-			'Cookie_Consent_Interface'    => DI\object( 'cookiebot_addons\lib\Cookie_Consent' ),
-			'Buffer_Output_Interface'     => DI\object( 'cookiebot_addons\lib\buffer\Buffer_Output' ),
-			'plugins'                     => DI\value( $this->plugins )
-		] );
+		
+		$builder->addDefinitions(
+			array(
+				'Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag' ),
+				'Cookie_Consent_Interface'    => DI\object( 'cookiebot_addons\lib\Cookie_Consent' ),
+				'Buffer_Output_Interface'     => DI\object( 'cookiebot_addons\lib\buffer\Buffer_Output' ),
+				'plugins'                     => DI\value( $this->plugins )
+			)
+		);
 
 		$this->container = $builder->build();
 
