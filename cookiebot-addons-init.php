@@ -3,6 +3,7 @@
 namespace cookiebot_addons;
 
 use cookiebot_addons\config\Settings_Config;
+use cookiebot_addons\config\Script_Config;
 use cookiebot_addons\controller\Plugin_Controller;
 use DI\ContainerBuilder;
 use DI;
@@ -18,6 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'COOKIEBOT_ADDONS_DIR', __DIR__ . DIRECTORY_SEPARATOR );
 
 define( 'COOKIEBOT_ADDONS_BASE_NAME', dirname( plugin_basename( __FILE__ ) ) );
+
+define( 'COOKIEBOT_ADDONS_VERSION', '1.9.0' );
 
 /**
  * Register autoloader to load files/classes dynamically
@@ -80,12 +83,23 @@ class Cookiebot_Addons {
 			new Plugin_Controller( $this->container->get( 'Settings_Service_Interface' ) ),
 			'load_active_addons'
 		) );
-
+		
 		/**
 		 * Load settings config
+		 *
+		 * @since 1.1.0
 		 */
 		$settings = new Settings_Config( $this->container->get( 'Settings_Service_Interface' ) );
 		$settings->load();
+		
+		/**
+		 * Load scripts config
+		 *
+		 * This is used to fix bugs caused in previous versions
+		 *
+		 * @since 1.9.0
+		 */
+		new Script_Config();
 	}
 
 	/**
