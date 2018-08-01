@@ -90,15 +90,7 @@ final class Cookiebot_WP {
 					include_once('addons/cookiebot-addons-init.php');
 				}
 				else {
-					add_action('admin_notices', function() {
-						?>
-						<div class="notice notice-warning">
-							<p>
-								<?php _e( 'Cookiebot Addons is disabled. You need at least PHP 5.4 to use Cookiebot Addons.', 'cookiebot' ); ?>
-							</p>
-						</div>
-						<?php
-					});
+					define('COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION',true);
 				}
 			}
 			else {
@@ -194,6 +186,20 @@ final class Cookiebot_WP {
 		add_submenu_page('cookiebot',__('Cookiebot Settings','cookiebot'),__('Settings','cookiebot'), 'manage_options', 'cookiebot',array($this,'settings_page'));
 		add_submenu_page('cookiebot',__('Cookiebot Support','cookiebot'),__('Support','cookiebot'), 'manage_options', 'cookiebot_support',array($this,'support_page'));
 		
+		if(defined('COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION')) {
+			//Load prior consent page anyway - but from Cookiebot WP Core plugin.
+			add_submenu_page( 'cookiebot', __( 'Prior Consent', 'cookiebot' ), __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array($this,'setting_page_placeholder'	) );
+		}
+	}
+	
+	/**
+	 * Cookiebot_WP Cookiebot prior consent placeholder page
+	 *
+	 * @version 1.4.0
+	 * @since   1.0.0
+	 */
+	function setting_page_placeholder() {
+		include __DIR__ . DIRECTORY_SEPARATOR . 'addons' . DIRECTORY_SEPARATOR . 'view/admin/settings/setting-page.php';
 	}
 	
 	/**
