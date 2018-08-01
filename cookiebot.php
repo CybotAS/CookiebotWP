@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR Compliant Cookie Consent and Notice
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supporting prior consent, cookie declaration, and documentation of consents. Easy to install, implement and configure.
 Author: Cybot A/S
-Version: 2.0.0
+Version: 2.0.1
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.0.0';
+	public $version = '2.0.1';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -60,7 +60,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Init Cookiebot.
 	 *
-	 * @version 1.6.2
+	 * @version 2.0.1
 	 * @since   1.6.2
 	 * @access  public
 	 */
@@ -84,7 +84,22 @@ final class Cookiebot_WP {
 		else {
 			if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED')) 
 						&& $dismissAddons !== true ) {
+							
+				//Make sure we got a PHP version that works
+				if(version_compare(PHP_VERSION, '5.4.0', '>=')) {
 					include_once('addons/cookiebot-addons-init.php');
+				}
+				else {
+					add_action('admin_notices', function() {
+						?>
+						<div class="notice notice-warning">
+							<p>
+								<?php _e( 'Cookiebot Addons is disabled. You need at least PHP 5.4 to use Cookiebot Addons.', 'cookiebot' ); ?>
+							</p>
+						</div>
+						<?php
+					});
+				}
 			}
 			else {
 				add_action('admin_notices', function() {
