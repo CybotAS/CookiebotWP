@@ -1,0 +1,159 @@
+# WordPress Blank Pot
+# Copyright (C) 2014 ...
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Cookiebot\n"
+"Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
+"POT-Creation-Date: 2017-12-21 10:51+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Cookiebot <qa@cookiebot.com>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
+"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 2.0.4\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: cookiebot.php:79
+msgid "Cookiebot Status"
+msgstr "Cookiebot Status"
+
+#: cookiebot.php:91
+msgid "You need to enter your Cookiebot ID."
+msgstr "Du skal indtaste et Cookiebot ID."
+
+#: cookiebot.php:93
+msgid "Update your Cookiebot ID"
+msgstr "Opdater dit Cookiebot ID"
+
+#: cookiebot.php:97
+msgid "Your Cookiebot is working!"
+msgstr "Din Cookiebot virker!"
+
+#: cookiebot.php:108
+msgid "Cookiebot"
+msgstr "Cookiebot"
+
+#: cookiebot.php:130
+msgid "Cookiebot Settings"
+msgstr "Cookiebot indstillinger"
+
+#: cookiebot.php:135
+msgid ""
+"Cookiebot enables your website to comply with current legislation in the EU "
+"on the use of cookies for user tracking and profiling. The EU ePrivacy "
+"Directive requires prior, informed consent of your site users, while the <a "
+"href=\"https://www.cookiebot.com/en/gdpr\" target=\"_blank\">General Data "
+"Protection Regulation (GDPR)</a> requires you to document each consent. At "
+"the same time you must be able to account for what user data you share with "
+"embedded third-party services on your website and where in the world the "
+"user data is sent."
+msgstr ""
+"Med Cookiebot kan din hjemmeside overholde gældende lovgivning i EU ift. "
+"brugen af cookies til sporing og profilering af dine brugere. EU's ePrivacy-"
+"direktiv kræver forudgående, informeret samtykke fra dine hjemmeside-"
+"brugere, mens persondata-forordingen (GDPR) kræver, at du kan dokumentere "
+"hvert enkelt samtykke. Samtidig skal du kunne redegøre for hvilke bruger-"
+"data, du deler med de indlejrede tredjeparts-tjenester på din hjemmeside, og "
+"hvor i Verden brugernes data sendes hen."
+
+#: cookiebot.php:142
+msgid "Cookiebot ID"
+msgstr "Cookiebot ID"
+
+#: cookiebot.php:146
+msgid "Need an ID?"
+msgstr "Brug for et ID?"
+
+#: cookiebot.php:147
+msgid "Sign up for free on cookiebot.com"
+msgstr "Opret dig gratis på cookiebot.com"
+
+#: cookiebot.php:154
+msgid "How to find my Cookiebot ID"
+msgstr "Hvordan finder jeg mit Cookiebot ID"
+
+#: cookiebot.php:157
+msgid ""
+"Log in to your <a href=\"https://www.cookiebot.com/en/account\" target="
+"\"_blank\">Cookiebot account</a>."
+msgstr ""
+"Log ind på din <a href=\"https://www.cookiebit.com/da/account\" target="
+"\"blank\">Cookiebot konto</a>."
+
+#: cookiebot.php:158
+msgid "Go to <b>Manage</b> > <b>Settings</b> and add setup your Cookiebot"
+msgstr ""
+"Gå til <b>Administration</b> > <b>Indstillinger</b> og opret din Cookiebot"
+
+#: cookiebot.php:159
+msgid "Go to the <b>\"Your scripts\"</b> tab"
+msgstr "Gå til <b>\"Dine scripts\"</b> fanen"
+
+#: cookiebot.php:160
+msgid ""
+"Copy the value inside the data-cid parameter - eg.: abcdef12-3456-7890-abcd-"
+"ef1234567890"
+msgstr ""
+"Kopier værdien i data-cid parameteren - f.eks.: abcdef12-3456-7890-abcd-"
+"ef1234567890"
+
+#: cookiebot.php:161
+msgid ""
+"Add <b>[cookie_declaration]</b> shortcode to a page to show the declation"
+msgstr ""
+"Tilføj <b>[cookie_declaration]</b> shortcoden til siden hvor du ønsker at "
+"vise deklarationen"
+
+#: cookiebot.php:162
+msgid "Remember to change your scripts as descripted below"
+msgstr "Husk at opdatere dine scripts som beskrevet nedenfor"
+
+#: cookiebot.php:165
+msgid "Update your script tags"
+msgstr "Opdater dine script tags"
+
+#: cookiebot.php:167
+msgid ""
+"To enable prior consent, apply the attribute \"data-cookieconsent\" to "
+"cookie-setting script tags on your website. Set the comma-separated value to "
+"one or more of the cookie categories \"preferences\", \"statistics\" and "
+"\"marketing\" in accordance with the types of cookies being set by each "
+"script. Finally change the attribute \"type\" from \"text/javascript\" to "
+"\"text/plain\". Example on modifying an existing Google Analytics Universal "
+"script tag."
+msgstr ""
+
+#: cookiebot.php:178
+msgid "Helper function to update your scripts"
+msgstr "Hjælperfunktion til at opdatere dine scripts"
+
+#: cookiebot.php:180
+msgid ""
+"You are able to update your scripts yourself. However, Cookiebot also offers "
+"a small helper function that makes the work easier."
+msgstr ""
+"Du kan selv opdatere dine scripts, men Cookiebot tilbyder også en lille "
+"hjælperfunktion, der gør arbejdet lidt nemmere."
+
+#: cookiebot.php:182
+msgid "Update your script tags this way:"
+msgstr "Opdater dine script tags på denne måde:"
+
+#: cookiebot.php:186
+#, php-format
+msgid "%s to %s"
+msgstr "%s til %s"
+
+#: cookiebot.php:224
+msgid "Please add your Cookiebot ID to show Cookie Declarations"
+msgstr "Tilføj dit Cookiebot ID for at vise Cookie deklarationen"
