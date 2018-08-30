@@ -145,30 +145,65 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 */
 	public function cookiebot_addon_embed_autocorrect_content( $content ) {
 		//Make sure Cookiebot is active and the user has enabled autocorrection
-		
-		
-		//Match twitter.
-		preg_match_all( '#\<(script).+src=".+platform.twitter.com\/widgets\.js.+\<\/(script)\>#mis', $content, $matches );
-		if ( ! empty( $matches[0][0] ) ) {
-			$start = strpos( $content, 'href="https://twitter.com/TwitterVideo/' ) + 6;
-			$end   = strpos( $content, '"', $start );
-			$src   = substr( $content, $start, $end - $start );
+
+		preg_match_all( '|<div[^>]*id=\"fb-root\">.*?</blockquote>|si', $content, $matches );
+		foreach ( $matches[0] as $match ) {
+			//Find src.
+			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></p></blockquote>|', $match, $matchSrc );
+			$src = $matchSrc[1];
 			
-			$adjusted_content = str_replace( '<script', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '"', $matches[0][0] );
-			$adjusted_content = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_twitter_source', $src ) ) . $adjusted_content;
+			//Replace - and add cookie consent notice.
+			$adjusted = str_replace( '<script>', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '">', $match );
+			
+			/**
+			 * Generate placeholder
+			 */
+			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
 			
 			/**
 			 * Modify placeholder by Filter
 			 *
-			 * @param   $adjusted_content    string  Current placeholder text
-			 * @param   $src                 string  Source attribute from the embedded video
-			 * @param   $this                array   Array of required cookie types
+			 * @param   $placeholder    string  Current placeholder text
+			 * @param   $src            string  Source attribute from the embedded video
+			 * @param   $this           array   Array of required cookie types
 			 */
-			$adjusted_content = apply_filters( 'cookiebot_addons_embed_twitter_placeholder', $adjusted_content, $src, $this->get_cookie_types() );
+			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
 			
-			$content = str_replace( $matches[0][0], $adjusted_content, $content );
+			$adjusted .= $placeholder;
+			$content  = str_replace( $match, $adjusted, $content );
+		
 		}
 		unset( $matches );
+		
+		preg_match_all( '|<blockquote[^>]*class=\"twitter-tweet\"[^>]*>.*?</script></p>|si', $content, $matches );
+		foreach ( $matches[0] as $match ) {
+			//Find src.
+			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></p></blockquote>|', $match, $matchSrc );
+			$src = $matchSrc[1];
+			
+			//Replace - and add cookie consent notice.
+			$adjusted = str_replace( '<script ', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" ', $match );
+			
+			/**
+			 * Generate placeholder
+			 */
+			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
+			
+			/**
+			 * Modify placeholder by Filter
+			 *
+			 * @param   $placeholder    string  Current placeholder text
+			 * @param   $src            string  Source attribute from the embedded video
+			 * @param   $this           array   Array of required cookie types
+			 */
+			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
+			
+			$adjusted .= $placeholder;
+			$content  = str_replace( $match, $adjusted, $content );
+		
+		}
+		unset( $matches );
+		
 		
 		//Match all youtube, vimeo and facebook iframes.
 		preg_match_all( '/<iframe[^>]*src=\"[^\"]*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com)\/[^>]*>.*?<\\/iframe>/mi', $content, $matches );
@@ -200,6 +235,10 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			$adjusted .= $placeholder;
 			$content  = str_replace( $match, $adjusted, $content );
 		}
+		
+		
+		
+	
 		
 		return $content;
 	}
