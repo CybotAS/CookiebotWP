@@ -1,15 +1,10 @@
 <?php
-/**
- * Plugin Name: Cookiebot Addons
- * Description: Adding support for Cookiebot
- * Author: Johan Holst Nielsen & Aytac Kokus & Sebastian Kurznyowski
- * Version: 1.5.0
- */
 
-namespace cookiebot_addons_framework;
+namespace cookiebot_addons;
 
-use cookiebot_addons_framework\config\Settings_Config;
-use cookiebot_addons_framework\controller\Plugin_Controller;
+use cookiebot_addons\config\Settings_Config;
+use cookiebot_addons\config\Script_Config;
+use cookiebot_addons\controller\Plugin_Controller;
 use DI\ContainerBuilder;
 use DI;
 
@@ -17,29 +12,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
+
 /**
  * __DIR__ of this plugin
  */
-define( 'CAF_DIR', __DIR__ . DIRECTORY_SEPARATOR );
+define( 'COOKIEBOT_ADDONS_DIR', __DIR__ . DIRECTORY_SEPARATOR );
+
+define( 'COOKIEBOT_ADDONS_BASE_NAME', dirname( plugin_basename( __FILE__ ) ) );
+
+define( 'COOKIEBOT_ADDONS_VERSION', '1.9.0' );
 
 /**
  * Register autoloader to load files/classes dynamically
  */
-include_once CAF_DIR . 'lib/autoloader.php';
+include_once COOKIEBOT_ADDONS_DIR . 'lib/autoloader.php';
 
 /**
  * Load global functions for this plugin
  */
-include_once CAF_DIR . 'lib/helper.php';
+include_once COOKIEBOT_ADDONS_DIR . 'lib/helper.php';
 
 /**
  * Load composer
  *
  * "php-di/php-di": "5.0"
  */
-include_once CAF_DIR . 'lib/ioc/autoload.php';
+include_once COOKIEBOT_ADDONS_DIR . 'lib/ioc/autoload.php';
 
-class Cookiebot_Addons_Framework {
+class Cookiebot_Addons {
 
 	/**
 	 * IoC Container - is used for dependency injections
@@ -60,7 +60,7 @@ class Cookiebot_Addons_Framework {
 	public $plugins;
 
 	/**
-	 * Cookiebot_Addons_Framework constructor.
+	 * Cookiebot_Addons constructor.
 	 *
 	 * @throws DI\DependencyException
 	 * @throws DI\NotFoundException
@@ -83,12 +83,23 @@ class Cookiebot_Addons_Framework {
 			new Plugin_Controller( $this->container->get( 'Settings_Service_Interface' ) ),
 			'load_active_addons'
 		) );
-
+		
 		/**
 		 * Load settings config
+		 *
+		 * @since 1.1.0
 		 */
 		$settings = new Settings_Config( $this->container->get( 'Settings_Service_Interface' ) );
 		$settings->load();
+		
+		/**
+		 * Load scripts config
+		 *
+		 * This is used to fix bugs caused in previous versions
+		 *
+		 * @since 1.9.0
+		 */
+		new Script_Config();
 	}
 
 	/**
@@ -101,7 +112,7 @@ class Cookiebot_Addons_Framework {
 	 * @since 1.3.0
 	 */
 	protected function get_plugins() {
-		$file = file_get_contents( CAF_DIR . 'addons.json' );
+		$file          = file_get_contents( COOKIEBOT_ADDONS_DIR . 'addons.json' );
 		$this->plugins = json_decode( $file );
 	}
 
@@ -112,17 +123,19 @@ class Cookiebot_Addons_Framework {
 	 */
 	protected function build_container() {
 		$builder = new ContainerBuilder();
-
-		$builder->addDefinitions( [
-			'Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons_framework\lib\script_loader_tag\Script_Loader_Tag' ),
-			'Cookie_Consent_Interface'    => DI\object( 'cookiebot_addons_framework\lib\Cookie_Consent' ),
-			'Buffer_Output_Interface'     => DI\object( 'cookiebot_addons_framework\lib\buffer\Buffer_Output' ),
-			'plugins'                     => DI\value( $this->plugins )
-		] );
+		
+		$builder->addDefinitions(
+			array(
+				'Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag' ),
+				'Cookie_Consent_Interface'    => DI\object( 'cookiebot_addons\lib\Cookie_Consent' ),
+				'Buffer_Output_Interface'     => DI\object( 'cookiebot_addons\lib\buffer\Buffer_Output' ),
+				'plugins'                     => DI\value( $this->plugins )
+			)
+		);
 
 		$this->container = $builder->build();
 
-		$this->container->set( 'Settings_Service_Interface', DI\object( 'cookiebot_addons_framework\lib\Settings_Service' )
+		$this->container->set( 'Settings_Service_Interface', DI\object( 'cookiebot_addons\lib\Settings_Service' )
 			->constructor( $this->container ) );
 	}
 
@@ -151,10 +164,9 @@ class Cookiebot_Addons_Framework {
 			);
 		}
 	}
-
 }
 
 /**
  * Initiate the cookiebot addons framework plugin
  */
-new Cookiebot_Addons_Framework();
+new Cookiebot_Addons();

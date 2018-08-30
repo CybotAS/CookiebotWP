@@ -1,8 +1,8 @@
 <?php
 
-namespace cookiebot_addons_framework\lib;
+namespace cookiebot_addons\lib;
 
-use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 
 Interface Settings_Service_Interface {
 
@@ -81,4 +81,17 @@ Interface Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_active_addons();
+
+	/**
+	 * returns the placeholder if it does exist
+	 *
+	 * @param $option_key
+	 * @param $default_placeholder
+	 * @param $cookies
+	 *
+	 * @return bool|mixed
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_placeholder( $option_key, $default_placeholder, $cookies );
 }

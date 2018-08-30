@@ -1,10 +1,10 @@
 <?php
 
-namespace cookiebot_addons_framework\controller;
+namespace cookiebot_addons\controller;
 
-use cookiebot_addons_framework\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons_framework\lib\buffer\Buffer_Output_Interface;
-use cookiebot_addons_framework\lib\Settings_Service_Interface;
+use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
+use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
 
 class Plugin_Controller {
 
@@ -38,6 +38,8 @@ class Plugin_Controller {
 	protected function load_init_files() {
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+			require_once( ABSPATH . '/wp-includes/l10n.php' );
+			require_once( ABSPATH . '/wp-admin/includes/translation-install.php' );
 		}
 	}
 
