@@ -7,9 +7,6 @@ so that they can handle their cookie setting code without explicit support for C
 
 https://core.trac.wordpress.org/ticket/44043 
 
-# News on GADWP
-GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'll provide a link here once the addon is released. 
-
 # Travis CI Status 
 
 [![Build Status](https://travis-ci.org/CybotAS/CookiebotAddons.svg?branch=develop)](https://travis-ci.org/CybotAS/CookiebotAddons)
