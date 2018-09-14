@@ -54,14 +54,18 @@ function cookiebot_addons_remove_class_action( $action, $class, $method, $priori
  *
  * @return mixed|null|string|string[]
  *
+ * @version 2.0.4
  * @since 1.2.0
  */
 function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
 	/**
 	 * Pattern to get all scripts
+	 *
+	 * @version 2.0.4
+	 * @since 1.2.0
 	 */
-	$pattern = "/\<script(.*?)?\>(.|\s)*?\<\/script\>/i";
-
+	$pattern = "/<script[\s\S]*?>[\s\S]*?<\/script>/gi";
+	
 	/**
 	 * Get all scripts and add cookieconsent if it does match with the criterion
 	 */
@@ -70,7 +74,7 @@ function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
 		 * Matched script data
 		 */
 		$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
-
+		
 		/**
 		 * Check if the script contains the keywords, checks keywords one by one
 		 *
@@ -83,20 +87,30 @@ function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
 			if ( strpos( $data, $needle ) !== false ) {
 				$data = preg_replace( '/\<script/', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $cookie_type ) . '"', $data );
 				$data = preg_replace( '/type\=\"text\/javascript\"/', '', $data );
-
+				
 				/**
 				 * matched already so we can skip other keywords
 				 **/
 				continue;
 			}
 		}
-
+		
 		/**
 		 * Return updated script data
 		 */
 		return $data;
 	}, $buffer );
-
+	
+	/**
+	 * Fallback when the regex fails to work due to PCRE_ERROR_JIT_STACKLIMIT
+	 *
+	 * @version 2.0.4
+	 * @since 2.0.4
+	 */
+	if( $updated_scripts === null ) {
+		$updated_scripts = $buffer;
+	}
+	
 	return $updated_scripts;
 }
 

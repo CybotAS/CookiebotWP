@@ -2,8 +2,6 @@
 
 namespace cookiebot_addons\config;
 
-use cookiebot_addons\lib\Settings_Service_Interface;
-
 class Script_Config {
 	
 	/**
