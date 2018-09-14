@@ -64,7 +64,7 @@ function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
 	 * @version 2.0.4
 	 * @since   1.2.0
 	 */
-	$pattern = "/<script[\s\S]*?>[\s\S]*?<\/script>/gi";
+	$pattern = "/<script[\s\S]*?>[\s\S]*?<\/script>/i";
 	
 	/**
 	 * Get all scripts and add cookieconsent if it does match with the criterion
