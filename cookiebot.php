@@ -107,6 +107,7 @@ final class Cookiebot_WP {
 		}
 		if(is_admin()) {
 			add_action('admin_menu', array($this,'add_menu'),1);
+			add_action('admin_menu', array($this,'add_menu_iab'),11);
 			add_action('admin_init', array($this,'register_cookiebot_settings'));
 			add_action('wp_dashboard_setup',  array($this,'add_dashboard_widgets'));
 			//adding cookie banner in admin area too
@@ -193,6 +194,16 @@ final class Cookiebot_WP {
 	}
 	
 	/**
+	 * CookiebotWP add option menu page for IAB
+     *
+     * @version 2.0.3
+     * @since 2.0.3
+	 */
+	function add_menu_iab() {
+		add_submenu_page('cookiebot',__('IAB','cookiebot'),__('IAB','cookiebot'), 'manage_options', 'cookiebot_iab',array($this,'iab_page'));
+    }
+    
+	/**
 	 * Cookiebot_WP Cookiebot prior consent placeholder page
 	 *
 	 * @version 1.4.0
@@ -213,6 +224,7 @@ final class Cookiebot_WP {
 		register_setting('cookiebot', 'cookiebot-language');
 		register_setting('cookiebot', 'cookiebot-nooutput');
 		register_setting('cookiebot', 'cookiebot-autoupdate');
+		register_setting('cookiebot-iab', 'cookiebot-iab');
 	}
 	
 	/**
@@ -493,6 +505,32 @@ final class Cookiebot_WP {
 	}
 	
 	/**
+	 * Cookiebot_WP Cookiebot IAB page
+	 *
+	 * @version 2.0.0
+	 * @since   2.0.0
+	 */
+	function iab_page() {
+		?>
+        <div class="wrap">
+            <h1><?php _e('IAB','cookiebot'); ?></h1>
+
+            <p>For more details about Cookiebot's IAB integration, see <a href="https://support.cookiebot.com/hc/en-us/articles/360007652694-Cookiebot-and-the-IAB-Consent-Framework" target="_blank">article about cookiebot and the IAB consent framework</a></p>
+            
+            <form method="post" action="options.php">
+	            <?php settings_fields( 'cookiebot-iab' ); ?>
+	            <?php do_settings_sections( 'cookiebot-iab' ); ?>
+                
+                <label>Enable IAB integration</label>
+                <input type="checkbox" name="cookiebot-iab" value="1" <?php checked(1,get_option('cookiebot-iab',true), true); ?>>
+	
+	            <?php submit_button(); ?>
+            </form>
+        </div>
+		<?php
+    }
+    
+	/**
 	 * Cookiebot_WP Add Cookiebot JS to <head>
 	 *
 	 * @version 1.6.0
@@ -505,8 +543,10 @@ final class Cookiebot_WP {
 			if(!empty($lang)) {
 				$lang = ' data-culture="'.strtoupper($lang).'"'; //Use data-culture to define language
 			}
+			
+			$iab = ( get_option('cookiebot-iab') != false ) ? 'data-framework="IAB"' : '';
 			?>
-			<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="<?php echo $cbid; ?>"<?php echo $lang; ?> type="text/javascript" async></script>
+			<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" <?php echo $iab; ?> data-cbid="<?php echo $cbid; ?>"<?php echo $lang; ?> type="text/javascript" async></script>
 			<?php
 		}
 	}
