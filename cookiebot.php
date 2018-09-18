@@ -28,7 +28,7 @@ final class Cookiebot_WP {
 	 * @since 1.0.0
 	 */
 	protected static $_instance = null;
-	
+
 	/**
 	 * Main Cookiebot_WP Instance
 	 *
@@ -56,7 +56,7 @@ final class Cookiebot_WP {
 	function __construct() {
 		add_action('plugins_loaded', array($this, 'cookiebot_init'), 5);
 	}
-	
+
 	/**
 	 * Cookiebot_WP Init Cookiebot.
 	 *
@@ -64,7 +64,7 @@ final class Cookiebot_WP {
 	 * @since   1.6.2
 	 * @access  public
 	 */
-	function cookiebot_init() {	
+	function cookiebot_init() {
 		/* Load Cookiebot Addons Framework */
 		$dismissAddons = false;
 		if(defined('CAF_DIR')) {
@@ -82,9 +82,9 @@ final class Cookiebot_WP {
 				});*/
 		}
 		else {
-			if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED')) 
+			if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED'))
 						&& $dismissAddons !== true ) {
-							
+
 				//Make sure we got a PHP version that works
 				if(version_compare(PHP_VERSION, '5.4.0', '>=')) {
 					include_once('addons/cookiebot-addons-init.php');
@@ -113,36 +113,36 @@ final class Cookiebot_WP {
 			//adding cookie banner in admin area too
 			add_action('admin_head', array($this,'add_js'));
 		}
-		
+
 
 		// Set up localisation
 		load_plugin_textdomain('cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
-		
+
 		//add JS
 		add_action('wp_head', array($this,'add_js'));
 		add_shortcode('cookie_declaration', array($this,'show_declaration'));
-		
+
 		//Add filter if WP rocket is enabled
 		if(defined('WP_ROCKET_VERSION')) {
 			add_filter('rocket_minify_excluded_external_js', array($this,'wp_rocket_exclude_external_js'));
 		}
-		
+
 		//Automatic update plugin
 		if(is_admin() || (defined('DOING_CRON') && DOING_CRON)) {
 			add_filter('auto_update_plugin', array($this,'automatic_updates'), 10, 2);
 		}
 	}
-	
+
 	/**
 	 * Cookiebot_WP Load text domain
-	 * 
+	 *
 	 * @version 2.0.0
 	 * @since		2.0.0
 	 */
 	function load_textdomain() {
-		load_plugin_textdomain( 'cookiebot', false, basename( dirname( __FILE__ ) ) . '/langs' ); 
+		load_plugin_textdomain( 'cookiebot', false, basename( dirname( __FILE__ ) ) . '/langs' );
 	}
-	
+
 	/**
 	 * Cookiebot_WP Add dashboard widgets to admin
 	 *
@@ -153,7 +153,7 @@ final class Cookiebot_WP {
 	function add_dashboard_widgets() {
 		wp_add_dashboard_widget('cookiebot_status', __('Cookiebot Status','cookiebot'), array($this,'dashboard_widget_status'));
 	}
-	
+
 	/**
 	 * Cookiebot_WP Output Dashboard Status Widget
 	 *
@@ -172,7 +172,7 @@ final class Cookiebot_WP {
 			echo '<p>'._e('Your Cookiebot is working!','cookiebot').'</p>';
 		}
 	}
-	
+
 	/**
 	 * Cookiebot_WP Add option menu page for Cookiebot
 	 *
@@ -183,16 +183,16 @@ final class Cookiebot_WP {
 		//Cookiebot Icon SVG base64 encoded
 		$icon = 'data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNzIgNTQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI0ZGRkZGRiIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNNDYuODcyNTkwMyA4Ljc3MzU4MzM0QzQxLjk0MzkwMzkgMy4zODI5NTAxMSAzNC44NDI0OTQ2IDAgMjYuOTQ4MjgxOSAwIDEyLjA2NTE1NjggMCAwIDEyLjAyNDQ3NzQgMCAyNi44NTc0MjE5YzAgMTQuODMyOTQ0NSAxMi4wNjUxNTY4IDI2Ljg1NzQyMTkgMjYuOTQ4MjgxOSAyNi44NTc0MjE5IDcuODk0MjEyNyAwIDE0Ljk5NTYyMi0zLjM4Mjk1MDIgMTkuOTI0MzA4NC04Ljc3MzU4MzQtMi44ODk2OTY3LTEuMzY4ODY2My01LjM5OTMxMS0zLjQwNTQzOS03LjMyODA4MzgtNS45MDk2MzU4LTMuMTIxNDMwNiAzLjIwOTQxMDQtNy40OTI5OTQ0IDUuMjA0MTI5MS0xMi4zMzIwMjU4IDUuMjA0MTI5MS05LjQ4NDM0NDQgMC0xNy4xNzI5MjQ3LTcuNjYyNjU3Mi0xNy4xNzI5MjQ3LTE3LjExNTAyMzhzNy42ODg1ODAzLTE3LjExNTAyMzcgMTcuMTcyOTI0Ny0xNy4xMTUwMjM3YzQuNzIzNDgyMiAwIDkuMDAxNTU1MiAxLjkwMDU5MzkgMTIuMTA2MjkyIDQuOTc2MzA5IDEuOTU2OTIzNy0yLjY0MTEzMSA0LjU1MDAyNjMtNC43ODU1MTgzIDcuNTUzODE3Ni02LjIwODQzMTg2eiIvPjxwYXRoIGQ9Ik01NS4zODAzMjgyIDQyLjY1MDE5OTFDNDYuMzMzNzIyNyA0Mi42NTAxOTkxIDM5IDM1LjM0MTIwMzEgMzkgMjYuMzI1MDk5NiAzOSAxNy4zMDg5OTYgNDYuMzMzNzIyNyAxMCA1NS4zODAzMjgyIDEwYzkuMDQ2NjA1NSAwIDE2LjM4MDMyODIgNy4zMDg5OTYgMTYuMzgwMzI4MiAxNi4zMjUwOTk2IDAgOS4wMTYxMDM1LTcuMzMzNzIyNyAxNi4zMjUwOTk1LTE2LjM4MDMyODIgMTYuMzI1MDk5NXptLjAyMTMwOTItNy43NTU2MzQyYzQuNzM3MDI3NiAwIDguNTc3MTQ3MS0zLjgyNzE3MiA4LjU3NzE0NzEtOC41NDgyMjc5IDAtNC43MjEwNTYtMy44NDAxMTk1LTguNTQ4MjI4LTguNTc3MTQ3MS04LjU0ODIyOC00LjczNzAyNzUgMC04LjU3NzE0NyAzLjgyNzE3Mi04LjU3NzE0NyA4LjU0ODIyOCAwIDQuNzIxMDU1OSAzLjg0MDExOTUgOC41NDgyMjc5IDguNTc3MTQ3IDguNTQ4MjI3OXoiLz48L2c+PC9zdmc+';
 		add_menu_page( 'Cookiebot', __('Cookiebot','cookiebot'), 'manage_options', 'cookiebot', array($this,'settings_page'),$icon);
-			
+
 		add_submenu_page('cookiebot',__('Cookiebot Settings','cookiebot'),__('Settings','cookiebot'), 'manage_options', 'cookiebot',array($this,'settings_page'));
 		add_submenu_page('cookiebot',__('Cookiebot Support','cookiebot'),__('Support','cookiebot'), 'manage_options', 'cookiebot_support',array($this,'support_page'));
-		
+
 		if(defined('COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION')) {
 			//Load prior consent page anyway - but from Cookiebot WP Core plugin.
 			add_submenu_page( 'cookiebot', __( 'Prior Consent', 'cookiebot' ), __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array($this,'setting_page_placeholder'	) );
 		}
 	}
-	
+
 	/**
 	 * CookiebotWP add option menu page for IAB
      *
@@ -202,7 +202,7 @@ final class Cookiebot_WP {
 	function add_menu_iab() {
 		add_submenu_page('cookiebot',__('IAB','cookiebot'),__('IAB','cookiebot'), 'manage_options', 'cookiebot_iab',array($this,'iab_page'));
     }
-    
+
 	/**
 	 * Cookiebot_WP Cookiebot prior consent placeholder page
 	 *
@@ -212,7 +212,7 @@ final class Cookiebot_WP {
 	function setting_page_placeholder() {
 		include __DIR__ . DIRECTORY_SEPARATOR . 'addons' . DIRECTORY_SEPARATOR . 'view/admin/settings/setting-page.php';
 	}
-	
+
 	/**
 	 * Cookiebot_WP Register Cookiebot settings
 	 *
@@ -226,10 +226,10 @@ final class Cookiebot_WP {
 		register_setting('cookiebot', 'cookiebot-autoupdate');
 		register_setting('cookiebot-iab', 'cookiebot-iab');
 	}
-	
+
 	/**
 	 * Cookiebot_WP Automatic update plugin if activated
-	 * 
+	 *
 	 * @version 1.5.0
 	 * @since		1.5.0
 	 */
@@ -238,30 +238,30 @@ final class Cookiebot_WP {
 		if(is_multisite() && ! is_main_site()) {
 			return $update;
 		}
-		
+
 		//Check if we have everything we need
 		$item = (array)$item;
 		if(!isset($item['new_version']) || !isset($item['slug'])) {
 			return $update;
 		}
-		
+
 		//It is not Cookiebot
 		if($item['slug'] !== 'cookiebot') {
 			return $update;
     }
-    
+
     // Check if cookiebot autoupdate is disabled
 		if(!get_option('cookiebot-autoupdate',true)) {
 			return $update;
 		}
-    
+
 		return true;
 	}
-	
-	
+
+
 	/**
 	 * Cookiebot_WP Get list of supported languages
-	 * 
+	 *
 	 * @version	1.4.0
 	 * @since		1.4.0
 	 */
@@ -313,7 +313,7 @@ final class Cookiebot_WP {
 		asort($supportedLanguages,SORT_LOCALE_STRING);
 		return $supportedLanguages;
 	}
-	
+
 	/**
 	 * Cookiebot_WP Output settings page
 	 *
@@ -372,13 +372,13 @@ final class Cookiebot_WP {
 									<?php _e('If the auto-detected language is not supported, Cookiebot will use the default language.'); ?>
 								</div>
 								<br />
-								
+
 								<a href="#" id="show_add_language_guide"><?php _e('Show guide to add languages'); ?></a>
 								&nbsp;
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-do-I-set-the-language-of-the-consent-banner-dialog-" target="_blank">
 									<?php _e('Read more here'); ?>
-								</a>								
-								
+								</a>
+
 								<div id="add_language_guide" style="display:none;">
 									<img src="<?php echo plugin_dir_url( __FILE__ ); ?>/assets/guide_add_language.gif" alt="Add language in Cookiebot administration tool" />
 									<br />
@@ -397,7 +397,7 @@ final class Cookiebot_WP {
 										$('#add_language_guide').slideUp();
 										$('#show_add_language_guide').show();
 									});
-									
+
 									$('#cookiebot-language').on('change', function() {
 										if(this.value == '') {
 											$('#info_lang_autodetect').show();
@@ -410,14 +410,14 @@ final class Cookiebot_WP {
 									});
 								});
 							</script>
-							
+
 						</td>
 					</tr>
 					<tr valign="top">
 						<th scope="row"><?php _e('Auto-update Cookiebot','cookiebot'); ?></th>
 						<td>
 							<input type="checkbox" name="cookiebot-autoupdate" value="1" <?php checked(1,get_option('cookiebot-autoupdate',true), true); ?> />
-							<p class="description"> 
+							<p class="description">
 								<?php _e('Automatic update your Cookiebot plugin when new releases becomes available.','cookiebot') ?>
 							</p>
 						</td>
@@ -426,7 +426,7 @@ final class Cookiebot_WP {
 						<th scope="row"><?php _e('Hide Cookie Popup','cookiebot'); ?></th>
 						<td>
 							<input type="checkbox" name="cookiebot-nooutput" value="1" <?php checked(1,get_option('cookiebot-nooutput',false), true); ?> />
-							<p class="description"> 
+							<p class="description">
 								<b><?php _e('This checkbox will remove the cookie consent banner from your website. The <i>[cookie_declaration]</i> shortcode will still be available.','cookiebot') ?></b><br />
 								<?php _e('If you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager.','cookiebot') ?><br />
 								<?php _e('<a href="https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment" target="_blank">See a detailed guide here</a>','cookiebot') ?>
@@ -439,7 +439,7 @@ final class Cookiebot_WP {
 		</div>
 		<?php
 	}
-	
+
 	/**
 	 * Cookiebot_WP Cookiebot support page
 	 *
@@ -486,7 +486,7 @@ final class Cookiebot_WP {
 			<p>
 				<a href="https://www.youtube.com/watch?v=MeHycvV2QCQ" target="_blank" class="button"><?php _e('Watch video demonstration','cookiebot'); ?></a>
 			</p>
-			
+
 			<h2><?php _e('Helper function to update your scripts','cookiebot'); ?></h2>
 			<p>
 				<?php _e('You are able to update your scripts yourself. However, Cookiebot also offers a small helper function that makes the work easier.','cookiebot'); ?>
@@ -503,7 +503,7 @@ final class Cookiebot_WP {
 		</div>
 		<?php
 	}
-	
+
 	/**
 	 * Cookiebot_WP Cookiebot IAB page
 	 *
@@ -516,20 +516,20 @@ final class Cookiebot_WP {
             <h1><?php _e('IAB','cookiebot'); ?></h1>
 
             <p>For more details about Cookiebot's IAB integration, see <a href="https://support.cookiebot.com/hc/en-us/articles/360007652694-Cookiebot-and-the-IAB-Consent-Framework" target="_blank">article about cookiebot and the IAB consent framework</a></p>
-            
+
             <form method="post" action="options.php">
 	            <?php settings_fields( 'cookiebot-iab' ); ?>
 	            <?php do_settings_sections( 'cookiebot-iab' ); ?>
-                
+
                 <label>Enable IAB integration</label>
-                <input type="checkbox" name="cookiebot-iab" value="1" <?php checked(1,get_option('cookiebot-iab',true), true); ?>>
-	
+                <input type="checkbox" name="cookiebot-iab" value="1" <?php checked(1,get_option('cookiebot-iab'), true); ?>>
+
 	            <?php submit_button(); ?>
             </form>
         </div>
 		<?php
     }
-    
+
 	/**
 	 * Cookiebot_WP Add Cookiebot JS to <head>
 	 *
@@ -543,14 +543,14 @@ final class Cookiebot_WP {
 			if(!empty($lang)) {
 				$lang = ' data-culture="'.strtoupper($lang).'"'; //Use data-culture to define language
 			}
-			
+
 			$iab = ( get_option('cookiebot-iab') != false ) ? 'data-framework="IAB"' : '';
 			?>
 			<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" <?php echo $iab; ?> data-cbid="<?php echo $cbid; ?>"<?php echo $lang; ?> type="text/javascript" async></script>
 			<?php
 		}
 	}
-	
+
 	/**
 	 * Cookiebot_WP Output declation shortcode [cookie_declaration]
 	 * Support attribute lang="LANGUAGE_CODE". Eg. lang="en".
@@ -562,12 +562,12 @@ final class Cookiebot_WP {
 		$cbid = get_option('cookiebot-cbid');
 		$lang = '';
 		if(!empty($cbid)) {
-			
+
 			$atts = shortcode_atts(array(
 					'lang' => $this->get_language(),
 				), $atts, 'cookie_declaration'
 			);
-			
+
 			if(!empty($atts['lang'])) {
 				$lang = ' data-culture="'.strtoupper($atts['lang']).'"'; //Use data-culture to define language
 			}
@@ -577,7 +577,7 @@ final class Cookiebot_WP {
 			return __('Please add your Cookiebot ID to show Cookie Declarations','cookiebot');
 		}
 	}
-	
+
 	/**
 	 * Cookiebot_WP Get the language code for Cookiebot
 	 *
@@ -592,11 +592,11 @@ final class Cookiebot_WP {
 				return $lang;
 			}
 		}
-		
-		if($onlyFromSetting) { 
+
+		if($onlyFromSetting) {
 			return $lang; //We want only to get if already set
 		}
-		
+
 		//Language not set - use WP language
 		if($lang == '_wp') {
 			$lang = get_bloginfo('language'); //Gets language in en-US format
@@ -606,7 +606,7 @@ final class Cookiebot_WP {
 		}
 		return $lang;
 	}
-	
+
 	/**
 	 * Cookiebot_WP Adding Cookiebot domain(s) to exclude list for WP Rocket minification.
 	 *
@@ -618,8 +618,8 @@ final class Cookiebot_WP {
 		$external_js_hosts[] = 'consentcdn.cookiebot.com';
 		return $external_js_hosts;
 	}
-	
-	
+
+
 }
 endif;
 
@@ -634,12 +634,12 @@ endif;
 function cookiebot_assist($type='statistics') {
 	//change to array
 	if(!is_array($type)) { $type = array($type); }
-	
+
 	foreach($type as $tk=>$tv) {
 		if(!in_array($tv,array('marketing','statistics','preferences'))) {
 			unset($type[$tk]);
 		}
-	} 
+	}
 	if(sizeof($type) > 0) {
 		return ' type="text/plain" data-cookieconsent="'.implode(',',$type).'"';
 	}
