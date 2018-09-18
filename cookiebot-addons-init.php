@@ -20,7 +20,10 @@ define( 'COOKIEBOT_ADDONS_DIR', __DIR__ . DIRECTORY_SEPARATOR );
 
 define( 'COOKIEBOT_ADDONS_BASE_NAME', dirname( plugin_basename( __FILE__ ) ) );
 
-define( 'COOKIEBOT_ADDONS_VERSION', '1.9.0' );
+/**
+ * Same version as the CookiebotWP
+ */
+define( 'COOKIEBOT_ADDONS_VERSION', '2.0.4' );
 
 /**
  * Register autoloader to load files/classes dynamically

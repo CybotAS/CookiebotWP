@@ -1,14 +1,11 @@
 # Cookiebot Wordpress Addons
 Cookiebot Addons are plugins for Wordpress that make other plugins compatible with Cookiebot. 
-The addons hook into the original plugin and render the cookie setting tags as advised by the Cookiebot guidelines at https://www.cookiebot.com/goto/help/. Please note this plugin will not function if the Cookiebot script is loaded through Google Tag Manager, we are working on this issue and it will be resolved in the next update.
+The addons hook into the original plugin and render the cookie setting tags as advised by the Cookiebot guidelines at https://www.cookiebot.com/goto/help/.
 
 Concurrently we are working with WP Core on what we believe is the real solution. A framework in WP Core that can signal the consent state to other plugins,
 so that they can handle their cookie setting code without explicit support for Cookiebot, or other cookie plugins. If and when this will be implemented is unknown.
 
 https://core.trac.wordpress.org/ticket/44043 
-
-# News on GADWP
-GADWP is about to release a GDPR compliance addon, which supports Cookiebot. We'll provide a link here once the addon is released. 
 
 # Travis CI Status 
 
