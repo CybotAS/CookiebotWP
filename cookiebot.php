@@ -64,7 +64,7 @@ final class Cookiebot_WP {
 	 * @since   1.6.2
 	 * @access  public
 	 */
-	function cookiebot_init() {	
+	function cookiebot_init() {
 		/* Load Cookiebot Addons Framework */
 		$dismissAddons = false;
 		if(defined('CAF_DIR')) {
@@ -82,9 +82,9 @@ final class Cookiebot_WP {
 				});*/
 		}
 		else {
-			if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED')) 
+			if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED'))
 						&& $dismissAddons !== true ) {
-							
+						
 				//Make sure we got a PHP version that works
 				if(version_compare(PHP_VERSION, '5.4.0', '>=')) {
 					include_once('addons/cookiebot-addons-init.php');
@@ -112,6 +112,8 @@ final class Cookiebot_WP {
 			add_action('wp_dashboard_setup',  array($this,'add_dashboard_widgets'));
 			//adding cookie banner in admin area too
 			add_action('admin_head', array($this,'add_js'));
+			add_action( 'admin_notices', array( $this, 'cookiebot_admin_notices' ) );
+			add_action('admin_init', array($this,'save_notice_link'));
 		}
 		
 
@@ -135,12 +137,12 @@ final class Cookiebot_WP {
 	
 	/**
 	 * Cookiebot_WP Load text domain
-	 * 
+	 *
 	 * @version 2.0.0
 	 * @since		2.0.0
 	 */
 	function load_textdomain() {
-		load_plugin_textdomain( 'cookiebot', false, basename( dirname( __FILE__ ) ) . '/langs' ); 
+		load_plugin_textdomain( 'cookiebot', false, basename( dirname( __FILE__ ) ) . '/langs' );
 	}
 	
 	/**
@@ -229,7 +231,7 @@ final class Cookiebot_WP {
 	
 	/**
 	 * Cookiebot_WP Automatic update plugin if activated
-	 * 
+	 *
 	 * @version 1.5.0
 	 * @since		1.5.0
 	 */
@@ -254,14 +256,14 @@ final class Cookiebot_WP {
 		if(!get_option('cookiebot-autoupdate',true)) {
 			return $update;
 		}
-    
+  
 		return true;
 	}
 	
 	
 	/**
 	 * Cookiebot_WP Get list of supported languages
-	 * 
+	 *
 	 * @version	1.4.0
 	 * @since		1.4.0
 	 */
@@ -377,7 +379,7 @@ final class Cookiebot_WP {
 								&nbsp;
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-do-I-set-the-language-of-the-consent-banner-dialog-" target="_blank">
 									<?php _e('Read more here'); ?>
-								</a>								
+								</a>
 								
 								<div id="add_language_guide" style="display:none;">
 									<img src="<?php echo plugin_dir_url( __FILE__ ); ?>/assets/guide_add_language.gif" alt="Add language in Cookiebot administration tool" />
@@ -417,7 +419,7 @@ final class Cookiebot_WP {
 						<th scope="row"><?php _e('Auto-update Cookiebot','cookiebot'); ?></th>
 						<td>
 							<input type="checkbox" name="cookiebot-autoupdate" value="1" <?php checked(1,get_option('cookiebot-autoupdate',true), true); ?> />
-							<p class="description"> 
+							<p class="description">
 								<?php _e('Automatic update your Cookiebot plugin when new releases becomes available.','cookiebot') ?>
 							</p>
 						</td>
@@ -426,7 +428,7 @@ final class Cookiebot_WP {
 						<th scope="row"><?php _e('Hide Cookie Popup','cookiebot'); ?></th>
 						<td>
 							<input type="checkbox" name="cookiebot-nooutput" value="1" <?php checked(1,get_option('cookiebot-nooutput',false), true); ?> />
-							<p class="description"> 
+							<p class="description">
 								<b><?php _e('This checkbox will remove the cookie consent banner from your website. The <i>[cookie_declaration]</i> shortcode will still be available.','cookiebot') ?></b><br />
 								<?php _e('If you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager.','cookiebot') ?><br />
 								<?php _e('<a href="https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment" target="_blank">See a detailed guide here</a>','cookiebot') ?>
@@ -593,7 +595,7 @@ final class Cookiebot_WP {
 			}
 		}
 		
-		if($onlyFromSetting) { 
+		if($onlyFromSetting) {
 			return $lang; //We want only to get if already set
 		}
 		
@@ -619,7 +621,90 @@ final class Cookiebot_WP {
 		return $external_js_hosts;
 	}
 	
+	/**
+	 * Display admin notice for recommending cookiebot
+     *
+     * @version 2.0.4
+     * @since 2.0.4
+	 */
+	function cookiebot_admin_notices() {
+	    if( ! $this->cookiebot_valid_admin_recommendation() ) {
+	        return false;
+        }
+        
+		$two_week_review_ignore = add_query_arg( array( 'cookiebot_admin_notice' => 'hide' ) );
+		$two_week_review_temp = add_query_arg( array( 'cookiebot_admin_notice' => 'two_week' ) );
+		
+		$notices = array(
+			'title' => __('Leave A Review?', 'cookiebot'),
+			'msg' => __('We hope you\'ve enjoyed using WordPress Cookiebot! Would you consider leaving us a review on WordPress.org?', 'cookiebot'),
+			'link' => '<li><span class="dashicons dashicons-external"></span><a href="https://wordpress.org/support/plugin/cookiebot/reviews?filter=5&rate=5#new-post" target="_blank">' . __('Sure! I\'d love to!', 'cookiebot') . '</a></li>
+                         <li><span class="dashicons dashicons-smiley"></span><a href="' . $two_week_review_ignore . '"> ' . __('I\'ve already left a review', 'cookiebot') . '</a></li>
+                         <li><span class="dashicons dashicons-calendar-alt"></span><a href="' . $two_week_review_temp . '">' . __('Maybe Later', 'cookiebot') . '</a></li>
+                         <li><span class="dashicons dashicons-dismiss"></span><a href="' . $two_week_review_ignore . '">' . __('Never show again', 'cookiebot') . '</a></li>',
+			'later_link' => $two_week_review_temp,
+			'int' => 14
+		);
+		
+		echo '<div class="update-nag cookiebot-admin-notice">
+                                <div class="cookiebot-notice-logo"></div>
+                                <p class="cookiebot-notice-title">' . $notices['title'] . '</p>
+                                <p class="cookiebot-notice-body">' . $notices['msg'] . '</p>
+                                <ul class="cookiebot-notice-body wd-blue">' . $notices['link'] . '</ul>
+                                <a href="' . $notices['later_link'] . '" class="dashicons dashicons-dismiss"></a>
+                              </div>';
+		
+		wp_enqueue_style( 'cookiebot-admin-notices', plugins_url( 'css/notice.css', __FILE__ ), array(), '2.0.4' );
+    }
 	
+	/**
+     * Validate if the last user action is valid for plugin recommendation
+     *
+	 * @return bool
+     *
+     * @version 2.0.4
+     * @since 2.0.4
+	 */
+    function cookiebot_valid_admin_recommendation() {
+	    /**
+	     * Default - the recommendation is allowed to be visible
+	     */
+	    $return = true;
+	    
+	    $option = get_option('cookiebot_notice_recommend');
+	    
+	    if( $option != false ) {
+		    /**
+		     * Never show again is clicked
+		     */
+	        if( $option == 'hide' ) {
+	            $return = false;
+            }elseif( is_numeric($option) && strtotime('now') < $option ) {
+		        /**
+		         * Show me after 2 weeks is clicked and the time is not valid yet
+		         */
+	           $return = false;
+            }
+        }
+        
+        return $return;
+    }
+	
+	/**
+	 * Save the user action on cookiebot recommendation link
+     *
+     * @version 2.0.4
+     * @since 2.0.4
+	 */
+	function save_notice_link() {
+	    if( isset( $_GET['cookiebot_admin_notice'] ) ) {
+           if( $_GET['cookiebot_admin_notice'] == 'hide' ) {
+                update_option('cookiebot_notice_recommend', 'hide' );
+           }else{
+                update_option('cookiebot_notice_recommend', strtotime('+2 weeks') );
+           }
+        }
+    }
 }
 endif;
 
@@ -639,7 +724,7 @@ function cookiebot_assist($type='statistics') {
 		if(!in_array($tv,array('marketing','statistics','preferences'))) {
 			unset($type[$tk]);
 		}
-	} 
+	}
 	if(sizeof($type) > 0) {
 		return ' type="text/plain" data-cookieconsent="'.implode(',',$type).'"';
 	}
