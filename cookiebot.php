@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR Compliant Cookie Consent and Notice
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supporting prior consent, cookie declaration, and documentation of consents. Easy to install, implement and configure.
 Author: Cybot A/S
-Version: 2.0.4
+Version: 2.0.5
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.0.4';
+	public $version = '2.0.5';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -618,21 +618,21 @@ final class Cookiebot_WP {
 		$external_js_hosts[] = 'consentcdn.cookiebot.com';
 		return $external_js_hosts;
 	}
-	
+
 	/**
 	 * Display admin notice for recommending cookiebot
      *
-     * @version 2.0.4
-     * @since 2.0.4
+     * @version 2.0.5
+     * @since 2.0.5
 	 */
 	function cookiebot_admin_notices() {
 	    if( ! $this->cookiebot_valid_admin_recommendation() ) {
 	        return false;
         }
-        
+
 		$two_week_review_ignore = add_query_arg( array( 'cookiebot_admin_notice' => 'hide' ) );
 		$two_week_review_temp = add_query_arg( array( 'cookiebot_admin_notice' => 'two_week' ) );
-		
+
 		$notices = array(
 			'title' => __('Leave A Review?', 'cookiebot'),
 			'msg' => __('We hope you\'ve enjoyed using WordPress Cookiebot! Would you consider leaving us a review on WordPress.org?', 'cookiebot'),
@@ -643,7 +643,7 @@ final class Cookiebot_WP {
 			'later_link' => $two_week_review_temp,
 			'int' => 14
 		);
-		
+
 		echo '<div class="update-nag cookiebot-admin-notice">
                                 <div class="cookiebot-notice-logo"></div>
                                 <p class="cookiebot-notice-title">' . $notices['title'] . '</p>
@@ -651,26 +651,26 @@ final class Cookiebot_WP {
                                 <ul class="cookiebot-notice-body wd-blue">' . $notices['link'] . '</ul>
                                 <a href="' . $notices['later_link'] . '" class="dashicons dashicons-dismiss"></a>
                               </div>';
-		
+
 		wp_enqueue_style( 'cookiebot-admin-notices', plugins_url( 'css/notice.css', __FILE__ ), array(), '2.0.4' );
     }
-	
+
 	/**
      * Validate if the last user action is valid for plugin recommendation
      *
 	 * @return bool
      *
-     * @version 2.0.4
-     * @since 2.0.4
+     * @version 2.0.5
+     * @since 2.0.5
 	 */
     function cookiebot_valid_admin_recommendation() {
 	    /**
 	     * Default - the recommendation is allowed to be visible
 	     */
 	    $return = true;
-	    
+
 	    $option = get_option('cookiebot_notice_recommend');
-	    
+
 	    if( $option != false ) {
 		    /**
 		     * Never show again is clicked
@@ -684,15 +684,15 @@ final class Cookiebot_WP {
 	           $return = false;
             }
         }
-        
+
         return $return;
     }
-	
+
 	/**
 	 * Save the user action on cookiebot recommendation link
      *
-     * @version 2.0.4
-     * @since 2.0.4
+     * @version 2.0.5
+     * @since 2.0.5
 	 */
 	function save_notice_link() {
 	    if( isset( $_GET['cookiebot_admin_notice'] ) ) {

@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent
 * Requires at least: 4.4
 * Tested up to: 4.9
-* Stable tag: 2.0.4
+* Stable tag: 2.0.5
 * Requires PHP: 5.4
 * License: GPLv2 or later
 
@@ -31,10 +31,10 @@ https://youtube.com/watch?v=t1LJ6i1i9gA
 ### Will my website become compliant once I install Cookiebot? ###
 The short answer is; no.
 
-Although Cookiebot enables your website to become fully compliant, [especially obeying the prior consent rule](https://support.cookiebot.com/hc/en-us/articles/360004104033-What-does-prior-consent-mean-and-how-do-I-implement-it-), some manual work is required to achieve compliance. 
+Although Cookiebot enables your website to become fully compliant, [especially obeying the prior consent rule](https://support.cookiebot.com/hc/en-us/articles/360004104033-What-does-prior-consent-mean-and-how-do-I-implement-it-), some manual work is required to achieve compliance.
 
-* If you are using plugins that set cookies which require consent (which most do), you have to: 
-  * Ask the plugin developers if they are planning on becoming GDPR compliant, or if they would like to integrate with Cookiebot. 
+* If you are using plugins that set cookies which require consent (which most do), you have to:
+  * Ask the plugin developers if they are planning on becoming GDPR compliant, or if they would like to integrate with Cookiebot.
   * Check if there already exists an addon for your plugin in the "Prior consent" submenu.
   * [Check out our Github repository](https://github.com/CybotAS/CookiebotAddons), where we are developing integrations for Cookiebot, until the plugin developers choose to do this themselves, [or WP Core enables such functionality](https://core.trac.wordpress.org/ticket/44043)
 
@@ -78,26 +78,26 @@ https://youtu.be/MeHycvV2QCQ
 
 ## Frequently Asked Questions ##
 
-### Is Cookiebot free? ### 
-Cookiebot is a freemium plugin, much like [Jetpack](https://wordpress.org/plugins/jetpack/) and [Monsterinsights](https://wordpress.org/plugins/google-analytics-for-wordpress/). 
+### Is Cookiebot free? ###
+Cookiebot is a freemium plugin, much like [Jetpack](https://wordpress.org/plugins/jetpack/) and [Monsterinsights](https://wordpress.org/plugins/google-analytics-for-wordpress/).
 
-Whether the free plan can suffice or you need a premium plan, depends on two things: 
+Whether the free plan can suffice or you need a premium plan, depends on two things:
 
 **1. The size of your website, i.e. the number of subpages on your website.**
-In other words, you cannot choose whether you want a free plan or a premium plan, as this is determined by the amount of subpages on your website. You can [get a quote](https://www.cookiebot.com/en/quote-input/) to see what plan you need for your website.  
+In other words, you cannot choose whether you want a free plan or a premium plan, as this is determined by the amount of subpages on your website. You can [get a quote](https://www.cookiebot.com/en/quote-input/) to see what plan you need for your website.
 
 **2. Your necessities, as the free plan does not include all features available in the premium plans.** The free plan does not include customization of banner and cookies declaration, multiple languages, e-mail reports, data-export, geo location, bulk consent, consent statistics, internal domain alias for development, test and staging.
 
-No matter the size of your website, you do have the right to a one month trial of Cookiebot for free. 
+No matter the size of your website, you do have the right to a one month trial of Cookiebot for free.
 
-See all details of [Cookiebot plans and pricing](https://www.cookiebot.com/en/pricing/). 
+See all details of [Cookiebot plans and pricing](https://www.cookiebot.com/en/pricing/).
 
-### What does Cookiebot count as pages? 
+### What does Cookiebot count as pages?
 Your pricing plan is dependent on the number of subpages we have detected on your website.
 
 Some users mistakenly think that Cookiebot counts their **image files** as subpages, thus setting the users on a higher subscription plan.
 
-Cookiebot does **not count image files as subpages**. Depending on your theme, Wordpress may automatically create real pages for content placed in your media library, called Attachment pages. Because these pages can contain online trackers, Cookiebot includes them in your page count. 
+Cookiebot does **not count image files as subpages**. Depending on your theme, Wordpress may automatically create real pages for content placed in your media library, called Attachment pages. Because these pages can contain online trackers, Cookiebot includes them in your page count.
 
 To disable the Attachment page feature in Wordpress, please see the following guides:
 
@@ -116,7 +116,7 @@ By default the cookie declaration is displayed in the chosen Cookiebot language.
 https://youtu.be/OCXz2bt4H_w
 
 ### Cookie-checker: What cookies are in use on my site? ###
-If you  are in doubt about what cookies are in use on our site, you can start by trying our free compliance test: 
+If you  are in doubt about what cookies are in use on our site, you can start by trying our free compliance test:
 
 **[Test my site](https://www.cookiebot.com/en/)**
 
@@ -125,7 +125,7 @@ The test scans five pages of your website and sends you a complete report of the
 If you want a complete overview of the cookies and online tracking going on on all of your website, sign up to the Cookiebot solution.
 
 ### What is GDPR? ###
-The GDPR is the General Data Protection Regulation, a EU-law that is enforced on the 25. May 2018, and affects all organizations and websites that handle data of EU-citizens. 
+The GDPR is the General Data Protection Regulation, a EU-law that is enforced on the 25. May 2018, and affects all organizations and websites that handle data of EU-citizens.
 
 See the [EU homepage of the GDPR](https://www.eugdpr.org/) for more information, and their infographic for businesses: [Data Protection: Better rules for small businesses](http://ec.europa.eu/justice/smedataprotect/index_en.htm)
 
@@ -143,15 +143,18 @@ if(function_exists('cookiebot_active') && cookiebot_active()) {
 
 The developer of the plugin can see more details on [our Github repository](https://github.com/CybotAS/CookiebotAddons)
 
-### Can I use Cookiebot with GTM? ### 
-Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" option on the Cookiebot plugin settings page. 
+### Can I use Cookiebot with GTM? ###
+Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" option on the Cookiebot plugin settings page.
 
 [Please see our article on how to depoloy Cookiebot with GTM](https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment).
 
 
 ## Changelog ##
 
-### 2.0.4 - 2018-09-18 ##
+### 2.0.5 - 2019-09-21 ###
+* Added "Leave a review" admin notice
+
+### 2.0.4 - 2018-09-18 ###
 * Added [IAB Consent Framework](https://support.cookiebot.com/hc/en-us/articles/360007652694-Cookiebot-and-the-IAB-Consent-Framework) option
 * Update Cookiebot Addons
 * Minor bugfixes
@@ -173,7 +176,7 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 * Fix check for WP Rocket.
 
 ### 1.6.1 - 2018-06-11 ###
-* Fixing shortcode when using WP Rocket 
+* Fixing shortcode when using WP Rocket
 
 ### 1.6.0 - 2018-05-30 ###
 * Support for removing cookie consent banner for tag manager users
