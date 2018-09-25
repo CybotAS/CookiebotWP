@@ -1,5 +1,5 @@
-# Cookiebot Wordpress Addons
-Cookiebot Addons are plugins for Wordpress that make other plugins compatible with Cookiebot. 
+# Cookiebot WordPress Addons
+Cookiebot Addons are plugins for WordPress that make other plugins compatible with Cookiebot. 
 The addons hook into the original plugin and render the cookie setting tags as advised by the Cookiebot guidelines at https://www.cookiebot.com/goto/help/.
 
 Concurrently we are working with WP Core on what we believe is the real solution. A framework in WP Core that can signal the consent state to other plugins,
@@ -24,7 +24,7 @@ Table of contents
 <!--te-->
 
 # Installation (for regular users)
-Regular users should use [Cookiebot Wordpress plugin](https://wordpress.org/plugins/cookiebot) which includes Cookiebot Addons.
+Regular users should use [Cookiebot WordPress plugin](https://wordpress.org/plugins/cookiebot) which includes Cookiebot Addons.
 
 # Installation (for development purpose)
 1. Get the [latest release](https://github.com/CybotAS/CookiebotAddons/releases/latest) of the framework plugin to your WP plugins folder
@@ -58,7 +58,7 @@ Released and tested addons:
 * [Google Analyticator](https://wordpress.org/plugins/google-analyticator/)
 * [Google Analytics +](https://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/)
 * [HubSpot Tracking Code](https://wordpress.org/plugins/hubspot-tracking-code/)
-* [Jetpack by Wordpress.com](https://wordpress.org/plugins/jetpack/)
+* [Jetpack by WordPress.com](https://wordpress.org/plugins/jetpack/)
   * Supported widgets:
     * Google Maps
     * Facebook
@@ -97,6 +97,6 @@ Way to go!
 # Need to get in touch?
 
 There are several ways you can get in touch with us. <br>
-We are available on the Making Wordpress Slack workspace. <br>
+We are available on the Making Wordress Slack workspace. <br>
 Username: Kenan <br>
 You can also reach us through our helpdesk at www.cookiebot.com/goto/helpdesk/
