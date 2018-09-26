@@ -76,6 +76,7 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 		$this->assertNotFalse( strpos( $content, 'add_action(\'woocommerce_thankyou' ) );
 		$this->assertNotFalse( strpos( $content, 'add_action(\'woocommerce_payment_complete' ) );
 	}
+
 	/**
 	 * @covers \cookiebot_addons|controller\addons\hubspot-tracking-code\Hubspot_Tracking_Code
 	 */
@@ -84,5 +85,16 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 
 		$this->assertNotFalse( strpos( $content, 'add_action(\'wp_footer\', array($this, \'hubspot_analytics_insert\'));' ) );
 		$this->assertNotFalse( strpos( $content, '<script type="text/javascript" id="hs-script-loader"' ) );
+	}
+
+	/**
+	 * @covers \cookiebot_addons|controller\jetpack\widget\Google_Maps_Widget
+	 */
+	public function test_google_maps_widget() {
+		$content = file_get_contents('http://plugins.svn.wordpress.org/jetpack/trunk/modules/widgets/contact-info.php');
+
+		$this->assertNotFalse( strpos( $content, 'do_action( \'jetpack_contact_info_widget_start\' );' ) );
+		$this->assertNotFalse( strpos( $content, 'do_action( \'jetpack_contact_info_widget_end\' );' ) );
+		$this->assertNotFalse( strpos( $content, 'do_action( \'jetpack_stats_extra\', \'widget_view\', \'contact_info\' );' ) );
 	}
 }
