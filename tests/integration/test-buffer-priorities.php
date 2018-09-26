@@ -76,4 +76,13 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 		$this->assertNotFalse( strpos( $content, 'add_action(\'woocommerce_thankyou' ) );
 		$this->assertNotFalse( strpos( $content, 'add_action(\'woocommerce_payment_complete' ) );
 	}
+	/**
+	 * @covers \cookiebot_addons|controller\addons\hubspot-tracking-code\Hubspot_Tracking_Code
+	 */
+	public function test_hubspot_tracking_code() {
+		$content = file_get_contents('http://plugins.svn.wordpress.org/hubspot-tracking-code/trunk/inc/class-hubspot-tracking-code-analytics.php');
+
+		$this->assertNotFalse( strpos( $content, 'add_action(\'wp_footer\', array($this, \'hubspot_analytics_insert\'));' ) );
+		$this->assertNotFalse( strpos( $content, '<script type="text/javascript" id="hs-script-loader"' ) );
+	}
 }
