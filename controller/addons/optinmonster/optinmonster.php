@@ -79,8 +79,6 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
-		
-		// wp_die('constent_not_given');
 
 		if ( $this->is_addon_enabled() ) {
 			if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
