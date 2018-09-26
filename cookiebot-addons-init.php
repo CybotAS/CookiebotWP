@@ -23,7 +23,7 @@ define( 'COOKIEBOT_ADDONS_BASE_NAME', dirname( plugin_basename( __FILE__ ) ) );
 /**
  * Same version as the CookiebotWP
  */
-define( 'COOKIEBOT_ADDONS_VERSION', '2.0.4' );
+define( 'COOKIEBOT_ADDONS_VERSION', '2.0.6' );
 
 /**
  * Register autoloader to load files/classes dynamically
@@ -86,7 +86,7 @@ class Cookiebot_Addons {
 			new Plugin_Controller( $this->container->get( 'Settings_Service_Interface' ) ),
 			'load_active_addons'
 		) );
-		
+
 		/**
 		 * Load settings config
 		 *
@@ -94,7 +94,7 @@ class Cookiebot_Addons {
 		 */
 		$settings = new Settings_Config( $this->container->get( 'Settings_Service_Interface' ) );
 		$settings->load();
-		
+
 		/**
 		 * Load scripts config
 		 *
@@ -126,7 +126,7 @@ class Cookiebot_Addons {
 	 */
 	protected function build_container() {
 		$builder = new ContainerBuilder();
-		
+
 		$builder->addDefinitions(
 			array(
 				'Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag' ),
