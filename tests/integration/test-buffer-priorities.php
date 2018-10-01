@@ -40,7 +40,7 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \cookiebot_addons|controller\addons\google_analyticator\Google_Analyticator
+	 * @covers \cookiebot_addons\controller\addons\google_analyticator\Google_Analyticator
 	 */
 	public function test_google_analyticator() {
 		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analyticator/trunk/google-analyticator.php' );
@@ -51,7 +51,7 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \cookiebot_addons|controller\addons\facebook_for_woocommerce\Facebook_For_Woocommerce\facebook-commerce.php
+	 * @covers \cookiebot_addons\controller\addons\facebook_for_woocommerce\Facebook_For_Woocommerce
 	 */
 	public function test_facebook_for_woocommerce_main_file() {
 		$content = file_get_contents( 'https://raw.githubusercontent.com/facebookincubator/facebook-for-woocommerce/master/facebook-commerce.php' );
@@ -60,7 +60,7 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \cookiebot_addons|controller\addons\facebook_for_woocommerce\Facebook_For_Woocommerce\facebook-commerce-events-tracker.php
+	 * @covers \cookiebot_addons\controller\addons\facebook_for_woocommerce\Facebook_For_Woocommerce
 	 */
 	public function test_facebook_for_woocommerce_hooks() {
 		$content = file_get_contents( 'https://raw.githubusercontent.com/facebookincubator/facebook-for-woocommerce/233b6fcf2296f8936d8ea259931b9ef14eacc4bd/facebook-commerce-events-tracker.php' );
@@ -78,7 +78,7 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \cookiebot_addons|controller\addons\hubspot-tracking-code\Hubspot_Tracking_Code
+	 * @covers \cookiebot_addons\controller\addons\hubspot-tracking-code\Hubspot_Tracking_Code
 	 */
 	public function test_hubspot_tracking_code() {
 		$content = file_get_contents('http://plugins.svn.wordpress.org/hubspot-tracking-code/trunk/inc/class-hubspot-tracking-code-analytics.php');
@@ -88,7 +88,7 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \cookiebot_addons|controller\jetpack\widget\Google_Maps_Widget
+	 * @covers \cookiebot_addons\controller\jetpack\widget\Google_Maps_Widget
 	 */
 	public function test_google_maps_widget() {
 		$content = file_get_contents('http://plugins.svn.wordpress.org/jetpack/trunk/modules/widgets/contact-info.php');

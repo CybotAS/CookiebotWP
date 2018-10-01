@@ -291,9 +291,9 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Urmează 
 			'onesignal' => 'statistics',
 			'facebook' => 'marketing'
 		);
-		
+
 		$changed_header = cookiebot_addons_manipulate_script( $buffer, $keywords );
-		
+
 		echo print_r( $changed_header, true );
 	}
 }

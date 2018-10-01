@@ -51,7 +51,7 @@ class Test_Addon_File_Name extends \WP_UnitTestCase {
 
 		foreach ( $this->plugins as $plugin ) {
 			$p = new $plugin->class( $settingsMock, $scriptLoaderTagMock, $cookieConsentMock, $bufferOutputMock );
-			if ( method_exists( $p, 'get_svn_url' ) && ! empty( $p->get_svn_url() ) ) {
+			if ( method_exists( $p, 'get_svn_url' ) && ! $p->get_svn_url() ) {
 				$content = file_get_contents( $p->get_svn_url() );
 				$this->assertNotFalse( $content, $plugin->class );
 			}
