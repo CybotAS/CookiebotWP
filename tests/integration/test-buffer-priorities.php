@@ -78,7 +78,7 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \cookiebot_addons\controller\addons\hubspot-tracking-code\Hubspot_Tracking_Code
+	 * @covers \cookiebot_addons\controller\addons\hubspot_tracking_code\Hubspot_Tracking_Code
 	 */
 	public function test_hubspot_tracking_code() {
 		$content = file_get_contents('http://plugins.svn.wordpress.org/hubspot-tracking-code/trunk/inc/class-hubspot-tracking-code-analytics.php');
@@ -88,7 +88,7 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \cookiebot_addons\controller\jetpack\widget\Google_Maps_Widget
+	 * @covers cookiebot_addons\controller\addons\jetpack\widget\Google_Maps_Widget
 	 */
 	public function test_google_maps_widget() {
 		$content = file_get_contents('http://plugins.svn.wordpress.org/jetpack/trunk/modules/widgets/contact-info.php');
