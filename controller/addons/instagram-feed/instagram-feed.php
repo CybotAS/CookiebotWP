@@ -61,7 +61,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function load_configuration() {
-		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_add_to_any' ), 5 );
+		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_sb_instagram' ), 5 );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function cookiebot_addon_add_to_any() {
+	public function cookiebot_addon_sb_instagram() {
 		// Check if instagram feed is loaded.
 		if ( ! defined( 'SBIVER' ) ) {
 			return;
