@@ -210,7 +210,7 @@ class Facebook_Widget {
 			}
 		}
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -221,7 +221,7 @@ class Facebook_Widget {
 	public function get_extra_information() {
 		return '<p>' . __( 'Facebook widget.', 'cookiebot-addons' ) . '</p>';
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -232,4 +232,5 @@ class Facebook_Widget {
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
+
 }

@@ -197,7 +197,7 @@ class Twitter_Timeline_Widget {
 			}
 		}
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -208,7 +208,7 @@ class Twitter_Timeline_Widget {
 	public function get_extra_information() {
 		return false;
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -219,4 +219,5 @@ class Twitter_Timeline_Widget {
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
+
 }

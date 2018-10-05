@@ -9,35 +9,35 @@ use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 
 class Add_To_Any implements Cookiebot_Addons_Interface {
-	
+
 	/**
 	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $settings;
-	
+
 	/**
 	 * @var Script_Loader_Tag_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $script_loader_tag;
-	
+
 	/**
 	 * @var Cookie_Consent_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $cookie_consent;
-	
+
 	/**
 	 * @var Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $buffer_output;
-	
+
 	/**
 	 * Jetpack constructor.
 	 *
@@ -54,7 +54,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
 	}
-	
+
 	/**
 	 * Loads addon configuration
 	 *
@@ -63,7 +63,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function load_configuration() {
 		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_add_to_any' ), 5 );
 	}
-	
+
 	/**
 	 * Disable scripts if state not accepted
 	 *
@@ -74,47 +74,47 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 		if ( ! function_exists( 'A2A_SHARE_SAVE_init' ) ) {
 			return;
 		}
-		
+
 		// Check if Cookiebot is activated and active.
 		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
 			return;
 		}
-		
+
 		// consent is given
 		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
-		
-		
+
+
 		add_filter( 'addtoany_script_disabled', '__return_true' );
-		
+
 		/**
 		 * Block head script
 		 */
 		if ( has_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' ) ) {
 			remove_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' );
 		}
-		
+
 		/**
 		 * Block footer script
 		 */
 		if ( has_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' ) ) {
 			remove_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' );
 		}
-		
+
 		/**
 		 * Block content addition
 		 */
 		if ( has_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' ) ) {
 			remove_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' );
 		}
-		
+
 		// External js, so manipulate attributes
 		if ( has_action( 'wp_enqueue_scripts', 'A2A_SHARE_SAVE_enqueue_script' ) ) {
 			$this->script_loader_tag->add_tag( 'addtoany', $this->get_cookie_types() );
 		}
 	}
-	
+
 	/**
 	 * Return addon/plugin name
 	 *
@@ -125,7 +125,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function get_addon_name() {
 		return 'addToAny Share Buttons';
 	}
-	
+
 	/**
 	 * Default placeholder content
 	 *
@@ -136,7 +136,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function get_default_placeholder() {
 		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.';
 	}
-	
+
 	/**
 	 * Get placeholder content
 	 *
@@ -152,7 +152,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function get_placeholder( $src = '' ) {
 		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
 	}
-	
+
 	/**
 	 * Option name in the database
 	 *
@@ -163,7 +163,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function get_option_name() {
 		return 'add_to_any';
 	}
-	
+
 	/**
 	 * Plugin file name
 	 *
@@ -174,7 +174,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function get_plugin_file() {
 		return 'add-to-any/add-to-any.php';
 	}
-	
+
 	/**
 	 * Returns checked cookie types
 	 * @return mixed
@@ -184,7 +184,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function get_cookie_types() {
 		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
 	}
-	
+
 	/**
 	 * Returns default cookie types
 	 * @return array
@@ -194,7 +194,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function get_default_cookie_types() {
 		return array( 'marketing', 'statistics' );
 	}
-	
+
 	/**
 	 * Check if plugin is activated and checked in the backend
 	 *
@@ -203,7 +203,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function is_addon_enabled() {
 		return $this->settings->is_addon_enabled( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Checks if addon is installed
 	 *
@@ -212,7 +212,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function is_addon_installed() {
 		return $this->settings->is_addon_installed( $this->get_plugin_file() );
 	}
-	
+
 	/**
 	 * Checks if addon is activated
 	 *
@@ -221,7 +221,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
 	}
-	
+
 	/**
 	 * Checks if it does have custom placeholder content
 	 *
@@ -232,7 +232,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function has_placeholder() {
 		return $this->settings->has_placeholder( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * returns all placeholder contents
 	 *
@@ -243,7 +243,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function get_placeholders() {
 		return $this->settings->get_placeholders( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Return true if the placeholder is enabled
 	 *
@@ -254,7 +254,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function is_placeholder_enabled() {
 		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -265,7 +265,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function get_extra_information() {
 		return '<p>' . __( 'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.', 'cookiebot-addons' ) . '</p>';
 	}
-	
+
 	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
 	 *
@@ -276,7 +276,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/add-to-any/trunk/add-to-any.php';
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -286,5 +286,16 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 */
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
+	}
+
+	/**
+	 * Returns true if addon has an option to remove tag instead of adding attributes
+	 *
+	 * @return boolean
+	 *
+	 * @since 2.1.0
+	 */
+	public function has_remove_tag_option() {
+		return false;
 	}
 }
