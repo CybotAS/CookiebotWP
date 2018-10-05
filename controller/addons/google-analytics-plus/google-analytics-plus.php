@@ -85,8 +85,16 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 			return;
 		}
 
+
 		// Disable Analytify if cookie consent not allowed
-		cookiebot_addons_remove_class_action( 'wp_head', 'Google_Analytics_Async', 'tracking_code_output' );
+		if( $this->is_remove_tag_enabled() ) {
+			cookiebot_addons_remove_class_action( 'wp_head', 'Google_Analytics_Async', 'tracking_code_output' );
+		}
+		else {
+			$this->buffer_output->add_tag( 'wp_head', 10, array(
+				'GoogleAnalyticsObject' => $this->get_cookie_types(),
+			), false );
+		}
 	}
 
 	/**

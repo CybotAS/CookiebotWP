@@ -472,7 +472,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @since 2.1.0
 	 */
 	public function has_remove_tag_option() {
-		return true;
+		return false;
 	}
 
 	/**
