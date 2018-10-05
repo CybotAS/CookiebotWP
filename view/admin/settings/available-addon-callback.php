@@ -106,7 +106,8 @@ require_once( ABSPATH . '/wp-admin/includes/translation-install.php' );
             <input type="checkbox" id="<?php echo 'remove_tag_' . $addon->get_option_name(); ?>"
                    name="cookiebot_available_addons[<?php echo $addon->get_option_name() ?>][remove_tag]"
                    value="1" <?php checked( 1, $addon->is_remove_tag_enabled(), true ); ?> />
-						<label for="<?php echo 'remove_tag_' . $addon->get_option_name(); ?>"><?php _e( 'Remove tracking tag instead of adding attributes', 'cookie' ); ?></label>
+						<label for="<?php echo 'remove_tag_' . $addon->get_option_name(); ?>"><?php _e( 'Load the script after the consent is given.', 'cookiebot-addons' ); ?></label>
+                        <span class="help-tip" title="<?php _e("The script will be excluded from the DOM when the consent is not given. It will be included in the next page load after the consent is given. This option is included for better performance as the cookiebot will not scan the buffer to manipulate the attribute.", 'cookiebot-addons'); ?>"></span>
 
         </p>
         <?php endif; ?>
