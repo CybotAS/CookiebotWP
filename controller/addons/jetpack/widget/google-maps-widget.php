@@ -233,7 +233,7 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 				$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
 
 				$data = str_replace( 'src=', 'data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->cookie_types ) . '" data-src=', $data );
-        
+
 				/**
 				 * Return updated iframe tag
 				 */
@@ -266,7 +266,7 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 			}
 		}
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -277,7 +277,7 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 	public function get_extra_information() {
 		return false;
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -287,5 +287,16 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 	 */
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
+	}
+
+	/**
+	 * Returns true if addon has an option to remove tag instead of adding attributes
+	 *
+	 * @return boolean
+	 *
+	 * @since 2.1.0
+	 */
+	public function has_remove_tag_option() {
+		return false;
 	}
 }

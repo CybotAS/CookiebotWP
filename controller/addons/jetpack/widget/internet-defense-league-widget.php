@@ -8,49 +8,49 @@ use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
 
 class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
-	
+
 	/**
 	 * @var array   list of supported cookie types
 	 *
 	 * @since 1.3.0
 	 */
 	protected $cookie_types;
-	
+
 	/**
 	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $settings;
-	
+
 	/**
 	 * @var Script_Loader_Tag_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $script_loader_tag;
-	
+
 	/**
 	 * @var Cookie_Consent_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $cookie_consent;
-	
+
 	/**
 	 * @var Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $buffer_output;
-	
+
 	/**
 	 * Option name for jetpack addon
 	 *
 	 * @var string
 	 */
 	public $widget_option;
-	
+
 	/**
 	 * Internet_Defense_league_Widget constructor.
 	 *
@@ -69,12 +69,12 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 		$this->buffer_output     = $buffer_output;
 		$this->widget_option     = $widget_option;
 	}
-	
+
 	public function load_configuration() {
 		if ( is_active_widget( false, false, 'internet_defense_league_widget', true ) ) {
-			
+
 			if ( $this->is_widget_enabled() ) {
-				
+
 				add_action( 'wp_footer', function () {
 					/**
 					 * Remove wp_footer script when the cookieconsent for marketing is not given
@@ -85,7 +85,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 						cookiebot_addons_remove_class_action( 'wp_footer', 'Jetpack_Internet_Defense_League_Widget', 'footer_script' );
 					}
 				}, 9 );
-				
+
 				/**
 				 * Display placeholder if allowed in the backend settings
 				 */
@@ -95,11 +95,11 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 			}
 		}
 	}
-	
+
 	public function get_label() {
 		return 'Internet defense league';
 	}
-	
+
 	/**
 	 * Returns widget option name
 	 *
@@ -110,7 +110,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	public function get_widget_option_name() {
 		return 'internet_defense_league';
 	}
-	
+
 	/**
 	 * Returns cookie types for a widget
 	 *
@@ -121,7 +121,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	public function get_widget_cookie_types() {
 		return $this->settings->get_widget_cookie_types( $this->widget_option, $this->get_widget_option_name() );
 	}
-	
+
 	/**
 	 * Checks if a widget is enabled
 	 *
@@ -132,14 +132,14 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	public function is_widget_enabled() {
 		return $this->settings->is_widget_enabled( $this->widget_option, $this->get_widget_option_name() );
 	}
-	
+
 	/**
 	 * @return string
 	 */
 	public function get_default_placeholder() {
 		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable internet defense league.';
 	}
-	
+
 	/**
 	 * Checks if a widget placeholder is enabled
 	 *
@@ -151,7 +151,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	public function is_widget_placeholder_enabled() {
 		return $this->settings->is_widget_placeholder_enabled( $this->widget_option, $this->get_widget_option_name() );
 	}
-	
+
 	/**
 	 * Checks if widget has existing placeholders
 	 *
@@ -162,7 +162,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	public function widget_has_placeholder() {
 		return $this->settings->widget_has_placeholder( $this->widget_option, $this->get_widget_option_name() );
 	}
-	
+
 	/**
 	 * Returns all widget placeholders
 	 *
@@ -173,7 +173,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	public function get_widget_placeholders() {
 		return $this->settings->get_widget_placeholders( $this->widget_option, $this->get_widget_option_name() );
 	}
-	
+
 	/**
 	 * returns widget placeholder
 	 *
@@ -184,7 +184,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	public function get_widget_placeholder() {
 		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_widget_cookie_types() ) );
 	}
-	
+
 	/**
 	 * Show consent message when the consent is not given.
 	 *
@@ -202,7 +202,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 			}
 		}
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -213,7 +213,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	public function get_extra_information() {
 		return false;
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -223,5 +223,16 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	 */
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
+	}
+
+	/**
+	 * Returns true if addon has an option to remove tag instead of adding attributes
+	 *
+	 * @return boolean
+	 *
+	 * @since 2.1.0
+	 */
+	public function has_remove_tag_option() {
+		return false;
 	}
 }
