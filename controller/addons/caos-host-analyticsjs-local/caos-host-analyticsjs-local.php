@@ -91,11 +91,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 		/**
 		 * ga scripts are loaded in wp_footer priority is defined in option variable
 		 */
-<<<<<<< HEAD
-		if ( has_action( 'wp_footer', 'caos_analytics_render_tracking_code' ) ) {
-=======
 		if ( has_action( 'wp_footer', 'caos_analytics_render_tracking_code') || has_action( 'wp_footer', 'add_ga_header_script' ) ) {
->>>>>>> 40bba796959ea8a77df4cbf3018c20cfd9497d99
 			/**
 			 * Consent not given - no cache
 			 */
@@ -107,11 +103,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 		/**
 		 * ga scripts are loaded in wp_head priority is defined in option variable
 		 */
-<<<<<<< HEAD
-		if ( has_action( 'wp_head', 'caos_analytics_render_tracking_code' ) ) {
-=======
 		if ( has_action( 'wp_head', 'caos_analytics_render_tracking_code' ) || has_action( 'wp_head', 'add_ga_header_script' ) ) {
->>>>>>> 40bba796959ea8a77df4cbf3018c20cfd9497d99
 			/**
 			 * Consent not given - no cache
 			 */
