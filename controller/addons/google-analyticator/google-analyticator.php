@@ -165,11 +165,11 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 	public function get_cookie_types() {
 		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
 	}
-	
+
 	/**
 	 * Returns default cookie types
 	 * @return array
-	 * 
+	 *
 	 * @since 1.5.0
 	 */
 	public function get_default_cookie_types() {
@@ -213,7 +213,7 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 	public function get_default_placeholder() {
 		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
 	}
-	
+
 	/**
 	 * Get placeholder content
 	 *
@@ -262,7 +262,7 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 	public function is_placeholder_enabled() {
 		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -271,9 +271,9 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-	
+
 	}
-	
+
 	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
 	 *
@@ -284,7 +284,7 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 	public function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/google-analyticator/trunk/google-analyticator.php';
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -294,5 +294,16 @@ class Google_Analyticator implements Cookiebot_Addons_Interface {
 	 */
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
+	}
+
+	/**
+	 * Returns true if addon has an option to remove tag instead of adding attributes
+	 *
+	 * @return boolean
+	 *
+	 * @since 2.1.0
+	 */
+	public function has_remove_tag_option() {
+		return false;
 	}
 }

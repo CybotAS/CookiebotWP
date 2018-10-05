@@ -463,4 +463,26 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%src - video source</li><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in the frontend</li></ul>';
 	}
+
+	/**
+	 * Returns true if addon has an option to remove tag instead of adding attributes
+	 *
+	 * @return boolean
+	 *
+	 * @since 2.1.0
+	 */
+	public function has_remove_tag_option() {
+		return false;
+	}
+
+	/**
+	 * Return true if the remove tag option is enabled
+	 *
+	 * @return mixed
+	 *
+	 * @since 2.1.0
+	 */
+	public function is_remove_tag_enabled() {
+		return $this->settings->is_remove_tag_enabled( $this->get_option_name() );
+	}
 }
