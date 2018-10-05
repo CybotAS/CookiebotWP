@@ -23,8 +23,8 @@ class Test_Buffer_Priorities extends \WP_UnitTestCase {
 	public function test_host_analyticsjs_local() {
 		$content = file_get_contents( 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/save-ga-local.php' );
 		
-		$this->assertNotFalse( strpos( $content, 'add_action(\'wp_footer\', \'add_ga_header_script\', $sgal_enqueue_order);' ) );
-		$this->assertNotFalse( strpos( $content, 'add_action(\'wp_head\', \'add_ga_header_script\', $sgal_enqueue_order);' ) );
+		$this->assertNotFalse( strpos( $content, 'add_action(\'wp_footer\', \'caos_analytics_render_tracking_code\', $sgal_enqueue_order);' ) );
+		$this->assertNotFalse( strpos( $content, 'add_action(\'wp_head\', \'caos_analytics_render_tracking_code\', $sgal_enqueue_order);' ) );
 	}
 	
 	/**
