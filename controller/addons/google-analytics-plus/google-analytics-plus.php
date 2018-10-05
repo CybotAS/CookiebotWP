@@ -85,8 +85,16 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 			return;
 		}
 
+
 		// Disable Analytify if cookie consent not allowed
-		cookiebot_addons_remove_class_action( 'wp_head', 'Google_Analytics_Async', 'tracking_code_output' );
+		if( $this->is_remove_tag_enabled() ) {
+			cookiebot_addons_remove_class_action( 'wp_head', 'Google_Analytics_Async', 'tracking_code_output' );
+		}
+		else {
+			$this->buffer_output->add_tag( 'wp_head', 10, array(
+				'GoogleAnalyticsObject' => $this->get_cookie_types(),
+			), false );
+		}
 	}
 
 	/**
@@ -131,11 +139,11 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	public function get_cookie_types() {
 		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
 	}
-	
+
 	/**
 	 * Returns default cookie types
 	 * @return array
-	 * 
+	 *
 	 * @since 1.5.0
 	 */
 	public function get_default_cookie_types() {
@@ -179,7 +187,7 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	public function get_default_placeholder() {
 		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
 	}
-	
+
 	/**
 	 * Get placeholder content
 	 *
@@ -228,7 +236,7 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	public function is_placeholder_enabled() {
 		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -239,7 +247,7 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	public function get_extra_information() {
 		return '<p>' . __( 'Google Analytics is a simple, easy-to-use tool that helps website owners measure how users interact with website content', 'cookiebot-addons' ) . '</p>';
 	}
-	
+
 	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
 	 *
@@ -250,7 +258,7 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	public function get_svn_url() {
 		return false;
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -260,5 +268,27 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	 */
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
+	}
+
+	/**
+	 * Returns true if addon has an option to remove tag instead of adding attributes
+	 *
+	 * @return boolean
+	 *
+	 * @since 2.1.0
+	 */
+	public function has_remove_tag_option() {
+		return true;
+	}
+
+	/**
+	 * Return true if the remove tag option is enabled
+	 *
+	 * @return mixed
+	 *
+	 * @since 2.1.0
+	 */
+	public function is_remove_tag_enabled() {
+		return $this->settings->is_remove_tag_enabled( $this->get_option_name() );
 	}
 }

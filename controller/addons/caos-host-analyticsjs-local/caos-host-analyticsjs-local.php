@@ -103,6 +103,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 		/**
 		 * ga scripts are loaded in wp_head priority is defined in option variable
 		 */
+
 		if ( has_action( 'wp_head', 'caos_analytics_render_tracking_code' ) || has_action( 'wp_head', 'add_ga_header_script' ) ) {
 			/**
 			 * Consent not given - no cache
@@ -296,5 +297,16 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 */
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
+	}
+
+	/**
+	 * Returns true if addon has an option to remove tag instead of adding attributes
+	 *
+	 * @return boolean
+	 *
+	 * @since 2.1.0
+	 */
+	public function has_remove_tag_option() {
+		return false;
 	}
 }
