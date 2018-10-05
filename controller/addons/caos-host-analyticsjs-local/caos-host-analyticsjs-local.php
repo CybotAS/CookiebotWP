@@ -9,35 +9,35 @@ use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
 
 class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
-	
+
 	/**
 	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $settings;
-	
+
 	/**
 	 * @var Script_Loader_Tag_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $script_loader_tag;
-	
+
 	/**
 	 * @var Cookie_Consent_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $cookie_consent;
-	
+
 	/**
 	 * @var Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $buffer_output;
-	
+
 	/**
 	 * Complete Analytics Optimization Suite (CAOS) (Host Analyticsjs Local) constructor.
 	 *
@@ -54,7 +54,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
 	}
-	
+
 	/**
 	 * Loads addon configuration
 	 *
@@ -63,7 +63,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function load_configuration() {
 		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_host_analyticsjs_local' ), 5 );
 	}
-	
+
 	/**
 	 * Check for Host Analyticsjs Local action hooks
 	 *
@@ -74,12 +74,12 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
 			return;
 		}
-		
+
 		// consent is given
 		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
-		
+
 		/* Priority need to be more than 0 so we are able to hook in before output begins */
 		$scriptPriority = $this->cookiebot_addon_host_analyticsjs_local_priority();
 		if ( $scriptPriority <= 0 ) {
@@ -87,11 +87,15 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 			$scriptPriority = 2;
 			update_option( 'sgal_enqueue_order', $scriptPriority );
 		}
-		
+
 		/**
 		 * ga scripts are loaded in wp_footer priority is defined in option variable
 		 */
+<<<<<<< HEAD
 		if ( has_action( 'wp_footer', 'caos_analytics_render_tracking_code' ) ) {
+=======
+		if ( has_action( 'wp_footer', 'caos_analytics_render_tracking_code') || has_action( 'wp_footer', 'add_ga_header_script' ) ) {
+>>>>>>> 40bba796959ea8a77df4cbf3018c20cfd9497d99
 			/**
 			 * Consent not given - no cache
 			 */
@@ -99,11 +103,15 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 				'GoogleAnalyticsObject' => $this->get_cookie_types(),
 			), false );
 		}
-		
+
 		/**
 		 * ga scripts are loaded in wp_head priority is defined in option variable
 		 */
+<<<<<<< HEAD
 		if ( has_action( 'wp_head', 'caos_analytics_render_tracking_code' ) ) {
+=======
+		if ( has_action( 'wp_head', 'caos_analytics_render_tracking_code' ) || has_action( 'wp_head', 'add_ga_header_script' ) ) {
+>>>>>>> 40bba796959ea8a77df4cbf3018c20cfd9497d99
 			/**
 			 * Consent not given - no cache
 			 */
@@ -111,9 +119,9 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 				'GoogleAnalyticsObject' => $this->get_cookie_types(),
 			), false );
 		}
-		
+
 	}
-	
+
 	/**
 	 * Get priority of script
 	 *
@@ -124,7 +132,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function cookiebot_addon_host_analyticsjs_local_priority() {
 		return ( esc_attr( get_option( 'sgal_enqueue_order' ) ) ) ? esc_attr( get_option( 'sgal_enqueue_order' ) ) : 0;
 	}
-	
+
 	/**
 	 * Return addon/plugin name
 	 *
@@ -135,7 +143,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function get_addon_name() {
 		return 'Complete Analytics Optimization Suite (CAOS)';
 	}
-	
+
 	/**
 	 * Option name in the database
 	 *
@@ -146,7 +154,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function get_option_name() {
 		return 'caos_host_analyticsjs_local';
 	}
-	
+
 	/**
 	 * plugin file name
 	 *
@@ -157,7 +165,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function get_plugin_file() {
 		return 'host-analyticsjs-local/save-ga-local.php';
 	}
-	
+
 	/**
 	 * Returns checked cookie types
 	 * @return array
@@ -167,7 +175,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function get_cookie_types() {
 		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
 	}
-	
+
 	/**
 	 * Returns default cookie types
 	 * @return array
@@ -177,7 +185,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function get_default_cookie_types() {
 		return array( 'statistics' );
 	}
-	
+
 	/**
 	 * Check if plugin is activated and checked in the backend
 	 *
@@ -186,7 +194,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function is_addon_enabled() {
 		return $this->settings->is_addon_enabled( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Checks if addon is installed
 	 *
@@ -195,7 +203,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function is_addon_installed() {
 		return $this->settings->is_addon_installed( $this->get_plugin_file() );
 	}
-	
+
 	/**
 	 * Checks if addon is activated
 	 *
@@ -204,7 +212,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
 	}
-	
+
 	/**
 	 * Default placeholder content
 	 *
@@ -215,7 +223,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function get_default_placeholder() {
 		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';
 	}
-	
+
 	/**
 	 * Get placeholder content
 	 *
@@ -231,7 +239,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function get_placeholder( $src = '' ) {
 		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
 	}
-	
+
 	/**
 	 * Checks if it does have custom placeholder content
 	 *
@@ -242,7 +250,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function has_placeholder() {
 		return $this->settings->has_placeholder( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * returns all placeholder contents
 	 *
@@ -253,7 +261,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function get_placeholders() {
 		return $this->settings->get_placeholders( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Return true if the placeholder is enabled
 	 *
@@ -264,7 +272,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function is_placeholder_enabled() {
 		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -275,7 +283,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function get_extra_information() {
 		return false;
 	}
-	
+
 	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
 	 *
@@ -286,7 +294,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	public function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/save-ga-local.php';
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *

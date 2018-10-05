@@ -267,7 +267,7 @@ class Ninja_Forms implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/ninja-forms/trunk/ninja-forms@.php';
+		return 'http://plugins.svn.wordpress.org/ninja-forms/trunk/ninja-forms.php';
 	}
 	
 	/**
