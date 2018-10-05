@@ -103,6 +103,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 		/**
 		 * ga scripts are loaded in wp_head priority is defined in option variable
 		 */
+
 		if ( has_action( 'wp_head', 'caos_analytics_render_tracking_code' ) || has_action( 'wp_head', 'add_ga_header_script' ) ) {
 			/**
 			 * Consent not given - no cache
