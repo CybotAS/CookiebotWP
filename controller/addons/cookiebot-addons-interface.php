@@ -33,7 +33,7 @@ Interface Cookiebot_Addons_Interface {
 	 *
 	 * @since 2.1.0
 	 */
-	public function has_remove_tag_option();
+	//public function has_remove_tag_option();
 
 	/**
 	 * Return addon/plugin name

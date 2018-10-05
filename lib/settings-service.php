@@ -410,7 +410,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @return bool
 	 *
-	 * @since 1.8.0
+	 * @since 2.1.0
 	 */
 	public function is_remove_tag_enabled( $option_key ) {
 		//Always return false if COOKIEBOT_OPTION_REMOVE_TAG

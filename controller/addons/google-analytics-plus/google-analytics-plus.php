@@ -278,7 +278,7 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	 *
 	 * @return mixed
 	 *
-	 * @since 1.8.0
+	 * @since 2.1.0
 	 */
 	public function is_remove_tag_enabled() {
 		return $this->settings->is_remove_tag_enabled( $this->get_option_name() );
