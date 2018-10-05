@@ -8,7 +8,8 @@ Steps
 3. Create a class in that new directory (copy class from another addon and adjust the namespace, classname and methods.)
 4. Edit 'load_configuration' method. That is the only method that needs to be worked on to block the cookies. You can create your own method from there.
 5. Test
-6. Send a pull-request in github
+6. Create integration test if you did use dependencies from the addon plugin. (We run daily tests to see if the dependencies from the addons plugin are still valid.)
+7. Send a pull-request in github
 
 Example
 ---
@@ -28,4 +29,6 @@ Example
 
 6. Test if the cookies are blocked.
 
-7. Send a pull-request to our github repository.
+7. Create integration test for the addon dependencies: https://github.com/CybotAS/CookiebotAddons/blob/develop/tests/integration/addons/test-add-to-any.php
+
+8. Send a pull-request to our github repository.
