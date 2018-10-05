@@ -11,8 +11,6 @@ class Test_Custom_Facebook_Feed extends \WP_UnitTestCase {
 	/**
 	 * This will validate if the hook "caos_analytics_render_tracking_code" still exists
 	 *
-	 * @covers \cookiebot_addons\controller\addons\add_to_any\Add_To_Any
-	 *
 	 * @since 2.1.0
 	 */
 	public function test_host_analyticsjs_local() {
@@ -20,5 +18,7 @@ class Test_Custom_Facebook_Feed extends \WP_UnitTestCase {
 		
 		$this->assertNotFalse( strpos( $content, 'echo \'var cfflinkhashtags = "\' .') );
 		$this->assertNotFalse( strpos( $content, "wp_register_script( 'cffscripts',") );
+		$this->assertNotFalse( strpos( $content, "add_action( 'wp_footer', 'cff_js' );") );
+		$this->assertNotFalse( strpos( $content, "add_action( 'wp_enqueue_scripts', 'cff_scripts_method' );") );
 	}
 }
