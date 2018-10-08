@@ -250,7 +250,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/leadin/trunk/leadin.php';
+		return 'http://plugins.svn.wordpress.org/instagram-feed/trunk/instagram-feed.php';
 	}
 
 	/**
