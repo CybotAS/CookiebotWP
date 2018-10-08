@@ -218,13 +218,13 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	/**
 	 * Returns default cookie types
 	 * @return array
-	 * 
+	 *
 	 * @since 1.5.0
 	 */
 	public function get_default_cookie_types() {
 		return array( 'statistics' );
 	}
-	
+
 	/**
 	 * Check if plugin is activated and checked in the backend
 	 *
@@ -273,7 +273,7 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	public function get_default_placeholder() {
 		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
 	}
-	
+
 	/**
 	 * Get placeholder content
 	 *
@@ -322,7 +322,7 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	public function is_placeholder_enabled() {
 		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -333,7 +333,7 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	public function get_extra_information() {
 		return false;
 	}
-	
+
 	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
 	 *
@@ -344,7 +344,7 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	public function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/jetpack/trunk/jetpack.php';
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -354,5 +354,16 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	 */
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
+	}
+
+	/**
+	 * Returns true if addon has an option to remove tag instead of adding attributes
+	 *
+	 * @return boolean
+	 *
+	 * @since 2.1.0
+	 */
+	public function has_remove_tag_option() {
+		return false;
 	}
 }
