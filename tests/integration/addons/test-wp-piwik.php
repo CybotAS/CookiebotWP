@@ -14,8 +14,8 @@ class Test_Wp_Piwik extends \WP_UnitTestCase {
 	 * @since 2.1.0
 	 */
 	public function test_host_analyticsjs_local() {
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/ga-google-analytics/trunk/inc/plugin-core.php' );
+		$content = file_get_contents( 'http://plugins.svn.wordpress.org/wp-piwik/trunk/classes/WP_Piwik.php' );
 		
-		$this->assertNotFalse( strpos( $content, 'ga_google_analytics_tracking_code') );
+		$this->assertNotFalse( strpos( $content, '\'disableCookies\' => self::$settings->getGlobalOption ( \'disable_cookies\' ) ? 1 : 0') );
 	}
 }
