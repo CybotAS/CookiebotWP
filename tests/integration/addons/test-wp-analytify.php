@@ -14,7 +14,7 @@ class Test_Wp_Analytify extends \WP_UnitTestCase {
 	 * @since 2.1.0
 	 */
 	public function test_wp_analytify() {
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/ga-google-analytics/trunk/inc/plugin-core.php' );
+		$content = file_get_contents( 'http://plugins.svn.wordpress.org/wp-analytify/trunk/wp-analytify.php' );
 		
 		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_head\', array( $this, \'analytify_add_analytics_code\' ) );') );
 	}
