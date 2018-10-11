@@ -120,8 +120,9 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 				'addtoany' => $this->get_cookie_types()
 			), false );
 
-			add_action( 'pre_get_posts', array( $this, 'start_buffer' ), 9 );
-			add_action( 'pre_get_posts', array( $this, 'stop_buffer' ), 11 );
+			$this->buffer_output->add_tag( 'pre_get_posts', 10, array(
+				'GoogleAnalyticsObject' => $this->get_cookie_types(),
+			), false );
 		}
 		
 		// External js, so manipulate attributes
@@ -323,71 +324,5 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 */
 	public function is_remove_tag_enabled() {
 		return $this->settings->is_remove_tag_enabled( $this->get_option_name() );
-	}
-	
-	/**
-	 * Start catching the output
-	 *
-	 * @since 2.1.1
-	 */
-	public function start_buffer() {
-		ob_start( array( $this, 'manipulate_iframe' ) );
-	}
-	
-	/**
-	 * Clear the buffer
-	 *
-	 * @since 2.1.1
-	 */
-	public function stop_buffer() {
-		ob_end_flush();
-	}
-	
-	/**
-	 * Return manipulated output with cookieconsent attribute
-	 *
-	 * @param $buffer
-	 *
-	 * @return mixed|null|string|string[]
-	 *
-	 * @since 2.1.1
-	 */
-	public function manipulate_iframe( $buffer ) {
-		/**
-		 * Get wp head scripts from the cache
-		 */
-//		$updated_scripts = get_transient( 'add_to_any' );
-//
-//		/**
-//		 * If cache is not set then build it
-//		 */
-//		if ( $updated_scripts === false ) {
-			/**
-			 * Pattern to get all iframes
-			 */
-			$pattern = "/\<iframe(.*?)?\>(.|\s)*?\<\/iframe\>/i";
-			
-			/**
-			 * Get all scripts and add cookieconsent if it does match with the criterion
-			 */
-			$updated_scripts = preg_replace_callback( $pattern, function ( $matches ) {
-				
-				$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
-				
-				$data = str_replace( 'src=', 'data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->cookie_types ) . '" data-src=', $data );
-				
-				/**
-				 * Return updated iframe tag
-				 */
-				return $data;
-			}, $buffer );
-			
-			/**
-			 * Set cache for 15 minutes
-			 */
-			//set_transient( 'jetpack_google_maps_widget', $updated_scripts, 60 * 15 );
-		//}
-		
-		return $updated_scripts;
 	}
 }
