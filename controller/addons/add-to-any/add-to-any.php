@@ -84,29 +84,43 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
-
-
-		add_filter( 'addtoany_script_disabled', '__return_true' );
-
-		/**
-		 * Block head script
-		 */
-		if ( has_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' ) ) {
-			remove_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' );
-		}
-
-		/**
-		 * Block footer script
-		 */
-		if ( has_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' ) ) {
-			remove_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' );
-		}
-
-		/**
-		 * Block content addition
-		 */
-		if ( has_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' ) ) {
-			remove_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' );
+		
+		if( $this->is_remove_tag_enabled() ) {
+			add_filter( 'addtoany_script_disabled', '__return_true' );
+			
+			/**
+			 * Block head script
+			 */
+			if ( has_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' ) ) {
+				remove_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' );
+			}
+			
+			/**
+			 * Block footer script
+			 */
+			if ( has_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' ) ) {
+				remove_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' );
+			}
+			
+			/**
+			 * Block content addition
+			 */
+			if ( has_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' ) ) {
+				remove_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' );
+			}
+		} else {
+			$this->buffer_output->add_tag( 'wp_head', 10, array(
+				'data-cfasync' => $this->get_cookie_types(),
+				'addtoany' => $this->get_cookie_types()
+			), false );
+			
+			$this->buffer_output->add_tag( 'wp_footer', 10, array(
+				'data-cfasync' => $this->get_cookie_types(),
+				'addtoany' => $this->get_cookie_types()
+			), false );
+			
+			add_action( 'pre_get_posts', array( $this, 'start_buffer' ), 9 );
+			add_action( 'pre_get_posts', array( $this, 'stop_buffer' ), 11 );
 		}
 
 		// External js, so manipulate attributes
@@ -296,6 +310,83 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 2.1.0
 	 */
 	public function has_remove_tag_option() {
-		return false;
+		return true;
+	}
+	
+	/**
+	 * Return true if the remove tag option is enabled
+	 *
+	 * @return mixed
+	 *
+	 * @since 2.1.0
+	 */
+	public function is_remove_tag_enabled() {
+		return $this->settings->is_remove_tag_enabled( $this->get_option_name() );
+	}
+	
+	/**
+	 * Start catching the output
+	 *
+	 * @since 2.1.1
+	 */
+	public function start_buffer() {
+		ob_start( array( $this, 'manipulate_iframe' ) );
+	}
+	
+	/**
+	 * Clear the buffer
+	 *
+	 * @since 2.1.1
+	 */
+	public function stop_buffer() {
+		ob_end_flush();
+	}
+	
+	/**
+	 * Return manipulated output with cookieconsent attribute
+	 *
+	 * @param $buffer
+	 *
+	 * @return mixed|null|string|string[]
+	 *
+	 * @since 2.1.1
+	 */
+	public function manipulate_iframe( $buffer ) {
+		/**
+		 * Get wp head scripts from the cache
+		 */
+//		$updated_scripts = get_transient( 'add_to_any' );
+//
+//		/**
+//		 * If cache is not set then build it
+//		 */
+//		if ( $updated_scripts === false ) {
+			/**
+			 * Pattern to get all iframes
+			 */
+			$pattern = "/\<iframe(.*?)?\>(.|\s)*?\<\/iframe\>/i";
+			
+			/**
+			 * Get all scripts and add cookieconsent if it does match with the criterion
+			 */
+			$updated_scripts = preg_replace_callback( $pattern, function ( $matches ) {
+				
+				$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
+				
+				$data = str_replace( 'src=', 'data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->cookie_types ) . '" data-src=', $data );
+				
+				/**
+				 * Return updated iframe tag
+				 */
+				return $data;
+			}, $buffer );
+			
+			/**
+			 * Set cache for 15 minutes
+			 */
+			//set_transient( 'jetpack_google_maps_widget', $updated_scripts, 60 * 15 );
+		//}
+		
+		return $updated_scripts;
 	}
 }
