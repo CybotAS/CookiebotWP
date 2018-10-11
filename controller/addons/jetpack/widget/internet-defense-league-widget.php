@@ -75,16 +75,23 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 
 			if ( $this->is_widget_enabled() ) {
 
-				add_action( 'wp_footer', function () {
-					/**
-					 * Remove wp_footer script when the cookieconsent for marketing is not given
-					 *
-					 * @since 1.2.0
-					 */
-					if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() ) ) {
-						cookiebot_addons_remove_class_action( 'wp_footer', 'Jetpack_Internet_Defense_League_Widget', 'footer_script' );
-					}
-				}, 9 );
+				if( $this->is_remove_tag_enabled() ) {
+					add_action( 'wp_footer', function () {
+						/**
+						 * Remove wp_footer script when the cookieconsent for marketing is not given
+						 *
+						 * @since 1.2.0
+						 */
+						if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() ) ) {
+							cookiebot_addons_remove_class_action( 'wp_footer', 'Jetpack_Internet_Defense_League_Widget', 'footer_script' );
+						}
+					}, 9 );
+				} else {
+					$this->buffer_output->add_tag( 'wp_footer', 9, array(
+						'internetdefenseleague' => $this->get_widget_cookie_types()
+					), false );
+				}
+
 
 				/**
 				 * Display placeholder if allowed in the backend settings
@@ -233,6 +240,17 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	 * @since 2.1.0
 	 */
 	public function has_remove_tag_option() {
-		return false;
+		return true;
+	}
+
+	/**
+	 * Return true if the remove tag option is enabled
+	 *
+	 * @return mixed
+	 *
+	 * @since 2.1.0
+	 */
+	public function is_remove_tag_enabled() {
+		return $this->settings->is_widget_remove_tag_enabled( $this->widget_option, $this->get_widget_option_name() );
 	}
 }
