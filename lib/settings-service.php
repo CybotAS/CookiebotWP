@@ -431,6 +431,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * returns true if the "remove tag" option is enabled
 	 *
 	 * @param $option_key
+	 * @param $widget_key
 	 *
 	 * @return bool
 	 *

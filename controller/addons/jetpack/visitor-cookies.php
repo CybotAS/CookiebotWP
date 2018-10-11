@@ -215,7 +215,6 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 		if ( has_action( 'set_comment_cookies', 'wp_set_comment_cookies' ) ) {
 			remove_action( 'set_comment_cookies', 'wp_set_comment_cookies' );
 		}
-
 	}
 
 	/**
@@ -234,7 +233,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 		/**
 		 * Show message to accept preferences consent to save
 		 */
-		if( $this->is_widget_placeholder_enabled() ) {
+		if ( $this->is_widget_placeholder_enabled() ) {
 			add_action( 'wp_mobile_theme_footer', array( $this, 'view_accept_preferences_consent' ) );
 		}
 	}
@@ -280,6 +279,17 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 2.1.0
 	 */
 	public function has_remove_tag_option() {
-		return false;
+		return true;
+	}
+
+	/**
+	 * Return true if the remove tag option is enabled
+	 *
+	 * @return mixed
+	 *
+	 * @since 2.1.0
+	 */
+	public function is_remove_tag_enabled() {
+		return $this->settings->is_widget_remove_tag_enabled( $this->widget_option, $this->get_widget_option_name() );
 	}
 }
