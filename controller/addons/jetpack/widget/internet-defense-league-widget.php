@@ -75,23 +75,21 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 
 			if ( $this->is_widget_enabled() ) {
 
-				add_action( 'wp_footer', function () {
-					/**
-					 * Remove wp_footer script when the cookieconsent for marketing is not given
-					 *
-					 * @since 1.2.0
-					 */
-					if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() ) ) {
-						if( $this->is_widget_remove_tag_enabled() ) {
-							cookiebot_addons_remove_class_action( 'wp_footer', 'Jetpack_Internet_Defense_League_Widget', 'footer_script' );
-						}
-						else {
-							$this->buffer_output->add_tag( 'wp_footer', 10, array(
-								'window._idl' => $this->get_widget_cookie_types(),
-							), false );
-						}
+				/**
+				 * Remove wp_footer script when the cookieconsent for marketing is not given
+				 *
+				 * @since 1.2.0
+				 */
+				if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() ) ) {
+					if( $this->is_widget_remove_tag_enabled() ) {
+						cookiebot_addons_remove_class_action( 'wp_footer', 'Jetpack_Internet_Defense_League_Widget', 'footer_script' );
 					}
-				}, 9 );
+					else {
+						$this->buffer_output->add_tag( 'wp_footer', 10, array(
+							'window._idl' => $this->get_widget_cookie_types(),
+						), false );
+					}
+				}
 
 				/**
 				 * Display placeholder if allowed in the backend settings
