@@ -206,11 +206,15 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	protected function disable_comment_cookies() {
 		/**
 		 * Remove action comment cookies in jetpack
+		 *
+		 * we have to remove this action, because it does manually add the cookie.
 		 */
 		cookiebot_addons_remove_class_action( 'comment_post', 'Highlander_Comments_Base', 'set_comment_cookies' );
 
 		/**
 		 * Remove action comment cookies in wordpress core
+		 *
+		 * we have to remove this action, because it does manually add the cookie.
 		 */
 		if ( has_action( 'set_comment_cookies', 'wp_set_comment_cookies' ) ) {
 			remove_action( 'set_comment_cookies', 'wp_set_comment_cookies' );
@@ -226,6 +230,9 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 1.2.0
 	 */
 	protected function do_not_save_mobile_or_web_view() {
+		/**
+		 * we have to remove this action, because it does manually add the cookie.
+		 */
 		if ( has_action( 'init', 'jetpack_mobile_request_handler' ) ) {
 			remove_action( 'init', 'jetpack_mobile_request_handler' );
 		}
@@ -289,7 +296,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 *
 	 * @since 2.1.0
 	 */
-	public function is_remove_tag_enabled() {
+	public function is_widget_remove_tag_enabled() {
 		return $this->settings->is_widget_remove_tag_enabled( $this->widget_option, $this->get_widget_option_name() );
 	}
 }
