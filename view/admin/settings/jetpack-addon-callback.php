@@ -83,21 +83,21 @@ $addon  = $args['addon'];
             </div>
 		<?php endif; ?>
 
-        <p class="add_placeholder_language">
-            <button class="btn_add_language button button-secondary"
-                    data-addon="<?php echo $widget->get_widget_option_name(); ?>"><?php _e( '+ Add language', 'cookiebot-addons' ); ?></button>
-        </p>
-    </div>
 
+		<p class="add_placeholder_language">
+			<button class="btn_add_language button button-secondary"
+			        data-addon="<?php echo $widget->get_widget_option_name(); ?>"><?php _e( '+ Add language', 'cookiebot-addons' ); ?></button>
+		</p>
+	</div>
 	<?php if ( method_exists($widget,'has_remove_tag_option') && $widget->has_remove_tag_option() &&
-	           defined( 'COOKIEBOT_OPTION_REMOVE_TAG' ) && COOKIEBOT_OPTION_REMOVE_TAG ): ?>
+										defined( 'COOKIEBOT_OPTION_REMOVE_TAG' ) && COOKIEBOT_OPTION_REMOVE_TAG ): ?>
         <p>
             <input type="checkbox" id="<?php echo 'remove_tag_' . $widget->get_widget_option_name(); ?>"
-                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][remove_tag]"
-                   value="1" <?php checked( 1, $widget->is_remove_tag_enabled(), true ); ?> />
-            <label for="<?php echo 'remove_tag_' . $widget->get_widget_option_name(); ?>"><?php _e( 'Load the script after the consent is given.', 'cookiebot-addons' ); ?></label>
-            <span class="help-tip" title="<?php _e("The script will be excluded from the DOM when the consent is not given. It will be included in the next page load after the consent is given. This option is included for better performance as the cookiebot will not scan the buffer to manipulate the attribute.", 'cookiebot-addons'); ?>"></span>
+                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name() ?>][remove_tag]"
+                   value="1" <?php checked( 1, $widget->is_widget_remove_tag_enabled(), true ); ?> />
+						<label for="<?php echo 'remove_tag_' . $widget->get_widget_option_name(); ?>"><?php _e( 'Remove script untill consent is given.', 'cookiebot-addons' ); ?></label>
+                        <span class="help-tip" title="<?php _e("The script will be excluded from the DOM when the consent is not given. It will be included in the next page load after the consent is given. This option is included for better performance as the cookiebot will not scan the buffer to manipulate the attribute.", 'cookiebot-addons'); ?>"></span>
 
         </p>
-	<?php endif; ?>
+ <?php endif; ?>
 </div>
