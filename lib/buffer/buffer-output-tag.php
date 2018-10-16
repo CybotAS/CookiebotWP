@@ -41,11 +41,11 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 	private $transient_name;
 
 	/**
-	 * 
+	 *
 	 * Use transient cache
-	 * 
+	 *
 	 * @var boolean
-	 * 
+	 *
 	 * @since 1.2.0
 	 */
 	private	$use_cache;
@@ -112,7 +112,7 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 		if( $this->use_cache ) {
 			$updated_scripts = get_transient( $this->transient_name );
 		}
-		
+
 		/**
 		 * If cache is not set then build it
 		 */
@@ -121,7 +121,7 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 			 * Get all scripts and add cookieconsent if it does match with the criterion
 			 */
 			$updated_scripts = cookiebot_addons_manipulate_script( $buffer, $this->keywords );
-			
+
 			if( $this->use_cache ) {
 				/**
 				 * Set cache for 15 minutes

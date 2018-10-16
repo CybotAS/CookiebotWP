@@ -94,4 +94,27 @@ Interface Settings_Service_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_placeholder( $option_key, $default_placeholder, $cookies );
+
+	/**
+	 * returns true if the "remove tag" option is enabled
+	 *
+	 * @param $option_key
+	 *
+	 * @return bool
+	 *
+	 * @since 2.1.0
+	 */
+	public function is_remove_tag_enabled( $option_key );
+
+	/**
+	 * returns true if the "remove tag" option is enabled
+	 *
+	 * @param $option_key
+	 * @param $widget_key
+	 *
+	 * @return bool
+	 *
+	 * @since 2.1.0
+	 */
+	public function is_widget_remove_tag_enabled( $option_key, $widget_key );
 }
