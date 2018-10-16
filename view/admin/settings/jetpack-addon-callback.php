@@ -4,88 +4,100 @@ $addon  = $args['addon'];
 
 ?>
 <div class="postbox cookiebot-addon">
-	<p>
-		<label for="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"><?php _e( 'Enable', 'cookiebot' ); ?></label>
-		<input type="checkbox" id="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"
-		       name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][enabled]"
-		       value="1" <?php checked( 1, $widget->is_widget_enabled(), true ); ?> />
-	</p>
-	<p>
-		<span><?php _e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></span><br>
-	<ul class="cookietypes">
-		<li><input type="checkbox" id="cookie_type_preferences_<?php echo $widget->get_widget_option_name(); ?>"
-		           value="preferences"
+    <p>
+        <label for="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"><?php _e( 'Enable', 'cookiebot' ); ?></label>
+        <input type="checkbox" id="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"
+               name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][enabled]"
+               value="1" <?php checked( 1, $widget->is_widget_enabled(), true ); ?> />
+    </p>
+    <p>
+        <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></span><br>
+    <ul class="cookietypes">
+        <li><input type="checkbox" id="cookie_type_preferences_<?php echo $widget->get_widget_option_name(); ?>"
+                   value="preferences"
 				<?php cookiebot_addons_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'preferences' ); ?>
-				   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Preferences</label>
-		</li>
-		<li><input type="checkbox" id="cookie_type_statistics_<?php echo $widget->get_widget_option_name(); ?>"
-		           value="statistics"
+                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Preferences</label>
+        </li>
+        <li><input type="checkbox" id="cookie_type_statistics_<?php echo $widget->get_widget_option_name(); ?>"
+                   value="statistics"
 				<?php cookiebot_addons_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'statistics' ); ?>
-				   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Statistics</label>
-		</li>
-		<li><input type="checkbox" id="cookie_type_marketing_<?php echo $widget->get_widget_option_name(); ?>"
-		           value="marketing"
+                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Statistics</label>
+        </li>
+        <li><input type="checkbox" id="cookie_type_marketing_<?php echo $widget->get_widget_option_name(); ?>"
+                   value="marketing"
 				<?php cookiebot_addons_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'marketing' ); ?>
-				   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Marketing</label>
-		</li>
-	</ul>
-	</p>
-	
-	<p>
-		<label><?php _e( 'Display a placeholder', 'cookiebot' ); ?></label>
-		<input type="checkbox"
-		       class="placeholder_enable"
-		       data-addon="<?php echo $widget->get_widget_option_name(); ?>"
-		       name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][enabled]"
+                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Marketing</label>
+        </li>
+    </ul>
+    </p>
+
+    <p>
+        <label><?php _e( 'Display a placeholder', 'cookiebot' ); ?></label>
+        <input type="checkbox"
+               class="placeholder_enable"
+               data-addon="<?php echo $widget->get_widget_option_name(); ?>"
+               name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][enabled]"
 			<?php checked( 1, $widget->is_widget_placeholder_enabled() ); ?>
-			   value="1">
-	</p>
-	
-	<div class="placeholder"
-	     data-addon="<?php echo $widget->get_widget_option_name(); ?>" <?php echo ( ! $widget->is_widget_placeholder_enabled() ) ? 'style="display:none"' : ''; ?>>
+               value="1">
+    </p>
+
+    <div class="placeholder"
+         data-addon="<?php echo $widget->get_widget_option_name(); ?>" <?php echo ( ! $widget->is_widget_placeholder_enabled() ) ? 'style="display:none"' : ''; ?>>
 		<?php if ( $widget->widget_has_placeholder() ): ?>
 			<?php $count = 0; ?>
 			<?php foreach ( $widget->get_widget_placeholders() as $placeholder_lang => $placeholder_value ): ?>
-				<div class="placeholder_content submitbox">
-					<p>
-						<label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
+                <div class="placeholder_content submitbox">
+                    <p>
+                        <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
 						<?php
 						$name = 'cookiebot_jetpack_addon[' . $widget->get_widget_option_name() . '][placeholder][languages][' . $placeholder_lang . ']';
 						echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, $placeholder_lang );
 						?>
 						<?php if ( $count != 0 ): ?>
-							<a href=""
-							   class="submitdelete deletion"><?php _e( 'Remove language', 'cookiebot-addons' ); ?></a>
+                            <a href=""
+                               class="submitdelete deletion"><?php _e( 'Remove language', 'cookiebot-addons' ); ?></a>
 						<?php endif; ?>
-					</p>
-					<p>
+                    </p>
+                    <p>
                         <textarea cols="60" rows="5"
                                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][<?php echo $placeholder_lang; ?>]"><?php echo $placeholder_value; ?></textarea>
                         <span class="help-tip" title="<?php echo $addon->get_placeholder_helper(); ?>"></span>
-					</p>
-				</div>
+                    </p>
+                </div>
 				<?php $count ++; ?>
 			<?php endforeach; ?>
 		<?php else: ?>
-			<div class="placeholder_content">
-				<p>
-					<label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
+            <div class="placeholder_content">
+                <p>
+                    <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
 					<?php
 					$name = 'cookiebot_jetpack_addon[' . $widget->get_widget_option_name() . '][placeholder][languages][site-default]';
 					echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, '' );
 					?>
-				</p>
-				<p>
+                </p>
+                <p>
                         <textarea cols="80" rows="5"
                                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][site-default]"><?php echo $widget->get_default_placeholder(); ?></textarea>
                     <span class="help-tip" title="<?php echo $addon->get_placeholder_helper(); ?>"></span>
-				</p>
-			</div>
+                </p>
+            </div>
 		<?php endif; ?>
-		
+
+
 		<p class="add_placeholder_language">
 			<button class="btn_add_language button button-secondary"
 			        data-addon="<?php echo $widget->get_widget_option_name(); ?>"><?php _e( '+ Add language', 'cookiebot-addons' ); ?></button>
 		</p>
 	</div>
+	<?php if ( method_exists($widget,'has_remove_tag_option') && $widget->has_remove_tag_option() &&
+										defined( 'COOKIEBOT_OPTION_REMOVE_TAG' ) && COOKIEBOT_OPTION_REMOVE_TAG ): ?>
+        <p>
+            <input type="checkbox" id="<?php echo 'remove_tag_' . $widget->get_widget_option_name(); ?>"
+                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name() ?>][remove_tag]"
+                   value="1" <?php checked( 1, $widget->is_widget_remove_tag_enabled(), true ); ?> />
+						<label for="<?php echo 'remove_tag_' . $widget->get_widget_option_name(); ?>"><?php _e( 'Remove script untill consent is given.', 'cookiebot-addons' ); ?></label>
+                        <span class="help-tip" title="<?php _e("The script will be excluded from the DOM when the consent is not given. It will be included in the next page load after the consent is given. This option is included for better performance as the cookiebot will not scan the buffer to manipulate the attribute.", 'cookiebot-addons'); ?>"></span>
+
+        </p>
+ <?php endif; ?>
 </div>

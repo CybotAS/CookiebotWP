@@ -87,9 +87,19 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 
 		$this->script_loader_tag->add_tag( 'aepc-pixel-events', array( 'facebook' => $this->get_cookie_types() ) );
 
-		cookiebot_addons_remove_class_action( 'wp_head', 'AEPC_Pixel_Scripts', 'pixel_init', 99 );
-		cookiebot_addons_remove_class_action( 'wp_footer', 'AEPC_Pixel_Scripts', 'pixel_init', 1 );
+		if( $this->is_remove_tag_enabled() ) {
+			cookiebot_addons_remove_class_action( 'wp_head', 'AEPC_Pixel_Scripts', 'pixel_init', 99 );
+			cookiebot_addons_remove_class_action( 'wp_footer', 'AEPC_Pixel_Scripts', 'pixel_init', 1 );
+		}
+		else {
+			$this->buffer_output->add_tag( 'wp_head', 99, array(
+				'aepc_pixel' => $this->get_cookie_types(),
+			), false );
 
+			$this->buffer_output->add_tag( 'wp_footer', 1, array(
+				'aepc_pixel' => $this->get_cookie_types(),
+			), false );
+		}
 	}
 
 	/**
@@ -134,11 +144,11 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	public function get_cookie_types() {
 		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
 	}
-	
+
 	/**
 	 * Returns default cookie types
 	 * @return array
-	 * 
+	 *
 	 * @since 1.5.0
 	 */
 	public function get_default_cookie_types() {
@@ -182,7 +192,7 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	public function get_default_placeholder() {
 		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
 	}
-	
+
 	/**
 	 * Get placeholder content
 	 *
@@ -231,7 +241,7 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	public function is_placeholder_enabled() {
 		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -242,7 +252,7 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	public function get_extra_information() {
 		return false;
 	}
-	
+
 	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
 	 *
@@ -253,7 +263,7 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	public function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/pixel-caffeine/trunk/pixel-caffeine.php';
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -263,5 +273,27 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	 */
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
+	}
+
+	/**
+	 * Returns true if addon has an option to remove tag instead of adding attributes
+	 *
+	 * @return boolean
+	 *
+	 * @since 2.1.0
+	 */
+	public function has_remove_tag_option() {
+		return true;
+	}
+
+	/**
+	 * Return true if the remove tag option is enabled
+	 *
+	 * @return mixed
+	 *
+	 * @since 2.1.0
+	 */
+	public function is_remove_tag_enabled() {
+		return $this->settings->is_remove_tag_enabled( $this->get_option_name() );
 	}
 }

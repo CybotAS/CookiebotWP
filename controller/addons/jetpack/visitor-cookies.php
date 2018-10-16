@@ -206,16 +206,19 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	protected function disable_comment_cookies() {
 		/**
 		 * Remove action comment cookies in jetpack
+		 *
+		 * we have to remove this action, because it does manually add the cookie.
 		 */
 		cookiebot_addons_remove_class_action( 'comment_post', 'Highlander_Comments_Base', 'set_comment_cookies' );
 
 		/**
 		 * Remove action comment cookies in wordpress core
+		 *
+		 * we have to remove this action, because it does manually add the cookie.
 		 */
 		if ( has_action( 'set_comment_cookies', 'wp_set_comment_cookies' ) ) {
 			remove_action( 'set_comment_cookies', 'wp_set_comment_cookies' );
 		}
-
 	}
 
 	/**
@@ -227,6 +230,9 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 1.2.0
 	 */
 	protected function do_not_save_mobile_or_web_view() {
+		/**
+		 * we have to remove this action, because it does manually add the cookie.
+		 */
 		if ( has_action( 'init', 'jetpack_mobile_request_handler' ) ) {
 			remove_action( 'init', 'jetpack_mobile_request_handler' );
 		}
@@ -234,7 +240,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 		/**
 		 * Show message to accept preferences consent to save
 		 */
-		if( $this->is_widget_placeholder_enabled() ) {
+		if ( $this->is_widget_placeholder_enabled() ) {
 			add_action( 'wp_mobile_theme_footer', array( $this, 'view_accept_preferences_consent' ) );
 		}
 	}
@@ -249,7 +255,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 						  ' . $this->get_default_placeholder() . '
 						</div>';
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -260,7 +266,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	public function get_extra_information() {
 		return false;
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -270,5 +276,27 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 */
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
+	}
+
+	/**
+	 * Returns true if addon has an option to remove tag instead of adding attributes
+	 *
+	 * @return boolean
+	 *
+	 * @since 2.1.0
+	 */
+	public function has_remove_tag_option() {
+		return true;
+	}
+
+	/**
+	 * Return true if the remove tag option is enabled
+	 *
+	 * @return mixed
+	 *
+	 * @since 2.1.0
+	 */
+	public function is_widget_remove_tag_enabled() {
+		return $this->settings->is_widget_remove_tag_enabled( $this->widget_option, $this->get_widget_option_name() );
 	}
 }
