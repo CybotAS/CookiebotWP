@@ -16,6 +16,6 @@ class Test_Optinmonster extends \WP_UnitTestCase {
 	public function test_optinmonster() {
 		$content = file_get_contents('https://plugins.svn.wordpress.org/optinmonster/trunk/optin-monster-wp-api.php');
 		
-		$this->assertNotFalse( strpos( $content, 'wp_enqueue_script( \'optinmonster-api-script\' );' ) );
+		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_enqueue_scripts\', \'optinmonster-api-script\' );') );
 	}
 }
