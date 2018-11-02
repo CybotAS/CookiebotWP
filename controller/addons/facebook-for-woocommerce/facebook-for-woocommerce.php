@@ -83,13 +83,6 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		/** @var  $consent_given boolean    consent is not given */
-		$consent_given = false;
-
-		$this->buffer_output->add_tag( 'wp_head', 10, array(
-			'fbq(\'track\',' => $this->get_cookie_types()
-		), $consent_given );
-
 
 		$this->buffer_output->add_tag( 'woocommerce_after_single_product', 2, array(
 			'fbq(\'ViewContent\'' => $this->get_cookie_types()
@@ -130,8 +123,17 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 		/**
 		 * inject base pixel
 		 */
+		//We always need to remove this untill consent is given - because we can force no execution before consent it given
 		cookiebot_addons_remove_class_action( 'wp_footer', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel_noscript' );
-		cookiebot_addons_remove_class_action( 'wp_head', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel' );
+
+		if( $this->is_remove_tag_enabled() ) {
+			cookiebot_addons_remove_class_action( 'wp_head', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel' );
+		}
+		else {
+			$this->buffer_output->add_tag( 'wp_head', 10, array(
+				'fbq(\'track\',' => $this->get_cookie_types()
+			), false );
+		}
 	}
 
 	/**
@@ -315,6 +317,17 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 * @since 2.1.0
 	 */
 	public function has_remove_tag_option() {
-		return false;
+		return true;
+	}
+
+	/**
+	 * Return true if the remove tag option is enabled
+	 *
+	 * @return mixed
+	 *
+	 * @since 2.1.0
+	 */
+	public function is_remove_tag_enabled() {
+		return $this->settings->is_remove_tag_enabled( $this->get_option_name() );
 	}
 }

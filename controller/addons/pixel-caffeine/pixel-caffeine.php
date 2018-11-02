@@ -87,9 +87,19 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 
 		$this->script_loader_tag->add_tag( 'aepc-pixel-events', array( 'facebook' => $this->get_cookie_types() ) );
 
-		cookiebot_addons_remove_class_action( 'wp_head', 'AEPC_Pixel_Scripts', 'pixel_init', 99 );
-		cookiebot_addons_remove_class_action( 'wp_footer', 'AEPC_Pixel_Scripts', 'pixel_init', 1 );
+		if( $this->is_remove_tag_enabled() ) {
+			cookiebot_addons_remove_class_action( 'wp_head', 'AEPC_Pixel_Scripts', 'pixel_init', 99 );
+			cookiebot_addons_remove_class_action( 'wp_footer', 'AEPC_Pixel_Scripts', 'pixel_init', 1 );
+		}
+		else {
+			$this->buffer_output->add_tag( 'wp_head', 99, array(
+				'aepc_pixel' => $this->get_cookie_types(),
+			), false );
 
+			$this->buffer_output->add_tag( 'wp_footer', 1, array(
+				'aepc_pixel' => $this->get_cookie_types(),
+			), false );
+		}
 	}
 
 	/**
@@ -273,6 +283,17 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	 * @since 2.1.0
 	 */
 	public function has_remove_tag_option() {
-		return false;
+		return true;
+	}
+
+	/**
+	 * Return true if the remove tag option is enabled
+	 *
+	 * @return mixed
+	 *
+	 * @since 2.1.0
+	 */
+	public function is_remove_tag_enabled() {
+		return $this->settings->is_remove_tag_enabled( $this->get_option_name() );
 	}
 }
