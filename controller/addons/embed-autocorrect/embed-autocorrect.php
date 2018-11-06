@@ -206,14 +206,16 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 
 
 		//Match all youtube, vimeo and facebook iframes.
-		preg_match_all( '/<iframe[^>]* src=\"[^\"]*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com)\/[^>]*>.*?<\\/iframe>/mi', $content, $matches );
-		foreach ( $matches[0] as $match ) {
+		preg_match_all( '/<iframe[^>]* src=("|\')[^("|\')](facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com)*[^>]*>.*?<\/iframe>/mi', $content, $matches );
+
+		foreach ( $matches[0] as $x=>$match ) {
 			/**
 			 * Get the source attribute value
 			 */
-			$start = strpos( $match, ' src="' ) + 6;
-			$end   = strpos( $match, '"', $start );
+			$start = strpos( $match, ' src=' ) + 6;
+			$end   = strpos( $match, $matches[1][$x], $start );
 			$src   = substr( $match, $start, $end - $start );
+
 
 			//Replace - and add cookie consent notice.
 			$adjusted = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $match );
