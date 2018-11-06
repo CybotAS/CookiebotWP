@@ -151,7 +151,7 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 ## Changelog ##
 
-### 2.1.1 - 2019-11-06 ###
+### 2.1.2 - 2019-11-06 ###
 * Auto correct addon added support for single quotes in iframe embeds
 
 ### 2.1.1 - 2019-11-02 ###
