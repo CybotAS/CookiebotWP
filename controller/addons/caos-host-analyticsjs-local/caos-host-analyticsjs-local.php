@@ -155,7 +155,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_plugin_file() {
-		return 'host-analyticsjs-local/save-ga-local.php';
+		return 'host-analyticsjs-local/host-analyticsjs-local.php';
 	}
 
 	/**
@@ -284,7 +284,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/save-ga-local.php';
+		return 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/host-analyticsjs-local.php';
 	}
 
 	/**
