@@ -18,12 +18,19 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	 */
 	protected $file;
 
+	/**
+	 * Get the plugins
+	 *
+	 * @since 1.8.0
+	 */
 	public function setUp() {
 		$this->get_plugins();
 	}
 
 	/**
 	 * Load the addons through json file.
+	 *
+	 * @since 1.8.0
 	 */
 	private function get_plugins() {
 		$this->file_path = dirname( dirname( __DIR__ ) ) . '/addons.json';
@@ -33,6 +40,8 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 
 	/**
 	 * Validate if the plugins in addons.json do exist as a class in addons controller directory.
+	 *
+	 * @since 1.8.0
 	 */
 	public function test_plugins_are_valid() {
 		foreach ( $this->plugins as $plugin ) {
@@ -47,6 +56,9 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	 * @covers \cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface
 	 * @covers \cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface
 	 * @covers \cookiebot_addons\lib\buffer\Buffer_Output_Interface
+	 *
+	 * @version 2.1.3
+	 * @since 1.8.0
 	 */
 	public function test_get_option_name_unique() {
 		$options = array();

@@ -153,6 +153,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 * @return string
 	 *
 	 * @since 1.3.0
+	 * @version 2.1.3
 	 */
 	public function get_plugin_file() {
 		return 'host-analyticsjs-local/host-analyticsjs-local.php';
@@ -282,6 +283,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 * @return string
 	 *
 	 * @since 1.8.0
+	 * @version 2.1.3
 	 */
 	public function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/host-analyticsjs-local.php';

@@ -166,6 +166,7 @@ class Settings_Config {
 	/**
 	 * Registers unavailabe addons
 	 *
+     * @version 2.1.3
 	 * @since 1.3.0
 	 */
 	private function register_unavailable_addons() {
