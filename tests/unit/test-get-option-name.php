@@ -21,14 +21,14 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	public function setUp() {
 		$this->get_plugins();
 	}
-	
+
 	/**
 	 * Load the addons through json file.
 	 */
 	private function get_plugins() {
 		$this->file_path = dirname( dirname( __DIR__ ) ) . '/addons.json';
-		$this->file     = file_get_contents( $this->file_path );
-		$this->plugins  = json_decode( $this->file );
+		$this->file      = file_get_contents( $this->file_path );
+		$this->plugins   = json_decode( $this->file );
 	}
 
 	/**
@@ -59,11 +59,15 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 		foreach ( $this->plugins as $plugin ) {
 			$p = new $plugin->class( $settingsMock, $scriptLoaderTagMock, $cookieConsentMock, $bufferOutputMock );
 
-			// test if the option_name exists in the options array
-			$this->assertNotContains( $p->get_option_name(), $options );
+			// if it doesn't have parent class
+			if ( get_parent_class( $p ) === false ) {
+				// test if the option_name exists in the options array
+				$this->assertNotContains( $p->get_option_name(), $options );
 
-			// add name to options array
-			$options[] = $p->get_option_name();
+				// add name to options array
+				$options[] = $p->get_option_name();
+			}
+
 		}
 	}
 
