@@ -414,7 +414,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 */
 	public function is_remove_tag_enabled( $option_key ) {
 		//Always return false if COOKIEBOT_OPTION_REMOVE_TAG
-		if ( !defined( 'COOKIEBOT_OPTION_REMOVE_TAG' ) || !COOKIEBOT_OPTION_REMOVE_TAG ) {
+		if ( ! defined( 'COOKIEBOT_OPTION_REMOVE_TAG' ) || ! COOKIEBOT_OPTION_REMOVE_TAG ) {
 			return false;
 		}
 
@@ -439,7 +439,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 */
 	public function is_widget_remove_tag_enabled( $option_key, $widget_key ) {
 		//Always return false if COOKIEBOT_OPTION_REMOVE_TAG
-		if ( !defined( 'COOKIEBOT_OPTION_REMOVE_TAG' ) || !COOKIEBOT_OPTION_REMOVE_TAG ) {
+		if ( ! defined( 'COOKIEBOT_OPTION_REMOVE_TAG' ) || ! COOKIEBOT_OPTION_REMOVE_TAG ) {
 			return false;
 		}
 
@@ -455,21 +455,20 @@ class Settings_Service implements Settings_Service_Interface {
 	/**
 	 * Check if the previous version is active
 	 *
-	 * @param $addon
+	 * @param $addons array         List of addons
+	 * @param $addon_class string   The name of the class
 	 *
 	 * @return bool
 	 *
 	 * @since 2.1.3
 	 */
-	public function is_previous_version_active( $addon ) {
-		$class = get_class( $addon );
+	public function is_previous_version_active( $addons, $addon_class ) {
+		foreach ( $addons as $addon ) {
+			$parent_class = $addon->get_parent_class();
 
-		foreach( $this->get_addons() as $add ) {
-			$parent_class = get_parent_class( $add );
-
-			if( $parent_class !== false ) {
-				if( $parent_class == $class ) {
-					if( $add->is_addon_activated() ) {
+			if ( $parent_class !== false ) {
+				if ( $parent_class == $addon_class ) {
+					if ( $addon->is_addon_activated() ) {
 						return true;
 					}
 				}

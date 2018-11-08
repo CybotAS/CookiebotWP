@@ -121,13 +121,14 @@ Interface Settings_Service_Interface {
 	/**
 	 * Check if the previous version is active
 	 *
-	 * @param $addon
+	 * @param $addons array         List of addons
+	 * @param $addon_class string   The name of the class
 	 *
 	 * @return bool
 	 *
 	 * @since 2.1.3
 	 */
-	public function is_previous_version_active( $addon );
+	public function is_previous_version_active( $addons, $addon_class );
 
 	/**
 	 * Checks if the addon is the latest plugin version.

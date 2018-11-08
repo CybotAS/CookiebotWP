@@ -296,4 +296,15 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	public function is_remove_tag_enabled() {
 		return $this->settings->is_remove_tag_enabled( $this->get_option_name() );
 	}
+
+	/**
+	 * Returns parent class or false
+	 *
+	 * @return string|bool
+	 *
+	 * @since 2.1.3
+	 */
+	public function get_parent_class() {
+		return get_parent_class( $this );
+	}
 }
