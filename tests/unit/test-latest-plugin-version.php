@@ -27,8 +27,6 @@ class Test_Latest_Plugin_Version extends \WP_UnitTestCase {
 			$bufferOutputMock
 		);
 
-		$this->assertInstanceOf( CAOS_Host_Analyticsjs_Local::class, $addonMock );
-
 		$this->assertFalse( $settings->is_latest_plugin_version( $addonMock ) );
 	}
 
