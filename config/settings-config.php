@@ -175,7 +175,7 @@ class Settings_Config {
 		), "cookiebot-addons" );
 		
 		foreach ( $this->settings_service->get_addons() as $addon ) {
-			if ( ! $addon->is_addon_installed() || ! $addon->is_addon_activated() ) {
+			if ( ( ! $addon->is_addon_installed() || ! $addon->is_addon_activated() ) && get_parent_class( $addon ) === false ) {
 				// not installed plugins
 				add_settings_field(
 					$addon->get_addon_name(),
