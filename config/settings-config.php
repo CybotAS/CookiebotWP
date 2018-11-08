@@ -176,7 +176,7 @@ class Settings_Config {
 		), "cookiebot-addons" );
 
 		foreach ( $this->settings_service->get_addons() as $addon ) {
-			if ( ( ! $addon->is_addon_installed() || ! $addon->is_addon_activated() ) && $this->latest_version( $addon ) && ! $this->previous_version_active( $addon ) ) {
+			if ( ( ! $addon->is_addon_installed() || ! $addon->is_addon_activated() ) && $this->settings_service->is_latest_plugin_version( $addon ) && ! $this->settings_service->is_previous_version_active( $addon ) ) {
 				// not installed plugins
 				add_settings_field(
 					$addon->get_addon_name(),
@@ -192,47 +192,6 @@ class Settings_Config {
 				register_setting( $addon->get_option_name(), "cookiebot_unavailable_addons" );
 			}
 		}
-	}
-
-	/**
-	 * Check if the previous version is active
-	 *
-	 * @param $addon
-	 *
-	 * @return bool
-	 *
-	 * @since 2.1.3
-	 */
-	private function previous_version_active( $addon ) {
-		$class = get_class( $addon );
-
-		foreach( $this->settings_service->get_addons() as $add ) {
-			$parent_class = get_parent_class( $add );
-
-			if( $parent_class !== false ) {
-				if( $parent_class == $class ) {
-					if( $add->is_addon_activated() ) {
-						return true;
-					}
-				}
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * Checks if the addon is the latest plugin version.
-	 * Latest plugin version doesn't have extended class.
-	 *
-	 * @param $addon
-	 *
-	 * @return bool
-	 *
-	 * @since 2.1.3
-	 */
-	private function latest_version( $addon ) {
-		return ( get_parent_class( $addon ) === false ) ? true : false;
 	}
 	
 	/**

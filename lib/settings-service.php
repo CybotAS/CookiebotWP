@@ -451,4 +451,45 @@ class Settings_Service implements Settings_Service_Interface {
 
 		return false;
 	}
+
+	/**
+	 * Check if the previous version is active
+	 *
+	 * @param $addon
+	 *
+	 * @return bool
+	 *
+	 * @since 2.1.3
+	 */
+	public function is_previous_version_active( $addon ) {
+		$class = get_class( $addon );
+
+		foreach( $this->get_addons() as $add ) {
+			$parent_class = get_parent_class( $add );
+
+			if( $parent_class !== false ) {
+				if( $parent_class == $class ) {
+					if( $add->is_addon_activated() ) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Checks if the addon is the latest plugin version.
+	 * Latest plugin version doesn't have extended class.
+	 *
+	 * @param $addon
+	 *
+	 * @return bool
+	 *
+	 * @since 2.1.3
+	 */
+	public function is_latest_plugin_version( $addon ) {
+		return ( get_parent_class( $addon ) === false ) ? true : false;
+	}
 }
