@@ -5,7 +5,7 @@ namespace cookiebot_addons\tests\integration\addons;
 class Test_Optinmonster extends \WP_UnitTestCase {
 
 	/**
-	 * This will validate if the hook "caos_analytics_render_tracking_code" still exists
+	 * This will validate if the hook "api-scripts" still exists
 	 *
 	 * @covers \cookiebot_addons\controller\addons\optinmonster\
 	 *
@@ -15,4 +15,5 @@ class Test_Optinmonster extends \WP_UnitTestCase {
 		$content = file_get_contents( 'http://http://plugins.svn.wordpress.org/optinmonster/trunk/optin-monster-wp-api.php' );
 
 		$this->assertNotFalse( strpos( $content, "add_action( 'wp_enqueue_scripts', 'api-scripts' );") );
+	}	
 }
