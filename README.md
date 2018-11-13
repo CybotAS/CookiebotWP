@@ -74,6 +74,7 @@ Released and tested addons:
 * [Googleanalytics](https://wordpress.org/plugins/googleanalytics/)
 * [HubSpot – Free Marketing Plugin for WordPress](https://wordpress.org/plugins/leadin/)
 * [Ninja forms](https://wordpress.org/plugins/ninja-forms/)
+* [Popups by OptinMonster](https://wordpress.org/plugins/optinmonster/)
 
 Following addons are in pipeline:
 * To be continued..
@@ -91,6 +92,8 @@ Shout out to
 [@irondan](https://github.com/irondan) - AddToAny
 
 [@Jursdotme](https://github.com/Jursdotme) - Custom Facebook Feed from Smashballoon
+
+[@MarcZijderveld](https://github.com/MarcZijderveld) - Popups by OptinMonster
 
 Way to go!
 
