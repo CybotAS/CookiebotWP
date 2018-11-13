@@ -52,5 +52,8 @@
   },
   "Ninja_Forms": {
     "class": "cookiebot_addons\\controller\\addons\\ninja_forms\\Ninja_Forms"
+  },
+  "Optinmonster": {
+    "class": "cookiebot_addons\\controller\\addons\\optinmonster\\Optinmonster"
   }
 }
