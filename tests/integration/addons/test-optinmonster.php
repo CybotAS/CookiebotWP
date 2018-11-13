@@ -7,8 +7,6 @@ class Test_Optinmonster extends \WP_UnitTestCase {
 	/**
 	 * This will validate if the hook "api-scripts" still exists
 	 *
-	 * @covers \cookiebot_addons\controller\addons\optinmonster\
-	 *
 	 * @since 2.1.0
 	 */
 	public function test_optinmonster() {
