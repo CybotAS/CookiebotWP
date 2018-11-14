@@ -91,7 +91,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 		/**
 		 * ga scripts are loaded in wp_footer priority is defined in option variable
 		 */
-		if ( has_action( 'wp_footer', 'caos_analytics_render_tracking_code') || has_action( 'wp_footer', 'add_ga_header_script' ) ) {
+		if ( has_action( 'wp_footer', 'caos_analytics_render_tracking_code' ) || has_action( 'wp_footer', 'add_ga_header_script' ) ) {
 			/**
 			 * Consent not given - no cache
 			 */
@@ -153,9 +153,10 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 * @return string
 	 *
 	 * @since 1.3.0
+	 * @version 2.1.3
 	 */
 	public function get_plugin_file() {
-		return 'host-analyticsjs-local/save-ga-local.php';
+		return 'host-analyticsjs-local/host-analyticsjs-local.php';
 	}
 
 	/**
@@ -282,9 +283,10 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 * @return string
 	 *
 	 * @since 1.8.0
+	 * @version 2.1.3
 	 */
 	public function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/save-ga-local.php';
+		return 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/host-analyticsjs-local.php';
 	}
 
 	/**
@@ -307,5 +309,16 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 */
 	public function has_remove_tag_option() {
 		return false;
+	}
+
+	/**
+	 * Returns parent class or false
+	 *
+	 * @return string|bool
+	 *
+	 * @since 2.1.3
+	 */
+	public function get_parent_class() {
+		return get_parent_class( $this );
 	}
 }

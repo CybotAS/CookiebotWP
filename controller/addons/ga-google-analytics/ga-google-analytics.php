@@ -294,4 +294,15 @@ class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
 	public function has_remove_tag_option() {
 		return false;
 	}
+
+	/**
+	 * Returns parent class or false
+	 *
+	 * @return string|bool
+	 *
+	 * @since 2.1.3
+	 */
+	public function get_parent_class() {
+		return get_parent_class( $this );
+	}
 }
