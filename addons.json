@@ -47,10 +47,16 @@
   "Google_Analytics_Plus": {
     "class": "cookiebot_addons\\controller\\addons\\google_analytics_plus\\Google_Analytics_Plus"
   },
+  "CAOS_Host_Analyticsjs_Local_Save_Ga_Local": {
+    "class": "cookiebot_addons\\controller\\addons\\caos_host_analyticsjs_local_save_ga_local\\CAOS_Host_Analyticsjs_Local_Save_Ga_Local"
+  },
   "CAOS_Host_Analyticsjs_Local": {
     "class": "cookiebot_addons\\controller\\addons\\caos_host_analyticsjs_local\\CAOS_Host_Analyticsjs_Local"
   },
   "Ninja_Forms": {
     "class": "cookiebot_addons\\controller\\addons\\ninja_forms\\Ninja_Forms"
+  },
+  "Optinmonster": {
+    "class": "cookiebot_addons\\controller\\addons\\optinmonster\\Optinmonster"
   }
 }

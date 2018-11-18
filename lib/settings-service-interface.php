@@ -117,4 +117,28 @@ Interface Settings_Service_Interface {
 	 * @since 2.1.0
 	 */
 	public function is_widget_remove_tag_enabled( $option_key, $widget_key );
+
+	/**
+	 * Check if the previous version is active
+	 *
+	 * @param $addons array         List of addons
+	 * @param $addon_class string   The name of the class
+	 *
+	 * @return bool
+	 *
+	 * @since 2.1.3
+	 */
+	public function is_previous_version_active( $addons, $addon_class );
+
+	/**
+	 * Checks if the addon is the latest plugin version.
+	 * Latest plugin version doesn't have extended class.
+	 *
+	 * @param $addon
+	 *
+	 * @return bool
+	 *
+	 * @since 2.1.3
+	 */
+	public function is_latest_plugin_version( $addon );
 }

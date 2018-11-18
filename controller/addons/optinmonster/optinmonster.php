@@ -1,50 +1,50 @@
 <?php
 
-namespace cookiebot_addons\controller\addons\instagram_feed;
+namespace cookiebot_addons\controller\addons\optinmonster;
 
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons\lib\Cookie_Consent_Interface;
-use cookiebot_addons\lib\Settings_Service_Interface;
-use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
+use cookiebot_addons\lib\Cookie_Consent_Interface;
+use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cookiebot_addons\lib\Settings_Service_Interface;
 
-class Instagram_Feed implements Cookiebot_Addons_Interface {
-
+class Optinmonster implements Cookiebot_Addons_Interface {
+	
 	/**
 	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $settings;
-
+	
 	/**
 	 * @var Script_Loader_Tag_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $script_loader_tag;
-
+	
 	/**
 	 * @var Cookie_Consent_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $cookie_consent;
-
+	
 	/**
 	 * @var Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $buffer_output;
-
+	
 	/**
 	 * Jetpack constructor.
 	 *
-	 * @param $settings Settings_Service_Interface
+	 * @param $settings          Settings_Service_Interface
 	 * @param $script_loader_tag Script_Loader_Tag_Interface
-	 * @param $cookie_consent Cookie_Consent_Interface
-	 * @param $buffer_output Buffer_Output_Interface
+	 * @param $cookie_consent    Cookie_Consent_Interface
+	 * @param $buffer_output     Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
@@ -54,43 +54,39 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
 	}
-
+	
 	/**
 	 * Loads addon configuration
 	 *
 	 * @since 1.3.0
 	 */
 	public function load_configuration() {
-		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_sb_instagram' ), 5 );
+		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_optinmonster' ), 10 );
 	}
-
+	
 	/**
-	 * Disable scripts if state not accepted
+	 * Check for optinmonster action hooks
 	 *
 	 * @since 1.3.0
 	 */
-	public function cookiebot_addon_sb_instagram() {
-		// Check if instagram feed is loaded.
-		if ( ! defined( 'SBIVER' ) ) {
-			return;
-		}
-
+	public function cookiebot_addon_optinmonster() {
 		// Check if Cookiebot is activated and active.
 		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
 			return;
 		}
-
+		
 		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
 
-		// External js, so manipulate attributes
-		if ( has_action( 'wp_enqueue_scripts', 'sb_instagram_scripts_enqueue' ) ) {
-			$this->script_loader_tag->add_tag( 'sb_instagram_scripts', $this->get_cookie_types() );
+		if ( $this->is_addon_enabled() ) {
+			if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+				$this->script_loader_tag->add_tag( 'optinmonster-api-script', $this->get_cookie_types() );
+			}
 		}
 	}
-
+	
 	/**
 	 * Return addon/plugin name
 	 *
@@ -99,9 +95,9 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_addon_name() {
-		return 'Instagram feed';
+		return 'Optinmonster';
 	}
-
+	
 	/**
 	 * Option name in the database
 	 *
@@ -110,30 +106,30 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_option_name() {
-		return 'instagram feed';
+		return 'optinmonster';
 	}
-
+	
 	/**
-	 * Plugin file name
+	 * plugin file name
 	 *
 	 * @return string
 	 *
 	 * @since 1.3.0
 	 */
 	public function get_plugin_file() {
-		return 'instagram-feed/instagram-feed.php';
+		return 'optinmonster/optin-monster-wp-api.php';
 	}
-
+	
 	/**
 	 * Returns checked cookie types
-	 * @return mixed
+	 * @return array
 	 *
 	 * @since 1.3.0
 	 */
 	public function get_cookie_types() {
-		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
+		return $this->settings->get_cookie_types( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * Returns default cookie types
 	 * @return array
@@ -141,9 +137,9 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.5.0
 	 */
 	public function get_default_cookie_types() {
-		return array( 'marketing' );
+		return array( 'marketing', 'statistics' );
 	}
-
+	
 	/**
 	 * Check if plugin is activated and checked in the backend
 	 *
@@ -152,7 +148,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	public function is_addon_enabled() {
 		return $this->settings->is_addon_enabled( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * Checks if addon is installed
 	 *
@@ -161,7 +157,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	public function is_addon_installed() {
 		return $this->settings->is_addon_installed( $this->get_plugin_file() );
 	}
-
+	
 	/**
 	 * Checks if addon is activated
 	 *
@@ -170,7 +166,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
 	}
-
+	
 	/**
 	 * Default placeholder content
 	 *
@@ -179,9 +175,9 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
+		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for optinmonster.';
 	}
-
+	
 	/**
 	 * Get placeholder content
 	 *
@@ -197,7 +193,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	public function get_placeholder( $src = '' ) {
 		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
 	}
-
+	
 	/**
 	 * Checks if it does have custom placeholder content
 	 *
@@ -208,7 +204,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	public function has_placeholder() {
 		return $this->settings->has_placeholder( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * returns all placeholder contents
 	 *
@@ -219,7 +215,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	public function get_placeholders() {
 		return $this->settings->get_placeholders( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * Return true if the placeholder is enabled
 	 *
@@ -230,7 +226,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	public function is_placeholder_enabled() {
 		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
-
+	
 	/**
 	 * Adds extra information under the label
 	 *
@@ -239,9 +235,9 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return false;
+		return '<p>' . __( 'OptinMonster API plugin to connect your WordPress site to your OptinMonster account.', 'cookiebot-addons' ) . '</p>';
 	}
-
+	
 	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
 	 *
@@ -250,9 +246,9 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/instagram-feed/trunk/instagram-feed.php';
+		return 'https://plugins.svn.wordpress.org/optinmonster/trunk/optin-monster-wp-api.php';
 	}
-
+	
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -263,7 +259,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
-
+	
 	/**
 	 * Returns true if addon has an option to remove tag instead of adding attributes
 	 *
@@ -273,16 +269,5 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 */
 	public function has_remove_tag_option() {
 		return false;
-	}
-
-	/**
-	 * Returns parent class or false
-	 *
-	 * @return string|bool
-	 *
-	 * @since 2.1.3
-	 */
-	public function get_parent_class() {
-		return get_parent_class( $this );
 	}
 }
