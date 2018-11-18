@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent
 * Requires at least: 4.4
 * Tested up to: 4.9
-* Stable tag: 2.1.2
+* Stable tag: 2.1.3
 * Requires PHP: 5.4
 * License: GPLv2 or later
 
@@ -150,6 +150,10 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 
 ## Changelog ##
+
+### 2.1.3 - 2019-11-18 ###
+* New addon: Popups by OptinMonster
+* Added support for grouping addons for different versions of same plugin
 
 ### 2.1.2 - 2019-11-06 ###
 * Auto correct addon added support for single quotes in iframe embeds
