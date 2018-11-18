@@ -9,35 +9,35 @@ use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
 
 class Optinmonster implements Cookiebot_Addons_Interface {
-	
+
 	/**
 	 * @var Settings_Service_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $settings;
-	
+
 	/**
 	 * @var Script_Loader_Tag_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $script_loader_tag;
-	
+
 	/**
 	 * @var Cookie_Consent_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $cookie_consent;
-	
+
 	/**
 	 * @var Buffer_Output_Interface
 	 *
 	 * @since 1.3.0
 	 */
 	protected $buffer_output;
-	
+
 	/**
 	 * Jetpack constructor.
 	 *
@@ -54,7 +54,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
 	}
-	
+
 	/**
 	 * Loads addon configuration
 	 *
@@ -63,7 +63,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function load_configuration() {
 		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_optinmonster' ), 10 );
 	}
-	
+
 	/**
 	 * Check for optinmonster action hooks
 	 *
@@ -74,7 +74,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
 			return;
 		}
-		
+
 		// consent is given
 		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
@@ -86,7 +86,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 			}
 		}
 	}
-	
+
 	/**
 	 * Return addon/plugin name
 	 *
@@ -97,7 +97,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function get_addon_name() {
 		return 'Optinmonster';
 	}
-	
+
 	/**
 	 * Option name in the database
 	 *
@@ -108,7 +108,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function get_option_name() {
 		return 'optinmonster';
 	}
-	
+
 	/**
 	 * plugin file name
 	 *
@@ -119,7 +119,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function get_plugin_file() {
 		return 'optinmonster/optin-monster-wp-api.php';
 	}
-	
+
 	/**
 	 * Returns checked cookie types
 	 * @return array
@@ -129,7 +129,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function get_cookie_types() {
 		return $this->settings->get_cookie_types( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Returns default cookie types
 	 * @return array
@@ -139,7 +139,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function get_default_cookie_types() {
 		return array( 'marketing', 'statistics' );
 	}
-	
+
 	/**
 	 * Check if plugin is activated and checked in the backend
 	 *
@@ -148,7 +148,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function is_addon_enabled() {
 		return $this->settings->is_addon_enabled( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Checks if addon is installed
 	 *
@@ -157,7 +157,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function is_addon_installed() {
 		return $this->settings->is_addon_installed( $this->get_plugin_file() );
 	}
-	
+
 	/**
 	 * Checks if addon is activated
 	 *
@@ -166,7 +166,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
 	}
-	
+
 	/**
 	 * Default placeholder content
 	 *
@@ -177,7 +177,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function get_default_placeholder() {
 		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for optinmonster.';
 	}
-	
+
 	/**
 	 * Get placeholder content
 	 *
@@ -193,7 +193,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function get_placeholder( $src = '' ) {
 		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
 	}
-	
+
 	/**
 	 * Checks if it does have custom placeholder content
 	 *
@@ -204,7 +204,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function has_placeholder() {
 		return $this->settings->has_placeholder( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * returns all placeholder contents
 	 *
@@ -215,7 +215,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function get_placeholders() {
 		return $this->settings->get_placeholders( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Return true if the placeholder is enabled
 	 *
@@ -226,7 +226,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function is_placeholder_enabled() {
 		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
 	}
-	
+
 	/**
 	 * Adds extra information under the label
 	 *
@@ -237,7 +237,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function get_extra_information() {
 		return '<p>' . __( 'OptinMonster API plugin to connect your WordPress site to your OptinMonster account.', 'cookiebot-addons' ) . '</p>';
 	}
-	
+
 	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
 	 *
@@ -248,7 +248,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function get_svn_url() {
 		return 'https://plugins.svn.wordpress.org/optinmonster/trunk/optin-monster-wp-api.php';
 	}
-	
+
 	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
@@ -259,7 +259,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function get_placeholder_helper() {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
-	
+
 	/**
 	 * Returns true if addon has an option to remove tag instead of adding attributes
 	 *
@@ -269,5 +269,16 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	 */
 	public function has_remove_tag_option() {
 		return false;
+	}
+
+	/**
+	 * Returns parent class or false
+	 *
+	 * @return string|bool
+	 *
+	 * @since 2.1.3
+	 */
+	public function get_parent_class() {
+		return get_parent_class( $this );
 	}
 }
