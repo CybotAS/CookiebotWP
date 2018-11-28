@@ -636,7 +636,7 @@ final class Cookiebot_WP {
 
 		$notices = array(
 			'title' => __('Leave A Review?', 'cookiebot'),
-			'msg' => __('We hope you\'ve enjoyed using WordPress Cookiebot! Would you consider leaving us a review on WordPress.org?', 'cookiebot'),
+			'msg' => __('We hope you enjoy using WordPress Cookiebot! Would you consider leaving us a review on WordPress.org?', 'cookiebot'),
 			'link' => '<li><span class="dashicons dashicons-external"></span><a href="https://wordpress.org/support/plugin/cookiebot/reviews?filter=5&rate=5#new-post" target="_blank">' . __('Sure! I\'d love to!', 'cookiebot') . '</a></li>
                          <li><span class="dashicons dashicons-smiley"></span><a href="' . $two_week_review_ignore . '"> ' . __('I\'ve already left a review', 'cookiebot') . '</a></li>
                          <li><span class="dashicons dashicons-calendar-alt"></span><a href="' . $two_week_review_temp . '">' . __('Maybe Later', 'cookiebot') . '</a></li>
