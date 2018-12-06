@@ -49,12 +49,28 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Constructor.
 	 *
-	 * @version 1.6.1
+	 * @version 2.1.4
 	 * @since   1.0.0
 	 * @access  public
 	 */
 	function __construct() {
 		add_action('plugins_loaded', array($this, 'cookiebot_init'), 5);
+		register_activation_hook( __FILE__ , array($this, 'activation'));
+	}
+
+	/**
+	 * Cookiebot_WP Installation actions
+	 *
+	 * @version 2.1.4
+	 * @since		2.1.4
+	 * @accces	public
+	 */
+	function activation() {
+		//Delay display of recommendation notice in 3 days if not activated ealier
+		if(get_option('cookiebot_notice_recommend',false) === false) {
+			//Not set yet - this must be first activation - delay in 3 days
+			update_option('cookiebot_notice_recommend', strtotime('+3 days'));
+		}
 	}
 
 	/**
