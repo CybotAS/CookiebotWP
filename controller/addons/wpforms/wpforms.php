@@ -62,6 +62,8 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	 */
 	public function load_configuration() {
 		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_wpforms' ), 5 );
+		add_filter( 'wpforms_settings_defaults', array( $this, 'wpforms_settings_defaults' ) );
+		add_action( 'wp_footer', array( $this, 'enqueue_script_for_adding_the_cookie_after_the_consent' ), 18 );
 	}
 
 	/**
@@ -85,27 +87,28 @@ class Wpforms implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		$this->javascript_load_unique_id_cookie_when_the_consent_is_given();
-
 		add_filter( 'wpforms_gdpr_consent_is_given', array( $this, 'gdpr_consent_is_given' ) );
+	}
+
+	public function wpforms_settings_defaults( $defaults ) {
+		$defaults['general']['gdpr'] = array(
+			'id'       => 'gdpr',
+			'content'  => '<p>' . esc_html__( 'GDPR is managed by 3rd party code.', 'wpforms-lite' ) . '</p>',
+			'class'    => array( 'section-heading', 'no-desc' ),
+			'no_label' => true,
+			'type'     => 'content',
+		);
+
+		return $defaults;
 	}
 
 	/**
 	 * Create cookie when the visitor gives consent
 	 */
-	public function javascript_load_unique_id_cookie_when_the_consent_is_given() {
-		?>
-		<script type="text/javascript">
-
-            window.addEventListener('CookiebotOnAccept', function (e) {
-                if (WPForms.getCookie('_wpfuuid') && Cookiebot.consent.preferences)
-                {
-                    WPForms.setUserIndentifier();
-                }
-            }, false);
-
-		</script>
-		<?php
+	public function enqueue_script_for_adding_the_cookie_after_the_consent() {
+		wp_enqueue_script( 'wpforms-gdpr-cookiebot', COOKIEBOT_URL . 'addons/controller/addons/wpforms/cookie-after-consent.js', array( 'jquery' ),
+			'',
+			true );
 	}
 
 	/**
@@ -116,7 +119,7 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	 * @since 2.1.4
 	 */
 	public function gdpr_consent_is_given() {
-		if( $this->cookie_consent->is_cookie_state_accepted('preferences') ) {
+		if ( $this->cookie_consent->is_cookie_state_accepted( 'preferences' ) ) {
 			return true;
 		}
 
