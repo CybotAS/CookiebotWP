@@ -24,11 +24,11 @@
     };
 
     /**
-     * Make global getGdprConsent function to check cookie consent status
+     * Make global hasRequiredConsent function to check cookie consent status
      *
      * @return {boolean}
      */
-    window.getGdprConsent = function getGdprConsent() {
+    window.hasRequiredConsent = function hasRequiredConsent() {
         if ( Cookiebot && Cookiebot.consent && Cookiebot.consent.preferences ) {
             return true;
         }
