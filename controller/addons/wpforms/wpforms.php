@@ -104,11 +104,15 @@ class Wpforms implements Cookiebot_Addons_Interface {
 
 	/**
 	 * Create cookie when the visitor gives consent
+	 * and hasRequiredConsent function
+	 *
+	 * @since 2.2.0
 	 */
 	public function enqueue_script_for_adding_the_cookie_after_the_consent() {
 		wp_enqueue_script( 'wpforms-gdpr-cookiebot', COOKIEBOT_URL . 'addons/controller/addons/wpforms/cookie-after-consent.js', array( 'jquery' ),
 			'',
 			true );
+		wp_localize_script( 'wpforms-gdpr-cookiebot', 'cookiebot_wpforms_settings', array( 'cookie_types' => $this->get_cookie_types() ) );
 	}
 
 	/**
@@ -119,7 +123,7 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	 * @since 2.1.4
 	 */
 	public function gdpr_consent_is_given() {
-		if ( $this->cookie_consent->is_cookie_state_accepted( 'preferences' ) ) {
+		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return true;
 		}
 
@@ -307,7 +311,7 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	 * @since 2.1.0
 	 */
 	public function has_remove_tag_option() {
-		return true;
+		return false;
 	}
 
 	/**
@@ -342,8 +346,8 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	public function post_hook_after_enabling() {
 		$wpforms_settings = get_option( 'wpforms_settings' );
 
-		$wpforms_settings['gdpr'] = false;
-		$wpforms_settings['gdpr-disable-uuid'] = false;
+		$wpforms_settings['gdpr']                 = false;
+		$wpforms_settings['gdpr-disable-uuid']    = false;
 		$wpforms_settings['gdpr-disable-details'] = false;
 
 		update_option( 'wpforms_settings', $wpforms_settings );
