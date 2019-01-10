@@ -203,7 +203,7 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	 * @since 1.5.0
 	 */
 	public function get_default_cookie_types() {
-		return array( 'prefrences' );
+		return array( 'preferences' );
 	}
 
 	/**

@@ -6,6 +6,9 @@
             $( document ).ready( cookiebot_wpforms.update_after_consent );
         },
 
+        /**
+         * Async wpfuuid after the visitor clicked on cookie accept
+         */
         update_after_consent: function () {
             window.addEventListener( 'CookiebotOnAccept', function ( e ) {
 
@@ -18,7 +21,20 @@
                 }
             }, false );
         }
-    }
+    };
+
+    /**
+     * Make global getGdprConsent function to check cookie consent status
+     *
+     * @return {boolean}
+     */
+    window.getGdprConsent = function getGdprConsent() {
+        if ( Cookiebot && Cookiebot.consent && Cookiebot.consent.preferences ) {
+            return true;
+        }
+
+        return false;
+    };
 
     cookiebot_wpforms.init();
 
