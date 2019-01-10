@@ -491,4 +491,25 @@ class Settings_Service implements Settings_Service_Interface {
 	public function is_latest_plugin_version( $addon ) {
 		return ( get_parent_class( $addon ) === false ) ? true : false;
 	}
+
+	/**
+	 * Check if the addon option name matchs with the parameter
+	 * then run the post_hook_after_enabling function in the addon class.
+	 *
+	 * @param $addon_option_name    string  Addon option name
+	 *
+	 * @throws \DI\DependencyException
+	 * @throws \DI\NotFoundException
+	 *
+	 * @since 2.2.0
+	 */
+	public function post_hook_after_enabling_addon_on_settings_page( $addon_option_name ) {
+		$addons = $this->get_addons();
+
+		foreach( $addons as $addon ) {
+			if( $addon->get_option_name() == $addon_option_name ) {
+				$addon->post_hook_after_enabling();
+			}
+		}
+	}
 }

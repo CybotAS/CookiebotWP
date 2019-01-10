@@ -93,7 +93,7 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	public function wpforms_settings_defaults( $defaults ) {
 		$defaults['general']['gdpr'] = array(
 			'id'       => 'gdpr',
-			'content'  => '<p>' . esc_html__( 'GDPR is managed by 3rd party code.', 'wpforms-lite' ) . '</p>',
+			'content'  => '<p>' . esc_html__( 'GDPR is managed by 3rd party code. (Cookiebot)', 'wpforms-lite' ) . '</p>',
 			'class'    => array( 'section-heading', 'no-desc' ),
 			'no_label' => true,
 			'type'     => 'content',
@@ -330,5 +330,22 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	 */
 	public function get_parent_class() {
 		return get_parent_class( $this );
+	}
+
+	/**
+	 * Action after enabling the addon on the settings page
+	 *
+	 * Clear gdpr settings in the wpforms
+	 *
+	 * @since 2.2.0
+	 */
+	public function post_hook_after_enabling() {
+		$wpforms_settings = get_option( 'wpforms_settings' );
+
+		$wpforms_settings['gdpr'] = false;
+		$wpforms_settings['gdpr-disable-uuid'] = false;
+		$wpforms_settings['gdpr-disable-details'] = false;
+
+		update_option( 'wpforms_settings', $wpforms_settings );
 	}
 }

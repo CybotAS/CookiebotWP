@@ -285,4 +285,13 @@ class Wp_Piwik implements Cookiebot_Addons_Interface {
 	public function get_parent_class() {
 		return get_parent_class( $this );
 	}
+
+	/**
+	 * Action after enabling the addon on the settings page
+	 *
+	 * @since 2.2.0
+	 */
+	public function post_hook_after_enabling() {
+		//do nothing
+	}
 }
