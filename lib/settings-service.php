@@ -512,4 +512,16 @@ class Settings_Service implements Settings_Service_Interface {
 			}
 		}
 	}
+
+	/**
+	 * The cookiebot plugin is deactivated
+	 * so run this function to cleanup the addons.
+	 *
+	 * @since 2.2.0
+	 */
+	public function cookiebot_deactivated() {
+		foreach( $this->get_active_addons() as $addon ) {
+			$addon->plugin_deactivated();
+		}
+	}
 }

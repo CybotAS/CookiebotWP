@@ -182,4 +182,11 @@ Interface Cookiebot_Addons_Interface {
 	 * @since 2.2.0
 	 */
 	public function post_hook_after_enabling();
+
+	/**
+	 * Cookiebot plugin is deactivated
+	 *
+	 * @since 2.2.0
+	 */
+	public function plugin_deactivated();
 }

@@ -3,8 +3,8 @@
 namespace cookiebot_addons;
 
 use cookiebot_addons\config\Settings_Config;
-use cookiebot_addons\config\Script_Config;
 use cookiebot_addons\controller\Plugin_Controller;
+use cookiebot_addons\lib\Settings_Service_Interface;
 use DI\ContainerBuilder;
 use DI;
 
@@ -63,6 +63,37 @@ class Cookiebot_Addons {
 	public $plugins;
 
 	/**
+	 * @var   Cookiebot_Addons The single instance of the class
+	 * @since 1.0.0
+	 */
+	protected static $_instance = null;
+
+	/**
+	 * Main Cookiebot_WP Instance
+	 *
+	 * Ensures only one instance of Cookiebot_Addons is loaded or can be loaded.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 * @static
+	 *
+	 * @return Cookiebot_Addons
+	 */
+	public static function instance() {
+		if ( is_null( self::$_instance ) ) {
+			try {
+				self::$_instance = new self();
+			} catch ( \DI\DependencyException $e ) {
+				echo 'Dependencies are not loaded.';
+			} catch ( DI\NotFoundException $e ) {
+				echo 'Dependencies are not found.';
+			}
+		}
+
+		return self::$_instance;
+	}
+
+	/**
 	 * Cookiebot_Addons constructor.
 	 *
 	 * @throws DI\DependencyException
@@ -94,15 +125,17 @@ class Cookiebot_Addons {
 		 */
 		$settings = new Settings_Config( $this->container->get( 'Settings_Service_Interface' ) );
 		$settings->load();
+	}
 
-		/**
-		 * Load scripts config
-		 *
-		 * This is used to fix bugs caused in previous versions
-		 *
-		 * @since 1.9.0
-		 */
-		new Script_Config();
+	/**
+	 * if the cookiebot is deactivated
+	 * run this script to clean up addons.
+	 *
+	 * @since 2.2.0
+	 */
+	public function cookiebot_deactivated() {
+		$settings_service = $this->container->get( 'Settings_Service_Interface' );
+		$settings_service->cookiebot_deactivated();
 	}
 
 	/**
@@ -172,4 +205,4 @@ class Cookiebot_Addons {
 /**
  * Initiate the cookiebot addons framework plugin
  */
-new Cookiebot_Addons();
+Cookiebot_Addons::instance();

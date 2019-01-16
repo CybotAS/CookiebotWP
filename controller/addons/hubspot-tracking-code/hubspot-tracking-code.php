@@ -309,4 +309,13 @@ class Hubspot_Tracking_Code implements Cookiebot_Addons_Interface {
 	public function post_hook_after_enabling() {
 		//do nothing
 	}
+
+	/**
+	 * Cookiebot plugin is deactivated
+	 *
+	 * @since 2.2.0
+	 */
+	public function plugin_deactivated() {
+		//do nothing
+	}
 }

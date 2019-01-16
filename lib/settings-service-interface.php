@@ -141,4 +141,12 @@ Interface Settings_Service_Interface {
 	 * @since 2.1.3
 	 */
 	public function is_latest_plugin_version( $addon );
+
+	/**
+	 * The cookiebot plugin is deactivated
+	 * so run this function to cleanup the addons.
+	 *
+	 * @since 2.2.0
+	 */
+	public function cookiebot_deactivated();
 }

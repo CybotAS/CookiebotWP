@@ -62,8 +62,6 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	 */
 	public function load_configuration() {
 		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_wpforms' ), 5 );
-		add_filter( 'wpforms_settings_defaults', array( $this, 'wpforms_settings_defaults' ) );
-		add_action( 'wp_footer', array( $this, 'enqueue_script_for_adding_the_cookie_after_the_consent' ), 18 );
 	}
 
 	/**
@@ -88,25 +86,11 @@ class Wpforms implements Cookiebot_Addons_Interface {
 		}
 
 		add_filter( 'wpforms_gdpr_consent_is_given', array( $this, 'gdpr_consent_is_given' ) );
-	}
-
-	public function wpforms_settings_defaults( $defaults ) {
-		$defaults['general']['gdpr'] = array(
-			'id'       => 'gdpr',
-			'content'  => '<p>' . esc_html__( 'GDPR is managed by 3rd party code. (Cookiebot)', 'wpforms-lite' ) . '</p>',
-			'class'    => array( 'section-heading', 'no-desc' ),
-			'no_label' => true,
-			'type'     => 'content',
-		);
-
-		return $defaults;
+		add_action( 'wp_footer', array( $this, 'enqueue_script_for_adding_the_cookie_after_the_consent' ), 18 );
 	}
 
 	/**
 	 * Create cookie when the visitor gives consent
-	 * and hasRequiredConsent function
-	 *
-	 * @since 2.2.0
 	 */
 	public function enqueue_script_for_adding_the_cookie_after_the_consent() {
 		wp_enqueue_script( 'wpforms-gdpr-cookiebot', COOKIEBOT_URL . 'addons/controller/addons/wpforms/cookie-after-consent.js', array( 'jquery' ),
@@ -351,5 +335,40 @@ class Wpforms implements Cookiebot_Addons_Interface {
 		$wpforms_settings['gdpr-disable-details'] = false;
 
 		update_option( 'wpforms_settings', $wpforms_settings );
+	}
+
+	/**
+	 * Cookiebot plugin is deactivated
+	 *
+	 * @since 2.2.0
+	 */
+	public function plugin_deactivated() {
+		// if the checkbox was checked and the cookiebot plugin is deactivated
+		// remove the setting so the default gdpr checkboxes are still visible
+		$this->wpforms_set_setting( 'gdpr-cookiebot', false );
+	}
+
+	/**
+	 * Set the value of a specific WPForms setting.
+	 *
+	 * @since 1.5.0.4
+	 *
+	 * @param string $key
+	 * @param mixed $new_value
+	 * @param string $option
+	 *
+	 * @return mixed
+	 */
+	public function wpforms_set_setting( $key, $new_value, $option = 'wpforms_settings' ) {
+
+		$key          = wpforms_sanitize_key( $key );
+		$options      = get_option( $option, false );
+		$option_value = is_array( $options ) && ! empty( $options[ $key ] ) ? $options[ $key ] : false;
+
+		if ( $new_value !== $option_value ) {
+			$options[ $key ] = $new_value;
+		}
+
+		update_option( $option, $options );
 	}
 }
