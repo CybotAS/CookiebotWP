@@ -56,6 +56,7 @@ final class Cookiebot_WP {
 	function __construct() {
 		add_action('plugins_loaded', array($this, 'cookiebot_init'), 5);
 		register_activation_hook( __FILE__ , array($this, 'activation'));
+		register_deactivation_hook( __FILE__, 'cookiebot_addons_plugin_deactivated' );
 	}
 
 	/**
