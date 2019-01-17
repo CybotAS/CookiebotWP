@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR Compliant Cookie Consent and Notice
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supporting prior consent, cookie declaration, and documentation of consents. Easy to install, implement and configure.
 Author: Cybot A/S
-Version: 2.1.3
+Version: 2.1.5
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.1.2';
+	public $version = '2.1.5';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -232,7 +232,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Register Cookiebot settings
 	 *
-	 * @version 1.4.0
+	 * @version 2.1.5
 	 * @since   1.0.0
 	 */
 	function register_cookiebot_settings() {
@@ -240,6 +240,8 @@ final class Cookiebot_WP {
 		register_setting('cookiebot', 'cookiebot-language');
 		register_setting('cookiebot', 'cookiebot-nooutput');
 		register_setting('cookiebot', 'cookiebot-autoupdate');
+		register_setting('cookiebot', 'cookiebot-script-tag-uc-attribute');
+		register_setting('cookiebot', 'cookiebot-script-tag-cd-attribute');
 		register_setting('cookiebot-iab', 'cookiebot-iab');
 	}
 
@@ -334,7 +336,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Output settings page
 	 *
-	 * @version 1.6.0
+	 * @version 2.1.5
 	 * @since   1.0.0
 	 */
 	function settings_page() {
@@ -428,6 +430,62 @@ final class Cookiebot_WP {
 								});
 							</script>
 
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row">
+							<?php _e('Add async or defer attribute','cookiebot'); ?>
+							<br /><?php _e('Consent banner script tag'); ?>
+						</th>
+						<td>
+							<?php
+							$cv = get_option('cookiebot-script-tag-uc-attribute','async');
+							?>
+							<label>
+								<input type="radio" name="cookiebot-script-tag-uc-attribute" value="" 		 <?php checked('',		 $cv, true); ?> />
+								<i>None</i>
+							</label>
+							&nbsp; &nbsp;
+							<label>
+								<input type="radio" name="cookiebot-script-tag-uc-attribute" value="async" <?php checked('async',$cv, true); ?> />
+								async
+							</label>
+							&nbsp; &nbsp;
+							<label>
+								<input type="radio" name="cookiebot-script-tag-uc-attribute" value="defer" <?php checked('defer',$cv, true); ?> />
+								defer
+							</label>
+							<p class="description">
+								<?php _e('Add async or defer attribute to Cookiebot script tag. Default: async','cookiebot') ?>
+							</p>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row">
+							<?php _e('Add async or defer attribute','cookiebot'); ?>
+							<br /><?php _e('Cookie declaration script tag'); ?>
+						</th>
+						<td>
+							<?php
+							$cv = get_option('cookiebot-script-tag-cd-attribute','async');
+							?>
+							<label>
+								<input type="radio" name="cookiebot-script-tag-cd-attribute" value="" 		 <?php checked('',		 $cv, true); ?> />
+								<i>None</i>
+							</label>
+							&nbsp; &nbsp;
+							<label>
+								<input type="radio" name="cookiebot-script-tag-cd-attribute" value="async" <?php checked('async',$cv, true); ?> />
+								async
+							</label>
+							&nbsp; &nbsp;
+							<label>
+								<input type="radio" name="cookiebot-script-tag-cd-attribute" value="defer" <?php checked('defer',$cv, true); ?> />
+								defer
+							</label>
+							<p class="description">
+								<?php _e('Add async or defer attribute to Cookiebot script tag. Default: async','cookiebot') ?>
+							</p>
 						</td>
 					</tr>
 					<tr valign="top">
@@ -550,7 +608,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Add Cookiebot JS to <head>
 	 *
-	 * @version 1.6.0
+	 * @version 2.1.5
 	 * @since   1.0.0
 	 */
 	function add_js() {
@@ -561,9 +619,11 @@ final class Cookiebot_WP {
 				$lang = ' data-culture="'.strtoupper($lang).'"'; //Use data-culture to define language
 			}
 
+			$tagAttr = get_option('cookiebot-script-tag-uc-attribute','async');
+
 			$iab = ( get_option('cookiebot-iab') != false ) ? 'data-framework="IAB"' : '';
 			?>
-			<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" <?php echo $iab; ?> data-cbid="<?php echo $cbid; ?>"<?php echo $lang; ?> type="text/javascript" async></script>
+			<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" <?php echo $iab; ?> data-cbid="<?php echo $cbid; ?>"<?php echo $lang; ?> type="text/javascript" <?php echo $tagAttr; ?>></script>
 			<?php
 		}
 	}
@@ -572,7 +632,7 @@ final class Cookiebot_WP {
 	 * Cookiebot_WP Output declation shortcode [cookie_declaration]
 	 * Support attribute lang="LANGUAGE_CODE". Eg. lang="en".
 	 *
-	 * @version 1.4.2
+	 * @version 2.1.5
 	 * @since   1.0.0
 	 */
 	function show_declaration($atts) {
@@ -588,7 +648,10 @@ final class Cookiebot_WP {
 			if(!empty($atts['lang'])) {
 				$lang = ' data-culture="'.strtoupper($atts['lang']).'"'; //Use data-culture to define language
 			}
-			return '<script id="CookieDeclaration" src="https://consent.cookiebot.com/'.$cbid.'/cd.js"'.$lang.' type="text/javascript" async></script>';
+
+			$tagAttr = get_option('cookiebot-script-tag-cd-attribute','async');
+
+			return '<script id="CookieDeclaration" src="https://consent.cookiebot.com/'.$cbid.'/cd.js"'.$lang.' type="text/javascript" '.$tagAttr.'></script>';
 		}
 		else {
 			return __('Please add your Cookiebot ID to show Cookie Declarations','cookiebot');
