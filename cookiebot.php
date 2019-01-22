@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR Compliant Cookie Consent and Notice
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supporting prior consent, cookie declaration, and documentation of consents. Easy to install, implement and configure.
 Author: Cybot A/S
-Version: 2.1.5
+Version: 2.1.6
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -76,7 +76,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Init Cookiebot.
 	 *
-	 * @version 2.0.1
+	 * @version 2.1.6
 	 * @since   1.6.2
 	 * @access  public
 	 */
@@ -124,9 +124,11 @@ final class Cookiebot_WP {
 			add_action('admin_menu', array($this,'add_menu_iab'),11);
 			add_action('admin_init', array($this,'register_cookiebot_settings'));
 			add_action('wp_dashboard_setup',  array($this,'add_dashboard_widgets'));
-			//adding cookie banner in admin area too
-			add_action('admin_head', array($this,'add_js'));
-			add_action( 'admin_notices', array( $this, 'cookiebot_admin_notices' ) );
+			if(!get_option('cookiebot-nooutput-admin',false)) {
+				//adding cookie banner in admin area too
+				add_action('admin_head', array($this,'add_js'));
+			}
+			add_action('admin_notices', array( $this, 'cookiebot_admin_notices' ) );
 			add_action('admin_init', array($this,'save_notice_link'));
 		}
 
@@ -239,6 +241,7 @@ final class Cookiebot_WP {
 		register_setting('cookiebot', 'cookiebot-cbid');
 		register_setting('cookiebot', 'cookiebot-language');
 		register_setting('cookiebot', 'cookiebot-nooutput');
+		register_setting('cookiebot', 'cookiebot-nooutput-admin');
 		register_setting('cookiebot', 'cookiebot-autoupdate');
 		register_setting('cookiebot', 'cookiebot-script-tag-uc-attribute');
 		register_setting('cookiebot', 'cookiebot-script-tag-cd-attribute');
@@ -336,7 +339,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Output settings page
 	 *
-	 * @version 2.1.5
+	 * @version 2.1.6
 	 * @since   1.0.0
 	 */
 	function settings_page() {
@@ -505,6 +508,15 @@ final class Cookiebot_WP {
 								<b><?php _e('This checkbox will remove the cookie consent banner from your website. The <i>[cookie_declaration]</i> shortcode will still be available.','cookiebot') ?></b><br />
 								<?php _e('If you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager.','cookiebot') ?><br />
 								<?php _e('<a href="https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment" target="_blank">See a detailed guide here</a>','cookiebot') ?>
+							</p>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row"><?php _e('Hide Cookie Popup in WP Admin','cookiebot'); ?></th>
+						<td>
+							<input type="checkbox" name="cookiebot-nooutput-admin" value="1" <?php checked(1,get_option('cookiebot-nooutput-admin',false), true); ?> />
+							<p class="description">
+								<b><?php _e('This checkbox will remove the cookie consent banner the Wordpress Admin area.','cookiebot') ?></b>
 							</p>
 						</td>
 					</tr>
