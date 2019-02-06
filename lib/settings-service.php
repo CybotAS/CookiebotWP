@@ -64,7 +64,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 2.2.1
 	 */
 	public function get_addon_version( $addon ) {
-		$plugin_data = get_plugin_data( $addon );
+		$plugin_data = get_file_data( WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . $addon, array( 'Version' => 'version' ), false );
 
 		return ( isset( $plugin_data['Version'] ) ) ? $plugin_data['Version'] : false;
 	}
