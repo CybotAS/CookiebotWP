@@ -49,6 +49,17 @@ Interface Settings_Service_Interface {
 	public function is_addon_activated( $addon );
 
 	/**
+	 * Returns the addon version
+	 *
+	 * @param $addon
+	 *
+	 * @return bool
+	 *
+	 * @since 2.2.1
+	 */
+	public function get_addon_version( $addon );
+
+	/**
 	 * Returns all cookie type for given addon
 	 *
 	 * @param $addon    string  option name
