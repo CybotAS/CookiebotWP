@@ -209,7 +209,13 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_installed() {
-		return $this->settings->is_addon_installed( $this->get_plugin_file() );
+		$installed = $this->settings->is_addon_installed( $this->get_plugin_file() );
+
+		if ( $installed && version_compare( $this->get_addon_version(), '1.5.1', '<' ) ) {
+			$installed = false;
+		}
+
+		return $installed;
 	}
 
 	/**
