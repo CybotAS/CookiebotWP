@@ -85,7 +85,7 @@ class Wpforms implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		add_filter( 'wpforms_gdpr_consent_is_given', array( $this, 'gdpr_consent_is_given' ) );
+		add_filter( 'wpforms_disable_entry_user_ip', array( $this, 'gdpr_consent_is_given' ) );
 		add_action( 'wp_footer', array( $this, 'enqueue_script_for_adding_the_cookie_after_the_consent' ), 18 );
 	}
 
