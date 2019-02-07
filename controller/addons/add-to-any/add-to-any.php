@@ -238,6 +238,17 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	}
 
 	/**
+	 * Retrieves current installed version of the addon
+	 *
+	 * @return bool
+	 *
+	 * @since 2.2.1
+	 */
+	public function get_addon_version() {
+		return $this->settings->get_addon_version( $this->get_plugin_file() );
+	}
+
+	/**
 	 * Checks if it does have custom placeholder content
 	 *
 	 * @return mixed
