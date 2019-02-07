@@ -55,6 +55,21 @@ class Settings_Service implements Settings_Service_Interface {
 	}
 
 	/**
+	 * Returns the addon version
+	 *
+	 * @param $addon
+	 *
+	 * @return bool
+	 *
+	 * @since 2.2.1
+	 */
+	public function get_addon_version( $addon ) {
+		$plugin_data = get_file_data( WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . $addon, array( 'Version' => 'version' ), false );
+
+		return ( isset( $plugin_data['Version'] ) ) ? $plugin_data['Version'] : false;
+	}
+
+	/**
 	 * Returns true if the addon plugin is activated
 	 *
 	 * @param $addon
