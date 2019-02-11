@@ -151,6 +151,9 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 ## Changelog ##
 
+### 2.2.0 - 2019-01-24 ###
+* Adding support for network wide settings on Multisite Wordpress setups.
+
 ### 2.1.5 - 2019-01-17 ###
 * New addon: Custom Facebook Feed Pro
 * Adding support for setting none, defer or async to Cookiebot script tags
