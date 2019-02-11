@@ -123,6 +123,15 @@ Interface Cookiebot_Addons_Interface {
 	public function is_addon_activated();
 
 	/**
+	 * Retrieves current installed version of the addon
+	 *
+	 * @return bool
+	 *
+	 * @since 2.2.1
+	 */
+	public function get_addon_version();
+
+	/**
 	 * Checks if it does have custom placeholder content
 	 *
 	 * @return mixed

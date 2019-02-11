@@ -122,13 +122,6 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		$this->widgets[] = new Visitor_Cookies( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
 
 		/**
-		 * Load configuration for googleplus badge widget
-		 *
-		 * @since 1.2.0
-		 */
-		$this->widgets[] = new Googleplus_Badge_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
-
-		/**
 		 * Load configuration for twitter timeline widget
 		 *
 		 * @since 1.2.0
@@ -148,6 +141,20 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		 * @since 1.2.0
 		 */
 		$this->widgets[] = new Facebook_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
+
+		/**
+		 * If jetpack version is lower than 7 than add googleplus badge widget
+		 *
+		 * @since 2.2.1
+		 */
+		if( version_compare($this->get_addon_version(), '7', '<' ) ) {
+			/**
+			 * Load configuration for googleplus badge widget
+			 *
+			 * @since 1.2.0
+			 */
+			$this->widgets[] = new Googleplus_Badge_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output, $this->get_widget_option() );
+		}
 	}
 
 	/**
@@ -250,6 +257,17 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	 */
 	public function is_addon_activated() {
 		return $this->settings->is_addon_activated( $this->get_plugin_file() );
+	}
+
+	/**
+	 * Retrieves current installed version of the addon
+	 *
+	 * @return bool
+	 *
+	 * @since 2.2.1
+	 */
+	public function get_addon_version() {
+		return $this->settings->get_addon_version( $this->get_plugin_file() );
 	}
 
 	/**
