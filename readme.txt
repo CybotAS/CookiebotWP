@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent
 * Requires at least: 4.4
 * Tested up to: 4.9
-* Stable tag: 2.1.5
+* Stable tag: 2.2.0
 * Requires PHP: 5.4
 * License: GPLv2 or later
 
@@ -151,7 +151,7 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 ## Changelog ##
 
-### 2.2.0 - 2019-01-24 ###
+### 2.2.0 - 2019-02-11 ###
 * Adding support for network wide settings on Multisite Wordpress setups.
 
 ### 2.1.5 - 2019-01-17 ###
