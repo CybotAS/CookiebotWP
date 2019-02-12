@@ -279,7 +279,11 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . __( 'Blocks unique user ID.', 'cookiebot-addons' ) . '</p>';
+		return 	'<p>' . 
+				__( 'If the user gives correct consent, IP and Unique User ID will be saved on form submissions, otherwise not.', 'cookiebot-addons' ) .
+				'<br />' .
+				__( 'Increases opt-in rate compared to WPForms "GDPR mode".', 'cookiebot-addons' ) .
+				'</p>';
 	}
 
 	/**
