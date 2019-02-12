@@ -184,4 +184,18 @@ Interface Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_placeholder_helper();
+
+	/**
+	 * Action after enabling the addon on the settings page
+	 *
+	 * @since 2.2.0
+	 */
+	public function post_hook_after_enabling();
+
+	/**
+	 * Cookiebot plugin is deactivated
+	 *
+	 * @since 2.2.0
+	 */
+	public function plugin_deactivated();
 }

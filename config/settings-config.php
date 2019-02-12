@@ -31,6 +31,10 @@ class Settings_Config {
 		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_wp_admin_style_script' ) );
+		add_action( 'update_option_cookiebot_available_addons', array(
+			$this,
+			'post_hook_available_addons_update_option'
+		), 10, 3 );
 	}
 
 	/**
@@ -304,5 +308,24 @@ class Settings_Config {
 	 */
 	public function setting_page( $active_tab = '' ) {
 		include COOKIEBOT_ADDONS_DIR . 'view/admin/settings/setting-page.php';
+	}
+
+	/**
+     * Post action hook after enabling the addon on the settings page.
+     *
+	 * @param $old_value
+	 * @param $value
+	 * @param $option_name
+     *
+     * @since 2.2.0
+	 */
+	public function post_hook_available_addons_update_option( $old_value, $value, $option_name ) {
+		if ( is_array( $value ) ) {
+			foreach ( $value as $addon_option_name => $addon_settings ) {
+				if ( isset( $addon_settings['enabled'] ) ) {
+					$this->settings_service->post_hook_after_enabling_addon_on_settings_page( $addon_option_name );
+				}
+			}
+		}
 	}
 }
