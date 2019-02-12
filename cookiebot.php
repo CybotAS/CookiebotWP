@@ -937,7 +937,7 @@ final class Cookiebot_WP {
 	 * @version	2.2.0
 	 * @since		1.0.0
 	 */
-	function get_cbid() {
+	public static function get_cbid() {
 		$cbid = get_option('cookiebot-cbid');
 		if(is_multisite() && ($network_cbid = get_site_option('cookiebot-cbid'))) {
 			if(empty($cbid)) {
@@ -1104,13 +1104,7 @@ function cookiebot_assist($type='statistics') {
  * @return  string
  */
 function cookiebot_active() {
-	$cbid = get_option('cookiebot-cbid');
-	if(is_multisite() && ($network_cbid = get_site_option('cookiebot-cbid'))) {
-		if(empty($cbid)) {
-			return true;
-		}
-	}
-
+	$cbid = Cookiebot_WP::get_cbid();
 	if(!empty($cbid)) {
 		return true;
 	}
