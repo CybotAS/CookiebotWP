@@ -1104,7 +1104,13 @@ function cookiebot_assist($type='statistics') {
  * @return  string
  */
 function cookiebot_active() {
-	$cbid = Cookiebot_WP::get_cbid();
+	$cbid = get_option('cookiebot-cbid');
+	if(is_multisite() && ($network_cbid = get_site_option('cookiebot-cbid'))) {
+		if(empty($cbid)) {
+			return true;
+		}
+	}
+
 	if(!empty($cbid)) {
 		return true;
 	}

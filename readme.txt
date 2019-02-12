@@ -153,6 +153,7 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 ### 2.2.1 - 2019-02-12 ###
 * Adding support for WPForms
+* Fix warning non-static call to get_cbid
 * Add plugin deactivation hook for addons
 
 ### 2.2.0 - 2019-02-11 ###
