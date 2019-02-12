@@ -61,5 +61,8 @@
   },
   "Optinmonster": {
     "class": "cookiebot_addons\\controller\\addons\\optinmonster\\Optinmonster"
+  },
+  "Wpforms": {
+    "class": "cookiebot_addons\\controller\\addons\\wpforms\\Wpforms"
   }
 }

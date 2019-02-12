@@ -147,7 +147,7 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		 *
 		 * @since 2.2.1
 		 */
-		if( version_compare($this->get_addon_version(), '7', '<' ) ) {
+		if( $this->is_addon_installed() && version_compare($this->get_addon_version(), '7', '<' ) ) {
 			/**
 			 * Load configuration for googleplus badge widget
 			 *
@@ -394,5 +394,23 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	 */
 	public function get_parent_class() {
 		return get_parent_class( $this );
+	}
+
+	/**
+	 * Action after enabling the addon on the settings page
+	 *
+	 * @since 2.2.0
+	 */
+	public function post_hook_after_enabling() {
+		//do nothing
+	}
+
+	/**
+	 * Cookiebot plugin is deactivated
+	 *
+	 * @since 2.2.0
+	 */
+	public function plugin_deactivated() {
+		//do nothing
 	}
 }

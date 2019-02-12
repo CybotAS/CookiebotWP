@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons\controller\addons\add_to_any;
+namespace cookiebot_addons\controller\addons\wpforms;
 
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons\lib\Cookie_Consent_Interface;
@@ -8,7 +8,7 @@ use cookiebot_addons\lib\Settings_Service_Interface;
 use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 
-class Add_To_Any implements Cookiebot_Addons_Interface {
+class Wpforms implements Cookiebot_Addons_Interface {
 
 	/**
 	 * @var Settings_Service_Interface
@@ -61,7 +61,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function load_configuration() {
-		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_add_to_any' ), 5 );
+		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_wpforms' ), 5 );
 	}
 
 	/**
@@ -69,9 +69,9 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function cookiebot_addon_add_to_any() {
+	public function cookiebot_addon_wpforms() {
 		// Check if Add To Any is loaded.
-		if ( ! function_exists( 'A2A_SHARE_SAVE_init' ) ) {
+		if ( ! function_exists( 'wpforms' ) ) {
 			return;
 		}
 
@@ -85,49 +85,33 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		if ( $this->is_remove_tag_enabled() ) {
-			add_filter( 'addtoany_script_disabled', '__return_true' );
+		add_filter( 'wpforms_disable_entry_user_ip', array( $this, 'gdpr_consent_is_given' ) );
+		add_action( 'wp_footer', array( $this, 'enqueue_script_for_adding_the_cookie_after_the_consent' ), 18 );
+	}
 
-			/**
-			 * Block head script
-			 */
-			if ( has_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' ) ) {
-				remove_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' );
-			}
+	/**
+	 * Create cookie when the visitor gives consent
+	 */
+	public function enqueue_script_for_adding_the_cookie_after_the_consent() {
+		wp_enqueue_script( 'wpforms-gdpr-cookiebot', COOKIEBOT_URL . 'addons/controller/addons/wpforms/cookie-after-consent.js', array( 'jquery' ),
+			'',
+			true );
+		wp_localize_script( 'wpforms-gdpr-cookiebot', 'cookiebot_wpforms_settings', array( 'cookie_types' => $this->get_cookie_types() ) );
+	}
 
-			/**
-			 * Block footer script
-			 */
-			if ( has_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' ) ) {
-				remove_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' );
-			}
-
-			/**
-			 * Block content addition
-			 */
-			if ( has_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' ) ) {
-				remove_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' );
-			}
-		} else {
-			$this->buffer_output->add_tag( 'wp_head', 10, array(
-				'data-cfasync' => $this->get_cookie_types(),
-				'addtoany'     => $this->get_cookie_types()
-			), false );
-
-			$this->buffer_output->add_tag( 'wp_footer', 10, array(
-				'data-cfasync' => $this->get_cookie_types(),
-				'addtoany'     => $this->get_cookie_types()
-			), false );
-
-			$this->buffer_output->add_tag( 'pre_get_posts', 10, array(
-				'GoogleAnalyticsObject' => $this->get_cookie_types(),
-			), false );
+	/**
+	 * Retrieve if the cookie consent is given
+	 *
+	 * @return bool
+	 *
+	 * @since 2.1.4
+	 */
+	public function gdpr_consent_is_given() {
+		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+			return true;
 		}
 
-		// External js, so manipulate attributes
-		if ( has_action( 'wp_enqueue_scripts', 'A2A_SHARE_SAVE_enqueue_script' ) ) {
-			$this->script_loader_tag->add_tag( 'addtoany', $this->get_cookie_types() );
-		}
+		return false;
 	}
 
 	/**
@@ -138,7 +122,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_addon_name() {
-		return 'addToAny Share Buttons';
+		return 'WPForms';
 	}
 
 	/**
@@ -149,7 +133,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.';
+		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.';
 	}
 
 	/**
@@ -176,7 +160,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_option_name() {
-		return 'add_to_any';
+		return 'wpforms';
 	}
 
 	/**
@@ -187,7 +171,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_plugin_file() {
-		return 'add-to-any/add-to-any.php';
+		return 'wpforms/wpforms.php';
 	}
 
 	/**
@@ -207,7 +191,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.5.0
 	 */
 	public function get_default_cookie_types() {
-		return array( 'marketing', 'statistics' );
+		return array( 'preferences' );
 	}
 
 	/**
@@ -225,7 +209,13 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_installed() {
-		return $this->settings->is_addon_installed( $this->get_plugin_file() );
+		$installed = $this->settings->is_addon_installed( $this->get_plugin_file() );
+
+		if ( $installed && version_compare( $this->get_addon_version(), '1.5.1', '<' ) ) {
+			$installed = false;
+		}
+
+		return $installed;
 	}
 
 	/**
@@ -289,7 +279,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . __( 'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.', 'cookiebot-addons' ) . '</p>';
+		return '<p>' . __( 'Blocks unique user ID.', 'cookiebot-addons' ) . '</p>';
 	}
 
 	/**
@@ -300,7 +290,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/add-to-any/trunk/add-to-any.php';
+		return false;
 	}
 
 	/**
@@ -322,7 +312,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 2.1.0
 	 */
 	public function has_remove_tag_option() {
-		return true;
+		return false;
 	}
 
 	/**
@@ -350,10 +340,18 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	/**
 	 * Action after enabling the addon on the settings page
 	 *
+	 * Clear gdpr settings in the wpforms
+	 *
 	 * @since 2.2.0
 	 */
 	public function post_hook_after_enabling() {
-		//do nothing
+		$wpforms_settings = get_option( 'wpforms_settings' );
+
+		$wpforms_settings['gdpr']                 = false;
+		$wpforms_settings['gdpr-disable-uuid']    = false;
+		$wpforms_settings['gdpr-disable-details'] = false;
+
+		update_option( 'wpforms_settings', $wpforms_settings );
 	}
 
 	/**
@@ -362,6 +360,32 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 2.2.0
 	 */
 	public function plugin_deactivated() {
-		//do nothing
+		// if the checkbox was checked and the cookiebot plugin is deactivated
+		// remove the setting so the default gdpr checkboxes are still visible
+		$this->wpforms_set_setting( 'gdpr-cookiebot', false );
+	}
+
+	/**
+	 * Set the value of a specific WPForms setting.
+	 *
+	 * @since 1.5.0.4
+	 *
+	 * @param string $key
+	 * @param mixed $new_value
+	 * @param string $option
+	 *
+	 * @return mixed
+	 */
+	public function wpforms_set_setting( $key, $new_value, $option = 'wpforms_settings' ) {
+
+		$key          = wpforms_sanitize_key( $key );
+		$options      = get_option( $option, false );
+		$option_value = is_array( $options ) && ! empty( $options[ $key ] ) ? $options[ $key ] : false;
+
+		if ( $new_value !== $option_value ) {
+			$options[ $key ] = $new_value;
+		}
+
+		update_option( $option, $options );
 	}
 }
