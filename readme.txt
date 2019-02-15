@@ -2,7 +2,7 @@
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent
 * Requires at least: 4.4
-* Tested up to: 4.9
+* Tested up to: 5.1
 * Stable tag: 2.2.2
 * Requires PHP: 5.4
 * License: GPLv2 or later
