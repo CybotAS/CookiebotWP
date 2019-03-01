@@ -1,4 +1,0 @@
-[submodule "addons"]
-	path = addons
-	url = https://github.com/CybotAS/CookiebotAddons.git
-	branch = master
