@@ -160,7 +160,12 @@ final class Cookiebot_WP {
 		//add JS
 		add_action('wp_head', array($this,'add_js'));
 		add_shortcode('cookie_declaration', array($this,'show_declaration'));
-
+		
+		//load widget
+		add_action( 'media_buttons', array( $this, 'add_cookiebot_media_button' ), 99 );
+		add_action( 'wp_enqueue_media', array( $this, 'cookiebot_include_media_button_js_file' ) );
+			
+		
 		//Add filter if WP rocket is enabled
 		if(defined('WP_ROCKET_VERSION')) {
 			add_filter('rocket_minify_excluded_external_js', array($this,'wp_rocket_exclude_external_js'));
@@ -1066,6 +1071,104 @@ final class Cookiebot_WP {
 				update_option('cookiebot_notice_recommend', strtotime('+2 weeks') );
 			}
 		}
+	}
+	
+	/**
+	 * Register cookiebot media buttons
+	 *
+	 * @version 2.0.3
+	 * @since   2.0.3
+	 */
+	function add_cookiebot_media_button() {
+		?>
+           <div class="cookiebot_media_button">
+               <a href="#" id="cookiebot-media" class="button">Cookiebot</a>
+                <div id="cookiebot_media_content">
+                   <button type="button" class="media-modal-close"><span class="media-modal-icon"><span
+                                   class="screen-reader-text">Close media panel</span></span></button>
+                    <div class="media-frame-menu">
+                       <div class="media-menu">
+                           <a href="#" class="media-menu-item active" data-name="iframe">Iframe</a>
+                           <a href="#" class="media-menu-item" data-name="placeholder">Placeholder</a>
+                           <a href="#" class="media-menu-item" data-name="image">Image</a>
+                       </div>
+                   </div>
+                    <div class="media-frame-title">
+                       <h1>Iframe</h1>
+                   </div>
+                    <div class="media-frame-content">
+                       <div class="colorbox-content">
+                           <div class="iframe_content widget_content">
+                               <p><?php _e('Enter iframe tag into the iframe field. After that select the required cookie types. When it is ready, click on "Insert into content" button. <br>This will automatically convert the iframe tag based on cookiebot instructions and place it in the content.', 'cookiebot') ?></p>
+                               <label>Iframe</label>
+                               <textarea id="iframe_content" class="cookiebot_textarea" rows="5"></textarea>
+                           </div>
+                            <div class="placeholder_content widget_content">
+                               <p><?php _e('Enter placeholder text into placeholder field. After that select the required cookie types. When it is ready, click on "Insert into content" button. <br>This will automatically create the Placeholder tag based on cookiebot instructions and place it in the content.', 'cookiebot') ?></p>
+                               <label>Placeholder</label>
+                               <textarea id="placeholder_content" class="cookiebot_textarea" rows="5" placeholder="Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this."></textarea>
+                               <span class="help-tip" title="<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>"></span>
+                            </div>
+                            <div class="image_content widget_content">
+                               <p><?php _e('Enter image source into the image field or click on Add image to upload image or select from uploaded images. After that select the required cookie types. When it is ready, click on "Insert into content" button. <br>This will automatically create the image tag based on cookiebot instructions and place it in the content.', 'cookiebot') ?></p>
+                               <a href="#" class="image_link">Add image</a>
+                               
+                               <label>Image url</label>
+                               <input type="text" name="image_content" id="image_content" class="regular-text">
+                           </div>
+                           
+                           <label>Cookietypes</label>
+                           <ul class="colorbox-cookietypes">
+                               <li>
+                                   <input type="checkbox" class="cookieconsent" name="cookieconsent[]" value="necessary"> <?php _e('Necessary', 'cookiebot'); ?>
+                               </li>
+                               <li>
+                                   <input type="checkbox" class="cookieconsent" name="cookieconsent[]" value="preferences"> <?php _e('Preferences', 'cookiebot'); ?>
+                               </li>
+                               <li>
+                                   <input type="checkbox" class="cookieconsent" name="cookieconsent[]" value="statistics" checked> <?php _e('Statistics', 'cookiebot'); ?>
+                               </li>
+                               <li>
+                                   <input type="checkbox" class="cookieconsent" name="cookieconsent[]" value="marketing" checked> <?php _e('Marketing', 'cookiebot'); ?>
+                               </li>
+                           </ul>
+                       </div>
+                        <div id="placeholder-form" class="colorbox-content">
+                       
+                       </div>
+                   </div>
+                    <div class="media-frame-toolbar">
+                       <div class="media-toolbar">
+                           <div class="media-toolbar-primary search-form">
+                               <button type="button" class="button media-button button-primary button-large media-button-insert">
+                                   <?php _e('Insert into content', 'cookiebot'); ?>
+                               </button>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            </div>
+		<?php
+	}
+	
+	/**
+	 * Enqueue script for cookiebot media buttons
+	 *
+	 * @version 2.0.3
+	 * @since   2.0.3
+	 */
+	function cookiebot_include_media_button_js_file() {
+		wp_enqueue_script( 'jquery_colorbox', plugin_dir_url( __FILE__ ) . 'js/jquery.colorbox-min.js', array( 'jquery' ), '2.0.3', true );
+		
+		wp_enqueue_script( 'cookiebot_tiptip_js', plugin_dir_url( __FILE__ ) . 'addons/js/jquery.tipTip.js', array( 'jquery' ), '1.8', true );
+		
+		wp_enqueue_script( 'media_button', plugin_dir_url( __FILE__ ) . 'js/cookiebot-media-button.js', array(
+			'jquery',
+			'jquery_colorbox',
+               'cookiebot_tiptip_js'
+		), '2.0.3', true );
+		
+		wp_enqueue_style( 'cookiebot_media_button_css', plugin_dir_url( __FILE__ ) . 'css/cookiebot-media-button.css' );
 	}
 
 }
