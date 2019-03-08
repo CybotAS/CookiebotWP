@@ -4,7 +4,7 @@ Steps
 ---
 
 1. Add new addon to addons.json
-2. Create a directory in controller/addons
+2. Create a directory in addons/controller/addons
 3. Create a class in that new directory (copy class from another addon and adjust the namespace, classname and methods.)
 4. Edit 'load_configuration' method. That is the only method that needs to be worked on to block the cookies. You can create your own method from there.
 5. Test

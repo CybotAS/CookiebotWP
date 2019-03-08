@@ -1,5 +1,5 @@
-# Cookiebot WordPress Addons
-Cookiebot Addons are plugins for WordPress that make other plugins compatible with Cookiebot. 
+# Cookiebot WordPress Plugin
+Cookiebot Wordpress plugin is a plugin that make other plugins compatible with Cookiebot. 
 The addons hook into the original plugin and render the cookie setting tags as advised by the Cookiebot guidelines at https://www.cookiebot.com/goto/help/.
 
 Concurrently we are working with WP Core on what we believe is the real solution. A framework in WP Core that can signal the consent state to other plugins,
@@ -15,23 +15,17 @@ Table of contents
 =================
 
 <!--ts-->
-   * [Installation for regular users](#installation-for-regular-users)
-   * [Installation for development purpose](#installation-for-development-purpose)
+   * [Installation](#installation)
    * [How do I make my plugin support Cookiebot?](#how-do-i-make-my-plugin-support-cookiebot)
    * [Roadmap](#roadmap)
    * [Contributions](#contributions)
    * [Need to get in touch?](#need-to-get-in-touch)
 <!--te-->
 
-# Installation (for regular users)
+# Installation
 Regular users should use [Cookiebot WordPress plugin](https://wordpress.org/plugins/cookiebot) which includes Cookiebot Addons.
 
-# Installation (for development purpose)
-1. Get the [latest release](https://github.com/CybotAS/CookiebotAddons/releases/latest) of the framework plugin to your WP plugins folder
-2. Rename cookiebot-addons.txt to cookiebot-addons.php
-3. Add "define('COOKIEBOT_ADDONS_STANDALONE',true);" to your wp-config.php
-4. Go to the admin page of your WP installation and activate the plugin
-5. You are done, verify that it works
+If you want the most recent changes get the [latest release](https://github.com/CybotAS/CookiebotAddons/releases/latest) of the plugin and upliad it to your WP plugins folder
 
 # How do I make my plugin support Cookiebot?
 See [the Cookiebot API readme for more details about the Cookiebot API](CookiebotAPI.md)
