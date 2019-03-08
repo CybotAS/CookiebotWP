@@ -120,12 +120,6 @@ class Gadwp implements Cookiebot_Addons_Interface {
 
 	}
 
-	public function change_gadwp_gtag_script_path($path) {
-		$path = $path . ' \' data-cookieconsent=\'statistics, marketing\'';
-
-		return $path;
-	}
-
 	/**
 	 * Return addon/plugin name
 	 *
