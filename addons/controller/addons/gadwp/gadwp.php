@@ -116,8 +116,6 @@ class Gadwp implements Cookiebot_Addons_Interface {
 		cookiebot_addons_remove_class_action('wp_footer', 'GADWP_Tracking_TagManager', 'output', 99);
 
 		cookiebot_addons_remove_class_action('amp_post_template_footer', 'GADWP_Tracking_TagManager', 'amp_output', 99);
-
-
 	}
 
 	/**
