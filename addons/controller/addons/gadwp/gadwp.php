@@ -54,10 +54,10 @@ class Gadwp implements Cookiebot_Addons_Interface {
 		Cookie_Consent_Interface $cookie_consent,
 		Buffer_Output_Interface $buffer_output
 	) {
-		$this->settings          = $settings;
+		$this->settings = $settings;
 		$this->script_loader_tag = $script_loader_tag;
-		$this->cookie_consent    = $cookie_consent;
-		$this->buffer_output     = $buffer_output;
+		$this->cookie_consent = $cookie_consent;
+		$this->buffer_output = $buffer_output;
 	}
 
 	/**
@@ -104,18 +104,23 @@ class Gadwp implements Cookiebot_Addons_Interface {
 		$this->script_loader_tag->add_tag( 'gadwp-front-widget', $this->get_cookie_types() );
 		$this->script_loader_tag->add_tag( 'googlecharts', $this->get_cookie_types() );
 
-		cookiebot_addons_remove_class_action('wp_head', 'GADWP_Tracking_GlobalSiteTag', 'output', 99);
-		cookiebot_addons_remove_class_action('wp_footer', 'GADWP_Tracking_GlobalSiteTag', 'output', 99);
+		$this->buffer_output->add_tag( 'wp_head',
+			99,
+			array(
+				'google-analytics.com' => $this->get_cookie_types(),
+				'googletagmanager.com' => $this->get_cookie_types(),
+				'ga-disable-'          => $this->get_cookie_types(),
+			),
+			false );
 
-		cookiebot_addons_remove_class_action('wp_head', 'GADWP_Tracking_Analytics', 'output', 99);
-		cookiebot_addons_remove_class_action('wp_footer', 'GADWP_Tracking_Analytics', 'output', 99);
-
-		cookiebot_addons_remove_class_action('amp_post_template_footer', 'GADWP_Tracking_Analytics_AMP', 'output', 10);
-
-		cookiebot_addons_remove_class_action('wp_head', 'GADWP_Tracking_TagManager', 'output', 99);
-		cookiebot_addons_remove_class_action('wp_footer', 'GADWP_Tracking_TagManager', 'output', 99);
-
-		cookiebot_addons_remove_class_action('amp_post_template_footer', 'GADWP_Tracking_TagManager', 'amp_output', 99);
+		$this->buffer_output->add_tag( 'wp_footer',
+			99,
+			array(
+				'google-analytics.com' => $this->get_cookie_types(),
+				'googletagmanager.com' => $this->get_cookie_types(),
+				'ga-disable-'          => $this->get_cookie_types(),
+			),
+			false );
 	}
 
 	/**

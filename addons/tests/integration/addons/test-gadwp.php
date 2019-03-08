@@ -14,16 +14,16 @@ class Test_Gadwp extends \WP_UnitTestCase {
 	 * @since 2.1.0
 	 */
 	public function test_hooks() {
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/front/tracking-tagmanager.php' );
-		
-		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_footer\', array( $this, \'output\' ), 99 );') );
-		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_head\', array( $this, \'output\' ), 99 );') );
-		$this->assertNotFalse( strpos( $content, 'add_action( \'amp_post_template_footer\', array( $this, \'amp_output\' ) );') );
+		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/front/views/tagmanager-code.php' );
 
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/front/tracking-analytics.php' );
+		$this->assertNotFalse( strpos( $content, 'https://www.googletagmanager.com') );
 
-		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_footer\', array( $this, \'output\' ), 99 );') );
-		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_head\', array( $this, \'output\' ), 99 );') );
-		$this->assertNotFalse( strpos( $content, 'add_action( \'amp_post_template_footer\', array( $this, \'output\' ) );') );
+		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/front/views/analytics-optout-code.php' );
+
+		$this->assertNotFalse( strpos( $content, 'ga-disable-') );
+
+		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/front/views/analytics-code.php' );
+
+		$this->assertNotFalse( strpos( $content, 'tracking_script_path') );
 	}
 }
