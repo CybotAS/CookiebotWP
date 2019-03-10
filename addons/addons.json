@@ -64,5 +64,8 @@
   },
   "Wpforms": {
     "class": "cookiebot_addons\\controller\\addons\\wpforms\\Wpforms"
+  },
+  "Gadwp": {
+    "class": "cookiebot_addons\\controller\\addons\\gadwp\\Gadwp"
   }
 }
