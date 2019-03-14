@@ -1,4 +1,18 @@
 <?php
+/**
+ * Check if a cache plugin is activated and in function.
+ * 
+ * @return boolean	True	If attributes always should be added
+ * 					False	If attributes only should be added if consent no given
+ */
+
+function cookiebot_addons_enabled_cache_plugin() {
+	if(defined("WP_ROCKET_PATH")) {
+		return true; //WP Rocket - We need to ensure we not cache tags without attributes
+	}
+	return false;
+}
+
 
 /**
  * Removes action with class in callback
