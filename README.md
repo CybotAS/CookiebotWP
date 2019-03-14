@@ -69,6 +69,7 @@ Released and tested addons:
 * [HubSpot – Free Marketing Plugin for WordPress](https://wordpress.org/plugins/leadin/)
 * [Ninja forms](https://wordpress.org/plugins/ninja-forms/)
 * [Popups by OptinMonster](https://wordpress.org/plugins/optinmonster/)
+* [Google Analytics Dashboard for WP](https://wordpress.org/plugins/google-analytics-dashboard-for-wp/)
 
 Following addons are in pipeline:
 * To be continued..
