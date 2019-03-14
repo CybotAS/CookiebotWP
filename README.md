@@ -9,7 +9,7 @@ https://core.trac.wordpress.org/ticket/44043
 
 # Travis CI Status 
 
-[![Build Status](https://travis-ci.org/CybotAS/CookiebotAddons.svg?branch=develop)](https://travis-ci.org/CybotAS/CookiebotAddons)
+[![Build Status](https://travis-ci.org/CybotAS/CookiebotWP.svg?branch=master)](https://travis-ci.org/CybotAS/CookiebotWP)
 
 Table of contents
 =================
