@@ -81,8 +81,7 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 		}
 
 		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			&& !cookiebot_addons_enabled_cache_plugin() ) {
+		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return;
 		}
 

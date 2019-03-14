@@ -86,10 +86,8 @@ class Hubspot_Leadin implements Cookiebot_Addons_Interface {
 		}
 
 		if ( $this->is_addon_enabled() && $this->is_addon_activated() ) {
-			if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-				// block the script untill the consent is given
-				$this->script_loader_tag->add_tag( 'leadin-scriptloader-js', $this->get_cookie_types() );
-			}
+			// block the script untill the consent is given
+			$this->script_loader_tag->add_tag( 'leadin-scriptloader-js', $this->get_cookie_types() );
 		}
 	}
 

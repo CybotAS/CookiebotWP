@@ -82,9 +82,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 		}
 
 		if ( $this->is_addon_enabled() ) {
-			if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-				$this->script_loader_tag->add_tag( 'optinmonster-api-script', $this->get_cookie_types() );
-			}
+			$this->script_loader_tag->add_tag( 'optinmonster-api-script', $this->get_cookie_types() );
 		}
 	}
 
