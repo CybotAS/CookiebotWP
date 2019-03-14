@@ -10,6 +10,18 @@ function cookiebot_addons_enabled_cache_plugin() {
 	if(defined("WP_ROCKET_PATH")) {
 		return true; //WP Rocket - We need to ensure we not cache tags without attributes
 	}
+	if(defined("W3TC")) {
+		return true; //W3 Total Cache
+	}
+	if(defined("WPCACHEHOME")) {
+		return true; //WP Super Cache
+	}
+	if(defined("WPFC_WP_PLUGIN_DIR")) {
+		return true; //WP Fastest Cache
+	}
+	if(defined("LSCWP_CONTENT_DIR")) {
+		return true; //Litespeed Cache
+	}
 	return false;
 }
 
