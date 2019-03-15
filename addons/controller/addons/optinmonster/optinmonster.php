@@ -76,14 +76,13 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 		}
 
 		// consent is given
-		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() )
+			&& !cookiebot_addons_enabled_cache_plugin() ) {
 			return;
 		}
 
 		if ( $this->is_addon_enabled() ) {
-			if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-				$this->script_loader_tag->add_tag( 'optinmonster-api-script', $this->get_cookie_types() );
-			}
+			$this->script_loader_tag->add_tag( 'optinmonster-api-script', $this->get_cookie_types() );
 		}
 	}
 
