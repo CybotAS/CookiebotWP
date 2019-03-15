@@ -29,11 +29,12 @@ class Buffer_Output implements Buffer_Output_Interface {
 		 * If tag_name and priority exists
 		 * Then merge the keywords
 		 */
-		if ( in_array( $unique_id, $this->tags ) ) {
-			$tag->merge_keywords( $keywords );
+		if ( isset( $this->tags[ $unique_id ] ) ) {
+			$this->tags[ $unique_id ]->merge_keywords( $keywords );
 		}
-
-		$this->tags[ $unique_id ] = $tag;
+		else {
+			$this->tags[ $unique_id ] = $tag;
+		}
 	}
 
 	/**

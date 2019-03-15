@@ -85,7 +85,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		$this->buffer_output->add_tag( 'wp_head', 10, array(
+    $this->buffer_output->add_tag( 'wp_head', 10, array(
 			'data-cfasync' => $this->get_cookie_types(),
 			'addtoany'     => $this->get_cookie_types()
 		), false );
