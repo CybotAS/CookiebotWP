@@ -70,23 +70,6 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	 * @since 1.5.0
 	 */
 	public function cookiebot_addon_google_analytics_async() {
-		// Check if Analytify is loaded.
-		if ( ! class_exists( 'Google_Analytics_Async' ) ) {
-			return;
-		}
-
-		// Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
-
-		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			&& !cookiebot_addons_enabled_cache_plugin() ) {
-			return;
-		}
-
-
 		// Disable Analytify if cookie consent not allowed
 		$this->buffer_output->add_tag( 'wp_head', 10, array(
 			'GoogleAnalyticsObject' => $this->get_cookie_types(),

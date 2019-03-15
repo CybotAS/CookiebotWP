@@ -74,20 +74,6 @@ class Custom_Facebook_Feed_Pro implements Cookiebot_Addons_Interface {
 	 * @since 2.1.4
 	 */
 	public function cookiebot_addon_custom_facebook_feed() {
-		//Check if Custom Facebook Feed is loaded.
-		if ( ! shortcode_exists( 'custom-facebook-feed' ) ) {
-			return;
-		}
-		//Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
-
-		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			&& !cookiebot_addons_enabled_cache_plugin() ) {
-			return;
-		}
 
 		//Remove cff_js action and replace it with our own
 		if ( has_action( 'wp_footer', 'cff_js' ) ) {

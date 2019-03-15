@@ -70,17 +70,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_host_analyticsjs_local() {
-		// Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
-
-		// consent is given
-		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			&& !cookiebot_addons_enabled_cache_plugin() ) {
-			return;
-		}
-
+	
 		/* Priority need to be more than 0 so we are able to hook in before output begins */
 		$scriptPriority = $this->cookiebot_addon_host_analyticsjs_local_priority();
 		if ( $scriptPriority <= 0 ) {

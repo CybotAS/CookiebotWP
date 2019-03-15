@@ -70,22 +70,6 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	 * @since 1.4.0
 	 */
 	public function cookiebot_addon_pixel_caffeine() {
-		// Check if Pixel Caffeine is loaded.
-		if ( ! defined( 'AEPC_PLUGIN_FILE' ) ) {
-			return;
-		}
-
-		// Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
-
-		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			&& !cookiebot_addons_enabled_cache_plugin() ) {
-			return;
-		}
-
 		$this->script_loader_tag->add_tag( 'aepc-pixel-events', array( 'facebook' => $this->get_cookie_types() ) );
 
 		$this->buffer_output->add_tag( 'wp_head', 99, array(

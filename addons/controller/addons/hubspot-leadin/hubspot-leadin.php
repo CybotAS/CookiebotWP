@@ -74,21 +74,9 @@ class Hubspot_Leadin implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_hubspot_tracking_code() {
-		// Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
 
-		// consent is given
-		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			&& !cookiebot_addons_enabled_cache_plugin() ) {
-			return;
-		}
-
-		if ( $this->is_addon_enabled() && $this->is_addon_activated() ) {
-			// block the script untill the consent is given
-			$this->script_loader_tag->add_tag( 'leadin-scriptloader-js', $this->get_cookie_types() );
-		}
+		// block the script untill the consent is given
+		$this->script_loader_tag->add_tag( 'leadin-scriptloader-js', $this->get_cookie_types() );
 	}
 
 	/**

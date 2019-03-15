@@ -70,22 +70,6 @@ class Wd_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function disable_cookies() {
-		// Check if WD google analytics is loaded.
-		if ( ! defined( 'GWD_NAME' ) ) {
-			return;
-		}
-
-		// Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
-
-		// consent is given
-		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			&& !cookiebot_addons_enabled_cache_plugin() ) {
-			return;
-		}
-
 		$this->buffer_output->add_tag( 'wp_head', 99, array(
 			'GoogleAnalyticsObject' => $this->get_cookie_types(),
 		), false );

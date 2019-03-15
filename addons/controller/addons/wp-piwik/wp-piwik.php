@@ -76,10 +76,6 @@ class Wp_Piwik implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_wp_piwik() {
-		// Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
 
 		//If plugin activated and no consent block wp-piwik global option.
 		if ( is_plugin_active( 'wp-piwik/wp-piwik.php' ) ) {

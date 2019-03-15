@@ -75,20 +75,6 @@ class Ga_Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.1.0
 	 */
 	public function cookiebot_addon_ga_google_analytics() {
-		//Check if GA Google Analytics is loaded.
-		if ( ! function_exists( 'ga_google_analytics_init' ) ) {
-			return;
-		}
-		//Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
-
-		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			&& !cookiebot_addons_enabled_cache_plugin() ) {
-			return;
-		}
 
 		//Remove GA Google action and replace it with our own
 		if ( has_action( 'wp_head', 'ga_google_analytics_tracking_code' ) ) {
