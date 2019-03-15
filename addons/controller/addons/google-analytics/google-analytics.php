@@ -76,7 +76,8 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 		}
 
 		// consent is given
-		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
+			&& !cookiebot_addons_enabled_cache_plugin() ) {
 			return;
 		}
 
@@ -84,7 +85,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		if( $this->is_remove_tag_enabled() ) {
+		if( $this->is_remove_tag_enabled() && !$this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			// disable scripts
 			remove_action( 'wp_enqueue_scripts', 'Ga_Frontend::platform_sharethis' );
 			remove_action( 'wp_footer', 'Ga_Frontend::insert_ga_script' );

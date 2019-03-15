@@ -79,7 +79,8 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 		}
 
 		/** Check if consent is given  */
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
+			&& !cookiebot_addons_enabled_cache_plugin() ) {
 			return;
 		}
 
@@ -125,8 +126,8 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 		 */
 		//We always need to remove this untill consent is given - because we can force no execution before consent it given
 		cookiebot_addons_remove_class_action( 'wp_footer', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel_noscript' );
-
-		if( $this->is_remove_tag_enabled() ) {
+		
+		if( $this->is_remove_tag_enabled() && !$this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			cookiebot_addons_remove_class_action( 'wp_head', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel' );
 		}
 		else {
