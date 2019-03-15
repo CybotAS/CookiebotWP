@@ -85,44 +85,19 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 			return;
 		}
 
-		if ( $this->is_remove_tag_enabled() ) {
-			add_filter( 'addtoany_script_disabled', '__return_true' );
+		$this->buffer_output->add_tag( 'wp_head', 10, array(
+			'data-cfasync' => $this->get_cookie_types(),
+			'addtoany'     => $this->get_cookie_types()
+		), false );
 
-			/**
-			 * Block head script
-			 */
-			if ( has_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' ) ) {
-				remove_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' );
-			}
+		$this->buffer_output->add_tag( 'wp_footer', 10, array(
+			'data-cfasync' => $this->get_cookie_types(),
+			'addtoany'     => $this->get_cookie_types()
+		), false );
 
-			/**
-			 * Block footer script
-			 */
-			if ( has_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' ) ) {
-				remove_action( 'wp_footer', 'A2A_SHARE_SAVE_footer_script' );
-			}
-
-			/**
-			 * Block content addition
-			 */
-			if ( has_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' ) ) {
-				remove_action( 'pre_get_posts', 'A2A_SHARE_SAVE_pre_get_posts' );
-			}
-		} else {
-			$this->buffer_output->add_tag( 'wp_head', 10, array(
-				'data-cfasync' => $this->get_cookie_types(),
-				'addtoany'     => $this->get_cookie_types()
-			), false );
-
-			$this->buffer_output->add_tag( 'wp_footer', 10, array(
-				'data-cfasync' => $this->get_cookie_types(),
-				'addtoany'     => $this->get_cookie_types()
-			), false );
-
-			$this->buffer_output->add_tag( 'pre_get_posts', 10, array(
-				'GoogleAnalyticsObject' => $this->get_cookie_types(),
-			), false );
-		}
+		$this->buffer_output->add_tag( 'pre_get_posts', 10, array(
+			'GoogleAnalyticsObject' => $this->get_cookie_types(),
+		), false );
 
 		// External js, so manipulate attributes
 		if ( has_action( 'wp_enqueue_scripts', 'A2A_SHARE_SAVE_enqueue_script' ) ) {
@@ -314,27 +289,6 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
 
-	/**
-	 * Returns true if addon has an option to remove tag instead of adding attributes
-	 *
-	 * @return boolean
-	 *
-	 * @since 2.1.0
-	 */
-	public function has_remove_tag_option() {
-		return true;
-	}
-
-	/**
-	 * Return true if the remove tag option is enabled
-	 *
-	 * @return mixed
-	 *
-	 * @since 2.1.0
-	 */
-	public function is_remove_tag_enabled() {
-		return $this->settings->is_remove_tag_enabled( $this->get_option_name() );
-	}
 
 	/**
 	 * Returns parent class or false

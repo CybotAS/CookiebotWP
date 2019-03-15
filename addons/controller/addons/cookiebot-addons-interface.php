@@ -27,15 +27,6 @@ Interface Cookiebot_Addons_Interface {
 	public function load_configuration();
 
 	/**
-	 * Returns true if addon has an option to remove tag instead of adding attributes
-	 *
-	 * @return boolean
-	 *
-	 * @since 2.1.0
-	 */
-	//public function has_remove_tag_option();
-
-	/**
 	 * Return addon/plugin name
 	 *
 	 * @return string

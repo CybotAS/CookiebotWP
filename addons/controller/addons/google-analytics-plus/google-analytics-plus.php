@@ -87,14 +87,9 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 
 
 		// Disable Analytify if cookie consent not allowed
-		if( $this->is_remove_tag_enabled() ) {
-			cookiebot_addons_remove_class_action( 'wp_head', 'Google_Analytics_Async', 'tracking_code_output' );
-		}
-		else {
-			$this->buffer_output->add_tag( 'wp_head', 10, array(
-				'GoogleAnalyticsObject' => $this->get_cookie_types(),
-			), false );
-		}
+		$this->buffer_output->add_tag( 'wp_head', 10, array(
+			'GoogleAnalyticsObject' => $this->get_cookie_types(),
+		), false );
 	}
 
 	/**
@@ -281,27 +276,6 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
 
-	/**
-	 * Returns true if addon has an option to remove tag instead of adding attributes
-	 *
-	 * @return boolean
-	 *
-	 * @since 2.1.0
-	 */
-	public function has_remove_tag_option() {
-		return true;
-	}
-
-	/**
-	 * Return true if the remove tag option is enabled
-	 *
-	 * @return mixed
-	 *
-	 * @since 2.1.0
-	 */
-	public function is_remove_tag_enabled() {
-		return $this->settings->is_remove_tag_enabled( $this->get_option_name() );
-	}
 
 	/**
 	 * Returns parent class or false

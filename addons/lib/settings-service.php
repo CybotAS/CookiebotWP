@@ -419,55 +419,6 @@ class Settings_Service implements Settings_Service_Interface {
 	}
 
 	/**
-	 * returns true if the "remove tag" option is enabled
-	 *
-	 * @param $option_key
-	 *
-	 * @return bool
-	 *
-	 * @since 2.1.0
-	 */
-	public function is_remove_tag_enabled( $option_key ) {
-		//Always return false if COOKIEBOT_OPTION_REMOVE_TAG
-		if ( ! defined( 'COOKIEBOT_OPTION_REMOVE_TAG' ) || ! COOKIEBOT_OPTION_REMOVE_TAG ) {
-			return false;
-		}
-
-		$option = get_option( static::OPTION_NAME );
-
-		if ( isset( $option[ $option_key ]['remove_tag'] ) ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * returns true if the "remove tag" option is enabled
-	 *
-	 * @param $option_key
-	 * @param $widget_key
-	 *
-	 * @return bool
-	 *
-	 * @since 2.1.0
-	 */
-	public function is_widget_remove_tag_enabled( $option_key, $widget_key ) {
-		//Always return false if COOKIEBOT_OPTION_REMOVE_TAG
-		if ( ! defined( 'COOKIEBOT_OPTION_REMOVE_TAG' ) || ! COOKIEBOT_OPTION_REMOVE_TAG ) {
-			return false;
-		}
-
-		$option = get_option( $option_key );
-
-		if ( isset( $option[ $widget_key ]['remove_tag'] ) ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Check if the previous version is active
 	 *
 	 * @param $addons array         List of addons

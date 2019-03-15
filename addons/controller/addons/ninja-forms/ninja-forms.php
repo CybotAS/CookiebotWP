@@ -293,17 +293,6 @@ class Ninja_Forms implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * Returns true if addon has an option to remove tag instead of adding attributes
-	 *
-	 * @return boolean
-	 *
-	 * @since 2.1.0
-	 */
-	public function has_remove_tag_option() {
-		return false;
-	}
-
-	/**
 	 * Returns parent class or false
 	 *
 	 * @return string|bool
