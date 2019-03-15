@@ -66,7 +66,7 @@ class Plugin_Controller {
 		 * @var $plugin Cookiebot_Addons_Interface
 		 */
 		foreach ( $this->settings_service->get_active_addons() as $plugin ) {
-			if ( !$plugin->cookie_consent->are_cookie_states_accepted( $plugin->get_cookie_types() )
+			if ( ! $plugin->cookie_consent->are_cookie_states_accepted( $plugin->get_cookie_types() )
 				|| cookiebot_addons_enabled_cache_plugin() ) {
 				$plugin->load_configuration();
 			}
