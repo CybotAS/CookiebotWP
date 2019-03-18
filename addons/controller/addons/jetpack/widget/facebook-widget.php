@@ -77,18 +77,29 @@ class Facebook_Widget {
 	}
 
 	public function load_configuration() {
+		/**
+		 * The widget is active
+		 */
 		if ( is_active_widget( false, false, 'facebook-likebox', true ) ) {
+			/**
+			 * The widget is enabled in Prior consent
+			 */
 			if ( $this->is_widget_enabled() ) {
 				/**
-				 * Manipulate script attribute
+				 * The visitor didn't check the required cookie types
 				 */
-				$this->add_consent_attribute_to_facebook_embed_javascript();
+				if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() ) ) {
+					/**
+					 * Manipulate script attribute
+					 */
+					$this->add_consent_attribute_to_facebook_embed_javascript();
 
-				/**
-				 * Display placeholder if allowed in the backend settings
-				 */
-				if ( $this->is_widget_placeholder_enabled() ) {
-					add_action( 'jetpack_stats_extra', array( $this, 'cookie_consent_div' ), 10, 2 );
+					/**
+					 * Display placeholder if allowed in the backend settings
+					 */
+					if ( $this->is_widget_placeholder_enabled() ) {
+						add_action( 'jetpack_stats_extra', array( $this, 'cookie_consent_div' ), 10, 2 );
+					}
 				}
 			}
 		}

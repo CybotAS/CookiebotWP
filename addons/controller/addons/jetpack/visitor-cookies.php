@@ -74,10 +74,10 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 
 	public function load_configuration() {
 		/**
-		 * When preferences consent is not given
+		 * When consent is not given
 		 * Then disable comment cookies
 		 */
-		if ( ! $this->cookie_consent->is_cookie_state_accepted( 'preferences' ) ) {
+		if ( ! $this->cookie_consent->is_cookie_state_accepted( $this->get_widget_cookie_types() ) ) {
 			$this->disable_comment_cookies();
 			$this->do_not_save_mobile_or_web_view();
 			$this->disable_eu_cookie_law();
