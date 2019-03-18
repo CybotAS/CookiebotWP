@@ -81,25 +81,22 @@ class Wp_Piwik implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_wp_piwik() {
-		//If plugin activated and no consent block wp-piwik global option.
-		if ( is_plugin_active( 'wp-piwik/wp-piwik.php' ) ) {
-			if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-				// wp_footer
-				$this->buffer_output->add_tag( 'wp_footer',
-					10,
-					array(
-						'matomo' => $this->get_cookie_types(),
-					),
-					false );
+		if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
+			// wp_footer
+			$this->buffer_output->add_tag( 'wp_footer',
+				10,
+				array(
+					'matomo' => $this->get_cookie_types(),
+				),
+				false );
 
-				// wp_head
-				$this->buffer_output->add_tag( 'wp_head',
-					10,
-					array(
-						'matomo' => $this->get_cookie_types(),
-					),
-					false );
-			}
+			// wp_head
+			$this->buffer_output->add_tag( 'wp_head',
+				10,
+				array(
+					'matomo' => $this->get_cookie_types(),
+				),
+				false );
 		}
 	}
 
