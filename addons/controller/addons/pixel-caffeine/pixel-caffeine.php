@@ -29,7 +29,7 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.4.0
 	 */
-	protected $cookie_consent;
+	public $cookie_consent;
 
 	/**
 	 * @var Buffer_Output_Interface

@@ -29,7 +29,7 @@ class Custom_Facebook_Feed_Pro implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 2.1.4
 	 */
-	protected $cookie_consent;
+	public $cookie_consent;
 
 	/**
 	 * @var Buffer_Output_Interface

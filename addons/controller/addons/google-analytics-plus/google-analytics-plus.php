@@ -29,7 +29,7 @@ class Google_Analytics_Plus implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.5.0
 	 */
-	protected $cookie_consent;
+	public $cookie_consent;
 
 	/**
 	 * @var Buffer_Output_Interface
