@@ -28,7 +28,7 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	protected $cookie_consent;
+	public $cookie_consent;
 
 	/**
 	 * @var Buffer_Output_Interface
@@ -73,17 +73,6 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_facebook_for_woocommerce_tracking_code() {
-		//Check Facebook for Wooocommerce is active
-		if ( ! class_exists( 'WC_Facebookcommerce' ) ) {
-			return;
-		}
-
-		/** Check if consent is given  */
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			&& !cookiebot_addons_enabled_cache_plugin() ) {
-			return;
-		}
-
 
 		$this->buffer_output->add_tag( 'woocommerce_after_single_product', 2, array(
 			'fbq(\'ViewContent\'' => $this->get_cookie_types()

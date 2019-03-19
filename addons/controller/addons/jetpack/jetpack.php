@@ -43,7 +43,7 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	protected $cookie_consent;
+	public $cookie_consent;
 
 	/**
 	 * @var Buffer_Output_Interface
@@ -80,16 +80,6 @@ class Jetpack implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function load_configuration() {
-		// Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
-
-		// consent is given
-		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
-			return;
-		}
-
 		// load widgets
 		$this->load_widgets();
 	}
@@ -147,7 +137,7 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		 *
 		 * @since 2.2.1
 		 */
-		if( $this->is_addon_installed() && version_compare($this->get_addon_version(), '7', '<' ) ) {
+		if( version_compare($this->get_addon_version(), '7', '<' ) ) {
 			/**
 			 * Load configuration for googleplus badge widget
 			 *

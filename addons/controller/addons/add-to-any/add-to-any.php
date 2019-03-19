@@ -29,7 +29,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	protected $cookie_consent;
+	public $cookie_consent;
 
 	/**
 	 * @var Buffer_Output_Interface
@@ -70,22 +70,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_add_to_any() {
-		// Check if Add To Any is loaded.
-		if ( ! function_exists( 'A2A_SHARE_SAVE_init' ) ) {
-			return;
-		}
-
-		// Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
-
-		// consent is given
-		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			 && !cookiebot_addons_enabled_cache_plugin() ) {
-			return;
-		}
-
+		
     $this->buffer_output->add_tag( 'wp_head', 10, array(
 			'data-cfasync' => $this->get_cookie_types(),
 			'addtoany'     => $this->get_cookie_types()

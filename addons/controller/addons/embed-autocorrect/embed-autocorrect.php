@@ -29,7 +29,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	protected $cookie_consent;
+	public $cookie_consent;
 
 	/**
 	 * @var Buffer_Output_Interface
@@ -74,17 +74,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_embed_autocorrect() {
-		// Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
-
-		// consent is given
-		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			&& !cookiebot_addons_enabled_cache_plugin() ) {
-			return;
-		}
-
+		
 		//add filters to handle autocorrection in content
 		add_filter( 'the_content', array(
 			$this,

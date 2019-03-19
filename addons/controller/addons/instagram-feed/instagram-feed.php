@@ -29,7 +29,7 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	protected $cookie_consent;
+	public $cookie_consent;
 
 	/**
 	 * @var Buffer_Output_Interface
@@ -70,22 +70,6 @@ class Instagram_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_sb_instagram() {
-		// Check if instagram feed is loaded.
-		if ( ! defined( 'SBIVER' ) ) {
-			return;
-		}
-
-		// Check if Cookiebot is activated and active.
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
-			return;
-		}
-
-		// consent is given
-		if( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) 
-			&& !cookiebot_addons_enabled_cache_plugin() ) {
-			return;
-		}
-
 		// External js, so manipulate attributes
 		if ( has_action( 'wp_enqueue_scripts', 'sb_instagram_scripts_enqueue' ) ) {
 			$this->script_loader_tag->add_tag( 'sb_instagram_scripts', $this->get_cookie_types() );

@@ -54,12 +54,22 @@ class Plugin_Controller {
 	 */
 	public function load_active_addons() {
 		/**
+		 * Check if Cookiebot is activated and active. Return if cookiebot is inactive
+		 */
+		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
+			return;
+		}
+		
+		/**
 		 * Check plugins one by one and load configuration if it is active
 		 *
 		 * @var $plugin Cookiebot_Addons_Interface
 		 */
 		foreach ( $this->settings_service->get_active_addons() as $plugin ) {
-			$plugin->load_configuration();
+			if ( ! $plugin->cookie_consent->are_cookie_states_accepted( $plugin->get_cookie_types() )
+				|| cookiebot_addons_enabled_cache_plugin() ) {
+				$plugin->load_configuration();
+			}
 		}
 
 		/**
