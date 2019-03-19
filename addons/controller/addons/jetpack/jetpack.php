@@ -71,7 +71,9 @@ class Jetpack implements Cookiebot_Addons_Interface {
 		$this->buffer_output     = $buffer_output;
 
 		// set widgets
-		$this->set_widgets();
+		if($this->is_addon_enabled()) {
+			$this->set_widgets();
+		}
 	}
 
 	/**
