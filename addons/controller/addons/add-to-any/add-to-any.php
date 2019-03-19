@@ -72,13 +72,11 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function cookiebot_addon_add_to_any() {
 		
     $this->buffer_output->add_tag( 'wp_head', 10, array(
-			'data-cfasync' => $this->get_cookie_types(),
-			'addtoany'     => $this->get_cookie_types()
+			'a2a_config'     => $this->get_cookie_types()
 		), false );
 
 		$this->buffer_output->add_tag( 'wp_footer', 10, array(
-			'data-cfasync' => $this->get_cookie_types(),
-			'addtoany'     => $this->get_cookie_types()
+			'a2a_config'     => $this->get_cookie_types()
 		), false );
 
 		$this->buffer_output->add_tag( 'pre_get_posts', 10, array(
