@@ -70,8 +70,9 @@ class Wp_Analytify implements Cookiebot_Addons_Interface {
 	 * @since 1.5.0
 	 */
 	public function cookiebot_addon_analytify() {
-		// Disable Analytify if cookie consent not allowed
-		cookiebot_addons_remove_class_action( 'wp_head', 'WP_Analytify', 'analytify_add_analytics_code' );
+        $this->buffer_output->add_tag( 'wp_head', 10, array(
+            'GoogleAnalyticsObject'     => $this->get_cookie_types()
+        ), false );
 	}
 
 	/**
