@@ -67,5 +67,8 @@
   },
   "Gadwp": {
     "class": "cookiebot_addons\\controller\\addons\\gadwp\\Gadwp"
+  },
+  "Addthis": {
+    "class": "cookiebot_addons\\controller\\addons\\addthis\\Addthis"
   }
 }
