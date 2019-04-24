@@ -166,10 +166,10 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		}
 		unset( $matches );
 
-		preg_match_all( '|<blockquote[^>]*class=\"twitter-tweet\"[^>]*>.*?</script></p>|si', $content, $matches );
+		preg_match_all( '|<blockquote[^>]*class=\"twitter-tweet\"[^>]*>.*?</script>|si', $content, $matches );
 		foreach ( $matches[0] as $match ) {
 			//Find src.
-			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></p></blockquote>|', $match, $matchSrc );
+			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></blockquote>|', $match, $matchSrc );
 			$src = $matchSrc[1];
 
 			//Replace - and add cookie consent notice.
@@ -196,24 +196,25 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		unset( $matches );
 
 
-		//Match all youtube, vimeo and facebook iframes.
+		//Match all speakerdeck, slideshare, screencast, reverbnation, mixcloud, kickstarter,
+		// dailymoition, collegehumor, cloudup, animoto, videopress, youtube, vimeo and facebook iframes.
 		preg_match_all( '/<iframe[^>]* src=("|\')[^("|\')](facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com)*[^>]*>.*?<\/iframe>/mi', $content, $matches );
 
 		foreach ( $matches[0] as $x=>$match ) {
-			/**
-			 * Get the source attribute value
-			 */
+			/** Get the source attribute value */
 			$start = strpos( $match, ' src=' ) + 6;
 			$end   = strpos( $match, $matches[1][$x], $start );
 			$src   = substr( $match, $start, $end - $start );
 
+			/** Skip the matched iframe if the data-cookieconsent attribute exists */
+			if( strpos($match, 'data-cookieconsent') !== false ) {
+			    continue;
+            }
 
-			//Replace - and add cookie consent notice.
+			/**  Replace - and add cookie consent notice. */
 			$adjusted = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $match );
 
-			/**
-			 * Generate placeholder
-			 */
+			/** Generate placeholder */
 			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
 
 			/**
@@ -229,7 +230,27 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			$content  = str_replace( $match, $adjusted, $content );
 		}
 
-
+		unset( $matches );
+		preg_match_all( '/<script.*(instagram|issuu|imgur|polldaddy|tumblr)+.*<\/script>/mi', $content, $matches );
+		foreach ( $matches[0] as $x => $match ) {
+			//Replace - and add cookie consent notice.
+			$adjusted = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $match );
+			/**
+			 * Generate placeholder
+			 */
+			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
+			/**
+			 * Modify placeholder by Filter
+			 *
+			 * @param   $placeholder    string  Current placeholder text
+			 * @param   $src            string  Source attribute from the embedded video
+			 * @param   $this           array   Array of required cookie types
+			 */
+			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
+			$adjusted .= $placeholder;
+			$content  = str_replace( $match, $adjusted, $content );
+		}
+		unset( $matches );
 
 
 
