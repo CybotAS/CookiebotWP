@@ -75,7 +75,6 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 	 */
 	public function cookiebot_addon_custom_facebook_feed() {
 
-		//Remove cff_js action and replace it with our own
 		if ( has_action( 'wp_footer', 'cff_js' ) ) {
 			/**
 			 * Consent not given - no cache
