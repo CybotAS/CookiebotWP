@@ -77,6 +77,13 @@ class Addthis implements Cookiebot_Addons_Interface {
 
 		// block the script untill the consent is given
 		$this->script_loader_tag->add_tag( 'addthis_widget', $this->get_cookie_types() );
+		
+		$this->buffer_output->add_tag( 'wp_footer', 19, array(
+				'addthis_product' => $this->get_cookie_types(),
+			), false );
+		$this->buffer_output->add_tag( 'wp_head', 19, array(
+				'addthis_product ' => $this->get_cookie_types(),
+			), false );
 	}
 
 	/**
