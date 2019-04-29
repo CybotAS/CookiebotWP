@@ -179,7 +179,7 @@ class Addthis implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
+		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element.';
 	}
 
 	/**
