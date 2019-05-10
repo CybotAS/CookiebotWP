@@ -20,11 +20,21 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	private $states = array();
 
 	/**
+	 * @var array|null
+	 */
+	private $cookie;
+
+	/**
 	 * Scan cookiebot cookie
 	 *
+	 * @param   $default_cookie
+	 *
 	 * @since 1.2.0
+	 * @version 2.4.1
 	 */
-	public function __construct() {
+	public function __construct($default_cookie = null) {
+		$this->cookie = ( isset( $_COOKIE['CookieConsent'] ) ) ? $_COOKIE['CookieConsent'] : $default_cookie;
+
 		$this->scan_cookie();
 	}
 
@@ -32,13 +42,14 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 * Scans cookiebot consent cookie and fills in $states with accepted consents.
 	 *
 	 * @since 1.2.0
+	 * @version 2.4.1
 	 */
 	public function scan_cookie() {
 		//default - set strictly necessary cookies
 		$this->add_state( 'necessary' );
 
-		if ( isset( $_COOKIE["CookieConsent"] ) ) {
-			switch ( $_COOKIE["CookieConsent"] ) {
+		if ( ! empty( $this->cookie ) ) {
+			switch ( $this->cookie ) {
 				case "0":
 					//The user has not accepted cookies - set strictly necessary cookies only
 					break;
@@ -53,24 +64,26 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 				default: //The user has accepted one or more type of cookies
 
 					//Read current user consent in encoded JavaScript format
-					$valid_php_json = preg_replace( '/\s*:\s*([a-zA-Z0-9_]+?)([}\[,])/', ':"$1"$2', preg_replace( '/([{\[,])\s*([a-zA-Z0-9_]+?):/', '$1"$2":', str_replace( "'", '"', stripslashes( $_COOKIE["CookieConsent"] ) ) ) );
+					$valid_php_json = preg_replace( '/\s*:\s*([a-zA-Z0-9_]+?)([}\[,])/', ':"$1"$2',
+						preg_replace( '/([{\[,])\s*([a-zA-Z0-9_]+?):/', '$1"$2":',
+							str_replace( "'", '"', stripslashes( $this->cookie ) ) ) );
 					$CookieConsent  = json_decode( $valid_php_json );
 
-					if ( filter_var( $CookieConsent->preferences, FILTER_VALIDATE_BOOLEAN ) ) {
+					if ( isset( $CookieConsent->preferences ) && filter_var( $CookieConsent->preferences, FILTER_VALIDATE_BOOLEAN ) ) {
 						//Current user accepts preference cookies
 						$this->add_state( 'preferences' );
 					} else {
 						//Current user does NOT accept preference cookies
 					}
 
-					if ( filter_var( $CookieConsent->statistics, FILTER_VALIDATE_BOOLEAN ) ) {
+					if ( isset( $CookieConsent->statistics ) && filter_var( $CookieConsent->statistics, FILTER_VALIDATE_BOOLEAN ) ) {
 						//Current user accepts statistics cookies
 						$this->add_state( 'statistics' );
 					} else {
 						//Current user does NOT accept statistics cookies
 					}
 
-					if ( filter_var( $CookieConsent->marketing, FILTER_VALIDATE_BOOLEAN ) ) {
+					if ( isset( $CookieConsent->marketing ) && filter_var( $CookieConsent->marketing, FILTER_VALIDATE_BOOLEAN ) ) {
 						//Current user accepts marketing cookies
 						$this->add_state( 'marketing' );
 					} else {
