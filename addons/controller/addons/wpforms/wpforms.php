@@ -78,7 +78,9 @@ class Wpforms implements Cookiebot_Addons_Interface {
 	 * Create cookie when the visitor gives consent
 	 */
 	public function enqueue_script_for_adding_the_cookie_after_the_consent() {
-		wp_enqueue_script( 'wpforms-gdpr-cookiebot', COOKIEBOT_URL . 'addons/controller/addons/wpforms/cookie-after-consent.js', array( 'jquery' ),
+		wp_enqueue_script( 'wpforms-gdpr-cookiebot',
+			COOKIEBOT_URL . 'addons/controller/addons/wpforms/cookie-after-consent.js',
+			array( 'jquery' ),
 			'',
 			true );
 		wp_localize_script( 'wpforms-gdpr-cookiebot', 'cookiebot_wpforms_settings', array( 'cookie_types' => $this->get_cookie_types() ) );

@@ -115,7 +115,7 @@ class Cookiebot_Addons {
 		 */
 		add_action( 'plugins_loaded', array(
 			new Plugin_Controller( $this->container->get( 'Settings_Service_Interface' ) ),
-			'load_active_addons'
+			'load_active_addons',
 		) );
 
 		/**
@@ -165,7 +165,7 @@ class Cookiebot_Addons {
 				'Script_Loader_Tag_Interface' => DI\object( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag' ),
 				'Cookie_Consent_Interface'    => DI\object( 'cookiebot_addons\lib\Cookie_Consent' ),
 				'Buffer_Output_Interface'     => DI\object( 'cookiebot_addons\lib\buffer\Buffer_Output' ),
-				'plugins'                     => DI\value( $this->plugins )
+				'plugins'                     => DI\value( $this->plugins ),
 			)
 		);
 

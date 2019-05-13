@@ -102,6 +102,7 @@ final class Cookiebot_WP {
 			if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED')) && $dismissAddons !== true ) {
 				//Make sure we got a PHP version that works
 				if(version_compare(PHP_VERSION, '5.4.0', '>=')) {
+				    define('COOKIEBOT_URL', plugin_dir_url( __FILE__ ));
 					include_once('addons/cookiebot-addons-init.php');
 				}
 				else {
