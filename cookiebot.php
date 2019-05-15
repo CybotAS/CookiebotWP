@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.4.1';
+	public $version = '2.4.2';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -300,12 +300,12 @@ final class Cookiebot_WP {
     }
 
     // Check if cookiebot autoupdate is disabled
-		if(!get_option('cookiebot-autoupdate',true)) {
+		if(!get_option('cookiebot-autoupdate',false)) {
 			return $update;
 		}
 
 		// Check if multisite autoupdate is disabled
-		if(is_multisite() && !get_site_option('cookiebot-autoupdate',true)) {
+		if(is_multisite() && !get_site_option('cookiebot-autoupdate',false)) {
 			return $update;
 		}
 
@@ -549,7 +549,7 @@ final class Cookiebot_WP {
 						<tr valign="top">
 							<th scope="row"><?php _e('Auto-update Cookiebot','cookiebot'); ?></th>
 							<td>
-								<input type="checkbox" name="cookiebot-autoupdate" value="1" <?php checked(1,get_option('cookiebot-autoupdate',true), true); ?> />
+								<input type="checkbox" name="cookiebot-autoupdate" value="1" <?php checked(1,get_option('cookiebot-autoupdate',false), true); ?> />
 								<p class="description">
 									<?php _e('Automatic update your Cookiebot plugin when new releases becomes available.','cookiebot') ?>
 								</p>
@@ -714,7 +714,7 @@ final class Cookiebot_WP {
 					<tr valign="top">
 						<th scope="row"><?php _e('Auto-update Cookiebot','cookiebot'); ?></th>
 						<td>
-							<input type="checkbox" name="cookiebot-autoupdate" value="1" <?php checked(1,get_site_option('cookiebot-autoupdate',true), true); ?> />
+							<input type="checkbox" name="cookiebot-autoupdate" value="1" <?php checked(1,get_site_option('cookiebot-autoupdate',false), true); ?> />
 							<p class="description">
 								<?php _e('Automatic update your Cookiebot plugin when new releases becomes available.','cookiebot') ?>
 							</p>
