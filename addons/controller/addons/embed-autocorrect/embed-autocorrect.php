@@ -260,7 +260,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	/**
 	 * Implementation of filter wp_video_shortcode - fixing code for cookiebot.
 	 */
-	public function cookiebot_addon_embed_autocorrect_handle_video($output, $atts, $video, $post_id, $library) {
+	public function cookiebot_addon_embed_autocorrect_handle_video($output, $atts=array(), $video='', $post_id=null, $library='') {
 		/**
 		 * Generate placeholder
 		 */
@@ -277,7 +277,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	/**
 	 * Implementation of filter wp_audio_shortcode - fixing code for cookiebot.
 	 */
-	public function cookiebot_addon_embed_autocorrect_handle_audio($output, $atts, $video, $post_id, $library) {
+	public function cookiebot_addon_embed_autocorrect_handle_audio($output, $atts=array(), $video='', $post_id=null, $library='') {
 		/**
 		 * Generate placeholder
 		 */
