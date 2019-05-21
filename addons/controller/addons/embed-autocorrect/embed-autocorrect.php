@@ -261,13 +261,16 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * Implementation of filter wp_video_shortcode - fixing code for cookiebot.
 	 */
 	public function cookiebot_addon_embed_autocorrect_handle_video($output, $atts=array(), $video='', $post_id=null, $library='') {
+		/* Find src in markup */
+		preg_match( '| src=\"([^\"]*)\"|', $output, $match );
+		$src = $match[1];
+		
 		/**
 		 * Generate placeholder
 		 */
 		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
 		$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
-
-
+		
 		$output = str_replace( 'wp-video-shortcode','wp-video-shortcode__disabled', $output );
 		$output = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $output );
 		$output.= $placeholder;
@@ -278,6 +281,10 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * Implementation of filter wp_audio_shortcode - fixing code for cookiebot.
 	 */
 	public function cookiebot_addon_embed_autocorrect_handle_audio($output, $atts=array(), $video='', $post_id=null, $library='') {
+		/* Find src in markup */
+		preg_match( '| src=\"([^\"]*)\"|', $output, $match );
+		$src = $match[1];
+		
 		/**
 		 * Generate placeholder
 		 */
