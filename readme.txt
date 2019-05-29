@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent
 * Requires at least: 4.4
 * Tested up to: 5.1
-* Stable tag: 2.4.4
+* Stable tag: 2.4.5
 * Requires PHP: 5.4
 * License: GPLv2 or later
 
