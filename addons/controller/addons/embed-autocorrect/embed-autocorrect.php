@@ -597,20 +597,45 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface
         //do nothing
     }
 
+    /**
+     * Returns regex from the database
+     * If it does not exist then it will return the default regex
+     *
+     * @return string
+     *
+     * @since 2.4.6
+     */
     private function get_regex()
     {
         return $this->settings->get_addon_regex($this->get_option_name(), $this->get_default_regex());
     }
 
+    /**
+     * Returns the default regex
+     *
+     * @return string
+     *
+     * @since 2.4.6
+     */
     private function get_default_regex()
     {
         return '/<iframe[^>]* src=("|\').*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com).*[^>].*>.*?<\/iframe>/mi';
     }
 
     /**
+     * Returns true if the default and the normal regex functions match
+     *
+     * @return bool
+     *
+     * @since 2.4.6
+     */
+    private function is_regex_default() {
+        return $this->get_regex() === $this->get_default_regex();
+    }
+    /**
      * @return mixed
      *
-     * @since 2.4.5
+     * @since 2.4.6
      */
     public function extra_available_addon_option()
     {
@@ -621,6 +646,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface
                   title="<?php echo __('This is for more advanced users.', 'cookiebot-addons'); ?>"></span>
         </div>
         <div class="advanced_options">
+
             <label for="embed_regex"><?php _e('Regex:', 'cookiebot-addons'); ?></label>
             <textarea
                     id="embed_regex"
@@ -629,11 +655,16 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface
                     name="cookiebot_available_addons[<?php echo $this->get_option_name(); ?>][regex]"
                     disabled
             ><?php echo esc_html($this->get_regex()); ?></textarea>
+
+            <?php if( $this->is_regex_default() ) : ?>
+                <button id="edit_embed_regex" class="button"><?php _e('Edit regex', 'cookiebot-addons'); ?></button>
+            <?php endif; ?>
+
             <button
                     id="btn_default_embed_regex"
-                    class="button"
+                    class="button<?php echo ($this->is_regex_default()) ? ' hidden' : ''; ?>"
                     type="button"
-                    value="Reset to default regex"><?php _e('Reset to default regex', 'cookiebot-addons');?></button>
+                    value="Reset to default regex"><?php _e('Reset to default regex', 'cookiebot-addons'); ?></button>
             <input
                     type="hidden"
                     name="default_embed_regex"

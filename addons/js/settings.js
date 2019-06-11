@@ -17,6 +17,7 @@ function init() {
     button_delete_language();
     tooltip();
     show_advanced_options();
+    edit_embed_regex();
     set_default_embed_regex();
 }
 
@@ -158,18 +159,28 @@ function show_advanced_options() {
         /** Toggle displaying advanced options **/
         jQuery( this ).next().toggle();
 
+        return false;
+    } );
+}
+
+function edit_embed_regex() {
+    jQuery(document).on('click', '#edit_embed_regex', function(e) {
+        e.preventDefault();
+
         /** Get the textarea for the embed regex **/
         let embed_regex = document.getElementById("embed_regex");
 
-        /** If advanced option is shown, then remove the disable attribute in the textarea **/
-        if( embed_regex.disabled === false ) {
-            embed_regex.disabled = true;
-        } else {
-            embed_regex.disabled = false;
-        }
+        /** Remove the disable attribute in the textarea **/
+        embed_regex.disabled = false;
+
+        /** Make the Reset default button back visible **/
+        let default_button = document.getElementById('btn_default_embed_regex');
+        default_button.classList.remove('hidden');
+
+        jQuery(this).hide();
 
         return false;
-    } );
+    });
 }
 
 /**
@@ -185,7 +196,7 @@ function set_default_embed_regex() {
         let default_regex = jQuery( "#default_embed_regex").val();
 
         /** Update the textarea of the embed regex **/
-        jQuery( '#embed_regex' ).html( default_regex );
+        jQuery( '#embed_regex' ).val( default_regex );
 
         return false;
     } );
