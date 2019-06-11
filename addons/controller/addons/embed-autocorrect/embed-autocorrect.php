@@ -219,7 +219,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface
 
         //Match all speakerdeck, slideshare, screencast, reverbnation, mixcloud, kickstarter,
         // dailymoition, collegehumor, cloudup, animoto, videopress, youtube, vimeo and facebook iframes.
-        preg_match_all($this->get_default_regex(),
+        preg_match_all($this->get_regex(),
             $content, $matches);
 
         foreach ($matches[0] as $x => $match) {
