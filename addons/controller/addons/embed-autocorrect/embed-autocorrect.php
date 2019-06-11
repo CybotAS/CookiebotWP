@@ -8,520 +8,638 @@ use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\Cookie_Consent_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
 
-class Embed_Autocorrect implements Cookiebot_Addons_Interface {
+class Embed_Autocorrect implements Cookiebot_Addons_Interface
+{
 
-	/**
-	 * @var Settings_Service_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $settings;
+    /**
+     * @var Settings_Service_Interface
+     *
+     * @since 1.3.0
+     */
+    protected $settings;
 
-	/**
-	 * @var Script_Loader_Tag_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $script_loader_tag;
+    /**
+     * @var Script_Loader_Tag_Interface
+     *
+     * @since 1.3.0
+     */
+    protected $script_loader_tag;
 
-	/**
-	 * @var Cookie_Consent_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	public $cookie_consent;
+    /**
+     * @var Cookie_Consent_Interface
+     *
+     * @since 1.3.0
+     */
+    public $cookie_consent;
 
-	/**
-	 * @var Buffer_Output_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $buffer_output;
+    /**
+     * @var Buffer_Output_Interface
+     *
+     * @since 1.3.0
+     */
+    protected $buffer_output;
 
-	/**
-	 * Jetpack constructor.
-	 *
-	 * @param $settings          Settings_Service_Interface
-	 * @param $script_loader_tag Script_Loader_Tag_Interface
-	 * @param $cookie_consent    Cookie_Consent_Interface
-	 * @param $buffer_output     Buffer_Output_Interface
-	 *
-	 * @since 1.2.0
-	 */
-	public function __construct( Settings_Service_Interface $settings, Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent, Buffer_Output_Interface $buffer_output ) {
-		$this->settings          = $settings;
-		$this->script_loader_tag = $script_loader_tag;
-		$this->cookie_consent    = $cookie_consent;
-		$this->buffer_output     = $buffer_output;
-	}
+    /**
+     * Jetpack constructor.
+     *
+     * @param $settings          Settings_Service_Interface
+     * @param $script_loader_tag Script_Loader_Tag_Interface
+     * @param $cookie_consent    Cookie_Consent_Interface
+     * @param $buffer_output     Buffer_Output_Interface
+     *
+     * @since 1.2.0
+     */
+    public function __construct(
+        Settings_Service_Interface $settings,
+        Script_Loader_Tag_Interface $script_loader_tag,
+        Cookie_Consent_Interface $cookie_consent,
+        Buffer_Output_Interface $buffer_output
+    ) {
+        $this->settings          = $settings;
+        $this->script_loader_tag = $script_loader_tag;
+        $this->cookie_consent    = $cookie_consent;
+        $this->buffer_output     = $buffer_output;
+    }
 
-	/**
-	 * Loads addon configuration
-	 *
-	 * @since 1.3.0
-	 */
-	public function load_configuration() {
-		/**
-		 * We add the action after wp_loaded and replace the original GA Google
-		 * Analytics action with our own adjusted version.
-		 */
-		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_embed_autocorrect' ) );
-	}
+    /**
+     * Loads addon configuration
+     *
+     * @since 1.3.0
+     */
+    public function load_configuration()
+    {
+        /**
+         * We add the action after wp_loaded and replace the original GA Google
+         * Analytics action with our own adjusted version.
+         */
+        add_action('wp_loaded', array($this, 'cookiebot_addon_embed_autocorrect'));
+    }
 
-	/**
-	 * Check for embed autocorrect action hooks
-	 *
-	 * @since 1.3.0
-	 */
-	public function cookiebot_addon_embed_autocorrect() {
-		
-		//add filters to handle autocorrection in content
-		add_filter( 'the_content', array(
-			$this,
-			'cookiebot_addon_embed_autocorrect_content'
-		), 1000 ); //Ensure it is executed as the last filter
+    /**
+     * Check for embed autocorrect action hooks
+     *
+     * @since 1.3.0
+     */
+    public function cookiebot_addon_embed_autocorrect()
+    {
 
-		//add filters to handle autocorrection in widget text
-		add_filter( 'widget_text', array(
-			$this,
-			'cookiebot_addon_embed_autocorrect_content'
-		), 1000 ); //Ensure it is executed as the last filter
+        //add filters to handle autocorrection in content
+        add_filter('the_content', array(
+            $this,
+            'cookiebot_addon_embed_autocorrect_content',
+        ), 1000); //Ensure it is executed as the last filter
 
-
-		//add fitler to handle video shortcodes
-		add_filter( 'wp_video_shortcode', array(
-			$this,
-			'cookiebot_addon_embed_autocorrect_handle_video'
-		), 1000 );
-
-		//add fitler to handle audio shortcodes
-		add_filter( 'wp_audio_shortcode', array(
-			$this,
-			'cookiebot_addon_embed_autocorrect_handle_audio'
-		), 1000 );
-
-		add_action( 'wp_head', array(
-			$this,
-			'cookiebot_addon_embed_autocorrect_javascript'
-		) );
-
-	}
-
-	/**
-	 * Add javascript to handle videos as loaded
-	 *
-	 * @since 1.1.0
-	 */
-	public function cookiebot_addon_embed_autocorrect_javascript() {
-		$library = apply_filters( 'wp_video_shortcode_library', 'mediaelement' );
-		if($library === 'mediaelement') {
-			?><style type="text/css">video.wp-video-shortcode__disabled,audio.wp-audio-shortcode__disabled { display:none; }</style>
-			<script>
-			window.addEventListener('CookiebotOnTagsExecuted',function (e) {
-				if(<?php echo 'Cookiebot.consent.'.implode(' && Cookiebot.consent.',$this->get_cookie_types()); ?>) {
-					jQuery('.wp-video-shortcode__disabled').addClass('wp-video-shortcode').removeClass('wp-video-shortcode__disabled');
-					jQuery('.wp-audio-shortcode__disabled').addClass('wp-audio-shortcode').removeClass('wp-audio-shortcode__disabled');
-					window.wp.mediaelement.initialize();
-				}
-			}, false );
-			</script><?php
-		}
-	}
+        //add filters to handle autocorrection in widget text
+        add_filter('widget_text', array(
+            $this,
+            'cookiebot_addon_embed_autocorrect_content',
+        ), 1000); //Ensure it is executed as the last filter
 
 
-	/**
-	 * Autocorrection of Vimeo and Youtube tags to make them GDPR compatible
-	 *
-	 * @since 1.1.0
-	 */
-	public function cookiebot_addon_embed_autocorrect_content( $content ) {
-		//Make sure Cookiebot is active and the user has enabled autocorrection
+        //add fitler to handle video shortcodes
+        add_filter('wp_video_shortcode', array(
+            $this,
+            'cookiebot_addon_embed_autocorrect_handle_video',
+        ), 1000);
 
-		preg_match_all( '|<div[^>]*id=\"fb-root\">.*?</blockquote>|si', $content, $matches );
-		foreach ( $matches[0] as $match ) {
-			//Find src.
-			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></p></blockquote>|', $match, $matchSrc );
-			$src = $matchSrc[1];
+        //add fitler to handle audio shortcodes
+        add_filter('wp_audio_shortcode', array(
+            $this,
+            'cookiebot_addon_embed_autocorrect_handle_audio',
+        ), 1000);
 
-			//Replace - and add cookie consent notice.
-			$adjusted = str_replace( '<script>', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '">', $match );
+        add_action('wp_head', array(
+            $this,
+            'cookiebot_addon_embed_autocorrect_javascript',
+        ));
+    }
 
-			/**
-			 * Generate placeholder
-			 */
-			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
-
-			/**
-			 * Modify placeholder by Filter
-			 *
-			 * @param   $placeholder    string  Current placeholder text
-			 * @param   $src            string  Source attribute from the embedded video
-			 * @param   $this           array   Array of required cookie types
-			 */
-			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
-
-			$adjusted .= $placeholder;
-			$content  = str_replace( $match, $adjusted, $content );
-
-		}
-		unset( $matches );
-
-		preg_match_all( '|<blockquote[^>]*class=\"twitter-tweet\"[^>]*>.*?</script>|si', $content, $matches );
-		foreach ( $matches[0] as $match ) {
-			//Find src.
-			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></blockquote>|', $match, $matchSrc );
-			$src = $matchSrc[1];
-
-			//Replace - and add cookie consent notice.
-			$adjusted = str_replace( '<script ', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" ', $match );
-
-			/**
-			 * Generate placeholder
-			 */
-			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
-
-			/**
-			 * Modify placeholder by Filter
-			 *
-			 * @param   $placeholder    string  Current placeholder text
-			 * @param   $src            string  Source attribute from the embedded video
-			 * @param   $this           array   Array of required cookie types
-			 */
-			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
-
-			$adjusted .= $placeholder;
-			$content  = str_replace( $match, $adjusted, $content );
-
-		}
-		unset( $matches );
+    /**
+     * Add javascript to handle videos as loaded
+     *
+     * @since 1.1.0
+     */
+    public function cookiebot_addon_embed_autocorrect_javascript()
+    {
+        $library = apply_filters('wp_video_shortcode_library', 'mediaelement');
+        if ($library === 'mediaelement') {
+            ?>
+            <style type="text/css">video.wp-video-shortcode__disabled, audio.wp-audio-shortcode__disabled {
+                    display: none;
+                }</style>
+            <script>
+                window.addEventListener( 'CookiebotOnTagsExecuted', function ( e ) {
+                    if (<?php echo 'Cookiebot.consent.'.implode(' && Cookiebot.consent.',
+                            $this->get_cookie_types()); ?>) {
+                        jQuery( '.wp-video-shortcode__disabled' ).addClass( 'wp-video-shortcode' ).removeClass( 'wp-video-shortcode__disabled' );
+                        jQuery( '.wp-audio-shortcode__disabled' ).addClass( 'wp-audio-shortcode' ).removeClass( 'wp-audio-shortcode__disabled' );
+                        window.wp.mediaelement.initialize();
+                    }
+                }, false );
+            </script><?php
+        }
+    }
 
 
-		//Match all speakerdeck, slideshare, screencast, reverbnation, mixcloud, kickstarter,
-		// dailymoition, collegehumor, cloudup, animoto, videopress, youtube, vimeo and facebook iframes.
-		preg_match_all( '/<iframe[^>]* src=("|\').*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com).*[^>].*>.*?<\/iframe>/mi', $content, $matches );
+    /**
+     * Autocorrection of Vimeo and Youtube tags to make them GDPR compatible
+     *
+     * @since 1.1.0
+     */
+    public function cookiebot_addon_embed_autocorrect_content($content)
+    {
+        //Make sure Cookiebot is active and the user has enabled autocorrection
 
-		foreach ( $matches[0] as $x=>$match ) {
-			/** Get the source attribute value */
-			$start = strpos( $match, ' src=' ) + 6;
-			$end   = strpos( $match, $matches[1][$x], $start );
-			$src   = substr( $match, $start, $end - $start );
+        preg_match_all('|<div[^>]*id=\"fb-root\">.*?</blockquote>|si', $content, $matches);
+        foreach ($matches[0] as $match) {
+            //Find src.
+            preg_match('|<a href=\"([^\"]*)\">([^<]*)</a></p></blockquote>|', $match, $matchSrc);
+            $src = $matchSrc[1];
 
-			/** Skip the matched iframe if the data-cookieconsent attribute exists */
-			if( strpos($match, 'data-cookieconsent') !== false ) {
-			    continue;
+            //Replace - and add cookie consent notice.
+            $adjusted = str_replace('<script>',
+                '<script type="text/plain" data-cookieconsent="'.cookiebot_addons_output_cookie_types($this->get_cookie_types()).'">',
+                $match);
+
+            /**
+             * Generate placeholder
+             */
+            $placeholder = $this->generate_placeholder_with_src(apply_filters('cookiebot_addons_embed_source',
+                $src));
+
+            /**
+             * Modify placeholder by Filter
+             *
+             * @param   $placeholder    string  Current placeholder text
+             * @param   $src            string  Source attribute from the embedded video
+             * @param   $this           array   Array of required cookie types
+             */
+            $placeholder = apply_filters('cookiebot_addons_embed_placeholder', $placeholder, $src,
+                $this->get_cookie_types());
+
+            $adjusted .= $placeholder;
+            $content  = str_replace($match, $adjusted, $content);
+
+        }
+        unset($matches);
+
+        preg_match_all('|<blockquote[^>]*class=\"twitter-tweet\"[^>]*>.*?</script>|si', $content, $matches);
+        foreach ($matches[0] as $match) {
+            //Find src.
+            preg_match('|<a href=\"([^\"]*)\">([^<]*)</a></blockquote>|', $match, $matchSrc);
+            $src = $matchSrc[1];
+
+            //Replace - and add cookie consent notice.
+            $adjusted = str_replace('<script ',
+                '<script type="text/plain" data-cookieconsent="'.cookiebot_addons_output_cookie_types($this->get_cookie_types()).'" ',
+                $match);
+
+            /**
+             * Generate placeholder
+             */
+            $placeholder = $this->generate_placeholder_with_src(apply_filters('cookiebot_addons_embed_source',
+                $src));
+
+            /**
+             * Modify placeholder by Filter
+             *
+             * @param   $placeholder    string  Current placeholder text
+             * @param   $src            string  Source attribute from the embedded video
+             * @param   $this           array   Array of required cookie types
+             */
+            $placeholder = apply_filters('cookiebot_addons_embed_placeholder', $placeholder, $src,
+                $this->get_cookie_types());
+
+            $adjusted .= $placeholder;
+            $content  = str_replace($match, $adjusted, $content);
+
+        }
+        unset($matches);
+
+
+        //Match all speakerdeck, slideshare, screencast, reverbnation, mixcloud, kickstarter,
+        // dailymoition, collegehumor, cloudup, animoto, videopress, youtube, vimeo and facebook iframes.
+        preg_match_all($this->get_default_regex(),
+            $content, $matches);
+
+        foreach ($matches[0] as $x => $match) {
+            /** Get the source attribute value */
+            $start = strpos($match, ' src=') + 6;
+            $end   = strpos($match, $matches[1][$x], $start);
+            $src   = substr($match, $start, $end - $start);
+
+            /** Skip the matched iframe if the data-cookieconsent attribute exists */
+            if (strpos($match, 'data-cookieconsent') !== false) {
+                continue;
             }
 
-			/**  Replace - and add cookie consent notice. */
-			$adjusted = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $match );
+            /**  Replace - and add cookie consent notice. */
+            $adjusted = str_replace(' src=',
+                ' data-cookieconsent="'.cookiebot_addons_output_cookie_types($this->get_cookie_types()).'" data-src=',
+                $match);
 
-			/** Generate placeholder */
-			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
+            /** Generate placeholder */
+            $placeholder = $this->generate_placeholder_with_src(apply_filters('cookiebot_addons_embed_source',
+                $src));
 
-			/**
-			 * Modify placeholder by Filter
-			 *
-			 * @param   $placeholder    string  Current placeholder text
-			 * @param   $src            string  Source attribute from the embedded video
-			 * @param   $this           array   Array of required cookie types
-			 */
-			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
+            /**
+             * Modify placeholder by Filter
+             *
+             * @param   $placeholder    string  Current placeholder text
+             * @param   $src            string  Source attribute from the embedded video
+             * @param   $this           array   Array of required cookie types
+             */
+            $placeholder = apply_filters('cookiebot_addons_embed_placeholder', $placeholder, $src,
+                $this->get_cookie_types());
 
-			$adjusted .= $placeholder;
-			$content  = str_replace( $match, $adjusted, $content );
-		}
+            $adjusted .= $placeholder;
+            $content  = str_replace($match, $adjusted, $content);
+        }
 
-		unset( $matches );
-		preg_match_all( '/<script.*(instagram|issuu|imgur|polldaddy|tumblr)+.*<\/script>/mi', $content, $matches );
-		foreach ( $matches[0] as $x => $match ) {
-			//Replace - and add cookie consent notice.
-			$adjusted = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $match );
-			/**
-			 * Generate placeholder
-			 */
-			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
-			/**
-			 * Modify placeholder by Filter
-			 *
-			 * @param   $placeholder    string  Current placeholder text
-			 * @param   $src            string  Source attribute from the embedded video
-			 * @param   $this           array   Array of required cookie types
-			 */
-			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
-			$adjusted .= $placeholder;
-			$content  = str_replace( $match, $adjusted, $content );
-		}
-		unset( $matches );
+        unset($matches);
+        preg_match_all('/<script.*(instagram|issuu|imgur|polldaddy|tumblr)+.*<\/script>/mi', $content, $matches);
+        foreach ($matches[0] as $x => $match) {
+            //Replace - and add cookie consent notice.
+            $adjusted = str_replace(' src=',
+                ' data-cookieconsent="'.cookiebot_addons_output_cookie_types($this->get_cookie_types()).'" data-src=',
+                $match);
+            /**
+             * Generate placeholder
+             */
+            $placeholder = $this->generate_placeholder_with_src(apply_filters('cookiebot_addons_embed_source',
+                $src));
+            /**
+             * Modify placeholder by Filter
+             *
+             * @param   $placeholder    string  Current placeholder text
+             * @param   $src            string  Source attribute from the embedded video
+             * @param   $this           array   Array of required cookie types
+             */
+            $placeholder = apply_filters('cookiebot_addons_embed_placeholder', $placeholder, $src,
+                $this->get_cookie_types());
+            $adjusted    .= $placeholder;
+            $content     = str_replace($match, $adjusted, $content);
+        }
+        unset($matches);
 
 
+        return $content;
+    }
 
-		return $content;
-	}
+    /**
+     * Implementation of filter wp_video_shortcode - fixing code for cookiebot.
+     */
+    public function cookiebot_addon_embed_autocorrect_handle_video(
+        $output,
+        $atts = array(),
+        $video = '',
+        $post_id = null,
+        $library = ''
+    ) {
+        /* Find src in markup */
+        preg_match('| src=\"([^\"]*)\"|', $output, $match);
+        $src = $match[1];
 
-	/**
-	 * Implementation of filter wp_video_shortcode - fixing code for cookiebot.
-	 */
-	public function cookiebot_addon_embed_autocorrect_handle_video($output, $atts=array(), $video='', $post_id=null, $library='') {
-		/* Find src in markup */
-		preg_match( '| src=\"([^\"]*)\"|', $output, $match );
-		$src = $match[1];
-		
-		/**
-		 * Generate placeholder
-		 */
-		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
-		$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
-		
-		$output = str_replace( 'wp-video-shortcode','wp-video-shortcode__disabled', $output );
-		$output = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $output );
-		$output.= $placeholder;
-		return $output;
-	}
+        /**
+         * Generate placeholder
+         */
+        $placeholder = $this->generate_placeholder_with_src(apply_filters('cookiebot_addons_embed_source', $src));
+        $placeholder = apply_filters('cookiebot_addons_embed_placeholder', $placeholder, $src,
+            $this->get_cookie_types());
 
-	/**
-	 * Implementation of filter wp_audio_shortcode - fixing code for cookiebot.
-	 */
-	public function cookiebot_addon_embed_autocorrect_handle_audio($output, $atts=array(), $video='', $post_id=null, $library='') {
-		/* Find src in markup */
-		preg_match( '| src=\"([^\"]*)\"|', $output, $match );
-		$src = $match[1];
-		
-		/**
-		 * Generate placeholder
-		 */
-		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
-		$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src, $this->get_cookie_types() );
+        $output = str_replace('wp-video-shortcode', 'wp-video-shortcode__disabled', $output);
+        $output = str_replace(' src=',
+            ' data-cookieconsent="'.cookiebot_addons_output_cookie_types($this->get_cookie_types()).'" data-src=',
+            $output);
+        $output .= $placeholder;
 
-		$output = str_replace( 'wp-audio-shortcode','wp-audio-shortcode__disabled', $output );
-		$output = str_replace( ' src=', ' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=', $output );
-		$output.= $placeholder;
-		return $output;
-	}
+        return $output;
+    }
 
-	/**
-	 * Generates placeholder for given source
-	 *
-	 * @param $src
-	 *
-	 * @return string
-	 */
-	public function generate_placeholder_with_src( $src = '' ) {
-		$cookieContentNotice = '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_cookie_types() ) . '">';
-		$cookieContentNotice .= $this->get_placeholder( $src );
-		$cookieContentNotice .= '</div>';
+    /**
+     * Implementation of filter wp_audio_shortcode - fixing code for cookiebot.
+     */
+    public function cookiebot_addon_embed_autocorrect_handle_audio(
+        $output,
+        $atts = array(),
+        $video = '',
+        $post_id = null,
+        $library = ''
+    ) {
+        /* Find src in markup */
+        preg_match('| src=\"([^\"]*)\"|', $output, $match);
+        $src = $match[1];
 
-		return $cookieContentNotice;
-	}
+        /**
+         * Generate placeholder
+         */
+        $placeholder = $this->generate_placeholder_with_src(apply_filters('cookiebot_addons_embed_source', $src));
+        $placeholder = apply_filters('cookiebot_addons_embed_placeholder', $placeholder, $src,
+            $this->get_cookie_types());
 
-	/**
-	 * Return addon/plugin name
-	 *
-	 * @return string
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_addon_name() {
-		return 'Embed autocorrect';
-	}
+        $output = str_replace('wp-audio-shortcode', 'wp-audio-shortcode__disabled', $output);
+        $output = str_replace(' src=',
+            ' data-cookieconsent="'.cookiebot_addons_output_cookie_types($this->get_cookie_types()).'" data-src=',
+            $output);
+        $output .= $placeholder;
 
-	/**
-	 * Option name in the database
-	 *
-	 * @return string
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_option_name() {
-		return 'embed_autocorrect';
-	}
+        return $output;
+    }
 
-	/**
-	 * Plugin file path
-	 *
-	 * @return string
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_plugin_file() {
-		return false;
-	}
+    /**
+     * Generates placeholder for given source
+     *
+     * @param $src
+     *
+     * @return string
+     */
+    public function generate_placeholder_with_src($src = '')
+    {
+        $cookieContentNotice = '<div class="cookieconsent-optout-'.cookiebot_addons_get_one_cookie_type($this->get_cookie_types()).'">';
+        $cookieContentNotice .= $this->get_placeholder($src);
+        $cookieContentNotice .= '</div>';
 
-	/**
-	 * Returns checked cookie types
-	 * @return mixed
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_cookie_types() {
-		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
-	}
+        return $cookieContentNotice;
+    }
 
-	/**
-	 * Returns default cookie types
-	 * @return array
-	 *
-	 * @since 1.5.0
-	 */
-	public function get_default_cookie_types() {
-		return array( 'marketing', 'statistics' );
-	}
+    /**
+     * Return addon/plugin name
+     *
+     * @return string
+     *
+     * @since 1.3.0
+     */
+    public function get_addon_name()
+    {
+        return 'Embed autocorrect';
+    }
 
-	/**
-	 * Check if plugin is activated and checked in the backend
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_enabled() {
-		return $this->settings->is_addon_enabled( $this->get_option_name() );
-	}
+    /**
+     * Option name in the database
+     *
+     * @return string
+     *
+     * @since 1.3.0
+     */
+    public function get_option_name()
+    {
+        return 'embed_autocorrect';
+    }
 
-	/**
-	 * Checks if addon is installed
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_installed() {
-		return $this->settings->is_addon_installed( $this->get_plugin_file() );
-	}
+    /**
+     * Plugin file path
+     *
+     * @return string
+     *
+     * @since 1.3.0
+     */
+    public function get_plugin_file()
+    {
+        return false;
+    }
 
-	/**
-	 * Checks if addon is activated
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_activated() {
-		return $this->settings->is_addon_activated( $this->get_plugin_file() );
-	}
+    /**
+     * Returns checked cookie types
+     * @return mixed
+     *
+     * @since 1.3.0
+     */
+    public function get_cookie_types()
+    {
+        return $this->settings->get_cookie_types($this->get_option_name(), $this->get_default_cookie_types());
+    }
 
-	/**
-	 * Retrieves current installed version of the addon
-	 *
-	 * @return bool
-	 *
-	 * @since 2.2.1
-	 */
-	public function get_addon_version() {
-		return false;
-	}
+    /**
+     * Returns default cookie types
+     * @return array
+     *
+     * @since 1.5.0
+     */
+    public function get_default_cookie_types()
+    {
+        return array('marketing', 'statistics');
+    }
 
-	/**
-	 * Default placeholder content
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
-	}
+    /**
+     * Check if plugin is activated and checked in the backend
+     *
+     * @since 1.3.0
+     */
+    public function is_addon_enabled()
+    {
+        return $this->settings->is_addon_enabled($this->get_option_name());
+    }
 
-	/**
-	 * Get placeholder content
-	 *
-	 * This function will check following features:
-	 * - Current language
-	 *
-	 * @param $src
-	 *
-	 * @return bool|mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_placeholder( $src = '' ) {
-		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
-	}
+    /**
+     * Checks if addon is installed
+     *
+     * @since 1.3.0
+     */
+    public function is_addon_installed()
+    {
+        return $this->settings->is_addon_installed($this->get_plugin_file());
+    }
 
-	/**
-	 * Checks if it does have custom placeholder content
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function has_placeholder() {
-		return $this->settings->has_placeholder( $this->get_option_name() );
-	}
+    /**
+     * Checks if addon is activated
+     *
+     * @since 1.3.0
+     */
+    public function is_addon_activated()
+    {
+        return $this->settings->is_addon_activated($this->get_plugin_file());
+    }
 
-	/**
-	 * returns all placeholder contents
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_placeholders() {
-		return $this->settings->get_placeholders( $this->get_option_name() );
-	}
+    /**
+     * Retrieves current installed version of the addon
+     *
+     * @return bool
+     *
+     * @since 2.2.1
+     */
+    public function get_addon_version()
+    {
+        return false;
+    }
 
-	/**
-	 * Return true if the placeholder is enabled
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function is_placeholder_enabled() {
-		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
-	}
+    /**
+     * Default placeholder content
+     *
+     * @return string
+     *
+     * @since 1.8.0
+     */
+    public function get_default_placeholder()
+    {
+        return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
+    }
 
-	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_extra_information() {
-		return '<p>' . __( 'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.', 'cookiebot-addons' ) . '</p>';
-	}
+    /**
+     * Get placeholder content
+     *
+     * This function will check following features:
+     * - Current language
+     *
+     * @param $src
+     *
+     * @return bool|mixed
+     *
+     * @since 1.8.0
+     */
+    public function get_placeholder($src = '')
+    {
+        return $this->settings->get_placeholder($this->get_option_name(), $this->get_default_placeholder(),
+            cookiebot_addons_output_cookie_types($this->get_cookie_types()), $src);
+    }
 
-	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
-	 *
-	 * @return boolean
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_svn_url() {
-		return false;
-	}
+    /**
+     * Checks if it does have custom placeholder content
+     *
+     * @return mixed
+     *
+     * @since 1.8.0
+     */
+    public function has_placeholder()
+    {
+        return $this->settings->has_placeholder($this->get_option_name());
+    }
 
-	/**
-	 * Placeholder helper overlay in the settings page.
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_placeholder_helper() {
-		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%src - video source</li><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in the frontend</li></ul>';
-	}
+    /**
+     * returns all placeholder contents
+     *
+     * @return mixed
+     *
+     * @since 1.8.0
+     */
+    public function get_placeholders()
+    {
+        return $this->settings->get_placeholders($this->get_option_name());
+    }
 
-	/**
-	 * Returns parent class or false
-	 *
-	 * @return string|bool
-	 *
-	 * @since 2.1.3
-	 */
-	public function get_parent_class() {
-		return get_parent_class( $this );
-	}
+    /**
+     * Return true if the placeholder is enabled
+     *
+     * @return mixed
+     *
+     * @since 1.8.0
+     */
+    public function is_placeholder_enabled()
+    {
+        return $this->settings->is_placeholder_enabled($this->get_option_name());
+    }
 
-	/**
-	 * Action after enabling the addon on the settings page
-	 *
-	 * @since 2.2.0
-	 */
-	public function post_hook_after_enabling() {
-		//do nothing
-	}
+    /**
+     * Adds extra information under the label
+     *
+     * @return string
+     *
+     * @since 1.8.0
+     */
+    public function get_extra_information()
+    {
+        return '<p>'.__('Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
+                'cookiebot-addons').'</p>';
+    }
 
-	/**
-	 * Cookiebot plugin is deactivated
-	 *
-	 * @since 2.2.0
-	 */
-	public function plugin_deactivated() {
-		//do nothing
-	}
+    /**
+     * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+     *
+     * @return boolean
+     *
+     * @since 1.8.0
+     */
+    public function get_svn_url()
+    {
+        return false;
+    }
+
+    /**
+     * Placeholder helper overlay in the settings page.
+     *
+     * @return string
+     *
+     * @since 1.8.0
+     */
+    public function get_placeholder_helper()
+    {
+        return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%src - video source</li><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in the frontend</li></ul>';
+    }
+
+    /**
+     * Returns parent class or false
+     *
+     * @return string|bool
+     *
+     * @since 2.1.3
+     */
+    public function get_parent_class()
+    {
+        return get_parent_class($this);
+    }
+
+    /**
+     * Action after enabling the addon on the settings page
+     *
+     * @since 2.2.0
+     */
+    public function post_hook_after_enabling()
+    {
+        //do nothing
+    }
+
+    /**
+     * Cookiebot plugin is deactivated
+     *
+     * @since 2.2.0
+     */
+    public function plugin_deactivated()
+    {
+        //do nothing
+    }
+
+    private function get_regex()
+    {
+        return $this->settings->get_addon_regex($this->get_option_name(), $this->get_default_regex());
+    }
+
+    private function get_default_regex()
+    {
+        return '/<iframe[^>]* src=("|\').*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com).*[^>].*>.*?<\/iframe>/mi';
+    }
+
+    /**
+     * @return mixed
+     *
+     * @since 2.4.5
+     */
+    public function extra_available_addon_option()
+    {
+        ?>
+        <div class="show_advanced_options">
+            <button class="button button-secondary"><?php _e('Show advanced options', 'cookiebot-addons'); ?></button>
+            <span class="help-tip"
+                  title="<?php echo __('This is for more advanced users.', 'cookiebot-addons'); ?>"></span>
+        </div>
+        <div class="advanced_options">
+            <label for="embed_regex"><?php _e('Regex:', 'cookiebot-addons'); ?></label>
+            <textarea
+                    id="embed_regex"
+                    cols="80"
+                    rows="5"
+                    name="cookiebot_available_addons[<?php echo $this->get_option_name(); ?>][regex]"
+                    disabled
+            ><?php echo esc_html($this->get_regex()); ?></textarea>
+            <button
+                    id="btn_default_embed_regex"
+                    class="button"
+                    type="button"
+                    value="Reset to default regex"><?php _e('Reset to default regex', 'cookiebot-addons');?></button>
+            <input
+                    type="hidden"
+                    name="default_embed_regex"
+                    id="default_embed_regex"
+                    value="<?php echo esc_html($this->get_default_regex()); ?>"/>
+        </div>
+        <?php
+    }
 }

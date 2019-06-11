@@ -1,4 +1,5 @@
 <?php
+/** @var \cookiebot_addons\controller\addons\Cookiebot_Addons_Interface $addon */
 $addon = $args['addon'];
 
 require_once( ABSPATH . '/wp-includes/l10n.php' );
@@ -100,4 +101,7 @@ require_once( ABSPATH . '/wp-admin/includes/translation-install.php' );
                         data-addon="<?php echo $addon->get_option_name(); ?>"><?php _e( '+ Add language', 'cookiebot-addons' ); ?></button>
             </p>
         </div>
+	    <?php
+	        $addon->extra_available_addon_option();
+	    ?>
     </div>

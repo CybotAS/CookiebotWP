@@ -16,6 +16,8 @@ function init() {
     button_add_placeholder_language();
     button_delete_language();
     tooltip();
+    show_advanced_options();
+    set_default_embed_regex();
 }
 
 /**
@@ -141,5 +143,50 @@ function tooltip() {
         'fadeIn': 50,
         'fadeOut': 50,
         'delay': 200
+    } );
+}
+
+/**
+ * Show advanced options
+ *
+ * @since 2.4.5
+ */
+function show_advanced_options() {
+    jQuery(document).on('click', '.show_advanced_options', function( e ) {
+        e.preventDefault();
+
+        /** Toggle displaying advanced options **/
+        jQuery( this ).next().toggle();
+
+        /** Get the textarea for the embed regex **/
+        let embed_regex = document.getElementById("embed_regex");
+
+        /** If advanced option is shown, then remove the disable attribute in the textarea **/
+        if( embed_regex.disabled === false ) {
+            embed_regex.disabled = true;
+        } else {
+            embed_regex.disabled = false;
+        }
+
+        return false;
+    } );
+}
+
+/**
+ * Set default embed regex
+ *
+ * @since 2.4.5
+ */
+function set_default_embed_regex() {
+    jQuery(document).on('click', '#btn_default_embed_regex', function( e ) {
+        e.preventDefault();
+
+        /** get the value of the default embed regex **/
+        let default_regex = jQuery( "#default_embed_regex").val();
+
+        /** Update the textarea of the embed regex **/
+        jQuery( '#embed_regex' ).html( default_regex );
+
+        return false;
     } );
 }
