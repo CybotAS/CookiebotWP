@@ -102,7 +102,7 @@ final class Cookiebot_WP {
 			if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED')) && $dismissAddons !== true ) {
 				//Make sure we got a PHP version that works
 				if(version_compare(PHP_VERSION, '5.4.0', '>=')) {
-				    define('COOKIEBOT_URL', plugin_dir_url( __FILE__ ));
+					define('COOKIEBOT_URL', plugin_dir_url( __FILE__ ));
 					include_once( dirname( __FILE__ ) . '/addons/cookiebot-addons-init.php' );
 				}
 				else {
@@ -171,6 +171,11 @@ final class Cookiebot_WP {
 		if(is_admin() || (defined('DOING_CRON') && DOING_CRON)) {
 			add_filter('auto_update_plugin', array($this,'automatic_updates'), 10, 2);
 		}
+		
+		//Loading widgets
+		include_once( dirname( __FILE__ ) . '/widgets/cookiebot-declaration-widget.php' );
+		add_action( 'widgets_init', array($this,'register_widgets') );
+
 	}
 
 	/**
@@ -181,6 +186,16 @@ final class Cookiebot_WP {
 	 */
 	function load_textdomain() {
 		load_plugin_textdomain( 'cookiebot', false, basename( dirname( __FILE__ ) ) . '/langs' );
+	}
+	
+	/**
+	 * Cookiebot_WP Register widgets
+	 * 
+	 * @version 2.5.0
+	 * @since 	2.5.0
+	 */
+	function register_widgets() {
+		register_widget( 'Cookiebot_Declaration_Widget' );
 	}
 
 	/**
@@ -319,7 +334,7 @@ final class Cookiebot_WP {
 	 * @version	1.4.0
 	 * @since		1.4.0
 	 */
-	function get_supported_languages() {
+	public static function get_supported_languages() {
 		$supportedLanguages = array();
 		$supportedLanguages['nb'] = __('Norwegian Bokmål','cookiebot');
 		$supportedLanguages['tr'] = __('Turkish','cookiebot');
