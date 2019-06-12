@@ -72,6 +72,18 @@ Interface Settings_Service_Interface {
 	public function get_cookie_types( $addon, $default = array() );
 
 	/**
+	 * Returns regex for given addon
+	 *
+	 * @param $addon    string  option name
+	 * @param $default  string   default regex
+	 *
+	 * @return string
+	 *
+	 * @since 2.4.5
+	 */
+	public function get_addon_regex( $addon, $default = '' );
+
+	/**
 	 * Returns addons one by one through a generator
 	 *
 	 * @return \Generator

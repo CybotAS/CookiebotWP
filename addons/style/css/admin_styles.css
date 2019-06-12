@@ -142,3 +142,19 @@ div.extra_information {
     height: 0;
     width: 0
 }
+
+/**
+Show advanced options
+ */
+.show_advanced_options {
+    margin: 15px 0 10px 0;
+}
+.advanced_options{
+    display: none;
+}
+.advanced_options label{
+    vertical-align: top;
+}
+#embed_regex {
+    width: 400px;
+}

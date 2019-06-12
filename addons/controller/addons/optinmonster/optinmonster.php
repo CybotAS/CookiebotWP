@@ -286,4 +286,13 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	public function plugin_deactivated() {
 		//do nothing
 	}
+
+	/**
+	 * @return mixed
+	 *
+	 * @since 2.4.5
+	 */
+	public function extra_available_addon_option() {
+		//do nothing
+	}
 }

@@ -16,6 +16,9 @@ function init() {
     button_add_placeholder_language();
     button_delete_language();
     tooltip();
+    show_advanced_options();
+    edit_embed_regex();
+    set_default_embed_regex();
 }
 
 /**
@@ -141,5 +144,60 @@ function tooltip() {
         'fadeIn': 50,
         'fadeOut': 50,
         'delay': 200
+    } );
+}
+
+/**
+ * Show advanced options
+ *
+ * @since 2.4.5
+ */
+function show_advanced_options() {
+    jQuery(document).on('click', '.show_advanced_options', function( e ) {
+        e.preventDefault();
+
+        /** Toggle displaying advanced options **/
+        jQuery( this ).next().toggle();
+
+        return false;
+    } );
+}
+
+function edit_embed_regex() {
+    jQuery(document).on('click', '#edit_embed_regex', function(e) {
+        e.preventDefault();
+
+        /** Get the textarea for the embed regex **/
+        let embed_regex = document.getElementById("embed_regex");
+
+        /** Remove the disable attribute in the textarea **/
+        embed_regex.disabled = false;
+
+        /** Make the Reset default button back visible **/
+        let default_button = document.getElementById('btn_default_embed_regex');
+        default_button.classList.remove('hidden');
+
+        jQuery(this).hide();
+
+        return false;
+    });
+}
+
+/**
+ * Set default embed regex
+ *
+ * @since 2.4.5
+ */
+function set_default_embed_regex() {
+    jQuery(document).on('click', '#btn_default_embed_regex', function( e ) {
+        e.preventDefault();
+
+        /** get the value of the default embed regex **/
+        let default_regex = jQuery( "#default_embed_regex").val();
+
+        /** Update the textarea of the embed regex **/
+        jQuery( '#embed_regex' ).val( default_regex );
+
+        return false;
     } );
 }

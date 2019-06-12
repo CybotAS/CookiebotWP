@@ -357,4 +357,13 @@ class Wpforms implements Cookiebot_Addons_Interface {
 
 		update_option( $option, $options );
 	}
+
+	/**
+	 * @return mixed
+	 *
+	 * @since 2.4.5
+	 */
+	public function extra_available_addon_option() {
+		//do nothing
+	}
 }

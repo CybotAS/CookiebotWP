@@ -103,6 +103,26 @@ class Settings_Service implements Settings_Service_Interface {
 	}
 
 	/**
+	 * Returns regex for given addon
+	 *
+	 * @param $addon    string  option name
+	 * @param $default  string   default regex
+	 *
+	 * @return string
+	 *
+	 * @since 2.4.5
+	 */
+	public function get_addon_regex( $addon, $default = '' ) {
+		$option = get_option( static::OPTION_NAME );
+
+		if ( isset( $option[ $addon ]['regex'] ) ) {
+			return $option[ $addon ]['regex'];
+		}
+
+		return $default;
+	}
+
+	/**
 	 * Returns addons one by one through a generator
 	 *
 	 * @return array
