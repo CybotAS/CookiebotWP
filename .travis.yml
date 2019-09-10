@@ -1,3 +1,6 @@
+# This uses newer and faster docker based build system
+sudo: false
+
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
 
@@ -11,9 +14,7 @@ env:
   - WP_PROJECT_TYPE=plugin WP_VERSION=latest WP_MULTISITE=0 WP_TEST_URL=http://localhost:12000 WP_TEST_USER=test WP_TEST_USER_PASS=test
 
 before_script:
-  # Install composer packages before trying to activate themes or plugins
-  # - composer install
-
+  # Install test framework
   - git clone https://github.com/Seravo/wordpress-test-template wp-tests
   - bash wp-tests/bin/install-wp-tests.sh test root '' localhost $WP_VERSION
 
