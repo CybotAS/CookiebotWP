@@ -135,8 +135,6 @@ If you want a complete overview of the cookies and online tracking going on on a
 ### What is the GDPR and the ePrivacy Directive? ###
 The GDPR is the General Data Protection Regulation, an EU-law enforced since May 2018, that protects EU citizens’ personal data globally and affects all organizations and websites that handle such data. If you have a website with users from the EU, and if your websites uses cookies (it probably does), then you need to make your use of cookies and tracking compliant with the GDPR.  
 
-See the [EU homepage of the GDPR](https://www.eugdpr.org/) for more information, and their infographic for businesses: [Data Protection: Better rules for small businesses](http://ec.europa.eu/justice/smedataprotect/index_en.htm)
-
 See the [EU homepage of the GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32016R0679) for more information, and their infographic for businesses: [Data Protection: Better rules for small businesses](http://ec.europa.eu/justice/smedataprotect/index_en.htm)
 
 The ePrivacy Directive is another legal instrument of the EU that specifically aims to protect EU citizens’ online data such as data from online communication. It is in the process of becoming an actual Regulation such as the GDPR, which will probably happen in 2020. 
