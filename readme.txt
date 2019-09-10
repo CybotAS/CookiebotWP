@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent
 * Requires at least: 4.4
 * Tested up to: 5.2
-* Stable tag: 2.5.0
+* Stable tag: 3.0.0
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -11,17 +11,17 @@ Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supportin
 
 ## Description ##
 
-### What Cookiebot Offers ###
+### Trustworthy and easy GDPR/ePR compliant cookie consent ###
 
-Cookiebot is a cloud-driven solution that offers:
+Cookiebot is a cloud-driven solution that enables full cookie compliance, offering:
 
-* A highly customizable consent banner to handle user consents and give the users the required possibility to opt-in and -out of cookie categories.
-* A cookie policy and declaration, with purpose descriptions and automatic categorization of your cookies (strictly necessary, preference, statistics, marketing).
-* Full monthly scans to detect all tracking in place on the website as well as detection of where data is being sent to and where in the source code the cookie can be found.
-* A scanner that detects various online trackers such as Cookies, HTML5 Local Storage, Flash Local Shared Object, Silverlight Isolated Storage, IndexedDB, ultrasound beacons, pixel tags etc.
+* A highly customizable consent banner to handle consents and give the users the possibility to opt-in and -out of cookie categories, as required by the GPDR, ePrivacy Directive and similar legislations around the world.
+* An automatically generated and updated cookie policy and cookie declaration, with purpose descriptions and categorization of your cookies (Necessary, Statistics, Preferences, Marketing).
+* Full monthly website scan, detecting all first and third party cookies and similar tracking on your site (e.g. HTML5 Local Storage, Flash Local Shared Object, Silverlight Isolated Storage, IndexedDB, ultrasound beacons, pixel tags etc.) as well as their provenance, duration and where to the data is sent.
+* The unique Cookiebot feature of automatic cookie blocking. All cookies and tracking are automatically held back right from the moment the user lands on the website and until the proper consent has been obtained, enabling compliance with the GDPR and ePrivacy requirement for “prior consent”. 
 * An easy way to allow the users to change or withdraw their consent.
-* Translations for 44 languages and the ability to change the text on the banner and declaration for any language.
-* Storage of user-consents in our cloud-driven environment, which are downloadable and can be used as proof.
+* Translations for 44 languages and the ability to change the text on the banner and cookie declaration for any language.
+* Storage of user consents in our cloud-driven environment, which are downloadable and can be used as proof that the consent was given.
 * Execution of cookie-setting scripts without a page reload, if the user gives consent.
 
 Please read our FAQ at the bottom of the page for more information.
@@ -29,18 +29,26 @@ Please read our FAQ at the bottom of the page for more information.
 https://youtube.com/watch?v=t1LJ6i1i9gA
 
 ### Will my website become compliant once I install Cookiebot? ###
-The short answer is; no.
 
-Although Cookiebot enables your website to become fully compliant, [especially obeying the prior consent rule](https://support.cookiebot.com/hc/en-us/articles/360004104033-What-does-prior-consent-mean-and-how-do-I-implement-it-), some manual work is required to achieve compliance.
+If you use our plugin version 3.0 or later and chose our automatic implementation, Cookiebot enables full compliance with the ‘prior consent’ requirement of the GDPR, the ePrivacy Directive (ePR) and similar legal instruments for protection of user data around the world.
 
-* If you are using plugins that set cookies which require consent (which most do), you have to:
-  * Ask the plugin developers if they are planning on becoming GDPR compliant, or if they would like to integrate with Cookiebot.
-  * Check if there already exists an addon for your plugin in the "Prior consent" submenu.
-  * [Check out our Github repository](https://github.com/CybotAS/CookiebotAddons), where we are developing integrations for Cookiebot, until the plugin developers choose to do this themselves, [or WP Core enables such functionality](https://core.trac.wordpress.org/ticket/44043)
+The default consent banner has the strictest settings possible and is suitable for obtaining consent under both GDPR and the ePR. Make sure to adapt the consent banner content to fit your website. You should also check out [our GDPR checklist](https://support.cookiebot.com/hc/en-us/sections/360000917513-Ready-for-25-May-2018-GDPR-enforcement-date-A-Cookiebot-checklist-). If you are using server-side cookies, please check the [“Server side usage” guide](https://www.cookiebot.com/en/developer/).
 
-Once Cookiebot is installed, and we've scanned your site, you can check the [cookie report](https://manage.cookiebot.com/goto/reports), to identify all cookies being set on your website. If the cookies are coming from content that you have inserted manually, then you can mark up that content [as described in our help section step 3](https://www.cookiebot.com/goto/help/).
+However, being a customizable plugin, true compliance always depends on the website owner choosing a type of banner, wording and settings that are compliant with the local legislation and fits the specific website and company (controller).
 
-Embedded videos and iframes, which set cookies, can be marked up as explain in our [Iframe cookie consent with YouTube example](https://support.cookiebot.com/hc/en-us/articles/360003790854-Iframe-cookie-consent-with-YouTube-example).
+## If you choose th emanual implementation… ##
+
+Then please make sure of the following:
+
+If you are using plugins that set cookies which require consent (which most do), you have to:
+
+* Ask the plugin developers if they are planning on becoming GDPR compliant, or if they would like to integrate with Cookiebot.
+* Check if there already exists an addon for your plugin in the "Prior consent" submenu.
+* [Check out our Github repository](https://github.com/CybotAS/CookiebotAddons), where we are developing integrations for Cookiebot, until the plugin developers choose to do this themselves, [or if WP Core enables such functionality](https://core.trac.wordpress.org/ticket/44043)
+
+Once Cookiebot is installed, and we've scanned your site, you can check the [cookie report](https://manage.cookiebot.com/goto/reports), to identify all cookies being set on your website. If the cookies are coming from content that you have inserted manually, you can mark up that content [as described in our manual implementation guide step 4](https://www.cookiebot.com/goto/help/).
+
+Embedded videos and iframes which set cookies can be marked up as explained in our [Iframe cookie consent with YouTube example](https://support.cookiebot.com/hc/en-us/articles/360003790854-Iframe-cookie-consent-with-YouTube-example).
 
 
 ### Cookiebot Addons ####
@@ -88,7 +96,7 @@ In other words, you cannot choose whether you want a free plan or a premium plan
 
 **2. Your necessities, as the free plan does not include all features available in the premium plans.** The free plan does not include customization of banner and cookies declaration, multiple languages, e-mail reports, data-export, geo location, bulk consent, consent statistics, internal domain alias for development, test and staging.
 
-No matter the size of your website, you do have the right to a one month trial of Cookiebot for free.
+If more than 100 subpages are found during the initial website scan, you will be given a one-month trial free of Cookiebot with full functionality. 
 
 See all details of [Cookiebot plans and pricing](https://www.cookiebot.com/en/pricing/).
 
@@ -120,14 +128,18 @@ If you  are in doubt about what cookies are in use on our site, you can start by
 
 **[Test my site](https://www.cookiebot.com/en/)**
 
-The test scans five pages of your website and sends you a complete report of the cookies and online tracking on these pages, including information on their provenance, purpose and whether or not they are compliant with the EU-regulations.
+The test scans up to five pages of your website and sends you a complete report of the cookies and online tracking on these pages, including information on their provenance, purpose and whether or not they are compliant with EU-legislation.
 
 If you want a complete overview of the cookies and online tracking going on on all of your website, sign up to the Cookiebot solution.
 
-### What is GDPR? ###
-The GDPR is the General Data Protection Regulation, a EU-law that is enforced on the 25. May 2018, and affects all organizations and websites that handle data of EU-citizens.
+### What is the GDPR and the ePrivacy Directive? ###
+The GDPR is the General Data Protection Regulation, an EU-law enforced since May 2018, that protects EU citizens’ personal data globally and affects all organizations and websites that handle such data. If you have a website with users from the EU, and if your websites uses cookies (it probably does), then you need to make your use of cookies and tracking compliant with the GDPR.  
 
 See the [EU homepage of the GDPR](https://www.eugdpr.org/) for more information, and their infographic for businesses: [Data Protection: Better rules for small businesses](http://ec.europa.eu/justice/smedataprotect/index_en.htm)
+
+See the [EU homepage of the GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32016R0679) for more information, and their infographic for businesses: [Data Protection: Better rules for small businesses](http://ec.europa.eu/justice/smedataprotect/index_en.htm)
+
+The ePrivacy Directive is another legal instrument of the EU that specifically aims to protect EU citizens’ online data such as data from online communication. It is in the process of becoming an actual Regulation such as the GDPR, which will probably happen in 2020. 
 
 ### How do I make other plugins support Cookiebot? ###
 If you favourite plugins doesn't support Cookiebot you always welcome to ask the author to add support for Cookiebot.
@@ -150,6 +162,9 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 
 ## Changelog ##
+
+### 3.0.0 - 2019-09-10 ###
+* Adding support for auto cookie blocking mode
 
 ### 2.5.0 - 2019-06-12 ###
 * Add support for custom regex for embed autocorrect

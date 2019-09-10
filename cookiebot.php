@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR Compliant Cookie Consent and Notice
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supporting prior consent, cookie declaration, and documentation of consents. Easy to install, implement and configure.
 Author: Cybot A/S
-Version: 2.5.0
+Version: 3.0.0
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.5.0';
+	public $version = '3.0.0';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -72,6 +72,14 @@ final class Cookiebot_WP {
 			//Not set yet - this must be first activation - delay in 3 days
 			update_option('cookiebot_notice_recommend', strtotime('+3 days'));
 		}
+		if($this->get_cbid() == '') {
+			if(is_multisite()) {
+				update_site_option('cookiebot-cookie-blocking-mode','auto');
+			}
+			else {
+				update_option('cookiebot-cookie-blocking-mode','auto');
+			}
+		}
 	}
 
 	/**
@@ -98,6 +106,7 @@ final class Cookiebot_WP {
 					<?php
 				});*/
 		}
+		//elseif( $this->get_cookie_blocking_mode() !== 'auto' ) {
 		else {
 			if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED')) && $dismissAddons !== true ) {
 				//Make sure we got a PHP version that works
@@ -150,7 +159,7 @@ final class Cookiebot_WP {
 			}
 			if($addJSAdmin) {
 				//adding cookie banner in admin area too
-				add_action('admin_head', array($this,'add_js'));
+				add_action('admin_head', array($this,'add_js'),-9999);
 			}
 		}
 
@@ -159,7 +168,7 @@ final class Cookiebot_WP {
 		load_plugin_textdomain('cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
 
 		//add JS
-		add_action('wp_head', array($this,'add_js'));
+		add_action('wp_head', array($this,'add_js'), -9999);
 		add_shortcode('cookie_declaration', array($this,'show_declaration'));
 
 		//Add filter if WP rocket is enabled
@@ -288,6 +297,7 @@ final class Cookiebot_WP {
 		register_setting('cookiebot', 'cookiebot-autoupdate');
 		register_setting('cookiebot', 'cookiebot-script-tag-uc-attribute');
 		register_setting('cookiebot', 'cookiebot-script-tag-cd-attribute');
+		register_setting('cookiebot', 'cookiebot-cookie-blocking-mode');
 		register_setting('cookiebot-iab', 'cookiebot-iab');
 	}
 
@@ -397,6 +407,7 @@ final class Cookiebot_WP {
 			$network_cbid = get_site_option('cookiebot-cbid','');
 			$network_scrip_tag_uc_attr = get_site_option('cookiebot-script-tag-uc-attribute','custom');
 			$network_scrip_tag_cd_attr = get_site_option('cookiebot-script-tag-cd-attribute','custom');
+			$network_cookie_blocking_mode = get_site_option('cookiebot-cookie-blocking-mode','manual');
 		}
 		?>
 		<div class="wrap">
@@ -492,6 +503,52 @@ final class Cookiebot_WP {
 					</tr>
 					<tr valign="top">
 						<th scope="row">
+							<?php _e('Cookie-blocking mode','cookiebot'); ?>
+						</th>
+						<td>
+							<?php
+							$cbm = get_option('cookiebot-cookie-blocking-mode','manual');
+							if($is_ms && $network_cookie_blocking_mode != 'custom') {
+								$cbm = $network_cookie_blocking_mode;
+							}
+							?>
+							<label>
+								<input type="radio" name="cookiebot-cookie-blocking-mode" value="auto" <?php checked('auto', $cbm, true); ?> />
+								<?php _e('Automatic','cookiebot'); ?>
+							</label>
+							&nbsp; &nbsp;
+							<label>
+								<input type="radio" name="cookiebot-cookie-blocking-mode" value="manual" <?php checked('manual',$cbm, true); ?> />
+								<?php _e('Manual','cookiebot'); ?>
+							</label>
+							<p class="description">
+								<?php _e('Should Cookiebot automatic block cookies by tagging known tags.','cookiebot') ?>
+							</p>
+						</td>
+					</tr>
+					<script>
+						jQuery(document).ready(function($) {
+							var cookieBlockingMode = '<?php echo $cbm; ?>';
+							$( 'input[type=radio][name=cookiebot-cookie-blocking-mode]' ).on( 'change', function() {
+								if(this.value == 'auto' && cookieBlockingMode != this.value ) {
+									$( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 );
+									$( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true );
+								}
+								if( this.value == 'manual' && cookieBlockingMode != this.value ) {
+									$( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 1 );
+									$( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', false );
+								}
+								cookieBlockingMode = this.value;
+							});
+							if( cookieBlockingMode == 'auto' ) {
+								$( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 );
+								$( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true );
+							}
+						});
+					</script>
+					
+					<tr valign="top" id="cookiebot-setting-async">
+						<th scope="row">
 							<?php _e('Add async or defer attribute','cookiebot'); ?>
 							<br /><?php _e('Consent banner script tag'); ?>
 						</th>
@@ -573,7 +630,7 @@ final class Cookiebot_WP {
 						<?php
 					}
 					?>
-					<tr valign="top">
+					<tr valign="top" id="cookiebot-setting-hide-popup">
 						<th scope="row"><?php _e('Hide Cookie Popup','cookiebot'); ?></th>
 						<td>
 							<?php
@@ -660,6 +717,48 @@ final class Cookiebot_WP {
 					</tr>
 					<tr valign="top">
 						<th scope="row">
+							<?php _e('Cookie-blocking mode','cookiebot'); ?>
+						</th>
+						<td>
+							<?php
+							$cbm = get_site_option('cookiebot-cookie-blocking-mode','manual');
+							?>
+							<label>
+								<input type="radio" name="cookiebot-cookie-blocking-mode" value="auto" <?php checked('auto', $cbm, true); ?> />
+								<?php _e('Automatic','cookiebot'); ?>
+							</label>
+							&nbsp; &nbsp;
+							<label>
+								<input type="radio" name="cookiebot-cookie-blocking-mode" value="manual" <?php checked('manual',$cbm, true); ?> />
+								<?php _e('Manual','cookiebot'); ?>
+							</label>
+							<p class="description">
+								<?php _e('Should Cookiebot automatic block cookies by tagging known tags.','cookiebot') ?>
+							</p>
+						</td>
+					</tr>
+					<script>
+						jQuery(document).ready(function($) {
+							var cookieBlockingMode = '<?php echo $cbm; ?>';
+							$( 'input[type=radio][name=cookiebot-cookie-blocking-mode]' ).on( 'change', function() {
+								if(this.value == 'auto' && cookieBlockingMode != this.value ) {
+									$( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 );
+									$( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true );
+								}
+								if( this.value == 'manual' && cookieBlockingMode != this.value ) {
+									$( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 1 );
+									$( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', false );
+								}
+								cookieBlockingMode = this.value;
+							});
+							if( cookieBlockingMode == 'auto' ) {
+								$( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 );
+								$( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true );
+							}
+						});
+					</script>
+					<tr valign="top" id="cookiebot-setting-async">
+						<th scope="row">
 							<?php _e('Add async or defer attribute','cookiebot'); ?>
 							<br /><?php _e('Consent banner script tag'); ?>
 						</th>
@@ -735,7 +834,7 @@ final class Cookiebot_WP {
 							</p>
 						</td>
 					</tr>
-					<tr valign="top">
+					<tr valign="top" id="cookiebot-setting-hide-popup">
 						<th scope="row"><?php _e('Hide Cookie Popup','cookiebot'); ?></th>
 						<td>
 							<input type="checkbox" name="cookiebot-nooutput" value="1" <?php checked(1,get_site_option('cookiebot-nooutput',false), true); ?> />
@@ -778,6 +877,8 @@ final class Cookiebot_WP {
 		update_site_option('cookiebot-autoupdate', 								$_POST['cookiebot-autoupdate'] );
 		update_site_option('cookiebot-nooutput', 									$_POST['cookiebot-nooutput'] );
 		update_site_option('cookiebot-nooutput-admin', 						$_POST['cookiebot-nooutput-admin'] );
+		update_site_option('cookiebot-cookie-blocking-mode', 			$_POST['cookiebot-cookie-blocking-mode'] );
+
 
 		wp_redirect( add_query_arg( array(
 			'page' => 'cookiebot_network',
@@ -904,6 +1005,10 @@ final class Cookiebot_WP {
 			else {
 				$tagAttr = get_site_option('cookiebot-script-tag-uc-attribute');
 			}
+			
+			if($this->get_cookie_blocking_mode() == 'auto') {
+				$tagAttr = 'data-blockingmode="auto"';
+			}
 
 			$iab = ( get_option('cookiebot-iab') != false ) ? 'data-framework="IAB"' : '';
 			?>
@@ -961,6 +1066,23 @@ final class Cookiebot_WP {
 			}
 		}
 		return $cbid;
+	}
+	
+	/**
+	 * Cookiebot_WP Get cookie blocking mode (auto | manual)
+	 *
+	 * @version	2.2.0
+	 * @since		1.0.0
+	 */
+	public static function get_cookie_blocking_mode() {
+		$cbm = get_option('cookiebot-cookie-blocking-mode');
+		if(is_multisite() && ($network_cbm = get_site_option('cookiebot-cookie-blocking-mode'))) {
+			if(empty($cbm)) {
+				return $network_cbm;
+			}
+		}
+		if(empty($cbm)) { $cbm = 'manual'; }
+		return $cbm;
 	}
 
 	/**

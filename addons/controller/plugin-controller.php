@@ -65,10 +65,12 @@ class Plugin_Controller {
 		 *
 		 * @var $plugin Cookiebot_Addons_Interface
 		 */
+		$addonsEnabled = 0;
 		foreach ( $this->settings_service->get_active_addons() as $plugin ) {
 			if ( ! $plugin->cookie_consent->are_cookie_states_accepted( $plugin->get_cookie_types() )
 				|| cookiebot_addons_enabled_cache_plugin() ) {
 				$plugin->load_configuration();
+				$addonsEnabled++;
 			}
 		}
 
@@ -78,6 +80,24 @@ class Plugin_Controller {
 		 * Run buffer output actions - this runs after scanning of every addons
 		 */
 		add_action( 'parse_request', array( $this, 'run_buffer_output_manipulations' ) );
+		
+		
+		/**
+		 * Add notice for the user if any addons is enabled and cookie
+		 * blocking mode is set to auto.
+		 */
+		if($addonsEnabled > 0 && \Cookiebot_WP::get_cookie_blocking_mode() == 'auto') {
+			if(isset($_GET['page']) && in_array($_GET['page'],array('cookiebot','cookiebot-addons'))) {
+				add_action('admin_notices', function() {
+					echo '<div class="notice notice-warning">
+						<p>
+						<strong>'.__('You enabled Cookiebot auto blocking mode but still using addons').'</strong><br>
+						'.__('In some occasions this may cause client side errors. If you notice any errors please try to disable Cookiebot addons or contact Cookiebot support.').'
+						</p>
+					</div>';
+				});
+			}
+		}
 	}
 
 	/**
