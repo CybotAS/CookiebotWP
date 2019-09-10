@@ -122,7 +122,7 @@ By implementing it, you ensure that your cookie declaration is specific and accu
 
 To display your cookie declaration, create a new page on your website - and add the shortcode that the plugin provides to the page: [cookie_declaration]. Alternatively, you can incorporate it into e.g. your existing Privacy Policy.
 
-By default, the cookie declaration is displayed in the chosen Cookiebot language. You are able to override this setting with a "lang" attribute in the shortcode. Eg.: [cookie_declaration lang="de"] for a German version. Remember to add all used languages in the Cookiebot Manager.
+By default, the cookie declaration is displayed in the chosen Cookiebot language. You are able to override this setting with a "lang" attribute in the shortcode. Eg.: [cookie_declaration lang="de"] for a German version. Remember to add all used languages in the [Cookiebot Manager](https://manage.cookiebot.com).
 
 https://youtu.be/OCXz2bt4H_w
 
