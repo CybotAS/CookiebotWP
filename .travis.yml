@@ -1,6 +1,9 @@
 # This uses newer and faster docker based build system
 sudo: false
 
+services:
+  - mysql
+
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
 
