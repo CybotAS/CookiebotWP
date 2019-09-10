@@ -36,7 +36,7 @@ The default consent banner has the strictest settings possible and is suitable f
 
 However, being a customizable plugin, true compliance always depends on the website owner choosing a type of banner, wording and settings that are compliant with the local legislation and fits the specific website and company (controller).
 
-## If you choose th emanual implementation… ##
+**If you choose the manual implementation…**
 
 Then please make sure of the following:
 
@@ -46,7 +46,7 @@ If you are using plugins that set cookies which require consent (which most do),
 * Check if there already exists an addon for your plugin in the "Prior consent" submenu.
 * [Check out our Github repository](https://github.com/CybotAS/CookiebotAddons), where we are developing integrations for Cookiebot, until the plugin developers choose to do this themselves, [or if WP Core enables such functionality](https://core.trac.wordpress.org/ticket/44043)
 
-Once Cookiebot is installed, and we've scanned your site, you can check the [cookie report](https://manage.cookiebot.com/goto/reports), to identify all cookies being set on your website. If the cookies are coming from content that you have inserted manually, you can mark up that content [as described in our manual implementation guide step 4](https://www.cookiebot.com/goto/help/).
+Once Cookiebot is installed, and we've scanned your site, you can check the [cookie report](https://manage.cookiebot.com/goto/reports), to identify all cookies being set on your website. If the cookies are coming from content that you have inserted manually, you can mark up that content [as described in our manual implementation guide step 4](https://cookiebot.com/goto/manual-implementation).
 
 Embedded videos and iframes which set cookies can be marked up as explained in our [Iframe cookie consent with YouTube example](https://support.cookiebot.com/hc/en-us/articles/360003790854-Iframe-cookie-consent-with-YouTube-example).
 
@@ -82,7 +82,7 @@ https://youtu.be/OCXz2bt4H_w
 
 **Implementing prior consent:**
 
-Below is a video tutorial on how to manually implement prior consent i.e. holding back all cookies and trackers (other than those strictly necessary for the website to function) until the user has given a consent. The manual implementation guide (found in step 11 of the video) can be [found here](https://cookiebot.com/en/manual-implementation).
+Below is a video tutorial on how to manually implement prior consent i.e. holding back all cookies and trackers (other than those strictly necessary for the website to function) until the user has given a consent. The manual implementation guide (found in step 11 of the video) can be [found here](https://cookiebot.com/goto/manual-implementation).
 Please note that you can make use of our automatic cookie blocking functionality instead of manually having to mark up the cookie-setting scripts. To do so, update the plugin (version 3.0.0 or higher) and choose automatic cookie control in your Admin panel. 
 
 https://youtu.be/MeHycvV2QCQ
@@ -95,13 +95,13 @@ Cookiebot is a freemium plugin, much like [Jetpack](https://wordpress.org/plugin
 Whether the free plan can suffice or you need a premium plan, depends on two things:
 
 **1. The size of your website, i.e. the number of subpages on your website.**
-In other words, you cannot choose whether you want a free plan or a premium plan, as this is determined by the amount of subpages on your website. You can [get a quote](https://www.cookiebot.com/en/quote-input/) to see what plan you need for your website.
+In other words, you cannot choose whether you want a free plan or a premium plan, as this is determined by the amount of subpages on your website. You can [get a quote](https://www.cookiebot.com/goto/quote-input/) to see what plan you need for your website.
 
 **2. Your necessities, as the free plan does not include all features available in the premium plans.** The free plan does not include customization of banner and cookies declaration, multiple languages, e-mail reports, data-export, geo location, bulk consent, consent statistics, internal domain alias for development, test and staging.
 
-If more than 100 subpages are found during the initial website scan, you will be given a one-month trial free of Cookiebot with full functionality. 
+If more than 100 subpages are found during the initial website scan, you will be given a free one-month trial of Cookiebot with full functionality.
 
-See all details of [Cookiebot plans and pricing](https://www.cookiebot.com/en/pricing/).
+See all details of [Cookiebot plans and pricing](https://www.cookiebot.com/goto/pricing/).
 
 ### What does Cookiebot count as pages?
 Your pricing plan is dependent on the number of subpages we have detected on your website.
@@ -122,14 +122,14 @@ By implementing it, you ensure that your cookie declaration is specific and accu
 
 To display your cookie declaration, create a new page on your website - and add the shortcode that the plugin provides to the page: [cookie_declaration]. Alternatively, you can incorporate it into e.g. your existing Privacy Policy.
 
-By default the cookie declaration is displayed in the chosen Cookiebot language. You are able to override this setting with a "lang" attribute in the shortcode. Eg.: [cookie_declaration lang="de"] for a German version. Remember to add all used languages in the Cookiebot administration tool.
+By default, the cookie declaration is displayed in the chosen Cookiebot language. You are able to override this setting with a "lang" attribute in the shortcode. Eg.: [cookie_declaration lang="de"] for a German version. Remember to add all used languages in the Cookiebot Manager.
 
 https://youtu.be/OCXz2bt4H_w
 
 ### Cookie-checker: What cookies are in use on my site? ###
 If you  are in doubt about what cookies are in use on our site, you can start by trying our free compliance test:
 
-**[Test my site](https://www.cookiebot.com/en/)**
+**[Test my site](https://www.cookiebot.com/)**
 
 The test scans up to five pages of your website and sends you a complete report of the cookies and online tracking on these pages, including information on their provenance, purpose and whether or not they are compliant with EU-legislation.
 
@@ -143,11 +143,11 @@ See the [EU homepage of the GDPR](https://eur-lex.europa.eu/legal-content/EN/TX
 The ePrivacy Directive is another legal instrument of the EU that specifically aims to protect EU citizens’ online data such as data from online communication. It is in the process of becoming an actual Regulation such as the GDPR, which will probably happen in 2020. 
 
 ### How do I make other plugins support Cookiebot? ###
-If you favourite plugins doesn't support Cookiebot you always welcome to ask the author to add support for Cookiebot.
+If your favourite plugin doesn't support Cookiebot you are always welcome to ask the author to add support for Cookiebot.
 
 Send an e-mail to the author of the plugin you want to support Cookiebot. Ask for adding support for Cookiebot. Cookiebot provides a helper function to check if there is an active, working version of Cookiebot on the website.
 
-The easiest way for at developer to implement Cookiebot support is following to add a check for Cookiebot where <script> tags are outputted to the visitor. This can be done following way
+The easiest way for a developer to implement Cookiebot support is following to add a check for Cookiebot where <script> tags are outputted to the visitor. This can be done following way
 
 $scriptTag = '<script>';
 if(function_exists('cookiebot_active') && cookiebot_active()) {
@@ -159,7 +159,7 @@ The developer of the plugin can see more details on [our Github repository](http
 ### Can I use Cookiebot with GTM? ###
 Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" option on the Cookiebot plugin settings page.
 
-[Please see our article on how to depoloy Cookiebot with GTM](https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment).
+[Please see our article on how to deploy Cookiebot with GTM](https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment).
 
 
 ## Changelog ##
