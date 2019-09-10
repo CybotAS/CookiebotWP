@@ -82,6 +82,9 @@ https://youtu.be/OCXz2bt4H_w
 
 **Implementing prior consent:**
 
+Below is a video tutorial on how to manually implement prior consent i.e. holding back all cookies and trackers (other than those strictly necessary for the website to function) until the user has given a consent. The manual implementation guide (found in step 11 of the video) can be [found here](https://cookiebot.com/en/manual-implementation).
+Please note that you can make use of our automatic cookie blocking functionality instead of manually having to mark up the cookie-setting scripts. To do so, update the plugin (version 3.0.0 or higher) and choose automatic cookie control in your Admin panel. 
+
 https://youtu.be/MeHycvV2QCQ
 
 ## Frequently Asked Questions ##
