@@ -1,5 +1,5 @@
 ﻿# Cookiebot | GDPR Compliant Cookie Consent and Notice #
-* Contributors: cookiebot,phpgeekdk,aytac,rvcybot,kh1987
+* Contributors: cookiebot,phpgeekdk,aytac,rvcybot,kh1987,bmlcybot
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent
 * Requires at least: 4.4
 * Tested up to: 5.2
