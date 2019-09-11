@@ -76,7 +76,13 @@ class Hubspot_Leadin implements Cookiebot_Addons_Interface {
 	public function cookiebot_addon_hubspot_tracking_code() {
 
 		// block the script untill the consent is given
-		$this->script_loader_tag->add_tag( 'leadin-scriptloader-js', $this->get_cookie_types() );
+		
+		if(version_compare(LEADIN_PLUGIN_VERSION,'7.10.0','>=')) {
+			$this->script_loader_tag->add_tag( 'leadin-script-loader-js', $this->get_cookie_types() );	
+		}
+		else {
+			$this->script_loader_tag->add_tag( 'leadin-scriptloader-js', $this->get_cookie_types() );
+		}
 	}
 
 	/**

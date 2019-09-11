@@ -16,6 +16,6 @@ class Test_Hubspot_Leadin extends \WP_UnitTestCase {
 	public function test_hook() {
 		$content = file_get_contents( 'http://plugins.svn.wordpress.org/leadin/trunk/inc/class-leadin.php' );
 		
-		$this->assertNotFalse( strpos( $content, '$embedId  = \'leadin-scriptloader-js\';') );
+		$this->assertNotFalse( strpos( $content, "const TRACKING_CODE_ID = 'leadin-script-loader-js';") );
 	}
 }
