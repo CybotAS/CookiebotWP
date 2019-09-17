@@ -15,8 +15,8 @@ class Test_Caos_Host_Analyticsjs_Local extends \WP_UnitTestCase {
 		$content = file_get_contents( 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/host-analyticsjs-local.php' );
 
 		$this->assertNotFalse( strpos( $content,
-			'add_action(\'wp_footer\', \'caos_analytics_render_tracking_code\', CAOS_ANALYTICS_ENQUEUE_ORDER);' ) );
+			'add_action(\'wp_footer\', \'caos_analytics_render_tracking_code\', CAOS_OPT_ENQUEUE_ORDER);' ) );
 		$this->assertNotFalse( strpos( $content,
-			'add_action(\'wp_head\', \'caos_analytics_render_tracking_code\', CAOS_ANALYTICS_ENQUEUE_ORDER);' ) );
+			'add_action(\'wp_head\', \'caos_analytics_render_tracking_code\', CAOS_OPT_ENQUEUE_ORDER);' ) );
 	}
 }
