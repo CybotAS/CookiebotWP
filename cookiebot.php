@@ -106,8 +106,8 @@ final class Cookiebot_WP {
 					<?php
 				});*/
 		}
-		//elseif( $this->get_cookie_blocking_mode() !== 'auto' ) {
-		else {
+		elseif( $this->get_cookie_blocking_mode() !== 'auto' ) {
+		//else {
 			if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED')) && $dismissAddons !== true ) {
 				//Make sure we got a PHP version that works
 				if(version_compare(PHP_VERSION, '5.4.0', '>=')) {
@@ -418,6 +418,7 @@ final class Cookiebot_WP {
 			<p>
 				<?php _e('Cookiebot enables your website to comply with current legislation in the EU on the use of cookies for user tracking and profiling. The EU ePrivacy Directive requires prior, informed consent of your site users, while the <a href="https://www.cookiebot.com/en/gdpr" target="_blank">General Data Protection Regulation (GDPR)</a> requires you to document each consent. At the same time you must be able to account for what user data you share with embedded third-party services on your website and where in the world the user data is sent.','cookiebot'); ?>
 			</p>
+			
 			<form method="post" action="options.php">
 				<?php settings_fields( 'cookiebot' ); ?>
 				<?php do_settings_sections( 'cookiebot' ); ?>
@@ -458,6 +459,13 @@ final class Cookiebot_WP {
 									<?php _e('Learn more','cookiebot'); ?>
 								</a>
 							</p>
+							<?php
+							if($this->get_cookie_blocking_mode() === 'auto') {
+								?>
+								<div class="notice inline notice-error" style="display:inline-block;"><p><?php _e('Cookiebot addons is disabled because Cookie Blocking Mode is set to auto.','cookiebot'); ?></p></div>
+								<?php
+							}
+							?>
 							<script>
 								jQuery(document).ready(function($) {
 									var cookieBlockingMode = '<?php echo $cbm; ?>';
