@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR Compliant Cookie Consent and Notice
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supporting prior consent, cookie declaration, and documentation of consents. Easy to install, implement and configure.
 Author: Cybot A/S
-Version: 3.0.1
+Version: 3.1.0
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -75,9 +75,11 @@ final class Cookiebot_WP {
 		if($this->get_cbid() == '') {
 			if(is_multisite()) {
 				update_site_option('cookiebot-cookie-blocking-mode','auto');
+				update_site_option('cookiebot-nooutput-admin',true);
 			}
 			else {
 				update_option('cookiebot-cookie-blocking-mode','auto');
+				update_option('cookiebot-nooutput-admin',true);
 			}
 		}
 	}
@@ -112,7 +114,9 @@ final class Cookiebot_WP {
 				//Make sure we got a PHP version that works
 				if(version_compare(PHP_VERSION, '5.4.0', '>=')) {
 					define('COOKIEBOT_URL', plugin_dir_url( __FILE__ ));
-					include_once( dirname( __FILE__ ) . '/addons/cookiebot-addons-init.php' );
+					if(!is_admin() || !$this->cookiebot_disabled_in_admin()) {
+						include_once( dirname( __FILE__ ) . '/addons/cookiebot-addons-init.php' );
+					}
 				}
 				else {
 					define('COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION',true);
@@ -150,14 +154,7 @@ final class Cookiebot_WP {
 			add_action('admin_init', array($this,'save_notice_link'));
 
 			//Check if we should show cookie consent banner on admin pages
-			$addJSAdmin = true;
-			if(is_multisite() && get_site_option('cookiebot-nooutput-admin',false)) {
-				$addJSAdmin = false;
-			}
-			elseif(get_option('cookiebot-nooutput-admin',false)) {
-				$addJSAdmin = false;
-			}
-			if($addJSAdmin) {
+			if(!$this->cookiebot_disabled_in_admin()) {
 				//adding cookie banner in admin area too
 				add_action('admin_head', array($this,'add_js'),-9999);
 			}
@@ -683,7 +680,7 @@ final class Cookiebot_WP {
 							</td>
 						</tr>
 						<tr valign="top">
-							<th scope="row"><?php _e('Hide Cookie Popup in WP Admin','cookiebot'); ?></th>
+							<th scope="row"><?php _e('Disable Cookiebot in WP Admin','cookiebot'); ?></th>
 							<td>
 								<?php
 								$disabled = false;
@@ -1113,6 +1110,23 @@ final class Cookiebot_WP {
 		}
 		if(empty($cbm)) { $cbm = 'manual'; }
 		return $cbm;
+	}
+
+
+	/**
+	 * Cookiebot_WP Check if Cookiebot is active in admin
+	 * 
+	 * @version 3.1.0
+	 * @since		3.1.0
+	 */
+	public static function cookiebot_disabled_in_admin() {
+			if(is_multisite() && get_site_option('cookiebot-nooutput-admin',false)) {
+				return true;
+			}
+			elseif(get_option('cookiebot-nooutput-admin',false)) {
+				return true;
+			}
+			return false;
 	}
 
 	/**
