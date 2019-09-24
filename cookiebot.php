@@ -114,9 +114,7 @@ final class Cookiebot_WP {
 				//Make sure we got a PHP version that works
 				if(version_compare(PHP_VERSION, '5.4.0', '>=')) {
 					define('COOKIEBOT_URL', plugin_dir_url( __FILE__ ));
-					if(!is_admin() || !$this->cookiebot_disabled_in_admin()) {
-						include_once( dirname( __FILE__ ) . '/addons/cookiebot-addons-init.php' );
-					}
+					include_once( dirname( __FILE__ ) . '/addons/cookiebot-addons-init.php' );
 				}
 				else {
 					define('COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION',true);
@@ -696,7 +694,7 @@ final class Cookiebot_WP {
 								?>
 								<p class="description">
 									<?php if($disabled) { echo '<b>'._('Network setting applied. Please contact website administrator to change this setting.').'</b><br />';  } ?>
-									<b><?php _e('This checkbox will remove the cookie consent banner the Wordpress Admin area.','cookiebot') ?></b>
+									<b><?php _e('This checkbox will disable Cookiebot in the Wordpress Admin area.','cookiebot') ?></b>
 								</p>
 							</td>
 						</tr>

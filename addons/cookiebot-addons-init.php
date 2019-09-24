@@ -117,7 +117,6 @@ class Cookiebot_Addons {
 			new Plugin_Controller( $this->container->get( 'Settings_Service_Interface' ) ),
 			'load_active_addons',
 		) );
-
 		/**
 		 * Load settings config
 		 *
