@@ -1261,11 +1261,12 @@ final class Cookiebot_WP {
 	 * @since   3.2.0
 	 */
 	function cookiebot_fix_plugin_conflicts() {
+		//Fix for Divi Page Builder
 		add_action( 'wp', array( $this, '_cookiebot_plugin_conflict_divi' ), 100 );
 		
-		if( defined( 'ELEMENTOR_VERSION' ) ) {
-			add_filter( 'script_loader_tag', '_cookiebot_plugin_conflict_elementor', 10, 2 );
-		}
+		//Fix for Elementor Builder
+		add_filter( 'script_loader_tag', array( $this, '_cookiebot_plugin_conflict_elementor' ), 10, 2 );
+		
 	}
 	
 	/**
@@ -1293,7 +1294,11 @@ final class Cookiebot_WP {
 	 * @since   3.2.0
 	 */
 	function _cookiebot_plugin_conflict_elementor( $tag, $handle ) {
-		if( in_array( $handle, [ 'jquery-core',	'elementor-frontend-modules', 'elementor-frontend' ] ) )  {
+		if( !defined( 'ELEMENTOR_VERSION' ) ) {
+			return $tag;
+		}
+		
+		if( in_array( $handle, [ 'jquery-core', 'elementor-frontend-modules', 'elementor-frontend', 'wp-tinymce' ] ) )  {
 			$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
 		}
 		return $tag;
