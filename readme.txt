@@ -164,6 +164,11 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 ## Changelog ##
 
+### 3.2.0 - 2019-10-29 ###
+* Adding fix for conflict with Elementor Page Builder when Cookie blocking is in auto mode 
+* Adding fix for conflict with Divi Builder when Cookie blocking is in auto mode (still need to disable Cookiebot on admin pages to work properly).
+* Minor adjustments to code style and unit tests
+
 ### 3.1.0 - 2019-09-24 ###
 * Change option to hide cookie banner in WP Admin to instead disabling Cookiebot
 * Set option to disable Cookiebot banner as default for new installs
