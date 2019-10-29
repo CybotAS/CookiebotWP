@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR Compliant Cookie Consent and Notice
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supporting prior consent, cookie declaration, and documentation of consents. Easy to install, implement and configure.
 Author: Cybot A/S
-Version: 3.1.0
+Version: 3.2.0
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.0.1';
+	public $version = '3.2.0';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -57,6 +57,9 @@ final class Cookiebot_WP {
 		add_action('plugins_loaded', array($this, 'cookiebot_init'), 5);
 		register_activation_hook( __FILE__ , array($this, 'activation'));
 		register_deactivation_hook( __FILE__, 'cookiebot_addons_plugin_deactivated' );
+		
+		$this->cookiebot_fix_plugin_conflicts();
+		
 	}
 
 	/**
@@ -87,7 +90,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Init Cookiebot.
 	 *
-	 * @version 2.2.0
+	 * @version 3.2.0
 	 * @since   1.6.2
 	 * @access  public
 	 */
@@ -1010,7 +1013,7 @@ final class Cookiebot_WP {
 	 */
 	function add_js() {
 		$cbid = $this->get_cbid();
-		if(!empty($cbid)) {
+		if(!empty($cbid) && !defined('COOKIEBOT_DISABLE_ON_PAGE')) {
 			if(is_multisite() && get_site_option('cookiebot-nooutput',false)) {
 				return; //Is multisite - and disabled output is checked as network setting
 			}
@@ -1246,6 +1249,54 @@ final class Cookiebot_WP {
 				update_option('cookiebot_notice_recommend', strtotime('+2 weeks') );
 			}
 		}
+	}
+	
+	
+	
+
+	/**
+	 * Cookiebot_WP Fix plugin conflicts related to Cookiebot 
+	 *
+	 * @version 3.2.0
+	 * @since   3.2.0
+	 */
+	function cookiebot_fix_plugin_conflicts() {
+		add_action( 'wp', array( $this, '_cookiebot_plugin_conflict_divi' ), 100 );
+		
+		if( defined( 'ELEMENTOR_VERSION' ) ) {
+			add_filter( 'script_loader_tag', '_cookiebot_plugin_conflict_elementor', 10, 2 );
+		}
+	}
+	
+	/**
+	 * Cookiebot_WP Fix Divi builder conflict when blocking mode is in auto. 
+	 *
+	 * @version 3.2.0
+	 * @since   3.2.0
+	 */
+	function _cookiebot_plugin_conflict_divi() {
+		if ( defined( 'ET_FB_ENABLED' ) ) {
+			if ( 	ET_FB_ENABLED &&
+						$this->cookiebot_disabled_in_admin() &&
+						$this->get_cookie_blocking_mode() == 'auto' ) {
+
+					define('COOKIEBOT_DISABLE_ON_PAGE',true); //Disable Cookiebot on the current page
+
+			}
+		}
+	}
+	
+	/**
+	 * Cookiebot_WP Fix Elementor builder conflict - whitelist JS files in automode
+	 * 
+	 * @version 3.2.0
+	 * @since   3.2.0
+	 */
+	function _cookiebot_plugin_conflict_elementor( $tag, $handle ) {
+		if( in_array( $handle, [ 'jquery-core',	'elementor-frontend-modules', 'elementor-frontend' ] ) )  {
+			$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
+		}
+		return $tag;
 	}
 
 }

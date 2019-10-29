@@ -63,7 +63,7 @@ class Plugin_Controller {
 		if( \Cookiebot_WP::cookiebot_disabled_in_admin() === true && is_admin() ) {
 			return;
 		}
-		
+
 		/**
 		 * Check plugins one by one and load configuration if it is active
 		 *
