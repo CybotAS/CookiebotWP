@@ -1,5 +1,8 @@
 {
     "require": {
         "php-di/php-di": "5.0"
+    },
+    "config":{
+        "prepend-autoloader": false
     }
 }
