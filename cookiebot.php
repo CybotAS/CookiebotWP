@@ -1264,9 +1264,9 @@ final class Cookiebot_WP {
 		//Fix for Divi Page Builder
 		add_action( 'wp', array( $this, '_cookiebot_plugin_conflict_divi' ), 100 );
 		
-		//Fix for Elementor Builder
-		add_filter( 'script_loader_tag', array( $this, '_cookiebot_plugin_conflict_elementor' ), 10, 2 );
-		
+		//Fix for Elementor and WPBakery Page Builder Builder
+		add_filter( 'script_loader_tag', array( $this, '_cookiebot_plugin_conflict_scripttags' ), 10, 2 );
+				
 	}
 	
 	/**
@@ -1288,19 +1288,42 @@ final class Cookiebot_WP {
 	}
 	
 	/**
-	 * Cookiebot_WP Fix Elementor builder conflict - whitelist JS files in automode
+	 * Cookiebot_WP Fix plugin conflicts with page builders - whitelist JS files in automode
 	 * 
 	 * @version 3.2.0
 	 * @since   3.2.0
 	 */
-	function _cookiebot_plugin_conflict_elementor( $tag, $handle ) {
-		if( !defined( 'ELEMENTOR_VERSION' ) ) {
-			return $tag;
+	function _cookiebot_plugin_conflict_scripttags( $tag, $handle ) {
+		
+		//Check if Elementor Page Builder active
+		if( defined( 'ELEMENTOR_VERSION' ) ) {
+			if( in_array( $handle, [ 
+				'jquery-core', 
+				'elementor-frontend-modules', 
+				'elementor-frontend', 
+				'wp-tinymce' 
+			] ) )  {
+				$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
+			}
 		}
 		
-		if( in_array( $handle, [ 'jquery-core', 'elementor-frontend-modules', 'elementor-frontend', 'wp-tinymce' ] ) )  {
-			$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
+		//Check if WPBakery Page Builder active
+		if ( defined( 'WPB_VC_VERSION' ) ) {
+			if( in_array( $handle, [
+				'jquery-core',
+				'jquery-ui-core',
+				'jquery-ui-sortable',
+				'jquery-ui-mouse',
+				'jquery-ui-widget',
+				'vc_editors-templates-preview-js',
+				'vc-frontend-editor-min-js',
+				'vc_inline_iframe_js',
+				'wpb_composer_front_js',
+			] ) ) {
+				$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
+			}
 		}
+		
 		return $tag;
 	}
 
