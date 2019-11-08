@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR Compliant Cookie Consent and Notice
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supporting prior consent, cookie declaration, and documentation of consents. Easy to install, implement and configure.
 Author: Cybot A/S
-Version: 3.2.0
+Version: 3.3.0
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.2.0';
+	public $version = '3.3.0';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -1258,15 +1258,15 @@ final class Cookiebot_WP {
 	 * Cookiebot_WP Fix plugin conflicts related to Cookiebot 
 	 *
 	 * @version 3.2.0
-	 * @since   3.2.0
+	 * @since   3.3.0
 	 */
 	function cookiebot_fix_plugin_conflicts() {
 		//Fix for Divi Page Builder
 		add_action( 'wp', array( $this, '_cookiebot_plugin_conflict_divi' ), 100 );
 		
-		//Fix for Elementor Builder
-		add_filter( 'script_loader_tag', array( $this, '_cookiebot_plugin_conflict_elementor' ), 10, 2 );
-		
+		//Fix for Elementor and WPBakery Page Builder Builder
+		add_filter( 'script_loader_tag', array( $this, '_cookiebot_plugin_conflict_scripttags' ), 10, 2 );
+				
 	}
 	
 	/**
@@ -1288,19 +1288,42 @@ final class Cookiebot_WP {
 	}
 	
 	/**
-	 * Cookiebot_WP Fix Elementor builder conflict - whitelist JS files in automode
+	 * Cookiebot_WP Fix plugin conflicts with page builders - whitelist JS files in automode
 	 * 
 	 * @version 3.2.0
-	 * @since   3.2.0
+	 * @since   3.3.0
 	 */
-	function _cookiebot_plugin_conflict_elementor( $tag, $handle ) {
-		if( !defined( 'ELEMENTOR_VERSION' ) ) {
-			return $tag;
+	function _cookiebot_plugin_conflict_scripttags( $tag, $handle ) {
+		
+		//Check if Elementor Page Builder active
+		if( defined( 'ELEMENTOR_VERSION' ) ) {
+			if( in_array( $handle, [ 
+				'jquery-core', 
+				'elementor-frontend-modules', 
+				'elementor-frontend', 
+				'wp-tinymce' 
+			] ) )  {
+				$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
+			}
 		}
 		
-		if( in_array( $handle, [ 'jquery-core', 'elementor-frontend-modules', 'elementor-frontend', 'wp-tinymce' ] ) )  {
-			$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
+		//Check if WPBakery Page Builder active
+		if ( defined( 'WPB_VC_VERSION' ) ) {
+			if( in_array( $handle, [
+				'jquery-core',
+				'jquery-ui-core',
+				'jquery-ui-sortable',
+				'jquery-ui-mouse',
+				'jquery-ui-widget',
+				'vc_editors-templates-preview-js',
+				'vc-frontend-editor-min-js',
+				'vc_inline_iframe_js',
+				'wpb_composer_front_js',
+			] ) ) {
+				$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
+			}
 		}
+		
 		return $tag;
 	}
 
