@@ -1301,7 +1301,14 @@ final class Cookiebot_WP {
 				'jquery-core', 
 				'elementor-frontend-modules', 
 				'elementor-frontend', 
-				'wp-tinymce' 
+				'wp-tinymce' ,
+				'underscore',
+				'backbone',
+				'backbone-marionette',
+				'backbone-radio',
+				'elementor-common-modules',
+				'elementor-dialog',
+				'elementor-common',
 			] ) )  {
 				$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
 			}
