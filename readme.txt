@@ -165,7 +165,8 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 ## Changelog ##
 
 ### 3.3.0 - 2019-11-07 ###
-* Adding fix for conflict with WPBakery Page Builder when Cookie blocking is in auto mode 
+* Fix for conflict with WPBakery Page Builder when Cookie blocking is in auto mode
+* Fix for Elementor Extras causing JS errors in frontend when Cookie blocking is in auto mode 
 * Removing prepending of composer autoloader - causing conflicts with other plugins.
 
 ### 3.2.0 - 2019-10-29 ###
