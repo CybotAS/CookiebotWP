@@ -187,6 +187,11 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface
         foreach ($matches[0] as $match) {
             //Find src.
             preg_match('|<a href=\"([^\"]*)\">([^<]*)</a></blockquote>|', $match, $matchSrc);
+
+            if( empty( $matchSrc )) {
+                continue;
+            }
+
             $src = $matchSrc[1];
 
             //Replace - and add cookie consent notice.
@@ -607,7 +612,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface
      */
     private function get_regex()
     {
-        return $this->settings->get_addon_regex($this->get_option_name(), $this->get_default_regex());
+        return apply_filters('cookiebot_embed_regex', $this->settings->get_addon_regex($this->get_option_name(), $this->get_default_regex()));
     }
 
     /**
@@ -619,7 +624,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface
      */
     private function get_default_regex()
     {
-        return '/<iframe[^>]* src=("|\').*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com).*[^>].*>.*?<\/iframe>/mi';
+        return apply_filters('cookiebot_embed_default_regex', '/<iframe[^>]* src=("|\').*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com).*[^>].*>.*?<\/iframe>/mi');
     }
 
     /**
