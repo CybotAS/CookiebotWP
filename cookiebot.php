@@ -388,6 +388,7 @@ final class Cookiebot_WP {
 		$supportedLanguages['sr'] = __('Serbian','cookiebot');
 		$supportedLanguages['fi'] = __('Finnish','cookiebot');
 		$supportedLanguages['eu'] = __('Basque','cookiebot');
+		$supportedLanguages['hu'] = __('Hungarian','cookiebot');
 		asort($supportedLanguages,SORT_LOCALE_STRING);
 		return $supportedLanguages;
 	}
