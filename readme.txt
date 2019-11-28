@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent
 * Requires at least: 4.4
 * Tested up to: 5.2
-* Stable tag: 3.3.0
+* Stable tag: 3.3.1
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -163,6 +163,10 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 
 ## Changelog ##
+
+### 3.3.1 - 2019-11-27 ###
+* Adding filter for regexp for fixing embedded media
+* Minor fixes and changes
 
 ### 3.3.0 - 2019-11-09 ###
 * Fix for conflict with WPBakery Page Builder when Cookie blocking is in auto mode

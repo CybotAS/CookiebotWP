@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.3.0';
+	public $version = '3.3.1';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
