@@ -1022,6 +1022,9 @@ final class Cookiebot_WP {
 				return; //Do not show JS - output disabled
 			}
 
+			if($this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() ) {
+			    return;
+            }
 
 			$lang = $this->get_language();
 			if(!empty($lang)) {
@@ -1045,6 +1048,23 @@ final class Cookiebot_WP {
 			<?php
 		}
 	}
+
+	/**
+     * Returns true if an user is logged in and has an edit_themes capability
+     *
+	 * @return bool
+     *
+     * @since 3.3.1
+	 */
+	function can_current_user_edit_theme() {
+	    if( is_user_logged_in() ) {
+	        if( current_user_can('edit_themes') ) {
+	            return true;
+            }
+        }
+
+	    return false;
+    }
 
 	/**
 	 * Cookiebot_WP Output declation shortcode [cookie_declaration]
