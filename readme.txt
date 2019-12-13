@@ -11,7 +11,7 @@ Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supportin
 
 ## Description ##
 
-### Trustworthy and simple cookie consent soluton for GDPR/ePR and compliance ###
+### Trustworthy and simple cookie consent solution for GDPR/ePR and CCPA compliance ###
 
 Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePR and CCPA compliance and offering:
 
