@@ -1,4 +1,4 @@
-﻿# Cookiebot | GDPR Compliant Cookie Consent and Notice #
+﻿# Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control #
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent
 * Requires at least: 4.4
@@ -11,17 +11,18 @@ Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supportin
 
 ## Description ##
 
-### Trustworthy and easy GDPR/ePR compliant cookie consent ###
+### Trustworthy and simple cookie consent soluton for GDPR/ePR and compliance ###
 
-Cookiebot is a cloud-driven solution that enables full cookie compliance, offering:
+Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePR and CCPA compliance and offering:
 
-* A highly customizable consent banner to handle consents and give the users the possibility to opt-in and -out of cookie categories, as required by the GPDR, ePrivacy Directive and similar legislations around the world.
-* An automatically generated and updated cookie policy and cookie declaration, with purpose descriptions and categorization of your cookies (Necessary, Statistics, Preferences, Marketing).
-* Full monthly website scan, detecting all first and third party cookies and similar tracking on your site (e.g. HTML5 Local Storage, Flash Local Shared Object, Silverlight Isolated Storage, IndexedDB, ultrasound beacons, pixel tags etc.) as well as their provenance, duration and where to the data is sent.
-* The unique Cookiebot feature of automatic cookie blocking. All cookies and tracking are automatically held back right from the moment the user lands on the website and until the proper consent has been obtained, enabling compliance with the GDPR and ePrivacy requirement for “prior consent”. 
-* An easy way to allow the users to change or withdraw their consent.
-* Translations for 44 languages and the ability to change the text on the banner and cookie declaration for any language.
-* Storage of user consents in our cloud-driven environment, which are downloadable and can be used as proof that the consent was given.
+* A highly customizable consent banner to handle consents and give the user the possibility to opt in and out of cookie categories, as required by the GDPR/ePR, CCPA and similar legislations around the world.
+* An automatically generated and updated cookie policy and cookie declaration, with purpose descriptions and categorization of your cookies (Necessary, Statistic, Preferences, Marketing).
+* A Do Not Sell My Personal Information link on the cookie declaration for end-users to opt out of having their data sold to third parties, as required by the CCPA – including the special opt-in banner for sites that have visitors under the age of 16, also in accordance with CCPA.
+* Monthly website scans, detecting all first- and third-party cookies and similar tracking on your site (e.g. HTML5 Local Storage, Flash Local Shared Object, Silverlight Isolated Storage, IndexedDB, ultrasound beacons, pixel tags etc.) as well as their provenance, duration and where the data is sent to.
+* The unique Cookiebot feature of automatic cookie blocking. All cookies and tracking are automatically held back right from the moment the user lands on the website and until the proper consent has been obtained, enabling compliance with the GDPR and the ePrivacy Directive.
+* An easy way to allow the user to change or withdraw their consent.
+* Supports 45 languages in consent banner and cookie declaration.
+* Secure storage of user consents in our cloud-driven environment. The user consents are downloadable and can be used as proof that the consent was given.
 * Execution of cookie-setting scripts without a page reload, if the user gives consent.
 
 Please read our FAQ at the bottom of the page for more information.
@@ -30,11 +31,13 @@ https://youtube.com/watch?v=t1LJ6i1i9gA
 
 ### Will my website become compliant once I install Cookiebot? ###
 
-If you use our plugin version 3.0 or later and chose our automatic implementation, Cookiebot enables full compliance with the ‘prior consent’ requirement of the GDPR, the ePrivacy Directive (ePR) and similar legal instruments for protection of user data around the world.
+If you use our plugin version 3.0 or later and choose the automatic implementation, Cookiebot enables full compliance with the ‘prior consent’ requirement of the GDPR, the ePrivacy Directive (ePR) and similar legal instruments for protection of user data around the world.
 
-The default consent banner has the strictest settings possible and is suitable for obtaining consent under both GDPR and the ePR. Make sure to adapt the consent banner content to fit your website. You should also check out [our GDPR checklist](https://support.cookiebot.com/hc/en-us/sections/360000917513-Ready-for-25-May-2018-GDPR-enforcement-date-A-Cookiebot-checklist-). If you are using server-side cookies, please check the [“Server side usage” guide](https://www.cookiebot.com/en/developer/).
+Cookiebot also enables compliance with the CCPA through the implementation of the Do Not Sell My Personal Information link on a website’s cookie declaration, as well as the opt-in banner required if your website targets visitors under the age of 16.
 
-However, being a customizable plugin, true compliance always depends on the website owner choosing a type of banner, wording and settings that are compliant with the local legislation and fits the specific website and company (controller).
+The default consent banner has the strictest settings possible and is suitable for obtaining consent under both GDPR and the ePR. Make sure to adapt the consent banner content to fit your website. You should also check out [our GDPR checklist if you have users from the European Union](https://support.cookiebot.com/hc/en-us/sections/360000917513-Ready-for-25-May-2018-GDPR-enforcement-date-A-Cookiebot-checklist-). If you are using server-side cookies, please check the [“Server side usage” guide](https://www.cookiebot.com/en/developer/).
+
+However, being a customizable plugin, true compliance always depends on the website owner choosing a type of banner, wording and settings that are compliant with the local legislation and fits the specific website and company (data controller).
 
 **If you choose the manual implementation…**
 
@@ -42,11 +45,10 @@ Then please make sure of the following:
 
 If you are using plugins that set cookies which require consent (which most do), you have to:
 
-* Ask the plugin developers if they are planning on becoming GDPR compliant, or if they would like to integrate with Cookiebot.
-* Check if there already exists an addon for your plugin in the "Prior consent" submenu.
-* [Check out our Github repository](https://github.com/CybotAS/CookiebotAddons), where we are developing integrations for Cookiebot, until the plugin developers choose to do this themselves, [or if WP Core enables such functionality](https://core.trac.wordpress.org/ticket/44043)
+* Ask the plugin developers if they are planning on becoming GDPR/CCPA compliant, or if they would like to integrate with Cookiebot.
+* [Check out our Github repository](https://github.com/CybotAS/CookiebotAddons), where we are developing integrations for Cookiebot, until the plugin developers choose to do this themselves, [or if WP Core enables such functionality](https://core.trac.wordpress.org/ticket/44043).
 
-Once Cookiebot is installed, and we've scanned your site, you can check the [cookie report](https://manage.cookiebot.com/goto/reports), to identify all cookies being set on your website. If the cookies are coming from content that you have inserted manually, you can mark up that content [as described in our manual implementation guide step 4](https://cookiebot.com/goto/manual-implementation).
+Once Cookiebot is installed and we’ve scanned your site, you can check the [cookie report](https://manage.cookiebot.com/goto/reports) to identify all cookies being set on your website. If the cookies are coming from content that you have inserted manually, you can mark up that content [as described in our manual implementation guide step 4](https://cookiebot.com/goto/manual-implementation).
 
 Embedded videos and iframes which set cookies can be marked up as explained in our [Iframe cookie consent with YouTube example](https://support.cookiebot.com/hc/en-us/articles/360003790854-Iframe-cookie-consent-with-YouTube-example).
 
@@ -120,6 +122,8 @@ The Cookiebot solution also includes an automatically updated cookie declaration
 
 By implementing it, you ensure that your cookie declaration is specific and accurate at all times, as required by the GDPR. Also, the declaration automatically provides the mandatory options for the user to change or withdraw consent.
 
+For CCPA compliance, businesses will be able to display the CCPA required **Do Not Sell My Personal Information** link on their cookie declaration.
+
 To display your cookie declaration, create a new page on your website - and add the shortcode that the plugin provides to the page: [cookie_declaration]. Alternatively, you can incorporate it into e.g. your existing Privacy Policy.
 
 By default, the cookie declaration is displayed in the chosen Cookiebot language. You are able to override this setting with a "lang" attribute in the shortcode. Eg.: [cookie_declaration lang="de"] for a German version. Remember to add all used languages in the [Cookiebot Manager](https://manage.cookiebot.com).
@@ -141,6 +145,23 @@ The GDPR is the General Data Protection Regulation, an EU-law enforced since May
 See the [EU homepage of the GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32016R0679) for more information, and their infographic for businesses: [Data Protection: Better rules for small businesses](http://ec.europa.eu/justice/smedataprotect/index_en.htm)
 
 The ePrivacy Directive is another legal instrument of the EU that specifically aims to protect EU citizens’ online data such as data from online communication. It is in the process of becoming an actual Regulation such as the GDPR, which will probably happen in 2020. 
+
+### What is the CCPA? ###
+The California Consumer Privacy Act (CCPA) is a state-wide law that regulates how businesses all over the world are allowed to handle the personal information of California residents.
+
+You are liable for CCPA compliance if your business:
+
+* Sells the personal information of more than 50,000 California residents per year,
+* Has an annual gross revenue exceeding $25 million,
+* Derives more than 50 percent of its annual revenue from the selling of personal information of California residents.
+
+Cookies and other tracking technologies are classified as unique identifiers that form part of the CCPA’s definition of personal information.
+
+If your business has a website, you must know and disclose to consumers, at or before the point of collection, the data you collect and which third parties you share it with. This can be done through the Cookiebot cookie declaration that also features the required Do Not Sell My Personal Information link, so end-users can opt out of having their data sold.
+
+If your website is visited by consumers under the age of 16, you are required by the CCPA to first obtain their opt-in. This can be done through Cookiebot’s CCPA opt-in banner. 
+
+Visit [Cookiebot](https://cookiebot.com) to read more about the CCPA, how to achieve CCPA compliance, and what the CCPA says about your website’s use of cookies.
 
 ### How do I make other plugins support Cookiebot? ###
 If your favourite plugin doesn't support Cookiebot you are always welcome to ask the author to add support for Cookiebot.
