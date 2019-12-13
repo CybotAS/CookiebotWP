@@ -7,7 +7,7 @@
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
-Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supporting prior consent, cookie declaration, and documentation of consents. Easy to install, implement and configure.
+Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites.
 
 ## Description ##
 
