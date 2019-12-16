@@ -1,6 +1,6 @@
 ﻿# Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control #
 * Contributors: cookiebot,phpgeekdk,aytac
-* Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent
+* Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent, ccpa
 * Requires at least: 4.4
 * Tested up to: 5.2
 * Stable tag: 3.4.0
