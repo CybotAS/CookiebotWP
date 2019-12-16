@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Cookiebot | GDPR Compliant Cookie Consent and Notice
+Plugin Name: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control
 Plugin URI: https://cookiebot.com/
-Description: Cookiebot is a fully GDPR & ePrivacy compliant cookie consent solution supporting prior consent, cookie declaration, and documentation of consents. Easy to install, implement and configure.
+Description: Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites.
 Author: Cybot A/S
 Version: 3.4.0
 Author URI: http://cookiebot.com
