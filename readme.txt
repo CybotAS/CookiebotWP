@@ -161,7 +161,7 @@ If your business has a website, you must know and disclose to consumers, at or b
 
 If your website is visited by consumers under the age of 16, you are required by the CCPA to first obtain their opt-in. This can be done through Cookiebot’s CCPA opt-in banner. 
 
-Visit [Cookiebot](https://cookiebot.com) to read more about the CCPA, how to achieve CCPA compliance, and what the CCPA says about your website’s use of cookies.
+Visit [Cookiebot](https://www.cookiebot.com/en/what-is-ccpa/) to read more about the CCPA, how to achieve CCPA compliance, and what the CCPA says about your website’s use of cookies.
 
 ### How do I make other plugins support Cookiebot? ###
 If your favourite plugin doesn't support Cookiebot you are always welcome to ask the author to add support for Cookiebot.
