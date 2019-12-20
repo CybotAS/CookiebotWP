@@ -1324,7 +1324,7 @@ final class Cookiebot_WP {
 	 */
 	public function get_wp_consent_api_category($cbCategory='marketing') {
 		$m = $this->get_wp_consent_api_mapping();
-		return ( isset( $m[$cbCategory] ) ? $m[$cbCategory] : false;
+		return ( isset( $m[$cbCategory] ) ) ? $m[$cbCategory] : false;
 	}
 	
 	/**
