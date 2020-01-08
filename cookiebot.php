@@ -160,7 +160,11 @@ final class Cookiebot_WP {
 				add_action('admin_head', array($this,'add_js'),-9999);
 			}
 		}
-
+		
+		//Include integration to WP Consent Level API if available
+		if($this->is_wp_consent_api_active()) {
+			add_action( 'wp_enqueue_scripts', array($this, 'cookiebot_enqueue_consent_api_scripts') );
+		}
 
 		// Set up localisation
 		load_plugin_textdomain('cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
@@ -1339,6 +1343,17 @@ final class Cookiebot_WP {
 		return get_option( 'cookiebot-consent-mapping',$this->get_default_wp_consent_api_mapping());
 	}	 
 	 
+	/**
+	 * Cookiebot_WP Enqueue JS for integration with WP Consent Level API
+	 * 
+	 * @version 3.5.0
+	 * @since 	3.5.0
+	 */
+	function cookiebot_enqueue_consent_api_scripts() {
+		wp_register_script( 'cookiebot-wp-consent-level-api-integration', plugins_url( 'cookiebot/js/cookiebot-wp-consent-level-api-integration.js', 'cookiebot' ) );
+		wp_enqueue_script( 'cookiebot-wp-consent-level-api-integration' );
+		wp_localize_script( 'cookiebot-wp-consent-level-api-integration', 'cookiebot_category_mapping', $this->get_wp_consent_api_mapping() );
+	}
 	
 
 	/**
