@@ -1055,12 +1055,21 @@ final class Cookiebot_WP {
 	 * @return bool
      *
      * @since 3.3.1
+     * @version 3.4.1
 	 */
 	function can_current_user_edit_theme() {
 	    if( is_user_logged_in() ) {
 	        if( current_user_can('edit_themes') ) {
 	            return true;
             }
+
+	        if( current_user_can( 'edit_pages' ) ) {
+	            return true;
+            }
+
+		    if( current_user_can( 'edit_posts' ) ) {
+			    return true;
+		    }
         }
 
 	    return false;
