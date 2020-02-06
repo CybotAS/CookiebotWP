@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent, ccpa
 * Requires at least: 4.4
 * Tested up to: 5.2
-* Stable tag: 3.4.1
+* Stable tag: 3.4.2
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -184,6 +184,10 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 
 ## Changelog ##
+
+
+### 3.4.2 - 2020-02-06 ###
+* Fix for DIVI editor
 
 ### 3.4.1 - 2020-01-28 ###
 * Removing manual fixes for Cookiebot when in auto
