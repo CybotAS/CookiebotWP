@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites.
 Author: Cybot A/S
-Version: 3.4.2
+Version: 3.5.0
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.4.2';
+	public $version = '3.5.0';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -57,9 +57,9 @@ final class Cookiebot_WP {
 		add_action('plugins_loaded', array($this, 'cookiebot_init'), 5);
 		register_activation_hook( __FILE__ , array($this, 'activation'));
 		register_deactivation_hook( __FILE__, 'cookiebot_addons_plugin_deactivated' );
-		
+
 		$this->cookiebot_fix_plugin_conflicts();
-		
+
 	}
 
 	/**
@@ -161,6 +161,10 @@ final class Cookiebot_WP {
 			}
 		}
 
+		//Include integration to WP Consent Level API if available
+		if($this->is_wp_consent_api_active()) {
+			add_action( 'wp_enqueue_scripts', array($this, 'cookiebot_enqueue_consent_api_scripts') );
+		}
 
 		// Set up localisation
 		load_plugin_textdomain('cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
@@ -178,7 +182,7 @@ final class Cookiebot_WP {
 		if(is_admin() || (defined('DOING_CRON') && DOING_CRON)) {
 			add_filter('auto_update_plugin', array($this,'automatic_updates'), 10, 2);
 		}
-		
+
 		//Loading widgets
 		include_once( dirname( __FILE__ ) . '/widgets/cookiebot-declaration-widget.php' );
 		add_action( 'widgets_init', array($this,'register_widgets') );
@@ -194,10 +198,10 @@ final class Cookiebot_WP {
 	function load_textdomain() {
 		load_plugin_textdomain( 'cookiebot', false, basename( dirname( __FILE__ ) ) . '/langs' );
 	}
-	
+
 	/**
 	 * Cookiebot_WP Register widgets
-	 * 
+	 *
 	 * @version 2.5.0
 	 * @since 	2.5.0
 	 */
@@ -296,6 +300,7 @@ final class Cookiebot_WP {
 		register_setting('cookiebot', 'cookiebot-script-tag-uc-attribute');
 		register_setting('cookiebot', 'cookiebot-script-tag-cd-attribute');
 		register_setting('cookiebot', 'cookiebot-cookie-blocking-mode');
+		register_setting('cookiebot', 'cookiebot-consent-mapping');
 		register_setting('cookiebot-iab', 'cookiebot-iab');
 	}
 
@@ -400,6 +405,8 @@ final class Cookiebot_WP {
 	 * @since   1.0.0
 	 */
 	function settings_page() {
+		wp_enqueue_style( 'cookiebot-consent-mapping-table', plugins_url( 'css/consent_mapping_table.css', __FILE__ ), array(), '3.5.0' );
+
 		/* Check if multisite */
 		if($is_ms = is_multisite()) {
 			//Receive settings from multisite - this might change the way we render the form
@@ -415,7 +422,7 @@ final class Cookiebot_WP {
 				<img src="<?php echo plugins_url( 'cookiebot-logo.png', __FILE__ ); ?>" style="float:right;margin-left:1em;">
 			</a>
 			<p>
-				<?php _e('Cookiebot enables your website to comply with current legislation in the EU on the use of cookies for user tracking and profiling. The EU ePrivacy Directive requires prior, informed consent of your site users, while the <a href="https://www.cookiebot.com/en/gdpr" target="_blank">General Data Protection Regulation (GDPR)</a> requires you to document each consent. At the same time you must be able to account for what user data you share with embedded third-party services on your website and where in the world the user data is sent.','cookiebot'); ?>
+				<?php _e('Cookiebot enables your website to comply with current legislation in the EU on the use of cookies for user tracking and profiling. The EU ePrivacy Directive requires prior, informed consent of your site users, while the <a href="https://www.cookiebot.com/goto/gdpr" target="_blank">General Data Protection Regulation (GDPR)</a> requires you to document each consent. At the same time you must be able to account for what user data you share with embedded third-party services on your website and where in the world the user data is sent.','cookiebot'); ?>
 			</p>
 			<form method="post" action="options.php">
 				<?php settings_fields( 'cookiebot' ); ?>
@@ -427,7 +434,7 @@ final class Cookiebot_WP {
 							<input type="text" name="cookiebot-cbid" value="<?php echo esc_attr( get_option('cookiebot-cbid') ); ?>"<?php echo ($is_ms) ? ' placeholder="'.$network_cbid.'"' : ''; ?> style="width:300px" />
 							<p class="description">
 								<?php _e('Need an ID?','cookiebot'); ?>
-								<a href="https://www.cookiebot.com/en/signup" target="_blank"><?php _e('Sign up for free on cookiebot.com','cookiebot'); ?></a>
+								<a href="https://www.cookiebot.com/goto/signup" target="_blank"><?php _e('Sign up for free on cookiebot.com','cookiebot'); ?></a>
 							</p>
 						</td>
 					</tr>
@@ -551,29 +558,29 @@ final class Cookiebot_WP {
 				</table>
 				<script>
 					jQuery(document).ready(function($) {
-						$('#advanced_settings_link').on('click',function(e) {
+						$('.cookiebot_fieldset_header').on('click',function(e) {
 							e.preventDefault();
-							$('#advanced_settings').slideToggle();
-							$('#advanced_settings_link').toggleClass('active');
+							$(this).next().slideToggle();
+							$(this).toggleClass('active');
 						});
 					});
 				</script>
 				<style type="text/css">
-					#advanced_settings_link {
+					.cookiebot_fieldset_header {
 						cursor:pointer;
 					}
-					#advanced_settings_link::after {
+					.cookiebot_fieldset_header::after {
 						content: "\f140";
 						font: normal 24px/1 dashicons;
 						position: relative;
 						top: 5px;
 					}
-					#advanced_settings_link.active::after {
+					.cookiebot_fieldset_header.active::after {
 						content: "\f142";
 					}
 				</style>
-				<h3 id="advanced_settings_link"><?php _e('Advanced settings', 'cookiebot'); ?></h3>
-				<div  id="advanced_settings" style="display:none;">	
+				<h3 id="advanced_settings_link" class="cookiebot_fieldset_header"><?php _e('Advanced settings', 'cookiebot'); ?></h3>
+				<div  id="advanced_settings" style="display:none;">
 					<table class="form-table">
 						<tr valign="top" id="cookiebot-setting-async">
 							<th scope="row">
@@ -704,6 +711,96 @@ final class Cookiebot_WP {
 						</tr>
 					</table>
 				</div>
+				<?php if($this->is_wp_consent_api_active()) { ?>
+					<h3 id="consent_level_api_settings" class="cookiebot_fieldset_header"><?php _e('Consent Level API Settings', 'cookiebot'); ?></h3>
+					<div  id="consent_level_api_settings" style="display:none;">
+						<p><?php _e('WP Consent Level API and Cookiebot categorise cookies a bit different. The default settings should fit mosts needs - but if you need to change the mapping you are able to do it below.','cookiebot'); ?></p>
+
+						<?php
+						$mDefault = $this->get_default_wp_consent_api_mapping();
+
+						$m = $this->get_wp_consent_api_mapping();
+
+						$consentTypes = ['preferences', 'statistics', 'marketing'];
+						$states = array_reduce($consentTypes, function ($t, $v) {
+								$newt = [];
+								if (empty($t)) {
+										$newt = [
+												[$v => true],
+												[$v => false],
+										];
+								} else {
+										foreach ($t as $item) {
+												$newt[] = array_merge($item, [$v => true]);
+												$newt[] = array_merge($item, [$v => false]);
+										}
+								}
+
+								return $newt;
+						}, []);
+
+						?>
+
+
+						<table class="widefat striped consent_mapping_table">
+							<thead>
+								<tr>
+									<th>Cookiebot categories</th>
+									<th class="consent_mapping">WP Consent Level categories</th>
+								</tr>
+							</thead>
+							<?php
+							foreach($states as $state) {
+
+								$key = [];
+								$key[] = 'n=1';
+								$key[] = 'p='.($state['preferences'] ? '1' : '0');
+								$key[] = 's='.($state['statistics'] ? '1' : '0');
+								$key[] = 'm='.($state['marketing'] ? '1' : '0');
+								$key = implode(';',$key);
+								?>
+								<tr valign="top">
+									<td>
+										<div class="cb_consent">
+											<span class="forceconsent">Necessary</span>
+											<span class="<?php echo ($state['preferences'] ? 'consent' : 'noconsent'); ?>">Preferences</span>
+											<span class="<?php echo ($state['statistics'] ? 'consent' : 'noconsent'); ?>">Statistics</span>
+											<span class="<?php echo ($state['marketing'] ? 'consent' : 'noconsent'); ?>">Marketing</span>
+										</div>
+									</td>
+									<td>
+										<div class="consent_mapping">
+											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][functional]" 	data-default-value="1" value="1" checked disabled> Functional </label>
+											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][preferences]" data-default-value="<?php echo $mDefault[$key]['preferences']; ?>" value="1" <?php if($m[$key]['preferences']) { echo 'checked'; } ?>> Preferences </label>
+											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][statistics]" data-default-value="<?php echo $mDefault[$key]['statistics']; ?>"  value="1" <?php if($m[$key]['statistics']) { echo 'checked'; } ?>> Statistics </label>
+											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][statistics-anonymous]" data-default-value="<?php echo $mDefault[$key]['statistics-anonymous']; ?>"  value="1"  <?php if($m[$key]['statistics-anonymous']) { echo 'checked'; } ?>> Statistics Anonymous</label>
+											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][marketing]" data-default-value="<?php echo $mDefault[$key]['marketing']; ?>"  value="1" <?php if($m[$key]['marketing']) { echo 'checked'; } ?>> Marketing</label>
+										</div>
+									</td>
+								</tr>
+								<?php
+							}
+							?>
+							<tfoot>
+								<tr>
+									<td colspan="2" style="text-align:right;"><button class="button" onclick="return resetConsentMapping();">Reset to default mapping</button></td>
+								</tr>
+							</tfoot>
+						</table>
+						<script>
+							function resetConsentMapping() {
+								if(confirm('Are you sure you want to reset to default consent mapping?')) {
+									jQuery('.consent_mapping_table input[type=checkbox]').each(function () {
+										if(!this.disabled) {
+											this.checked = (jQuery(this).data('default-value') == '1') ? true : false;
+										}
+									});
+								}
+								return false;
+							}
+						</script>
+					</div>
+				<?php } ?>
 				<?php submit_button(); ?>
 			</form>
 		</div>
@@ -724,7 +821,7 @@ final class Cookiebot_WP {
 				<img src="<?php echo plugins_url( 'cookiebot-logo.png', __FILE__ ); ?>" style="float:right;margin-left:1em;">
 			</a>
 			<p>
-				<?php _e('Cookiebot enables your website to comply with current legislation in the EU on the use of cookies for user tracking and profiling. The EU ePrivacy Directive requires prior, informed consent of your site users, while the <a href="https://www.cookiebot.com/en/gdpr" target="_blank">General Data Protection Regulation (GDPR)</a> requires you to document each consent. At the same time you must be able to account for what user data you share with embedded third-party services on your website and where in the world the user data is sent.','cookiebot'); ?>
+				<?php _e('Cookiebot enables your website to comply with current legislation in the EU on the use of cookies for user tracking and profiling. The EU ePrivacy Directive requires prior, informed consent of your site users, while the <a href="https://www.cookiebot.com/goto/gdpr" target="_blank">General Data Protection Regulation (GDPR)</a> requires you to document each consent. At the same time you must be able to account for what user data you share with embedded third-party services on your website and where in the world the user data is sent.','cookiebot'); ?>
 			</p>
 			<p>
 				<b><big style="color:red;"><?php _e('The settings below is network wide settings. See notes below each field.'); ?></big></b>
@@ -740,7 +837,7 @@ final class Cookiebot_WP {
 								<b><?php _e('If added this will be the default Cookiebot ID for all subsites. Subsites are able to override the Cookiebot ID.'); ?></b>
 								<br />
 								<?php _e('Need an ID?','cookiebot'); ?>
-								<a href="https://www.cookiebot.com/en/signup" target="_blank"><?php _e('Sign up for free on cookiebot.com','cookiebot'); ?></a>
+								<a href="https://www.cookiebot.com/goto/signup" target="_blank"><?php _e('Sign up for free on cookiebot.com','cookiebot'); ?></a>
 							</p>
 						</td>
 					</tr>
@@ -929,7 +1026,7 @@ final class Cookiebot_WP {
 			<h2><?php _e('How to find my Cookiebot ID','cookiebot'); ?></h2>
 			<p>
 				<ol>
-					<li><?php _e('Log in to your <a href="https://www.cookiebot.com/en/account" target="_blank">Cookiebot account</a>.','cookiebot'); ?></li>
+					<li><?php _e('Log in to your <a href="https://www.cookiebot.com/goto/account" target="_blank">Cookiebot account</a>.','cookiebot'); ?></li>
 					<li><?php _e('Go to <b>Manage</b> > <b>Settings</b> and add setup your Cookiebot','cookiebot'); ?></li>
 					<li><?php _e('Go to the <b>"Your scripts"</b> tab','cookiebot'); ?></li>
 					<li><?php _e('Copy the value inside the data-cid parameter - eg.: abcdef12-3456-7890-abcd-ef1234567890','cookiebot'); ?></li>
@@ -1037,7 +1134,7 @@ final class Cookiebot_WP {
 			else {
 				$tagAttr = get_site_option('cookiebot-script-tag-uc-attribute');
 			}
-			
+
 			if($this->get_cookie_blocking_mode() == 'auto') {
 				$tagAttr = 'data-blockingmode="auto"';
 			}
@@ -1125,7 +1222,7 @@ final class Cookiebot_WP {
 		}
 		return $cbid;
 	}
-	
+
 	/**
 	 * Cookiebot_WP Get cookie blocking mode (auto | manual)
 	 *
@@ -1146,7 +1243,7 @@ final class Cookiebot_WP {
 
 	/**
 	 * Cookiebot_WP Check if Cookiebot is active in admin
-	 * 
+	 *
 	 * @version 3.1.0
 	 * @since		3.1.0
 	 */
@@ -1200,6 +1297,90 @@ final class Cookiebot_WP {
 		$external_js_hosts[] = 'consentcdn.cookiebot.com';
 		return $external_js_hosts;
 	}
+
+
+	/**
+	 * Cookiebot_WP Check if WP Cookie Consent API is active
+	 *
+	 * @version 3.5.0
+	 * @since		3.5.0
+	 */
+	public function is_wp_consent_api_active() {
+		if ( class_exists( 'WP_CONSENT_API' ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Cookiebot_WP Default consent level mappings
+	 *
+	 * @version 3.5.0
+	 * @since 	3.5.0
+	 */
+	public function get_default_wp_consent_api_mapping() {
+		return array(
+			'n=1;p=1;s=1;m=1' =>
+				array('preferences'=>1,'statistics'=>1,'statistics-anonymous'=>0,'marketing'=>1),
+			'n=1;p=1;s=1;m=0' =>
+				array('preferences'=>1,'statistics'=>1,'statistics-anonymous'=>1,'marketing'=>0),
+			'n=1;p=1;s=0;m=1' =>
+				array('preferences'=>1,'statistics'=>0,'statistics-anonymous'=>0,'marketing'=>1),
+			'n=1;p=1;s=0;m=0' =>
+				array('preferences'=>1,'statistics'=>0,'statistics-anonymous'=>0,'marketing'=>0),
+			'n=1;p=0;s=1;m=1' =>
+				array('preferences'=>0,'statistics'=>1,'statistics-anonymous'=>0,'marketing'=>1),
+			'n=1;p=0;s=1;m=0' =>
+				array('preferences'=>0,'statistics'=>1,'statistics-anonymous'=>0,'marketing'=>0),
+			'n=1;p=0;s=0;m=1' =>
+				array('preferences'=>0,'statistics'=>0,'statistics-anonymous'=>0,'marketing'=>1),
+			'n=1;p=0;s=0;m=0' =>
+				array('preferences'=>0,'statistics'=>0,'statistics-anonymous'=>0,'marketing'=>0),
+		);
+
+	}
+
+	/**
+	 * Cookiebot_WP Get the mapping between Consent Level API and Cookiebot
+	 * Returns array where key is the consent level api category and value
+	 * is the mapped Cookiebot category.
+	 *
+	 * @version 3.5.0
+	 * @since 	3.5.0
+	 */
+	public function get_wp_consent_api_mapping() {
+		$mDefault = $this->get_default_wp_consent_api_mapping();
+		$mapping = get_option( 'cookiebot-consent-mapping', $mDefault);
+
+		$mapping = ( '' === $mapping ) ? $mDefault : $mapping;
+
+		foreach($mDefault as $k=>$v) {
+			if(!isset($mapping[$k])) {
+				$mapping[$k] = $v;
+			}
+			else {
+				foreach($v as $vck=>$vcv) {
+					if(!isset($mapping[$k][$vck])) {
+						$mapping[$k][$vck] = $vcv;
+					}
+				}
+			}
+		}
+		return $mapping;
+	}
+
+	/**
+	 * Cookiebot_WP Enqueue JS for integration with WP Consent Level API
+	 *
+	 * @version 3.5.0
+	 * @since 	3.5.0
+	 */
+	function cookiebot_enqueue_consent_api_scripts() {
+		wp_register_script( 'cookiebot-wp-consent-level-api-integration', plugins_url( 'cookiebot/js/cookiebot-wp-consent-level-api-integration.js', 'cookiebot' ) );
+		wp_enqueue_script( 'cookiebot-wp-consent-level-api-integration' );
+		wp_localize_script( 'cookiebot-wp-consent-level-api-integration', 'cookiebot_category_mapping', $this->get_wp_consent_api_mapping() );
+	}
+
 
 	/**
 	 * Display admin notice for recommending cookiebot
@@ -1280,12 +1461,12 @@ final class Cookiebot_WP {
 			}
 		}
 	}
-	
-	
-	
+
+
+
 
 	/**
-	 * Cookiebot_WP Fix plugin conflicts related to Cookiebot 
+	 * Cookiebot_WP Fix plugin conflicts related to Cookiebot
 	 *
 	 * @version 3.2.0
 	 * @since   3.3.0
@@ -1298,11 +1479,10 @@ final class Cookiebot_WP {
 		//Fix for Elementor and WPBakery Page Builder Builder
 		//Disabled - using another method now (can_current_user_edit_theme())
 		//add_filter( 'script_loader_tag', array( $this, '_cookiebot_plugin_conflict_scripttags' ), 10, 2 );
-				
 	}
-	
+
 	/**
-	 * Cookiebot_WP Fix Divi builder conflict when blocking mode is in auto. 
+	 * Cookiebot_WP Fix Divi builder conflict when blocking mode is in auto.
 	 *
 	 * @version 3.2.0
 	 * @since   3.2.0
@@ -1318,21 +1498,21 @@ final class Cookiebot_WP {
 			}
 		}
 	}
-	
+
 	/**
 	 * Cookiebot_WP Fix plugin conflicts with page builders - whitelist JS files in automode
-	 * 
+	 *
 	 * @version 3.2.0
 	 * @since   3.3.0
 	 */
 	function _cookiebot_plugin_conflict_scripttags( $tag, $handle ) {
-		
+
 		//Check if Elementor Page Builder active
 		if( defined( 'ELEMENTOR_VERSION' ) ) {
-			if( in_array( $handle, [ 
-				'jquery-core', 
-				'elementor-frontend-modules', 
-				'elementor-frontend', 
+			if( in_array( $handle, [
+				'jquery-core',
+				'elementor-frontend-modules',
+				'elementor-frontend',
 				'wp-tinymce' ,
 				'underscore',
 				'backbone',
@@ -1345,7 +1525,7 @@ final class Cookiebot_WP {
 				$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
 			}
 		}
-		
+
 		//Check if WPBakery Page Builder active
 		if ( defined( 'WPB_VC_VERSION' ) ) {
 			if( in_array( $handle, [
@@ -1362,7 +1542,7 @@ final class Cookiebot_WP {
 				$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
 			}
 		}
-		
+
 		return $tag;
 	}
 
