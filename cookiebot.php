@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites.
 Author: Cybot A/S
-Version: 3.4.0
+Version: 3.5.0
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.4.0';
+	public $version = '3.5.0';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -405,6 +405,8 @@ final class Cookiebot_WP {
 	 * @since   1.0.0
 	 */
 	function settings_page() {
+		wp_enqueue_style( 'cookiebot-consent-mapping-table', plugins_url( 'css/consent_mapping_table.css', __FILE__ ), array(), '3.5.0' );
+		
 		/* Check if multisite */
 		if($is_ms = is_multisite()) {
 			//Receive settings from multisite - this might change the way we render the form
@@ -420,7 +422,7 @@ final class Cookiebot_WP {
 				<img src="<?php echo plugins_url( 'cookiebot-logo.png', __FILE__ ); ?>" style="float:right;margin-left:1em;">
 			</a>
 			<p>
-				<?php _e('Cookiebot enables your website to comply with current legislation in the EU on the use of cookies for user tracking and profiling. The EU ePrivacy Directive requires prior, informed consent of your site users, while the <a href="https://www.cookiebot.com/en/gdpr" target="_blank">General Data Protection Regulation (GDPR)</a> requires you to document each consent. At the same time you must be able to account for what user data you share with embedded third-party services on your website and where in the world the user data is sent.','cookiebot'); ?>
+				<?php _e('Cookiebot enables your website to comply with current legislation in the EU on the use of cookies for user tracking and profiling. The EU ePrivacy Directive requires prior, informed consent of your site users, while the <a href="https://www.cookiebot.com/goto/gdpr" target="_blank">General Data Protection Regulation (GDPR)</a> requires you to document each consent. At the same time you must be able to account for what user data you share with embedded third-party services on your website and where in the world the user data is sent.','cookiebot'); ?>
 			</p>
 			<form method="post" action="options.php">
 				<?php settings_fields( 'cookiebot' ); ?>
@@ -432,7 +434,7 @@ final class Cookiebot_WP {
 							<input type="text" name="cookiebot-cbid" value="<?php echo esc_attr( get_option('cookiebot-cbid') ); ?>"<?php echo ($is_ms) ? ' placeholder="'.$network_cbid.'"' : ''; ?> style="width:300px" />
 							<p class="description">
 								<?php _e('Need an ID?','cookiebot'); ?>
-								<a href="https://www.cookiebot.com/en/signup" target="_blank"><?php _e('Sign up for free on cookiebot.com','cookiebot'); ?></a>
+								<a href="https://www.cookiebot.com/goto/signup" target="_blank"><?php _e('Sign up for free on cookiebot.com','cookiebot'); ?></a>
 							</p>
 						</td>
 					</tr>
@@ -712,94 +714,91 @@ final class Cookiebot_WP {
 				<?php if($this->is_wp_consent_api_active()) { ?>
 					<h3 id="consent_level_api_settings" class="cookiebot_fieldset_header"><?php _e('Consent Level API Settings', 'cookiebot'); ?></h3>
 					<div  id="consent_level_api_settings" style="display:none;">	
-						<?php _e('WP Consent Level API and Cookiebot categorise cookies a bit different. The default settings should fit mosts needs - but if you need to change the mapping you are able to do it below.','cookiebot'); ?>
+						<p><?php _e('WP Consent Level API and Cookiebot categorise cookies a bit different. The default settings should fit mosts needs - but if you need to change the mapping you are able to do it below.','cookiebot'); ?></p>
 						
 						<?php
-						$m = get_option( 'cookiebot-consent-mapping',$this->get_default_wp_consent_api_mapping());
+						$mDefault = $this->get_default_wp_consent_api_mapping();
+						
+						$m = $this->get_wp_consent_api_mapping();
+						
+						$consentTypes = ['preferences', 'statistics', 'marketing'];
+						$states = array_reduce($consentTypes, function ($t, $v) {
+								$newt = [];
+								if (empty($t)) {
+										$newt = [
+												[$v => true],
+												[$v => false],
+										];
+								} else {
+										foreach ($t as $item) {
+												$newt[] = array_merge($item, [$v => true]);
+												$newt[] = array_merge($item, [$v => false]);
+										}
+								}
+
+								return $newt;
+						}, []);
+						
 						?>
-					
-						<table class="form-table">
-							<tr valign="top">
-								<th scope="row">
-									<?php _e('Consent Level: Functional','cookiebot'); ?>
-								</th>
-								<td>
-									<select name="cookiebot-consent-mapping[functional]">
-										<option value="necessary"<?php   echo ( $m['functional'] == 'necessary' ) ? ' selected' : ''; ?>>Necessary</option>
-										<option value="preferences"<?php echo ( $m['functional'] == 'preferences' ) ? ' selected' : ''; ?>>Preferences</option>
-										<option value="statistics"<?php  echo ( $m['functional'] == 'statistics' ) ? ' selected' : ''; ?>>Statistics</option>
-										<option value="marketing"<?php   echo ( $m['functional'] == 'marketing' ) ? ' selected' : ''; ?>>Marketing</option>
-									</select>
-									<p class="description">
-										<?php _e('Default: <i>Necessary</i>','cookiebot'); ?>
-									</p>
-								</td>
-							</tr>
-							<tr valign="top">
-								<th scope="row">
-									<?php _e('Consent Level: Preferences','cookiebot'); ?>
-								</th>
-								<td>
-									<select name="cookiebot-consent-mapping[preferences]">
-										<option value="necessary"<?php   echo ( $m['preferences'] == 'necessary' ) ? ' selected' : ''; ?>>Necessary</option>
-										<option value="preferences"<?php echo ( $m['preferences'] == 'preferences' ) ? ' selected' : ''; ?>>Preferences</option>
-										<option value="statistics"<?php  echo ( $m['preferences'] == 'statistics' ) ? ' selected' : ''; ?>>Statistics</option>
-										<option value="marketing"<?php   echo ( $m['preferences'] == 'marketing' ) ? ' selected' : ''; ?>>Marketing</option>
-									</select>
-									<p class="description">
-										<?php _e('Default: <i>Preferences</i>','cookiebot'); ?>
-									</p>
-								</td>
-							</tr>
-							<tr valign="top">
-								<th scope="row">
-									<?php _e('Consent Level: Statistics','cookiebot'); ?>
-								</th>
-								<td>
-									<select name="cookiebot-consent-mapping[statistics]">
-										<option value="necessary"<?php   echo ( $m['statistics'] == 'necessary' ) ? ' selected' : ''; ?>>Necessary</option>
-										<option value="preferences"<?php echo ( $m['statistics'] == 'preferences' ) ? ' selected' : ''; ?>>Preferences</option>
-										<option value="statistics"<?php  echo ( $m['statistics'] == 'statistics' ) ? ' selected' : ''; ?>>Statistics</option>
-										<option value="marketing"<?php   echo ( $m['statistics'] == 'marketing' ) ? ' selected' : ''; ?>>Marketing</option>
-									</select>
-									<p class="description">
-										<?php _e('Default: <i>Statistics</i>','cookiebot'); ?>
-									</p>
-								</td>
-							</tr>
-							<tr valign="top">
-								<th scope="row">
-									<?php _e('Consent Level: Statistics-anonymous','cookiebot'); ?>
-								</th>
-								<td>
-									<select name="cookiebot-consent-mapping[statistics-anonymous]">
-										<option value="necessary"<?php   echo ( $m['statistics-anonymous'] == 'necessary' ) ? ' selected' : ''; ?>>Necessary</option>
-										<option value="preferences"<?php echo ( $m['statistics-anonymous'] == 'preferences' ) ? ' selected' : ''; ?>>Preferences</option>
-										<option value="statistics"<?php  echo ( $m['statistics-anonymous'] == 'statistics' ) ? ' selected' : ''; ?>>Statistics</option>
-										<option value="marketing"<?php   echo ( $m['statistics-anonymous'] == 'marketing' ) ? ' selected' : ''; ?>>Marketing</option>
-									</select>
-									<p class="description">
-										<?php _e('Default: <i>Statistics</i>','cookiebot'); ?>
-									</p>
-								</td>
-							</tr>
-							<tr valign="top">
-								<th scope="row">
-									<?php _e('Consent Level: Marketing','cookiebot'); ?>
-								</th>
-								<td>
-									<select name="cookiebot-consent-mapping[marketing]">
-										<option value="necessary"<?php   echo ( $m['marketing'] == 'necessary' ) ? ' selected' : ''; ?>>Necessary</option>
-										<option value="preferences"<?php echo ( $m['marketing'] == 'preferences' ) ? ' selected' : ''; ?>>Preferences</option>
-										<option value="statistics"<?php  echo ( $m['marketing'] == 'statistics' ) ? ' selected' : ''; ?>>Statistics</option>
-										<option value="marketing"<?php   echo ( $m['marketing'] == 'marketing' ) ? ' selected' : ''; ?>>Marketing</option>
-									</select>
-									<p class="description">
-										<?php _e('Default: <i>Marketing</i>','cookiebot'); ?>
-									</p>
-								</td>
-							</tr>
+				
+						
+						<table class="widefat striped consent_mapping_table">
+							<thead>
+								<tr>
+									<th>Cookiebot categories</th>
+									<th class="consent_mapping">WP Consent Level categories</th>
+								</tr>
+							</thead>
+							<?php
+							foreach($states as $state) {
+								
+								$key = [];
+								$key[] = 'n=1';
+								$key[] = 'p='.($state['preferences'] ? '1' : '0');
+								$key[] = 's='.($state['statistics'] ? '1' : '0');
+								$key[] = 'm='.($state['marketing'] ? '1' : '0');
+								$key = implode(';',$key);
+								?>
+								<tr valign="top">
+									<td>
+										<div class="cb_consent">
+											<span class="forceconsent">Necessary</span>
+											<span class="<?php echo ($state['preferences'] ? 'consent' : 'noconsent'); ?>">Preferences</span>
+											<span class="<?php echo ($state['statistics'] ? 'consent' : 'noconsent'); ?>">Statistics</span>
+											<span class="<?php echo ($state['marketing'] ? 'consent' : 'noconsent'); ?>">Marketing</span>
+										</div>
+									</td>
+									<td>
+										<div class="consent_mapping">
+											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][functional]" 	data-default-value="1" value="1" checked disabled> Functional </label>
+											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][preferences]" data-default-value="<?php echo $mDefault[$key]['preferences']; ?>" value="1" <?php if($m[$key]['preferences']) { echo 'checked'; } ?>> Preferences </label>
+											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][statistics]" data-default-value="<?php echo $mDefault[$key]['statistics']; ?>"  value="1" <?php if($m[$key]['statistics']) { echo 'checked'; } ?>> Statistics </label>
+											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][statistics-anonymous]" data-default-value="<?php echo $mDefault[$key]['statistics-anonymous']; ?>"  value="1"  <?php if($m[$key]['statistics-anonymous']) { echo 'checked'; } ?>> Statistics Anonymous</label> 
+											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][marketing]" data-default-value="<?php echo $mDefault[$key]['marketing']; ?>"  value="1" <?php if($m[$key]['marketing']) { echo 'checked'; } ?>> Marketing</label>
+										</div>
+									</td>
+								</tr>
+								<?php
+							}
+							?>
+							<tfoot>
+								<tr>
+									<td colspan="2" style="text-align:right;"><button class="button" onclick="return resetConsentMapping();">Reset to default mapping</button></td>
+								</tr>
+							</tfoot>
 						</table>
+						<script>
+							function resetConsentMapping() {
+								if(confirm('Are you sure you want to reset to default consent mapping?')) {
+									jQuery('.consent_mapping_table input[type=checkbox]').each(function () {
+										if(!this.disabled) {
+											this.checked = (jQuery(this).data('default-value') == '1') ? true : false;
+										}
+									});
+								}
+								return false;
+							}
+						</script>
 					</div>
 				<?php } ?>
 				<?php submit_button(); ?>
@@ -822,7 +821,7 @@ final class Cookiebot_WP {
 				<img src="<?php echo plugins_url( 'cookiebot-logo.png', __FILE__ ); ?>" style="float:right;margin-left:1em;">
 			</a>
 			<p>
-				<?php _e('Cookiebot enables your website to comply with current legislation in the EU on the use of cookies for user tracking and profiling. The EU ePrivacy Directive requires prior, informed consent of your site users, while the <a href="https://www.cookiebot.com/en/gdpr" target="_blank">General Data Protection Regulation (GDPR)</a> requires you to document each consent. At the same time you must be able to account for what user data you share with embedded third-party services on your website and where in the world the user data is sent.','cookiebot'); ?>
+				<?php _e('Cookiebot enables your website to comply with current legislation in the EU on the use of cookies for user tracking and profiling. The EU ePrivacy Directive requires prior, informed consent of your site users, while the <a href="https://www.cookiebot.com/goto/gdpr" target="_blank">General Data Protection Regulation (GDPR)</a> requires you to document each consent. At the same time you must be able to account for what user data you share with embedded third-party services on your website and where in the world the user data is sent.','cookiebot'); ?>
 			</p>
 			<p>
 				<b><big style="color:red;"><?php _e('The settings below is network wide settings. See notes below each field.'); ?></big></b>
@@ -838,7 +837,7 @@ final class Cookiebot_WP {
 								<b><?php _e('If added this will be the default Cookiebot ID for all subsites. Subsites are able to override the Cookiebot ID.'); ?></b>
 								<br />
 								<?php _e('Need an ID?','cookiebot'); ?>
-								<a href="https://www.cookiebot.com/en/signup" target="_blank"><?php _e('Sign up for free on cookiebot.com','cookiebot'); ?></a>
+								<a href="https://www.cookiebot.com/goto/signup" target="_blank"><?php _e('Sign up for free on cookiebot.com','cookiebot'); ?></a>
 							</p>
 						</td>
 					</tr>
@@ -1027,7 +1026,7 @@ final class Cookiebot_WP {
 			<h2><?php _e('How to find my Cookiebot ID','cookiebot'); ?></h2>
 			<p>
 				<ol>
-					<li><?php _e('Log in to your <a href="https://www.cookiebot.com/en/account" target="_blank">Cookiebot account</a>.','cookiebot'); ?></li>
+					<li><?php _e('Log in to your <a href="https://www.cookiebot.com/goto/account" target="_blank">Cookiebot account</a>.','cookiebot'); ?></li>
 					<li><?php _e('Go to <b>Manage</b> > <b>Settings</b> and add setup your Cookiebot','cookiebot'); ?></li>
 					<li><?php _e('Go to the <b>"Your scripts"</b> tab','cookiebot'); ?></li>
 					<li><?php _e('Copy the value inside the data-cid parameter - eg.: abcdef12-3456-7890-abcd-ef1234567890','cookiebot'); ?></li>
@@ -1312,23 +1311,24 @@ final class Cookiebot_WP {
 	 */
 	public function get_default_wp_consent_api_mapping() {
 		return array(
-				'functional' 						=> 'necessary',
-				'preferences' 					=> 'preferences',
-				'statistics'						=> 'statistics',
-				'statistics-anonymous' 	=> 'statistics',
-				'marketing' 						=> 'marketing',
-			);
-	}
+			'n=1;p=1;s=1;m=1' =>
+				array('preferences'=>1,'statistics'=>1,'statistics-anonymous'=>0,'marketing'=>1),
+			'n=1;p=1;s=1;m=0' =>
+				array('preferences'=>1,'statistics'=>1,'statistics-anonymous'=>1,'marketing'=>0),
+			'n=1;p=1;s=0;m=1' =>
+				array('preferences'=>1,'statistics'=>0,'statistics-anonymous'=>0,'marketing'=>1),
+			'n=1;p=1;s=0;m=0' =>
+				array('preferences'=>1,'statistics'=>0,'statistics-anonymous'=>0,'marketing'=>0),
+			'n=1;p=0;s=1;m=1' =>
+				array('preferences'=>0,'statistics'=>1,'statistics-anonymous'=>0,'marketing'=>1),
+			'n=1;p=0;s=1;m=0' =>
+				array('preferences'=>0,'statistics'=>1,'statistics-anonymous'=>0,'marketing'=>0),
+			'n=1;p=0;s=0;m=1' =>
+				array('preferences'=>0,'statistics'=>0,'statistics-anonymous'=>0,'marketing'=>1),
+			'n=1;p=0;s=0;m=0' =>
+				array('preferences'=>0,'statistics'=>0,'statistics-anonymous'=>0,'marketing'=>0),
+		);
 	
-	/**
-	 * Cookiebot_WP Get the cookiebot based on Consent Level API category
-	 * 
-	 * @version 3.5.0
-	 * @since 	3.5.0
-	 */
-	public function get_wp_consent_api_category($cbCategory='marketing') {
-		$m = $this->get_wp_consent_api_mapping();
-		return ( isset( $m[$cbCategory] ) ) ? $m[$cbCategory] : false;
 	}
 	
 	/**
@@ -1340,7 +1340,23 @@ final class Cookiebot_WP {
 	 * @since 	3.5.0
 	 */
 	public function get_wp_consent_api_mapping() {
-		return get_option( 'cookiebot-consent-mapping',$this->get_default_wp_consent_api_mapping());
+		$mDefault = $this->get_default_wp_consent_api_mapping();
+		$mapping = get_option( 'cookiebot-consent-mapping', $mDefault);
+		
+		
+		foreach($mDefault as $k=>$v) {
+			if(!isset($mapping[$k])) {
+				$mapping[$k] = $v;
+			}
+			else {
+				foreach($v as $vck=>$vcv) {
+					if(!isset($mapping[$k][$vcl])) {
+						$mapping[$k][$vck] = $vcv;
+					}
+				}
+			}
+		}
+		return $mapping;
 	}	 
 	 
 	/**

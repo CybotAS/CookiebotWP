@@ -7,20 +7,28 @@ window.addEventListener('load', cookiebot_update_consent_level, false);
 
 
 function cookiebot_update_consent_level(e) {
-	for (var key in cookiebot_category_mapping) {
-
-		if (cookiebot_category_mapping.hasOwnProperty(key)) {           
-
-			if( Cookiebot.consent[cookiebot_category_mapping[key]] != wp_has_consent(key) ) {
-
-				var strValue = (Cookiebot.consent[cookiebot_category_mapping[key]]) ? 'allow' : 'deny';
-
-				wp_set_consent(key,strValue);
-
-			}
-
+	
+	wp_set_consent( 'functional', 'allow' ); //always allow functional cookies
+	
+	if ( typeof Cookiebot === 'undefined' ) {
+		var consentMappingKey = 'n=1;p=1;s=1;m=1';
+	}
+	else {
+		var consentMappingKey = 'n=1;';
+		consentMappingKey = consentMappingKey + 'p=' + ( ( Cookiebot.consent.preferences ) ? '1' : '0' ) + ';';
+		consentMappingKey = consentMappingKey + 's=' + ( ( Cookiebot.consent.statistics ) ? '1' : '0' ) + ';';
+		consentMappingKey = consentMappingKey + 'm=' + ( ( Cookiebot.consent.marketing ) ? '1' : '0' );
+	}
+		
+	for( var key in cookiebot_category_mapping[consentMappingKey] ) {
+	
+		var strValue = cookiebot_category_mapping[consentMappingKey][key] ? 'allow' : 'deny';
+		
+		if( ( wp_has_consent( key ) && strValue != 'allow' ) || ( !wp_has_consent(key) && strValue == 'allow' ) ) {
+			wp_set_consent( key, strValue );
 		}
 		
 	}
+
 
 }
