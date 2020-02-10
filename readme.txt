@@ -182,9 +182,16 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 [Please see our article on how to deploy Cookiebot with GTM](https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment).
 
+### Does Cookiebot integrate with WP Consent API? ###
+Cookiebot is fully integrated with the WP Consent API. When your visitors give consent using Cookiebot, the consent will automatically be sent to the [WP Consent API](https://wordpress.org/plugins/wp-consent-api/).
+
+You are able to define the mapping between Cookiebot and the WP Consent API in the administration interface (Cookiebot WP plugin).
+
 
 ## Changelog ##
 
+### 3.5.0 - 2020-02-10 ###
+* Adding integration with WP Consent API
 
 ### 3.4.2 - 2020-02-06 ###
 * Fix for DIVI editor
