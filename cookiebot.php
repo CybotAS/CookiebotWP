@@ -1152,12 +1152,21 @@ final class Cookiebot_WP {
 	 * @return bool
      *
      * @since 3.3.1
+     * @version 3.4.1
 	 */
 	function can_current_user_edit_theme() {
 	    if( is_user_logged_in() ) {
 	        if( current_user_can('edit_themes') ) {
 	            return true;
             }
+
+	        if( current_user_can( 'edit_pages' ) ) {
+	            return true;
+            }
+
+		    if( current_user_can( 'edit_posts' ) ) {
+			    return true;
+		    }
         }
 
 	    return false;
@@ -1464,11 +1473,12 @@ final class Cookiebot_WP {
 	 */
 	function cookiebot_fix_plugin_conflicts() {
 		//Fix for Divi Page Builder
-		add_action( 'wp', array( $this, '_cookiebot_plugin_conflict_divi' ), 100 );
-
+		//Disabled - using another method now (can_current_user_edit_theme())
+		//add_action( 'wp', array( $this, '_cookiebot_plugin_conflict_divi' ), 100 );
+		
 		//Fix for Elementor and WPBakery Page Builder Builder
-		add_filter( 'script_loader_tag', array( $this, '_cookiebot_plugin_conflict_scripttags' ), 10, 2 );
-
+		//Disabled - using another method now (can_current_user_edit_theme())
+		//add_filter( 'script_loader_tag', array( $this, '_cookiebot_plugin_conflict_scripttags' ), 10, 2 );
 	}
 
 	/**

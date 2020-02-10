@@ -12,11 +12,12 @@ class Test_Caos_Host_Analyticsjs_Local extends \WP_UnitTestCase {
 	 * @since 2.1.0
 	 */
 	public function test_host_analyticsjs_local() {
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/host-analyticsjs-local.php' );
+		$content = file_get_contents( 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/includes/frontend/class-tracking.php' );
 
 		$this->assertNotFalse( strpos( $content,
-			'add_action(\'wp_footer\', \'caos_render_tracking_code\', CAOS_OPT_ENQUEUE_ORDER);' ) );
+			'add_action(\'wp_footer\', array($this, \'render_tracking_code\'), CAOS_OPT_ENQUEUE_ORDER);' ) );
+			
 		$this->assertNotFalse( strpos( $content,
-			'add_action(\'wp_head\', \'caos_render_tracking_code\', CAOS_OPT_ENQUEUE_ORDER);' ) );
+			'switch (CAOS_OPT_SCRIPT_POSITION) {' ) );
 	}
 }

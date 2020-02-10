@@ -185,6 +185,14 @@ Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" opt
 
 ## Changelog ##
 
+
+### 3.4.2 - 2020-02-06 ###
+* Fix for DIVI editor
+
+### 3.4.1 - 2020-01-28 ###
+* Removing manual fixes for Cookiebot when in auto
+* Adjustments and updates to addons
+
 ### 3.4.0 - 2019-12-13 ###
 * Removing Cookiebot when in auto mode and the user is logged in and has a edit themes capability
 * Adding filter for regexp for fixing embedded media
