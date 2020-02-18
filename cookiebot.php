@@ -1288,7 +1288,7 @@ final class Cookiebot_WP {
 	 * @version 2.2.0
 	 * @since   1.0.0
 	 */
-	function show_declaration($atts=[]) {
+	function show_declaration($atts=array()) {
 		$cbid = $this->get_cbid();
 		$lang = '';
 		if(!empty($cbid)) {
