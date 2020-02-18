@@ -14,16 +14,16 @@ class Test_Gadwp extends \WP_UnitTestCase {
 	 * @since 2.1.0
 	 */
 	public function test_hooks() {
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/front/views/tagmanager-code.php' );
+		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/includes/frontend/tracking/class-tracking-analytics.php' );
 
-		$this->assertNotFalse( strpos( $content, 'https://www.googletagmanager.com') );
+		$this->assertNotFalse( strpos( $content, 'GoogleAnalyticsObject') );
 
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/front/views/analytics-optout-code.php' );
+		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/includes/frontend/frontend.php' );
 
-		$this->assertNotFalse( strpos( $content, 'ga-disable-') );
+		$this->assertNotFalse( strpos( $content, "add_action( 'wp_head', 'exactmetrics_tracking_script', 6 );") );
 
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/front/views/analytics-code.php' );
+		$content = file_get_contents( 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/includes/frontend/events/class-analytics-events.php' );
 
-		$this->assertNotFalse( strpos( $content, 'tracking_script_path') );
+		$this->assertNotFalse( strpos( $content, "wp_enqueue_script( 'exactmetrics-frontend-script',") );
 	}
 }

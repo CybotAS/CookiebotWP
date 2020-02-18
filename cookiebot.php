@@ -1248,9 +1248,10 @@ final class Cookiebot_WP {
 			$iab = ( get_option('cookiebot-iab') != false ) ? 'data-framework="IAB"' : '';
 			
 			$tag = '<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" '.$iab.' data-cbid="'.$cbid.'"'.$lang.' type="text/javascript" '.$tagAttr.'></script>';
-			if(!$printTag) { return $tag; }
-			echo $tag;
-			
+			if($printTag===false) {
+				return $tag;
+			}
+			echo $tag;		
 		}
 	}
 
