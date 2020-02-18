@@ -190,6 +190,10 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ## Changelog ##
 
+### 3.6.0 - 2020-02-18 ###
+* Adding Debugging submenu
+* Update GADWP addon to support newest version of plugin
+
 ### 3.5.0 - 2020-02-10 ###
 * Adding integration with WP Consent API
 
