@@ -139,6 +139,8 @@ final class Cookiebot_WP {
 
 			//Adding menu to WP admin
 			add_action('admin_menu', array($this,'add_menu'),1);
+			add_action('admin_menu', array($this,'add_menu_debug'),50);
+
 
 			if(is_multisite()) {
 				add_action('network_admin_menu', array($this,'add_network_menu'),1);
@@ -250,15 +252,24 @@ final class Cookiebot_WP {
 		$icon = 'data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNzIgNTQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI0ZGRkZGRiIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNNDYuODcyNTkwMyA4Ljc3MzU4MzM0QzQxLjk0MzkwMzkgMy4zODI5NTAxMSAzNC44NDI0OTQ2IDAgMjYuOTQ4MjgxOSAwIDEyLjA2NTE1NjggMCAwIDEyLjAyNDQ3NzQgMCAyNi44NTc0MjE5YzAgMTQuODMyOTQ0NSAxMi4wNjUxNTY4IDI2Ljg1NzQyMTkgMjYuOTQ4MjgxOSAyNi44NTc0MjE5IDcuODk0MjEyNyAwIDE0Ljk5NTYyMi0zLjM4Mjk1MDIgMTkuOTI0MzA4NC04Ljc3MzU4MzQtMi44ODk2OTY3LTEuMzY4ODY2My01LjM5OTMxMS0zLjQwNTQzOS03LjMyODA4MzgtNS45MDk2MzU4LTMuMTIxNDMwNiAzLjIwOTQxMDQtNy40OTI5OTQ0IDUuMjA0MTI5MS0xMi4zMzIwMjU4IDUuMjA0MTI5MS05LjQ4NDM0NDQgMC0xNy4xNzI5MjQ3LTcuNjYyNjU3Mi0xNy4xNzI5MjQ3LTE3LjExNTAyMzhzNy42ODg1ODAzLTE3LjExNTAyMzcgMTcuMTcyOTI0Ny0xNy4xMTUwMjM3YzQuNzIzNDgyMiAwIDkuMDAxNTU1MiAxLjkwMDU5MzkgMTIuMTA2MjkyIDQuOTc2MzA5IDEuOTU2OTIzNy0yLjY0MTEzMSA0LjU1MDAyNjMtNC43ODU1MTgzIDcuNTUzODE3Ni02LjIwODQzMTg2eiIvPjxwYXRoIGQ9Ik01NS4zODAzMjgyIDQyLjY1MDE5OTFDNDYuMzMzNzIyNyA0Mi42NTAxOTkxIDM5IDM1LjM0MTIwMzEgMzkgMjYuMzI1MDk5NiAzOSAxNy4zMDg5OTYgNDYuMzMzNzIyNyAxMCA1NS4zODAzMjgyIDEwYzkuMDQ2NjA1NSAwIDE2LjM4MDMyODIgNy4zMDg5OTYgMTYuMzgwMzI4MiAxNi4zMjUwOTk2IDAgOS4wMTYxMDM1LTcuMzMzNzIyNyAxNi4zMjUwOTk1LTE2LjM4MDMyODIgMTYuMzI1MDk5NXptLjAyMTMwOTItNy43NTU2MzQyYzQuNzM3MDI3NiAwIDguNTc3MTQ3MS0zLjgyNzE3MiA4LjU3NzE0NzEtOC41NDgyMjc5IDAtNC43MjEwNTYtMy44NDAxMTk1LTguNTQ4MjI4LTguNTc3MTQ3MS04LjU0ODIyOC00LjczNzAyNzUgMC04LjU3NzE0NyAzLjgyNzE3Mi04LjU3NzE0NyA4LjU0ODIyOCAwIDQuNzIxMDU1OSAzLjg0MDExOTUgOC41NDgyMjc5IDguNTc3MTQ3IDguNTQ4MjI3OXoiLz48L2c+PC9zdmc+';
 		add_menu_page( 'Cookiebot', __('Cookiebot','cookiebot'), 'manage_options', 'cookiebot', array($this,'settings_page'),$icon);
 
-		add_submenu_page('cookiebot',__('Cookiebot Settings','cookiebot'),__('Settings','cookiebot'), 'manage_options', 'cookiebot',array($this,'settings_page'));
-		add_submenu_page('cookiebot',__('Cookiebot Support','cookiebot'),__('Support','cookiebot'), 'manage_options', 'cookiebot_support',array($this,'support_page'));
-		add_submenu_page('cookiebot',__('IAB','cookiebot'),__('IAB','cookiebot'), 'manage_options', 'cookiebot_iab',array($this,'iab_page'));
-		add_submenu_page('cookiebot',__('Debug info','cookiebot'),__('Debug info','cookiebot'), 'manage_options', 'cookiebot_debug',array($this,'debug_page'),9);
-
+		add_submenu_page('cookiebot',__('Cookiebot Settings','cookiebot'),__('Settings','cookiebot'), 'manage_options', 'cookiebot',array($this,'settings_page') );
+		add_submenu_page('cookiebot',__('Cookiebot Support','cookiebot'),__('Support','cookiebot'), 'manage_options', 'cookiebot_support',array($this,'support_page') );
+		add_submenu_page('cookiebot',__('IAB','cookiebot'),__('IAB','cookiebot'), 'manage_options', 'cookiebot_iab',array($this,'iab_page') );
+		
 		if(defined('COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION')) {
 			//Load prior consent page anyway - but from Cookiebot WP Core plugin.
 			add_submenu_page( 'cookiebot', __( 'Prior Consent', 'cookiebot' ), __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array($this,'setting_page_placeholder'	) );
 		}
+	}
+	
+	/**
+	 * Cookiebot_WP Add debug menu - we need to add this seperate to ensure it is placed last (after menu items from Addons).
+	 *
+	 * @version 3.6.0
+	 * @since   3.6.0
+	 */
+	function add_menu_debug() {
+		add_submenu_page('cookiebot',__('Debug info','cookiebot'),__('Debug info','cookiebot'), 'manage_options', 'cookiebot_debug',array($this,'debug_page') );
 	}
 
 	/**
@@ -1118,6 +1129,10 @@ final class Cookiebot_WP {
 		$plugins = get_plugins();
 		$active_plugins = get_option( 'active_plugins' );
 		
+		
+		//$foo = new cookiebot_addons\lib\Settings_Service;
+		//$addons = $foo->get_active_addons();
+		
 		$debugStr = "";
 		$debugStr.= "##### Debug Information for ".get_site_url()." generated at ".date("c")." #####\n\n";
 		$debugStr.= "Wordpress Version: ".get_bloginfo('version')."\n";
@@ -1137,13 +1152,43 @@ final class Cookiebot_WP {
 		$debugStr.= "Disable Cookiebot in WP Admin: ".(get_option('cookiebot-nooutput-admin') == '1' ? 'Yes' : 'No')."\n";
 		$debugStr.= "Banner tag: ".$this->add_js(false)."\n";
 		$debugStr.= "Declaration tag: ".$this->show_declaration()."\n";
+		
+		if($this->is_wp_consent_api_active()) {
+			$debugStr.= "\n--- WP Consent API Mapping ---\n";
+			$debugStr .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous'."\n";
+			$m = $this->get_wp_consent_api_mapping();
+			foreach($m as $k=>$v) {
+				$cb = array();
+				
+				$debugStr .= strtoupper( str_replace(';', ', ', $k ) ) . '   =>   ';
+				
+				$debugStr .= 'F=1, ';
+				$debugStr .= 'P=' . $v['preferences'] . ', ';
+				$debugStr .= 'M=' . $v['marketing'] . ', ';
+				$debugStr .= 'S=' . $v['statistics'] . ', ';
+				$debugStr .= 'SA=' . $v['statistics-anonymous'] . "\n";
+				
+			}
+			
+		} 
+		
+		if(class_exists('cookiebot_addons\Cookiebot_Addons')) {
+			$ca = new cookiebot_addons\Cookiebot_Addons();
+			$settingservice = $ca->container->get( 'Settings_Service_Interface' );
+			$addons = $settingservice->get_active_addons();
+			$debugStr.= "\n--- Activated Cookiebot Addons ---\n";
+			foreach($addons as $addon) {
+				$debugStr.= $addon->get_addon_name()." (".implode( ", ", $addon->get_cookie_types() ).")\n";
+			}
+		}
+		
 		$debugStr.= "\n--- Activated Plugins ---\n";
 		foreach($active_plugins as $p) {
 			if($p != 'cookiebot/cookiebot.php') {
 				$debugStr.= $plugins[$p]['Name'] . " (Version: ".$plugins[$p]['Version'].")\n"; 
 			}
 		}
-		
+				
 		$debugStr.= "\n##### Debug Information END #####";
 		
 		?>
