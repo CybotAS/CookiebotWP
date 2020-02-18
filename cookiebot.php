@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.5.0';
+	public $version = '3.6.0';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -1154,7 +1154,7 @@ final class Cookiebot_WP {
 		$debugStr.= "Declaration tag: ".$this->show_declaration()."\n";
 		
 		if($this->is_wp_consent_api_active()) {
-			$debugStr.= "\n--- WP Consent API Mapping ---\n";
+			$debugStr.= "\n--- WP Consent Level API Mapping ---\n";
 			$debugStr .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous'."\n";
 			$m = $this->get_wp_consent_api_mapping();
 			foreach($m as $k=>$v) {
