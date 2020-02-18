@@ -98,6 +98,7 @@ class Gadwp implements Cookiebot_Addons_Interface {
 			),
 			false );
 
+
 		$this->buffer_output->add_tag( 'wp_footer',
 			99,
 			array(
@@ -106,6 +107,17 @@ class Gadwp implements Cookiebot_Addons_Interface {
 				'ga-disable-'          => $this->get_cookie_types(),
 			),
 			false );
+			
+			
+	/* For new versions of GADWP */
+	$this->script_loader_tag->add_tag( 'exactmetrics-frontend-script', $this->get_cookie_types() );
+	$this->buffer_output->add_tag( 'wp_head',
+			6,
+			array(
+				'GoogleAnalyticsObject' => $this->get_cookie_types(),
+			),
+			false );
+
 	}
 
 	/**
