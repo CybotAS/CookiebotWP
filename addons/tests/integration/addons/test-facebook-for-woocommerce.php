@@ -25,8 +25,7 @@ class Test_Facebook_For_Woocommerce extends \WP_UnitTestCase {
 		$content = file_get_contents( 'https://raw.githubusercontent.com/facebookincubator/facebook-for-woocommerce/master/facebook-commerce-events-tracker.php' );
 		
 		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_head\', array( $this, \'apply_filters\' ) );' ) );
-		$this->assertNotFalse( strpos( $content, 'add_action(
-				\'woocommerce_after_single_product\',' ) );
+		$this->assertNotFalse( strpos( $content, 'add_action( \'woocommerce_after_single_product\', [ $this, \'inject_view_content_event\' ] );' ) );
 		$this->assertNotFalse( strpos( $content, 'add_action(
 				\'woocommerce_after_shop_loop\',' ) );
 		$this->assertNotFalse( strpos( $content, 'add_action(
