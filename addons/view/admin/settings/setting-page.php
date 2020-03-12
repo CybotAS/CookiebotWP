@@ -33,7 +33,7 @@
 	else { 
 		?>
 		<?php if ( isset( $_GET['tab'] ) ) {
-			$active_tab = $_GET['tab'];
+			$active_tab = esc_attr( $_GET['tab'] );
 		} else if ( $active_tab == 'unavailable_addons' ) {
 			$active_tab = 'unavailable_addons';
 		} else {
