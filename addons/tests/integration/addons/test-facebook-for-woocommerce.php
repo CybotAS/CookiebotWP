@@ -34,8 +34,7 @@ class Test_Facebook_For_Woocommerce extends \WP_UnitTestCase {
 				\'woocommerce_after_cart\',' ) );
 		$this->assertNotFalse( strpos( $content, 'add_action(
 				\'woocommerce_add_to_cart\',' ) );
-		$this->assertNotFalse( strpos( $content, 'add_action(
-				\'wc_ajax_fb_inject_add_to_cart_event\',' ) );
+		$this->assertNotFalse( strpos( $content, 'add_action( \'woocommerce_ajax_added_to_cart\', [ $this, \'add_filter_for_add_to_cart_fragments\' ] );' ) );
 		$this->assertNotFalse( strpos( $content, 'add_action(
 				\'woocommerce_after_checkout_form\',' ) );
 		$this->assertNotFalse( strpos( $content, 'add_action(
