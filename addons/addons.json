@@ -70,5 +70,8 @@
   },
   "Addthis": {
     "class": "cookiebot_addons\\controller\\addons\\addthis\\Addthis"
+  },
+  "Wp_Mautic": {
+    "class": "cookiebot_addons\\controller\\addons\\wp_mautic\\Wp_Mautic"
   }
 }
