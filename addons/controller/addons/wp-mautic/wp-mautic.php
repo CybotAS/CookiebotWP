@@ -70,12 +70,17 @@ class Wp_Mautic implements Cookiebot_Addons_Interface {
 	 * @since 1.5.0
 	 */
 	public function cookiebot_addon_mautic() {
-        $this->buffer_output->add_tag( 'wp_head', 10, array(
-            'MauticTrackingObject'     => $this->get_cookie_types()
-        ), false );
-        $this->buffer_output->add_tag( 'wp_footer', 10, array(
-            'MauticTrackingObject'     => $this->get_cookie_types()
-        ), false );
+        	$this->buffer_output->add_tag( 'wp_head', 10, array(
+        	    'MauticTrackingObject'     => $this->get_cookie_types()
+        	), false );
+        	$this->buffer_output->add_tag( 'wp_footer', 10, array(
+        	    'MauticTrackingObject'     => $this->get_cookie_types()
+       		), false );
+		
+		//Remove noscript tracking
+		if( has_action( 'wp_footer', 'wpmautic_inject_noscript' ) ) {
+			remove_action( 'wp_footer', 'wpmautic_inject_noscript' );
+		}
 	}
 
 	/**
