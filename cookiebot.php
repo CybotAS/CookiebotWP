@@ -471,7 +471,7 @@ final class Cookiebot_WP {
 								<?php _e('Manual','cookiebot'); ?>
 							</label>
 							<p class="description">
-								<?php _e('Automatic block cookies (except necessary) untill the user has given their consent.','cookiebot') ?>
+								<?php _e('Automatic block cookies (except necessary) until the user has given their consent.','cookiebot') ?>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360009063100-Automatic-Cookie-Blocking-How-does-it-work-" target="_blank">
 									<?php _e('Learn more','cookiebot'); ?>
 								</a>
