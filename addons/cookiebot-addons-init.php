@@ -23,7 +23,7 @@ define( 'COOKIEBOT_ADDONS_BASE_NAME', dirname( plugin_basename( __FILE__ ) ) );
 /**
  * Same version as the CookiebotWP
  */
-define( 'COOKIEBOT_ADDONS_VERSION', '3.6.1' );
+define( 'COOKIEBOT_ADDONS_VERSION', '3.6.2' );
 
 /**
  * Register autoloader to load files/classes dynamically
