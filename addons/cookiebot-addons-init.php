@@ -127,6 +127,17 @@ class Cookiebot_Addons {
 	}
 
 	/**
+	 * if the cookiebot is activated
+	 * run this script to start up
+	 *
+	 * @since 2.2.0
+	 */
+	public function cookiebot_activated() {
+		$settings_service = $this->container->get( 'Settings_Service_Interface' );
+		$settings_service->cookiebot_activated();
+	}
+
+	/**
 	 * if the cookiebot is deactivated
 	 * run this script to clean up addons.
 	 *

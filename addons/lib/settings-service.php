@@ -64,7 +64,8 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 2.2.1
 	 */
 	public function get_addon_version( $addon ) {
-		$plugin_data = get_file_data( WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . $addon, array( 'Version' => 'version' ), false );
+		$plugin_data = get_file_data( WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . $addon, array( 'Version' => 'version' ),
+			false );
 
 		return ( isset( $plugin_data['Version'] ) ) ? $plugin_data['Version'] : false;
 	}
@@ -170,7 +171,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @param       $option_key
 	 * @param       $widget
-	 * @param array $default
+	 * @param  array  $default
 	 *
 	 * @return array
 	 *
@@ -367,7 +368,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @param        $option_key
 	 * @param        $default_placeholder
 	 * @param        $cookies
-	 * @param string $src
+	 * @param  string  $src
 	 *
 	 * @return mixed
 	 *
@@ -390,7 +391,8 @@ class Settings_Service implements Settings_Service_Interface {
 				 * if current lang match with the prefix language in the database then get the text
 				 */
 				if ( $key == $current_lang ) {
-					return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages'][ $key ], $cookies, $src );
+					return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages'][ $key ],
+						$cookies, $src );
 				}
 			}
 		}
@@ -399,7 +401,8 @@ class Settings_Service implements Settings_Service_Interface {
 		 * Returns site-default text if no match found.
 		 */
 		if ( isset( $option[ $option_key ]['placeholder']['languages']['site-default'] ) ) {
-			return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages']['site-default'], $cookies, $src );
+			return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages']['site-default'],
+				$cookies, $src );
 		}
 
 		/**
@@ -492,8 +495,8 @@ class Settings_Service implements Settings_Service_Interface {
 	public function post_hook_after_enabling_addon_on_settings_page( $addon_option_name ) {
 		$addons = $this->get_addons();
 
-		foreach( $addons as $addon ) {
-			if( $addon->get_option_name() == $addon_option_name ) {
+		foreach ( $addons as $addon ) {
+			if ( $addon->get_option_name() == $addon_option_name ) {
 				$addon->post_hook_after_enabling();
 			}
 		}
@@ -506,8 +509,29 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 2.2.0
 	 */
 	public function cookiebot_deactivated() {
-		foreach( $this->get_active_addons() as $addon ) {
+		foreach ( $this->get_active_addons() as $addon ) {
 			$addon->plugin_deactivated();
+		}
+	}
+
+	/**
+	 * The cookiebot plugin is activated and the addon settings is activated
+	 *
+	 * @since 3.6.3
+	 */
+	public function cookiebot_activated() {
+		$option = get_option( static::OPTION_NAME );
+
+		if( $option == false ) {
+			$option = array();
+
+			foreach ( $this->get_addons() as $addon ) {
+				if ( $addon->enable_by_default() ) {
+					$option[ $addon->get_option_name() ] = $addon->get_default_enable_setting();
+				}
+			}
+
+			update_option( static::OPTION_NAME, $option );
 		}
 	}
 }

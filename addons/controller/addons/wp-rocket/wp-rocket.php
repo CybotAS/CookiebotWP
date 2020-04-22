@@ -75,10 +75,11 @@ class Wp_Rocket implements Cookiebot_Addons_Interface {
 	/**
 	 * Exclude scripts from WP Rocket’s defer JS option.
 	 *
-	 * @author Caspar Hübinger
-	 * @param  array  $excluded_files   Array of script URLs to be excluded
+	 * @param  array  $excluded_files  Array of script URLs to be excluded
+	 *
 	 * @return array                    Extended array script URLs to be excluded
 	 *
+	 * @author Caspar Hübinger
 	 * @since 3.6.2
 	 */
 	public function exclude_files( $excluded_files = array() ) {
@@ -249,7 +250,8 @@ class Wp_Rocket implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return false;
+		return '<p>' . __( 'Excludes cookiebot javascript files when the WP-Rocket deter option is enabled.',
+				'cookiebot-addons' ) . '</p>';;
 	}
 
 	/**
@@ -311,5 +313,31 @@ class Wp_Rocket implements Cookiebot_Addons_Interface {
 	 */
 	public function extra_available_addon_option() {
 		//do nothing
+	}
+
+	/**
+	 * Returns boolean to enable/disable plugin by default
+	 *
+	 * @return bool
+	 *
+	 * @since 3.6.3
+	 */
+	public function enable_by_default() {
+		return true;
+	}
+
+	/**
+	 * Sets default settings for this addon
+	 *
+	 * @return array
+	 *
+	 * @since 3.6.3
+	 */
+	public function get_default_enable_setting() {
+		return array(
+			'enabled'     => 1,
+			'cookie_type' => $this->get_default_cookie_types(),
+			'placeholder' => $this->get_default_placeholder(),
+		);
 	}
 }

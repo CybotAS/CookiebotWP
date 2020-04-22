@@ -284,3 +284,13 @@ function cookiebot_addons_plugin_deactivated( ) {
 	$cookiebot_addons = \cookiebot_addons\Cookiebot_Addons::instance();
 	$cookiebot_addons->cookiebot_deactivated();
 }
+
+/**
+ * Run actions when the cookiebot plugin is deactivated
+ *
+ * @since 3.6.3
+ */
+function cookiebot_addons_plugin_activated( ) {
+	$cookiebot_addons = \cookiebot_addons\Cookiebot_Addons::instance();
+	$cookiebot_addons->cookiebot_activated();
+}

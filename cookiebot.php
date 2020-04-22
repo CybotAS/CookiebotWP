@@ -59,7 +59,6 @@ final class Cookiebot_WP {
 		register_deactivation_hook( __FILE__, 'cookiebot_addons_plugin_deactivated' );
 
 		$this->cookiebot_fix_plugin_conflicts();
-
 	}
 
 	/**
@@ -83,6 +82,20 @@ final class Cookiebot_WP {
 			else {
 				update_option('cookiebot-cookie-blocking-mode','auto');
 				update_option('cookiebot-nooutput-admin',true);
+			}
+		}
+
+		/**
+		 * Run through the addons and enable the default ones
+		 */
+		if( (!defined('COOKIEBOT_ADDONS_STANDALONE') || COOKIEBOT_ADDONS_STANDALONE != true || !defined('COOKIE_ADDONS_LOADED')) ) {
+			//Make sure we got a PHP version that works
+			if ( version_compare( PHP_VERSION, '5.4.0', '>=' ) ) {
+				define( 'COOKIEBOT_URL', plugin_dir_url( __FILE__ ) );
+				// activation hook doesn't have the addons loaded - so load it extra when the plugin is activated
+				include_once( dirname( __FILE__ ) . '/addons/cookiebot-addons-init.php' );
+				// run activated hook on the addons
+				cookiebot_addons_plugin_activated();
 			}
 		}
 	}
@@ -255,13 +268,13 @@ final class Cookiebot_WP {
 		add_submenu_page('cookiebot',__('Cookiebot Settings','cookiebot'),__('Settings','cookiebot'), 'manage_options', 'cookiebot',array($this,'settings_page') );
 		add_submenu_page('cookiebot',__('Cookiebot Support','cookiebot'),__('Support','cookiebot'), 'manage_options', 'cookiebot_support',array($this,'support_page') );
 		add_submenu_page('cookiebot',__('IAB','cookiebot'),__('IAB','cookiebot'), 'manage_options', 'cookiebot_iab',array($this,'iab_page') );
-		
+
 		if(defined('COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION')) {
 			//Load prior consent page anyway - but from Cookiebot WP Core plugin.
 			add_submenu_page( 'cookiebot', __( 'Prior Consent', 'cookiebot' ), __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array($this,'setting_page_placeholder'	) );
 		}
 	}
-	
+
 	/**
 	 * Cookiebot_WP Add debug menu - we need to add this seperate to ensure it is placed last (after menu items from Addons).
 	 *
@@ -1114,25 +1127,25 @@ final class Cookiebot_WP {
         </div>
 		<?php
     }
-    
+
   /**
    * Cookiebot_WP Debug Page
-   * 
+   *
    * @version	3.6.0
    * @since		3.6.0
    */
-   
+
   function debug_page() {
 		global $wpdb;
-		
+
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		$plugins = get_plugins();
 		$active_plugins = get_option( 'active_plugins' );
-		
-		
+
+
 		//$foo = new cookiebot_addons\lib\Settings_Service;
 		//$addons = $foo->get_active_addons();
-		
+
 		$debugStr = "";
 		$debugStr.= "##### Debug Information for ".get_site_url()." generated at ".date("c")." #####\n\n";
 		$debugStr.= "Wordpress Version: ".get_bloginfo('version')."\n";
@@ -1152,26 +1165,26 @@ final class Cookiebot_WP {
 		$debugStr.= "Disable Cookiebot in WP Admin: ".(get_option('cookiebot-nooutput-admin') == '1' ? 'Yes' : 'No')."\n";
 		$debugStr.= "Banner tag: ".$this->add_js(false)."\n";
 		$debugStr.= "Declaration tag: ".$this->show_declaration()."\n";
-		
+
 		if($this->is_wp_consent_api_active()) {
 			$debugStr.= "\n--- WP Consent Level API Mapping ---\n";
 			$debugStr .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous'."\n";
 			$m = $this->get_wp_consent_api_mapping();
 			foreach($m as $k=>$v) {
 				$cb = array();
-				
+
 				$debugStr .= strtoupper( str_replace(';', ', ', $k ) ) . '   =>   ';
-				
+
 				$debugStr .= 'F=1, ';
 				$debugStr .= 'P=' . $v['preferences'] . ', ';
 				$debugStr .= 'M=' . $v['marketing'] . ', ';
 				$debugStr .= 'S=' . $v['statistics'] . ', ';
 				$debugStr .= 'SA=' . $v['statistics-anonymous'] . "\n";
-				
+
 			}
-			
-		} 
-		
+
+		}
+
 		if(class_exists('cookiebot_addons\Cookiebot_Addons')) {
 			$ca = new cookiebot_addons\Cookiebot_Addons();
 			$settingservice = $ca->container->get( 'Settings_Service_Interface' );
@@ -1181,16 +1194,16 @@ final class Cookiebot_WP {
 				$debugStr.= $addon->get_addon_name()." (".implode( ", ", $addon->get_cookie_types() ).")\n";
 			}
 		}
-		
+
 		$debugStr.= "\n--- Activated Plugins ---\n";
 		foreach($active_plugins as $p) {
 			if($p != 'cookiebot/cookiebot.php') {
-				$debugStr.= $plugins[$p]['Name'] . " (Version: ".$plugins[$p]['Version'].")\n"; 
+				$debugStr.= $plugins[$p]['Name'] . " (Version: ".$plugins[$p]['Version'].")\n";
 			}
 		}
-				
+
 		$debugStr.= "\n##### Debug Information END #####";
-		
+
 		?>
 		<div class="wrap">
 			<h1><?php _e('Debug information','cookiebot'); ?></h1>
@@ -1246,12 +1259,12 @@ final class Cookiebot_WP {
 			}
 
 			$iab = ( get_option('cookiebot-iab') != false ) ? 'data-framework="IAB"' : '';
-			
+
 			$tag = '<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" '.$iab.' data-cbid="'.$cbid.'"'.$lang.' type="text/javascript" '.$tagAttr.'></script>';
 			if($printTag===false) {
 				return $tag;
 			}
-			echo $tag;		
+			echo $tag;
 		}
 	}
 
@@ -1584,7 +1597,7 @@ final class Cookiebot_WP {
 		//Fix for Divi Page Builder
 		//Disabled - using another method now (can_current_user_edit_theme())
 		//add_action( 'wp', array( $this, '_cookiebot_plugin_conflict_divi' ), 100 );
-		
+
 		//Fix for Elementor and WPBakery Page Builder Builder
 		//Disabled - using another method now (can_current_user_edit_theme())
 		//add_filter( 'script_loader_tag', array( $this, '_cookiebot_plugin_conflict_scripttags' ), 10, 2 );
