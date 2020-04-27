@@ -311,4 +311,30 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	public function extra_available_addon_option() {
 		//do nothing
 	}
+
+	/**
+	 * Returns boolean to enable/disable plugin by default
+	 *
+	 * @return bool
+	 *
+	 * @since 3.6.3
+	 */
+	public function enable_by_default() {
+		return false;
+	}
+
+	/**
+	 * Sets default settings for this addon
+	 *
+	 * @return array
+	 *
+	 * @since 3.6.3
+	 */
+	public function get_default_enable_setting() {
+		return array(
+			'enabled'     => 1,
+			'cookie_type' => $this->get_default_cookie_types(),
+			'placeholder' => $this->get_default_placeholder(),
+		);
+	}
 }

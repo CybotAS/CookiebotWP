@@ -150,4 +150,11 @@ Interface Settings_Service_Interface {
 	 * @since 2.2.0
 	 */
 	public function cookiebot_deactivated();
+
+	/**
+	 * The cookiebot plugin is activated and the addon settings is activated
+	 *
+	 * @since 3.6.3
+	 */
+	public function cookiebot_activated();
 }

@@ -196,4 +196,22 @@ Interface Cookiebot_Addons_Interface {
 	 * @since 2.4.5
 	 */
 	public function extra_available_addon_option();
+
+	/**
+	 * Returns boolean to enable/disable plugin by default
+	 *
+	 * @return bool
+	 *
+	 * @since 3.6.3
+	 */
+	public function enable_by_default();
+
+	/**
+	 * Sets default settings for this addon
+	 *
+	 * @return array
+	 *
+	 * @since 3.6.3
+	 */
+	public function get_default_enable_setting();
 }
