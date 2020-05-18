@@ -110,15 +110,15 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 			'fbq(\'Purchase\'' => $this->get_cookie_types()
 		), false );
 
+		$this->buffer_output->add_tag( 'wp_head', 10, array(
+			'fbq(\'track\',' => $this->get_cookie_types()
+		), false );
+
 		/**
 		 * inject base pixel
 		 */
 		//We always need to remove this untill consent is given - because we can force no execution before consent it given
 		cookiebot_addons_remove_class_action( 'wp_footer', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel_noscript' );
-
-		$this->buffer_output->add_tag( 'wp_head', 10, array(
-			'fbq(\'track\',' => $this->get_cookie_types()
-		), false );
 
 	}
 
