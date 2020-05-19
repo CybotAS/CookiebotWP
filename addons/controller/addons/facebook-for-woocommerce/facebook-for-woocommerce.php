@@ -74,7 +74,7 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 */
 	public function cookiebot_addon_facebook_for_woocommerce_tracking_code() {
 		
-		add_filter( 'wc_facebook_pixel_script_attributes', 'cookiebot_addon_facebook_for_woocommerce_script_attributes' );
+		add_filter( 'wc_facebook_pixel_script_attributes', array( $this, 'cookiebot_addon_facebook_for_woocommerce_script_attributes' ) );
 		
 		/* Keep for old version */
 		$this->buffer_output->add_tag( 'woocommerce_after_single_product', 2, array(
