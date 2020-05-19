@@ -73,7 +73,10 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_facebook_for_woocommerce_tracking_code() {
-
+		
+		add_filter( 'wc_facebook_pixel_script_attributes', 'cookiebot_addon_facebook_for_woocommerce_script_attributes' );
+		
+		/* Keep for old version */
 		$this->buffer_output->add_tag( 'woocommerce_after_single_product', 2, array(
 			'fbq(\'ViewContent\'' => $this->get_cookie_types()
 		), false );
@@ -120,6 +123,16 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 			'fbq(\'track\',' => $this->get_cookie_types()
 		), false );
 
+	}
+	
+	/**
+	 * Return attributes for script tags
+	 */
+	function cookiebot_addon_facebook_for_woocommerce_script_attributes() {
+		$attr = array();
+		$attr['type'] = 'text/plain';
+		$attr['data-cookieconsent'] = implode(',',$this->get_cookie_types());
+		return $attr;
 	}
 
 	/**
