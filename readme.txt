@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent, ccpa
 * Requires at least: 4.4
 * Tested up to: 5.3.2
-* Stable tag: 3.6.3
+* Stable tag: 3.6.5
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -189,6 +189,10 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 
 ## Changelog ##
+
+### 3.6.5 - 2020-05-19 ###
+* Adding fix for SG Optimizer
+* Add support for latest version of Facebook for Woocommerce addon
 
 ### 3.6.3 - 2020-04-30 ###
 * Adding support for default enabled addons
