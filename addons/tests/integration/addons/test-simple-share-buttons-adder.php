@@ -14,6 +14,6 @@
 		public function test_script_loader_tag_addtoany() {
 			$content = file_get_contents( 'http://plugins.svn.wordpress.org/simple-share-buttons-adder/trunk/php/class-styles.php' );
 
-			$this->assertNotFalse( strpos( $content, "wp_enqueue_script( 'ssba-sharethis'" ) );
+			$this->assertNotFalse( strpos( $content, "wp_enqueue_script('ssba-sharethis'" ) );
 		}
 	}
