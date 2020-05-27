@@ -76,5 +76,8 @@
   },
   "Wp_Rocket": {
     "class": "cookiebot_addons\\controller\\addons\\wp_rocket\\Wp_Rocket"
+  },
+  "Enhanced_Ecommerce_For_WooCommerce_Store": {
+    "class": "cookiebot_addons\\controller\\addons\\enhanced_ecommerce_for_woocommerce_store\\Enhanced_Ecommerce_For_WooCommerce_Store"
   }
 }
