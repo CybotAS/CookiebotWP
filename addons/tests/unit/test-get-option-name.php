@@ -35,7 +35,7 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	private function get_plugins() {
 		$this->file_path = dirname( dirname( __DIR__ ) ) . '/addons.json';
 		$this->file      = file_get_contents( $this->file_path );
-		$this->plugins   = json_decode( $this->file );
+		$this->plugins   = apply_filters( 'cookiebot_addons_list', json_decode( $this->file ) );
 	}
 
 	/**

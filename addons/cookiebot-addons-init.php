@@ -23,7 +23,7 @@ define( 'COOKIEBOT_ADDONS_BASE_NAME', dirname( plugin_basename( __FILE__ ) ) );
 /**
  * Same version as the CookiebotWP
  */
-define( 'COOKIEBOT_ADDONS_VERSION', '3.6.2' );
+define( 'COOKIEBOT_ADDONS_VERSION', '3.6.5' );
 
 /**
  * Register autoloader to load files/classes dynamically
@@ -159,7 +159,7 @@ class Cookiebot_Addons {
 	 */
 	protected function get_plugins() {
 		$file          = file_get_contents( COOKIEBOT_ADDONS_DIR . 'addons.json' );
-		$this->plugins = json_decode( $file );
+		$this->plugins = apply_filters( 'cookiebot_addons_list', json_decode( $file ) );
 	}
 
 	/**

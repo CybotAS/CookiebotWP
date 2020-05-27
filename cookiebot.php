@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites.
 Author: Cybot A/S
-Version: 3.6.2
+Version: 3.6.5
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.6.1';
+	public $version = '3.6.5';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -192,6 +192,9 @@ final class Cookiebot_WP {
 		if(defined('WP_ROCKET_VERSION')) {
 			add_filter('rocket_minify_excluded_external_js', array($this,'wp_rocket_exclude_external_js'));
 		}
+		
+		//Add filter 
+		add_filter( 'sgo_javascript_combine_excluded_external_paths', array($this,'sgo_exclude_external_js') );
 
 		//Automatic update plugin
 		if(is_admin() || (defined('DOING_CRON') && DOING_CRON)) {
@@ -1418,6 +1421,17 @@ final class Cookiebot_WP {
 		$external_js_hosts[] = 'consent.cookiebot.com';      // Add cookiebot domains
 		$external_js_hosts[] = 'consentcdn.cookiebot.com';
 		return $external_js_hosts;
+	}
+	
+	/**
+	 * Cookiebot_WP Adding Cookiebot domain(s) to exclude list for SGO minification.
+	 *
+	 * @version 3.6.5
+	 * @since   3.6.5
+	 */
+	function sgo_exclude_external_js( $exclude_list ) {
+		//Uses same format as WP Rocket - for now we just use WP Rocket function
+		return wp_rocket_exclude_external_js( $exclude_list );
 	}
 
 
