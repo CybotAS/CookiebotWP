@@ -113,7 +113,7 @@ class Cookiebot_Addons {
 		 *
 		 * @since 1.1.0
 		 */
-		add_action( 'plugins_loaded', array(
+		add_action( 'after_setup_theme', array(
 			new Plugin_Controller( $this->container->get( 'Settings_Service_Interface' ) ),
 			'load_active_addons',
 		) );
