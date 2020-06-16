@@ -82,5 +82,8 @@
   },
   "Enhanced_Ecommerce_For_WooCommerce_Store": {
     "class": "cookiebot_addons\\controller\\addons\\enhanced_ecommerce_for_woocommerce_store\\Enhanced_Ecommerce_For_WooCommerce_Store"
+  },
+  "Simple_Share_Buttons_Adder": {
+    "class": "cookiebot_addons\\controller\\addons\\simple_share_buttons_adder\\Simple_Share_Buttons_Adder"
   }
 }
