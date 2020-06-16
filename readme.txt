@@ -2,8 +2,8 @@
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent, ccpa
 * Requires at least: 4.4
-* Tested up to: 5.4.1
-* Stable tag: 3.6.5
+* Tested up to: 5.4.2
+* Stable tag: 3.6.6
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -189,6 +189,11 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 
 ## Changelog ##
+
+### 3.6.6 - 2020-06-16 ###
+* Fix through addon for Lightspeed Cache
+* Added addon for Enchanged Ecommerce for WooCommerce
+* Added addon for Simple Share Buttons
 
 ### 3.6.5 - 2020-05-19 ###
 * Adding fix for SG Optimizer
