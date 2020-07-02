@@ -1210,7 +1210,7 @@ final class Cookiebot_WP {
 		$debugStr.= "Language: ".get_option('cookiebot-language')."\n";
 		$debugStr.= "IAB: ".(get_option('cookiebot-iab') == '1' ? 'Enabled' : 'Not enabled')."\n";
 		$debugStr.= "CCPA banner for visitors from California: ".(get_option('cookiebot-ccpa') == '1' ? 'Enabled' : 'Not enabled')."\n";
-		$debugStr.= "CCPA domain group id: ". get_option('cookiebot-domain-group-id') ."\n";
+		$debugStr.= "CCPA domain group id: ". get_option('cookiebot-ccpa-domain-group-id') ."\n";
 		$debugStr.= "Add async/defer to banner tag: ".(get_option('cookiebot-script-tag-uc-attribute') != '' ? get_option('cookiebot-script-tag-uc-attribute') : 'None')."\n";
 		$debugStr.= "Add async/defer to declaration tag: ".(get_option('cookiebot-script-tag-cd-attribute') != '' ? get_option('cookiebot-script-tag-cd-attribute') : 'None')."\n";
 		$debugStr.= "Auto update: ".(get_option('cookiebot-autoupdate') == '1' ? 'Enabled' : 'Not enabled')."\n";
