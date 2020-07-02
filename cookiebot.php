@@ -1159,7 +1159,7 @@ final class Cookiebot_WP {
                 <table class="form-table">
                     <tbody>
                     <tr valign="top">
-                        <th scope="row"><label>Enable CCPA legislations</label></th>
+                        <th scope="row"><label>Enable CCPA banner for visitors from California</label></th>
                         <td>
                             <input type="checkbox" name="cookiebot-ccpa" value="1" <?php checked(1,get_option('cookiebot-ccpa'), true); ?>>
                         </td>
