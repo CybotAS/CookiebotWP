@@ -1313,7 +1313,7 @@ final class Cookiebot_WP {
 
 			$iab = ( get_option('cookiebot-iab') != false ) ? 'data-framework="IAB"' : '';
 
-			$ccpa = ( get_option('cookiebot-ccpa') != false ) ? 'data-georegions="{\'region\':\'US-O6\',\'cbid\':\''.get_option('cookiebot-ccpa-domain-group-id').'\'}"' : '';
+			$ccpa = ( get_option('cookiebot-ccpa') != false ) ? 'data-georegions="{\'region\':\'US-06\',\'cbid\':\''.get_option('cookiebot-ccpa-domain-group-id').'\'}"' : '';
 
 			$tag = '<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" '.$iab.' '.$ccpa.' data-cbid="'.$cbid.'"'.$lang.' type="text/javascript" '.$tagAttr.'></script>';
 			if($printTag===false) {
