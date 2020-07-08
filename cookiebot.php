@@ -59,7 +59,6 @@ final class Cookiebot_WP {
 		register_deactivation_hook( __FILE__, 'cookiebot_addons_plugin_deactivated' );
 
 		$this->cookiebot_fix_plugin_conflicts();
-		$this->gutenberg_block_setup();
 	}
 
 	/**
@@ -207,6 +206,9 @@ final class Cookiebot_WP {
 		include_once( dirname( __FILE__ ) . '/widgets/cookiebot-declaration-widget.php' );
 		add_action( 'widgets_init', array($this,'register_widgets') );
 		
+		
+		//Add Gutenberg block
+		add_action( 'enqueue_block_assets', array($this,'gutenberg_block_setup') );
 	}
 	
 	
