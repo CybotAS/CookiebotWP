@@ -209,6 +209,7 @@ final class Cookiebot_WP {
 		
 		//Add Gutenberg block
 		add_action( 'enqueue_block_assets', array($this,'gutenberg_block_setup') );
+		add_action( 'enqueue_block_editor_assets', array($this,'gutenberg_block_admin_assets') );   
 	}
 	
 	
@@ -222,7 +223,19 @@ final class Cookiebot_WP {
 		if ( ! function_exists( 'register_block_type' ) ) {
 			return; //gutenberg not active
 		}
-		
+					
+		register_block_type( 'cookiebot/cookie-declaration', array(
+			'render_callback' => array( $this, 'block_cookie_declaration' )
+		) );
+	}
+	
+	/**
+	 * Cookiebot_WP Add block JS
+	 * 
+	 * @version	3.7.1
+	 * @since		3.7.1
+	 */
+	function gutenberg_block_admin_assets() {
 		//Add Gutenberg Widget
 		wp_enqueue_script( 
 			'cookiebot-declaration', 
@@ -230,10 +243,6 @@ final class Cookiebot_WP {
 			array('wp-blocks', 'wp-i18n', 'wp-element'), // Required scripts for the block
 			$this->version
 		);
-					
-		register_block_type( 'cookiebot/cookie-declaration', array(
-			'render_callback' => array( $this, 'block_cookie_declaration' )
-		) );
 	}
 	
 	/**
