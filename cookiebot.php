@@ -226,7 +226,7 @@ final class Cookiebot_WP {
 		//Add Gutenberg Widget
 		wp_enqueue_script( 
 			'cookiebot-declaration', 
-			plugin_dir_url( __FILE__ ) . '/js/block.js', 
+			plugin_dir_url( __FILE__ ) . 'js/block.js', 
 			array('wp-blocks', 'wp-i18n', 'wp-element'), // Required scripts for the block
 			$this->version
 		);
