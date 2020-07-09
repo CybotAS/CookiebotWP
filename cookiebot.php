@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites.
 Author: Cybot A/S
-Version: 3.6.5
+Version: 3.7.1
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.6.5';
+	public $version = '3.7.1';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -54,7 +54,7 @@ final class Cookiebot_WP {
 	 * @access  public
 	 */
 	function __construct() {
-		add_action('plugins_loaded', array($this, 'cookiebot_init'), 5);
+		add_action('after_setup_theme', array($this, 'cookiebot_init'), 5);
 		register_activation_hook( __FILE__ , array($this, 'activation'));
 		register_deactivation_hook( __FILE__, 'cookiebot_addons_plugin_deactivated' );
 
@@ -152,6 +152,7 @@ final class Cookiebot_WP {
 
 			//Adding menu to WP admin
 			add_action('admin_menu', array($this,'add_menu'),1);
+			add_action('admin_menu', array($this,'add_menu_legislations'),40);
 			add_action('admin_menu', array($this,'add_menu_debug'),50);
 
 
@@ -192,8 +193,8 @@ final class Cookiebot_WP {
 		if(defined('WP_ROCKET_VERSION')) {
 			add_filter('rocket_minify_excluded_external_js', array($this,'wp_rocket_exclude_external_js'));
 		}
-		
-		//Add filter 
+
+		//Add filter
 		add_filter( 'sgo_javascript_combine_excluded_external_paths', array($this,'sgo_exclude_external_js') );
 
 		//Automatic update plugin
@@ -204,7 +205,54 @@ final class Cookiebot_WP {
 		//Loading widgets
 		include_once( dirname( __FILE__ ) . '/widgets/cookiebot-declaration-widget.php' );
 		add_action( 'widgets_init', array($this,'register_widgets') );
-
+		
+		
+		//Add Gutenberg block
+		add_action( 'enqueue_block_assets', array($this,'gutenberg_block_setup') );
+		add_action( 'enqueue_block_editor_assets', array($this,'gutenberg_block_admin_assets') );   
+	}
+	
+	
+	/**
+	 * Cookiebot_WP Setup Gutenberg block
+	 *
+	 * @version 3.7.0
+	 * @since		3.7.0
+	 */
+	function gutenberg_block_setup() {
+		if ( ! function_exists( 'register_block_type' ) ) {
+			return; //gutenberg not active
+		}
+					
+		register_block_type( 'cookiebot/cookie-declaration', array(
+			'render_callback' => array( $this, 'block_cookie_declaration' )
+		) );
+	}
+	
+	/**
+	 * Cookiebot_WP Add block JS
+	 * 
+	 * @version	3.7.1
+	 * @since		3.7.1
+	 */
+	function gutenberg_block_admin_assets() {
+		//Add Gutenberg Widget
+		wp_enqueue_script( 
+			'cookiebot-declaration', 
+			plugin_dir_url( __FILE__ ) . 'js/block.js', 
+			array('wp-blocks', 'wp-i18n', 'wp-element'), // Required scripts for the block
+			$this->version
+		);
+	}
+	
+	/**
+	 * Cookiebot_WP Render Cookiebot Declaration as Gutenberg block
+	 *
+	 * @version 3.7.0
+	 * @since		3.7.0
+	 */
+	function block_cookie_declaration() {
+		return $this->show_declaration();
 	}
 
 	/**
@@ -268,15 +316,19 @@ final class Cookiebot_WP {
 		$icon = 'data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNzIgNTQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI0ZGRkZGRiIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNNDYuODcyNTkwMyA4Ljc3MzU4MzM0QzQxLjk0MzkwMzkgMy4zODI5NTAxMSAzNC44NDI0OTQ2IDAgMjYuOTQ4MjgxOSAwIDEyLjA2NTE1NjggMCAwIDEyLjAyNDQ3NzQgMCAyNi44NTc0MjE5YzAgMTQuODMyOTQ0NSAxMi4wNjUxNTY4IDI2Ljg1NzQyMTkgMjYuOTQ4MjgxOSAyNi44NTc0MjE5IDcuODk0MjEyNyAwIDE0Ljk5NTYyMi0zLjM4Mjk1MDIgMTkuOTI0MzA4NC04Ljc3MzU4MzQtMi44ODk2OTY3LTEuMzY4ODY2My01LjM5OTMxMS0zLjQwNTQzOS03LjMyODA4MzgtNS45MDk2MzU4LTMuMTIxNDMwNiAzLjIwOTQxMDQtNy40OTI5OTQ0IDUuMjA0MTI5MS0xMi4zMzIwMjU4IDUuMjA0MTI5MS05LjQ4NDM0NDQgMC0xNy4xNzI5MjQ3LTcuNjYyNjU3Mi0xNy4xNzI5MjQ3LTE3LjExNTAyMzhzNy42ODg1ODAzLTE3LjExNTAyMzcgMTcuMTcyOTI0Ny0xNy4xMTUwMjM3YzQuNzIzNDgyMiAwIDkuMDAxNTU1MiAxLjkwMDU5MzkgMTIuMTA2MjkyIDQuOTc2MzA5IDEuOTU2OTIzNy0yLjY0MTEzMSA0LjU1MDAyNjMtNC43ODU1MTgzIDcuNTUzODE3Ni02LjIwODQzMTg2eiIvPjxwYXRoIGQ9Ik01NS4zODAzMjgyIDQyLjY1MDE5OTFDNDYuMzMzNzIyNyA0Mi42NTAxOTkxIDM5IDM1LjM0MTIwMzEgMzkgMjYuMzI1MDk5NiAzOSAxNy4zMDg5OTYgNDYuMzMzNzIyNyAxMCA1NS4zODAzMjgyIDEwYzkuMDQ2NjA1NSAwIDE2LjM4MDMyODIgNy4zMDg5OTYgMTYuMzgwMzI4MiAxNi4zMjUwOTk2IDAgOS4wMTYxMDM1LTcuMzMzNzIyNyAxNi4zMjUwOTk1LTE2LjM4MDMyODIgMTYuMzI1MDk5NXptLjAyMTMwOTItNy43NTU2MzQyYzQuNzM3MDI3NiAwIDguNTc3MTQ3MS0zLjgyNzE3MiA4LjU3NzE0NzEtOC41NDgyMjc5IDAtNC43MjEwNTYtMy44NDAxMTk1LTguNTQ4MjI4LTguNTc3MTQ3MS04LjU0ODIyOC00LjczNzAyNzUgMC04LjU3NzE0NyAzLjgyNzE3Mi04LjU3NzE0NyA4LjU0ODIyOCAwIDQuNzIxMDU1OSAzLjg0MDExOTUgOC41NDgyMjc5IDguNTc3MTQ3IDguNTQ4MjI3OXoiLz48L2c+PC9zdmc+';
 		add_menu_page( 'Cookiebot', __('Cookiebot','cookiebot'), 'manage_options', 'cookiebot', array($this,'settings_page'),$icon);
 
-		add_submenu_page('cookiebot',__('Cookiebot Settings','cookiebot'),__('Settings','cookiebot'), 'manage_options', 'cookiebot',array($this,'settings_page') );
-		add_submenu_page('cookiebot',__('Cookiebot Support','cookiebot'),__('Support','cookiebot'), 'manage_options', 'cookiebot_support',array($this,'support_page') );
-		add_submenu_page('cookiebot',__('IAB','cookiebot'),__('IAB','cookiebot'), 'manage_options', 'cookiebot_iab',array($this,'iab_page') );
+		add_submenu_page('cookiebot',__('Cookiebot Settings','cookiebot'),__('Settings','cookiebot'), 'manage_options', 'cookiebot',array($this,'settings_page'), 10 );
+		add_submenu_page('cookiebot',__('Cookiebot Support','cookiebot'),__('Support','cookiebot'), 'manage_options', 'cookiebot_support',array($this,'support_page'), 20 );
+		add_submenu_page('cookiebot',__('IAB','cookiebot'),__('IAB','cookiebot'), 'manage_options', 'cookiebot_iab',array($this,'iab_page'), 30 );
 
 		if(defined('COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION')) {
 			//Load prior consent page anyway - but from Cookiebot WP Core plugin.
-			add_submenu_page( 'cookiebot', __( 'Prior Consent', 'cookiebot' ), __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array($this,'setting_page_placeholder'	) );
+			add_submenu_page( 'cookiebot', __( 'Prior Consent', 'cookiebot' ), __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array($this,'setting_page_placeholder'	), 40 );
 		}
 	}
+
+	function add_menu_legislations() {
+		add_submenu_page( 'cookiebot', __( 'Legislations', 'cookiebot' ), __( 'Legislations', 'cookiebot' ), 'manage_options', 'cookiebot-legislations', array($this,'legislations_page'	), 50 );
+    }
 
 	/**
 	 * Cookiebot_WP Add debug menu - we need to add this seperate to ensure it is placed last (after menu items from Addons).
@@ -330,6 +382,8 @@ final class Cookiebot_WP {
 		register_setting('cookiebot', 'cookiebot-cookie-blocking-mode');
 		register_setting('cookiebot', 'cookiebot-consent-mapping');
 		register_setting('cookiebot-iab', 'cookiebot-iab');
+		register_setting('cookiebot-legislations', 'cookiebot-ccpa');
+		register_setting('cookiebot-legislations', 'cookiebot-ccpa-domain-group-id');
 	}
 
 	/**
@@ -1131,6 +1185,47 @@ final class Cookiebot_WP {
 		<?php
     }
 
+	/**
+	 * Cookiebot_WP Cookiebot legislations page
+	 *
+	 * @version 3.6.6
+	 * @since   3.6.6
+	 */
+	function legislations_page() {
+		?>
+        <div class="wrap">
+            <h1><?php _e('Legislations','cookiebot'); ?></h1>
+
+            <p>For more details about Cookiebot's CCPA Legislation integration, see <a href="https://support.cookiebot.com/hc/en-us/articles/360010932419-Use-multiple-banners-on-the-same-website-support-both-CCPA-GDPR-compliance-" target="_blank">article about cookiebot and the CCPA compliance</a></p>
+
+            <form method="post" action="options.php">
+				<?php settings_fields( 'cookiebot-legislations' ); ?>
+				<?php do_settings_sections( 'cookiebot-legislations' ); ?>
+
+
+                <table class="form-table">
+                    <tbody>
+                    <tr valign="top">
+                        <th scope="row"><label>Enable CCPA banner for visitors from California</label></th>
+                        <td>
+                            <input type="checkbox" name="cookiebot-ccpa" value="1" <?php checked(1,get_option('cookiebot-ccpa'), true); ?>>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th valign="top"><label>Domain Group ID</label></th>
+                        <td>
+                            <input type="text" style="width: 300px;" name="cookiebot-ccpa-domain-group-id" value="<?php echo get_option('cookiebot-ccpa-domain-group-id'); ?>">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+				<?php submit_button(); ?>
+            </form>
+        </div>
+		<?php
+	}
+
   /**
    * Cookiebot_WP Debug Page
    *
@@ -1161,6 +1256,8 @@ final class Cookiebot_WP {
 		$debugStr.= "Blocking mode: ".get_option('cookiebot-cookie-blocking-mode')."\n";
 		$debugStr.= "Language: ".get_option('cookiebot-language')."\n";
 		$debugStr.= "IAB: ".(get_option('cookiebot-iab') == '1' ? 'Enabled' : 'Not enabled')."\n";
+		$debugStr.= "CCPA banner for visitors from California: ".(get_option('cookiebot-ccpa') == '1' ? 'Enabled' : 'Not enabled')."\n";
+		$debugStr.= "CCPA domain group id: ". get_option('cookiebot-ccpa-domain-group-id') ."\n";
 		$debugStr.= "Add async/defer to banner tag: ".(get_option('cookiebot-script-tag-uc-attribute') != '' ? get_option('cookiebot-script-tag-uc-attribute') : 'None')."\n";
 		$debugStr.= "Add async/defer to declaration tag: ".(get_option('cookiebot-script-tag-cd-attribute') != '' ? get_option('cookiebot-script-tag-cd-attribute') : 'None')."\n";
 		$debugStr.= "Auto update: ".(get_option('cookiebot-autoupdate') == '1' ? 'Enabled' : 'Not enabled')."\n";
@@ -1263,7 +1360,9 @@ final class Cookiebot_WP {
 
 			$iab = ( get_option('cookiebot-iab') != false ) ? 'data-framework="IAB"' : '';
 
-			$tag = '<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" '.$iab.' data-cbid="'.$cbid.'"'.$lang.' type="text/javascript" '.$tagAttr.'></script>';
+			$ccpa = ( get_option('cookiebot-ccpa') != false ) ? 'data-georegions="{\'region\':\'US-06\',\'cbid\':\''.get_option('cookiebot-ccpa-domain-group-id').'\'}"' : '';
+
+			$tag = '<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" '.$iab.' '.$ccpa.' data-cbid="'.$cbid.'"'.$lang.' type="text/javascript" '.$tagAttr.'></script>';
 			if($printTag===false) {
 				return $tag;
 			}
@@ -1422,7 +1521,7 @@ final class Cookiebot_WP {
 		$external_js_hosts[] = 'consentcdn.cookiebot.com';
 		return $external_js_hosts;
 	}
-	
+
 	/**
 	 * Cookiebot_WP Adding Cookiebot domain(s) to exclude list for SGO minification.
 	 *

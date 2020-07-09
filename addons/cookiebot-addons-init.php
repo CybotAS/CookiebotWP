@@ -23,7 +23,7 @@ define( 'COOKIEBOT_ADDONS_BASE_NAME', dirname( plugin_basename( __FILE__ ) ) );
 /**
  * Same version as the CookiebotWP
  */
-define( 'COOKIEBOT_ADDONS_VERSION', '3.6.5' );
+define( 'COOKIEBOT_ADDONS_VERSION', '3.7.1' );
 
 /**
  * Register autoloader to load files/classes dynamically
@@ -113,7 +113,7 @@ class Cookiebot_Addons {
 		 *
 		 * @since 1.1.0
 		 */
-		add_action( 'plugins_loaded', array(
+		add_action( 'after_setup_theme', array(
 			new Plugin_Controller( $this->container->get( 'Settings_Service_Interface' ) ),
 			'load_active_addons',
 		) );

@@ -27,6 +27,8 @@ before_script:
   # Install test framework
   - git clone https://github.com/Seravo/wordpress-test-template wp-tests
   - bash wp-tests/bin/install-wp-tests.sh test root '' localhost $WP_VERSION
+  - rm -rf /tmp/wordpress-tests-lib/includes/
+  - svn co --quiet http://develop.svn.wordpress.org/tags/5.4.2/tests/phpunit/includes/ /tmp/wordpress-tests-lib/includes/
 
 script:
   - /tmp/phpunit

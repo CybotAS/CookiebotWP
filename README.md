@@ -95,6 +95,6 @@ Way to go!
 # Need to get in touch?
 
 There are several ways you can get in touch with us. <br>
-We are available on the Making Wordress Slack workspace. <br>
+We are available on the Making Wordpress Slack workspace. <br>
 Username: Kenan <br>
 You can also reach us through our helpdesk at www.cookiebot.com/goto/helpdesk/
