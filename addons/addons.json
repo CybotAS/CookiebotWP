@@ -87,6 +87,6 @@
     "class": "cookiebot_addons\\controller\\addons\\simple_share_buttons_adder\\Simple_Share_Buttons_Adder"
   },
   "Hotjar": {
-    "class": "cookiebot_addons\\controller\\addons\\Hotjar\\Hotjar"
+    "class": "cookiebot_addons\\controller\\addons\\hotjar\\Hotjar"
   }
 }
