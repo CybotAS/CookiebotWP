@@ -79,36 +79,36 @@
 			// Caldera forms integration
 			$this->buffer_output->add_tag( 'caldera_forms_ajax_return', 10, array(
 				'fbq' => $this->get_cookie_types()
-			));
+			), false);
 
 			// Gravity forms integration
 			$this->buffer_output->add_tag( 'gform_confirmation', 10, array(
 				'fbq' => $this->get_cookie_types()
-			));
+			), false);
 
 			// Ninja forms integration
 			$this->buffer_output->add_tag( 'ninja_forms_submission_actions', 10, array(
 				'fbq' => $this->get_cookie_types()
-			));
+			), false);
 
 			// WP Ecommerce integration
 			$this->buffer_output->add_tag( 'wpsc_add_to_cart_json_response', 11, array(
 				'fbq' => $this->get_cookie_types()
-			));
+			), false);
 
 			$this->buffer_output->add_tag( 'wpsc_transaction_results_shutdown', 11, array(
 				'fbq' => $this->get_cookie_types()
-			));
+			), false);
 
 			// WP Forms integration
 			$this->buffer_output->add_tag('wp_footer', 20, array(
 				'fbq' => $this->get_cookie_types()
-			));
+			), false);
 
 			// Catching most events created with \FacebookPixelPlugin\Integration\FacebookWordpressIntegrationBase::addPixelFireForHook
 			$this->buffer_output->add_tag('wp_footer', 11, array(
 				'fbq' => $this->get_cookie_types()
-			));
+			), false);
 
 			// Server side pixel events
 			if(!$this->cookie_consent->are_cookie_states_accepted($this->get_cookie_types())) {
