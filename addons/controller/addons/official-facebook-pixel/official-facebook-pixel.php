@@ -72,7 +72,8 @@
 		public function cookiebot_addon_official_facebook_pixel() {
 			// Pageview
 			$this->buffer_output->add_tag( 'wp_head', 10, array(
-				'connect.facebook.net' => $this->get_cookie_types()
+				'connect.facebook.net' => $this->get_cookie_types(),
+				'fbq' => $this->get_cookie_types(),
 			));
 
 			// Caldera forms integration
