@@ -65,6 +65,8 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 		$this->priority = $priority;
 		$this->keywords = $keywords;
 		$this->use_cache = $use_cache;
+
+		$this->transient_name = "cookiebot_output_buffer_{$tag}_{$priority}";
 	}
 
 	/**
