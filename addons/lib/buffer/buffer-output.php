@@ -31,6 +31,10 @@ class Buffer_Output implements Buffer_Output_Interface {
 		 */
 		if ( isset( $this->tags[ $unique_id ] ) ) {
 			$this->tags[ $unique_id ]->merge_keywords( $keywords );
+			
+			if(!$use_cache) {
+				$this->tags[ $unique_id ]->set_use_cache(false);
+			}
 		}
 		else {
 			$this->tags[ $unique_id ] = $tag;
