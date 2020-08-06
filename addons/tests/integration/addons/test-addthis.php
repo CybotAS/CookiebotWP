@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons\tests\integration\addons;
 
-class Test_Addthis extends \WP_UnitTestCase {
+class Test_Addthis extends Addons_Base {
 	
 	public function setUp() {
 	
@@ -13,7 +13,7 @@ class Test_Addthis extends \WP_UnitTestCase {
 	 *
 	 */
 	public function test_addthis() {
-		$content = file_get_contents( 'https://plugins.svn.wordpress.org/addthis/trunk/backend/AddThisPlugin.php' );
+		$content = $this->curl_get_content( 'https://plugins.svn.wordpress.org/addthis/trunk/backend/AddThisPlugin.php' );
 		
 		$this->assertNotFalse( strpos( $content, "'addthis_widget',") );
 		$this->assertNotFalse( strpos( $content, "window.addthis_product ") );

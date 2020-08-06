@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons\tests\integration\addons;
 
-class Test_Hubspot_Tracking_Code extends \WP_UnitTestCase {
+class Test_Hubspot_Tracking_Code extends Addons_Base {
 	
 	public function setUp() {
 	
@@ -14,7 +14,7 @@ class Test_Hubspot_Tracking_Code extends \WP_UnitTestCase {
 	 * @since 2.1.0
 	 */
 	public function test_hubspot_tracking_code() {
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/hubspot-tracking-code/trunk/inc/class-hubspot-tracking-code-analytics.php' );
+		$content = $this->curl_get_content( 'http://plugins.svn.wordpress.org/hubspot-tracking-code/trunk/inc/class-hubspot-tracking-code-analytics.php' );
 		
 		$this->assertNotFalse( strpos( $content, '<script type="text/javascript" id="hs-script-loader"') );
 	}
