@@ -2,7 +2,7 @@
 
 	namespace cookiebot_addons\tests\integration\addons;
 
-	class Test_Simple_Share_Buttons_Adder extends \WP_UnitTestCase {
+	class Test_Simple_Share_Buttons_Adder extends Addons_Base {
 
 		/**
 		 * This will cover the existince of the wp_enqueue_script ssba-sharethis
@@ -12,7 +12,7 @@
 		 * @since 3.6.5
 		 */
 		public function test_script_loader_tag_addtoany() {
-			$content = file_get_contents( 'http://plugins.svn.wordpress.org/simple-share-buttons-adder/trunk/php/class-styles.php' );
+			$content = $this->curl_get_content( 'http://plugins.svn.wordpress.org/simple-share-buttons-adder/trunk/php/class-styles.php' );
 
 			$this->assertNotFalse( strpos( $content, "wp_enqueue_script('ssba-sharethis'" ) );
 		}

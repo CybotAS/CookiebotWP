@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons\tests\integration\addons;
 
-class Test_Custom_Facebook_Feed extends \WP_UnitTestCase {
+class Test_Custom_Facebook_Feed extends Addons_Base {
 	
 	public function setUp() {
 	
@@ -14,7 +14,7 @@ class Test_Custom_Facebook_Feed extends \WP_UnitTestCase {
 	 * @since 2.1.0
 	 */
 	public function test_host_analyticsjs_local() {
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/custom-facebook-feed/trunk/custom-facebook-feed.php' );
+		$content = $this->curl_get_content( 'http://plugins.svn.wordpress.org/custom-facebook-feed/trunk/custom-facebook-feed.php' );
 		
 		$this->assertNotFalse( strpos( $content, 'echo \'var cfflinkhashtags = "\' .') );
 		$this->assertNotFalse( strpos( $content, "wp_register_script( 'cffscripts',") );

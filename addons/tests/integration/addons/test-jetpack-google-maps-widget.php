@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons\tests\integration\addons;
 
-class Test_Jetpack_Google_Maps_Widget extends \WP_UnitTestCase {
+class Test_Jetpack_Google_Maps_Widget extends Addons_Base {
 	
 	public function setUp() {
 	
@@ -14,7 +14,7 @@ class Test_Jetpack_Google_Maps_Widget extends \WP_UnitTestCase {
 	 * @since 2.1.0
 	 */
 	public function test_google_maps_widget() {
-		$content = file_get_contents('http://plugins.svn.wordpress.org/jetpack/trunk/modules/widgets/contact-info.php');
+		$content = $this->curl_get_content('http://plugins.svn.wordpress.org/jetpack/trunk/modules/widgets/contact-info.php');
 		
 		$this->assertNotFalse( strpos( $content, 'do_action( \'jetpack_contact_info_widget_start\' );' ) );
 		$this->assertNotFalse( strpos( $content, 'do_action( \'jetpack_contact_info_widget_end\' );' ) );

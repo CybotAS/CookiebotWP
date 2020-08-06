@@ -48,7 +48,12 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function __construct( Settings_Service_Interface $settings, Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent, Buffer_Output_Interface $buffer_output ) {
+	public function __construct(
+		Settings_Service_Interface $settings,
+		Script_Loader_Tag_Interface $script_loader_tag,
+		Cookie_Consent_Interface $cookie_consent,
+		Buffer_Output_Interface $buffer_output
+	) {
 		$this->settings          = $settings;
 		$this->script_loader_tag = $script_loader_tag;
 		$this->cookie_consent    = $cookie_consent;
@@ -70,7 +75,7 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_host_analyticsjs_local() {
-	
+
 		/* Priority need to be more than 0 so we are able to hook in before output begins */
 		$scriptPriority = $this->cookiebot_addon_host_analyticsjs_local_priority();
 		if ( $scriptPriority <= 0 ) {
@@ -83,9 +88,9 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 		 * ga scripts are loaded in wp_footer priority is defined in option variable
 		 */
 		if ( has_action( 'wp_footer', 'caos_analytics_render_tracking_code' ) ||
-				has_action( 'wp_footer', 'caos_render_tracking_code' ) ||
-				has_action( 'wp_footer', 'add_ga_header_script' ) ||
-				( defined( 'CAOS_OPT_SCRIPT_POSITION' ) && CAOS_OPT_SCRIPT_POSITION == 'footer' ) ) {
+		     has_action( 'wp_footer', 'caos_render_tracking_code' ) ||
+		     has_action( 'wp_footer', 'add_ga_header_script' ) ||
+		     ( defined( 'CAOS_OPT_SCRIPT_POSITION' ) && CAOS_OPT_SCRIPT_POSITION == 'footer' ) ) {
 			/**
 			 * Consent not given - no cache
 			 */
@@ -97,10 +102,10 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 		/**
 		 * ga scripts are loaded in wp_head priority is defined in option variable
 		 */
-		if ( has_action( 'wp_head', 'caos_analytics_render_tracking_code' ) || 
-				has_action( 'wp_head', 'caos_render_tracking_code' ) || 
-				has_action( 'wp_head', 'add_ga_header_script' ) ||
-				( defined( 'CAOS_OPT_SCRIPT_POSITION' ) && CAOS_OPT_SCRIPT_POSITION != 'footer' ) ) {
+		if ( has_action( 'wp_head', 'caos_analytics_render_tracking_code' ) ||
+		     has_action( 'wp_head', 'caos_render_tracking_code' ) ||
+		     has_action( 'wp_head', 'add_ga_header_script' ) ||
+		     ( defined( 'CAOS_OPT_SCRIPT_POSITION' ) && CAOS_OPT_SCRIPT_POSITION != 'footer' ) ) {
 			/**
 			 * Consent not given - no cache
 			 */
@@ -108,7 +113,6 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 				'GoogleAnalyticsObject' => $this->get_cookie_types(),
 			), false );
 		}
-
 	}
 
 	/**
@@ -238,7 +242,8 @@ class CAOS_Host_Analyticsjs_Local implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_placeholder( $src = '' ) {
-		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
+		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(),
+			cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
 	}
 
 	/**

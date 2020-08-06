@@ -2,7 +2,7 @@
 
 	namespace cookiebot_addons\tests\integration\addons;
 
-	class Test_Enhanced_Ecommerce_For_WooCommerce_Store extends \WP_UnitTestCase {
+	class Test_Enhanced_Ecommerce_For_WooCommerce_Store extends Addons_Base {
 
 		/**
 		 * This will cover the existince of the wc_enqueue_js
@@ -12,7 +12,7 @@
 		 * @since 3.6.6
 		 */
 		public function test_script_loader_tag_addtoany() {
-			$content = file_get_contents( 'https://plugins.svn.wordpress.org/enhanced-e-commerce-for-woocommerce-store/trunk/public/class-enhanced-ecommerce-google-analytics-public.php' );
+			$content = $this->curl_get_content( 'https://plugins.svn.wordpress.org/enhanced-e-commerce-for-woocommerce-store/trunk/public/class-enhanced-ecommerce-google-analytics-public.php' );
 
 			$this->assertNotFalse( strpos( $content, "wc_enqueue_js(" ) );
 		}
