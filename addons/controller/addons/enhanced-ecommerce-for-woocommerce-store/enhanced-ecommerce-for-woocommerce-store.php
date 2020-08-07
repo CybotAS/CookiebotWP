@@ -70,16 +70,14 @@
 		 * @since 1.3.0
 		 */
 		public function cookiebot_addon_enhanced_ecommerce_for_woocommerce_store() {
-			cookiebot_addons_remove_class_action('woocommerce_after_checkout_billing_form', 'Enhanced_Ecommerce_Google_Analytics_Public', 'checkout_step_3_tracking', 10);
-			cookiebot_addons_remove_class_action('woocommerce_after_add_to_cart_button', 'Enhanced_Ecommerce_Google_Analytics_Public', 'add_to_cart', 10);
-			cookiebot_addons_remove_class_action('wp_head', 'Enhanced_Ecommerce_Google_Analytics_Public', 'add_dev_id', 10);
-			cookiebot_addons_remove_class_action('wp_footer', 'Enhanced_Ecommerce_Google_Analytics_Public', 'tvc_store_meta_data', 10);
-			cookiebot_addons_remove_class_action('woocommerce_thankyou', 'Enhanced_Ecommerce_Google_Analytics_Public', 'ecommerce_tracking_code', 10);
-			cookiebot_addons_remove_class_action('wp_head', 'Enhanced_Ecommerce_Google_Analytics_Public', 'ee_settings', 10);
-			cookiebot_addons_remove_class_action('wp_footer', 'Enhanced_Ecommerce_Google_Analytics_Public', 't_products_impre_clicks', 10);
-			cookiebot_addons_remove_class_action('woocommerce_after_shop_loop_item', 'Enhanced_Ecommerce_Google_Analytics_Public', 'bind_product_metadata', 10);
-			cookiebot_addons_remove_class_action('woocommerce_after_single_product', 'Enhanced_Ecommerce_Google_Analytics_Public', 'product_detail_view', 10);
-			cookiebot_addons_remove_class_action('woocommerce_after_cart', 'Enhanced_Ecommerce_Google_Analytics_Public', 'remove_cart_tracking', 10);
+			$this->buffer_output->add_tag( 'wp_footer', 25, array(
+				'gtag' => $this->get_cookie_types()
+			), false );
+
+			$this->buffer_output->add_tag( 'wp_head', 10, array(
+				'gtag' => $this->get_cookie_types(),
+				'gaProperty' => $this->get_cookie_types(),
+			), false );
 		}
 
 		/**
