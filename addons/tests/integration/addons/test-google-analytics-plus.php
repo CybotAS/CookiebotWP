@@ -15,11 +15,13 @@ class Test_Google_Analytics_Async extends Addons_Base {
 	 */
 	public function test_hooks() {
 		$file = WP_PLUGIN_DIR . '/google-analytics-async/google-analytics-async.php';
-		
+
 		if( file_exists( $file ) ) {
-			$content = $this->curl_get_content( $file );
+			$content = file_get_contents( $file );
 			
 			$this->assertNotFalse( strpos( $content, 'add_action( \'wp_head\', array( &$this, \'tracking_code_output\' ) );') );
-		}
+		} else {
+		    $this->expectNotToPerformAssertions();
+        }
 	}
 }
