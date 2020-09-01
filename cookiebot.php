@@ -154,6 +154,7 @@ final class Cookiebot_WP {
 			add_action('admin_menu', array($this,'add_menu'),1);
 			add_action('admin_menu', array($this,'add_menu_legislations'),40);
 			add_action('admin_menu', array($this,'add_menu_debug'),50);
+			add_action('admin_menu', array($this,'add_menu_API'),60);
 
 
 			if(is_multisite()) {
@@ -338,6 +339,10 @@ final class Cookiebot_WP {
 	 */
 	function add_menu_debug() {
 		add_submenu_page('cookiebot',__('Debug info','cookiebot'),__('Debug info','cookiebot'), 'manage_options', 'cookiebot_debug',array($this,'debug_page') );
+	}
+
+	function add_menu_API() {
+		add_submenu_page('cookiebot',__('API', 'cookiebot'),__('API','cookiebot'), 'manage_options', 'cookiebot_API', array($this, 'API_page'), 60 );
 	}
 
 	/**
@@ -1223,6 +1228,109 @@ final class Cookiebot_WP {
 				<?php submit_button(); ?>
             </form>
         </div>
+		<?php
+	}
+
+	/* API */
+
+	
+	function API_page() {
+		?>
+			<div class="wrap" style="display: grid; grid-template-columns: 49% 49%; grid-gap: 20px;">
+				<h1><?php _e('API','cookiebot'); ?></h1>
+
+				<div class="actions" style="background-color: white; width: 100%; grid-column: 1 / span 2;">
+					<div class="header_actions" style="height: 40px; display: grid; align-items: center; border-bottom: 1px #f1f1f1 solid;">
+						<h3 style="margin: 0 0 0 10px;">Actions required</h3>
+					</div>
+					<div class="content_actions" style="background-color: white; height: 150px; width: 100%; margin-top: 0; display: grid; grid-template-columns: 1fr 1fr; box-sizing:border-box; padding: 0 10px 0 10px">
+						<div>
+							<p>
+								Uncategorized cookies in need of manual categorization <br>
+								How to classify unclassified cookies
+							</p>
+						</div>
+						<div style="justify-self: end;">
+							<p>0</p>
+						</div>
+
+						<div>
+							<p>
+								Cookies in need of blocking (until acceptance by user) <br>
+								How to block
+							</p>
+						</div>
+						<div style="justify-self: end;">
+							0
+						</div>
+					</div>
+				</div>
+
+				<div class="graph">
+					<div class="graph_header" style="background-color: white; height: 40px; width: 100%; display: grid; align-items: center; border-bottom: 1px #f1f1f1 solid;">
+						<h3 style="margin: 0 0 0 10px;">Opt in rates per category</h3>
+					</div>
+					<div class="graph_content" style="background-color: white; height: 200px; width: 100%; box-sizing: border-box; padding: 10px;">
+						<canvas id="myChart" width="400px" height="110px;"></canvas>
+					</div>
+				</div>
+
+				<div class="information">
+					<div class="information_header" style="background-color: white; height: 40px; width: 100%; display: grid; align-items: center; border-bottom: 1px #f1f1f1 solid;">
+						<h3 style="margin: 0 0 0 10px;">Information</h3>
+					</div>
+					<div class="information_content" style="background-color: white; height: 200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; padding: 10px; box-sizing: border-box;">
+						<p style="margin: 0;">Last scan</p>
+						<p style="margin: 0; justify-self: end;">Dato</p>
+
+						<p style="margin: 0;">Next scheduled scan</p>
+						<p style="margin: 0; justify-self: end;">Dato</p>
+						
+						<p style="margin: 0;">URL count</p>
+						<p style="margin: 0; justify-self: end;">0</p>
+						
+						<p style="margin: 0;">Subscription counnt</p>
+						<p style="margin: 0; justify-self: end;">0</p>
+
+						<p style="margin: 0;">Cookies deployed</p>
+						<p style="margin: 0; justify-self: end;">0</p>
+					</div>
+				</div>
+			</div>
+			<script src="path/to/chartjs/dist/Chart.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+			<script>
+				var ctx = document.getElementById('myChart').getContext('2d');
+				var chart = new Chart(ctx, {
+					// The type of chart we want to create
+					type: 'line',
+
+					// The data for our dataset
+					data: {
+						labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+						datasets: [{
+							label: 'Preferences',
+							/* backgroundColor: 'rgb(255, 99, 132)', */
+							borderColor: 'rgb(255, 0, 0)',
+							fill: false,
+							data: [0, 10, 5, 2, 20, 30, 45]
+						},{
+							label: 'Statistic',
+							borderColor: 'rgb(230, 230, 0)',
+							fill: false,
+							data: [0, 20, 2, 6, 3, 21, 34]
+						},{
+							label: 'Marketing',
+							borderColor: 'rgb(0, 200, 255)',
+							fill: false,
+							data: [0, 15, 12, 16, 7, 11, 54]
+						}]
+					},
+
+					// Configuration options go here
+					options: {}
+				});
+			</script>
 		<?php
 	}
 
