@@ -295,7 +295,6 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Urmează 
 
 		$changed_header = cookiebot_addons_manipulate_script( $buffer, $keywords );
 
-		echo $changed_header;
 		$expected_replacements = array();
 
 		ob_start(); // first match
