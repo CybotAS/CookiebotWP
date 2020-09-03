@@ -18,6 +18,6 @@ class Test_Caos_Host_Analyticsjs_Local extends Addons_Base {
 			'add_filter(\'woocommerce_google_analytics_script_src\'' ) );
 			
 		$this->assertNotFalse( strpos( $content,
-			'\'render_tracking_code\')' ) );
+			'\'render_tracking_code\']' ) );
 	}
 }
