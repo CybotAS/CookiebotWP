@@ -64,7 +64,10 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 		$this->tag      = $tag;
 		$this->priority = $priority;
 		$this->keywords = $keywords;
-		$this->use_cache = $use_cache;
+
+		$this->transient_name = "cookiebot_output_buffer_{$tag}_{$priority}";
+
+		$this->set_use_cache($use_cache);
 	}
 
 	/**
@@ -76,6 +79,15 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 	 */
 	public function merge_keywords( $keywords ) {
 		$this->keywords = array_merge( $this->keywords, $keywords );
+	}
+
+	/**
+	 * Set use cache
+	 *
+	 * @param $use_cache
+	 */
+	public function set_use_cache($use_cache) {
+		$this->use_cache = $use_cache;
 	}
 
 	/**

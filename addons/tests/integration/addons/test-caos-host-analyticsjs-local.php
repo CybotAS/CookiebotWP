@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons\tests\integration\addons;
 
-class Test_Caos_Host_Analyticsjs_Local extends \WP_UnitTestCase {
+class Test_Caos_Host_Analyticsjs_Local extends Addons_Base {
 
 	/**
 	 * This will validate if the hook "caos_analytics_render_tracking_code" still exists
@@ -12,12 +12,12 @@ class Test_Caos_Host_Analyticsjs_Local extends \WP_UnitTestCase {
 	 * @since 2.1.0
 	 */
 	public function test_host_analyticsjs_local() {
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/includes/frontend/class-tracking.php' );
+		$content = $this->curl_get_content( 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/includes/frontend/class-tracking.php' );
 
 		$this->assertNotFalse( strpos( $content,
-			'add_action(\'wp_footer\', array($this, \'render_tracking_code\'), CAOS_OPT_ENQUEUE_ORDER);' ) );
+			'add_filter(\'woocommerce_google_analytics_script_src\'' ) );
 			
 		$this->assertNotFalse( strpos( $content,
-			'switch (CAOS_OPT_SCRIPT_POSITION) {' ) );
+			'\'render_tracking_code\']' ) );
 	}
 }
