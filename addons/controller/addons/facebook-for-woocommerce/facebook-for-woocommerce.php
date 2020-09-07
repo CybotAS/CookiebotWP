@@ -305,7 +305,7 @@ class Facebook_For_Woocommerce implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_svn_url() {
-		return 'https://github.com/facebookincubator/facebook-for-woocommerce/blob/master/facebook-commerce.php';
+		return 'https://raw.githubusercontent.com/facebookincubator/facebook-for-woocommerce/master/facebook-commerce.php';
 	}
 
 	/**
