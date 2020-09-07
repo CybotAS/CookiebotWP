@@ -17,8 +17,12 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	 * @var string
 	 */
 	protected $file;
+    /**
+     * @var mixed|void
+     */
+    private $plugins;
 
-	/**
+    /**
 	 * Get the plugins
 	 *
 	 * @since 1.8.0
@@ -63,10 +67,18 @@ class Test_Get_Option_Name extends \WP_UnitTestCase {
 	public function test_get_option_name_unique() {
 		$options = array();
 
-		$settingsMock        = $this->getMockBuilder( 'cookiebot_addons\lib\Settings_Service_Interface' )->getMock();
-		$scriptLoaderTagMock = $this->getMockBuilder( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface' )->getMock();
-		$cookieConsentMock   = $this->getMockBuilder( 'cookiebot_addons\lib\Cookie_Consent_Interface' )->getMock();
-		$bufferOutputMock    = $this->getMockBuilder( 'cookiebot_addons\lib\buffer\Buffer_Output_Interface' )->getMock();
+		$settingsMock        = $this->getMockBuilder( 'cookiebot_addons\lib\Settings_Service_Interface' )
+            ->disableOriginalConstructor()
+            ->getMock();
+		$scriptLoaderTagMock = $this->getMockBuilder( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface' )
+            ->disableOriginalConstructor()
+            ->getMock();
+		$cookieConsentMock   = $this->getMockBuilder( 'cookiebot_addons\lib\Cookie_Consent_Interface' )
+            ->disableOriginalConstructor()
+            ->getMock();
+		$bufferOutputMock    = $this->getMockBuilder( 'cookiebot_addons\lib\buffer\Buffer_Output_Interface' )
+            ->disableOriginalConstructor()
+            ->getMock();
 
 		foreach ( $this->plugins as $plugin ) {
 			$p = new $plugin->class( $settingsMock, $scriptLoaderTagMock, $cookieConsentMock, $bufferOutputMock );
