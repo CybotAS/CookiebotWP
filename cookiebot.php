@@ -389,6 +389,9 @@ final class Cookiebot_WP {
 		register_setting('cookiebot-iab', 'cookiebot-iab');
 		register_setting('cookiebot-legislations', 'cookiebot-ccpa');
 		register_setting('cookiebot-legislations', 'cookiebot-ccpa-domain-group-id');
+		register_setting('cookiebot-API', 'client_ID');
+		register_setting('cookiebot-API', 'client_secret');
+		register_setting('cookiebot-domain-selection', 'domainId');
 	}
 
 	/**
@@ -1233,11 +1236,153 @@ final class Cookiebot_WP {
 
 	/* API */
 
-	
 	function API_page() {
+
+        $client_ID = get_option('client_ID');
+		$client_secret = get_option('client_secret');
+		
+
+		$client_curl = curl_init();
+
+		curl_setopt_array($client_curl, array(
+		CURLOPT_URL => "https://api.cookiebot.com/auth/v1/connect/token",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_CUSTOMREQUEST => "POST",
+		CURLOPT_POSTFIELDS => "grant_type=client_credentials&client_id=" . $client_ID . "&client_secret=" . $client_secret,
+		CURLOPT_HTTPHEADER => array(
+			"Content-Type: application/x-www-form-urlencoded"
+		),
+		));
+	
+		$client_response = curl_exec($client_curl);
+
+		curl_close($client_curl);
+	
+		$token = json_decode($client_response);
+
+		/* Domain */
+
+		$domain_curl = curl_init();
+
+		curl_setopt_array($domain_curl, array(
+		CURLOPT_URL => "https://api.cookiebot.com/umbraco/v1/domains?format=json",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET",
+		CURLOPT_HTTPHEADER => array(
+			"Authorization: Bearer " . $token->access_token 
+		),
+		));
+
+		$domain_response = curl_exec($domain_curl);
+
+		curl_close($domain_curl);
+
+		$domain = json_decode($domain_response);
+
+
 		?>
+
+        <head>
+            <style>
+                .submit{
+                    justify-self: end;
+                }
+
+				input[type=text]{
+					width: 100%;
+				}
+
+				.log_out{
+					background-color: rgb(255, 50, 50);
+					border-radius: 3px;
+					border: 0;
+					padding: 5px 10px;
+				}
+            </style>
+        </head>
+
+		<h1><?php _e('API','cookiebot'); ?></h1>
+
+		<?php 
+		/* Statistics */
+
+		$data_curl = curl_init();
+
+		curl_setopt_array($data_curl, array(
+		CURLOPT_URL => "https://api.cookiebot.com/umbraco/v1/dashboard/" . get_option('domainId') . "?format=json",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET",
+		CURLOPT_HTTPHEADER => array("Authorization: Bearer " . $token->access_token),
+		));
+
+		$data_response = curl_exec($data_curl);
+
+		curl_close($data_curl);
+
+		$data = json_decode($data_response);
+
+		if(empty($token->access_token)){
+		?>
+
+		<form method="post" action="options.php" style="height: 250px; width: 400px; padding: 20px; box-sizing: border-box; background-color: white; display: grid; align-items: center; margin-top: 20px;">
+			<?php settings_fields( 'cookiebot-API' ); ?>
+			<?php do_settings_sections( 'cookiebot-API' ); ?>
+				<label>Client ID</label>
+				<input type="text" name="client_ID" value="<?php echo get_option('client_ID'); ?>">
+
+				<label style="margin-top: 20px">Client Secret</label>
+				<input type="text" name="client_secret" value="<?php echo get_option('client_secret'); ?>">
+
+			<?php submit_button(); ?>
+		</form>
+
+		<?php
+		}else{
+
+		?>
+
+		<div style="display: grid; grid-template-columns: 76% 22%; grid-gap: 0; margin-bottom: 20px;">
+			<form method="post" action="options.php" style="height: 130px; width: 100%; padding: 20px; box-sizing: border-box; background-color: white; margin-top: 20px">
+				<?php settings_fields( 'cookiebot-domain-selection' ); ?>
+				<?php do_settings_sections( 'cookiebot-domain-selection' ); ?>
+				<select name="domainId">
+					<?php
+					
+					foreach($domain->domainGroups as $domainGroup){
+						foreach($domainGroup->domains as $domains){
+							?>
+								<option value="<?php echo $domains->domainId ?>"<?php selected(get_option('domainId') == $domains->domainId, true, true) ?>><?php echo "(" . $domainGroup->domainGroupName . ") " . $domains->domainName; ?></option>
+							<?php
+						}
+					}
+
+					?>
+				</select>
+				<?php submit_button(); ?>
+			</form>
+
+			<form action="options.php" style="height: 130px; width: 100%; padding: 20px; box-sizing: border-box; background-color: white; margin-top: 20px; display: grid;">
+				<?php settings_fields( 'cookiebot-API' ); ?>
+				<?php do_settings_sections( 'cookiebot-API' ); ?>
+					<input type="hidden" name="client_ID" value="<?php echo get_option('') ?>">
+					<input type="hidden" name="client_secret" value="<?php echo get_option('') ?>">
+					<input type="submit" class="log_out" value="Log ud" style="justify-self: end; height: 30px;">
+			</form>
+		</div>
+
+			
+
 			<div class="wrap" style="display: grid; grid-template-columns: 49% 49%; grid-gap: 20px;">
-				<h1><?php _e('API','cookiebot'); ?></h1>
 
 				<div class="actions" style="background-color: white; width: 100%; grid-column: 1 / span 2;">
 					<div class="header_actions" style="height: 40px; display: grid; align-items: center; border-bottom: 1px #f1f1f1 solid;">
@@ -1247,31 +1392,57 @@ final class Cookiebot_WP {
 						<div>
 							<p>
 								Uncategorized cookies in need of manual categorization <br>
-								How to classify unclassified cookies
+								<a href="https://support.cookiebot.com/hc/en-us/articles/360003735214-Unclassified-cookies-how-do-I-classify-them-manually-" style="text-decoration: none;"><img src="<?php echo plugin_dir_url( __FILE__ ); ?>assets/help.png" style="height: 10px; width: 10px; margin: 0 3px 0 0;">How to classify unclassified cookies</a>
 							</p>
 						</div>
 						<div style="justify-self: end;">
-							<p>0</p>
+							<p>
+								<?php
+									$unCategorized = 0;
+									foreach($data->cookies as $cookies){
+										if($cookies->cookieCategory == "Uncategorized"){
+											$unCategorized++;
+										}
+									}
+									if($unCategorized == 0){
+										$iconUncategorized = "assets/check.png";
+									}else{
+										$iconUncategorized = "assets/warning.png";
+									}
+									echo $unCategorized;
+								?>
+								<a><img src="<?php echo plugin_dir_url( __FILE__ ) . $iconUncategorized;?>" style="height: 10px; width: 10px; margin: 0 3px 0 0;"></a>
+							</p>
 						</div>
 
 						<div>
 							<p>
 								Cookies in need of blocking (until acceptance by user) <br>
-								How to block
+								<a href="https://support.cookiebot.com/hc/en-us/articles/360004104033-What-does-prior-consent-mean-and-how-do-I-implement-it-" style="text-decoration: none;"><img src="<?php echo plugin_dir_url( __FILE__ ); ?>assets/help.png" style="height: 10px; width: 10px; margin: 0 3px 0 0;">How to block</a>
 							</p>
 						</div>
 						<div style="justify-self: end;">
-							0
+							<p><?php 
+								if($data->cookiesWithoutPriorConsent == 0){
+									$iconCookies = "assets/check.png";
+								}else{
+									$iconCookies = "assets/warning.png";
+								}
+							
+							echo $data->cookiesWithoutPriorConsent; ?> <a><img src="<?php echo plugin_dir_url( __FILE__ ) . $iconCookies;?>" style="height: 10px; width: 10px; margin: 0 3px 0 0;"></a></p>
 						</div>
 					</div>
 				</div>
-
+								
 				<div class="graph">
 					<div class="graph_header" style="background-color: white; height: 40px; width: 100%; display: grid; align-items: center; border-bottom: 1px #f1f1f1 solid;">
 						<h3 style="margin: 0 0 0 10px;">Opt in rates per category</h3>
 					</div>
-					<div class="graph_content" style="background-color: white; height: 200px; width: 100%; box-sizing: border-box; padding: 10px;">
-						<canvas id="myChart" width="400px" height="110px;"></canvas>
+					<div class="graph_content" style="background-color: white; max-height: 333px; min-height: 200px; max-height: width: 100%; box-sizing: border-box; padding: 10px; display: grid; justify-items: center;">
+						<canvas id="myChart" style="height: 100%; min-height: 190px; max-width: 650px;"></canvas>
+						<div id="noData" style="display: none;">
+							<p>Der er ikke noget data at hente</p>
+						</div>
 					</div>
 				</div>
 
@@ -1281,58 +1452,95 @@ final class Cookiebot_WP {
 					</div>
 					<div class="information_content" style="background-color: white; height: 200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; padding: 10px; box-sizing: border-box;">
 						<p style="margin: 0;">Last scan</p>
-						<p style="margin: 0; justify-self: end;">Dato</p>
+						<p style="margin: 0; justify-self: end;"><?php echo mb_strimwidth($data->domainInfo->lastScanDate, 0, 10); ?></p>
 
 						<p style="margin: 0;">Next scheduled scan</p>
-						<p style="margin: 0; justify-self: end;">Dato</p>
+						<p style="margin: 0; justify-self: end;"><?php echo mb_strimwidth($data->domainInfo->nextScanDate, 0, 10); ?></p>
 						
 						<p style="margin: 0;">URL count</p>
-						<p style="margin: 0; justify-self: end;">0</p>
+						<p style="margin: 0; justify-self: end;"><?php echo $data->domainInfo->pageCount ?></p>
 						
-						<p style="margin: 0;">Subscription counnt</p>
-						<p style="margin: 0; justify-self: end;">0</p>
+						<p style="margin: 0;">Subscription size</p>
+						<p style="margin: 0; justify-self: end;"><?php echo $data->domainInfo->subscriptionSize ?></p>
 
 						<p style="margin: 0;">Cookies deployed</p>
-						<p style="margin: 0; justify-self: end;">0</p>
+						<p style="margin: 0; justify-self: end;"><?php 
+																	$deployed = 0;
+																	foreach($data->cookies as $cookies){
+																		$deployed++;
+																	}
+																	echo $deployed;
+																?></p>
 					</div>
 				</div>
 			</div>
-			<script src="path/to/chartjs/dist/Chart.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-			<script>
-				var ctx = document.getElementById('myChart').getContext('2d');
-				var chart = new Chart(ctx, {
-					// The type of chart we want to create
-					type: 'line',
+			<?php
 
-					// The data for our dataset
-					data: {
-						labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-						datasets: [{
-							label: 'Preferences',
-							/* backgroundColor: 'rgb(255, 99, 132)', */
-							borderColor: 'rgb(255, 0, 0)',
-							fill: false,
-							data: [0, 10, 5, 2, 20, 30, 45]
-						},{
-							label: 'Statistic',
-							borderColor: 'rgb(230, 230, 0)',
-							fill: false,
-							data: [0, 20, 2, 6, 3, 21, 34]
-						},{
-							label: 'Marketing',
-							borderColor: 'rgb(0, 200, 255)',
-							fill: false,
-							data: [0, 15, 12, 16, 7, 11, 54]
-						}]
-					},
+			function arrayTest($var){
+				return($var == 0);
+			}
 
-					// Configuration options go here
-					options: {}
-				});
-			</script>
+			if(array_filter($data->consentRates,"arrayTest") == 0){
+				?>
+				
+				<script>
+					document.getElementById("noData").style.display = "block";
+				</script>
+				
+				<?php
+			}else{
+
+				?>
+				<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>			
+				<script>
+					var ctx = document.getElementById('myChart').getContext('2d');
+					var chart = new Chart(ctx, {
+						type: 'line',
+						data: {
+							labels: [
+								<?php
+									foreach(array_reverse($data->consentRates, true) as $consentRates){
+										echo "\"" . mb_strimwidth($consentRates->consentDate, 0, 10) . "\"" . ",";
+									}
+								?>],
+							datasets: [{
+								label: 'Preferences',
+								borderColor: 'rgb(255, 0, 0)',
+								fill: false,
+								data: [
+								<?php
+									foreach(array_reverse($data->consentRates, true) as $consentRates){
+										echo $consentRates->optInRatePreferences . ",";
+									}
+								?>]
+							},{
+								label: 'Statistic',
+								borderColor: 'rgb(230, 230, 0)',
+								fill: false,
+								data: [
+								<?php
+									foreach(array_reverse($data->consentRates, true) as $consentRates){
+										echo $consentRates->optInRateStatistics . ",";
+									}
+								?>]
+							},{
+								label: 'Marketing',
+								borderColor: 'rgb(0, 200, 255)',
+								fill: false,
+								data: [
+								<?php
+									foreach(array_reverse($data->consentRates, true) as $consentRates){
+										echo $consentRates->optInRateMarketing . ",";
+									}
+								?>]
+							}]
+						},
+					});
+				</script>
+			
 		<?php
-	}
+			}
+	}}
 
   /**
    * Cookiebot_WP Debug Page
