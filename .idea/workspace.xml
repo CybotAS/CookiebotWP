@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="92154ce2-9134-4935-a375-27f525ae4c18" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cookiebot.php" beforeDir="false" afterPath="$PROJECT_DIR$/cookiebot.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +51,8 @@
       <workItem from="1598865015043" duration="1575000" />
       <workItem from="1598866615758" duration="5798000" />
       <workItem from="1599211350208" duration="14982000" />
+      <workItem from="1600152308719" duration="620000" />
+      <workItem from="1600170190634" duration="618000" />
     </task>
     <servers />
   </component>
@@ -67,6 +68,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="987" y="351" key="#PHP/5120.576.1536.832/0.0.2560.1400/2560.-4.2560.1400@0.0.2560.1400" timestamp="1598865057540" />
+    <state x="798" y="444" key="#WordPress" timestamp="1600152326006">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="798" y="444" key="#WordPress/1920.85.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600152326006" />
     <state x="1060" y="441" key="FileChooserDialogImpl" timestamp="1598866022747">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

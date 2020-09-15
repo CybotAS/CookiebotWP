@@ -1246,7 +1246,8 @@ final class Cookiebot_WP {
         $client_curl = curl_init();
 
         curl_setopt_array($client_curl, array(
-            CURLOPT_URL => "https://api.cookiebot.com/auth/v1/connect/token",
+			CURLOPT_URL => "https://api.cookiebot.com/auth/v1/connect/token",
+			CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => "grant_type=client_credentials&client_id=" . $client_ID . "&client_secret=" . $client_secret,
@@ -1255,7 +1256,7 @@ final class Cookiebot_WP {
             ),
         ));
 
-        $client_response = curl_exec($client_curl);
+		$client_response = curl_exec($client_curl);
 
         curl_close($client_curl);
 
@@ -1267,7 +1268,8 @@ final class Cookiebot_WP {
 
         curl_setopt_array($domain_curl, array(
             CURLOPT_URL => "https://api.cookiebot.com/umbraco/v1/domains?format=json",
-            CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 0,
@@ -1317,7 +1319,8 @@ final class Cookiebot_WP {
         curl_setopt_array($data_curl, array(
             CURLOPT_URL => "https://api.cookiebot.com/umbraco/v1/dashboard/" . get_option('domainId') . "?format=json",
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
+			CURLOPT_ENCODING => "",
+			CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
@@ -1347,7 +1350,6 @@ final class Cookiebot_WP {
 
                 <?php submit_button(); ?>
             </form>
-
             <?php
         } else {
 
@@ -1499,14 +1501,13 @@ final class Cookiebot_WP {
 				<?php
 
 				/* CSV */
-
-				include('simple_html_dom.php');
 				
 				$CSV_curl = curl_init();
 
 				curl_setopt_array($CSV_curl, array(
 				CURLOPT_URL => "https://app-cookiebot-api-umbracodashboard-prod.azurewebsites.net/urls/" . get_option('domainID') . "?format=csv",
 				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_SSL_VERIFYPEER => false,
 				CURLOPT_ENCODING => "",
 				CURLOPT_MAXREDIRS => 10,
 				CURLOPT_TIMEOUT => 0,
@@ -1523,7 +1524,7 @@ final class Cookiebot_WP {
 
 				curl_close($CSV_curl);
 
-				echo '<a href="' . admin_url( 'admin-post.php?action=print.csv' ) . '">';
+				echo '<a href="' . admin_url( 'admin-post.php?action=print.csv' ) . '">download</a>';
 
 				add_action( 'admin_post_print.csv', 'print_csv' );
 
