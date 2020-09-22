@@ -392,6 +392,7 @@ final class Cookiebot_WP {
 		register_setting('cookiebot-API', 'client_ID');
 		register_setting('cookiebot-API', 'client_secret');
 		register_setting('cookiebot-domain-selection', 'domainId');
+		register_setting('cookiebot-token', 'token');
 	}
 
 	/**
@@ -1260,7 +1261,7 @@ final class Cookiebot_WP {
 
         curl_close($client_curl);
 
-        $token = json_decode($client_response);
+		$token = json_decode($client_response);
 
         /* Domain */
 
@@ -1306,6 +1307,14 @@ final class Cookiebot_WP {
                     border: 0;
                     padding: 5px 10px;
                 }
+
+				#submitCSV{
+					background-color: transparent;
+					border: none;
+					background-image: url("assets/download.png");
+					height: 10px;
+					width: 10px;
+				}
             </style>
         </head>
 
@@ -1444,9 +1453,7 @@ final class Cookiebot_WP {
                                     $iconCookies = "assets/warning.png";
                                 }
 
-                                echo $data->cookiesWithoutPriorConsent; ?> <a><img
-                                            src="<?php echo plugin_dir_url(__FILE__) . $iconCookies; ?>"
-                                            style="height: 10px; width: 10px; margin: 0 3px 0 0;"></a></p>
+                                echo $data->cookiesWithoutPriorConsent; ?> <a><img src="<?php echo plugin_dir_url(__FILE__) . $iconCookies; ?>" style="height: 10px; width: 10px; margin: 0 3px 0 0;"></a></p>
                         </div>
                     </div>
                 </div>
@@ -1479,7 +1486,11 @@ final class Cookiebot_WP {
                         <p style="margin: 0; justify-self: end;"><?php echo mb_strimwidth($data->domainInfo->nextScanDate, 0, 10); ?></p>
 
                         <p style="margin: 0;">URL count</p>
-                        <p style="margin: 0; justify-self: end;"><?php echo $data->domainInfo->pageCount ?></p>
+                        <a style="margin: 0; justify-self: end; color: black;">
+						<form method="post" style="float: left; margin-right: 2px;">
+							<input type="image" src="<?php echo plugin_dir_url(__FILE__) . 'assets/download.png'; ?>" name="submitCSV" id="submitCSV" value="">
+						</form>
+						<?php echo $data->domainInfo->pageCount ?></a>
 
                         <p style="margin: 0;">Subscription size</p>
                         <p style="margin: 0; justify-self: end;"><?php echo $data->domainInfo->subscriptionSize ?></p>
@@ -1493,59 +1504,9 @@ final class Cookiebot_WP {
                             echo $deployed;
                             ?></p>
                     </div>
-					<form method="post">
-						<input type="submit" name="submitCSV" id="submitCSV">
-					</form>
                 </div>
-
-				<?php
-
-				/* CSV */
-				
-				$CSV_curl = curl_init();
-
-				curl_setopt_array($CSV_curl, array(
-				CURLOPT_URL => "https://app-cookiebot-api-umbracodashboard-prod.azurewebsites.net/urls/" . get_option('domainID') . "?format=csv",
-				CURLOPT_RETURNTRANSFER => true,
-				CURLOPT_SSL_VERIFYPEER => false,
-				CURLOPT_ENCODING => "",
-				CURLOPT_MAXREDIRS => 10,
-				CURLOPT_TIMEOUT => 0,
-				CURLOPT_FOLLOWLOCATION => true,
-				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-				CURLOPT_CUSTOMREQUEST => "GET",
-				CURLOPT_HTTPHEADER => array(
-					"Authorization: Bearer $token->access_token",
-					"Cookie: ss-pid=0yPqI5orpugQMK61d2Bs; ss-id=UKHj1091V8EZmXIFvRRJ"
-				),
-				));
-
-				$CSV = curl_exec($CSV_curl);
-
-				curl_close($CSV_curl);
-
-				echo '<a href="' . admin_url( 'admin-post.php?action=print.csv' ) . '">download</a>';
-
-				add_action( 'admin_post_print.csv', 'print_csv' );
-
-				function print_csv()
-				{
-					if ( ! current_user_can( 'manage_options' ) )
-						return;
-
-					header('Content-Type: application/csv');
-					header('Content-Disposition: attachment; filename=example.csv');
-					header('Pragma: no-cache');
-
-					// output the CSV data
-					echo $CSV;
-				}
-
-				?>
             </div>
             <?php
-			echo get_option('domainID');
-			echo $token->access_token;
 
 			/* Graph */
 
@@ -1624,7 +1585,7 @@ final class Cookiebot_WP {
 
                 <?php
             }
-        }
+		}
     }
 
   /**
@@ -2239,4 +2200,9 @@ if(!function_exists('cookiebot')) {
 	}
 }
 
-cookiebot();
+if(isset($_POST['submitCSV_x'])){
+	include('csv_download.php');
+}else{
+	cookiebot();
+}
+
