@@ -1301,6 +1301,15 @@ final class Cookiebot_WP {
                     width: 100%;
                 }
 
+				.domain_select{
+					border: none;
+					border-radius: 5px;
+					background-color: rgb(0, 124, 186);
+					color: white;
+					width: 60px;
+					margin-left: 10px;
+				}
+
                 .log_out {
                     background-color: rgb(255, 50, 50);
                     border-radius: 3px;
@@ -1364,12 +1373,11 @@ final class Cookiebot_WP {
 
             ?>
 
-            <div style="display: grid; grid-template-columns: 76% 22%; grid-gap: 0; margin-bottom: 20px;">
-                <form method="post" action="options.php"
-                      style="height: 130px; width: 100%; padding: 20px; box-sizing: border-box; background-color: white; margin-top: 20px">
+            <div class="choose_domain" style="display: grid; grid-template-columns: 88% 10%; grid-gap: 0; margin-bottom: 20px;">
+                <form method="post" action="options.php" style="height: 50px; width: 100%; padding: 10px; box-sizing: border-box; background-color: white; margin-top: 20px; display: grid; grid-template-columns: 90% 10%;">
                     <?php settings_fields('cookiebot-domain-selection'); ?>
                     <?php do_settings_sections('cookiebot-domain-selection'); ?>
-                    <select name="domainId">
+                    <select name="domainId" style="width: 100%; max-width: none; height: 30px;">
                         <?php
 
                         foreach ($domain->domainGroups as $domainGroup) {
@@ -1382,16 +1390,16 @@ final class Cookiebot_WP {
 
                         ?>
                     </select>
-                    <?php submit_button(); ?>
+					<input type="submit" name="domain_select" class="domain_select" value="Select">
                 </form>
 
                 <form action="options.php"
-                      style="height: 130px; width: 100%; padding: 20px; box-sizing: border-box; background-color: white; margin-top: 20px; display: grid;">
+                      style="height: 50px; width: 100%; padding: 10px; box-sizing: border-box; background-color: white; margin-top: 20px; display: grid;">
                     <?php settings_fields('cookiebot-API'); ?>
                     <?php do_settings_sections('cookiebot-API'); ?>
                     <input type="hidden" name="client_ID" value="<?php echo get_option('') ?>">
                     <input type="hidden" name="client_secret" value="<?php echo get_option('') ?>">
-                    <input type="submit" class="log_out" value="Log ud" style="justify-self: end; height: 30px;">
+                    <input type="submit" class="log_out" value="Log out" style="justify-self: end; height: 30px;">
                 </form>
             </div>
 
