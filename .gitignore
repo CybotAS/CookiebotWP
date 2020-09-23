@@ -1,3 +1,5 @@
 plugin-sources
 .DS_Store
 tmp
+.idea/
+.vscode/
