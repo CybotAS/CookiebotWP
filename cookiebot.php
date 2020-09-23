@@ -154,7 +154,7 @@ final class Cookiebot_WP {
 			add_action('admin_menu', array($this,'add_menu'),1);
 			add_action('admin_menu', array($this,'add_menu_legislations'),40);
 			add_action('admin_menu', array($this,'add_menu_debug'),50);
-			add_action('admin_menu', array($this,'add_menu_API'),60);
+			add_action('admin_menu', array($this,'add_menu_dashboard'),60);
 
 
 			if(is_multisite()) {
@@ -341,8 +341,8 @@ final class Cookiebot_WP {
 		add_submenu_page('cookiebot',__('Debug info','cookiebot'),__('Debug info','cookiebot'), 'manage_options', 'cookiebot_debug',array($this,'debug_page') );
 	}
 
-	function add_menu_API() {
-		add_submenu_page('cookiebot',__('API', 'cookiebot'),__('API','cookiebot'), 'manage_options', 'cookiebot_API', array($this, 'API_page'), 60 );
+	function add_menu_dashboard() {
+		add_submenu_page('cookiebot',__('Dashboard', 'cookiebot'),__('Dashboard','cookiebot'), 'manage_options', 'cookiebot_dashboard', array($this, 'dashboard_page'), 60 );
 	}
 
 	/**
@@ -389,8 +389,8 @@ final class Cookiebot_WP {
 		register_setting('cookiebot-iab', 'cookiebot-iab');
 		register_setting('cookiebot-legislations', 'cookiebot-ccpa');
 		register_setting('cookiebot-legislations', 'cookiebot-ccpa-domain-group-id');
-		register_setting('cookiebot-API', 'client_ID');
-		register_setting('cookiebot-API', 'client_secret');
+		register_setting('cookiebot-dashboard', 'client_ID');
+		register_setting('cookiebot-dashboard', 'client_secret');
 		register_setting('cookiebot-domain-selection', 'domainId');
 		register_setting('cookiebot-token', 'token');
 	}
@@ -1235,9 +1235,9 @@ final class Cookiebot_WP {
 		<?php
 	}
 
-	/* API */
+	/* dashboard */
 
-    function API_page()
+    function dashboard_page()
     {
 
         $client_ID = get_option('client_ID');
@@ -1327,7 +1327,7 @@ final class Cookiebot_WP {
             </style>
         </head>
 
-        <h1><?php _e('API', 'cookiebot'); ?></h1>
+        <h1><?php _e('Dashboard', 'cookiebot'); ?></h1>
 
         <?php
         /* Statistics */
@@ -1358,8 +1358,8 @@ final class Cookiebot_WP {
 
             <form method="post" action="options.php"
                   style="height: 250px; width: 400px; padding: 20px; box-sizing: border-box; background-color: white; display: grid; align-items: center; margin-top: 20px;">
-                <?php settings_fields('cookiebot-API'); ?>
-                <?php do_settings_sections('cookiebot-API'); ?>
+                <?php settings_fields('cookiebot-dashboard'); ?>
+                <?php do_settings_sections('cookiebot-dashboard'); ?>
                 <label>Client ID</label>
                 <input type="text" name="client_ID" value="<?php echo get_option('client_ID'); ?>">
 
@@ -1395,8 +1395,8 @@ final class Cookiebot_WP {
 
                 <form action="options.php"
                       style="height: 50px; width: 100%; padding: 10px; box-sizing: border-box; background-color: white; margin-top: 20px; display: grid;">
-                    <?php settings_fields('cookiebot-API'); ?>
-                    <?php do_settings_sections('cookiebot-API'); ?>
+                    <?php settings_fields('cookiebot-dashboard'); ?>
+                    <?php do_settings_sections('cookiebot-dashboard'); ?>
                     <input type="hidden" name="client_ID" value="<?php echo get_option('') ?>">
                     <input type="hidden" name="client_secret" value="<?php echo get_option('') ?>">
                     <input type="submit" class="log_out" value="Log out" style="justify-self: end; height: 30px;">
