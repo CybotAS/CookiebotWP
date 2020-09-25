@@ -10,6 +10,8 @@ Text Domain: cookiebot
 Domain Path: /langs
 */
 
+session_start();
+
 if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
 if(!class_exists('Cookiebot_WP')):
@@ -1237,8 +1239,10 @@ final class Cookiebot_WP {
 
 	/* dashboard */
 
-    function dashboard_page()
-    {
+    function dashboard_page(){
+
+
+		
 
         $client_ID = get_option('client_ID');
         $client_secret = get_option('client_secret');
@@ -1263,30 +1267,16 @@ final class Cookiebot_WP {
 
 		$token = json_decode($client_response);
 
-        /* Domain */
+		$_SESSION['token'] = $token->access_token;
 
-        $domain_curl = curl_init();
+		/* Domain */
+		
+		
 
-        curl_setopt_array($domain_curl, array(
-            CURLOPT_URL => "https://api.cookiebot.com/umbraco/v1/domains?format=json",
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer " . $token->access_token
-            ),
-        ));
+		$domain = curl("https://api.cookiebot.com/umbraco/v1/domains?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
 
-        $domain_response = curl_exec($domain_curl);
+		$data = curl("https://api.cookiebot.com/umbraco/v1/dashboard/" . get_option('domainId') . "?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
 
-        curl_close($domain_curl);
-
-        $domain = json_decode($domain_response);
 
 
         ?>
@@ -1310,7 +1300,17 @@ final class Cookiebot_WP {
 					margin-left: 10px;
 				}
 
-                .log_out {
+				.log_in{
+					border: none;
+					border-radius: 5px;
+					background-color: rgb(0, 124, 186);
+					color: white;
+					font-size: 16px;
+					width: 60px;
+					padding: 5px 10px;
+				}
+
+                .log_out{
                     background-color: rgb(255, 50, 50);
                     border-radius: 3px;
                     border: 0;
@@ -1332,49 +1332,27 @@ final class Cookiebot_WP {
         <?php
         /* Statistics */
 
-        $data_curl = curl_init();
-
-        curl_setopt_array($data_curl, array(
-            CURLOPT_URL => "https://api.cookiebot.com/umbraco/v1/dashboard/" . get_option('domainId') . "?format=json",
-            CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => "",
-			CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array("Authorization: Bearer " . $token->access_token),
-        ));
-
-        $data_response = curl_exec($data_curl);
-
-        curl_close($data_curl);
-
-        $data = json_decode($data_response);
-
         if (empty($token->access_token)) {
             ?>
 
-            <form method="post" action="options.php"
-                  style="height: 250px; width: 400px; padding: 20px; box-sizing: border-box; background-color: white; display: grid; align-items: center; margin-top: 20px;">
+            <form method="post" action="options.php" style="width: 400px; display: grid; align-items: center; grid-template-columns: 1fr 2fr; margin-top: 20px;">
                 <?php settings_fields('cookiebot-dashboard'); ?>
                 <?php do_settings_sections('cookiebot-dashboard'); ?>
-                <label>Client ID</label>
+                <p>Client ID</p>
                 <input type="text" name="client_ID" value="<?php echo get_option('client_ID'); ?>">
 
-                <label style="margin-top: 20px">Client Secret</label>
+                <p>Client Secret</p>
                 <input type="text" name="client_secret" value="<?php echo get_option('client_secret'); ?>">
 
-                <?php submit_button(); ?>
+                <input type="submit" name="log_in" class="log_in" value="Log in">
             </form>
             <?php
         } else {
 
             ?>
 
-            <div class="choose_domain" style="display: grid; grid-template-columns: 88% 10%; grid-gap: 0; margin-bottom: 20px;">
-                <form method="post" action="options.php" style="height: 50px; width: 100%; padding: 10px; box-sizing: border-box; background-color: white; margin-top: 20px; display: grid; grid-template-columns: 90% 10%;">
+            <div class="choose_domain" style="display: grid; grid-template-columns: 50% 50%; grid-gap: 0; margin-bottom: 20px;">
+                <form method="post" action="options.php" style="height: 50px; width: 100%; padding: 10px 10px 10px 0; box-sizing: border-box; margin-top: 20px; display: grid; grid-template-columns: 90% 10%;">
                     <?php settings_fields('cookiebot-domain-selection'); ?>
                     <?php do_settings_sections('cookiebot-domain-selection'); ?>
                     <select name="domainId" style="width: 100%; max-width: none; height: 30px;">
@@ -1394,7 +1372,7 @@ final class Cookiebot_WP {
                 </form>
 
                 <form action="options.php"
-                      style="height: 50px; width: 100%; padding: 10px; box-sizing: border-box; background-color: white; margin-top: 20px; display: grid;">
+                      style="height: 50px; width: 100%; padding: 10px; box-sizing: border-box; margin-top: 20px; display: grid;">
                     <?php settings_fields('cookiebot-dashboard'); ?>
                     <?php do_settings_sections('cookiebot-dashboard'); ?>
                     <input type="hidden" name="client_ID" value="<?php echo get_option('') ?>">
@@ -1404,15 +1382,14 @@ final class Cookiebot_WP {
             </div>
 
 
-            <div class="wrap" style="display: grid; grid-template-columns: 49% 49%; grid-gap: 20px;">
+            <div class="wrap">
 
-                <div class="actions" style="background-color: white; width: 100%; grid-column: 1 / span 2;">
-                    <div class="header_actions"
-                         style="height: 40px; display: grid; align-items: center; border-bottom: 1px #f1f1f1 solid;">
+                <div class="actions" style="width: 50%;">
+                    <div class="header_actions" style="height: 40px; display: grid; align-items: center; border-bottom: 1px #000 solid;">
                         <h3 style="margin: 0 0 0 10px;">Actions required</h3>
                     </div>
                     <div class="content_actions"
-                         style="background-color: white; height: 150px; width: 100%; margin-top: 0; display: grid; grid-template-columns: 1fr 1fr; box-sizing:border-box; padding: 0 10px 0 10px">
+                         style="height: 150px; width: 100%; margin-top: 0; display: grid; grid-template-columns: 3fr 1fr; box-sizing:border-box; padding: 0 10px 0 10px">
                         <div>
                             <p>
                                 Uncategorized cookies in need of manual categorization <br>
@@ -1466,13 +1443,13 @@ final class Cookiebot_WP {
                     </div>
                 </div>
 
-                <div class="graph">
+                <div class="graph" style="margin-top: 30px;">
                     <div class="graph_header"
-                         style="background-color: white; height: 40px; width: 100%; display: grid; align-items: center; border-bottom: 1px #f1f1f1 solid;">
+                         style="height: 40px; width: 50%; display: grid; align-items: center; border-bottom: 1px #000 solid;">
                         <h3 style="margin: 0 0 0 10px;">Opt in rates per category</h3>
                     </div>
                     <div class="graph_content" id="graph_content"
-                         style="background-color: white; max-height: 333px; min-height: 200px; width: 100%; box-sizing: border-box; padding: 10px; display: grid; justify-items: center;">
+                         style="background-color: white; min-height: 200px; width: 50%; box-sizing: border-box; padding: 10px; display: grid; justify-items: center;">
                         <canvas id="myChart" style="height: 100%; min-height: 190px; max-width: 650px;"></canvas>
                         <div id="noData" style="display: none; padding: 0 10px; box-sizing: border-box; background-color: lightgrey; border-radius: 5px; align-self: center;">
                             <p>There is no data</p>
@@ -1480,13 +1457,13 @@ final class Cookiebot_WP {
                     </div>
                 </div>
 
-                <div class="information">
+                <div class="information" style="margin-top: 30px">
                     <div class="information_header"
-                         style="background-color: white; height: 40px; width: 100%; display: grid; align-items: center; border-bottom: 1px #f1f1f1 solid;">
+                         style="height: 40px; width: 50%; display: grid; align-items: center; border-bottom: 1px #000 solid;">
                         <h3 style="margin: 0 0 0 10px;">Information</h3>
                     </div>
                     <div class="information_content"
-                         style="background-color: white; height: 200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; padding: 10px; box-sizing: border-box;">
+                         style="height: 200px; width: 50%; display: grid; grid-template-columns: 1fr 1fr; padding: 10px; box-sizing: border-box;">
                         <p style="margin: 0;">Last scan</p>
                         <p style="margin: 0; justify-self: end;"><?php echo mb_strimwidth($data->domainInfo->lastScanDate, 0, 10); ?></p>
 
@@ -1494,7 +1471,7 @@ final class Cookiebot_WP {
                         <p style="margin: 0; justify-self: end;"><?php echo mb_strimwidth($data->domainInfo->nextScanDate, 0, 10); ?></p>
 
                         <p style="margin: 0;">URL count</p>
-                        <a style="margin: 0; justify-self: end; color: black;">
+                        <a style="margin: 0; justify-self: end; color: #444;">
 						<form method="post" style="float: left; margin-right: 2px;">
 							<input type="image" src="<?php echo plugin_dir_url(__FILE__) . 'assets/download.png'; ?>" name="submitCSV" id="submitCSV" value="">
 						</form>
@@ -2206,6 +2183,29 @@ if(!function_exists('cookiebot')) {
 	function cookiebot() {
 		return Cookiebot_WP::instance();
 	}
+}
+
+function curl($url, $method, $header){
+	$curl = curl_init();
+
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => $url,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_SSL_VERIFYPEER => false,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => $method,
+		CURLOPT_HTTPHEADER => array($header),
+	));
+
+	$response = curl_exec($curl);
+
+	curl_close($curl);
+
+	return json_decode($response);
 }
 
 if(isset($_POST['submitCSV_x'])){

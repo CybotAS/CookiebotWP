@@ -1,29 +1,6 @@
 <?php
 
-$client_curl = curl_init();
-
-curl_setopt_array($client_curl, array(
-    CURLOPT_URL => "https://api.cookiebot.com/auth/v1/connect/token",
-    CURLOPT_SSL_VERIFYPEER => false,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "grant_type=client_credentials&client_id=" . get_option('client_ID') . "&client_secret=" . get_option('client_Secret'),
-    CURLOPT_HTTPHEADER => array(
-        "Content-Type: application/x-www-form-urlencoded"
-    ),
-));
-
-$client_response = curl_exec($client_curl);
-
-curl_close($client_curl);
-
-$token = json_decode($client_response);
-
-
-
-
-
-$CSV_curl = curl_init();
+/* $CSV_curl = curl_init();
 
 curl_setopt_array($CSV_curl, array(
 CURLOPT_URL => "https://app-cookiebot-api-umbracodashboard-prod.azurewebsites.net/urls/" . get_option('domainID') . "?format=json",
@@ -36,7 +13,7 @@ CURLOPT_FOLLOWLOCATION => true,
 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 CURLOPT_CUSTOMREQUEST => "GET",
 CURLOPT_HTTPHEADER => array(
-    "Authorization: Bearer " . $token->access_token
+    "Authorization: Bearer " . $_SESSION['token']
 ),
 ));
 
@@ -44,7 +21,9 @@ $CSV_response = curl_exec($CSV_curl);
 
 curl_close($CSV_curl);
 
-$CSV = json_decode($CSV_response);
+$CSV = json_decode($CSV_response); */
+
+$CSV = curl("https://app-cookiebot-api-umbracodashboard-prod.azurewebsites.net/urls/" . get_option('domainID') . "?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
 
 $fileName = 'somefile.csv';
 
