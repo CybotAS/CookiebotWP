@@ -1161,7 +1161,31 @@ final class Cookiebot_WP {
 	}
 
 	function GTM_page(){
+		?>
+		<div class="wrap">
+			<h1><?php _e('GTM','cookiebot'); ?></h1>
 
+			<form method="post" action="options.php" style="display: grid; grid-template-columns: 35% 65%; width: 600px; align-items: center;">
+				<p>Google Tag Manager</p>
+				<div class="GTM_check">
+					<input type="checkbox" name="GTM" id="GTM">
+					<p style="margin: 0; color: grey; font-style: italic;">Enable Google Tag Manager. <a href="">Learn more about GTM and cookiebot</a></p>
+				</div>
+
+				<p>GTM ID</p>
+				<input type="text" name="GTM_ID" id="GTM_ID" style="height: 30px;">
+
+				<p>DataLayer name</p>
+				<input type="text" name="data_layer" id="data_layer" style="height: 30px;">
+
+				<p>Google Consent Mode</p>
+				<div class="GTM_check">
+					<input type="checkbox" name?"GCM" id="GCM">
+					<p style="margin: 0; color: grey; font-style: italic;">Enable Google Consent Mode</p>
+				</div>
+			</form>
+		</div>
+		<?php
 	}
 
 	/**
