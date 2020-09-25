@@ -154,6 +154,7 @@ final class Cookiebot_WP {
 			add_action('admin_menu', array($this,'add_menu'),1);
 			add_action('admin_menu', array($this,'add_menu_legislations'),40);
 			add_action('admin_menu', array($this,'add_menu_debug'),50);
+			add_action('admin_menu', array($this,'add_menu_GTM'), 70);
 
 
 			if(is_multisite()) {
@@ -338,6 +339,10 @@ final class Cookiebot_WP {
 	 */
 	function add_menu_debug() {
 		add_submenu_page('cookiebot',__('Debug info','cookiebot'),__('Debug info','cookiebot'), 'manage_options', 'cookiebot_debug',array($this,'debug_page') );
+	}
+
+	function add_menu_GTM() {
+		add_submenu_page('cookiebot',__('GTM','cookiebot'),__('GTM','cookiebot'), 'manage_options', 'cookiebot_GTM',array($this,'GTM_page') );
 	}
 
 	/**
@@ -1320,6 +1325,10 @@ final class Cookiebot_WP {
 			</script>
 		</div>
 		<?php
+	}
+
+	function GTM_page(){
+
 	}
 
 	/**
