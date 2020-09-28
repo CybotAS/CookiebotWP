@@ -393,7 +393,7 @@ final class Cookiebot_WP {
 		register_setting('cookiebot-legislations', 'cookiebot-ccpa-domain-group-id');
 		register_setting('cookiebot-dashboard', 'client_ID');
 		register_setting('cookiebot-dashboard', 'client_secret');
-		register_setting('cookiebot-domain-selection', 'domainId');
+		register_setting('cookiebot-domain-selection', 'domain_id');
 		register_setting('cookiebot-token', 'token');
 	}
 
@@ -1275,7 +1275,7 @@ final class Cookiebot_WP {
 
 		$domain = curl("https://api.cookiebot.com/umbraco/v1/domains?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
 
-		$data = curl("https://api.cookiebot.com/umbraco/v1/dashboard/" . get_option('domainId') . "?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
+		$data = curl("https://api.cookiebot.com/umbraco/v1/dashboard/" . get_option('domain_id') . "?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
 
 
 
@@ -1317,7 +1317,7 @@ final class Cookiebot_WP {
                     padding: 5px 10px;
                 }
 
-				#submitCSV{
+				#submit_CSV{
 					background-color: transparent;
 					border: none;
 					background-image: url("assets/download.png");
@@ -1355,13 +1355,13 @@ final class Cookiebot_WP {
                 <form method="post" action="options.php" style="height: 50px; width: 100%; padding: 10px 10px 10px 0; box-sizing: border-box; margin-top: 20px; display: grid; grid-template-columns: 90% 10%;">
                     <?php settings_fields('cookiebot-domain-selection'); ?>
                     <?php do_settings_sections('cookiebot-domain-selection'); ?>
-                    <select name="domainId" style="width: 100%; max-width: none; height: 30px;">
+                    <select name="domain_id" style="width: 100%; max-width: none; height: 30px;">
                         <?php
 
                         foreach ($domain->domainGroups as $domainGroup) {
                             foreach ($domainGroup->domains as $domains) {
                                 ?>
-                                <option value="<?php echo $domains->domainId ?>"<?php selected(get_option('domainId') == $domains->domainId, true, true) ?>><?php echo "(" . $domainGroup->domainGroupName . ") " . $domains->domainName; ?></option>
+                                <option value="<?php echo $domains->domainId ?>"<?php selected(get_option('domain_id') == $domains->domainId, true, true) ?>><?php echo "(" . $domainGroup->domainGroupName . ") " . $domains->domainName; ?></option>
                                 <?php
                             }
                         }
@@ -1450,8 +1450,8 @@ final class Cookiebot_WP {
                     </div>
                     <div class="graph_content" id="graph_content"
                          style="background-color: white; min-height: 200px; width: 50%; box-sizing: border-box; padding: 10px; display: grid; justify-items: center;">
-                        <canvas id="myChart" style="height: 100%; min-height: 190px; max-width: 650px;"></canvas>
-                        <div id="noData" style="display: none; padding: 0 10px; box-sizing: border-box; background-color: lightgrey; border-radius: 5px; align-self: center;">
+                        <canvas id="my_chart" style="height: 100%; min-height: 190px; max-width: 650px;"></canvas>
+                        <div id="no_data" style="display: none; padding: 0 10px; box-sizing: border-box; background-color: lightgrey; border-radius: 5px; align-self: center;">
                             <p>There is no data</p>
                         </div>
                     </div>
@@ -1473,7 +1473,7 @@ final class Cookiebot_WP {
                         <p style="margin: 0;">URL count</p>
                         <a style="margin: 0; justify-self: end; color: #444;">
 						<form method="post" style="float: left; margin-right: 2px;">
-							<input type="image" src="<?php echo plugin_dir_url(__FILE__) . 'assets/download.png'; ?>" name="submitCSV" id="submitCSV" value="">
+							<input type="image" src="<?php echo plugin_dir_url(__FILE__) . 'assets/download.png'; ?>" name="submitCSV" id="submit_CSV" value="">
 						</form>
 						<?php echo $data->domainInfo->pageCount ?></a>
 
@@ -1495,25 +1495,25 @@ final class Cookiebot_WP {
 
 			/* Graph */
 
-			$consentRatesNumber = 0;
-			foreach($data->consentRates as $consentRates){
-				if($consentRates->optInRateMarketing > 0){
-					$consentRatesNumber++;
+			$consent_rates_number = 0;
+			foreach($data->consentRates as $consent_rates){
+				if($consent_rates->optInRateMarketing > 0){
+					$consent_rates_number++;
 				}
-				if($consentRates->optInRateStatistics > 0){
-					$consentRatesNumber++;
+				if($consent_rates->optInRateStatistics > 0){
+					$consent_rates_number++;
 				}
-				if($consentRates->optInRatePreferences > 0){
-					$consentRatesNumber++;
+				if($consent_rates->optInRatePreferences > 0){
+					$consent_rates_number++;
 				}
 			}
 				
-			if($consentRatesNumber == 0){
+			if($consent_rates_number == 0){
                 ?>
 
                 <script>
-                    document.getElementById("noData").style.display = "block";
-                    document.getElementById("myChart").style.display = "none";
+                    document.getElementById("no_data").style.display = "block";
+                    document.getElementById("my_chart").style.display = "none";
                     document.getElementById("graph_content").style.height = "200px";
                 </script>
 
@@ -1523,14 +1523,14 @@ final class Cookiebot_WP {
                 ?>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
                 <script>
-                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var ctx = document.getElementById('my_chart').getContext('2d');
                     var chart = new Chart(ctx, {
                         type: 'line',
                         data: {
                             labels: [
                                 <?php
-                                foreach (array_reverse($data->consentRates, true) as $consentRates) {
-                                    echo "\"" . mb_strimwidth($consentRates->consentDate, 0, 10) . "\"" . ",";
+                                foreach (array_reverse($data->consentRates, true) as $consent_rates) {
+                                    echo "\"" . mb_strimwidth($consent_rates->consentDate, 0, 10) . "\"" . ",";
                                 }
                                 ?>],
                             datasets: [{
@@ -1539,8 +1539,8 @@ final class Cookiebot_WP {
                                 fill: false,
                                 data: [
                                     <?php
-                                    foreach (array_reverse($data->consentRates, true) as $consentRates) {
-                                        echo $consentRates->optInRatePreferences . ",";
+                                    foreach (array_reverse($data->consentRates, true) as $consent_rates) {
+                                        echo $consent_rates->optInRatePreferences . ",";
 									}
                                     ?>]
                             }, {
@@ -1549,8 +1549,8 @@ final class Cookiebot_WP {
                                 fill: false,
                                 data: [
                                     <?php
-                                    foreach (array_reverse($data->consentRates, true) as $consentRates) {
-                                        echo $consentRates->optInRateStatistics . ",";
+                                    foreach (array_reverse($data->consentRates, true) as $consent_rates) {
+                                        echo $consent_rates->optInRateStatistics . ",";
                                     }
                                     ?>]
                             }, {
@@ -1559,8 +1559,8 @@ final class Cookiebot_WP {
                                 fill: false,
                                 data: [
                                     <?php
-                                    foreach (array_reverse($data->consentRates, true) as $consentRates) {
-                                        echo $consentRates->optInRateMarketing . ",";
+                                    foreach (array_reverse($data->consentRates, true) as $consent_rates) {
+                                        echo $consent_rates->optInRateMarketing . ",";
                                     }
                                     ?>]
                             }]
@@ -2209,8 +2209,42 @@ function curl($url, $method, $header){
 }
 
 if(isset($_POST['submitCSV_x'])){
-	include('csv_download.php');
-}else{
-	cookiebot();
+	$CSV = curl("https://app-cookiebot-api-umbracodashboard-prod.azurewebsites.net/urls/" . get_option('domainID') . "?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
+
+	$file_name = 'Domains_' . get_option('domain_id') . '.csv';
+
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header('Content-Description: File Transfer');
+	header("Content-type: text/csv");
+	header("Content-Disposition: attachment; filename={$file_name}");
+	header("Expires: 0");
+	header("Pragma: public");
+
+	$fh = @fopen( 'php://output', 'w' );
+
+	$header_displayed = false;
+	
+	foreach ( $CSV->crawlUrls as $url ) {
+		$url_column = array(
+			$url->url, $url->firstParentUrl
+		);
+
+		if ( !$header_displayed ) {
+			$header_column = array(
+				"url", "firstParentUrl"
+			);
+			fputcsv($fh, ($header_column));
+			$header_displayed = true;
+
+		}
+
+		fputcsv($fh, $url_column);
+	}
+
+	fclose($fh);
+
+	exit;
 }
+	
+cookiebot();
 
