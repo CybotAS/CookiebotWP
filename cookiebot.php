@@ -1239,20 +1239,17 @@ final class Cookiebot_WP {
 
 	/* dashboard */
 
-    function dashboard_page(){
-
-
-		
+    function dashboard_page()
+    {
 
         $client_ID = get_option('client_ID');
         $client_secret = get_option('client_secret');
 
-
         $client_curl = curl_init();
 
         curl_setopt_array($client_curl, array(
-			CURLOPT_URL => "https://api.cookiebot.com/auth/v1/connect/token",
-			CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_URL => "https://api.cookiebot.com/auth/v1/connect/token",
+            CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => "grant_type=client_credentials&client_id=" . $client_ID . "&client_secret=" . $client_secret,
@@ -1261,23 +1258,17 @@ final class Cookiebot_WP {
             ),
         ));
 
-		$client_response = curl_exec($client_curl);
+        $client_response = curl_exec($client_curl);
 
         curl_close($client_curl);
 
-		$token = json_decode($client_response);
+        $token = json_decode($client_response);
 
-		$_SESSION['token'] = $token->access_token;
+        $_SESSION['token'] = $token->access_token;
 
-		/* Domain */
-		
-		
+        $domain = fetch_json("https://api.cookiebot.com/umbraco/v1/domains?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
 
-		$domain = curl("https://api.cookiebot.com/umbraco/v1/domains?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
-
-		$data = curl("https://api.cookiebot.com/umbraco/v1/dashboard/" . get_option('domain_id') . "?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
-
-
+        $data = fetch_json("https://api.cookiebot.com/umbraco/v1/dashboard/" . get_option('domain_id') . "?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
 
         ?>
 
@@ -1291,39 +1282,39 @@ final class Cookiebot_WP {
                     width: 100%;
                 }
 
-				.domain_select{
-					border: none;
-					border-radius: 5px;
-					background-color: rgb(0, 124, 186);
-					color: white;
-					width: 60px;
-					margin-left: 10px;
-				}
+                .domain_select {
+                    border: none;
+                    border-radius: 5px;
+                    background-color: rgb(0, 124, 186);
+                    color: white;
+                    width: 60px;
+                    margin-left: 10px;
+                }
 
-				.log_in{
-					border: none;
-					border-radius: 5px;
-					background-color: rgb(0, 124, 186);
-					color: white;
-					font-size: 16px;
-					width: 60px;
-					padding: 5px 10px;
-				}
+                .log_in {
+                    border: none;
+                    border-radius: 5px;
+                    background-color: rgb(0, 124, 186);
+                    color: white;
+                    font-size: 16px;
+                    width: 60px;
+                    padding: 5px 10px;
+                }
 
-                .log_out{
+                .log_out {
                     background-color: rgb(255, 50, 50);
                     border-radius: 3px;
                     border: 0;
                     padding: 5px 10px;
                 }
 
-				#submit_CSV{
-					background-color: transparent;
-					border: none;
-					background-image: url("assets/download.png");
-					height: 10px;
-					width: 10px;
-				}
+                #submit_CSV {
+                    background-color: transparent;
+                    border: none;
+                    background-image: url("assets/download.png");
+                    height: 10px;
+                    width: 10px;
+                }
             </style>
         </head>
 
@@ -1335,7 +1326,8 @@ final class Cookiebot_WP {
         if (empty($token->access_token)) {
             ?>
 
-            <form method="post" action="options.php" style="width: 400px; display: grid; align-items: center; grid-template-columns: 1fr 2fr; margin-top: 20px;">
+            <form method="post" action="options.php"
+                  style="width: 400px; display: grid; align-items: center; grid-template-columns: 1fr 2fr; margin-top: 20px;">
                 <?php settings_fields('cookiebot-dashboard'); ?>
                 <?php do_settings_sections('cookiebot-dashboard'); ?>
                 <p>Client ID</p>
@@ -1351,8 +1343,10 @@ final class Cookiebot_WP {
 
             ?>
 
-            <div class="choose_domain" style="display: grid; grid-template-columns: 50% 50%; grid-gap: 0; margin-bottom: 20px;">
-                <form method="post" action="options.php" style="height: 50px; width: 100%; padding: 10px 10px 10px 0; box-sizing: border-box; margin-top: 20px; display: grid; grid-template-columns: 90% 10%;">
+            <div class="choose_domain"
+                 style="display: grid; grid-template-columns: 50% 50%; grid-gap: 0; margin-bottom: 20px;">
+                <form method="post" action="options.php"
+                      style="height: 50px; width: 100%; padding: 10px 10px 10px 0; box-sizing: border-box; margin-top: 20px; display: grid; grid-template-columns: 90% 10%;">
                     <?php settings_fields('cookiebot-domain-selection'); ?>
                     <?php do_settings_sections('cookiebot-domain-selection'); ?>
                     <select name="domain_id" style="width: 100%; max-width: none; height: 30px;">
@@ -1368,7 +1362,7 @@ final class Cookiebot_WP {
 
                         ?>
                     </select>
-					<input type="submit" name="domain_select" class="domain_select" value="Select">
+                    <input type="submit" name="domain_select" class="domain_select" value="Select">
                 </form>
 
                 <form action="options.php"
@@ -1381,11 +1375,11 @@ final class Cookiebot_WP {
                 </form>
             </div>
 
-
             <div class="wrap">
 
                 <div class="actions" style="width: 50%;">
-                    <div class="header_actions" style="height: 40px; display: grid; align-items: center; border-bottom: 1px #000 solid;">
+                    <div class="header_actions"
+                         style="height: 40px; display: grid; align-items: center; border-bottom: 1px #000 solid;">
                         <h3 style="margin: 0 0 0 10px;">Actions required</h3>
                     </div>
                     <div class="content_actions"
@@ -1438,7 +1432,9 @@ final class Cookiebot_WP {
                                     $iconCookies = "assets/warning.png";
                                 }
 
-                                echo $data->cookiesWithoutPriorConsent; ?> <a><img src="<?php echo plugin_dir_url(__FILE__) . $iconCookies; ?>" style="height: 10px; width: 10px; margin: 0 3px 0 0;"></a></p>
+                                echo $data->cookiesWithoutPriorConsent; ?> <a><img
+                                            src="<?php echo plugin_dir_url(__FILE__) . $iconCookies; ?>"
+                                            style="height: 10px; width: 10px; margin: 0 3px 0 0;"></a></p>
                         </div>
                     </div>
                 </div>
@@ -1451,7 +1447,8 @@ final class Cookiebot_WP {
                     <div class="graph_content" id="graph_content"
                          style="background-color: white; min-height: 200px; width: 50%; box-sizing: border-box; padding: 10px; display: grid; justify-items: center;">
                         <canvas id="my_chart" style="height: 100%; min-height: 190px; max-width: 650px;"></canvas>
-                        <div id="no_data" style="display: none; padding: 0 10px; box-sizing: border-box; background-color: lightgrey; border-radius: 5px; align-self: center;">
+                        <div id="no_data"
+                             style="display: none; padding: 0 10px; box-sizing: border-box; background-color: lightgrey; border-radius: 5px; align-self: center;">
                             <p>There is no data</p>
                         </div>
                     </div>
@@ -1472,10 +1469,12 @@ final class Cookiebot_WP {
 
                         <p style="margin: 0;">URL count</p>
                         <a style="margin: 0; justify-self: end; color: #444;">
-						<form method="post" style="float: left; margin-right: 2px;">
-							<input type="image" src="<?php echo plugin_dir_url(__FILE__) . 'assets/download.png'; ?>" name="submitCSV" id="submit_CSV" value="">
-						</form>
-						<?php echo $data->domainInfo->pageCount ?></a>
+                            <form method="post" style="float: left; margin-right: 2px;">
+                                <input type="image"
+                                       src="<?php echo plugin_dir_url(__FILE__) . 'assets/download.png'; ?>"
+                                       name="submitCSV" id="submit_CSV" value="">
+                            </form>
+                            <?php echo $data->domainInfo->pageCount ?></a>
 
                         <p style="margin: 0;">Subscription size</p>
                         <p style="margin: 0; justify-self: end;"><?php echo $data->domainInfo->subscriptionSize ?></p>
@@ -1493,22 +1492,22 @@ final class Cookiebot_WP {
             </div>
             <?php
 
-			/* Graph */
+            /* Graph */
 
-			$consent_rates_number = 0;
-			foreach($data->consentRates as $consent_rates){
-				if($consent_rates->optInRateMarketing > 0){
-					$consent_rates_number++;
-				}
-				if($consent_rates->optInRateStatistics > 0){
-					$consent_rates_number++;
-				}
-				if($consent_rates->optInRatePreferences > 0){
-					$consent_rates_number++;
-				}
-			}
-				
-			if($consent_rates_number == 0){
+            $consent_rates_number = 0;
+            foreach ($data->consentRates as $consent_rates) {
+                if ($consent_rates->optInRateMarketing > 0) {
+                    $consent_rates_number++;
+                }
+                if ($consent_rates->optInRateStatistics > 0) {
+                    $consent_rates_number++;
+                }
+                if ($consent_rates->optInRatePreferences > 0) {
+                    $consent_rates_number++;
+                }
+            }
+
+            if ($consent_rates_number == 0) {
                 ?>
 
                 <script>
@@ -1541,7 +1540,7 @@ final class Cookiebot_WP {
                                     <?php
                                     foreach (array_reverse($data->consentRates, true) as $consent_rates) {
                                         echo $consent_rates->optInRatePreferences . ",";
-									}
+                                    }
                                     ?>]
                             }, {
                                 label: 'Statistic',
@@ -1565,12 +1564,12 @@ final class Cookiebot_WP {
                                     ?>]
                             }]
                         },
-					});
+                    });
                 </script>
 
                 <?php
             }
-		}
+        }
     }
 
   /**
@@ -2185,7 +2184,9 @@ if(!function_exists('cookiebot')) {
 	}
 }
 
-function curl($url, $method, $header){
+
+//Fetches domain info to dashboard page.
+function fetch_json($url, $method, $header){
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
