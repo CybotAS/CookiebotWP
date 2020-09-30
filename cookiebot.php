@@ -1162,8 +1162,8 @@ final class Cookiebot_WP {
 						background-color: rgb(0, 124, 186);
 						color: white;
 						font-size: 16px;
-						width: 60px;
 						padding: 5px 10px;
+						margin: 10px 0 0 0;
 					}
 	
 					.log_out {
@@ -1201,7 +1201,7 @@ final class Cookiebot_WP {
 					<p>Client Secret</p>
 					<input type="text" name="client_secret" value="<?php echo get_option('client_secret'); ?>">
 	
-					<input type="submit" name="log_in" class="log_in" value="Log in">
+					<input type="submit" name="log_in" class="log_in" value="Save API credentials">
 				</form>
 				<?php
 			} else {
@@ -1583,6 +1583,23 @@ final class Cookiebot_WP {
 		$active_plugins = get_option( 'active_plugins' );
 
 
+		//Dashboard missing login info
+		$dashboard_log_in_count = 0;
+		if(empty(get_option('client_secret'))){
+			$dashboard_log_in = "missing client secret";
+			$dashboard_log_in_count++;
+		}
+		if(empty(get_option('client_ID'))){
+			$dashboard_log_in = "missing client id";
+			$dashboard_log_in_count++;
+		}
+		if($dashboard_log_in_count == 0){
+			$dashboard_log_in = "configured";
+		}
+		if($dashboard_log_in_count == 2){
+			$dashboard_log_in = "not configured";
+		}
+
 		//$foo = new cookiebot_addons\lib\Settings_Service;
 		//$addons = $foo->get_active_addons();
 
@@ -1607,6 +1624,7 @@ final class Cookiebot_WP {
 		$debugStr.= "Disable Cookiebot in WP Admin: ".(get_option('cookiebot-nooutput-admin') == '1' ? 'Yes' : 'No')."\n";
 		$debugStr.= "Banner tag: ".$this->add_js(false)."\n";
 		$debugStr.= "Declaration tag: ".$this->show_declaration()."\n";
+		$debugStr.= "Dashboard: ".$dashboard_log_in."\n";
 
 		if($this->is_wp_consent_api_active()) {
 			$debugStr.= "\n--- WP Consent Level API Mapping ---\n";
@@ -2179,6 +2197,19 @@ if(!function_exists('cookiebot')) {
 		return Cookiebot_WP::instance();
 	}
 }
+
+/* if(isset(get_option('client_ID'))){
+	if(isset(get_option('client_secret'))){
+		$dashboard_log_in = "configured";
+	}
+}elseif(isset(get_option('client_secret'))){
+	$dashboard_log_in = "Dashboard: missing client id";
+}elseif(isset(get_option('client_ID'))){
+	$dashboard_log_in = "missing client secret";
+}else{
+	$dashboard_log_in = "not configured";
+} */
+
 
 
 //Fetches domain info to dashboard page.
