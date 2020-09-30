@@ -1167,7 +1167,8 @@ final class Cookiebot_WP {
 					}
 	
 					.log_out {
-						background-color: rgb(255, 50, 50);
+						background-color: rgb(0, 124, 186);
+						color: white;
 						border-radius: 3px;
 						border: 0;
 						padding: 5px 10px;
@@ -1586,18 +1587,18 @@ final class Cookiebot_WP {
 		//Dashboard missing login info
 		$dashboard_log_in_count = 0;
 		if(empty(get_option('client_secret'))){
-			$dashboard_log_in = "missing client secret";
+			$dashboard_log_in = "Missing Client Secret";
 			$dashboard_log_in_count++;
 		}
 		if(empty(get_option('client_ID'))){
-			$dashboard_log_in = "missing client id";
+			$dashboard_log_in = "Missing client ID";
 			$dashboard_log_in_count++;
 		}
 		if($dashboard_log_in_count == 0){
-			$dashboard_log_in = "configured";
+			$dashboard_log_in = "Configured";
 		}
 		if($dashboard_log_in_count == 2){
-			$dashboard_log_in = "not configured";
+			$dashboard_log_in = "Not configured";
 		}
 
 		//$foo = new cookiebot_addons\lib\Settings_Service;
