@@ -1314,7 +1314,7 @@ final class Cookiebot_WP {
 					<div class="information" style="margin-top: 30px">
 						<div class="information_header"
 							 style="height: 40px; width: 50%; display: grid; align-items: center; border-bottom: 1px #000 solid;">
-							<h3 style="margin: 0 0 0 10px;"><?php _e('Information'?></h3>
+							<h3 style="margin: 0 0 0 10px;"><?php _e('Information')?></h3>
 						</div>
 						<div class="information_content"
 							 style="height: 200px; width: 50%; display: grid; grid-template-columns: 1fr 1fr; padding: 10px; box-sizing: border-box;">
