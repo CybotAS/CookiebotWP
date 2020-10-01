@@ -1173,7 +1173,7 @@ final class Cookiebot_WP {
 				<?php settings_fields( 'cookiebot-GTM' ); ?>
 				<?php do_settings_sections( 'cookiebot-GTM' ); ?>
 
-				<p><?php _e('Google Tag Manager')?></p>
+				<p><?php _e('Enable GTM')?></p>
 				<div class="GTM_check">
 					<input type="checkbox" name="GTM" id="GTM" value="1" <?php checked(1,get_option('GTM'), true); ?> style="float: left; margin: 2px 4px 0 0">
 					<a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/" style="margin: 0; font-style: italic;"><?php _e('Learn more about GTM and cookiebot')?></a>
