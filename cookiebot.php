@@ -1196,13 +1196,13 @@ final class Cookiebot_WP {
 					  style="width: 400px; display: grid; align-items: center; grid-template-columns: 1fr 2fr; margin-top: 20px;">
 					<?php settings_fields('cookiebot-dashboard'); ?>
 					<?php do_settings_sections('cookiebot-dashboard'); ?>
-					<p>Client ID</p>
+					<p><?php _e('Client ID')?></p>
 					<input type="text" name="client_ID" value="<?php echo get_option('client_ID'); ?>">
 	
-					<p>Client Secret</p>
+					<p><?php _e('Client Secret')?></p>
 					<input type="text" name="client_secret" value="<?php echo get_option('client_secret'); ?>">
 	
-					<input type="submit" name="log_in" class="log_in" value="Save API credentials">
+					<input type="submit" name="log_in" class="log_in" value="<?php _e('Save API credentials')?>">
 				</form>
 				<?php
 			} else {
@@ -1228,7 +1228,7 @@ final class Cookiebot_WP {
 	
 							?>
 						</select>
-						<input type="submit" name="domain_select" class="domain_select" value="Select">
+						<input type="submit" name="domain_select" class="domain_select" value="<?php _e('Select')?>">
 					</form>
 				</div>
 	
@@ -1237,18 +1237,18 @@ final class Cookiebot_WP {
 					<div class="actions" style="width: 50%;">
 						<div class="header_actions"
 							 style="height: 40px; display: grid; align-items: center; border-bottom: 1px #000 solid;">
-							<h3 style="margin: 0 0 0 10px;">Actions required</h3>
+							<h3 style="margin: 0 0 0 10px;"><?php _e('Actions required')?></h3>
 						</div>
 						<div class="content_actions"
 							 style="height: 150px; width: 100%; margin-top: 0; display: grid; grid-template-columns: 3fr 1fr; box-sizing:border-box; padding: 0 10px 0 10px">
 							<div>
 								<p>
-									Uncategorized cookies in need of manual categorization <br>
+								<?php _e('Uncategorized cookies in need of manual categorization')?> <br>
 									<a href="https://support.cookiebot.com/hc/en-us/articles/360003735214-Unclassified-cookies-how-do-I-classify-them-manually-"
 									   style="text-decoration: none;"><img
 												src="<?php echo plugin_dir_url(__FILE__); ?>assets/help.png"
-												style="height: 10px; width: 10px; margin: 0 3px 0 0;">How to classify
-										unclassified cookies</a>
+												style="height: 10px; width: 10px; margin: 0 3px 0 0;">
+									<?php _e('How to classify unclassified cookies')?></a>
 								</p>
 							</div>
 							<div style="justify-self: end;">
@@ -1274,11 +1274,11 @@ final class Cookiebot_WP {
 	
 							<div>
 								<p>
-									Cookies in need of blocking (until acceptance by user) <br>
+								<?php _e('Cookies in need of blocking (until acceptance by user)')?> <br>
 									<a href="https://support.cookiebot.com/hc/en-us/articles/360004104033-What-does-prior-consent-mean-and-how-do-I-implement-it-"
 									   style="text-decoration: none;"><img
 												src="<?php echo plugin_dir_url(__FILE__); ?>assets/help.png"
-												style="height: 10px; width: 10px; margin: 0 3px 0 0;">How to block</a>
+												style="height: 10px; width: 10px; margin: 0 3px 0 0;"><?php _e('How to block')?></a>
 								</p>
 							</div>
 							<div style="justify-self: end;">
@@ -1299,14 +1299,14 @@ final class Cookiebot_WP {
 					<div class="graph" style="margin-top: 30px;">
 						<div class="graph_header"
 							 style="height: 40px; width: 50%; display: grid; align-items: center; border-bottom: 1px #000 solid;">
-							<h3 style="margin: 0 0 0 10px;">Opt in rates per category</h3>
+							<h3 style="margin: 0 0 0 10px;"><?php _e('Opt in rates per category')?></h3>
 						</div>
 						<div class="graph_content" id="graph_content"
 							 style="background-color: white; min-height: 200px; width: 50%; box-sizing: border-box; padding: 10px; display: grid; justify-items: center;">
 							<canvas id="my_chart" style="height: 100%; min-height: 190px; max-width: 650px;"></canvas>
 							<div id="no_data"
 								 style="display: none; padding: 0 10px; box-sizing: border-box; background-color: lightgrey; border-radius: 5px; align-self: center;">
-								<p>There is no data</p>
+								<p><?php _e('There is no data')?></p>
 							</div>
 						</div>
 					</div>
@@ -1314,17 +1314,17 @@ final class Cookiebot_WP {
 					<div class="information" style="margin-top: 30px">
 						<div class="information_header"
 							 style="height: 40px; width: 50%; display: grid; align-items: center; border-bottom: 1px #000 solid;">
-							<h3 style="margin: 0 0 0 10px;">Information</h3>
+							<h3 style="margin: 0 0 0 10px;"><?php _e('Information'?></h3>
 						</div>
 						<div class="information_content"
 							 style="height: 200px; width: 50%; display: grid; grid-template-columns: 1fr 1fr; padding: 10px; box-sizing: border-box;">
-							<p style="margin: 0;">Last scan</p>
+							<p style="margin: 0;"><?php _e('Last scan')?></p>
 							<p style="margin: 0; justify-self: end;"><?php echo mb_strimwidth($data->domainInfo->lastScanDate, 0, 10); ?></p>
 	
-							<p style="margin: 0;">Next scheduled scan</p>
+							<p style="margin: 0;"><?php _e('Next scheduled scan')?></p>
 							<p style="margin: 0; justify-self: end;"><?php echo mb_strimwidth($data->domainInfo->nextScanDate, 0, 10); ?></p>
 	
-							<p style="margin: 0;">URL count</p>
+							<p style="margin: 0;"><?php _e('URL count')?></p>
 							<a style="margin: 0; justify-self: end; color: #444;">
 								<form method="post" style="float: left; margin-right: 2px;">
 									<input type="image"
@@ -1333,10 +1333,10 @@ final class Cookiebot_WP {
 								</form>
 								<?php echo $data->domainInfo->pageCount ?></a>
 	
-							<p style="margin: 0;">Subscription size</p>
+							<p style="margin: 0;"><?php _e('Subscription size')?></p>
 							<p style="margin: 0; justify-self: end;"><?php echo $data->domainInfo->subscriptionSize ?></p>
 	
-							<p style="margin: 0;">Cookies deployed</p>
+							<p style="margin: 0;"><?php _e('Cookies deployed')?></p>
 							<p style="margin: 0; justify-self: end;"><?php
 								$deployed = 0;
 								foreach ($data->cookies as $cookies) {
@@ -1353,7 +1353,7 @@ final class Cookiebot_WP {
 						<?php do_settings_sections('cookiebot-dashboard'); ?>
 						<input type="hidden" name="client_ID" value="<?php echo get_option('') ?>">
 						<input type="hidden" name="client_secret" value="<?php echo get_option('') ?>">
-						<input type="submit" class="log_out" value="Clear API credentials" style="justify-self: start; height: 30px;">
+						<input type="submit" class="log_out" value="<?php _e('Clear API credentials')?>" style="justify-self: start; height: 30px;">
 					</form>
 				</div>
 				<?php
