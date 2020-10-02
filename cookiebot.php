@@ -103,7 +103,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Init Cookiebot.
 	 *
-	 * @version 3.2.0
+	 * @version 3.8.1
 	 * @since   1.6.2
 	 * @access  public
 	 */
@@ -371,7 +371,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Register Cookiebot settings
 	 *
-	 * @version 2.1.5
+	 * @version 3.8.1
 	 * @since   1.0.0
 	 */
 	function register_cookiebot_settings() {
@@ -1166,6 +1166,13 @@ final class Cookiebot_WP {
 		<?php
 	}
 
+		/**
+	 * Cookiebot_WP Google Tag Manager page
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
+
 	function GTM_page(){
 		?>
 		<div class="wrap">
@@ -1277,7 +1284,7 @@ final class Cookiebot_WP {
   /**
    * Cookiebot_WP Debug Page
    *
-   * @version	3.6.0
+   * @version	3.8.1
    * @since		3.6.0
    */
 
@@ -1381,7 +1388,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Add Cookiebot JS to <head>
 	 *
-	 * @version 3.6.0
+	 * @version 3.8.1
 	 * @since   1.0.0
 	 */
 	function add_js($printTag=true) {
@@ -1436,6 +1443,13 @@ final class Cookiebot_WP {
 		}
 	}
 
+		/**
+	 * Cookiebot_WP Add Google Tag Manager JS to <head>
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
+
 	function add_GTM($printTag=true) {
 
 		if(get_option('cookiebot-gtm') != false ){
@@ -1461,6 +1475,13 @@ final class Cookiebot_WP {
 			  echo $GTM;
 		}
 	}
+
+		/**
+	 * Cookiebot_WP Add Google Consent Mode JS to <head>
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
 
 	function add_GCM($printTag=true) {
 
