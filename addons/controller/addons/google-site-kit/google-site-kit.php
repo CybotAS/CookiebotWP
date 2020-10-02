@@ -1,15 +1,14 @@
 <?php
 
-namespace cookiebot_addons\controller\addons\official_facebook_pixel;
+namespace cookiebot_addons\controller\addons\google_site_kit;
 
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons\lib\Cookie_Consent_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
 use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
-use FacebookPixelPlugin\Core\FacebookPluginConfig;
 
-class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
+class Google_Site_Kit implements Cookiebot_Addons_Interface {
 
 	/**
 	 * @var Settings_Service_Interface
@@ -67,7 +66,7 @@ class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function load_configuration() {
-		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_official_facebook_pixel' ), 5 );
+		add_action( 'wp_loaded', array( $this, 'cookiebot_addon_google_site_kit' ), 5 );
 	}
 
 	/**
@@ -75,108 +74,9 @@ class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function cookiebot_addon_official_facebook_pixel() {
-		// Pageview
-		$this->buffer_output->add_tag( 'wp_head', 10, array(
-			'connect.facebook.net' => $this->get_cookie_types(),
-			'fbq'                  => $this->get_cookie_types(),
-		) );
-
-		// Caldera forms integration
-		$this->buffer_output->add_tag( 'caldera_forms_ajax_return', 10, array(
-			'fbq' => $this->get_cookie_types(),
-		), false );
-
-		// Gravity forms integration
-		$this->buffer_output->add_tag( 'gform_confirmation', 10, array(
-			'fbq' => $this->get_cookie_types(),
-		), false );
-
-		// Ninja forms integration
-		$this->buffer_output->add_tag( 'ninja_forms_submission_actions', 10, array(
-			'fbq' => $this->get_cookie_types(),
-		), false );
-
-		// WP Ecommerce integration
-		$this->buffer_output->add_tag( 'wpsc_add_to_cart_json_response', 11, array(
-			'fbq' => $this->get_cookie_types(),
-		), false );
-
-		$this->buffer_output->add_tag( 'wpsc_transaction_results_shutdown', 11, array(
-			'fbq' => $this->get_cookie_types(),
-		), false );
-
-		// WP Forms integration
-		$this->buffer_output->add_tag( 'wp_footer', 20, array(
-			'fbq' => $this->get_cookie_types(),
-		), false );
-
-		// Catching most events created with \FacebookPixelPlugin\Integration\FacebookWordpressIntegrationBase::addPixelFireForHook
-		$this->buffer_output->add_tag( 'wp_footer', 11, array(
-			'fbq' => $this->get_cookie_types(),
-		), false );
-
-		// Server side pixel events
-		// Caldera form integration
-		cookiebot_addons_remove_class_action( 'caldera_forms_ajax_return',
-			'FacebookPixelPlugin\Integration\FacebookWordpressCalderaForm', 'injectLeadEvent' );
-
-		// Contact Form 7 integration
-		cookiebot_addons_remove_class_action( 'wpcf7_submit',
-			'FacebookPixelPlugin\Integration\FacebookWordpressContactForm7', 'trackServerEvent' );
-		cookiebot_addons_remove_class_action( 'wpcf7_ajax_json_echo',
-			'FacebookPixelPlugin\Integration\FacebookWordpressContactForm7', 'injectLeadEvent', 20 );
-
-		// Formidable Form integration
-		cookiebot_addons_remove_class_action( 'frm_after_create_entry',
-			'FacebookPixelPlugin\Integration\FacebookWordpressFormidableForm', 'trackServerEvent', 20 );
-		cookiebot_addons_remove_class_action( 'wp_footer',
-			'FacebookPixelPlugin\Integration\FacebookWordpressFormidableForm', 'injectLeadEvent', 20 );
-
-		// Easy digital downloads integration
-		cookiebot_addons_remove_class_action( 'edd_payment_receipt_after',
-			'FacebookPixelPlugin\Integration\FacebookWordpressEasyDigitalDownloads', 'trackPurchaseEvent' );
-		cookiebot_addons_remove_class_action( 'edd_after_download_content',
-			'FacebookPixelPlugin\Integration\FacebookWordpressEasyDigitalDownloads', 'injectAddToCartEvent', 11 );
-		cookiebot_addons_remove_class_action( 'edd_after_checkout_cart',
-			'FacebookPixelPlugin\Integration\FacebookWordpressEasyDigitalDownloads', 'injectInitiateCheckoutEvent',
-			11 );
-		cookiebot_addons_remove_class_action( 'edd_after_download_content',
-			'FacebookPixelPlugin\Integration\FacebookWordpressEasyDigitalDownloads', 'injectViewContentEvent', 11 );
-
-		// Gravity forms integration
-		cookiebot_addons_remove_class_action( 'gform_confirmation',
-			'FacebookPixelPlugin\Integration\FacebookWordpressGravityForms', 'injectLeadEvent' );
-
-		// Mailchimp for WP integration
-		cookiebot_addons_remove_class_action( 'mc4wp_form_subscribed',
-			'FacebookPixelPlugin\Integration\FacebookWordpressMailchimpForWp', 'injectLeadEvent', 11 );
-
-		// Ninja forms integration
-		cookiebot_addons_remove_class_action( 'ninja_forms_submission_actions',
-			'FacebookPixelPlugin\Integration\FacebookWordpressNinjaForms', 'injectLeadEvent' );
-
-		// WooCommerce integration
-		cookiebot_addons_remove_class_action( 'woocommerce_after_checkout_form',
-			'FacebookPixelPlugin\Integration\FacebookWordpressWooCommerce', 'trackInitiateCheckout', 40 );
-		cookiebot_addons_remove_class_action( 'woocommerce_add_to_cart',
-			'FacebookPixelPlugin\Integration\FacebookWordpressWooCommerce', 'trackAddToCartEvent', 40 );
-		cookiebot_addons_remove_class_action( 'woocommerce_thankyou',
-			'FacebookPixelPlugin\Integration\FacebookWordpressWooCommerce', 'trackPurchaseEvent', 40 );
-		cookiebot_addons_remove_class_action( 'woocommerce_payment_complete',
-			'FacebookPixelPlugin\Integration\FacebookWordpressWooCommerce', 'trackPurchaseEvent', 40 );
-
-		// WP Ecommerce integration
-		cookiebot_addons_remove_class_action( 'wpsc_add_to_cart_json_response',
-			'FacebookPixelPlugin\Integration\FacebookWordpressWPECommerce', 'injectAddToCartEvent', 11 );
-		cookiebot_addons_remove_class_action( 'wpsc_before_shopping_cart_page',
-			'FacebookPixelPlugin\Integration\FacebookWordpressWPECommerce', 'injectInitiateCheckoutEvent', 11 );
-		cookiebot_addons_remove_class_action( 'wpsc_transaction_results_shutdown',
-			'FacebookPixelPlugin\Integration\FacebookWordpressWPECommerce', 'injectPurchaseEvent', 11 );
-
-		// WP Forms integration
-		cookiebot_addons_remove_class_action( 'wpforms_process_before',
-			'FacebookPixelPlugin\Integration\FacebookWordpressWPForms', 'trackEvent', 20 );
+	public function cookiebot_addon_google_site_kit() {
+		// Google Tag Manager
+        $this->script_loader_tag->add_tag( 'google_gtagjs', $this->get_cookie_types() );
 	}
 
 	/**
@@ -187,7 +87,7 @@ class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_addon_name() {
-		return 'Official Facebook Pixel';
+		return 'Google Site Kit';
 	}
 
 	/**
@@ -198,7 +98,7 @@ class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.';
+		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics.';
 	}
 
 	/**
@@ -226,7 +126,7 @@ class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_option_name() {
-		return 'official_facebook_pixel';
+		return 'google_site_kit';
 	}
 
 	/**
@@ -237,7 +137,7 @@ class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_plugin_file() {
-		return 'official-facebook-pixel/facebook-for-wordpress.php';
+		return 'google-site-kit/google-site-kit.php';
 	}
 
 	/**
@@ -257,7 +157,7 @@ class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
 	 * @since 1.5.0
 	 */
 	public function get_default_cookie_types() {
-		return array( 'marketing' );
+		return array( 'marketing', 'statistics' );
 	}
 
 	/**
@@ -339,7 +239,7 @@ class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . __( 'Blocks Official Facebook Pixel scripts', 'cookiebot-addons' ) . '</p>';
+		return '<p>' . __( 'Blocks Google Analytics scripts', 'cookiebot-addons' ) . '</p>';
 	}
 
 	/**
@@ -350,7 +250,7 @@ class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_svn_url() {
-		return 'https://plugins.svn.wordpress.org/official-facebook-pixel/trunk/facebook-for-wordpress.php';
+		return 'http://plugins.svn.wordpress.org/google-site-kit/trunk/google-site-kit.php';
 	}
 
 	/**

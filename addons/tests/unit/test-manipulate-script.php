@@ -221,7 +221,8 @@ var ywot = {'p':''};
 <noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
 <meta name='onesignal' content='wordpress-plugin'>
 <link rel='manifest' href='https://www.ursula-sandner.com/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/manifest.json.php?gcm_sender_id='>
-<script src='https://cdn.onesignal.com/sdks/OneSignalSDK.js' async=''></script> <script>
+<script src='https://cdn.onesignal.com/sdks/OneSignalSDK.js' async=''/>
+<script>
 
       window.OneSignal = window.OneSignal || [];
 
@@ -293,7 +294,27 @@ oneSignal_options['notifyButton']['text']['dialog.blocked.message'] = 'Urmează 
 		);
 
 		$changed_header = cookiebot_addons_manipulate_script( $buffer, $keywords );
-		
-		$this->assertNotFalse( strpos( $changed_header, 'data-cookieconsent="statistics" src=\'https://cdn.onesignal.com/sdks/OneSignalSDK.js\'' ) );
+
+		$expected_replacements = array();
+
+		ob_start(); // first match
+        ?><script type="text/plain" data-cookieconsent="marketing">{'@context':'https:\/\/schema.org','@type':'Person','url':'https:\/\/www.ursula-sandner.com\/','sameAs':['https:\/\/www.facebook.com\/SandnerMindConsulting','https:\/\/instagram.com\/ursula.sandner','https:\/\/twitter.com\/psihotimisoara'],'@id':'#person','name':'Ursula Yvonne Sandner'}</script><?php
+        $expected_replacements[] = ob_get_clean();
+
+        ob_start(); // second match
+        ?><script type='text/plain' data-cfasync='false' data-cookieconsent='statistics'><?php
+            $expected_replacements[] = ob_get_clean();
+
+		ob_start(); // third match
+        ?><script type="text/plain" data-cookieconsent="statistics" src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script><?php
+		$expected_replacements[] = ob_get_clean();
+
+        ob_start(); // fourth match
+		?><script type="text/plain" data-cookieconsent="statistics"><?php
+        $expected_replacements[] = ob_get_clean();
+
+        foreach($expected_replacements as $expected_replacement) {
+            $this->assertNotFalse( strpos( $changed_header, $expected_replacement ) );
+        }
 	}
 }
