@@ -186,7 +186,9 @@ final class Cookiebot_WP {
 		load_plugin_textdomain('cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
 
 		//add JS
-		add_action('wp_head', array($this,'add_js'), -9999);
+		add_action('wp_head', array($this,'add_js'), -9997);
+		add_action('wp_head', array($this,'add_GTM'), -9998);
+		add_action('wp_head', array($this,'add_GCM'), -9999);
 		add_shortcode('cookie_declaration', array($this,'show_declaration'));
 
 		//Add filter if WP rocket is enabled
@@ -385,10 +387,10 @@ final class Cookiebot_WP {
 		register_setting('cookiebot-iab', 'cookiebot-iab');
 		register_setting('cookiebot-legislations', 'cookiebot-ccpa');
 		register_setting('cookiebot-legislations', 'cookiebot-ccpa-domain-group-id');
-		register_setting('cookiebot-GTM', 'GTM');
-		register_setting('cookiebot-GTM', 'GTM_ID');
-		register_setting('cookiebot-GTM', 'data_layer');
-		register_setting('cookiebot-GTM', 'GCM');
+		register_setting('cookiebot-gtm', 'cookiebot-gtm');
+		register_setting('cookiebot-gtm', 'cookiebot-gtm-id');
+		register_setting('cookiebot-gtm', 'cookiebot-data-layer');
+		register_setting('cookiebot-gtm', 'cookiebot-gcm');
 	}
 
 	/**
@@ -1169,31 +1171,40 @@ final class Cookiebot_WP {
 		<div class="wrap">
 			<h1><?php _e('Google Tag Manager', 'cookiebot')?></h1>
 
-			<form method="post" action="options.php" style="display: grid; grid-template-columns: 35% 65%; width: 600px; align-items: center;">
-				<?php settings_fields( 'cookiebot-GTM' ); ?>
-				<?php do_settings_sections( 'cookiebot-GTM' ); ?>
+			<form method="post" action="options.php" style="display: grid; grid-template-columns: 35% 65%; grid-row-gap: 20px; width: 600px; align-items: center;">
+				<?php settings_fields( 'cookiebot-gtm' ); ?>
+				<?php do_settings_sections( 'cookiebot-gtm' ); ?>
 
 				<p><?php _e('Enable GTM')?></p>
 				<div class="GTM_check">
-					<input type="checkbox" name="GTM" id="GTM" value="1" <?php checked(1,get_option('GTM'), true); ?> style="float: left; margin: 2px 4px 0 0">
+					<input type="checkbox" name="cookiebot-gtm" id="cookiebot-gtm" value="1" <?php checked(1,get_option('cookiebot-gtm'), true); ?> style="float: left; margin: 2px 4px 0 0">
 					<a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/" style="margin: 0; font-style: italic;"><?php _e('Learn more about GTM and cookiebot')?></a>
 				</div>
 
 				<p><?php _e('GTM ID')?></p>
-				<input type="text" name="GTM_ID" id="GTM_ID" value="<?php echo get_option('GTM_ID'); ?>" style="height: 30px;">
+				<input type="text" name="cookiebot-gtm-id" id="cookiebot-gtm-id" value="<?php echo get_option('cookiebot-gtm-id'); ?>" style="height: 30px;">
 
 				<p><?php _e('DataLayer name')?></p>
-				<input type="text" name="data_layer" id="data_layer" value="<?php echo get_option('data_layer'); ?>" style="height: 30px;">
+				<div>
+					<input type="text" name="cookiebot-data-layer" id="data_layer" placeholder="dataLayer" value="<?php echo get_option('cookiebot-data-layer'); ?>" style="height: 30px;">
+					<p style="margin: 0;"><?php _e('Optional, only change if necessary')?></p>
+				</div>
 
 				<p><?php _e('Google Consent Mode')?></p>
 				<div class="GTM_check">
-					<input type="checkbox" name="GCM" id="GCM" value="1" <?php checked(1,get_option('GCM'), true); ?> style="float: left; margin: 2px 4px 0 0">
+					<input type="checkbox" name="cookiebot-gcm" id="gcm" value="1" <?php checked(1,get_option('cookiebot-gcm'), true); ?> style="float: left; margin: 2px 4px 0 0">
 					<a href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode" style="margin: 0; font-style: italic;"><?php _e('Learn more about Google Consent Mode')?></a>
 				</div>
-				<input type="submit" value="Save" name="GTM_Save" style="background-color: rgb(0, 124, 186); color: white; padding: 5px 10px; border: none; border-radius: 5px; justify-self: start;">
+				<input type="submit" value="Save" name="gtm_save" style="background-color: rgb(0, 124, 186); color: white; padding: 5px 10px; border: none; border-radius: 5px; justify-self: start;">
 			</form>
 		</div>
 		<?php
+
+/* 		if(isset($_POST['gtm_save'])){
+			if(empty(get_option('cookiebot-data-layer'))){
+				update_option('cookiebot-data-layer', 'dataLayer');
+			}
+		} */
 	}
 
 	/**
@@ -1395,15 +1406,82 @@ final class Cookiebot_WP {
 				$tagAttr = 'data-blockingmode="auto"';
 			}
 
+            if (get_option('cookiebot-gtm') != false) {
+                if (empty(get_option('data-layer'))) {
+                    $data_layer = 'data-datalayer="dataLayer"';
+                } else {
+                    $data_layer = 'data-datalayer="' . get_option('data-layer') . '"';
+                }
+            } else {
+                $data_layer = '';
+            }
+
 			$iab = ( get_option('cookiebot-iab') != false ) ? 'data-framework="IAB"' : '';
 
 			$ccpa = ( get_option('cookiebot-ccpa') != false ) ? 'data-georegions="{\'region\':\'US-06\',\'cbid\':\''.get_option('cookiebot-ccpa-domain-group-id').'\'}"' : '';
 
-			$tag = '<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" '.$iab.' '.$ccpa.' data-cbid="'.$cbid.'"'.$lang.' type="text/javascript" '.$tagAttr.'></script>';
+			$tag = '<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" '.$iab.' '.$ccpa.' '.$data_layer.' data-cbid="'.$cbid.'"'.$lang.' type="text/javascript" '.$tagAttr.'></script>';
 			if($printTag===false) {
 				return $tag;
 			}
 			echo $tag;
+		}
+	}
+
+	function add_GTM($printTag=true) {
+
+		if(get_option('cookiebot-gtm') != false ){
+		
+			if(empty(get_option('data-layer'))){
+				$data_layer = 'dataLayer';
+			}else{
+				$data_layer = get_option('data-layer');
+			}
+
+			$GTM = "<script>(function (w, d, s, l, i) {
+				w[l] = w[l] || []; w[l].push({'gtm.start':new Date().getTime(), event: 'gtm.js'}); 
+			  var f = d.getElementsByTagName(s)[0],  j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; 
+			  j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; 
+			  f.parentNode.insertBefore(j, f);})
+			  (window, document, 'script', " . $data_layer . ", " . get_option('cookiebot-gtm-id') . ");
+			  </script>";
+
+			if($printTag===false) {
+				return $tag;
+			}
+
+			  echo $GTM;
+		}
+	}
+
+	function add_GCM($printTag=true) {
+
+		if(get_option('cookiebot-gcm') != false ){
+
+			if(empty(get_option('data-layer'))){
+				$data_layer = 'dataLayer';
+			}else{
+				$data_layer = get_option('data-layer');
+			}
+
+			$GCM = '<script data-cookieconsent="ignore">
+			' . $data_layer . ' = ' . $data_layer . ' || [];
+			function gtag() {
+				' . $data_layer . '.push(arguments);
+			}
+			gtag("consent", "default", {
+				ad_storage: "denied",
+				analytics_storage: "denied",
+				wait_for_update: 500,
+			});
+			gtag("set", "ads_data_redaction", true);
+			</script>';
+
+			if($printTag===false) {
+				return $tag;
+			}
+
+			echo $GCM;
 		}
 	}
 
