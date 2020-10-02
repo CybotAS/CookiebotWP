@@ -1314,6 +1314,14 @@ final class Cookiebot_WP {
 		$debugStr.= "Banner tag: ".$this->add_js(false)."\n";
 		$debugStr.= "Declaration tag: ".$this->show_declaration()."\n";
 
+		if(get_option('cookiebot-gtm') != false ){
+			$debugStr.= "GTM tag: ".$this->add_GTM(false)."\n";
+		}
+		
+		if(get_option('cookiebot-gcm') != false ){
+			$debugStr.= "GCM tag: ".$this->add_GCM(false)."\n";
+		}
+
 		if($this->is_wp_consent_api_active()) {
 			$debugStr.= "\n--- WP Consent Level API Mapping ---\n";
 			$debugStr .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous'."\n";
@@ -1447,7 +1455,7 @@ final class Cookiebot_WP {
 			  </script>";
 
 			if($printTag===false) {
-				return $tag;
+				return $GTM;
 			}
 
 			  echo $GTM;
@@ -1478,7 +1486,7 @@ final class Cookiebot_WP {
 			</script>';
 
 			if($printTag===false) {
-				return $tag;
+				return $GCM;
 			}
 
 			echo $GCM;
