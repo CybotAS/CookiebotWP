@@ -320,7 +320,7 @@ final class Cookiebot_WP {
 
 		add_submenu_page('cookiebot',__('Cookiebot Settings','cookiebot'),__('Settings','cookiebot'), 'manage_options', 'cookiebot',array($this,'settings_page'), 10 );
 		add_submenu_page('cookiebot',__('Cookiebot Support','cookiebot'),__('Support','cookiebot'), 'manage_options', 'cookiebot_support',array($this,'support_page'), 20 );
-		add_submenu_page('cookiebot',__('GTM','cookiebot'),__('GTM','cookiebot'), 'manage_options', 'cookiebot_GTM',array($this,'GTM_page') );
+		add_submenu_page('cookiebot',__('Google Tag Manager','cookiebot'),__('Google Tag Manager','cookiebot'), 'manage_options', 'cookiebot_GTM',array($this,'GTM_page') );
 		add_submenu_page('cookiebot',__('IAB','cookiebot'),__('IAB','cookiebot'), 'manage_options', 'cookiebot_iab',array($this,'iab_page'), 30 );
 
 		if(defined('COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION')) {
