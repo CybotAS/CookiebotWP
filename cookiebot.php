@@ -1182,25 +1182,25 @@ final class Cookiebot_WP {
 				<?php settings_fields( 'cookiebot-gtm' ); ?>
 				<?php do_settings_sections( 'cookiebot-gtm' ); ?>
 
-				<p><?php _e('Enable GTM')?></p>
+				<p><?php _e('Enable GTM', 'cookiebot')?></p>
 				<div class="GTM_check">
 					<input type="checkbox" name="cookiebot-gtm" id="cookiebot-gtm" value="1" <?php checked(1,get_option('cookiebot-gtm'), true); ?> style="float: left; margin: 2px 4px 0 0">
-					<a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/" style="margin: 0; font-style: italic;"><?php _e('Learn more about GTM and cookiebot')?></a>
+					<a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/" style="margin: 0; font-style: italic;"><?php _e('Learn more about GTM and cookiebot', 'cookiebot')?></a>
 				</div>
 
-				<p><?php _e('GTM ID')?></p>
+				<p><?php _e('GTM ID', 'cookiebot')?></p>
 				<input type="text" name="cookiebot-gtm-id" id="cookiebot-gtm-id" value="<?php echo get_option('cookiebot-gtm-id'); ?>" style="height: 30px;">
 
-				<p><?php _e('DataLayer name')?></p>
+				<p><?php _e('DataLayer name', 'cookiebot')?></p>
 				<div>
 					<input type="text" name="cookiebot-data-layer" id="data_layer" placeholder="dataLayer" value="<?php echo get_option('cookiebot-data-layer'); ?>" style="height: 30px;">
-					<p style="margin: 0;"><?php _e('Optional, only change if necessary')?></p>
+					<p style="margin: 0;"><?php _e('Optional, only change if necessary', 'cookiebot')?></p>
 				</div>
 
-				<p><?php _e('Google Consent Mode')?></p>
+				<p><?php _e('Google Consent Mode', 'cookiebot')?></p>
 				<div class="GTM_check">
 					<input type="checkbox" name="cookiebot-gcm" id="gcm" value="1" <?php checked(1,get_option('cookiebot-gcm'), true); ?> style="float: left; margin: 2px 4px 0 0">
-					<a href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode" style="margin: 0; font-style: italic;"><?php _e('Learn more about Google Consent Mode')?></a>
+					<a href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode" style="margin: 0; font-style: italic;"><?php _e('Learn more about Google Consent Mode', 'cookiebot')?></a>
 				</div>
 				<input type="submit" value="Save" name="gtm_save" style="background-color: rgb(0, 124, 186); color: white; padding: 5px 10px; border: none; border-radius: 5px; justify-self: start;">
 			</form>
