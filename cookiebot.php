@@ -1206,12 +1206,6 @@ final class Cookiebot_WP {
 			</form>
 		</div>
 		<?php
-
-/* 		if(isset($_POST['gtm_save'])){
-			if(empty(get_option('cookiebot-data-layer'))){
-				update_option('cookiebot-data-layer', 'dataLayer');
-			}
-		} */
 	}
 
 	/**
@@ -1422,10 +1416,10 @@ final class Cookiebot_WP {
 			}
 
             if (get_option('cookiebot-gtm') != false) {
-                if (empty(get_option('data-layer'))) {
+                if (empty(get_option('cookiebot-data-layer'))) {
                     $data_layer = 'data-datalayer="dataLayer"';
                 } else {
-                    $data_layer = 'data-datalayer="' . get_option('data-layer') . '"';
+                    $data_layer = 'data-datalayer="' . get_option('cookiebot-data-layer') . '"';
                 }
             } else {
                 $data_layer = '';
@@ -1454,10 +1448,10 @@ final class Cookiebot_WP {
 
 		if(get_option('cookiebot-gtm') != false ){
 		
-			if(empty(get_option('data-layer'))){
+			if(empty(get_option('cookiebot-data-layer'))){
 				$data_layer = 'dataLayer';
 			}else{
-				$data_layer = get_option('data-layer');
+				$data_layer = get_option('cookiebot-data-layer');
 			}
 
 			$GTM = "<script>(function (w, d, s, l, i) {
@@ -1487,10 +1481,10 @@ final class Cookiebot_WP {
 
 		if(get_option('cookiebot-gcm') != false ){
 
-			if(empty(get_option('data-layer'))){
+			if(empty(get_option('cookiebot-data-layer'))){
 				$data_layer = 'dataLayer';
 			}else{
-				$data_layer = get_option('data-layer');
+				$data_layer = get_option('cookiebot-data-layer');
 			}
 
 			$GCM = '<script data-cookieconsent="ignore">
