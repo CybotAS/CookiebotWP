@@ -10,6 +10,8 @@ Text Domain: cookiebot
 Domain Path: /langs
 */
 
+session_start();
+
 if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
 if(!class_exists('Cookiebot_WP')):
@@ -319,6 +321,7 @@ final class Cookiebot_WP {
 		add_menu_page( 'Cookiebot', __('Cookiebot','cookiebot'), 'manage_options', 'cookiebot', array($this,'settings_page'),$icon);
 
 		add_submenu_page('cookiebot',__('Cookiebot Settings','cookiebot'),__('Settings','cookiebot'), 'manage_options', 'cookiebot',array($this,'settings_page'), 10 );
+		add_submenu_page('cookiebot',__('Dashboard', 'cookiebot'),__('Dashboard','cookiebot'), 'manage_options', 'cookiebot_dashboard', array($this, 'dashboard_page'));
 		add_submenu_page('cookiebot',__('Cookiebot Support','cookiebot'),__('Support','cookiebot'), 'manage_options', 'cookiebot_support',array($this,'support_page'), 20 );
 		add_submenu_page('cookiebot',__('Google Tag Manager','cookiebot'),__('Google Tag Manager','cookiebot'), 'manage_options', 'cookiebot_GTM',array($this,'GTM_page') );
 		add_submenu_page('cookiebot',__('IAB','cookiebot'),__('IAB','cookiebot'), 'manage_options', 'cookiebot_iab',array($this,'iab_page'), 30 );
@@ -387,10 +390,17 @@ final class Cookiebot_WP {
 		register_setting('cookiebot-iab', 'cookiebot-iab');
 		register_setting('cookiebot-legislations', 'cookiebot-ccpa');
 		register_setting('cookiebot-legislations', 'cookiebot-ccpa-domain-group-id');
+
 		register_setting('cookiebot-gtm', 'cookiebot-gtm');
 		register_setting('cookiebot-gtm', 'cookiebot-gtm-id');
 		register_setting('cookiebot-gtm', 'cookiebot-data-layer');
 		register_setting('cookiebot-gtm', 'cookiebot-gcm');
+
+		register_setting('cookiebot-dashboard', 'client_ID');
+		register_setting('cookiebot-dashboard', 'client_secret');
+		register_setting('cookiebot-domain-selection', 'domain_id');
+		register_setting('cookiebot-token', 'token');
+
 	}
 
 	/**
@@ -1102,6 +1112,342 @@ final class Cookiebot_WP {
 		exit;
 	}
 
+		/* dashboard */
+
+		function dashboard_page()
+		{
+	
+			$client_ID = get_option('client_ID');
+			$client_secret = get_option('client_secret');
+	
+			$client_curl = curl_init();
+	
+			curl_setopt_array($client_curl, array(
+				CURLOPT_URL => "https://api.cookiebot.com/auth/v1/connect/token",
+				CURLOPT_SSL_VERIFYPEER => false,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_CUSTOMREQUEST => "POST",
+				CURLOPT_POSTFIELDS => "grant_type=client_credentials&client_id=" . $client_ID . "&client_secret=" . $client_secret,
+				CURLOPT_HTTPHEADER => array(
+					"Content-Type: application/x-www-form-urlencoded"
+				),
+			));
+	
+			$client_response = curl_exec($client_curl);
+	
+			curl_close($client_curl);
+	
+			$token = json_decode($client_response);
+	
+			$_SESSION['token'] = $token->access_token;
+	
+			$domain = fetch_json("https://api.cookiebot.com/umbraco/v1/domains?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
+	
+			$data = fetch_json("https://api.cookiebot.com/umbraco/v1/dashboard/" . get_option('domain_id') . "?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
+	
+			?>
+	
+			<head>
+				<style>
+					.submit {
+						justify-self: end;
+					}
+	
+					input[type=text] {
+						width: 100%;
+					}
+	
+					.domain_select {
+						border: none;
+						border-radius: 5px;
+						background-color: rgb(0, 124, 186);
+						color: white;
+						width: 60px;
+						margin-left: 10px;
+					}
+	
+					.log_in {
+						border: none;
+						border-radius: 5px;
+						background-color: rgb(0, 124, 186);
+						color: white;
+						font-size: 16px;
+						padding: 5px 10px;
+						margin: 10px 0 0 0;
+					}
+	
+					.log_out {
+						background-color: rgb(0, 124, 186);
+						color: white;
+						border-radius: 3px;
+						border: 0;
+						padding: 5px 10px;
+					}
+	
+					#submit_CSV {
+						background-color: transparent;
+						border: none;
+						background-image: url("assets/download.png");
+						height: 10px;
+						width: 10px;
+					}
+				</style>
+			</head>
+	
+			<h1><?php _e('Dashboard', 'cookiebot'); ?></h1>
+	
+			<?php
+			/* Statistics */
+	
+			if (!isset($token->access_token)) {
+				?>
+	
+				<form method="post" action="options.php"
+					  style="width: 400px; display: grid; align-items: center; grid-template-columns: 1fr 2fr; margin-top: 20px;">
+					<?php settings_fields('cookiebot-dashboard'); ?>
+					<?php do_settings_sections('cookiebot-dashboard'); ?>
+					<p><?php _e('Client ID', 'cookiebot')?></p>
+					<input type="text" name="client_ID" value="<?php echo get_option('client_ID'); ?>">
+	
+					<p><?php _e('Client Secret', 'cookiebot')?></p>
+					<input type="text" name="client_secret" value="<?php echo get_option('client_secret'); ?>">
+	
+					<input type="submit" name="log_in" class="log_in" value="<?php _e('Save API credentials', 'cookiebot')?>">
+				</form>
+				<?php
+			} else {
+	
+				?>
+	
+				<div class="choose_domain"
+					 style="width: 50%; margin-bottom: 20px;">
+					<form method="post" action="options.php"
+						  style="height: 50px; width: 100%; padding: 10px 10px 10px 0; box-sizing: border-box; margin-top: 20px; display: grid; grid-template-columns: 90% 10%;">
+						<?php settings_fields('cookiebot-domain-selection'); ?>
+						<?php do_settings_sections('cookiebot-domain-selection'); ?>
+						<select name="domain_id" style="width: 100%; max-width: none; height: 30px;">
+							<?php
+	
+							foreach ($domain->domainGroups as $domainGroup) {
+								foreach ($domainGroup->domains as $domains) {
+									?>
+									<option value="<?php echo $domains->domainId ?>"<?php selected(get_option('domain_id') == $domains->domainId, true, true) ?>><?php echo "(" . $domainGroup->domainGroupName . ") " . $domains->domainName; ?></option>
+									<?php
+								}
+							}
+	
+							?>
+						</select>
+						<input type="submit" name="domain_select" class="domain_select" value="<?php _e('Select')?>">
+					</form>
+				</div>
+	
+				<div class="wrap">
+	
+					<div class="actions" style="width: 50%;">
+						<div class="header_actions"
+							 style="height: 40px; display: grid; align-items: center; border-bottom: 1px #000 solid;">
+							<h3 style="margin: 0 0 0 10px;"><?php _e('Actions required')?></h3>
+						</div>
+						<div class="content_actions"
+							 style="height: 150px; width: 100%; margin-top: 0; display: grid; grid-template-columns: 3fr 1fr; box-sizing:border-box; padding: 0 10px 0 10px">
+							<div>
+								<p>
+								<?php _e('Uncategorized cookies in need of manual categorization', 'cookiebot')?> <br>
+									<a href="https://support.cookiebot.com/hc/en-us/articles/360003735214-Unclassified-cookies-how-do-I-classify-them-manually-"
+									   style="text-decoration: none;"><img
+												src="<?php echo plugin_dir_url(__FILE__); ?>assets/help.png"
+												style="height: 10px; width: 10px; margin: 0 3px 0 0;">
+									<?php _e('How to classify unclassified cookies', 'cookiebot')?></a>
+								</p>
+							</div>
+							<div style="justify-self: end;">
+								<p>
+									<?php
+									$unCategorized = 0;
+									foreach ($data->cookies as $cookies) {
+										if ($cookies->cookieCategory == "Uncategorized") {
+											$unCategorized++;
+										}
+									}
+									if ($unCategorized == 0) {
+										$iconUncategorized = "assets/check.png";
+									} else {
+										$iconUncategorized = "assets/warning.png";
+									}
+									echo $unCategorized;
+									?>
+									<a><img src="<?php echo plugin_dir_url(__FILE__) . $iconUncategorized; ?>"
+											style="height: 10px; width: 10px; margin: 0 3px 0 0;"></a>
+								</p>
+							</div>
+	
+							<div>
+								<p>
+								<?php _e('Cookies in need of blocking (until acceptance by user)', 'cookiebot')?> <br>
+									<a href="https://support.cookiebot.com/hc/en-us/articles/360004104033-What-does-prior-consent-mean-and-how-do-I-implement-it-"
+									   style="text-decoration: none;"><img
+												src="<?php echo plugin_dir_url(__FILE__); ?>assets/help.png"
+												style="height: 10px; width: 10px; margin: 0 3px 0 0;"><?php _e('How to block', 'cookiebot')?></a>
+								</p>
+							</div>
+							<div style="justify-self: end;">
+								<p><?php
+									if ($data->cookiesWithoutPriorConsent == 0) {
+										$iconCookies = "assets/check.png";
+									} else {
+										$iconCookies = "assets/warning.png";
+									}
+	
+									echo $data->cookiesWithoutPriorConsent; ?> <a><img
+												src="<?php echo plugin_dir_url(__FILE__) . $iconCookies; ?>"
+												style="height: 10px; width: 10px; margin: 0 3px 0 0;"></a></p>
+							</div>
+						</div>
+					</div>
+	
+					<div class="graph" style="margin-top: 30px;">
+						<div class="graph_header"
+							 style="height: 40px; width: 50%; display: grid; align-items: center; border-bottom: 1px #000 solid;">
+							<h3 style="margin: 0 0 0 10px;"><?php _e('Opt in rates per category', 'cookiebot')?></h3>
+						</div>
+						<div class="graph_content" id="graph_content"
+							 style="background-color: white; min-height: 200px; width: 50%; box-sizing: border-box; padding: 10px; display: grid; justify-items: center;">
+							<canvas id="my_chart" style="height: 100%; min-height: 190px; max-width: 650px;"></canvas>
+							<div id="no_data"
+								 style="display: none; padding: 0 10px; box-sizing: border-box; background-color: lightgrey; border-radius: 5px; align-self: center;">
+								<p><?php _e('There is no data', 'cookiebot')?></p>
+							</div>
+						</div>
+					</div>
+	
+					<div class="information" style="margin-top: 30px">
+						<div class="information_header"
+							 style="height: 40px; width: 50%; display: grid; align-items: center; border-bottom: 1px #000 solid;">
+							<h3 style="margin: 0 0 0 10px;"><?php _e('Information', 'cookiebot')?></h3>
+						</div>
+						<div class="information_content"
+							 style="height: 200px; width: 50%; display: grid; grid-template-columns: 1fr 1fr; padding: 10px; box-sizing: border-box;">
+							<p style="margin: 0;"><?php _e('Last scan', 'cookiebot')?></p>
+							<p style="margin: 0; justify-self: end;"><?php echo mb_strimwidth($data->domainInfo->lastScanDate, 0, 10); ?></p>
+	
+							<p style="margin: 0;"><?php _e('Next scheduled scan', 'cookiebot')?></p>
+							<p style="margin: 0; justify-self: end;"><?php echo mb_strimwidth($data->domainInfo->nextScanDate, 0, 10); ?></p>
+	
+							<p style="margin: 0;"><?php _e('URL count', 'cookiebot')?></p>
+							<a style="margin: 0; justify-self: end; color: #444;">
+								<form method="post" style="float: left; margin-right: 2px;">
+									<input type="image"
+										   src="<?php echo plugin_dir_url(__FILE__) . 'assets/download.png'; ?>"
+										   name="submitCSV" id="submit_CSV" value="">
+								</form>
+								<?php echo $data->domainInfo->pageCount ?></a>
+	
+							<p style="margin: 0;"><?php _e('Subscription size', 'cookiebot')?></p>
+							<p style="margin: 0; justify-self: end;"><?php echo $data->domainInfo->subscriptionSize ?></p>
+	
+							<p style="margin: 0;"><?php _e('Cookies deployed', 'cookiebot')?></p>
+							<p style="margin: 0; justify-self: end;"><?php
+								$deployed = 0;
+								foreach ($data->cookies as $cookies) {
+									$deployed++;
+								}
+								echo $deployed;
+								?></p>
+						</div>
+					</div>
+	
+					<form action="options.php"
+						  style="height: 50px; width: 100%; box-sizing: border-box; margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr;">
+						<?php settings_fields('cookiebot-dashboard'); ?>
+						<?php do_settings_sections('cookiebot-dashboard'); ?>
+						<input type="hidden" name="client_ID" value="<?php echo get_option('') ?>">
+						<input type="hidden" name="client_secret" value="<?php echo get_option('') ?>">
+						<input type="submit" class="log_out" value="<?php _e('Clear API credentials', 'cookiebot')?>" style="justify-self: start; height: 30px;">
+					</form>
+				</div>
+				<?php
+	
+				/* Graph */
+	
+				$consent_rates_number = 0;
+				foreach ($data->consentRates as $consent_rates) {
+					if ($consent_rates->optInRateMarketing > 0) {
+						$consent_rates_number++;
+					}
+					if ($consent_rates->optInRateStatistics > 0) {
+						$consent_rates_number++;
+					}
+					if ($consent_rates->optInRatePreferences > 0) {
+						$consent_rates_number++;
+					}
+				}
+	
+				if ($consent_rates_number == 0) {
+					?>
+	
+					<script>
+						document.getElementById("no_data").style.display = "block";
+						document.getElementById("my_chart").style.display = "none";
+						document.getElementById("graph_content").style.height = "200px";
+					</script>
+	
+					<?php
+				} else {
+	
+					?>
+					<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+					<script>
+						var ctx = document.getElementById('my_chart').getContext('2d');
+						var chart = new Chart(ctx, {
+							type: 'line',
+							data: {
+								labels: [
+									<?php
+									foreach (array_reverse($data->consentRates, true) as $consent_rates) {
+										echo "\"" . mb_strimwidth($consent_rates->consentDate, 0, 10) . "\"" . ",";
+									}
+									?>],
+								datasets: [{
+									label: 'Preferences',
+									borderColor: 'rgb(255, 0, 0)',
+									fill: false,
+									data: [
+										<?php
+										foreach (array_reverse($data->consentRates, true) as $consent_rates) {
+											echo $consent_rates->optInRatePreferences . ",";
+										}
+										?>]
+								}, {
+									label: 'Statistic',
+									borderColor: 'rgb(230, 230, 0)',
+									fill: false,
+									data: [
+										<?php
+										foreach (array_reverse($data->consentRates, true) as $consent_rates) {
+											echo $consent_rates->optInRateStatistics . ",";
+										}
+										?>]
+								}, {
+									label: 'Marketing',
+									borderColor: 'rgb(0, 200, 255)',
+									fill: false,
+									data: [
+										<?php
+										foreach (array_reverse($data->consentRates, true) as $consent_rates) {
+											echo $consent_rates->optInRateMarketing . ",";
+										}
+										?>]
+								}]
+							},
+						});
+					</script>
+	
+					<?php
+				}
+			}
+		}
+
 	/**
 	 * Cookiebot_WP Cookiebot support page
 	 *
@@ -1290,6 +1636,23 @@ final class Cookiebot_WP {
 		$active_plugins = get_option( 'active_plugins' );
 
 
+		//Dashboard missing login info
+		$dashboard_log_in_count = 0;
+		if(empty(get_option('client_secret'))){
+			$dashboard_log_in = "Missing Client Secret";
+			$dashboard_log_in_count++;
+		}
+		if(empty(get_option('client_ID'))){
+			$dashboard_log_in = "Missing client ID";
+			$dashboard_log_in_count++;
+		}
+		if($dashboard_log_in_count == 0){
+			$dashboard_log_in = "Configured";
+		}
+		if($dashboard_log_in_count == 2){
+			$dashboard_log_in = "Not configured";
+		}
+
 		//$foo = new cookiebot_addons\lib\Settings_Service;
 		//$addons = $foo->get_active_addons();
 
@@ -1314,6 +1677,7 @@ final class Cookiebot_WP {
 		$debugStr.= "Disable Cookiebot in WP Admin: ".(get_option('cookiebot-nooutput-admin') == '1' ? 'Yes' : 'No')."\n";
 		$debugStr.= "Banner tag: ".$this->add_js(false)."\n";
 		$debugStr.= "Declaration tag: ".$this->show_declaration()."\n";
+		$debugStr.= "Dashboard: ".$dashboard_log_in."\n";
 
 		if(get_option('cookiebot-gtm') != false ){
 			$debugStr.= "GTM tag: ".$this->add_GTM(false)."\n";
@@ -1976,4 +2340,83 @@ if(!function_exists('cookiebot')) {
 	}
 }
 
+/* if(isset(get_option('client_ID'))){
+	if(isset(get_option('client_secret'))){
+		$dashboard_log_in = "configured";
+	}
+}elseif(isset(get_option('client_secret'))){
+	$dashboard_log_in = "Dashboard: missing client id";
+}elseif(isset(get_option('client_ID'))){
+	$dashboard_log_in = "missing client secret";
+}else{
+	$dashboard_log_in = "not configured";
+} */
+
+
+
+//Fetches domain info to dashboard page.
+function fetch_json($url, $method, $header){
+	$curl = curl_init();
+
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => $url,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_SSL_VERIFYPEER => false,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => $method,
+		CURLOPT_HTTPHEADER => array($header),
+	));
+
+	$response = curl_exec($curl);
+
+	curl_close($curl);
+
+	return json_decode($response);
+}
+
+
+//Downloads a CSV document with the url names on the selected domain in the Dashboard page.
+if(isset($_POST['submitCSV_x'])){
+	$CSV = curl("https://app-cookiebot-api-umbracodashboard-prod.azurewebsites.net/urls/" . get_option('domainID') . "?format=json", "GET", "Authorization: Bearer " . $_SESSION['token']);
+
+	$file_name = 'Domains_' . get_option('domain_id') . '.csv';
+
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header('Content-Description: File Transfer');
+	header("Content-type: text/csv");
+	header("Content-Disposition: attachment; filename={$file_name}");
+	header("Expires: 0");
+	header("Pragma: public");
+
+	$fh = @fopen( 'php://output', 'w' );
+
+	$header_displayed = false;
+	
+	foreach ( $CSV->crawlUrls as $url ) {
+		$url_column = array(
+			$url->url, $url->firstParentUrl
+		);
+
+		if ( !$header_displayed ) {
+			$header_column = array(
+				"url", "firstParentUrl"
+			);
+			fputcsv($fh, ($header_column));
+			$header_displayed = true;
+
+		}
+
+		fputcsv($fh, $url_column);
+	}
+
+	fclose($fh);
+
+	exit;
+}
+	
 cookiebot();
+
