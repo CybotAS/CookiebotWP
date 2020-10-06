@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites.
 Author: Cybot A/S
-Version: 3.8.0
+Version: 3.9.0
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.8.0';
+	public $version = '3.9.0';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -368,7 +368,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Register Cookiebot settings
 	 *
-	 * @version 2.1.5
+	 * @version 3.9.0
 	 * @since   1.0.0
 	 */
 	function register_cookiebot_settings() {
@@ -376,6 +376,7 @@ final class Cookiebot_WP {
 		register_setting('cookiebot', 'cookiebot-language');
 		register_setting('cookiebot', 'cookiebot-nooutput');
 		register_setting('cookiebot', 'cookiebot-nooutput-admin');
+		register_setting('cookiebot', 'cookiebot-output-logged-in');
 		register_setting('cookiebot', 'cookiebot-autoupdate');
 		register_setting('cookiebot', 'cookiebot-script-tag-uc-attribute');
 		register_setting('cookiebot', 'cookiebot-script-tag-cd-attribute');
@@ -483,7 +484,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Output settings page
 	 *
-	 * @version 2.2.0
+	 * @version 3.9.0
 	 * @since   1.0.0
 	 */
 	function settings_page() {
@@ -788,6 +789,27 @@ final class Cookiebot_WP {
 								<p class="description">
 									<?php if($disabled) { echo '<b>'._('Network setting applied. Please contact website administrator to change this setting.').'</b><br />';  } ?>
 									<b><?php _e('This checkbox will disable Cookiebot in the Wordpress Admin area.','cookiebot') ?></b>
+								</p>
+							</td>
+						</tr>
+						<tr valign="top">
+							<th scope="row"><?php _e('Enable Cookiebot on front end while logged in','cookiebot'); ?></th>
+							<td>
+								<?php
+								$disabled = false;
+								if($is_ms && get_site_option('cookiebot-output-logged-in',false)) {
+									echo '<input type="checkbox" checked disabled />';
+									$disabled = true;
+								}
+								else {
+									?>
+									<input type="checkbox" name="cookiebot-output-logged-in" value="1" <?php checked(1,get_option('cookiebot-output-logged-in',false), true); ?> />
+									<?php
+								}
+								?>
+								<p class="description">
+									<?php if($disabled) { echo '<b>'._('Network setting applied. Please contact website administrator to change this setting.').'</b><br />';  } ?>
+									<b><?php _e('This checkbox will enable Cookiebot on front end while you\'re logged in','cookiebot') ?></b>
 								</p>
 							</td>
 						</tr>
@@ -1229,7 +1251,7 @@ final class Cookiebot_WP {
   /**
    * Cookiebot_WP Debug Page
    *
-   * @version	3.6.0
+   * @version	3.9.0
    * @since		3.6.0
    */
 
@@ -1263,6 +1285,7 @@ final class Cookiebot_WP {
 		$debugStr.= "Auto update: ".(get_option('cookiebot-autoupdate') == '1' ? 'Enabled' : 'Not enabled')."\n";
 		$debugStr.= "Hide Cookie Popup: ".(get_option('cookiebot-nooutput') == '1' ? 'Yes' : 'No')."\n";
 		$debugStr.= "Disable Cookiebot in WP Admin: ".(get_option('cookiebot-nooutput-admin') == '1' ? 'Yes' : 'No')."\n";
+		$debugStr.= "Enable Cookiebot on front end while logged in: ".(get_option('cookiebot-output-logged-in') == '1' ? 'Yes' : 'No')."\n";
 		$debugStr.= "Banner tag: ".$this->add_js(false)."\n";
 		$debugStr.= "Declaration tag: ".$this->show_declaration()."\n";
 
@@ -1325,7 +1348,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Add Cookiebot JS to <head>
 	 *
-	 * @version 3.6.0
+	 * @version 3.9.0
 	 * @since   1.0.0
 	 */
 	function add_js($printTag=true) {
@@ -1334,11 +1357,12 @@ final class Cookiebot_WP {
 			if(is_multisite() && get_site_option('cookiebot-nooutput',false)) {
 				return; //Is multisite - and disabled output is checked as network setting
 			}
+
 			if(get_option('cookiebot-nooutput',false)) {
 				return; //Do not show JS - output disabled
 			}
 
-			if($this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() && $printTag !== false ) {
+			if($this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() && $printTag !== false && get_site_option('cookiebot-output-logged-in') == false) {
 				return;
 			}
 
