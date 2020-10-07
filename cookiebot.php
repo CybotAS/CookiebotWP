@@ -1178,14 +1178,14 @@ final class Cookiebot_WP {
 		<div class="wrap">
 			<h1><?php _e('Google Tag Manager', 'cookiebot')?></h1>
 
-			<form method="post" action="options.php" style="display: grid; grid-template-columns: 35% 65%; grid-row-gap: 20px; width: 600px; align-items: center;">
+			<form method="post" action="options.php" style="display: grid; grid-template-columns: 35% 65%; grid-row-gap: 20px; width: 700px; align-items: center;">
 				<?php settings_fields( 'cookiebot-gtm' ); ?>
 				<?php do_settings_sections( 'cookiebot-gtm' ); ?>
 
 				<p><?php _e('Enable GTM', 'cookiebot')?></p>
 				<div class="GTM_check">
 					<input type="checkbox" name="cookiebot-gtm" id="cookiebot-gtm" value="1" <?php checked(1,get_option('cookiebot-gtm'), true); ?> style="float: left; margin: 2px 4px 0 0">
-					<a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/" style="margin: 0; font-style: italic;">(<?php _e('Learn more about GTM and cookiebot', 'cookiebot')?>)</a>
+					<p style="margin: 0; font-style: italic;"><?php _e('For more details about Cookiebot and Google Tag Manager click', 'cookiebot') ?><a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/" style="margin: 0; font-style: italic;">&nbsp;<?php _e('here', 'cookiebot')?></a></p>
 				</div>
 
 				<p><?php _e('GTM ID', 'cookiebot')?></p>
@@ -1200,7 +1200,7 @@ final class Cookiebot_WP {
 				<p><?php _e('Google Consent Mode', 'cookiebot')?></p>
 				<div class="GTM_check">
 					<input type="checkbox" name="cookiebot-gcm" id="gcm" value="1" <?php checked(1,get_option('cookiebot-gcm'), true); ?> style="float: left; margin: 2px 4px 0 0">
-					<a href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode" style="margin: 0; font-style: italic;">(<?php _e('Learn more about Google Consent Mode', 'cookiebot')?>)</a>
+					<p style="margin: 0; font-style: italic;"><?php _e('For more details about Cookiebot and Google Consent Mode click', 'cookiebot') ?><a href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode" style="margin: 0; font-style: italic;">&nbsp;<?php _e('here', 'cookiebot')?></a></p>
 				</div>
 				<input type="submit" value="Save" name="gtm_save" style="background-color: rgb(0, 124, 186); color: white; padding: 5px 10px; border: none; border-radius: 5px; justify-self: start;">
 			</form>
@@ -1417,9 +1417,9 @@ final class Cookiebot_WP {
 
             if (get_option('cookiebot-gtm') != false) {
                 if (empty(get_option('cookiebot-data-layer'))) {
-                    $data_layer = 'data-datalayer="dataLayer"';
+                    $data_layer = 'data-layer-name="dataLayer"';
                 } else {
-                    $data_layer = 'data-datalayer="' . get_option('cookiebot-data-layer') . '"';
+                    $data_layer = 'data-layer-name="' . get_option('cookiebot-data-layer') . '"';
                 }
             } else {
                 $data_layer = '';
@@ -1488,17 +1488,9 @@ final class Cookiebot_WP {
 			}
 
 			$GCM = '<script data-cookieconsent="ignore">
-			' . $data_layer . ' = ' . $data_layer . ' || [];
-			function gtag() {
-				' . $data_layer . '.push(arguments);
-			}
-			gtag("consent", "default", {
-				ad_storage: "denied",
-				analytics_storage: "denied",
-				wait_for_update: 500,
-			});
-			gtag("set", "ads_data_redaction", true);
-			</script>';
+			(function(w,d,l){w[l]=w[l]||[];function gtag(){w[l].push(arguments)};
+			gtag("consent","default",{ad_storage:d,analytics_storage:d,wait_for_update:500,});
+			gtag("set", "ads_data_redaction", true);})(window,"denied","' . $data_layer . '");</script>';
 
 			if($printTag===false) {
 				return $GCM;
