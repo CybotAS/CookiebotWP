@@ -183,7 +183,9 @@ Cookiebot works with GTM. There are two different options setting up GTM with Co
 1. Use the Google Tag Manager option in the plugin settings to enable GTM together with Cookiebot. Here you also have the option to enable Google Consent Mode for GTM. 
 2. Add the GTM script manually or by using another plugin to your site. 
 
-Should you choose one of these methods, Cookiebot must not be implemented using GTM. If you prefer the latter method, you should select ´Hide Cookie Popup´ in the Cookiebot WordPress plugin settings.
+Should you choose one of these methods, Cookiebot must not be implemented using GTM as this would result in Cookiebot being loaded twice. 
+
+If you prefer the latter method, you should select ´Hide Cookie Popup´ in the Cookiebot WordPress plugin settings.
 
 [Please see our article on how to deploy Cookiebot with GTM](https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment).
 
