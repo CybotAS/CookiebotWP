@@ -1185,7 +1185,7 @@ final class Cookiebot_WP {
 				<p><?php _e('Enable GTM', 'cookiebot')?></p>
 				<div class="GTM_check">
 					<input type="checkbox" name="cookiebot-gtm" id="cookiebot-gtm" value="1" <?php checked(1,get_option('cookiebot-gtm'), true); ?> style="float: left; margin: 2px 4px 0 0">
-					<p style="margin: 0; font-style: italic;"><?php _e('For more details about Cookiebot and Google Tag Manager click', 'cookiebot') ?><a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/" style="margin: 0; font-style: italic;">&nbsp;<?php _e('here', 'cookiebot')?></a></p>
+					<p style="margin: 0; font-style: italic;"><?php _e('For more details about Cookiebot and Google Tag Manager click', 'cookiebot') ?><a target="_blank" href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/" style="margin: 0; font-style: italic;">&nbsp;<?php _e('here', 'cookiebot')?></a></p>
 				</div>
 
 				<p><?php _e('GTM ID', 'cookiebot')?></p>
@@ -1200,7 +1200,7 @@ final class Cookiebot_WP {
 				<p><?php _e('Google Consent Mode', 'cookiebot')?></p>
 				<div class="GTM_check">
 					<input type="checkbox" name="cookiebot-gcm" id="gcm" value="1" <?php checked(1,get_option('cookiebot-gcm'), true); ?> style="float: left; margin: 2px 4px 0 0">
-					<p style="margin: 0; font-style: italic;"><?php _e('For more details about Cookiebot and Google Consent Mode click', 'cookiebot') ?><a href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode" style="margin: 0; font-style: italic;">&nbsp;<?php _e('here', 'cookiebot')?></a></p>
+					<p style="margin: 0; font-style: italic;"><?php _e('For more details about Cookiebot and Google Consent Mode click', 'cookiebot') ?><a target="_blank" href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode" style="margin: 0; font-style: italic;">&nbsp;<?php _e('here', 'cookiebot')?></a></p>
 				</div>
 				<input type="submit" value="Save" name="gtm_save" style="background-color: rgb(0, 124, 186); color: white; padding: 5px 10px; border: none; border-radius: 5px; justify-self: start;">
 			</form>
