@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent, ccpa
 * Requires at least: 4.4
 * Tested up to: 5.4.2
-* Stable tag: 3.8.0
+* Stable tag: 3.8.1
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -177,8 +177,15 @@ if(function_exists('cookiebot_active') && cookiebot_active()) {
 
 The developer of the plugin can see more details on [our Github repository](https://github.com/CybotAS/CookiebotAddons)
 
-### Can I use Cookiebot with GTM? ###
-Cookiebot works with GTM, however you need to enable the "Hide Cookie Popup" option on the Cookiebot plugin settings page.
+### Can I use Cookiebot with Google Tag Manager? ###
+Cookiebot works with GTM. There are two different options setting up GTM with Cookiebot: 
+
+1. Use the Google Tag Manager option in the plugin settings to enable GTM together with Cookiebot. Here you also have the option to enable Google Consent Mode for GTM. 
+2. Add the GTM script manually or by using another plugin to your site. 
+
+Should you choose one of these methods, Cookiebot must not be implemented using GTM as this would result in Cookiebot being loaded twice. 
+
+If you prefer the latter method, you should select ´Hide Cookie Popup´ in the Cookiebot WordPress plugin settings.
 
 [Please see our article on how to deploy Cookiebot with GTM](https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment).
 
@@ -189,6 +196,9 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 
 ## Changelog ##
+
+### 3.8.1 - 2020-10-02 ###
+* Added support for Google Tag Manager and Google Consent Mode
 
 ### 3.8.0 - 2020-09-07 ###
 * New addon for Official Facebook Pixel plugin
