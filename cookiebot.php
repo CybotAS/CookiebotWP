@@ -1490,7 +1490,13 @@ final class Cookiebot_WP {
 			$GCM = '<script data-cookieconsent="ignore">
 			(function(w,d,l){w[l]=w[l]||[];function gtag(){w[l].push(arguments)};
 			gtag("consent","default",{ad_storage:d,analytics_storage:d,wait_for_update:500,});
-			gtag("set", "ads_data_redaction", true);})(window,"denied","' . $data_layer . '");</script>';
+			gtag("set", "ads_data_redaction", true);})(window,"denied","' . $data_layer . '");';
+
+			if( get_option('cookiebot-iab') ) {
+			    $GCM .= 'window ["gtag_enable_tcf_support"] = true;';
+            }
+
+			$GCM .= '</script>';
 
 			if($printTag===false) {
 				return $GCM;
