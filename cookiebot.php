@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites.
 Author: Cybot A/S
-Version: 3.8.0
+Version: 3.9.0
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -21,7 +21,7 @@ final class Cookiebot_WP {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.8.0';
+	public $version = '3.9.0';
 
 	/**
 	 * @var   Cookiebot_WP The single instance of the class
@@ -103,7 +103,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Init Cookiebot.
 	 *
-	 * @version 3.2.0
+	 * @version 3.8.1
 	 * @since   1.6.2
 	 * @access  public
 	 */
@@ -186,7 +186,9 @@ final class Cookiebot_WP {
 		load_plugin_textdomain('cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
 
 		//add JS
-		add_action('wp_head', array($this,'add_js'), -9999);
+		add_action('wp_head', array($this,'add_js'), -9997);
+		add_action('wp_head', array($this,'add_GTM'), -9998);
+		add_action('wp_head', array($this,'add_GCM'), -9999);
 		add_shortcode('cookie_declaration', array($this,'show_declaration'));
 
 		//Add filter if WP rocket is enabled
@@ -318,6 +320,7 @@ final class Cookiebot_WP {
 
 		add_submenu_page('cookiebot',__('Cookiebot Settings','cookiebot'),__('Settings','cookiebot'), 'manage_options', 'cookiebot',array($this,'settings_page'), 10 );
 		add_submenu_page('cookiebot',__('Cookiebot Support','cookiebot'),__('Support','cookiebot'), 'manage_options', 'cookiebot_support',array($this,'support_page'), 20 );
+		add_submenu_page('cookiebot',__('Google Tag Manager','cookiebot'),__('Google Tag Manager','cookiebot'), 'manage_options', 'cookiebot_GTM',array($this,'GTM_page') );
 		add_submenu_page('cookiebot',__('IAB','cookiebot'),__('IAB','cookiebot'), 'manage_options', 'cookiebot_iab',array($this,'iab_page'), 30 );
 
 		if(defined('COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION')) {
@@ -368,7 +371,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Register Cookiebot settings
 	 *
-	 * @version 2.1.5
+	 * @version 3.9.0
 	 * @since   1.0.0
 	 */
 	function register_cookiebot_settings() {
@@ -376,6 +379,7 @@ final class Cookiebot_WP {
 		register_setting('cookiebot', 'cookiebot-language');
 		register_setting('cookiebot', 'cookiebot-nooutput');
 		register_setting('cookiebot', 'cookiebot-nooutput-admin');
+		register_setting('cookiebot', 'cookiebot-output-logged-in');
 		register_setting('cookiebot', 'cookiebot-autoupdate');
 		register_setting('cookiebot', 'cookiebot-script-tag-uc-attribute');
 		register_setting('cookiebot', 'cookiebot-script-tag-cd-attribute');
@@ -384,6 +388,10 @@ final class Cookiebot_WP {
 		register_setting('cookiebot-iab', 'cookiebot-iab');
 		register_setting('cookiebot-legislations', 'cookiebot-ccpa');
 		register_setting('cookiebot-legislations', 'cookiebot-ccpa-domain-group-id');
+		register_setting('cookiebot-gtm', 'cookiebot-gtm');
+		register_setting('cookiebot-gtm', 'cookiebot-gtm-id');
+		register_setting('cookiebot-gtm', 'cookiebot-data-layer');
+		register_setting('cookiebot-gtm', 'cookiebot-gcm');
 	}
 
 	/**
@@ -483,7 +491,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Output settings page
 	 *
-	 * @version 2.2.0
+	 * @version 3.9.0
 	 * @since   1.0.0
 	 */
 	function settings_page() {
@@ -788,6 +796,27 @@ final class Cookiebot_WP {
 								<p class="description">
 									<?php if($disabled) { echo '<b>'._('Network setting applied. Please contact website administrator to change this setting.').'</b><br />';  } ?>
 									<b><?php _e('This checkbox will disable Cookiebot in the Wordpress Admin area.','cookiebot') ?></b>
+								</p>
+							</td>
+						</tr>
+						<tr valign="top">
+							<th scope="row"><?php _e('Enable Cookiebot on front end while logged in','cookiebot'); ?></th>
+							<td>
+								<?php
+								$disabled = false;
+								if($is_ms && get_site_option('cookiebot-output-logged-in',false)) {
+									echo '<input type="checkbox" checked disabled />';
+									$disabled = true;
+								}
+								else {
+									?>
+									<input type="checkbox" name="cookiebot-output-logged-in" value="1" <?php checked(1,get_option('cookiebot-output-logged-in',false), true); ?> />
+									<?php
+								}
+								?>
+								<p class="description">
+									<?php if($disabled) { echo '<b>'._('Network setting applied. Please contact website administrator to change this setting.').'</b><br />';  } ?>
+									<b><?php _e('This checkbox will enable Cookiebot on front end while you\'re logged in','cookiebot') ?></b>
 								</p>
 							</td>
 						</tr>
@@ -1159,6 +1188,48 @@ final class Cookiebot_WP {
 		<?php
 	}
 
+		/**
+	 * Cookiebot_WP Google Tag Manager page
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
+
+	function GTM_page(){
+		?>
+		<div class="wrap">
+			<h1><?php _e('Google Tag Manager', 'cookiebot')?></h1>
+
+			<form method="post" action="options.php" style="display: grid; grid-template-columns: 35% 65%; grid-row-gap: 20px; width: 700px; align-items: center;">
+				<?php settings_fields( 'cookiebot-gtm' ); ?>
+				<?php do_settings_sections( 'cookiebot-gtm' ); ?>
+
+				<p><?php _e('Enable GTM', 'cookiebot')?></p>
+				<div class="GTM_check">
+					<input type="checkbox" name="cookiebot-gtm" id="cookiebot-gtm" value="1" <?php checked(1,get_option('cookiebot-gtm'), true); ?> style="float: left; margin: 2px 4px 0 0">
+					<p style="margin: 0; font-style: italic;"><?php _e('For more details about Cookiebot and Google Tag Manager click', 'cookiebot') ?><a target="_blank" href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/" style="margin: 0; font-style: italic;">&nbsp;<?php _e('here', 'cookiebot')?></a></p>
+				</div>
+
+				<p><?php _e('GTM ID', 'cookiebot')?></p>
+				<input type="text" name="cookiebot-gtm-id" id="cookiebot-gtm-id" value="<?php echo get_option('cookiebot-gtm-id'); ?>" style="height: 30px;">
+
+				<p><?php _e('DataLayer name', 'cookiebot')?></p>
+				<div>
+					<input type="text" name="cookiebot-data-layer" id="data_layer" placeholder="dataLayer" value="<?php echo get_option('cookiebot-data-layer'); ?>" style="height: 30px;">
+					<p style="margin: 0;"><?php _e('Optional, only change if necessary', 'cookiebot')?></p>
+				</div>
+
+				<p><?php _e('Google Consent Mode', 'cookiebot')?></p>
+				<div class="GTM_check">
+					<input type="checkbox" name="cookiebot-gcm" id="gcm" value="1" <?php checked(1,get_option('cookiebot-gcm'), true); ?> style="float: left; margin: 2px 4px 0 0">
+					<p style="margin: 0; font-style: italic;"><?php _e('For more details about Cookiebot and Google Consent Mode click', 'cookiebot') ?><a target="_blank" href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode" style="margin: 0; font-style: italic;">&nbsp;<?php _e('here', 'cookiebot')?></a></p>
+				</div>
+				<input type="submit" value="Save" name="gtm_save" style="background-color: rgb(0, 124, 186); color: white; padding: 5px 10px; border: none; border-radius: 5px; justify-self: start;">
+			</form>
+		</div>
+		<?php
+	}
+
 	/**
 	 * Cookiebot_WP Cookiebot IAB page
 	 *
@@ -1229,7 +1300,7 @@ final class Cookiebot_WP {
   /**
    * Cookiebot_WP Debug Page
    *
-   * @version	3.6.0
+   * @version	3.9.
    * @since		3.6.0
    */
 
@@ -1263,8 +1334,17 @@ final class Cookiebot_WP {
 		$debugStr.= "Auto update: ".(get_option('cookiebot-autoupdate') == '1' ? 'Enabled' : 'Not enabled')."\n";
 		$debugStr.= "Hide Cookie Popup: ".(get_option('cookiebot-nooutput') == '1' ? 'Yes' : 'No')."\n";
 		$debugStr.= "Disable Cookiebot in WP Admin: ".(get_option('cookiebot-nooutput-admin') == '1' ? 'Yes' : 'No')."\n";
+		$debugStr.= "Enable Cookiebot on front end while logged in: ".(get_option('cookiebot-output-logged-in') == '1' ? 'Yes' : 'No')."\n";
 		$debugStr.= "Banner tag: ".$this->add_js(false)."\n";
 		$debugStr.= "Declaration tag: ".$this->show_declaration()."\n";
+
+		if(get_option('cookiebot-gtm') != false ){
+			$debugStr.= "GTM tag: ".$this->add_GTM(false)."\n";
+		}
+		
+		if(get_option('cookiebot-gcm') != false ){
+			$debugStr.= "GCM tag: ".$this->add_GCM(false)."\n";
+		}
 
 		if($this->is_wp_consent_api_active()) {
 			$debugStr.= "\n--- WP Consent Level API Mapping ---\n";
@@ -1325,7 +1405,7 @@ final class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Add Cookiebot JS to <head>
 	 *
-	 * @version 3.6.0
+	 * @version 3.9.0
 	 * @since   1.0.0
 	 */
 	function add_js($printTag=true) {
@@ -1334,11 +1414,12 @@ final class Cookiebot_WP {
 			if(is_multisite() && get_site_option('cookiebot-nooutput',false)) {
 				return; //Is multisite - and disabled output is checked as network setting
 			}
+
 			if(get_option('cookiebot-nooutput',false)) {
 				return; //Do not show JS - output disabled
 			}
 
-			if($this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() && $printTag !== false ) {
+			if($this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() && $printTag !== false && get_site_option('cookiebot-output-logged-in') == false) {
 				return;
 			}
 
@@ -1358,15 +1439,97 @@ final class Cookiebot_WP {
 				$tagAttr = 'data-blockingmode="auto"';
 			}
 
+            if (get_option('cookiebot-gtm') != false) {
+                if (empty(get_option('cookiebot-data-layer'))) {
+                    $data_layer = 'data-layer-name="dataLayer"';
+                } else {
+                    $data_layer = 'data-layer-name="' . get_option('cookiebot-data-layer') . '"';
+                }
+            } else {
+                $data_layer = '';
+            }
+
 			$iab = ( get_option('cookiebot-iab') != false ) ? 'data-framework="IAB"' : '';
 
 			$ccpa = ( get_option('cookiebot-ccpa') != false ) ? 'data-georegions="{\'region\':\'US-06\',\'cbid\':\''.get_option('cookiebot-ccpa-domain-group-id').'\'}"' : '';
 
-			$tag = '<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" '.$iab.' '.$ccpa.' data-cbid="'.$cbid.'"'.$lang.' type="text/javascript" '.$tagAttr.'></script>';
+			$tag = '<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" '.$iab.' '.$ccpa.' '.$data_layer.' data-cbid="'.$cbid.'"'.$lang.' type="text/javascript" '.$tagAttr.'></script>';
 			if($printTag===false) {
 				return $tag;
 			}
 			echo $tag;
+		}
+	}
+
+		/**
+	 * Cookiebot_WP Add Google Tag Manager JS to <head>
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
+
+	function add_GTM($printTag=true) {
+
+		if(get_option('cookiebot-gtm') != false ){
+		
+			if(empty(get_option('cookiebot-data-layer'))){
+				$data_layer = 'dataLayer';
+			}else{
+				$data_layer = get_option('cookiebot-data-layer');
+			}
+
+			$GTM = "<script>";
+			if( get_option('cookiebot-iab') ) {
+			    $GTM .= 'window ["gtag_enable_tcf_support"] = true;';
+            		}
+			
+			$GTM .= "(function (w, d, s, l, i) {
+				w[l] = w[l] || []; w[l].push({'gtm.start':new Date().getTime(), event: 'gtm.js'}); 
+			  var f = d.getElementsByTagName(s)[0],  j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; 
+			  j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; 
+			  f.parentNode.insertBefore(j, f);})
+			  (window, document, 'script', '" . $data_layer . "', '" . get_option('cookiebot-gtm-id') . "');";
+					
+			
+			$GTM .=  "</script>";
+
+			if($printTag===false) {
+				return $GTM;
+			}
+
+			  echo $GTM;
+		}
+	}
+
+		/**
+	 * Cookiebot_WP Add Google Consent Mode JS to <head>
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
+
+	function add_GCM($printTag=true) {
+
+		if(get_option('cookiebot-gcm') != false ){
+
+			if(empty(get_option('cookiebot-data-layer'))){
+				$data_layer = 'dataLayer';
+			}else{
+				$data_layer = get_option('cookiebot-data-layer');
+			}
+
+			$GCM = '<script data-cookieconsent="ignore">
+			(function(w,d,l){w[l]=w[l]||[];function gtag(){w[l].push(arguments)};
+			gtag("consent","default",{ad_storage:d,analytics_storage:d,wait_for_update:500,});
+			gtag("set", "ads_data_redaction", true);})(window,"denied","' . $data_layer . '");';
+
+			$GCM .= '</script>';
+
+			if($printTag===false) {
+				return $GCM;
+			}
+
+			echo $GCM;
 		}
 	}
 
