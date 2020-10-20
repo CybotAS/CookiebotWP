@@ -88,5 +88,8 @@
   },
   "Official_Facebook_Pixel": {
     "class": "cookiebot_addons\\controller\\addons\\official_facebook_pixel\\Official_Facebook_Pixel"
+  },
+  "Google_Site_Kit": {
+    "class": "cookiebot_addons\\controller\\addons\\google_site_kit\\Google_Site_Kit"
   }
 }
