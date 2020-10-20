@@ -89,6 +89,9 @@
   "Official_Facebook_Pixel": {
     "class": "cookiebot_addons\\controller\\addons\\official_facebook_pixel\\Official_Facebook_Pixel"
   },
+  "Woocommerce_Google_Analytics_Pro": {
+    "class": "cookiebot_addons\\controller\\addons\\woocommerce_google_analytics_pro\\Woocommerce_Google_Analytics_Pro"
+  },
   "Google_Site_Kit": {
     "class": "cookiebot_addons\\controller\\addons\\google_site_kit\\Google_Site_Kit"
   }
