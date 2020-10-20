@@ -39,7 +39,7 @@ See [Admin UI](documentation/admin-ui.md)
 # Roadmap
 
 Following plugins have native (built-in) support for Cookiebot:
-* [MonsterInsights](https://www.monsterinsights.com/addon/eu-compliance/)
+* [MonsterInsights](https://www.monsterinsights.com/addon/eu-compliance/) (only in the Plus / Pro version)
 * [PixelYourSite](https://wordpress.org/plugins/pixelyoursite/)
 
 Released and tested addons:
