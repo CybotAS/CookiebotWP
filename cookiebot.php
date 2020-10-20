@@ -1478,13 +1478,20 @@ final class Cookiebot_WP {
 				$data_layer = get_option('cookiebot-data-layer');
 			}
 
-			$GTM = "<script>(function (w, d, s, l, i) {
+			$GTM = "<script>";
+			if( get_option('cookiebot-iab') ) {
+			    $GTM .= 'window ["gtag_enable_tcf_support"] = true;';
+            		}
+			
+			$GTM .= "(function (w, d, s, l, i) {
 				w[l] = w[l] || []; w[l].push({'gtm.start':new Date().getTime(), event: 'gtm.js'}); 
 			  var f = d.getElementsByTagName(s)[0],  j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; 
 			  j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; 
 			  f.parentNode.insertBefore(j, f);})
-			  (window, document, 'script', '" . $data_layer . "', '" . get_option('cookiebot-gtm-id') . "');
-			  </script>";
+			  (window, document, 'script', '" . $data_layer . "', '" . get_option('cookiebot-gtm-id') . "');";
+					
+			
+			$GTM .=  "</script>";
 
 			if($printTag===false) {
 				return $GTM;
@@ -1515,10 +1522,6 @@ final class Cookiebot_WP {
 			(function(w,d,l){w[l]=w[l]||[];function gtag(){w[l].push(arguments)};
 			gtag("consent","default",{ad_storage:d,analytics_storage:d,wait_for_update:500,});
 			gtag("set", "ads_data_redaction", true);})(window,"denied","' . $data_layer . '");';
-
-			if( get_option('cookiebot-iab') ) {
-			    $GCM .= 'window ["gtag_enable_tcf_support"] = true;';
-            }
 
 			$GCM .= '</script>';
 
