@@ -1454,16 +1454,18 @@ final class Cookiebot_WP {
 				$data_layer = get_option('cookiebot-data-layer');
 			}
 
-			$GTM = "<script>(function (w, d, s, l, i) {
+			$GTM = "<script>";
+			if( get_option('cookiebot-iab') ) {
+			    $GTM .= 'window ["gtag_enable_tcf_support"] = true;';
+            		}
+			
+			$GTM .= "(function (w, d, s, l, i) {
 				w[l] = w[l] || []; w[l].push({'gtm.start':new Date().getTime(), event: 'gtm.js'}); 
 			  var f = d.getElementsByTagName(s)[0],  j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; 
 			  j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; 
 			  f.parentNode.insertBefore(j, f);})
 			  (window, document, 'script', '" . $data_layer . "', '" . get_option('cookiebot-gtm-id') . "');";
-			
-			if( get_option('cookiebot-iab') ) {
-			    $GTM .= 'window ["gtag_enable_tcf_support"] = true;';
-            		}
+					
 			
 			$GTM .=  "</script>";
 
