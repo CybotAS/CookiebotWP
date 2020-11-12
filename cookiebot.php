@@ -210,7 +210,7 @@ final class Cookiebot_WP {
 		
 		
 		//Add Gutenberg block
-		add_action( 'enqueue_block_assets', array($this,'gutenberg_block_setup') );
+		add_action( 'init', array($this,'gutenberg_block_setup') );
 		add_action( 'enqueue_block_editor_assets', array($this,'gutenberg_block_admin_assets') );   
 	}
 	
