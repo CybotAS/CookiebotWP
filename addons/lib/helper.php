@@ -210,15 +210,42 @@ function cookiebot_addons_checked_selected_helper( $helper, $current, $echo = tr
  * @return string
  *
  * @since 1.3.0
+ * @version 3.9.1
  */
 function cookiebot_addons_output_cookie_types( $cookie_types ) {
 	if ( is_array( $cookie_types ) && count( $cookie_types ) > 0 ) {
-		return implode( ', ', $cookie_types );
+		return implode( ', ', array_map( function ( $value ) {
+			return cookiebot_translate_type_name( $value );
+		}, $cookie_types ) );
 	} elseif ( is_string( $cookie_types ) && $cookie_types != '' ) {
-		return $cookie_types;
+		return cookiebot_translate_type_name( $cookie_types );
 	}
 
-	return 'statistics';
+	return cookiebot_translate_type_name( 'statistics' );
+}
+
+/**
+ * Translates the cookie type to different language
+ *
+ * @param $type string
+ *
+ * @return string
+ *
+ * @since 3.9.1
+ */
+function cookiebot_translate_type_name( $type ) {
+	switch ( $type ) {
+		case 'marketing':
+			return esc_html__( 'marketing', 'cookiebot' );
+		case 'statistics':
+			return esc_html__( 'statistics', 'cookiebot' );
+		case 'preferences':
+			return esc_html__( 'preferences', 'cookiebot' );
+		case 'necessary':
+			return esc_html__( 'necessary', 'cookiebot' );
+		default:
+			return $type;
+	}
 }
 
 /**
