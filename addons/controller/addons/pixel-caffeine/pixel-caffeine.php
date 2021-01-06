@@ -70,7 +70,7 @@ class Pixel_Caffeine implements Cookiebot_Addons_Interface {
 	 * @since 1.4.0
 	 */
 	public function cookiebot_addon_pixel_caffeine() {
-		$this->script_loader_tag->add_tag( 'aepc-pixel-events', array( 'facebook' => $this->get_cookie_types() ) );
+		$this->script_loader_tag->add_tag( 'aepc-pixel-events', $this->get_cookie_types() );
 
 		$this->buffer_output->add_tag( 'wp_head', 99, array(
 			'aepc_pixel' => $this->get_cookie_types(),
