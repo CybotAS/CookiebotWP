@@ -4,5 +4,8 @@
     },
     "config":{
         "prepend-autoloader": false
+    },
+    "require-dev": {
+        "coenjacobs/mozart": "^0.5.1"
     }
 }
