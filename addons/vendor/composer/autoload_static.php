@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9337fa5989b39cf1b5067f0805930f63
+class ComposerStaticInitf7db2435a099f322baffc42d3d5d8c61
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -14,7 +14,7 @@ class ComposerStaticInit9337fa5989b39cf1b5067f0805930f63
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        'bbf73f3db644d3dced353b837903e74c' => __DIR__ . '/..' . '/php-di/php-di/src/DI/functions.php',
+        '1189f6b6b50c267de6a30d7721bb532e' => __DIR__ . '/../..' . '/inc/Dependencies/DI/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -31,27 +31,14 @@ class ComposerStaticInit9337fa5989b39cf1b5067f0805930f63
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\Console\\' => 26,
         ),
-        'P' => 
-        array (
-            'Psr\\Container\\' => 14,
-            'PhpDocReader\\' => 13,
-        ),
         'L' => 
         array (
             'League\\MimeTypeDetection\\' => 25,
             'League\\Flysystem\\' => 17,
         ),
-        'I' => 
-        array (
-            'Invoker\\' => 8,
-            'Interop\\Container\\' => 18,
-        ),
-        'D' => 
-        array (
-            'DI\\' => 3,
-        ),
         'C' => 
         array (
+            'Cybot\\' => 6,
             'CoenJacobs\\Mozart\\' => 18,
         ),
     );
@@ -97,14 +84,6 @@ class ComposerStaticInit9337fa5989b39cf1b5067f0805930f63
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
-        'Psr\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'PhpDocReader\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/php-di/phpdoc-reader/src/PhpDocReader',
-        ),
         'League\\MimeTypeDetection\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
@@ -113,17 +92,9 @@ class ComposerStaticInit9337fa5989b39cf1b5067f0805930f63
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
-        'Invoker\\' => 
+        'Cybot\\' => 
         array (
-            0 => __DIR__ . '/..' . '/php-di/invoker/src',
-        ),
-        'Interop\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
-        ),
-        'DI\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/php-di/php-di/src/DI',
+            0 => __DIR__ . '/../..' . '/inc',
         ),
         'CoenJacobs\\Mozart\\' => 
         array (
@@ -143,9 +114,9 @@ class ComposerStaticInit9337fa5989b39cf1b5067f0805930f63
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9337fa5989b39cf1b5067f0805930f63::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9337fa5989b39cf1b5067f0805930f63::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit9337fa5989b39cf1b5067f0805930f63::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf7db2435a099f322baffc42d3d5d8c61::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf7db2435a099f322baffc42d3d5d8c61::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf7db2435a099f322baffc42d3d5d8c61::$classMap;
 
         }, null, ClassLoader::class);
     }

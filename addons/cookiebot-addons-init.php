@@ -5,8 +5,8 @@ namespace cookiebot_addons;
 use cookiebot_addons\config\Settings_Config;
 use cookiebot_addons\controller\Plugin_Controller;
 use cookiebot_addons\lib\Settings_Service_Interface;
-use DI\ContainerBuilder;
-use DI;
+use Cybot\Dependencies\DI\ContainerBuilder;
+use Cybot\Dependencies\DI;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -40,14 +40,14 @@ include_once COOKIEBOT_ADDONS_DIR . 'lib/helper.php';
  *
  * "php-di/php-di": "5.0"
  */
-include_once COOKIEBOT_ADDONS_DIR . 'lib/ioc/autoload.php';
+include_once COOKIEBOT_ADDONS_DIR . 'vendor/autoload.php';
 
 class Cookiebot_Addons {
 
 	/**
 	 * IoC Container - is used for dependency injections
 	 *
-	 * @var \DI\Container
+	 * @var DI\Container
 	 *
 	 * @since 1.3.0
 	 */
@@ -83,7 +83,7 @@ class Cookiebot_Addons {
 		if ( is_null( self::$_instance ) ) {
 			try {
 				self::$_instance = new self();
-			} catch ( \DI\DependencyException $e ) {
+			} catch ( DI\DependencyException $e ) {
 				echo 'Dependencies are not loaded.';
 			} catch ( DI\NotFoundException $e ) {
 				echo 'Dependencies are not found.';
@@ -201,7 +201,7 @@ class Cookiebot_Addons {
 			/**
 			 * Load addon class to the container
 			 */
-			$this->container->set( $plugin->class, \DI\object( $plugin->class )
+			$this->container->set( $plugin->class, DI\object( $plugin->class )
 				->constructor(
 					$this->container->get( 'Settings_Service_Interface' ),
 					$this->container->get( 'Script_Loader_Tag_Interface' ),

@@ -37,14 +37,42 @@ class Compose extends Command
         $workingDir = getcwd();
         $this->workingDir = $workingDir;
 
-        $config = json_decode(file_get_contents($workingDir . '/composer.json'));
-        $config = $config->extra->mozart;
+        $composerFile = $workingDir . '/composer.json';
+        if (!file_exists($composerFile)) {
+            $output->write('No composer.json found at current directory: ' . $workingDir);
+            return 1;
+        }
+
+        $composer = json_decode(file_get_contents($composerFile));
+        // If the json was malformed.
+        if (!is_object($composer)) {
+            $output->write('Unable to parse composer.json read at: ' . $workingDir);
+            return 1;
+        }
+
+        // if `extra` is missing or not an object or if it does not have a `mozart` key which is an object.
+        if (!isset($composer->extra) || !is_object($composer->extra)
+            || !isset($composer->extra->mozart) || !is_object($composer->extra->mozart)) {
+            $output->write('Mozart config not readable in composer.json at extra->mozart');
+            return 1;
+        }
+        $config = $composer->extra->mozart;
+
+        $config->dep_namespace = preg_replace("/\\\{2,}$/", "\\", "$config->dep_namespace\\");
+
         $this->config = $config;
 
         $this->mover = new Mover($workingDir, $config);
         $this->replacer = new Replacer($workingDir, $config);
 
-        $packages = $this->findPackages($config->packages);
+        $require = array();
+        if (isset($config->packages) && is_array($config->packages)) {
+            $require = $config->packages;
+        } elseif (isset($composer->require) && is_object($composer->require)) {
+            $require = array_keys(get_object_vars($composer->require));
+        }
+
+        $packages = $this->findPackages($require);
 
         $this->movePackages($packages);
         $this->replacePackages($packages);
@@ -53,6 +81,8 @@ class Compose extends Command
             $this->replacer->replaceParentPackage($package, null);
         }
 
+	    $this->replacer->replaceParentClassesInDirectory( $this->config->classmap_directory );
+        
         return 0;
     }
 
@@ -125,7 +155,12 @@ class Compose extends Command
                 continue;
             }
 
-            $package = new Package($packageDir);
+            $autoloaders = null;
+            if (isset($this->config->override_autoload) && isset($this->config->override_autoload->$package_slug)) {
+                $autoloaders = $this->config->override_autoload->$package_slug;
+            }
+
+            $package = new Package($packageDir, $autoloaders);
             $package->findAutoloaders();
 
             $config = json_decode(file_get_contents($packageDir . 'composer.json'));
