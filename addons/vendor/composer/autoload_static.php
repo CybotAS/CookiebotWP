@@ -102,21 +102,11 @@ class ComposerStaticInitf7db2435a099f322baffc42d3d5d8c61
         ),
     );
 
-    public static $classMap = array (
-        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
-        'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
-        'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
-        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
-        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitf7db2435a099f322baffc42d3d5d8c61::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitf7db2435a099f322baffc42d3d5d8c61::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitf7db2435a099f322baffc42d3d5d8c61::$classMap;
 
         }, null, ClassLoader::class);
     }
