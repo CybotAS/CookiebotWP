@@ -26,11 +26,6 @@
         },
         "files": [
             "inc/Dependencies/DI/functions.php"
-        ],
-        "exclude-from-classmap": [
-            "vendor/symfony",
-            "vendor/coenjacobs",
-            "vendor/league"
         ]
     },
     "scripts": {
