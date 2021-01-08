@@ -31,10 +31,12 @@
     "scripts": {
         "post-install-cmd": [
             "\"vendor/bin/mozart\" compose",
+            "rm -Rf vendor/symfony vendor/coenjacobs vendor/league",
             "composer dump-autoload"
         ],
         "post-update-cmd": [
             "\"vendor/bin/mozart\" compose",
+            "rm -Rf vendor/symfony vendor/coenjacobs vendor/league",
             "composer dump-autoload"
         ]
     }
