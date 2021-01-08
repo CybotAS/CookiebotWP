@@ -1,6 +1,6 @@
 <?php
 
-namespace cookiebot_addons\controller\addons\custom_facebook_feed;
+namespace cookiebot_addons\controller\addons\custom_facebook_feed_2_17_1;
 
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
@@ -8,7 +8,7 @@ use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\Cookie_Consent_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
 
-class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
+class Custom_Facebook_Feed_2_17_1 implements Cookiebot_Addons_Interface {
 
 	/**
 	 * @var Settings_Service_Interface
@@ -99,7 +99,7 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_addon_name() {
-		return 'Custom Facebook Feed';
+		return 'Custom Facebook Feed (<= 2.17.1)';
 	}
 
 	/**
@@ -159,7 +159,13 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_installed() {
-		return $this->settings->is_addon_installed( $this->get_plugin_file() );
+		$installed = $this->settings->is_addon_installed( $this->get_plugin_file() );
+
+        if ( $installed && version_compare( $this->get_addon_version(), '2.17.1', '>' ) ) {
+            $installed = false;
+        }
+
+        return $installed;
 	}
 
 	/**
@@ -261,7 +267,7 @@ class Custom_Facebook_Feed implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/custom-facebook-feed/trunk/custom-facebook-feed.php';
+		return 'http://plugins.svn.wordpress.org/custom-facebook-feed/tags/2.17.1/custom-facebook-feed.php';
 	}
 
 	/**
