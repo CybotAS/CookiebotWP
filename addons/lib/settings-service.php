@@ -2,10 +2,12 @@
 
 namespace cookiebot_addons\lib;
 
+use Cybot\Dependencies\DI;
+
 class Settings_Service implements Settings_Service_Interface {
 
 	/**
-	 * @var \DI\Container
+	 * @var DI\Container
 	 */
 	public $container;
 
@@ -127,8 +129,8 @@ class Settings_Service implements Settings_Service_Interface {
 	 * Returns addons one by one through a generator
 	 *
 	 * @return array
-	 * @throws \DI\DependencyException
-	 * @throws \DI\NotFoundException
+	 * @throws DI\DependencyException
+	 * @throws DI\NotFoundException
 	 *
 	 * @since 1.3.0
 	 */
@@ -146,8 +148,8 @@ class Settings_Service implements Settings_Service_Interface {
 	 * Returns active addons
 	 *
 	 * @return array
-	 * @throws \DI\DependencyException
-	 * @throws \DI\NotFoundException
+	 * @throws DI\DependencyException
+	 * @throws DI\NotFoundException
 	 *
 	 * @since 1.3.0
 	 */
@@ -487,8 +489,8 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @param $addon_option_name    string  Addon option name
 	 *
-	 * @throws \DI\DependencyException
-	 * @throws \DI\NotFoundException
+	 * @throws DI\DependencyException
+	 * @throws DI\NotFoundException
 	 *
 	 * @since 2.2.0
 	 */
