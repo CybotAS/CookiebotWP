@@ -110,6 +110,10 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @return string
 	 */
 	public function cookiebot_addon_add_to_any_content( string $content ) {
+		if ( ! class_exists( 'DOMDocument' ) || ! class_exists( 'DOMXPath' ) || ! class_exists( 'DOMElement' ) ) {
+			return $content;
+		}
+
 		if ( $this->has_placeholder() && $this->is_placeholder_enabled() ) {
 			$dom = new DOMDocument();
 			$dom->loadHTML( $content );
