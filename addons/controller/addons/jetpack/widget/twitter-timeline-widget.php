@@ -204,7 +204,7 @@ class Twitter_Timeline_Widget {
 	public function display_div_message_to_go_to_consent_settings( $view, $widget ) {
 		if ( $widget == 'twitter_timeline' && $view == 'widget_view' ) {
 			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
-				echo '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">' . $this->get_widget_placeholder() . '</div>';
+				echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() ) . '">' . $this->get_widget_placeholder() . '</div>';
 			}
 		}
 	}

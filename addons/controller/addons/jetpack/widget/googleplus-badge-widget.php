@@ -208,7 +208,7 @@ class Googleplus_Badge_Widget {
 	public function display_div_message_to_go_to_consent_settings( $view, $widget ) {
 		if ( $widget == 'googleplus-badge' && $view == 'widget_view' ) {
 			if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
-				echo '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->cookie_types ) . '">' . $this->get_widget_placeholder() . '</div>';
+				echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->cookie_types ) . '">' . $this->get_widget_placeholder() . '</div>';
 			}
 
 		}

@@ -122,7 +122,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 
 			$placeholder         = $this->get_placeholder();
 			$placeholder_element = $dom->createDocumentFragment();
-			$placeholder_element->appendXML( '<div  class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_cookie_types() ) . '">' . $placeholder . '</div>' );
+			$placeholder_element->appendXML( '<div  class="' . cookiebot_addons_cookieconsent_optout( $this->get_cookie_types() ) . '">' . $placeholder . '</div>' );
 
 			foreach ( $nodes as $node ) {
 				/* @var DOMElement $node */

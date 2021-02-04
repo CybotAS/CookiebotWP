@@ -215,7 +215,7 @@ class Facebook_Widget {
 	public function cookie_consent_div( $view, $widget ) {
 		if ( $widget == 'facebook-likebox' && $view == 'widget_view' ) {
 			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
-				echo '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">
+				echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() ) . '">
 						  ' . $this->get_widget_placeholder() . '
 						</div>';
 			}
