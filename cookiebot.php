@@ -1429,7 +1429,7 @@ final class Cookiebot_WP {
 				return; //Do not show JS - output disabled
 			}
 
-			if($this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() && $printTag !== false && get_site_option('cookiebot-output-logged-in') == false) {
+			if($this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() && $printTag !== false && get_blog_option(null, 'cookiebot-output-logged-in') == false) {
 				return;
 			}
 
