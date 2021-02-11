@@ -5,6 +5,7 @@ namespace cookiebot_addons\controller;
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
+use Cybot\Dependencies\DI;
 
 class Plugin_Controller {
 
@@ -26,7 +27,6 @@ class Plugin_Controller {
 	 */
 	public function __construct( Settings_Service_Interface $settings_service ) {
 		$this->settings_service = $settings_service;
-
 		$this->load_init_files();
 	}
 
@@ -46,8 +46,8 @@ class Plugin_Controller {
 	/**
 	 *  Load addon configuration if the plugin is activated
 	 *
-	 * @throws \DI\DependencyException
-	 * @throws \DI\NotFoundException
+	 * @throws DI\DependencyException
+	 * @throws DI\NotFoundException
 	 *
 	 * @version 1.3.0
 	 * @since 1.2.0
