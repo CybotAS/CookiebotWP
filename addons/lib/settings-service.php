@@ -2,6 +2,7 @@
 
 namespace cookiebot_addons\lib;
 
+use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 use Cybot\Dependencies\DI;
 
 class Settings_Service implements Settings_Service_Interface {
@@ -157,7 +158,8 @@ class Settings_Service implements Settings_Service_Interface {
 		$active_addons = array();
 
 		foreach ( $this->get_addons() as $addon ) {
-			/**
+            /**
+             * @var $addon Cookiebot_Addons_Interface
 			 * Load addon code if the plugin is active and addon is activated
 			 */
 			if ( $addon->is_addon_enabled() && $addon->is_addon_installed() && $addon->is_addon_activated() ) {
