@@ -259,7 +259,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		}
 
 		unset( $matches );
-		preg_match_all( '/<script.*(instagram|issuu|imgur|polldaddy|tumblr)+.*<\/script>/mi', $content, $matches );
+		preg_match_all( '/<script.*(instagram|issuu|imgur|redditmedia\.com|tiktok\.com|polldaddy|tumblr)+.*<\/script>/mi', $content, $matches );
 		foreach ( $matches[0] as $x => $match ) {
 			//Replace - and add cookie consent notice.
 			$adjusted = str_replace( ' src=',
@@ -283,7 +283,6 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			$content     = str_replace( $match, $adjusted, $content );
 		}
 		unset( $matches );
-
 
 		return $content;
 	}
@@ -600,7 +599,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 */
 	private function get_default_regex() {
 		return apply_filters( 'cookiebot_embed_default_regex',
-			'/<iframe[^>]* src=("|\').*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com).*[^>].*>.*?<\/iframe>/mi' );
+			'/<iframe[^>]* src=("|\').*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com|soundcloud\.com|spotify\.com|speakerdeck\.com|slideshare\.net|screencast\.com|reverbnation\.com|mixcloud\.com|cloudup\.com|animoto\.com|video\.wordpress\.com|embed\.ted\.com|embedly\.com|kickstarter\.com).*[^>].*>.*?<\/iframe>/mi' );
 	}
 
 	/**
