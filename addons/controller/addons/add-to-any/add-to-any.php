@@ -2,6 +2,9 @@
 
 namespace cookiebot_addons\controller\addons\add_to_any;
 
+use DOMDocument;
+use DOMXPath;
+use DOMElement;
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons\lib\Cookie_Consent_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
@@ -87,6 +90,49 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 		if ( has_action( 'wp_enqueue_scripts', 'A2A_SHARE_SAVE_enqueue_script' ) ) {
 			$this->script_loader_tag->add_tag( 'addtoany', $this->get_cookie_types() );
 		}
+
+		add_filter( 'the_content', array(
+			$this,
+			'cookiebot_addon_add_to_any_content',
+		), 1000 ); //Ensure it is executed as the last filter
+
+		add_filter( 'the_excerpt', array(
+			$this,
+			'cookiebot_addon_add_to_any_content',
+		), 1000 ); //Ensure it is executed as the last filter
+	}
+
+	/**
+	 * Display a placeholder on elements with "addtoany_share_save_container" class name.
+	 *
+	 * @param string $content
+	 *
+	 * @return string
+	 */
+	public function cookiebot_addon_add_to_any_content( string $content ) {
+		if ( ! class_exists( 'DOMDocument' ) || ! class_exists( 'DOMXPath' ) || ! class_exists( 'DOMElement' ) ) {
+			return $content;
+		}
+
+		if ( $this->has_placeholder() && $this->is_placeholder_enabled() ) {
+			$dom = new DOMDocument();
+			$dom->loadHTML( $content );
+			$finder = new DOMXPath( $dom );
+			$nodes  = $finder->query( "//*[contains(@class, 'addtoany_share_save_container')]" );
+
+			$placeholder         = $this->get_placeholder();
+			$placeholder_element = $dom->createDocumentFragment();
+			$placeholder_element->appendXML( '<div  class="' . cookiebot_addons_cookieconsent_optout( $this->get_cookie_types() ) . '">' . $placeholder . '</div>' );
+
+			foreach ( $nodes as $node ) {
+				/* @var DOMElement $node */
+				$node->appendChild( $placeholder_element );
+			}
+
+			$content = $dom->saveHTML();
+		}
+
+		return $content;
 	}
 
 	/**

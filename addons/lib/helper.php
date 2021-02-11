@@ -272,6 +272,23 @@ function cookiebot_addons_get_one_cookie_type( $cookie_types ) {
 }
 
 /**
+ * @param $cookie_types
+ *
+ * @return string
+ *
+ * @version 3.9.0
+ */
+function cookiebot_addons_cookieconsent_optout( $cookie_types ) {
+	$output = '';
+
+	foreach ( $cookie_types as $cookie_type ) {
+		$output .= 'cookieconsent-optout-' . $cookie_type . ' ';
+	}
+
+	return trim( $output );
+}
+
+/**
  * Returns current site language
  *
  * @return mixed|string

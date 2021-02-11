@@ -356,7 +356,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @return string
 	 */
 	public function generate_placeholder_with_src( $src = '' ) {
-		$cookieContentNotice = '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_cookie_types() ) . '">';
+		$cookieContentNotice = '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_cookie_types() ) . '">';
 		$cookieContentNotice .= $this->get_placeholder( $src );
 		$cookieContentNotice .= '</div>';
 
