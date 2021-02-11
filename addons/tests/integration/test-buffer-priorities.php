@@ -11,15 +11,6 @@ class Test_Buffer_Priorities extends Addons_Base {
 	}
 	
 	/**
-	 * @covers \cookiebot_addons\controller\addons\custom_facebook_feed\Custom_Facebook_Feed
-	 */
-	public function test_custom_facebook_feed() {
-		$content = $this->curl_get_content( 'http://plugins.svn.wordpress.org/custom-facebook-feed/trunk/custom-facebook-feed.php' );
-		
-		$this->assertNotFalse( strpos( $content, "add_action( 'wp_footer', 'cff_js' );" ) );
-	}
-	
-	/**
 	 * @covers \cookiebot_addons\controller\addons\caos_host_analyticsjs_local\CAOS_Host_Analyticsjs_Local
 	 */
 	public function test_host_analyticsjs_local() {
