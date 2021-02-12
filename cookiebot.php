@@ -1108,14 +1108,24 @@ final class Cookiebot_WP {
 	function network_settings_save() {
 		check_admin_referer( 'cookiebot-network-settings' );
 
-		update_site_option('cookiebot-cbid', 											$_POST['cookiebot-cbid'] );
-		update_site_option('cookiebot-script-tag-uc-attribute', 	$_POST['cookiebot-script-tag-uc-attribute'] );
-		update_site_option('cookiebot-script-tag-cd-attribute', 	$_POST['cookiebot-script-tag-cd-attribute'] );
-		update_site_option('cookiebot-autoupdate', 								$_POST['cookiebot-autoupdate'] );
-		update_site_option('cookiebot-nooutput', 									$_POST['cookiebot-nooutput'] );
-		update_site_option('cookiebot-nooutput-admin', 						$_POST['cookiebot-nooutput-admin'] );
-		update_site_option('cookiebot-cookie-blocking-mode', 			$_POST['cookiebot-cookie-blocking-mode'] );
+		$cookiebot_cbid                    = isset( $_POST['cookiebot-cbid'] ) ? $_POST['cookiebot-cbid'] : '';
+		$cookiebot_script_tag_cd_attribute = isset( $_POST['cookiebot-script-tag-cd-attribute'] ) ? $_POST['cookiebot-script-tag-cd-attribute'] : '';
+		$cookiebot_autoupdate              = isset( $_POST['cookiebot-autoupdate'] ) ? $_POST['cookiebot-autoupdate'] : '';
+		$cookiebot_nooutput                = isset( $_POST['cookiebot-nooutput'] ) ? $_POST['cookiebot-nooutput'] : '';
+		$cookiebot_nooutput_admin          = isset( $_POST['cookiebot-nooutput-admin'] ) ? $_POST['cookiebot-nooutput-admin'] : '';
+		$cookiebot_cookie_blocking_mode    = isset( $_POST['cookiebot-cookie-blocking-mode'] ) ? $_POST['cookiebot-cookie-blocking-mode'] : 'auto';
 
+		if ( isset( $_POST['cookiebot-script-tag-uc-attribute'] ) ) {
+			$cookiebot_script_tag_uc_attribute = $_POST['cookiebot-script-tag-uc-attribute'];
+			update_site_option( 'cookiebot-script-tag-uc-attribute', $cookiebot_script_tag_uc_attribute );
+		}
+
+		update_site_option( 'cookiebot-cbid', $cookiebot_cbid );
+		update_site_option( 'cookiebot-script-tag-cd-attribute', $cookiebot_script_tag_cd_attribute );
+		update_site_option( 'cookiebot-autoupdate', $cookiebot_autoupdate );
+		update_site_option( 'cookiebot-nooutput', $cookiebot_nooutput );
+		update_site_option( 'cookiebot-nooutput-admin', $cookiebot_nooutput_admin );
+		update_site_option( 'cookiebot-cookie-blocking-mode', $cookiebot_cookie_blocking_mode );
 
 		wp_redirect( add_query_arg( array(
 			'page' => 'cookiebot_network',
@@ -1419,7 +1429,7 @@ final class Cookiebot_WP {
 				return; //Do not show JS - output disabled
 			}
 
-			if($this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() && $printTag !== false && get_site_option('cookiebot-output-logged-in') == false) {
+			if($this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() && $printTag !== false && get_blog_option(null, 'cookiebot-output-logged-in') == false) {
 				return;
 			}
 
