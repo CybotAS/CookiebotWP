@@ -259,7 +259,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		}
 
 		unset( $matches );
-		preg_match_all( '/<script.*(instagram|issuu|imgur|redditmedia\.com|tiktok\.com|polldaddy|tumblr)+.*<\/script>/mi', $content, $matches );
+		preg_match_all( '/<script.*(instagram|twitter|issuu|imgur|redditmedia\.com|tiktok\.com|polldaddy|tumblr)+.*<\/script>/mi', $content, $matches );
 		foreach ( $matches[0] as $x => $match ) {
 			//Replace - and add cookie consent notice.
 			$adjusted = str_replace( ' src=',
