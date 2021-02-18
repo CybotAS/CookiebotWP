@@ -239,7 +239,7 @@
 		 * @since 1.8.0
 		 */
 		public function get_extra_information() {
-			return '<p>' . __( 'Blocks enhanced e-commerce for WooCommerce store', 'cookiebot-addons' ) . '</p>';
+			return '<p>' . esc_html__( 'Blocks enhanced e-commerce for WooCommerce store', 'cookiebot-addons' ) . '</p>';
 		}
 
 		/**

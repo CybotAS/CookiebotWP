@@ -232,7 +232,7 @@ class Simple_Share_Buttons_Adder implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . __( 'Blocks Simple Share Buttons Adder.', 'cookiebot-addons' ) . '</p>';
+		return '<p>' . esc_html__( 'Blocks Simple Share Buttons Adder.', 'cookiebot-addons' ) . '</p>';
 	}
 
 	/**

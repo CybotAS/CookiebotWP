@@ -5,13 +5,13 @@ $addon  = $args['addon'];
 ?>
 <div class="postbox cookiebot-addon">
     <p>
-        <label for="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"><?php _e( 'Enable', 'cookiebot' ); ?></label>
+        <label for="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"><?php esc_html_e( 'Enable', 'cookiebot' ); ?></label>
         <input type="checkbox" id="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"
                name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][enabled]"
                value="1" <?php checked( 1, $widget->is_widget_enabled(), true ); ?> />
     </p>
     <p>
-        <span><?php _e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></span><br>
+        <span><?php esc_html_e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></span><br>
     <ul class="cookietypes">
         <li><input type="checkbox" id="cookie_type_preferences_<?php echo $widget->get_widget_option_name(); ?>"
                    value="preferences"
@@ -32,7 +32,7 @@ $addon  = $args['addon'];
     </p>
 
     <p>
-        <label><?php _e( 'Display a placeholder', 'cookiebot' ); ?></label>
+        <label><?php esc_html_e( 'Display a placeholder', 'cookiebot' ); ?></label>
         <input type="checkbox"
                class="placeholder_enable"
                data-addon="<?php echo $widget->get_widget_option_name(); ?>"
@@ -48,14 +48,14 @@ $addon  = $args['addon'];
 			<?php foreach ( $widget->get_widget_placeholders() as $placeholder_lang => $placeholder_value ): ?>
                 <div class="placeholder_content submitbox">
                     <p>
-                        <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
+                        <label><?php esc_html_e( 'Language', 'cookiebot-addons' ); ?></label>
 						<?php
 						$name = 'cookiebot_jetpack_addon[' . $widget->get_widget_option_name() . '][placeholder][languages][' . $placeholder_lang . ']';
 						echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, $placeholder_lang );
 						?>
 						<?php if ( $count != 0 ): ?>
                             <a href=""
-                               class="submitdelete deletion"><?php _e( 'Remove language', 'cookiebot-addons' ); ?></a>
+                               class="submitdelete deletion"><?php esc_html_e( 'Remove language', 'cookiebot-addons' ); ?></a>
 						<?php endif; ?>
                     </p>
                     <p>
@@ -69,7 +69,7 @@ $addon  = $args['addon'];
 		<?php else: ?>
             <div class="placeholder_content">
                 <p>
-                    <label><?php _e( 'Language', 'cookiebot-addons' ); ?></label>
+                    <label><?php esc_html_e( 'Language', 'cookiebot-addons' ); ?></label>
 					<?php
 					$name = 'cookiebot_jetpack_addon[' . $widget->get_widget_option_name() . '][placeholder][languages][site-default]';
 					echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, '' );
@@ -86,7 +86,7 @@ $addon  = $args['addon'];
 
 		<p class="add_placeholder_language">
 			<button class="btn_add_language button button-secondary"
-			        data-addon="<?php echo $widget->get_widget_option_name(); ?>"><?php _e( '+ Add language', 'cookiebot-addons' ); ?></button>
+			        data-addon="<?php echo $widget->get_widget_option_name(); ?>"><?php esc_html_e( '+ Add language', 'cookiebot-addons' ); ?></button>
 		</p>
 	</div>
 </div>

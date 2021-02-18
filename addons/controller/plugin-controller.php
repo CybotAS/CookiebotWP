@@ -95,8 +95,8 @@ class Plugin_Controller {
 				add_action('admin_notices', function() {
 					echo '<div class="notice notice-warning">
 						<p>
-						<strong>'.__('You enabled Cookiebot auto blocking mode but still using addons').'</strong><br>
-						'.__('In some occasions this may cause client side errors. If you notice any errors please try to disable Cookiebot addons or contact Cookiebot support.').'
+						<strong>'.esc_html__('You enabled Cookiebot auto blocking mode but still using addons').'</strong><br>
+						'.esc_html__('In some occasions this may cause client side errors. If you notice any errors please try to disable Cookiebot addons or contact Cookiebot support.').'
 						</p>
 					</div>';
 				});

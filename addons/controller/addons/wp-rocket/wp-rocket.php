@@ -250,7 +250,7 @@ class Wp_Rocket implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . __( 'Excludes cookiebot javascript files when the WP-Rocket deter option is enabled.',
+		return '<p>' . esc_html__( 'Excludes cookiebot javascript files when the WP-Rocket deter option is enabled.',
 				'cookiebot-addons' ) . '</p>';;
 	}
 
