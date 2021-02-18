@@ -109,7 +109,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 *
 	 * @return string
 	 */
-	public function cookiebot_addon_add_to_any_content( string $content ) {
+	public function cookiebot_addon_add_to_any_content( $content ) {
 		if ( ! class_exists( 'DOMDocument' ) || ! class_exists( 'DOMXPath' ) || ! class_exists( 'DOMElement' ) ) {
 			return $content;
 		}
