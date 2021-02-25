@@ -97,5 +97,9 @@
   },
   "Google_Site_Kit": {
     "class": "cookiebot_addons\\controller\\addons\\google_site_kit\\Google_Site_Kit"
+  },
+  "Enfold": {
+    "class": "cookiebot_addons\\controller\\addons\\enfold\\Enfold",
+    "is_theme": true
   }
 }
