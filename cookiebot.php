@@ -701,7 +701,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 									?>
 								<label>
 									<input type="radio" name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?> value="" <?php checked( '', $cv, true ); ?> />
-									<i>None</i>
+									<i><?php esc_html_e( 'None', 'cookiebot' ); ?></i>
 								</label>
 								&nbsp; &nbsp;
 								<label>
@@ -738,7 +738,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 								?>
 								<label>
 									<input type="radio" name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?> value="" 		 <?php checked( '', $cv, true ); ?> />
-									<i>None</i>
+									<i><?php esc_html_e( 'None', 'cookiebot' ); ?></i>
 								</label>
 								&nbsp; &nbsp;
 								<label>
@@ -795,7 +795,9 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 									?>
 									<b><?php esc_html_e( 'This checkbox will remove the cookie consent banner from your website. The <i>[cookie_declaration]</i> shortcode will still be available.', 'cookiebot' ); ?></b><br />
 									<?php esc_html_e( 'If you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager.', 'cookiebot' ); ?><br />
-									<?php esc_html_e( '<a href="https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment" target="_blank">See a detailed guide here</a>', 'cookiebot' ); ?>
+                                    <a href="https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment" target="_blank">
+                                        <?php esc_html_e( 'See a detailed guide here', 'cookiebot' ); ?>
+                                    </a>
 								</p>
 							</td>
 						</tr>
@@ -816,7 +818,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 								<p class="description">
 									<?php
 									if ( $disabled ) {
-										echo '<b>' . _( 'Network setting applied. Please contact website administrator to change this setting.' ) . '</b><br />';  }
+										echo '<b>' . __( 'Network setting applied. Please contact website administrator to change this setting.' ) . '</b><br />';  }
 									?>
 									<b><?php esc_html_e( 'This checkbox will disable Cookiebot in the WordPress Admin area.', 'cookiebot' ); ?></b>
 								</p>
@@ -902,15 +904,24 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 								<tr valign="top">
 									<td>
 										<div class="cb_consent">
-											<span class="forceconsent">Necessary</span>
-											<span class="<?php echo ( $state['preferences'] ? 'consent' : 'noconsent' ); ?>"><?php esc_html_e( 'Preferences', 'cookiebot' ); ?></span>
-											<span class="<?php echo ( $state['statistics'] ? 'consent' : 'noconsent' ); ?>"><?php esc_html_e( 'Statistics', 'cookiebot' ); ?></span>
-											<span class="<?php echo ( $state['marketing'] ? 'consent' : 'noconsent' ); ?>"><?php esc_html_e( 'Marketing', 'cookiebot' ); ?></span>
+                                            <span class="forceconsent">
+												<?php esc_html_e( 'Necessary', 'cookiebot' ); ?>
+                                            </span>
+                                            <span class="<?php echo( $state['preferences'] ? 'consent' : 'noconsent' ); ?>">
+												<?php esc_html_e( 'Preferences', 'cookiebot' ); ?>
+                                            </span>
+                                            <span class="<?php echo( $state['statistics'] ? 'consent' : 'noconsent' ); ?>">
+												<?php esc_html_e( 'Statistics', 'cookiebot' ); ?>
+                                            </span>
+                                            <span class="<?php echo( $state['marketing'] ? 'consent' : 'noconsent' ); ?>">
+												<?php esc_html_e( 'Marketing', 'cookiebot' ); ?>
+                                            </span>
 										</div>
 									</td>
 									<td>
 										<div class="consent_mapping">
-											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][functional]" 	data-default-value="1" value="1" checked disabled> Functional </label>
+											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][functional]" 	data-default-value="1" value="1" checked disabled
+                                                > <?php esc_html_e( 'Functional', 'cookiebot' ); ?> </label>
 											<label><input type="checkbox" name="cookiebot-consent-mapping[<?php echo $key; ?>][preferences]" data-default-value="<?php echo $mDefault[ $key ]['preferences']; ?>" value="1" 
 																													 <?php
 																														if ( $m[ $key ]['preferences'] ) {
@@ -993,7 +1004,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 					esc_html__( ' requires you to document each consent. At the same time you must be able to account for what user data you share with embedded third-party services on your website and where in the world the user data is sent.', 'cookiebot' )
 				);
 				?>
-<!--			</p>-->
+			</p>
 			<p>
 				<b><big style="color:red;"><?php esc_html_e( 'The settings below is network wide settings. See notes below each field.', 'cookiebot' ); ?></big></b>
 			</p>
@@ -1305,13 +1316,19 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		<div class="wrap">
 			<h1><?php esc_html_e( 'IAB', 'cookiebot' ); ?></h1>
 
-			<p>For more details about Cookiebot's IAB integration, see <a href="https://support.cookiebot.com/hc/en-us/articles/360007652694-Cookiebot-and-the-IAB-Consent-Framework" target="_blank">article about cookiebot and the IAB consent framework</a></p>
+			<p>
+                <?php echo sprintf(
+                        esc_html__( 'For more details about Cookiebot\'s IAB integration, see %sarticle about cookiebot and the IAB consent framework%s', 'cookiebot' ),
+                        '<a href="https://support.cookiebot.com/hc/en-us/articles/360007652694-Cookiebot-and-the-IAB-Consent-Framework" target="_blank">',
+                            '</a>'
+                ); ?>
+            </p>
 
 			<form method="post" action="options.php">
 				<?php settings_fields( 'cookiebot-iab' ); ?>
 				<?php do_settings_sections( 'cookiebot-iab' ); ?>
 
-				<label>Enable IAB integration</label>
+				<label><?php esc_html_e( 'Enable IAB integration', 'cookiebot' ); ?></label>
 				<input type="checkbox" name="cookiebot-iab" value="1" <?php checked( 1, get_option( 'cookiebot-iab' ), true ); ?>>
 
 				<?php submit_button(); ?>
@@ -1331,7 +1348,13 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		<div class="wrap">
 			<h1><?php esc_html_e( 'Legislations', 'cookiebot' ); ?></h1>
 
-			<p>For more details about Cookiebot's CCPA Legislation integration, see <a href="https://support.cookiebot.com/hc/en-us/articles/360010932419-Use-multiple-banners-on-the-same-website-support-both-CCPA-GDPR-compliance-" target="_blank">article about cookiebot and the CCPA compliance</a></p>
+			<p>
+				<?php echo sprintf(
+					esc_html__( 'For more details about Cookiebot\'s CCPA Legislation integration, see %sarticle about cookiebot and the CCPA compliance%s', 'cookiebot' ),
+					'<a href="https://support.cookiebot.com/hc/en-us/articles/360010932419-Use-multiple-banners-on-the-same-website-support-both-CCPA-GDPR-compliance-" target="_blank">',
+					'</a>'
+				); ?>
+            </p>
 
 			<form method="post" action="options.php">
 				<?php settings_fields( 'cookiebot-legislations' ); ?>
@@ -1341,13 +1364,13 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				<table class="form-table">
 					<tbody>
 					<tr valign="top">
-						<th scope="row"><label>Enable CCPA configuration for visitors from California</label></th>
+						<th scope="row"><label><?php esc_html_e( 'Enable CCPA configuration for visitors from California', 'cookiebot' ); ?></label></th>
 						<td>
 							<input type="checkbox" name="cookiebot-ccpa" value="1" <?php checked( 1, get_option( 'cookiebot-ccpa' ), true ); ?>>
 						</td>
 					</tr>
 					<tr>
-						<th valign="top"><label>Domain Group ID</label></th>
+						<th valign="top"><label><?php esc_html_e('Domain Group ID', 'cookiebot'); ?></label></th>
 						<td>
 							<input type="text" style="width: 300px;" name="cookiebot-ccpa-domain-group-id" value="<?php echo get_option( 'cookiebot-ccpa-domain-group-id' ); ?>">
 						</td>
