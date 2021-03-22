@@ -70,19 +70,6 @@ require_once( ABSPATH . '/wp-admin/includes/translation-install.php' );
                 <div class="placeholder_content">
                     <p>
                         <label><?php esc_html_e( 'Language', 'cookiebot-addons' ); ?></label>
-                        <select class="placeholder_select_language"
-                                name="cookiebot_available_addons[<?php echo $addon->get_option_name(); ?>][placeholder][languages][site-default]">
-							<?php
-							if ( function_exists( 'cookiebot' ) ) {
-								?>
-                                <option value=""><?php esc_html_e( 'Default (Autodetect)', 'cookiebot' ); ?></option>
-								<?php
-								foreach ( wp_get_available_translations() as $key => $value ) {
-									echo '<option value="' . $key . '">' . $value . '</option>';
-								}
-							}
-							?>
-                        </select>
 						<?php
 						$name = 'cookiebot_available_addons[' . $addon->get_option_name() . '][placeholder][languages][site-default]';
 						echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, '' );
