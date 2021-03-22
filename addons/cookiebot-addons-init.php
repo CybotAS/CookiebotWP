@@ -183,6 +183,9 @@ class Cookiebot_Addons {
 
 		$this->container->set( 'Settings_Service_Interface', DI\object( 'cookiebot_addons\lib\Settings_Service' )
 			->constructor( $this->container ) );
+
+		$this->container->set( 'Theme_Settings_Service_Interface', DI\object( 'cookiebot_addons\lib\Theme_Settings_Service' )
+			->constructor( $this->container ) );
 	}
 
 	/**
@@ -203,7 +206,9 @@ class Cookiebot_Addons {
 			 */
 			$this->container->set( $plugin->class, DI\object( $plugin->class )
 				->constructor(
-					$this->container->get( 'Settings_Service_Interface' ),
+					isset( $plugin->is_theme ) && $plugin->is_theme
+						? $this->container->get( 'Theme_Settings_Service_Interface' )
+						: $this->container->get( 'Settings_Service_Interface' ),
 					$this->container->get( 'Script_Loader_Tag_Interface' ),
 					$this->container->get( 'Cookie_Consent_Interface' ),
 					$this->container->get( 'Buffer_Output_Interface' ) )
