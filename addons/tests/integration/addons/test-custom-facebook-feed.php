@@ -17,7 +17,7 @@ class Test_Custom_Facebook_Feed extends Addons_Base {
 		$content = $this->curl_get_content( 'http://plugins.svn.wordpress.org/custom-facebook-feed/trunk/inc/Custom_Facebook_Feed.php' );
 
 		$this->assertNotFalse( strpos( $content, 'echo \'var cfflinkhashtags = "\' . $cff_link_hashtags . \'";\';') );
-		$this->assertNotFalse( strpos( $content, 'wp_enqueue_script(\'cffscripts\');') );
+		$this->assertNotFalse( strpos( $content, 'wp_enqueue_script( \'cffscripts\' );') );
 		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_footer\', [ self::$instance, \'cff_js\' ] );') );
 	}
 }

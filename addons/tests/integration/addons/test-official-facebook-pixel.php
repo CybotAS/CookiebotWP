@@ -42,7 +42,7 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
       10, 2);";
 
 		$snippets[] = "add_action(
-      'wpcf7_ajax_json_echo',
+      'wpcf7_feedback_response',
       array(__CLASS__, 'injectLeadEvent'),
       20, 2);";
 

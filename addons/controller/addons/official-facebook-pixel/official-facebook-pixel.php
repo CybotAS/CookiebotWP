@@ -126,6 +126,8 @@ class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
 			'FacebookPixelPlugin\Integration\FacebookWordpressContactForm7', 'trackServerEvent' );
 		cookiebot_addons_remove_class_action( 'wpcf7_ajax_json_echo',
 			'FacebookPixelPlugin\Integration\FacebookWordpressContactForm7', 'injectLeadEvent', 20 );
+		cookiebot_addons_remove_class_action( 'wpcf7_feedback_response',
+			'FacebookPixelPlugin\Integration\FacebookWordpressContactForm7', 'injectLeadEvent', 20 );
 
 		// Formidable Form integration
 		cookiebot_addons_remove_class_action( 'frm_after_create_entry',
