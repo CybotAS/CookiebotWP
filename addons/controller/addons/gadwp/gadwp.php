@@ -54,10 +54,10 @@ class Gadwp implements Cookiebot_Addons_Interface {
 		Cookie_Consent_Interface $cookie_consent,
 		Buffer_Output_Interface $buffer_output
 	) {
-		$this->settings = $settings;
+		$this->settings          = $settings;
 		$this->script_loader_tag = $script_loader_tag;
-		$this->cookie_consent = $cookie_consent;
-		$this->buffer_output = $buffer_output;
+		$this->cookie_consent    = $cookie_consent;
+		$this->buffer_output     = $buffer_output;
 	}
 
 	/**
@@ -76,7 +76,7 @@ class Gadwp implements Cookiebot_Addons_Interface {
 	/**
 	 * Manipulate the scripts if they are loaded.
 	 *
-	 * @version 1.3.0
+	 * @version 3.9.0
 	 * @since 1.1.0
 	 */
 	public function cookiebot_addon_ga_google_analytics() {
@@ -107,16 +107,25 @@ class Gadwp implements Cookiebot_Addons_Interface {
 				'ga-disable-'          => $this->get_cookie_types(),
 			),
 			false );
-			
-			
-	/* For new versions of GADWP */
-	$this->script_loader_tag->add_tag( 'exactmetrics-frontend-script', $this->get_cookie_types() );
-	$this->buffer_output->add_tag( 'wp_head',
+
+
+		/* For new versions of GADWP */
+		$this->script_loader_tag->add_tag( 'exactmetrics-frontend-script', $this->get_cookie_types() );
+		$this->buffer_output->add_tag( 'wp_head',
 			6,
 			array(
 				'GoogleAnalyticsObject' => $this->get_cookie_types(),
+				'googletagmanager' => $this->get_cookie_types()
 			),
 			false );
+
+
+		add_filter('exactmetrics_tracking_analytics_script_attributes', function($atts){
+			$atts['type'] = 'text/plain';
+			$atts['data-cookieconsent'] = cookiebot_addons_output_cookie_types( $this->get_cookie_types() );
+
+			return $atts;
+		});
 
 	}
 
@@ -128,7 +137,7 @@ class Gadwp implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function get_addon_name() {
-		return 'Google Analytics Dashboard for WP (GADWP)';
+		return 'Google Analytics Dashboard for WP by ExactMetrics';
 	}
 
 	/**
