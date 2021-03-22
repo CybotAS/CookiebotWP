@@ -7,7 +7,7 @@ class Cookiebot_Declaration_Widget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'cookiebot_declaration_widget',
-			__( 'Cookiebot - Cookie Declaration', 'cookiebot' ),
+			esc_html__( 'Cookiebot - Cookie Declaration', 'cookiebot' ),
 			array(
 				'customize_selective_refresh' => true,
 			)
@@ -21,13 +21,13 @@ class Cookiebot_Declaration_Widget extends WP_Widget {
 		$title = (isset($title) ? $title : '');
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title', 'Cookiebot' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'Cookiebot' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'lang' ); ?>"><?php _e( 'Language', 'cookiebot' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'lang' ); ?>"><?php esc_html_e( 'Language', 'cookiebot' ); ?></label>
 			<select name="<?php echo $this->get_field_name( 'lang' ); ?>" id="<?php echo $this->get_field_id( 'lang' ); ?>" class="widefat">
-				<option value=""><?php echo __('- Default -', 'cookiebot'); ?></option>
+				<option value=""><?php echo esc_html__('- Default -', 'cookiebot'); ?></option>
 				<?php
 				$options = Cookiebot_WP::get_supported_languages();
 				foreach ( $options as $key => $name ) {

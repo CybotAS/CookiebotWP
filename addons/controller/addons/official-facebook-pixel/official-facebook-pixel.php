@@ -339,7 +339,7 @@ class Official_Facebook_Pixel implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . __( 'Blocks Official Facebook Pixel scripts', 'cookiebot-addons' ) . '</p>';
+		return '<p>' . esc_html__( 'Blocks Official Facebook Pixel scripts', 'cookiebot-addons' ) . '</p>';
 	}
 
 	/**

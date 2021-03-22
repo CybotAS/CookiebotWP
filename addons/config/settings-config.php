@@ -43,12 +43,12 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function add_submenu() {
-		/*add_submenu_page('cookiebot', 'Prior Consent', __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot_addons', array(
+		/*add_submenu_page('cookiebot', 'Prior Consent', esc_html__( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot_addons', array(
 			$this,
 			'setting_page'
 		) );*/
 
-		add_submenu_page( 'cookiebot', __( 'Prior Consent', 'cookiebot' ), __( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array(
+		add_submenu_page( 'cookiebot', esc_html__( 'Prior Consent', 'cookiebot' ), esc_html__( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array(
 			$this,
 			'setting_page'
 		) );
@@ -67,7 +67,7 @@ class Settings_Config {
 
 		wp_enqueue_script( 'cookiebot_tiptip_js', plugins_url( 'js/jquery.tipTip.js', dirname( __FILE__ ) ), array( 'jquery' ), '1.8', true );
 		wp_enqueue_script( 'cookiebot_addons_custom_js', plugins_url( 'js/settings.js', dirname( __FILE__ ) ), array( 'jquery' ), '1.8', true );
-		wp_localize_script( 'cookiebot_addons_custom_js', 'php', array( 'remove_link' => ' <a href="" class="submitdelete deletion">' . __( 'Remove language', 'cookiebot-addons' ) . '</a>' ) );
+		wp_localize_script( 'cookiebot_addons_custom_js', 'php', array( 'remove_link' => ' <a href="" class="submitdelete deletion">' . esc_html__( 'Remove language', 'cookiebot-addons' ) . '</a>' ) );
 		wp_enqueue_style( 'cookiebot_addons_custom_css', plugins_url( 'style/css/admin_styles.css', dirname( __FILE__ ) ) );
 	}
 
@@ -223,7 +223,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function header_jetpack_addon() {
-		echo '<p>' . __( 'Jetpack settings.', 'cookiebot' ) . '</p>';
+		echo '<p>' . esc_html__( 'Jetpack settings.', 'cookiebot' ) . '</p>';
 	}
 
 	/**
@@ -245,11 +245,11 @@ class Settings_Config {
 	public function header_available_addons() {
 		?>
         <p>
-			<?php _e( 'Below is a list of addons for Cookiebot. Addons help you make installed plugins GDPR compliant.', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Below is a list of addons for Cookiebot. Addons help you make installed plugins GDPR compliant.', 'cookiebot' ); ?>
             <br/>
-			<?php _e( 'These addons are available because you have the corresponding plugins installed and activated.', 'cookiebot' ); ?>
+			<?php esc_html_e( 'These addons are available because you have the corresponding plugins installed and activated.', 'cookiebot' ); ?>
             <br/>
-			<?php _e( 'Deactivate an addon if you want to handle GDPR compliance yourself, or through another plugin.', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Deactivate an addon if you want to handle GDPR compliance yourself, or through another plugin.', 'cookiebot' ); ?>
         </p>
 		<?php
 	}
@@ -273,7 +273,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function header_unavailable_addons() {
-		echo '<p>' . __( 'The following addons are unavailable. This is because the corresponding plugin is not installed.', 'cookiebot' ) . '</p>';
+		echo '<p>' . esc_html__( 'The following addons are unavailable. This is because the corresponding plugin is not installed.', 'cookiebot' ) . '</p>';
 	}
 
 	/**
@@ -290,9 +290,9 @@ class Settings_Config {
         <div class="postbox cookiebot-addon">
             <i><?php
 				if ( ! $addon->is_addon_installed() ) {
-					_e( 'The plugin is not installed.', 'cookiebot' );
+					esc_html_e( 'The plugin is not installed.', 'cookiebot' );
 				} else if ( ! $addon->is_addon_activated() ) {
-					_e( 'The plugin is not activated.', 'cookiebot' );
+					esc_html_e( 'The plugin is not activated.', 'cookiebot' );
 				}
 				?></i>
         </div>

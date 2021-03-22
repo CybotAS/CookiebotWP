@@ -240,7 +240,7 @@ class Google_Analytics implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . __( 'Google Analytics is used to track how visitor interact with website content.', 'cookiebot-addons' ) . '</p>';
+		return '<p>' . esc_html__( 'Google Analytics is used to track how visitor interact with website content.', 'cookiebot-addons' ) . '</p>';
 	}
 
 	/**

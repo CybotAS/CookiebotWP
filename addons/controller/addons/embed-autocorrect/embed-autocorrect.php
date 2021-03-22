@@ -259,7 +259,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		}
 
 		unset( $matches );
-		preg_match_all( '/<script.*(instagram|issuu|imgur|redditmedia\.com|tiktok\.com|polldaddy|tumblr)+.*<\/script>/mi', $content, $matches );
+		preg_match_all( '/<script.*(instagram|twitter|issuu|imgur|redditmedia\.com|tiktok\.com|polldaddy|tumblr)+.*<\/script>/mi', $content, $matches );
 		foreach ( $matches[0] as $x => $match ) {
 			//Replace - and add cookie consent notice.
 			$adjusted = str_replace( ' src=',
@@ -522,7 +522,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . __( 'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
+		return '<p>' . esc_html__( 'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
 				'cookiebot-addons' ) . '</p>';
 	}
 
@@ -621,13 +621,13 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function extra_available_addon_option() {
 		?>
         <div class="show_advanced_options">
-            <button class="button button-secondary"><?php _e( 'Show advanced options', 'cookiebot-addons' ); ?></button>
+            <button class="button button-secondary"><?php esc_html_e( 'Show advanced options', 'cookiebot-addons' ); ?></button>
             <span class="help-tip"
-                  title="<?php echo __( 'This is for more advanced users.', 'cookiebot-addons' ); ?>"></span>
+                  title="<?php echo esc_html__( 'This is for more advanced users.', 'cookiebot-addons' ); ?>"></span>
         </div>
         <div class="advanced_options">
 
-            <label for="embed_regex"><?php _e( 'Regex:', 'cookiebot-addons' ); ?></label>
+            <label for="embed_regex"><?php esc_html_e( 'Regex:', 'cookiebot-addons' ); ?></label>
             <textarea
                     id="embed_regex"
                     cols="80"
@@ -637,14 +637,14 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
             ><?php echo esc_html( $this->get_regex() ); ?></textarea>
 
 			<?php if ( $this->is_regex_default() ) : ?>
-                <button id="edit_embed_regex" class="button"><?php _e( 'Edit regex', 'cookiebot-addons' ); ?></button>
+                <button id="edit_embed_regex" class="button"><?php esc_html_e( 'Edit regex', 'cookiebot-addons' ); ?></button>
 			<?php endif; ?>
 
             <button
                     id="btn_default_embed_regex"
                     class="button<?php echo ( $this->is_regex_default() ) ? ' hidden' : ''; ?>"
                     type="button"
-                    value="Reset to default regex"><?php _e( 'Reset to default regex', 'cookiebot-addons' ); ?></button>
+                    value="Reset to default regex"><?php esc_html_e( 'Reset to default regex', 'cookiebot-addons' ); ?></button>
             <input
                     type="hidden"
                     name="default_embed_regex"
