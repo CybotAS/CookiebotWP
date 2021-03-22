@@ -197,6 +197,18 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ## Changelog ##
 
+### 3.10.0 - 2021-03-22 ###
+* Added support for translating the settings pages
+* Added support for Enfold theme
+* Added support for ExactMetrics
+* Added support for Gutenberg Embed blocks
+* Added support for newer version of Custom Facebook Feed
+* Added support for newer version of Add To Any
+* Fixed prior consent language bug
+* Fixed embedding twitter
+* Fixed multisite settings
+* Prefixed the composer dependencies with Mozart
+
 ### 3.9.0 - 2020-10-20 ###
 * Added support for Google Tag Manager and Google Consent Mode
 * Added gtag TCF support 

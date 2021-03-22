@@ -4,7 +4,7 @@ Plugin Name: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites.
 Author: Cybot A/S
-Version: 3.9.0
+Version: 3.10.0
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -23,7 +23,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '3.9.0';
+		public $version = '3.10.0';
 
 		/**
 		 * @var   Cookiebot_WP The single instance of the class
