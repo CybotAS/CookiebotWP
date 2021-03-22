@@ -232,7 +232,7 @@ class Optinmonster implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . __( 'OptinMonster API plugin to connect your WordPress site to your OptinMonster account.', 'cookiebot-addons' ) . '</p>';
+		return '<p>' . esc_html__( 'OptinMonster API plugin to connect your WordPress site to your OptinMonster account.', 'cookiebot-addons' ) . '</p>';
 	}
 
 	/**
