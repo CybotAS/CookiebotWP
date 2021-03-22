@@ -3,13 +3,13 @@
 namespace cookiebot_addons\controller\addons\custom_facebook_feed;
 
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons\controller\addons\custom_facebook_feed_2_17_1\Custom_Facebook_Feed_2_17_1;
+use cookiebot_addons\controller\addons\custom_facebook_feed_old\Custom_Facebook_Feed_Old;
 use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\Cookie_Consent_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
 
-class Custom_Facebook_Feed extends Custom_Facebook_Feed_2_17_1 {
+class Custom_Facebook_Feed extends Custom_Facebook_Feed_Old {
 
 	/**
 	 * Return addon/plugin name

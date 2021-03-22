@@ -23,8 +23,8 @@
   "Hubspot_Tracking_Code": {
     "class": "cookiebot_addons\\controller\\addons\\hubspot_tracking_code\\Hubspot_Tracking_Code"
   },
-  "Custom_Facebook_Feed_2_17_1": {
-    "class": "cookiebot_addons\\controller\\addons\\custom_facebook_feed_2_17_1\\Custom_Facebook_Feed_2_17_1"
+  "Custom_Facebook_Feed_Old": {
+    "class": "cookiebot_addons\\controller\\addons\\custom_facebook_feed_old\\Custom_Facebook_Feed_Old"
   },
   "Custom_Facebook_Feed": {
     "class": "cookiebot_addons\\controller\\addons\\custom_facebook_feed\\Custom_Facebook_Feed"

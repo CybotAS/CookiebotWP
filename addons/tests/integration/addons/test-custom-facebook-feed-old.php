@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons\tests\integration\addons;
 
-class Test_Custom_Facebook_Feed_2_17_1 extends Addons_Base {
+class Test_Custom_Facebook_Feed_Old extends Addons_Base {
 	
 	public function setUp() {
 	
