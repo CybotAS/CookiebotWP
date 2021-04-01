@@ -424,3 +424,15 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://cookiebot.com"
 msgstr ""
+
+#: Preferences
+msgid "preferences"
+msgstr ""
+
+#: Statistics
+msgid "statistics"
+msgstr ""
+
+#: Marketing
+msgid "marketing"
+msgstr ""
