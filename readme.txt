@@ -197,6 +197,9 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ## Changelog ##
 
+### Unreleased - fix/214-cookie_types-is-not-localized ###
+* Added cookiebot_translate_cookie_names function in helper.php
+
 ### 3.10.0 - 2021-03-22 ###
 * Added support for translating the settings pages
 * Added support for Enfold theme
