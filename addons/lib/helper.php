@@ -366,3 +366,40 @@ function cookiebot_addons_plugin_activated( ) {
 	$cookiebot_addons = \cookiebot_addons\Cookiebot_Addons::instance();
 	$cookiebot_addons->cookiebot_activated();
 }
+
+/**
+ * @param string $url
+ *
+ * @return string
+ *
+ * @since 3.11.0
+ */
+function cookiebot_addons_get_domain_from_url( $url ) {
+	$parsed_url = parse_url( $url );
+
+	// relative url does not have host so use home url domain
+	$host = isset( $parsed_url['host'] ) ? $parsed_url['host'] : cookiebot_addons_get_home_url_domain();
+
+	$url_parts = explode('.', $host );
+
+	$url_parts = array_slice($url_parts, -2);
+
+	return implode('.', $url_parts );
+}
+
+/**
+ * @return string
+ * @throws Exception
+ *
+ * @since 3.11.0
+ */
+function cookiebot_addons_get_home_url_domain() {
+	$home_url = parse_url( home_url() );
+	/** @var $host string */
+	$host = $home_url['host'];
+
+	if( empty( $host ) ) {
+		throw new Exception('Home url domain is not found.' );
+	}
+	return $host;
+}
