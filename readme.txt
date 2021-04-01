@@ -199,6 +199,7 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ### Unreleased - fix/214-cookie_types-is-not-localized ###
 * Added cookiebot_translate_cookie_names function in helper.php
+* Use the helper function to translate cookie type names in settings-service.php -> get_translated_placeholder method
 
 ### 3.10.0 - 2021-03-22 ###
 * Added support for translating the settings pages
