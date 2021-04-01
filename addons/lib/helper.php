@@ -311,7 +311,7 @@ function cookiebot_addons_get_language() {
  *
  * @return array
  */
-function cookiebot_translate_cookie_names(array $cookie_names): array {
+function cookiebot_translate_cookie_names($cookie_names) {
 	$translated_cookie_names = array(
 		'preferences' => esc_html__('preferences', 'cookiebot'),
 		'statistics' => esc_html__('statistics', 'cookiebot'),
