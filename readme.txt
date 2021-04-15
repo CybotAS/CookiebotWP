@@ -197,6 +197,9 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ## Changelog ##
 
+### Unreleased - feature/216-prevent-same-domain-embedded-content-from-being-blocked ###
+* Added exception for same domain embedded content embed-autocorrect.php
+
 ### 3.10.0 - 2021-03-22 ###
 * Added support for translating the settings pages
 * Added support for Enfold theme
