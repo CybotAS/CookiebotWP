@@ -307,6 +307,29 @@ function cookiebot_addons_get_language() {
 }
 
 /**
+ * @param array $cookie_names
+ *
+ * @return array
+ */
+function cookiebot_translate_cookie_names($cookie_names) {
+	$translated_cookie_names = array(
+		'preferences' => esc_html__('preferences', 'cookiebot'),
+		'statistics' => esc_html__('statistics', 'cookiebot'),
+		'marketing' => esc_html__('marketing', 'cookiebot'),
+	);
+	return array_map(
+		function(string $cookie_name) use ($translated_cookie_names) {
+			$cookie_name = trim($cookie_name);
+			if(isset($translated_cookie_names[$cookie_name])) {
+				return $translated_cookie_names[$cookie_name];
+			}
+			return $cookie_name;
+		},
+		$cookie_names
+	);
+}
+
+/**
  * Get supported languages by the cookiebot
  *
  * @return array

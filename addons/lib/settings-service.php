@@ -395,8 +395,11 @@ class Settings_Service implements Settings_Service_Interface {
 				 * if current lang match with the prefix language in the database then get the text
 				 */
 				if ( $key == $current_lang ) {
+					$cookies_array = explode(', ',$cookies);
+					$translated_cookie_names = cookiebot_translate_cookie_names($cookies_array);
+					$translated_cookie_names = implode(', ', $translated_cookie_names);
 					return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages'][ $key ],
-						$cookies, $src );
+						$translated_cookie_names, $src );
 				}
 			}
 		}
