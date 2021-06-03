@@ -112,12 +112,11 @@ Interface Settings_Service_Interface {
 	 * @param $option_key
 	 * @param $default_placeholder
 	 * @param $cookies
+	 * @param string $src
 	 *
-	 * @return bool|mixed
-	 *
-	 * @since 1.8.0
+	 * @return mixed
 	 */
-	public function get_placeholder( $option_key, $default_placeholder, $cookies );
+	public function get_placeholder( $option_key, $default_placeholder, $cookies, $src = '' );
 
 
 	/**
