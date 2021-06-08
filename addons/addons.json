@@ -59,6 +59,9 @@
   "CAOS_Host_Analyticsjs_Local": {
     "class": "cookiebot_addons\\controller\\addons\\caos_host_analyticsjs_local\\CAOS_Host_Analyticsjs_Local"
   },
+  "Matomo": {
+    "class": "cookiebot_addons\\controller\\addons\\matomo\\matomo"
+  },
   "Ninja_Forms": {
     "class": "cookiebot_addons\\controller\\addons\\ninja_forms\\Ninja_Forms"
   },
