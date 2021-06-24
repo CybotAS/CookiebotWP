@@ -48,7 +48,12 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function __construct( Settings_Service_Interface $settings, Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent, Buffer_Output_Interface $buffer_output ) {
+	public function __construct(
+		Settings_Service_Interface $settings,
+		Script_Loader_Tag_Interface $script_loader_tag,
+		Cookie_Consent_Interface $cookie_consent,
+		Buffer_Output_Interface $buffer_output
+	) {
 		$this->settings          = $settings;
 		$this->script_loader_tag = $script_loader_tag;
 		$this->cookie_consent    = $cookie_consent;
@@ -70,13 +75,13 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_add_to_any() {
-		
-    $this->buffer_output->add_tag( 'wp_head', 10, array(
-			'a2a_config'     => $this->get_cookie_types()
+
+		$this->buffer_output->add_tag( 'wp_head', 10, array(
+			'a2a_config' => $this->get_cookie_types(),
 		), false );
 
 		$this->buffer_output->add_tag( 'wp_footer', 10, array(
-			'a2a_config'     => $this->get_cookie_types()
+			'a2a_config' => $this->get_cookie_types(),
 		), false );
 
 		$this->buffer_output->add_tag( 'pre_get_posts', 10, array(
@@ -102,7 +107,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	/**
 	 * Display a placeholder on elements with "addtoany_share_save_container" class name.
 	 *
-	 * @param string $content
+	 * @param  string  $content
 	 *
 	 * @return string
 	 */
@@ -112,8 +117,7 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 			$placeholder_text  = $this->get_placeholder();
 			$placeholder_class = cookiebot_addons_cookieconsent_optout( $this->get_cookie_types() );
 			$placeholder       = '<div  class="' . $placeholder_class . '">' . $placeholder_text . '</div>';
-			$matches           = preg_split( $pattern, $content, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
-			$content           = implode($placeholder, $matches);
+			$content           = preg_replace( $pattern, '$1' . $placeholder, $content );
 		}
 
 		return $content;
@@ -154,7 +158,8 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_placeholder( $src = '' ) {
-		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
+		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(),
+			cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
 	}
 
 	/**
@@ -278,7 +283,8 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__( 'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.', 'cookiebot-addons' ) . '</p>';
+		return '<p>' . esc_html__( 'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
+				'cookiebot-addons' ) . '</p>';
 	}
 
 	/**
