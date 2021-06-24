@@ -2,9 +2,6 @@
 
 namespace cookiebot_addons\controller\addons\add_to_any;
 
-use DOMDocument;
-use DOMXPath;
-use DOMElement;
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons\lib\Cookie_Consent_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
@@ -110,26 +107,13 @@ class Add_To_Any implements Cookiebot_Addons_Interface {
 	 * @return string
 	 */
 	public function cookiebot_addon_add_to_any_content( $content ) {
-		if ( ! class_exists( 'DOMDocument' ) || ! class_exists( 'DOMXPath' ) || ! class_exists( 'DOMElement' ) ) {
-			return $content;
-		}
-
 		if ( $this->has_placeholder() && $this->is_placeholder_enabled() ) {
-			$dom = new DOMDocument();
-			$dom->loadHTML( $content );
-			$finder = new DOMXPath( $dom );
-			$nodes  = $finder->query( "//*[contains(@class, 'addtoany_share_save_container')]" );
-
-			$placeholder         = $this->get_placeholder();
-			$placeholder_element = $dom->createDocumentFragment();
-			$placeholder_element->appendXML( '<div  class="' . cookiebot_addons_cookieconsent_optout( $this->get_cookie_types() ) . '">' . $placeholder . '</div>' );
-
-			foreach ( $nodes as $node ) {
-				/* @var DOMElement $node */
-				$node->appendChild( $placeholder_element );
-			}
-
-			$content = $dom->saveHTML();
+			$pattern           = '/(<div[^>]*class="[^"]*addtoany_share_save_container[^"]*"[^>]*>)/';
+			$placeholder_text  = $this->get_placeholder();
+			$placeholder_class = cookiebot_addons_cookieconsent_optout( $this->get_cookie_types() );
+			$placeholder       = '<div  class="' . $placeholder_class . '">' . $placeholder_text . '</div>';
+			$matches           = preg_split( $pattern, $content, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
+			$content           = implode($placeholder, $matches);
 		}
 
 		return $content;
