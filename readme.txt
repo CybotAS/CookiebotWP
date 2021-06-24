@@ -197,6 +197,9 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ## Changelog ##
 
+### Unreleased - feat/218-wp-google-analytics-events
+# Added support for WP Google Analytics Events
+
 ### Unreleased - feature/148-matomo-analytics-for-wordpress-add-on ###
 * Fixed number of arguments in the settings-service-interface.php get_placeholder method signature
 * Added new add-on for the Matomo Analytics plugin
