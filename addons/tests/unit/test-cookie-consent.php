@@ -3,9 +3,11 @@
 namespace cookiebot_addons\tests\unit;
 
 use cookiebot_addons\lib\Cookie_Consent;
-use DI\ContainerBuilder;
-use DI;
 
+/**
+ * Class Test_Cookie_Consent
+ * @package cookiebot_addons\tests\unit
+ */
 class Test_Cookie_Consent extends \WP_UnitTestCase {
 
 	/**
