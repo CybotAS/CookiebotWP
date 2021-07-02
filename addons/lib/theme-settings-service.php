@@ -15,7 +15,7 @@ class Theme_Settings_Service extends Settings_Service {
 	 * @since 1.3.0
 	 */
 	public function is_addon_installed( $addon ) {
-		return wp_get_theme($addon)->exists();
+		return wp_get_theme( $addon )->exists();
 	}
 
 	/**
@@ -28,9 +28,9 @@ class Theme_Settings_Service extends Settings_Service {
 	 * @since 2.2.1
 	 */
 	public function get_addon_version( $addon ) {
-		$theme = wp_get_theme($addon);
-		if($theme->exists()) {
-			return $theme->get('Version');
+		$theme = wp_get_theme( $addon );
+		if ( $theme->exists() ) {
+			return $theme->get( 'Version' );
 		}
 
 		return false;

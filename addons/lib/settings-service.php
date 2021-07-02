@@ -3,16 +3,17 @@
 namespace cookiebot_addons\lib;
 
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
-use Cybot\Dependencies\DI;
+use Exception;
+use WP_Error;
 
 class Settings_Service implements Settings_Service_Interface {
 
 	/**
-	 * @var DI\Container
+	 * @var Dependency_Container
 	 */
 	public $container;
 
-	CONST OPTION_NAME = 'cookiebot_available_addons';
+	const OPTION_NAME = 'cookiebot_available_addons';
 
 	/**
 	 * Settings_Service constructor.
@@ -49,7 +50,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @param $addon
 	 *
-	 * @return int|\WP_Error
+	 * @return int|WP_Error
 	 *
 	 * @since 1.3.0
 	 */
@@ -67,8 +68,11 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 2.2.1
 	 */
 	public function get_addon_version( $addon ) {
-		$plugin_data = get_file_data( WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . $addon, array( 'Version' => 'version' ),
-			false );
+		$plugin_data = get_file_data(
+			WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . $addon,
+			array( 'Version' => 'version' ),
+			false
+		);
 
 		return ( isset( $plugin_data['Version'] ) ) ? $plugin_data['Version'] : false;
 	}
@@ -83,7 +87,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_activated( $addon ) {
-		return ( $addon === false || is_plugin_active( $addon ) ) ? true : false;
+		return $addon === false || is_plugin_active( $addon );
 	}
 
 	/**
@@ -130,8 +134,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * Returns addons one by one through a generator
 	 *
 	 * @return array
-	 * @throws DI\DependencyException
-	 * @throws DI\NotFoundException
+	 * @throws Exception
 	 *
 	 * @since 1.3.0
 	 */
@@ -149,8 +152,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * Returns active addons
 	 *
 	 * @return array
-	 * @throws DI\DependencyException
-	 * @throws DI\NotFoundException
+	 * @throws Exception
 	 *
 	 * @since 1.3.0
 	 */
@@ -158,8 +160,8 @@ class Settings_Service implements Settings_Service_Interface {
 		$active_addons = array();
 
 		foreach ( $this->get_addons() as $addon ) {
-            /**
-             * @var $addon Cookiebot_Addons_Interface
+			/**
+			 * @var $addon Cookiebot_Addons_Interface
 			 * Load addon code if the plugin is active and addon is activated
 			 */
 			if ( $addon->is_addon_enabled() && $addon->is_addon_installed() && $addon->is_addon_activated() ) {
@@ -329,6 +331,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @param $option_key
 	 * @param $default_placeholder
 	 * @param $cookies
+	 * @param  string  $src
 	 *
 	 * @return bool|mixed
 	 *
@@ -381,7 +384,7 @@ class Settings_Service implements Settings_Service_Interface {
 	private function get_translated_placeholder( $option, $option_key, $default_placeholder, $cookies, $src = '' ) {
 		$current_lang = cookiebot_addons_get_language();
 
-		if ( $current_lang == false || $current_lang == '' ) {
+		if ( $current_lang === false || $current_lang === '' ) {
 			$current_lang = 'site-default';
 		}
 
@@ -394,12 +397,15 @@ class Settings_Service implements Settings_Service_Interface {
 				/**
 				 * if current lang match with the prefix language in the database then get the text
 				 */
-				if ( $key == $current_lang ) {
-					$cookies_array = explode(', ',$cookies);
-					$translated_cookie_names = cookiebot_translate_cookie_names($cookies_array);
-					$translated_cookie_names = implode(', ', $translated_cookie_names);
-					return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages'][ $key ],
-						$translated_cookie_names, $src );
+				if ( $key === $current_lang ) {
+					$cookies_array           = explode( ', ', $cookies );
+					$translated_cookie_names = cookiebot_translate_cookie_names( $cookies_array );
+					$translated_cookie_names = implode( ', ', $translated_cookie_names );
+					return $this->placeholder_merge_tag(
+						$option[ $option_key ]['placeholder']['languages'][ $key ],
+						$translated_cookie_names,
+						$src
+					);
 				}
 			}
 		}
@@ -408,8 +414,11 @@ class Settings_Service implements Settings_Service_Interface {
 		 * Returns site-default text if no match found.
 		 */
 		if ( isset( $option[ $option_key ]['placeholder']['languages']['site-default'] ) ) {
-			return $this->placeholder_merge_tag( $option[ $option_key ]['placeholder']['languages']['site-default'],
-				$cookies, $src );
+			return $this->placeholder_merge_tag(
+				$option[ $option_key ]['placeholder']['languages']['site-default'],
+				$cookies,
+				$src
+			);
 		}
 
 		/**
@@ -463,7 +472,7 @@ class Settings_Service implements Settings_Service_Interface {
 			$parent_class = $addon->get_parent_class();
 
 			if ( $parent_class !== false ) {
-				if ( $parent_class == $addon_class ) {
+				if ( $parent_class === $addon_class ) {
 					if ( $addon->is_addon_activated() ) {
 						return true;
 					}
@@ -485,7 +494,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 2.1.3
 	 */
 	public function is_latest_plugin_version( $addon ) {
-		return ( get_parent_class( $addon ) === false ) ? true : false;
+		return get_parent_class( $addon ) === false;
 	}
 
 	/**
@@ -494,8 +503,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @param $addon_option_name    string  Addon option name
 	 *
-	 * @throws DI\DependencyException
-	 * @throws DI\NotFoundException
+	 * @throws Exception
 	 *
 	 * @since 2.2.0
 	 */
@@ -503,7 +511,7 @@ class Settings_Service implements Settings_Service_Interface {
 		$addons = $this->get_addons();
 
 		foreach ( $addons as $addon ) {
-			if ( $addon->get_option_name() == $addon_option_name ) {
+			if ( $addon->get_option_name() === $addon_option_name ) {
 				$addon->post_hook_after_enabling();
 			}
 		}
@@ -529,7 +537,7 @@ class Settings_Service implements Settings_Service_Interface {
 	public function cookiebot_activated() {
 		$option = get_option( static::OPTION_NAME );
 
-		if( $option == false ) {
+		if ( $option === false ) {
 			$option = array();
 
 			foreach ( $this->get_addons() as $addon ) {

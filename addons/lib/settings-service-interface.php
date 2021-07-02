@@ -2,15 +2,18 @@
 
 namespace cookiebot_addons\lib;
 
-use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
-use Cybot\Dependencies\DI;
+use Exception;
 
-Interface Settings_Service_Interface {
+/**
+ * Interface Settings_Service_Interface
+ * @package cookiebot_addons\lib
+ */
+interface Settings_Service_Interface {
 
 	/**
 	 * Settings_Service constructor.
 	 *
-	 * @param $container DI\Container
+	 * @param $container Dependency_Container
 	 *
 	 * @since 1.3.0
 	 */
@@ -88,8 +91,7 @@ Interface Settings_Service_Interface {
 	 * Returns addons one by one through a generator
 	 *
 	 * @return \Generator
-	 * @throws DI\DependencyException
-	 * @throws DI\NotFoundException
+	 * @throws Exception
 	 *
 	 * @since 1.3.0
 	 */
@@ -99,8 +101,7 @@ Interface Settings_Service_Interface {
 	 * Returns active addons
 	 *
 	 * @return array
-	 * @throws DI\DependencyException
-	 * @throws DI\NotFoundException
+	 * @throws Exception
 	 *
 	 * @since 1.3.0
 	 */
