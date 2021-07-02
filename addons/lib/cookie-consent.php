@@ -2,6 +2,10 @@
 
 namespace cookiebot_addons\lib;
 
+/**
+ * Class Cookie_Consent
+ * @package cookiebot_addons\lib
+ */
 class Cookie_Consent implements Cookie_Consent_Interface {
 
 	/**
@@ -32,7 +36,7 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 * @since 1.2.0
 	 * @version 2.4.1
 	 */
-	public function __construct($default_cookie = null) {
+	public function __construct( $default_cookie = null ) {
 		$this->cookie = ( isset( $_COOKIE['CookieConsent'] ) ) ? $_COOKIE['CookieConsent'] : $default_cookie;
 
 		$this->scan_cookie();
@@ -50,23 +54,28 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 
 		if ( ! empty( $this->cookie ) ) {
 			switch ( $this->cookie ) {
-				case "0":
+				case '0':
 					//The user has not accepted cookies - set strictly necessary cookies only
 					break;
 
-				case "-1":
+				case '-1':
 					//The user is not within a region that requires consent - all cookies are accepted
 					$this->add_state( 'preferences' );
 					$this->add_state( 'statistics' );
 					$this->add_state( 'marketing' );
 					break;
 
-				default: //The user has accepted one or more type of cookies
-
+				default:
 					//Read current user consent in encoded JavaScript format
-					$valid_php_json = preg_replace( '/\s*:\s*([a-zA-Z0-9_]+?)([}\[,])/', ':"$1"$2',
-						preg_replace( '/([{\[,])\s*([a-zA-Z0-9_]+?):/', '$1"$2":',
-							str_replace( "'", '"', stripslashes( $this->cookie ) ) ) );
+					$valid_php_json = preg_replace(
+						'/\s*:\s*([a-zA-Z0-9_]+?)([}\[,])/',
+						':"$1"$2',
+						preg_replace(
+							'/([{\[,])\s*([a-zA-Z0-9_]+?):/',
+							'$1"$2":',
+							str_replace( "'", '"', stripslashes( $this->cookie ) )
+						)
+					);
 					$CookieConsent  = json_decode( $valid_php_json );
 
 					if ( isset( $CookieConsent->preferences ) && filter_var( $CookieConsent->preferences, FILTER_VALIDATE_BOOLEAN ) ) {

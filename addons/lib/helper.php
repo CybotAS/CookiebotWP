@@ -1,27 +1,28 @@
 <?php
 /**
  * Check if a cache plugin is activated and in function.
- * 
- * @return boolean	True	If attributes always should be added
- * 					False	If attributes only should be added if consent no given
+ *
+ * @return boolean  True    If attributes always should be added
+ *                  False   If attributes only should be added if consent no given
  */
 
 function cookiebot_addons_enabled_cache_plugin() {
-	if( defined( "WP_ROCKET_PATH" ) ) {
+	if ( defined( 'WP_ROCKET_PATH' ) ) {
 		return true; //WP Rocket - We need to ensure we not cache tags without attributes
 	}
-	if( defined( "W3TC" ) ) {
+	if ( defined( 'W3TC' ) ) {
 		return true; //W3 Total Cache
 	}
-	if( defined( "WPCACHEHOME" ) ) {
+	if ( defined( 'WPCACHEHOME' ) ) {
 		return true; //WP Super Cache
 	}
-	if( defined( "WPFC_WP_PLUGIN_DIR" ) ) {
+	if ( defined( 'WPFC_WP_PLUGIN_DIR' ) ) {
 		return true; //WP Fastest Cache
 	}
-	if( defined( "LSCWP_CONTENT_DIR" ) ) {
+	if ( defined( 'LSCWP_CONTENT_DIR' ) ) {
 		return true; //Litespeed Cache
 	}
+
 	return false;
 }
 
@@ -84,17 +85,15 @@ function cookiebot_addons_remove_class_action( $action, $class, $method, $priori
  * @since   1.2.0
  */
 function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
-    /**
-     * normalize potential self-closing script tags
-     */
+	/**
+	 * normalize potential self-closing script tags
+	 */
 
-    $normalized_buffer = preg_replace('/(<script(.*?)\/>)/is', '<script$2></script>', $buffer);
+	$normalized_buffer = preg_replace( '/(<script(.*?)\/>)/is', '<script$2></script>', $buffer );
 
-    if($normalized_buffer !== null) {
-        $buffer = $normalized_buffer;
-    }
-
-
+	if ( $normalized_buffer !== null ) {
+		$buffer = $normalized_buffer;
+	}
 
 	/**
 	 * Pattern to get all scripts
@@ -107,53 +106,57 @@ function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
 	/**
 	 * Get all scripts and add cookieconsent if it does match with the criterion
 	 */
-	$updated_scripts = preg_replace_callback( $pattern, function ( $matches ) use ( $keywords ) {
+	$updated_scripts = preg_replace_callback(
+		$pattern,
+		function ( $matches ) use ( $keywords ) {
 
-		$script = $matches[0]; // the full script html
-        $script_tag_open = $matches[1]; // only the script open tag with all attributes
-        $script_tag_inner = $matches[2]; // only the script's innerText
-        $script_tag_close = $matches[3]; // only the script closing tag
+			$script           = $matches[0]; // the full script html
+			$script_tag_open  = $matches[1]; // only the script open tag with all attributes
+			$script_tag_inner = $matches[2]; // only the script's innerText
+			$script_tag_close = $matches[3]; // only the script closing tag
 
-        /**
-		 * Check if the script contains the keywords, checks keywords one by one
-		 *
-		 * If one match, then the rest of the keywords will be skipped.
-		 **/
-		foreach ( $keywords as $needle => $cookie_type ) {
 			/**
-			 * The script contains the needle
+			 * Check if the script contains the keywords, checks keywords one by one
+			 *
+			 * If one match, then the rest of the keywords will be skipped.
 			 **/
-			if ( strpos( $script, $needle ) !== false ) {
-                /**
-                 * replace all single quotes with double quotes in the open tag
-                 * remove previously set data-cookieconsent attribute
-                 * remove type attribute
-                 */
-			    $script_tag_open = preg_replace('/\'/', '"', $script_tag_open);
-			    $script_tag_open = preg_replace('/\sdata-cookieconsent=\"(?:.*?)\"/', '', $script_tag_open);
-				$script_tag_open = preg_replace( '/\stype=\"(?:.*?)\"/', '', $script_tag_open );
+			foreach ( $keywords as $needle => $cookie_type ) {
+				/**
+				 * The script contains the needle
+				 **/
+				if ( strpos( $script, $needle ) !== false ) {
+					/**
+					 * replace all single quotes with double quotes in the open tag
+					 * remove previously set data-cookieconsent attribute
+					 * remove type attribute
+					 */
+					$script_tag_open = preg_replace( '/\'/', '"', $script_tag_open );
+					$script_tag_open = preg_replace( '/\sdata-cookieconsent=\"(?:.*?)\"/', '', $script_tag_open );
+					$script_tag_open = preg_replace( '/\stype=\"(?:.*?)\"/', '', $script_tag_open );
 
-                /**
-                 * set the type attribute to text/plain to prevent javascript execution
-                 * add data-cookieconsent attribute
-                 */
-				$cookie_types = cookiebot_addons_output_cookie_types( $cookie_type );
-				$replacement = '<script type="text/plain" data-cookieconsent="' . $cookie_types . '"';
-				$script_tag_open = preg_replace( '/<script/', $replacement, $script_tag_open );
+					/**
+					 * set the type attribute to text/plain to prevent javascript execution
+					 * add data-cookieconsent attribute
+					 */
+					$cookie_types    = cookiebot_addons_output_cookie_types( $cookie_type );
+					$replacement     = '<script type="text/plain" data-cookieconsent="' . $cookie_types . '"';
+					$script_tag_open = preg_replace( '/<script/', $replacement, $script_tag_open );
 
-                /**
-                 * reconstruct the script and break the foreach loop
-                 */
-				$script = $script_tag_open . $script_tag_inner . $script_tag_close;
-				continue;
+					/**
+					 * reconstruct the script and break the foreach loop
+					 */
+					$script = $script_tag_open . $script_tag_inner . $script_tag_close;
+					continue;
+				}
 			}
-		}
 
-        /**
-         * return the reconstructed script
-         */
-		return $script;
-	}, $buffer );
+			/**
+			 * return the reconstructed script
+			 */
+			return $script;
+		},
+		$buffer
+	);
 
 	/**
 	 * Fallback when the regex fails to work due to PCRE_ERROR_JIT_STACKLIMIT
@@ -177,8 +180,8 @@ function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
  *
  * @param        $helper
  * @param        $current
- * @param bool $echo
- * @param string $type
+ * @param  bool  $echo
+ * @param  string  $type
  *
  * @return string
  *
@@ -192,7 +195,6 @@ function cookiebot_addons_checked_selected_helper( $helper, $current, $echo = tr
 	} else {
 		$result = '';
 	}
-
 
 	if ( $echo ) {
 		echo $result;
@@ -214,9 +216,15 @@ function cookiebot_addons_checked_selected_helper( $helper, $current, $echo = tr
  */
 function cookiebot_addons_output_cookie_types( $cookie_types ) {
 	if ( is_array( $cookie_types ) && count( $cookie_types ) > 0 ) {
-		return implode( ', ', array_map( function ( $value ) {
-			return cookiebot_translate_type_name( $value );
-		}, $cookie_types ) );
+		return implode(
+			', ',
+			array_map(
+				function ( $value ) {
+					return cookiebot_translate_type_name( $value );
+				},
+				$cookie_types
+			)
+		);
 	} elseif ( is_string( $cookie_types ) && $cookie_types != '' ) {
 		return cookiebot_translate_type_name( $cookie_types );
 	}
@@ -307,22 +315,24 @@ function cookiebot_addons_get_language() {
 }
 
 /**
- * @param array $cookie_names
+ * @param  array  $cookie_names
  *
  * @return array
  */
-function cookiebot_translate_cookie_names($cookie_names) {
+function cookiebot_translate_cookie_names( $cookie_names ) {
 	$translated_cookie_names = array(
-		'preferences' => esc_html__('preferences', 'cookiebot'),
-		'statistics' => esc_html__('statistics', 'cookiebot'),
-		'marketing' => esc_html__('marketing', 'cookiebot'),
+		'preferences' => esc_html__( 'preferences', 'cookiebot' ),
+		'statistics'  => esc_html__( 'statistics', 'cookiebot' ),
+		'marketing'   => esc_html__( 'marketing', 'cookiebot' ),
 	);
+
 	return array_map(
-		function(string $cookie_name) use ($translated_cookie_names) {
-			$cookie_name = trim($cookie_name);
-			if(isset($translated_cookie_names[$cookie_name])) {
-				return $translated_cookie_names[$cookie_name];
+		function ( string $cookie_name ) use ( $translated_cookie_names ) {
+			$cookie_name = trim( $cookie_name );
+			if ( isset( $translated_cookie_names[ $cookie_name ] ) ) {
+				return $translated_cookie_names[ $cookie_name ];
 			}
+
 			return $cookie_name;
 		},
 		$cookie_names
@@ -359,7 +369,7 @@ function cookiebot_addons_get_dropdown_languages( $class, $name, $selected ) {
 		'selected'                 => $selected,
 		'show_option_site_default' => true,
 		'echo'                     => false,
-		'languages'                => get_available_languages()
+		'languages'                => get_available_languages(),
 	);
 	$dropdown = wp_dropdown_languages( $args );
 
@@ -375,7 +385,7 @@ function cookiebot_addons_get_dropdown_languages( $class, $name, $selected ) {
  *
  * @since 2.2.0
  */
-function cookiebot_addons_plugin_deactivated( ) {
+function cookiebot_addons_plugin_deactivated() {
 	$cookiebot_addons = \cookiebot_addons\Cookiebot_Addons::instance();
 	$cookiebot_addons->cookiebot_deactivated();
 }
@@ -385,13 +395,13 @@ function cookiebot_addons_plugin_deactivated( ) {
  *
  * @since 3.6.3
  */
-function cookiebot_addons_plugin_activated( ) {
+function cookiebot_addons_plugin_activated() {
 	$cookiebot_addons = \cookiebot_addons\Cookiebot_Addons::instance();
 	$cookiebot_addons->cookiebot_activated();
 }
 
 /**
- * @param string $url
+ * @param  string  $url
  *
  * @return string
  *
@@ -403,11 +413,11 @@ function cookiebot_addons_get_domain_from_url( $url ) {
 	// relative url does not have host so use home url domain
 	$host = isset( $parsed_url['host'] ) ? $parsed_url['host'] : cookiebot_addons_get_home_url_domain();
 
-	$url_parts = explode('.', $host );
+	$url_parts = explode( '.', $host );
 
-	$url_parts = array_slice($url_parts, -2);
+	$url_parts = array_slice( $url_parts, - 2 );
 
-	return implode('.', $url_parts );
+	return implode( '.', $url_parts );
 }
 
 /**
@@ -421,8 +431,47 @@ function cookiebot_addons_get_home_url_domain() {
 	/** @var $host string */
 	$host = $home_url['host'];
 
-	if( empty( $host ) ) {
-		throw new Exception('Home url domain is not found.' );
+	if ( empty( $host ) ) {
+		throw new Exception( 'Home url domain is not found.' );
 	}
+
 	return $host;
+}
+
+/**
+ * @param $file_path
+ *
+ * @return false|string
+ * @throws Exception
+ */
+function cookiebot_get_local_file_contents( $file_path ) {
+	if ( ! file_exists( $file_path ) ) {
+		throw new Exception( 'File ' . $file_path . ' does not exist' );
+	}
+
+	ob_start();
+	include $file_path;
+
+	return ob_get_clean();
+}
+
+/**
+ * @param $file_path
+ *
+ * @return array
+ * @throws Exception
+ */
+function cookiebot_get_local_file_json_contents( $file_path ) {
+	$json = cookiebot_get_local_file_contents( $file_path );
+
+	$decoded_json = json_decode( $json );
+
+	if ( ! is_a( $decoded_json, stdClass::class ) ) {
+		throw new Exception( 'Filepath ' . $file_path . ' could not be parsed as json file' );
+	}
+
+	/**
+	 * @var array $decoded_json
+	 */
+	return $decoded_json;
 }
