@@ -10,9 +10,9 @@ language: php
 # list any PHP version you want to test against
 php:
   # aliased to a recent 5.4.x version
-  - '5.6'
-  - '7.1'
-  - '7.3'
+#  - '5.6'
+#  - '7.1'
+#  - '7.3'
   - '8.0'
 
 env:
@@ -23,7 +23,7 @@ before_script:
   # - composer install
 
   # Install an older version of PHPUnit as WordPress does not support 8.x yet
-  - if [[ "$TRAVIS_PHP_VERSION" == "5.6" ]]; then PHPUNIT_VERSION=5.7.9; else if [[ "$TRAVIS_PHP_VERSION" < "8.0" ]]; then PHPUNIT_VERSION=7.0.0; else PHPUNIT_VERSION=7.5.9; fi fi;
+  - if [[ "$TRAVIS_PHP_VERSION" == "5.6" ]]; then PHPUNIT_VERSION=5.7.9; else if [[ "$TRAVIS_PHP_VERSION" < "8.0" ]]; then PHPUNIT_VERSION=7.0.0; else PHPUNIT_VERSION=9.3.0; fi fi;
   - wget https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar -O /tmp/phpunit; chmod +x /tmp/phpunit
 
   # Install test framework
