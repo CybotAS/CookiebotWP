@@ -23,7 +23,7 @@ before_script:
   # - composer install
 
   # Install an older version of PHPUnit as WordPress does not support 8.x yet
-  - if [[ "$TRAVIS_PHP_VERSION" == "5.6" ]]; then PHPUNIT_VERSION=5.7.9; else PHPUNIT_VERSION=6.5.9; fi
+  - if [[ "$TRAVIS_PHP_VERSION" == "5.6" ]]; then PHPUNIT_VERSION=5.7.9; else if [[ "$TRAVIS_PHP_VERSION" < "8.0" ]]; then PHPUNIT_VERSION=7.0.0; else PHPUNIT_VERSION=7.5.9; fi fi;
   - wget https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar -O /tmp/phpunit; chmod +x /tmp/phpunit
 
   # Install test framework
