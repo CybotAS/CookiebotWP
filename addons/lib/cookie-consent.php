@@ -76,23 +76,23 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 							str_replace( "'", '"', stripslashes( $this->cookie ) )
 						)
 					);
-					$CookieConsent  = json_decode( $valid_php_json );
+					$cookie_consent = json_decode( $valid_php_json );
 
-					if ( isset( $CookieConsent->preferences ) && filter_var( $CookieConsent->preferences, FILTER_VALIDATE_BOOLEAN ) ) {
+					if ( isset( $cookie_consent->preferences ) && filter_var( $cookie_consent->preferences, FILTER_VALIDATE_BOOLEAN ) ) {
 						//Current user accepts preference cookies
 						$this->add_state( 'preferences' );
 					} else {
 						//Current user does NOT accept preference cookies
 					}
 
-					if ( isset( $CookieConsent->statistics ) && filter_var( $CookieConsent->statistics, FILTER_VALIDATE_BOOLEAN ) ) {
+					if ( isset( $cookie_consent->statistics ) && filter_var( $cookie_consent->statistics, FILTER_VALIDATE_BOOLEAN ) ) {
 						//Current user accepts statistics cookies
 						$this->add_state( 'statistics' );
 					} else {
 						//Current user does NOT accept statistics cookies
 					}
 
-					if ( isset( $CookieConsent->marketing ) && filter_var( $CookieConsent->marketing, FILTER_VALIDATE_BOOLEAN ) ) {
+					if ( isset( $cookie_consent->marketing ) && filter_var( $cookie_consent->marketing, FILTER_VALIDATE_BOOLEAN ) ) {
 						//Current user accepts marketing cookies
 						$this->add_state( 'marketing' );
 					} else {

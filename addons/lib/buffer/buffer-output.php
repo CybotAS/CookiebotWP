@@ -21,7 +21,7 @@ class Buffer_Output implements Buffer_Output_Interface {
 	 *
 	 * @since 1.2.0
 	 */
-	public function add_tag( $tag_name, $priority, $keywords = array(), $use_cache = true) {
+	public function add_tag( $tag_name, $priority, $keywords = array(), $use_cache = true ) {
 		$tag       = new Buffer_Output_Tag( $tag_name, $priority, $keywords, $use_cache );
 		$unique_id = $tag->tag . '_' . $tag->priority;
 
@@ -31,12 +31,11 @@ class Buffer_Output implements Buffer_Output_Interface {
 		 */
 		if ( isset( $this->tags[ $unique_id ] ) ) {
 			$this->tags[ $unique_id ]->merge_keywords( $keywords );
-			
-			if(!$use_cache) {
-				$this->tags[ $unique_id ]->set_use_cache(false);
+
+			if ( ! $use_cache ) {
+				$this->tags[ $unique_id ]->set_use_cache( false );
 			}
-		}
-		else {
+		} else {
 			$this->tags[ $unique_id ] = $tag;
 		}
 	}

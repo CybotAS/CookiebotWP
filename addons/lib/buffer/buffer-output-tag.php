@@ -48,7 +48,7 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 	 *
 	 * @since 1.2.0
 	 */
-	private	$use_cache;
+	private $use_cache;
 
 	/**
 	 * Cookiebot_Buffer_Output_Tag constructor.
@@ -67,7 +67,7 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 
 		$this->transient_name = "cookiebot_output_buffer_{$tag}_{$priority}";
 
-		$this->set_use_cache($use_cache);
+		$this->set_use_cache( $use_cache );
 	}
 
 	/**
@@ -86,7 +86,7 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 	 *
 	 * @param $use_cache
 	 */
-	public function set_use_cache($use_cache) {
+	public function set_use_cache( $use_cache ) {
 		$this->use_cache = $use_cache;
 	}
 
@@ -121,20 +121,20 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 		/**
 		 * Get wp head scripts from the cache
 		 */
-		if( $this->use_cache ) {
+		if ( $this->use_cache ) {
 			$updated_scripts = get_transient( $this->transient_name );
 		}
 
 		/**
 		 * If cache is not set then build it
 		 */
-		if ( !$this->use_cache || $updated_scripts === false ) {
+		if ( ! $this->use_cache || $updated_scripts === false ) {
 			/**
 			 * Get all scripts and add cookieconsent if it does match with the criterion
 			 */
 			$updated_scripts = cookiebot_addons_manipulate_script( $buffer, $this->keywords );
 
-			if( $this->use_cache ) {
+			if ( $this->use_cache ) {
 				/**
 				 * Set cache for 15 minutes
 				 */

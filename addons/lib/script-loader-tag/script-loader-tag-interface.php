@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons\lib\script_loader_tag;
 
-Interface Script_Loader_Tag_Interface {
+interface Script_Loader_Tag_Interface {
 
 	/**
 	 * @param $tag
@@ -10,7 +10,7 @@ Interface Script_Loader_Tag_Interface {
 	 *
 	 * @return mixed
 	 */
-	public function add_tag($tag, $type );
+	public function add_tag( $tag, $type );
 
 	/**
 	 * @param $tag
