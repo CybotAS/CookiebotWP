@@ -197,6 +197,9 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ## Changelog ##
 
+### Unreleased - feat/218-wp-google-analytics-events
+# Added support for WP Google Analytics Events
+
 ### Unreleased - feat/replacing-php-di
 * Removed PHP-DI
 * Added custom container class to manage dependencies
