@@ -2,6 +2,7 @@
 
 namespace cookiebot_addons\lib;
 
+use cookiebot_addons\controller\addons\Base_Cookiebot_Addon;
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 use Exception;
 use WP_Error;
@@ -510,8 +511,9 @@ class Settings_Service implements Settings_Service_Interface {
 	public function post_hook_after_enabling_addon_on_settings_page( $addon_option_name ) {
 		$addons = $this->get_addons();
 
+		/** @var Base_Cookiebot_Addon $addon */
 		foreach ( $addons as $addon ) {
-			if ( $addon->get_option_name() === $addon_option_name ) {
+			if ( $addon::OPTION_NAME === $addon_option_name ) {
 				$addon->post_hook_after_enabling();
 			}
 		}

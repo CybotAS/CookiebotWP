@@ -2,11 +2,11 @@
 
 namespace cookiebot_addons\controller;
 
+use cookiebot_addons\controller\addons\Base_Cookiebot_Addon;
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
 use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
 use Cookiebot_WP;
-use Cybot\Dependencies\DI;
 use Exception;
 
 /**
@@ -74,10 +74,11 @@ class Plugin_Controller {
 		 * @var $plugin Cookiebot_Addons_Interface
 		 */
 		$addons_enabled_counter = 0;
-		foreach ( $this->settings_service->get_active_addons() as $plugin ) {
-			if ( ! $plugin->cookie_consent->are_cookie_states_accepted( $plugin->get_cookie_types() )
+		/** @var Base_Cookiebot_Addon $addon */
+		foreach ( $this->settings_service->get_active_addons() as $addon ) {
+			if ( ! $addon->cookie_consent->are_cookie_states_accepted( $addon->get_cookie_types() )
 				|| cookiebot_addons_enabled_cache_plugin() ) {
-				$plugin->load_configuration();
+				$addon->load_addon_configuration();
 				$addons_enabled_counter++;
 			}
 		}

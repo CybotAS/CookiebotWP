@@ -2,6 +2,8 @@
 
 namespace cookiebot_addons\config;
 
+use cookiebot_addons\controller\addons\Base_Cookiebot_Addon;
+use cookiebot_addons\controller\addons\jetpack\Jetpack;
 use cookiebot_addons\lib\Settings_Service_Interface;
 
 class Settings_Config {
@@ -31,10 +33,15 @@ class Settings_Config {
 		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_wp_admin_style_script' ) );
-		add_action( 'update_option_cookiebot_available_addons', array(
-			$this,
-			'post_hook_available_addons_update_option'
-		), 10, 3 );
+		add_action(
+			'update_option_cookiebot_available_addons',
+			array(
+				$this,
+				'post_hook_available_addons_update_option',
+			),
+			10,
+			3
+		);
 	}
 
 	/**
@@ -48,10 +55,17 @@ class Settings_Config {
 			'setting_page'
 		) );*/
 
-		add_submenu_page( 'cookiebot', esc_html__( 'Prior Consent', 'cookiebot' ), esc_html__( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot-addons', array(
-			$this,
-			'setting_page'
-		) );
+		add_submenu_page(
+			'cookiebot',
+			esc_html__( 'Prior Consent', 'cookiebot' ),
+			esc_html__( 'Prior Consent', 'cookiebot' ),
+			'manage_options',
+			'cookiebot-addons',
+			array(
+				$this,
+				'setting_page',
+			)
+		);
 
 	}
 
@@ -100,19 +114,25 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	private function register_available_addons() {
-		add_settings_section( "available_addons", "Available plugins", array(
-			$this,
-			"header_available_addons"
-		), "cookiebot-addons" );
+		add_settings_section(
+			'available_addons',
+			'Available plugins',
+			array(
+				$this,
+				'header_available_addons',
+			),
+			'cookiebot-addons'
+		);
 
+		/* @var Base_Cookiebot_Addon $addon */
 		foreach ( $this->settings_service->get_addons() as $addon ) {
 			if ( $addon->is_addon_installed() && $addon->is_addon_activated() ) {
 				add_settings_field(
-					$addon->get_option_name(),
-					$addon->get_addon_name() . $this->get_extra_information( $addon ),
+					$addon::OPTION_NAME,
+					$addon::ADDON_NAME . $this->get_extra_information( $addon ),
 					array(
 						$this,
-						"available_addon_callback"
+						'available_addon_callback',
 					),
 					"cookiebot-addons",
 					"available_addons",
@@ -121,10 +141,14 @@ class Settings_Config {
 					)
 				);
 
-				register_setting( 'cookiebot_available_addons', "cookiebot_available_addons", array(
-					$this,
-					'sanitize_cookiebot'
-				) );
+				register_setting(
+					'cookiebot_available_addons',
+					'cookiebot_available_addons',
+					array(
+						$this,
+						'sanitize_cookiebot',
+					)
+				);
 			}
 		}
 	}
@@ -135,11 +159,17 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	private function register_jetpack_addon() {
-		add_settings_section( "jetpack_addon", "Jetpack", array(
-			$this,
-			"header_jetpack_addon"
-		), "cookiebot-addons" );
+		add_settings_section(
+			'jetpack_addon',
+			'Jetpack',
+			array(
+				$this,
+				'header_jetpack_addon',
+			),
+			'cookiebot-addons'
+		);
 
+		/* @var Jetpack $addon */
 		foreach ( $this->settings_service->get_addons() as $addon ) {
 			if ( 'Jetpack' === ( new \ReflectionClass( $addon ) )->getShortName() ) {
 				if ( $addon->is_addon_installed() && $addon->is_addon_activated() ) {
@@ -150,13 +180,13 @@ class Settings_Config {
 							$widget->get_label() . $this->get_extra_information( $widget ),
 							array(
 								$this,
-								"jetpack_addon_callback"
+								'jetpack_addon_callback',
 							),
-							"cookiebot-addons",
-							"jetpack_addon",
+							'cookiebot-addons',
+							'jetpack_addon',
 							array(
 								'widget' => $widget,
-								'addon'  => $addon
+								'addon'  => $addon,
 							)
 						);
 
@@ -174,34 +204,40 @@ class Settings_Config {
 	 * @version 2.1.3
 	 */
 	private function register_unavailable_addons() {
-		add_settings_section( "unavailable_addons", "Unavailable plugins", array(
-			$this,
-			"header_unavailable_addons"
-		), "cookiebot-addons" );
+		add_settings_section(
+			'unavailable_addons',
+			'Unavailable plugins',
+			array(
+				$this,
+				'header_unavailable_addons',
+			),
+			'cookiebot-addons'
+		);
 
 		$addons = $this->settings_service->get_addons();
 
+		/** @var Base_Cookiebot_Addon $addon */
 		foreach ( $addons as $addon ) {
 			if ( ( ! $addon->is_addon_installed() || ! $addon->is_addon_activated() )
-			     && $this->settings_service->is_latest_plugin_version( $addon )
-			     && ! $this->settings_service->is_previous_version_active(
+				 && $this->settings_service->is_latest_plugin_version( $addon )
+				&& ! $this->settings_service->is_previous_version_active(
 					$addons,
 					get_class( $addon )
 				)
 			) {
 				// not installed plugins
 				add_settings_field(
-					$addon->get_addon_name(),
-					$addon->get_addon_name() . $this->get_extra_information( $addon ),
+					$addon::ADDON_NAME,
+					$addon::ADDON_NAME . $this->get_extra_information( $addon ),
 					array(
 						$this,
-						"unavailable_addon_callback"
+						'unavailable_addon_callback',
 					),
 					"cookiebot-addons",
 					"unavailable_addons",
 					array( 'addon' => $addon )
 				);
-				register_setting( $addon->get_option_name(), "cookiebot_unavailable_addons" );
+				register_setting( $addon::OPTION_NAME, 'cookiebot_unavailable_addons' );
 			}
 		}
 	}
@@ -209,12 +245,14 @@ class Settings_Config {
 	/**
 	 * Adds extra information under the label.
 	 *
-	 * @param $addon
+	 * @param Base_Cookiebot_Addon $addon
 	 *
 	 * @return string
 	 */
 	private function get_extra_information( $addon ) {
-		return ( $addon->get_extra_information() !== false ) ? '<div class="extra_information">' . $addon->get_extra_information() . '</div>' : '';
+		return $addon->get_extra_information()
+			? '<div class="extra_information">' . $addon->get_extra_information() . '</div>'
+			: '';
 	}
 
 	/**
@@ -244,13 +282,13 @@ class Settings_Config {
 	 */
 	public function header_available_addons() {
 		?>
-        <p>
+		<p>
 			<?php esc_html_e( 'Below is a list of addons for Cookiebot. Addons help you make installed plugins GDPR compliant.', 'cookiebot' ); ?>
-            <br/>
+			<br/>
 			<?php esc_html_e( 'These addons are available because you have the corresponding plugins installed and activated.', 'cookiebot' ); ?>
-            <br/>
+			<br/>
 			<?php esc_html_e( 'Deactivate an addon if you want to handle GDPR compliance yourself, or through another plugin.', 'cookiebot' ); ?>
-        </p>
+		</p>
 		<?php
 	}
 
@@ -287,15 +325,17 @@ class Settings_Config {
 		$addon = $args['addon'];
 
 		?>
-        <div class="postbox cookiebot-addon">
-            <i><?php
-				if ( ! $addon->is_addon_installed() ) {
-					esc_html_e( 'The plugin is not installed.', 'cookiebot' );
-				} else if ( ! $addon->is_addon_activated() ) {
-					esc_html_e( 'The plugin is not activated.', 'cookiebot' );
-				}
-				?></i>
-        </div>
+		<div class="postbox cookiebot-addon">
+			<i>
+			<?php
+			if ( ! $addon->is_addon_installed() ) {
+				esc_html_e( 'The plugin is not installed.', 'cookiebot' );
+			} elseif ( ! $addon->is_addon_activated() ) {
+				esc_html_e( 'The plugin is not activated.', 'cookiebot' );
+			}
+			?>
+				</i>
+		</div>
 		<?php
 	}
 
@@ -311,13 +351,13 @@ class Settings_Config {
 	}
 
 	/**
-     * Post action hook after enabling the addon on the settings page.
-     *
+	 * Post action hook after enabling the addon on the settings page.
+	 *
 	 * @param $old_value
 	 * @param $value
 	 * @param $option_name
-     *
-     * @since 2.2.0
+	 *
+	 * @since 2.2.0
 	 */
 	public function post_hook_available_addons_update_option( $old_value, $value, $option_name ) {
 		if ( is_array( $value ) ) {
