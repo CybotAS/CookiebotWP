@@ -13,5 +13,8 @@
   },
   "Ga_Google_Analytics": {
     "class": "cookiebot_addons\\controller\\addons\\ga_google_analytics\\Ga_Google_Analytics"
+  },
+  "Gadwp": {
+    "class": "cookiebot_addons\\controller\\addons\\gadwp\\Gadwp"
   }
 }
