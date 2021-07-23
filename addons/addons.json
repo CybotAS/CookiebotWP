@@ -2,6 +2,15 @@
   "Add_To_Any": {
     "class": "cookiebot_addons\\controller\\addons\\add_to_any\\Add_To_Any"
   },
+  "Wp_Mautic": {
+    "class": "cookiebot_addons\\controller\\addons\\wp_mautic\\Wp_Mautic"
+  },
+  "WP_Piwik": {
+    "class": "cookiebot_addons\\controller\\addons\\wp_piwik\\Wp_Piwik"
+  },
+  "Wp_Rocket": {
+    "class": "cookiebot_addons\\controller\\addons\\wp_rocket\\Wp_Rocket"
+  },
   "Wpforms": {
     "class": "cookiebot_addons\\controller\\addons\\wpforms\\Wpforms"
   }
