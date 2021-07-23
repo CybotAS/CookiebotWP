@@ -23,6 +23,9 @@
   "Google_Analytics": {
     "class": "cookiebot_addons\\controller\\addons\\google_analytics\\Google_Analytics"
   },
+  "Google_Analytics_Plus": {
+    "class": "cookiebot_addons\\controller\\addons\\google_analytics_plus\\Google_Analytics_Plus"
+  },
   "Wp_Mautic": {
     "class": "cookiebot_addons\\controller\\addons\\wp_mautic\\Wp_Mautic"
   },
