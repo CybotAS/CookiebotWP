@@ -20,6 +20,18 @@
   "Ga_Analyticator": {
     "class": "cookiebot_addons\\controller\\addons\\google_analyticator\\Google_Analyticator"
   },
+  "Wd_Google_Analytics": {
+    "class": "cookiebot_addons\\controller\\addons\\wd_google_analytics\\Wd_Google_Analytics"
+  },
+  "Woocommerce_Google_Analytics_Pro": {
+    "class": "cookiebot_addons\\controller\\addons\\woocommerce_google_analytics_pro\\Woocommerce_Google_Analytics_Pro"
+  },
+  "Wp_Analytify": {
+    "class": "cookiebot_addons\\controller\\addons\\wp_analytify\\Wp_Analytify"
+  },
+  "Wp_Google_Analytics_Events": {
+    "class": "cookiebot_addons\\controller\\addons\\wp_google_analytics_events\\Wp_Google_Analytics_Events"
+  },
   "Wp_Mautic": {
     "class": "cookiebot_addons\\controller\\addons\\wp_mautic\\Wp_Mautic"
   },

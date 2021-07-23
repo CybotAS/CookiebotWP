@@ -3,11 +3,6 @@
 namespace cookiebot_addons\controller\addons\wp_mautic;
 
 use cookiebot_addons\controller\addons\Base_Cookiebot_Addon;
-use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
-use cookiebot_addons\lib\Cookie_Consent_Interface;
-use cookiebot_addons\lib\Settings_Service_Interface;
-use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 
 class Wp_Mautic extends Base_Cookiebot_Addon {
 
