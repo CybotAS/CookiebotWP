@@ -7,5 +7,8 @@
   },
   "Enhanced_Ecommerce_For_WooCommerce_Store": {
     "class": "cookiebot_addons\\controller\\addons\\enhanced_ecommerce_for_woocommerce_store\\Enhanced_Ecommerce_For_WooCommerce_Store"
+  },
+  "Facebook_For_Woocommerce": {
+    "class": "cookiebot_addons\\controller\\addons\\facebook_for_woocommerce\\Facebook_For_Woocommerce"
   }
 }
