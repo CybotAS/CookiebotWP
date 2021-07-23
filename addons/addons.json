@@ -58,5 +58,11 @@
   },
   "Wpforms": {
     "class": "cookiebot_addons\\controller\\addons\\wpforms\\Wpforms"
+  },
+  "Official_Facebook_Pixel": {
+    "class": "cookiebot_addons\\controller\\addons\\official_facebook_pixel\\Official_Facebook_Pixel"
+  },
+  "Ninja_Forms": {
+    "class": "cookiebot_addons\\controller\\addons\\ninja_forms\\Ninja_Forms"
   }
 }
