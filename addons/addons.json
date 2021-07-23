@@ -20,6 +20,9 @@
   "Ga_Analyticator": {
     "class": "cookiebot_addons\\controller\\addons\\google_analyticator\\Google_Analyticator"
   },
+  "Google_Analytics": {
+    "class": "cookiebot_addons\\controller\\addons\\google_analytics\\Google_Analytics"
+  },
   "Wp_Mautic": {
     "class": "cookiebot_addons\\controller\\addons\\wp_mautic\\Wp_Mautic"
   },
