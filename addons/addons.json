@@ -19,5 +19,17 @@
   },
   "Ga_Analyticator": {
     "class": "cookiebot_addons\\controller\\addons\\google_analyticator\\Google_Analyticator"
+  },
+  "Wp_Mautic": {
+    "class": "cookiebot_addons\\controller\\addons\\wp_mautic\\Wp_Mautic"
+  },
+  "WP_Piwik": {
+    "class": "cookiebot_addons\\controller\\addons\\wp_piwik\\Wp_Piwik"
+  },
+  "Wp_Rocket": {
+    "class": "cookiebot_addons\\controller\\addons\\wp_rocket\\Wp_Rocket"
+  },
+  "Wpforms": {
+    "class": "cookiebot_addons\\controller\\addons\\wpforms\\Wpforms"
   }
 }
