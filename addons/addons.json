@@ -16,5 +16,8 @@
   },
   "Gadwp": {
     "class": "cookiebot_addons\\controller\\addons\\gadwp\\Gadwp"
+  },
+  "Ga_Analyticator": {
+    "class": "cookiebot_addons\\controller\\addons\\google_analyticator\\Google_Analyticator"
   }
 }
