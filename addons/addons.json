@@ -23,6 +23,15 @@
   "Wd_Google_Analytics": {
     "class": "cookiebot_addons\\controller\\addons\\wd_google_analytics\\Wd_Google_Analytics"
   },
+  "Simple_Share_Buttons_Adder": {
+    "class": "cookiebot_addons\\controller\\addons\\simple_share_buttons_adder\\Simple_Share_Buttons_Adder"
+  },
+  "Optinmonster": {
+    "class": "cookiebot_addons\\controller\\addons\\optinmonster\\Optinmonster"
+  },
+  "Pixel_Caffeine": {
+    "class": "cookiebot_addons\\controller\\addons\\pixel_caffeine\\Pixel_Caffeine"
+  },
   "Woocommerce_Google_Analytics_Pro": {
     "class": "cookiebot_addons\\controller\\addons\\woocommerce_google_analytics_pro\\Woocommerce_Google_Analytics_Pro"
   },
