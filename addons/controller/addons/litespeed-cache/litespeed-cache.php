@@ -7,10 +7,10 @@ use cookiebot_addons\controller\addons\Base_Cookiebot_Addon;
 class Litespeed_Cache extends Base_Cookiebot_Addon {
 
 	const ADDON_NAME                  = 'Litespeed Cache';
-	const DEFAULT_PLACEHOLDER_CONTENT = '';
+	const DEFAULT_PLACEHOLDER_CONTENT = 'This is not used.';
 	const OPTION_NAME                 = 'litespeed_cache';
 	const PLUGIN_FILE_PATH            = 'litespeed-cache/litespeed-cache.php';
-	const DEFAULT_COOKIE_TYPES        = array( 'statistics' );
+	const DEFAULT_COOKIE_TYPES        = array( 'necessary' );
 	const ENABLE_ADDON_BY_DEFAULT     = true;
 
 	/**

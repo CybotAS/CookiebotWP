@@ -94,7 +94,7 @@ abstract class Base_Cookiebot_Addon {
 			throw new Exception( 'DEFAULT_COOKIE_TYPES must be an array' );
 		}
 
-		$valid_cookie_types            = array( 'marketing', 'statistics', 'preferences' );
+		$valid_cookie_types            = array( 'necessary', 'marketing', 'statistics', 'preferences' );
 		$default_cookie_types_is_valid = array_reduce(
 			static::DEFAULT_COOKIE_TYPES,
 			function( $is_valid, $cookie_type ) use ( $valid_cookie_types ) {
