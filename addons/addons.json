@@ -64,5 +64,23 @@
   },
   "Ninja_Forms": {
     "class": "cookiebot_addons\\controller\\addons\\ninja_forms\\Ninja_Forms"
+  },
+  "Jetpack": {
+    "class": "cookiebot_addons\\controller\\addons\\jetpack\\Jetpack"
+  },
+  "Hubspot_Leadin": {
+    "class": "cookiebot_addons\\controller\\addons\\hubspot_leadin\\Hubspot_Leadin"
+  },
+  "Hubspot_Tracking_Code": {
+    "class": "cookiebot_addons\\controller\\addons\\hubspot_tracking_code\\Hubspot_Tracking_Code"
+  },
+  "Litespeed_Cache": {
+    "class": "cookiebot_addons\\controller\\addons\\litespeed_cache\\Litespeed_Cache"
+  },
+  "Matomo": {
+    "class": "cookiebot_addons\\controller\\addons\\matomo\\matomo"
+  },
+  "Instagram_Feed": {
+    "class": "cookiebot_addons\\controller\\addons\\instagram_feed\\Instagram_Feed"
   }
 }
