@@ -20,6 +20,9 @@ abstract class Base_Cookiebot_Addon {
 	const PLUGIN_FILE_PATH            = '';
 	const DEFAULT_COOKIE_TYPES        = array();
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const LATEST_PLUGIN_VERSION       = true;
+	/** @var bool|string False or PLUGIN FILE PATH OF THE LATEST PLUGIN VERSION  */
+	const PREVIOUS_PLUGIN_VERSION = false;
 
 	/**
 	 * @var Settings_Service_Interface
@@ -315,5 +318,26 @@ abstract class Base_Cookiebot_Addon {
 			'cookie_type' => static::DEFAULT_COOKIE_TYPES,
 			'placeholder' => static::DEFAULT_PLACEHOLDER_CONTENT,
 		);
+	}
+
+	/**
+	 * @return bool|Base_Cookiebot_Addon
+	 */
+	final public function has_previous_version_plugin() {
+		return static::PREVIOUS_PLUGIN_VERSION;
+	}
+
+	/**
+	 * @return bool
+	 */
+	final public function is_latest_plugin_version() {
+		return static::LATEST_PLUGIN_VERSION;
+	}
+
+	/**
+	 * @return bool
+	 */
+	final public function is_previous_version_plugin_activated() {
+		return $this->settings->is_addon_activated( self::PREVIOUS_PLUGIN_VERSION );
 	}
 }

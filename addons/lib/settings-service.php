@@ -470,10 +470,8 @@ class Settings_Service implements Settings_Service_Interface {
 	 */
 	public function is_previous_version_active( $addons, $addon_class ) {
 		foreach ( $addons as $addon ) {
-			$parent_class = $addon->get_parent_class();
-
-			if ( $parent_class !== false ) {
-				if ( $parent_class === $addon_class ) {
+			if ( $addon::LATEST_PLUGIN_VERSION !== true ) {
+				if ( $addon->get_parent_class() ) {
 					if ( $addon->is_addon_activated() ) {
 						return true;
 					}
@@ -488,14 +486,14 @@ class Settings_Service implements Settings_Service_Interface {
 	 * Checks if the addon is the latest plugin version.
 	 * Latest plugin version doesn't have extended class.
 	 *
-	 * @param $addon
+	 * @param Base_Cookiebot_Addon $addon
 	 *
 	 * @return bool
 	 *
 	 * @since 2.1.3
 	 */
 	public function is_latest_plugin_version( $addon ) {
-		return get_parent_class( $addon ) === false;
+		return $addon::LATEST_PLUGIN_VERSION === true;
 	}
 
 	/**

@@ -13,16 +13,10 @@ use cookiebot_addons\controller\addons\caos_host_analyticsjs_local\CAOS_Host_Ana
  */
 class CAOS_Host_Analyticsjs_Local_Save_Ga_Local extends CAOS_Host_Analyticsjs_Local {
 
-	/**
-	 * plugin file name
-	 *
-	 * @return string
-	 *
-	 * @since 2.1.3
-	 */
-	public function get_plugin_file() {
-		return 'host-analyticsjs-local/save-ga-local.php';
-	}
+	const PLUGIN_FILE_PATH        = 'host-analyticsjs-local/save-ga-local.php';
+	const LATEST_PLUGIN_VERSION   = false;
+	const PREVIOUS_PLUGIN_VERSION = CAOS_Host_Analyticsjs_Local::PLUGIN_FILE_PATH;
+
 
 	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.

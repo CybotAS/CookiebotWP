@@ -134,10 +134,10 @@ class Settings_Config {
 						$this,
 						'available_addon_callback',
 					),
-					"cookiebot-addons",
-					"available_addons",
+					'cookiebot-addons',
+					'available_addons',
 					array(
-						'addon' => $addon
+						'addon' => $addon,
 					)
 				);
 
@@ -219,11 +219,8 @@ class Settings_Config {
 		/** @var Base_Cookiebot_Addon $addon */
 		foreach ( $addons as $addon ) {
 			if ( ( ! $addon->is_addon_installed() || ! $addon->is_addon_activated() )
-				 && $this->settings_service->is_latest_plugin_version( $addon )
-				&& ! $this->settings_service->is_previous_version_active(
-					$addons,
-					get_class( $addon )
-				)
+				 && $addon->is_latest_plugin_version()
+				 && ! ( $addon->has_previous_version_plugin() && $addon->is_previous_version_plugin_activated() )
 			) {
 				// not installed plugins
 				add_settings_field(
@@ -233,8 +230,8 @@ class Settings_Config {
 						$this,
 						'unavailable_addon_callback',
 					),
-					"cookiebot-addons",
-					"unavailable_addons",
+					'cookiebot-addons',
+					'unavailable_addons',
 					array( 'addon' => $addon )
 				);
 				register_setting( $addon::OPTION_NAME, 'cookiebot_unavailable_addons' );
