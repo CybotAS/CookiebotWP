@@ -41,7 +41,7 @@ class Plugin_Controller {
 	 *
 	 * @since 1.3.0
 	 */
-	protected function load_init_files() {
+	private function load_init_files() {
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			require_once ABSPATH . '/wp-admin/includes/plugin.php';
 			require_once ABSPATH . '/wp-includes/l10n.php';
