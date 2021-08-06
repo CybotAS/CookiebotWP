@@ -1,19 +1,8 @@
 {
   "name": "cybot/cookiebot",
-  "type": "wordpress-plugin",
-  "scripts": {
-    "build": "composer archive --format=zip"
-  },
-  "archive": {
-    "exclude": [
-      ".gitignore",
-      ".git/",
-      "*.yml",
-      "tests/",
-      "bin/",
-      "composer.json",
-      "composer.lock",
-      "phpunit.xml"
-    ]
+  "autoload": {
+    "psr-4": {
+      "cybot\\cookiebot\\" : "src/"
+    }
   }
 }
