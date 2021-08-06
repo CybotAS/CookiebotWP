@@ -17,12 +17,12 @@ class Test_Addon_File_Name extends Addons_Base {
 	 * @var string
 	 */
 	protected $file;
-    /**
-     * @var mixed|void
-     */
-    private $plugins;
+	/**
+	 * @var mixed|void
+	 */
+	private $plugins;
 
-    public function setUp() {
+	public function setUp() {
 		$this->get_plugins();
 	}
 
@@ -46,18 +46,18 @@ class Test_Addon_File_Name extends Addons_Base {
 	}
 
 	public function test_get_svn_url() {
-        $settingsMock = $this->getMockBuilder('cookiebot_addons\lib\Settings_Service_Interface')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $scriptLoaderTagMock = $this->getMockBuilder('cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $cookieConsentMock = $this->getMockBuilder('cookiebot_addons\lib\Cookie_Consent_Interface')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $bufferOutputMock = $this->getMockBuilder('cookiebot_addons\lib\buffer\Buffer_Output_Interface')
-            ->disableOriginalConstructor()
-            ->getMock();
+		$settingsMock        = $this->getMockBuilder( 'cookiebot_addons\lib\Settings_Service_Interface' )
+			->disableOriginalConstructor()
+			->getMock();
+		$scriptLoaderTagMock = $this->getMockBuilder( 'cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface' )
+			->disableOriginalConstructor()
+			->getMock();
+		$cookieConsentMock   = $this->getMockBuilder( 'cookiebot_addons\lib\Cookie_Consent_Interface' )
+			->disableOriginalConstructor()
+			->getMock();
+		$bufferOutputMock    = $this->getMockBuilder( 'cookiebot_addons\lib\buffer\Buffer_Output_Interface' )
+			->disableOriginalConstructor()
+			->getMock();
 
 		foreach ( $this->plugins as $plugin ) {
 			$p = new $plugin->class( $settingsMock, $scriptLoaderTagMock, $cookieConsentMock, $bufferOutputMock );
@@ -65,7 +65,7 @@ class Test_Addon_File_Name extends Addons_Base {
 			if ( method_exists( $p, 'get_svn_url' ) ) {
 				$svn_address = $p->get_svn_url();
 				if ( ! empty( $svn_address ) ) {
-					$content     = $this->curl_get_content($svn_address);
+					$content = $this->curl_get_content( $svn_address );
 					$this->assertNotFalse( $content );
 				}
 			}

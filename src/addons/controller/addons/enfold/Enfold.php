@@ -71,9 +71,13 @@ class Enfold implements Cookiebot_Addons_Interface {
 	 * @since 1.3.0
 	 */
 	public function cookiebot_addon_enfold() {
-		$this->buffer_output->add_tag( 'wp_footer', 10000, array(
-			'google_analytics_script' => $this->get_cookie_types()
-		) );
+		$this->buffer_output->add_tag(
+			'wp_footer',
+			10000,
+			array(
+				'google_analytics_script' => $this->get_cookie_types(),
+			)
+		);
 	}
 
 	/**

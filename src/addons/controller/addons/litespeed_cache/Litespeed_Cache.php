@@ -49,8 +49,11 @@ class Litespeed_Cache extends Base_Cookiebot_Addon {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__( 'Excludes cookiebot javascript files when the Litespeed Cache deter option is enabled.',
-				'cookiebot-addons' ) . '</p>';;
+		return '<p>' . esc_html__(
+			'Excludes cookiebot javascript files when the Litespeed Cache deter option is enabled.',
+			'cookiebot-addons'
+		) . '</p>';
+
 	}
 
 	/**

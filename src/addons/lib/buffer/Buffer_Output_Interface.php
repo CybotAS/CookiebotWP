@@ -2,7 +2,7 @@
 
 namespace cybot\cookiebot\addons\lib\buffer;
 
-Interface Buffer_Output_Interface {
+interface Buffer_Output_Interface {
 
 	/**
 	 * @param $tag_name         string      Hook name

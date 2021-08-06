@@ -2,7 +2,7 @@
 
 namespace cybot\cookiebot\addons\controller\addons\hubspot_tracking_code;
 
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 
@@ -23,7 +23,7 @@ class Hubspot_Tracking_Code extends Base_Cookiebot_Addon {
 	public function load_addon_configuration() {
 		// Check if HubSpot Tracking Code is loaded
 		$options = get_option( 'hs_settings' );
-		if ( ! isset( $options['hs_portal'] ) || $options['hs_portal'] == '' ) {
+		if ( empty( $options['hs_portal'] ) ) {
 			return;
 		}
 

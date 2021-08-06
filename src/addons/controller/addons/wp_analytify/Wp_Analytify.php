@@ -23,9 +23,14 @@ class Wp_Analytify extends Base_Cookiebot_Addon {
 	 * @since 1.5.0
 	 */
 	public function load_addon_configuration() {
-        $this->buffer_output->add_tag( 'wp_head', 10, array(
-            'GoogleAnalyticsObject'     => $this->get_cookie_types()
-        ), false );
+		$this->buffer_output->add_tag(
+			'wp_head',
+			10,
+			array(
+				'GoogleAnalyticsObject' => $this->get_cookie_types(),
+			),
+			false
+		);
 	}
 
 	/**

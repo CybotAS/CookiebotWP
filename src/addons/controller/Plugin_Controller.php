@@ -116,6 +116,7 @@ class Plugin_Controller {
 	/**
 	 * Runs every added action hooks to manipulate script tag
 	 *
+	 * @throws Exception
 	 * @since 1.3.0
 	 */
 	public function run_buffer_output_manipulations() {

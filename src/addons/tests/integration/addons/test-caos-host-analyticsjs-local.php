@@ -14,10 +14,18 @@ class Test_Caos_Host_Analyticsjs_Local extends Addons_Base {
 	public function test_host_analyticsjs_local() {
 		$content = $this->curl_get_content( 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/includes/frontend/class-tracking.php' );
 
-		$this->assertNotFalse( strpos( $content,
-			'add_filter(\'woocommerce_google_analytics_script_src\'' ) );
-			
-		$this->assertNotFalse( strpos( $content,
-			'\'render_tracking_code\']' ) );
+		$this->assertNotFalse(
+			strpos(
+				$content,
+				'add_filter(\'woocommerce_google_analytics_script_src\''
+			)
+		);
+
+		$this->assertNotFalse(
+			strpos(
+				$content,
+				'\'render_tracking_code\']'
+			)
+		);
 	}
 }

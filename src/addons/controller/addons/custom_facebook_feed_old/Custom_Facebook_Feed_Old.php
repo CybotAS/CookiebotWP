@@ -162,11 +162,11 @@ class Custom_Facebook_Feed_Old implements Cookiebot_Addons_Interface {
 	public function is_addon_installed() {
 		$installed = $this->settings->is_addon_installed( $this->get_plugin_file() );
 
-        if ( $installed && version_compare( $this->get_addon_version(), '2.17.1', '>' ) ) {
-            $installed = false;
-        }
+		if ( $installed && version_compare( $this->get_addon_version(), '2.17.1', '>' ) ) {
+			$installed = false;
+		}
 
-        return $installed;
+		return $installed;
 	}
 
 	/**

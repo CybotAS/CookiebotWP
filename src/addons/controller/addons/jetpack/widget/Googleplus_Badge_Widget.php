@@ -9,6 +9,10 @@ use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
 
+/**
+ * Class Googleplus_Badge_Widget
+ * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
+ */
 class Googleplus_Badge_Widget {
 
 	/**
@@ -208,11 +212,12 @@ class Googleplus_Badge_Widget {
 	 * @since 1.2.0
 	 */
 	public function display_div_message_to_go_to_consent_settings( $view, $widget ) {
-		if ( $widget == 'googleplus-badge' && $view == 'widget_view' ) {
+		if ( $widget === 'googleplus-badge' && $view === 'widget_view' ) {
 			if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
-				echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->cookie_types ) . '">' . $this->get_widget_placeholder() . '</div>';
+				$classname  = cookiebot_addons_cookieconsent_optout( $this->cookie_types );
+				$inner_html = $this->get_widget_placeholder();
+				echo '<div class="' . esc_attr( $classname ) . '">' . esc_html( $inner_html ) . '</div>';
 			}
-
 		}
 	}
 

@@ -7,7 +7,7 @@ use cybot\cookiebot\addons\controller\addons\jetpack\widget\Google_Maps_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Facebook_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Googleplus_Badge_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Goodreads_Widget;
-use cybot\cookiebot\addons\controller\addons\jetpack\widget\Internet_Defense_league_Widget;
+use cybot\cookiebot\addons\controller\addons\jetpack\widget\Internet_Defense_League_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Twitter_Timeline_Widget;
 use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
 use cybot\cookiebot\addons\lib\Cookie_Consent_Interface;
@@ -24,12 +24,12 @@ use cybot\cookiebot\addons\lib\Settings_Service_Interface;
  */
 class Jetpack extends Base_Cookiebot_Addon {
 
-	const ADDON_NAME = 'Jetpack';
+	const ADDON_NAME                  = 'Jetpack';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';
-	const OPTION_NAME = 'jetpack';
-	const PLUGIN_FILE_PATH = 'jetpack/jetpack.php';
-	const DEFAULT_COOKIE_TYPES = array( 'statistics', 'marketing' );
-	const ENABLE_ADDON_BY_DEFAULT = false;
+	const OPTION_NAME                 = 'jetpack';
+	const PLUGIN_FILE_PATH            = 'jetpack/jetpack.php';
+	const DEFAULT_COOKIE_TYPES        = array( 'statistics', 'marketing' );
+	const ENABLE_ADDON_BY_DEFAULT     = false;
 
 	protected $widgets = array();
 
@@ -78,48 +78,78 @@ class Jetpack extends Base_Cookiebot_Addon {
 		 *
 		 * @since 1.2.0
 		 */
-		$this->widgets[] = new Google_Maps_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output,
-			$this->get_widget_option() );
+		$this->widgets[] = new Google_Maps_Widget(
+			$this->settings,
+			$this->script_loader_tag,
+			$this->cookie_consent,
+			$this->buffer_output,
+			$this->get_widget_option()
+		);
 
 		/**
 		 * Load configuration for internet defense league widget
 		 *
 		 * @since 1.2.0
 		 */
-		$this->widgets[] = new Internet_Defense_league_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output,
-			$this->get_widget_option() );
+		$this->widgets[] = new Internet_Defense_League_Widget(
+			$this->settings,
+			$this->script_loader_tag,
+			$this->cookie_consent,
+			$this->buffer_output,
+			$this->get_widget_option()
+		);
 
 		/**
 		 * Load configuration for visitor cookies
 		 *
 		 * @since 1.2.0
 		 */
-		$this->widgets[] = new Visitor_Cookies( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output,
-			$this->get_widget_option() );
+		$this->widgets[] = new Visitor_Cookies(
+			$this->settings,
+			$this->script_loader_tag,
+			$this->cookie_consent,
+			$this->buffer_output,
+			$this->get_widget_option()
+		);
 
 		/**
 		 * Load configuration for twitter timeline widget
 		 *
 		 * @since 1.2.0
 		 */
-		$this->widgets[] = new Twitter_Timeline_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output,
-			$this->get_widget_option() );
+		$this->widgets[] = new Twitter_Timeline_Widget(
+			$this->settings,
+			$this->script_loader_tag,
+			$this->cookie_consent,
+			$this->buffer_output,
+			$this->get_widget_option()
+		);
 
 		/**
 		 * Load configuration for goodreads widget
 		 *
 		 * @since 1.2.0
 		 */
-		$this->widgets[] = new Goodreads_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output,
-			$this->get_widget_option() );
+		$this->widgets[] = new Goodreads_Widget(
+			$this->settings,
+			$this->script_loader_tag,
+			$this->cookie_consent,
+			$this->buffer_output,
+			$this->get_widget_option()
+		);
 
 		/**
 		 * Load configuration for facebook widget
 		 *
 		 * @since 1.2.0
 		 */
-		$this->widgets[] = new Facebook_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output,
-			$this->get_widget_option() );
+		$this->widgets[] = new Facebook_Widget(
+			$this->settings,
+			$this->script_loader_tag,
+			$this->cookie_consent,
+			$this->buffer_output,
+			$this->get_widget_option()
+		);
 
 		/**
 		 * If jetpack version is lower than 7 than add googleplus badge widget
@@ -132,8 +162,13 @@ class Jetpack extends Base_Cookiebot_Addon {
 			 *
 			 * @since 1.2.0
 			 */
-			$this->widgets[] = new Googleplus_Badge_Widget( $this->settings, $this->script_loader_tag, $this->cookie_consent, $this->buffer_output,
-				$this->get_widget_option() );
+			$this->widgets[] = new Googleplus_Badge_Widget(
+				$this->settings,
+				$this->script_loader_tag,
+				$this->cookie_consent,
+				$this->buffer_output,
+				$this->get_widget_option()
+			);
 		}
 	}
 

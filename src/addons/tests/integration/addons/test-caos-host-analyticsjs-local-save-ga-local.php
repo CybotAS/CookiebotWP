@@ -14,9 +14,17 @@ class Test_Caos_Host_Analyticsjs_Local_Save_Ga_Local extends Addons_Base {
 	public function test_host_analyticsjs_local() {
 		$content = $this->curl_get_content( 'http://plugins.svn.wordpress.org/host-analyticsjs-local/tags/1.97/save-ga-local.php' );
 
-		$this->assertNotFalse( strpos( $content,
-			'add_action(\'wp_footer\', \'caos_analytics_render_tracking_code\', $sgal_enqueue_order);' ) );
-		$this->assertNotFalse( strpos( $content,
-			'add_action(\'wp_head\', \'caos_analytics_render_tracking_code\', $sgal_enqueue_order);' ) );
+		$this->assertNotFalse(
+			strpos(
+				$content,
+				'add_action(\'wp_footer\', \'caos_analytics_render_tracking_code\', $sgal_enqueue_order);'
+			)
+		);
+		$this->assertNotFalse(
+			strpos(
+				$content,
+				'add_action(\'wp_head\', \'caos_analytics_render_tracking_code\', $sgal_enqueue_order);'
+			)
+		);
 	}
 }

@@ -9,7 +9,11 @@ use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
 
-class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
+/**
+ * Class Internet_Defense_League_Widget
+ * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
+ */
+class Internet_Defense_League_Widget implements Jetpack_Widget_Interface {
 
 	/**
 	 * @var array   list of supported cookie types
@@ -90,9 +94,14 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 					 *
 					 * @since 1.2.0
 					 */
-					$this->buffer_output->add_tag( 'wp_footer', 10, array(
-						'window._idl' => $this->get_widget_cookie_types(),
-					), false );
+					$this->buffer_output->add_tag(
+						'wp_footer',
+						10,
+						array(
+							'window._idl' => $this->get_widget_cookie_types(),
+						),
+						false
+					);
 
 					/**
 					 * Display placeholder if allowed in the backend settings
@@ -203,10 +212,12 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 	 * @since 1.6.0
 	 */
 	public function cookie_consent_div( $view, $widget ) {
-		if ( $widget == 'internet_defense_league' && $view == 'widget_view' ) {
+		if ( $widget === 'internet_defense_league' && $view === 'widget_view' ) {
 			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
-				echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() ) . '">
-						  ' . $this->get_widget_placeholder() . '
+				$classname  = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
+				$inner_html = $this->get_widget_placeholder();
+				echo '<div class="' . esc_attr( $classname ) . '">
+						  ' . esc_html( $inner_html ) . '
 						</div>';
 			}
 		}

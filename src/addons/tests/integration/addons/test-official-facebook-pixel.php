@@ -4,7 +4,7 @@ namespace cookiebot\addons\tests\integration\addons;
 
 class Test_Official_Facebook_Pixel extends Addons_Base {
 
-    const TRUNK = 'https://plugins.svn.wordpress.org/official-facebook-pixel/trunk/';
+	const TRUNK = 'https://plugins.svn.wordpress.org/official-facebook-pixel/trunk/';
 
 	public function setUp() {
 	}
@@ -21,21 +21,21 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
 </script>
 <!-- End Facebook Pixel Code -->";
 
-		$this->assertNotFalse( strpos( $content, $snippet) );
+		$this->assertNotFalse( strpos( $content, $snippet ) );
 	}
 
 	public function test_official_facebook_pixel_caldera_form() {
-        $content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressCalderaForm.php' );
+		$content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressCalderaForm.php' );
 		$snippet = "add_action(
       'caldera_forms_ajax_return',
       array(__CLASS__, 'injectLeadEvent'),
       10, 2);";
 
-		$this->assertNotFalse( strpos( $content, $snippet) );
+		$this->assertNotFalse( strpos( $content, $snippet ) );
 	}
 
 	public function test_official_facebook_pixel_contact_form_7() {
-        $content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressContactForm7.php' );
+		$content    = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressContactForm7.php' );
 		$snippets[] = "add_action(
       'wpcf7_submit',
       array(__CLASS__, 'trackServerEvent'),
@@ -46,13 +46,13 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
       array(__CLASS__, 'injectLeadEvent'),
       20, 2);";
 
-		foreach($snippets as $snippet) {
-		    $this->assertNotFalse( strpos( $content, $snippet) );
-        }
+		foreach ( $snippets as $snippet ) {
+			$this->assertNotFalse( strpos( $content, $snippet ) );
+		}
 	}
 
 	public function test_official_facebook_pixel_formidable_form() {
-        $content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressFormidableForm.php' );
+		$content    = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressFormidableForm.php' );
 		$snippets[] = "add_action(
       'frm_after_create_entry',
       array(__CLASS__, 'trackServerEvent'),
@@ -65,13 +65,13 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
        20
     );";
 
-		foreach($snippets as $snippet) {
-		    $this->assertNotFalse( strpos( $content, $snippet) );
-        }
+		foreach ( $snippets as $snippet ) {
+			$this->assertNotFalse( strpos( $content, $snippet ) );
+		}
 	}
 
 	public function test_official_facebook_pixel_easy_digital_downloads() {
-        $content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressEasyDigitalDownloads.php' );
+		$content    = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressEasyDigitalDownloads.php' );
 		$snippets[] = "add_action(
       'edd_payment_receipt_after',
       array(__CLASS__, 'trackPurchaseEvent'),
@@ -90,44 +90,44 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
       40, 1
     );";
 
-		foreach($snippets as $snippet) {
-		    $this->assertNotFalse( strpos( $content, $snippet) );
-        }
+		foreach ( $snippets as $snippet ) {
+			$this->assertNotFalse( strpos( $content, $snippet ) );
+		}
 	}
 
 	public function test_official_facebook_pixel_gravity_forms() {
-        $content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressGravityForms.php' );
+		$content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressGravityForms.php' );
 		$snippet = "add_filter(
       'gform_confirmation',
       array(__CLASS__, 'injectLeadEvent'),
       10, 4);";
 
-		$this->assertNotFalse( strpos( $content, $snippet) );
+		$this->assertNotFalse( strpos( $content, $snippet ) );
 	}
 
 	public function test_official_facebook_pixel_mailchimp_for_wp() {
-        $content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressMailchimpForWp.php' );
+		$content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressMailchimpForWp.php' );
 		$snippet = "self::addPixelFireForHook(array(
       'hook_name' => 'mc4wp_form_subscribed',
       'classname' => __CLASS__,
       'inject_function' => 'injectLeadEvent'));
   }";
 
-		$this->assertNotFalse( strpos( $content, $snippet) );
+		$this->assertNotFalse( strpos( $content, $snippet ) );
 	}
 
 	public function test_official_facebook_pixel_ninja_forms() {
-        $content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressNinjaForms.php' );
+		$content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressNinjaForms.php' );
 		$snippet = "add_action(
       'ninja_forms_submission_actions',
       array(__CLASS__, 'injectLeadEvent'),
       10, 3);";
 
-		$this->assertNotFalse( strpos( $content, $snippet) );
+		$this->assertNotFalse( strpos( $content, $snippet ) );
 	}
 
 	public function test_official_facebook_pixel_woocommerce() {
-        $content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressWooCommerce.php' );
+		$content    = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressWooCommerce.php' );
 		$snippets[] = "add_action('woocommerce_after_checkout_form',
         array(__CLASS__, 'trackInitiateCheckout'),
         40);";
@@ -141,13 +141,13 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
         array(__CLASS__, 'trackPurchaseEvent'),
         40);";
 
-		foreach($snippets as $snippet) {
-		    $this->assertNotFalse( strpos( $content, $snippet) );
-        }
+		foreach ( $snippets as $snippet ) {
+			$this->assertNotFalse( strpos( $content, $snippet ) );
+		}
 	}
 
 	public function test_official_facebook_pixel_WPECommerce() {
-        $content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressWPECommerce.php' );
+		$content    = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressWPECommerce.php' );
 		$snippets[] = "add_action('wpsc_add_to_cart_json_response',
       array(__CLASS__, 'injectAddToCartEvent'), 11);";
 		$snippets[] = "self::addPixelFireForHook(array(
@@ -158,38 +158,38 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
       'wpsc_transaction_results_shutdown',
       array(__CLASS__, 'injectPurchaseEvent'), 11, 3);";
 
-        foreach($snippets as $snippet) {
-            $this->assertNotFalse( strpos( $content, $snippet) );
-        }
+		foreach ( $snippets as $snippet ) {
+			$this->assertNotFalse( strpos( $content, $snippet ) );
+		}
 	}
 
-    public function test_official_facebook_pixel_wp_forms() {
-        $content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressWPForms.php' );
-        $snippets[] = "add_action(
+	public function test_official_facebook_pixel_wp_forms() {
+		$content    = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressWPForms.php' );
+		$snippets[] = "add_action(
       'wp_footer',
        array(__CLASS__, 'injectLeadEvent'),
        20
     );";
-        $snippets[] = "add_action(
+		$snippets[] = "add_action(
       'wpforms_process_before',
       array(__CLASS__, 'trackEvent'),
       20,
       2
     );";
 
-        foreach($snippets as $snippet) {
-            $this->assertNotFalse( strpos( $content, $snippet) );
-        }
-    }
+		foreach ( $snippets as $snippet ) {
+			$this->assertNotFalse( strpos( $content, $snippet ) );
+		}
+	}
 
-    public function test_official_facebook_pixel_integration_base() {
-        $content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressIntegrationBase.php' );
+	public function test_official_facebook_pixel_integration_base() {
+		$content = $this->curl_get_content( self::TRUNK . 'integration/FacebookWordpressIntegrationBase.php' );
 
-        $snippet = 'add_action(
+		$snippet = 'add_action(
         \'wp_footer\',
         $hook_wp_footer,
         11);';
 
-        $this->assertNotFalse( strpos( $content, $snippet) );
-    }
+		$this->assertNotFalse( strpos( $content, $snippet ) );
+	}
 }

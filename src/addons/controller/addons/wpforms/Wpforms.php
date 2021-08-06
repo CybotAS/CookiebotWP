@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\addons\controller\addons\wpforms;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\Cookiebot_WP;
 
 class Wpforms extends Base_Cookiebot_Addon {
 
@@ -31,7 +32,7 @@ class Wpforms extends Base_Cookiebot_Addon {
 			'wpforms-gdpr-cookiebot',
 			COOKIEBOT_URL . 'addons/controller/addons/wpforms/cookie-after-consent.js',
 			array( 'jquery' ),
-			'',
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			true
 		);
 		wp_localize_script( 'wpforms-gdpr-cookiebot', 'cookiebot_wpforms_settings', array( 'cookie_types' => $this->get_cookie_types() ) );

@@ -10,6 +10,10 @@ use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_remove_class_action;
 
+/**
+ * Class Visitor_Cookies
+ * @package cybot\cookiebot\addons\controller\addons\jetpack
+ */
 class Visitor_Cookies implements Jetpack_Widget_Interface {
 
 	/**
@@ -182,9 +186,12 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 1.2.0
 	 */
 	protected function disable_comment_subscriptions() {
-		add_filter( 'comment_cookie_lifetime', function ( $time ) {
-			return 0;
-		} );
+		add_filter(
+			'comment_cookie_lifetime',
+			function ( $time ) {
+				return 0;
+			}
+		);
 	}
 
 	/**
@@ -214,7 +221,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 		cookiebot_addons_remove_class_action( 'comment_post', 'Highlander_Comments_Base', 'set_comment_cookies' );
 
 		/**
-		 * Remove action comment cookies in wordpress core
+		 * Remove action comment cookies in WordPress core
 		 *
 		 * we have to remove this action, because it does manually add the cookie.
 		 */
@@ -253,8 +260,10 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 1.2.0
 	 */
 	public function view_accept_preferences_consent() {
-		echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() ) . '">
-						  ' . $this->get_default_placeholder() . '
+		$classname  = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
+		$inner_html = $this->get_default_placeholder();
+		echo '<div class="' . esc_attr( $classname ) . '">
+						  ' . esc_html( $inner_html ) . '
 						</div>';
 	}
 

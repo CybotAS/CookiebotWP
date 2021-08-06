@@ -23,7 +23,7 @@ class Simple_Share_Buttons_Adder extends Base_Cookiebot_Addon {
 	 * @since 1.3.0
 	 */
 	public function load_addon_configuration() {
-		$this->script_loader_tag->add_tag('ssba-sharethis', $this->get_cookie_types());
+		$this->script_loader_tag->add_tag( 'ssba-sharethis', $this->get_cookie_types() );
 	}
 
 	/**

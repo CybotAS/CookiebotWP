@@ -50,8 +50,10 @@ class Test_Cookie_Consent extends \WP_UnitTestCase {
 	public function test_scan_cookie_everything_checked() {
 		$cookie_consent = new Cookie_Consent( - 1 );
 
-		$this->assertEquals( $cookie_consent->get_cookie_states(),
-			array( 'necessary', 'preferences', 'statistics', 'marketing' ) );
+		$this->assertEquals(
+			$cookie_consent->get_cookie_states(),
+			array( 'necessary', 'preferences', 'statistics', 'marketing' )
+		);
 	}
 
 	/**

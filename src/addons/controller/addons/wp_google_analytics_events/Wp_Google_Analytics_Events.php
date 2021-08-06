@@ -47,8 +47,10 @@ class Wp_Google_Analytics_Events extends Base_Cookiebot_Addon {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__( 'The plugin allows you to fire events whenever someone interacts or views elements on your website.',
-				'cookiebot-addons' ) . '</p>';
+		return '<p>' . esc_html__(
+			'The plugin allows you to fire events whenever someone interacts or views elements on your website.',
+			'cookiebot-addons'
+		) . '</p>';
 	}
 
 	/**

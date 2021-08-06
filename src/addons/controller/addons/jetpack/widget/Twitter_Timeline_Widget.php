@@ -204,9 +204,11 @@ class Twitter_Timeline_Widget {
 	 * @since 1.2.0
 	 */
 	public function display_div_message_to_go_to_consent_settings( $view, $widget ) {
-		if ( $widget == 'twitter_timeline' && $view == 'widget_view' ) {
+		if ( $widget === 'twitter_timeline' && $view === 'widget_view' ) {
 			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
-				echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() ) . '">' . $this->get_widget_placeholder() . '</div>';
+				$classname  = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
+				$inner_html = $this->get_widget_placeholder();
+				echo '<div class="' . esc_attr( $classname ) . '">' . esc_html( $inner_html ) . '</div>';
 			}
 		}
 	}

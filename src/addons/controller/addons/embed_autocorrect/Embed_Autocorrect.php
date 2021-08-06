@@ -85,34 +85,52 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function cookiebot_addon_embed_autocorrect() {
 
 		//add filters to handle autocorrection in content
-		add_filter( 'the_content', array(
-			$this,
-			'cookiebot_addon_embed_autocorrect_content',
-		), 1000 ); //Ensure it is executed as the last filter
+		add_filter(
+			'the_content',
+			array(
+				$this,
+				'cookiebot_addon_embed_autocorrect_content',
+			),
+			1000
+		); //Ensure it is executed as the last filter
 
 		//add filters to handle autocorrection in widget text
-		add_filter( 'widget_text', array(
-			$this,
-			'cookiebot_addon_embed_autocorrect_content',
-		), 1000 ); //Ensure it is executed as the last filter
-
+		add_filter(
+			'widget_text',
+			array(
+				$this,
+				'cookiebot_addon_embed_autocorrect_content',
+			),
+			1000
+		); //Ensure it is executed as the last filter
 
 		//add fitler to handle video shortcodes
-		add_filter( 'wp_video_shortcode', array(
-			$this,
-			'cookiebot_addon_embed_autocorrect_handle_video',
-		), 1000 );
+		add_filter(
+			'wp_video_shortcode',
+			array(
+				$this,
+				'cookiebot_addon_embed_autocorrect_handle_video',
+			),
+			1000
+		);
 
 		//add fitler to handle audio shortcodes
-		add_filter( 'wp_audio_shortcode', array(
-			$this,
-			'cookiebot_addon_embed_autocorrect_handle_audio',
-		), 1000 );
+		add_filter(
+			'wp_audio_shortcode',
+			array(
+				$this,
+				'cookiebot_addon_embed_autocorrect_handle_audio',
+			),
+			1000
+		);
 
-		add_action( 'wp_head', array(
-			$this,
-			'cookiebot_addon_embed_autocorrect_javascript',
-		) );
+		add_action(
+			'wp_head',
+			array(
+				$this,
+				'cookiebot_addon_embed_autocorrect_javascript',
+			)
+		);
 	}
 
 	/**
@@ -124,21 +142,28 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		$library = apply_filters( 'wp_video_shortcode_library', 'mediaelement' );
 		if ( $library === 'mediaelement' ) {
 			?>
-            <style type="text/css">video.wp-video-shortcode__disabled, audio.wp-audio-shortcode__disabled {
-                    display: none;
-                }</style>
-            <script>
-                window.addEventListener( 'CookiebotOnTagsExecuted', function ( e ) {
-                    if (<?php echo 'Cookiebot.consent.' . implode( ' && Cookiebot.consent.',
-							$this->get_cookie_types() ); ?>) {
-                        jQuery( '.wp-video-shortcode__disabled' ).addClass( 'wp-video-shortcode' ).removeClass( 'wp-video-shortcode__disabled' );
-                        jQuery( '.wp-audio-shortcode__disabled' ).addClass( 'wp-audio-shortcode' ).removeClass( 'wp-audio-shortcode__disabled' );
-                        if ( window.wp && window.wp.mediaelement && window.wp.mediaelement.initialize ) {
-                            window.wp.mediaelement.initialize();
-                        }
-                    }
-                }, false );
-            </script><?php
+			<style type="text/css">video.wp-video-shortcode__disabled, audio.wp-audio-shortcode__disabled {
+					display: none;
+				}</style>
+			<script>
+				window.addEventListener( 'CookiebotOnTagsExecuted', function ( e ) {
+					if (
+					<?php
+					echo 'Cookiebot.consent.' . implode(
+						' && Cookiebot.consent.',
+						$this->get_cookie_types()
+					);
+					?>
+							) {
+						jQuery( '.wp-video-shortcode__disabled' ).addClass( 'wp-video-shortcode' ).removeClass( 'wp-video-shortcode__disabled' );
+						jQuery( '.wp-audio-shortcode__disabled' ).addClass( 'wp-audio-shortcode' ).removeClass( 'wp-audio-shortcode__disabled' );
+						if ( window.wp && window.wp.mediaelement && window.wp.mediaelement.initialize ) {
+							window.wp.mediaelement.initialize();
+						}
+					}
+				}, false );
+			</script>
+			<?php
 		}
 	}
 
@@ -158,15 +183,21 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			$src = $matchSrc[1];
 
 			//Replace - and add cookie consent notice.
-			$adjusted = str_replace( '<script>',
+			$adjusted = str_replace(
+				'<script>',
 				'<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '">',
-				$match );
+				$match
+			);
 
 			/**
 			 * Generate placeholder
 			 */
-			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source',
-				$src ) );
+			$placeholder = $this->generate_placeholder_with_src(
+				apply_filters(
+					'cookiebot_addons_embed_source',
+					$src
+				)
+			);
 
 			/**
 			 * Modify placeholder by Filter
@@ -175,11 +206,15 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			 * @param   $src            string  Source attribute from the embedded video
 			 * @param   $this           array   Array of required cookie types
 			 */
-			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src,
-				$this->get_cookie_types() );
+			$placeholder = apply_filters(
+				'cookiebot_addons_embed_placeholder',
+				$placeholder,
+				$src,
+				$this->get_cookie_types()
+			);
 
 			$adjusted .= $placeholder;
-			$content  = str_replace( $match, $adjusted, $content );
+			$content   = str_replace( $match, $adjusted, $content );
 
 		}
 		unset( $matches );
@@ -196,15 +231,21 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			$src = $matchSrc[1];
 
 			//Replace - and add cookie consent notice.
-			$adjusted = str_replace( '<script ',
+			$adjusted = str_replace(
+				'<script ',
 				'<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" ',
-				$match );
+				$match
+			);
 
 			/**
 			 * Generate placeholder
 			 */
-			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source',
-				$src ) );
+			$placeholder = $this->generate_placeholder_with_src(
+				apply_filters(
+					'cookiebot_addons_embed_source',
+					$src
+				)
+			);
 
 			/**
 			 * Modify placeholder by Filter
@@ -213,20 +254,26 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			 * @param   $src            string  Source attribute from the embedded video
 			 * @param   $this           array   Array of required cookie types
 			 */
-			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src,
-				$this->get_cookie_types() );
+			$placeholder = apply_filters(
+				'cookiebot_addons_embed_placeholder',
+				$placeholder,
+				$src,
+				$this->get_cookie_types()
+			);
 
 			$adjusted .= $placeholder;
-			$content  = str_replace( $match, $adjusted, $content );
+			$content   = str_replace( $match, $adjusted, $content );
 
 		}
 		unset( $matches );
 
-
 		//Match all speakerdeck, slideshare, screencast, reverbnation, mixcloud, kickstarter,
 		// dailymoition, collegehumor, cloudup, animoto, videopress, youtube, vimeo and facebook iframes.
-		preg_match_all( $this->get_regex(),
-			$content, $matches );
+		preg_match_all(
+			$this->get_regex(),
+			$content,
+			$matches
+		);
 
 		foreach ( $matches[0] as $x => $match ) {
 			/** Get the source attribute value */
@@ -240,13 +287,19 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			}
 
 			/**  Replace - and add cookie consent notice. */
-			$adjusted = str_replace( ' src=',
+			$adjusted = str_replace(
+				' src=',
 				' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=',
-				$match );
+				$match
+			);
 
 			/** Generate placeholder */
-			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source',
-				$src ) );
+			$placeholder = $this->generate_placeholder_with_src(
+				apply_filters(
+					'cookiebot_addons_embed_source',
+					$src
+				)
+			);
 
 			/**
 			 * Modify placeholder by Filter
@@ -255,26 +308,39 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			 * @param   $src            string  Source attribute from the embedded video
 			 * @param   $this           array   Array of required cookie types
 			 */
-			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src,
-				$this->get_cookie_types() );
+			$placeholder = apply_filters(
+				'cookiebot_addons_embed_placeholder',
+				$placeholder,
+				$src,
+				$this->get_cookie_types()
+			);
 
 			$adjusted .= $placeholder;
-			$content  = str_replace( $match, $adjusted, $content );
+			$content   = str_replace( $match, $adjusted, $content );
 		}
 
 		unset( $matches );
-		preg_match_all( '/<script.*(instagram|twitter|issuu|imgur|redditmedia\.com|tiktok\.com|polldaddy|tumblr)+.*<\/script>/mi',
-			$content, $matches );
+		preg_match_all(
+			'/<script.*(instagram|twitter|issuu|imgur|redditmedia\.com|tiktok\.com|polldaddy|tumblr)+.*<\/script>/mi',
+			$content,
+			$matches
+		);
 		foreach ( $matches[0] as $x => $match ) {
 			//Replace - and add cookie consent notice.
-			$adjusted = str_replace( ' src=',
+			$adjusted = str_replace(
+				' src=',
 				' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=',
-				$match );
+				$match
+			);
 			/**
 			 * Generate placeholder
 			 */
-			$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source',
-				$src ) );
+			$placeholder = $this->generate_placeholder_with_src(
+				apply_filters(
+					'cookiebot_addons_embed_source',
+					$src
+				)
+			);
 			/**
 			 * Modify placeholder by Filter
 			 *
@@ -282,9 +348,13 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 			 * @param   $src            string  Source attribute from the embedded video
 			 * @param   $this           array   Array of required cookie types
 			 */
-			$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src,
-				$this->get_cookie_types() );
-			$adjusted    .= $placeholder;
+			$placeholder = apply_filters(
+				'cookiebot_addons_embed_placeholder',
+				$placeholder,
+				$src,
+				$this->get_cookie_types()
+			);
+			$adjusted   .= $placeholder;
 			$content     = str_replace( $match, $adjusted, $content );
 		}
 		unset( $matches );
@@ -308,21 +378,27 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 
 		// allow same domain embeds without cookieconsent
 		$src_domain = cookiebot_addons_get_domain_from_url( $src );
-		if( cookiebot_addons_get_home_url_domain() ===  $src_domain ) {
-		    return $output;
+		if ( cookiebot_addons_get_home_url_domain() === $src_domain ) {
+			return $output;
 		}
 
 		/**
 		 * Generate placeholder
 		 */
 		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
-		$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src,
-			$this->get_cookie_types() );
+		$placeholder = apply_filters(
+			'cookiebot_addons_embed_placeholder',
+			$placeholder,
+			$src,
+			$this->get_cookie_types()
+		);
 
-		$output = str_replace( 'wp-video-shortcode', 'wp-video-shortcode__disabled', $output );
-		$output = str_replace( ' src=',
+		$output  = str_replace( 'wp-video-shortcode', 'wp-video-shortcode__disabled', $output );
+		$output  = str_replace(
+			' src=',
 			' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=',
-			$output );
+			$output
+		);
 		$output .= $placeholder;
 
 		return $output;
@@ -346,13 +422,19 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 		 * Generate placeholder
 		 */
 		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
-		$placeholder = apply_filters( 'cookiebot_addons_embed_placeholder', $placeholder, $src,
-			$this->get_cookie_types() );
+		$placeholder = apply_filters(
+			'cookiebot_addons_embed_placeholder',
+			$placeholder,
+			$src,
+			$this->get_cookie_types()
+		);
 
-		$output = str_replace( 'wp-audio-shortcode', 'wp-audio-shortcode__disabled', $output );
-		$output = str_replace( ' src=',
+		$output  = str_replace( 'wp-audio-shortcode', 'wp-audio-shortcode__disabled', $output );
+		$output  = str_replace(
+			' src=',
 			' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=',
-			$output );
+			$output
+		);
 		$output .= $placeholder;
 
 		return $output;
@@ -366,7 +448,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @return string
 	 */
 	public function generate_placeholder_with_src( $src = '' ) {
-		$cookieContentNotice = '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_cookie_types() ) . '">';
+		$cookieContentNotice  = '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_cookie_types() ) . '">';
 		$cookieContentNotice .= $this->get_placeholder( $src );
 		$cookieContentNotice .= '</div>';
 
@@ -488,8 +570,12 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_placeholder( $src = '' ) {
-		return $this->settings->get_placeholder( $this->get_option_name(), $this->get_default_placeholder(),
-			cookiebot_addons_output_cookie_types( $this->get_cookie_types() ), $src );
+		return $this->settings->get_placeholder(
+			$this->get_option_name(),
+			$this->get_default_placeholder(),
+			cookiebot_addons_output_cookie_types( $this->get_cookie_types() ),
+			$src
+		);
 	}
 
 	/**
@@ -533,8 +619,10 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__( 'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
-				'cookiebot-addons' ) . '</p>';
+		return '<p>' . esc_html__(
+			'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
+			'cookiebot-addons'
+		) . '</p>';
 	}
 
 	/**
@@ -597,8 +685,10 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @since 2.4.6
 	 */
 	private function get_regex() {
-		return apply_filters( 'cookiebot_embed_regex',
-			$this->settings->get_addon_regex( $this->get_option_name(), $this->get_default_regex() ) );
+		return apply_filters(
+			'cookiebot_embed_regex',
+			$this->settings->get_addon_regex( $this->get_option_name(), $this->get_default_regex() )
+		);
 	}
 
 	/**
@@ -609,8 +699,10 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 * @since 2.4.6
 	 */
 	private function get_default_regex() {
-		return apply_filters( 'cookiebot_embed_default_regex',
-			'/<iframe[^>]* src=("|\').*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com|soundcloud\.com|spotify\.com|speakerdeck\.com|slideshare\.net|screencast\.com|reverbnation\.com|mixcloud\.com|cloudup\.com|animoto\.com|video\.wordpress\.com|embed\.ted\.com|embedly\.com|kickstarter\.com).*[^>].*>.*?<\/iframe>/mi' );
+		return apply_filters(
+			'cookiebot_embed_default_regex',
+			'/<iframe[^>]* src=("|\').*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com|soundcloud\.com|spotify\.com|speakerdeck\.com|slideshare\.net|screencast\.com|reverbnation\.com|mixcloud\.com|cloudup\.com|animoto\.com|video\.WordPress\.com|embed\.ted\.com|embedly\.com|kickstarter\.com).*[^>].*>.*?<\/iframe>/mi'
+		);
 	}
 
 	/**
@@ -631,40 +723,58 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 */
 	public function extra_available_addon_option() {
 		?>
-        <div class="show_advanced_options">
-            <button class="button button-secondary"><?php esc_html_e( 'Show advanced options',
-					'cookiebot-addons' ); ?></button>
-            <span class="help-tip"
-                  title="<?php echo esc_html__( 'This is for more advanced users.', 'cookiebot-addons' ); ?>"></span>
-        </div>
-        <div class="advanced_options">
+		<div class="show_advanced_options">
+			<button class="button button-secondary">
+			<?php
+			esc_html_e(
+				'Show advanced options',
+				'cookiebot-addons'
+			);
+			?>
+					</button>
+			<span class="help-tip"
+				  title="<?php echo esc_html__( 'This is for more advanced users.', 'cookiebot-addons' ); ?>"></span>
+		</div>
+		<div class="advanced_options">
 
-            <label for="embed_regex"><?php esc_html_e( 'Regex:', 'cookiebot-addons' ); ?></label>
-            <textarea
-                    id="embed_regex"
-                    cols="80"
-                    rows="5"
-                    name="cookiebot_available_addons[<?php echo $this->get_option_name(); ?>][regex]"
-                    disabled
-            ><?php echo esc_html( $this->get_regex() ); ?></textarea>
+			<label for="embed_regex"><?php esc_html_e( 'Regex:', 'cookiebot-addons' ); ?></label>
+			<textarea
+					id="embed_regex"
+					cols="80"
+					rows="5"
+					name="cookiebot_available_addons[<?php echo $this->get_option_name(); ?>][regex]"
+					disabled
+			><?php echo esc_html( $this->get_regex() ); ?></textarea>
 
 			<?php if ( $this->is_regex_default() ) : ?>
-                <button id="edit_embed_regex" class="button"><?php esc_html_e( 'Edit regex',
-						'cookiebot-addons' ); ?></button>
+				<button id="edit_embed_regex" class="button">
+				<?php
+				esc_html_e(
+					'Edit regex',
+					'cookiebot-addons'
+				);
+				?>
+						</button>
 			<?php endif; ?>
 
-            <button
-                    id="btn_default_embed_regex"
-                    class="button<?php echo ( $this->is_regex_default() ) ? ' hidden' : ''; ?>"
-                    type="button"
-                    value="Reset to default regex"><?php esc_html_e( 'Reset to default regex',
-					'cookiebot-addons' ); ?></button>
-            <input
-                    type="hidden"
-                    name="default_embed_regex"
-                    id="default_embed_regex"
-                    value="<?php echo esc_html( $this->get_default_regex() ); ?>"/>
-        </div>
+			<button
+					id="btn_default_embed_regex"
+					class="button<?php echo ( $this->is_regex_default() ) ? ' hidden' : ''; ?>"
+					type="button"
+					value="Reset to default regex">
+					<?php
+					esc_html_e(
+						'Reset to default regex',
+						'cookiebot-addons'
+					);
+					?>
+					</button>
+			<input
+					type="hidden"
+					name="default_embed_regex"
+					id="default_embed_regex"
+					value="<?php echo esc_html( $this->get_default_regex() ); ?>"/>
+		</div>
 		<?php
 	}
 
