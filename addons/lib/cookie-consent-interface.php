@@ -49,5 +49,5 @@ Interface Cookie_Consent_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function are_cookie_states_accepted( $states );
+	public function are_cookie_states_accepted( array $states );
 }

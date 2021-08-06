@@ -141,16 +141,17 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function are_cookie_states_accepted( $states ) {
-		if ( is_array( $states ) ) {
-			foreach ( $states as $state ) {
-				if ( ! in_array( $state, $this->states ) ) {
+	public function are_cookie_states_accepted( array $states ) {
+		return array_reduce(
+			$states,
+			function( $are_cookie_states_accepted, $state ) {
+				if ( ! $are_cookie_states_accepted ) {
 					return false;
 				}
-			}
-		}
-
-		return true;
+				return in_array( $state, $this->states, true );
+			},
+			true
+		);
 	}
 
 	/**
