@@ -78,29 +78,30 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 					);
 					$cookie_consent = json_decode( $valid_php_json );
 
-					if ( isset( $cookie_consent->preferences ) && filter_var( $cookie_consent->preferences, FILTER_VALIDATE_BOOLEAN ) ) {
+					if (
+						isset( $cookie_consent->preferences ) &&
+						filter_var( $cookie_consent->preferences, FILTER_VALIDATE_BOOLEAN )
+					) {
 						//Current user accepts preference cookies
 						$this->add_state( 'preferences' );
-					} else {
-						//Current user does NOT accept preference cookies
 					}
 
-					if ( isset( $cookie_consent->statistics ) && filter_var( $cookie_consent->statistics, FILTER_VALIDATE_BOOLEAN ) ) {
+					if (
+						isset( $cookie_consent->statistics ) &&
+						filter_var( $cookie_consent->statistics, FILTER_VALIDATE_BOOLEAN )
+					) {
 						//Current user accepts statistics cookies
 						$this->add_state( 'statistics' );
-					} else {
-						//Current user does NOT accept statistics cookies
 					}
 
-					if ( isset( $cookie_consent->marketing ) && filter_var( $cookie_consent->marketing, FILTER_VALIDATE_BOOLEAN ) ) {
+					if (
+						isset( $cookie_consent->marketing ) &&
+						filter_var( $cookie_consent->marketing, FILTER_VALIDATE_BOOLEAN )
+					) {
 						//Current user accepts marketing cookies
 						$this->add_state( 'marketing' );
-					} else {
-						//Current user does NOT accept marketing cookies
 					}
 			}
-		} else {
-			//The user has not accepted cookies - set strictly necessary cookies only
 		}
 	}
 
@@ -112,7 +113,7 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 * @since 1.2.0
 	 */
 	public function add_state( $state ) {
-		if ( ! in_array( $state, $this->states ) ) {
+		if ( ! $this->is_cookie_state_accepted( $state ) ) {
 			$this->states[] = $state;
 		}
 	}
@@ -125,7 +126,7 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 * @since 1.2.0
 	 */
 	public function get_cookie_states() {
-		if ( count( $this->states ) == 0 ) {
+		if ( empty( $this->states ) ) {
 			$this->scan_cookie();
 		}
 
@@ -144,11 +145,12 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	public function are_cookie_states_accepted( array $states ) {
 		return array_reduce(
 			$states,
-			function( $are_cookie_states_accepted, $state ) {
+			function ( $are_cookie_states_accepted, $state ) {
 				if ( ! $are_cookie_states_accepted ) {
 					return false;
 				}
-				return in_array( $state, $this->states, true );
+
+				return $this->is_cookie_state_accepted( $state );
 			},
 			true
 		);
@@ -162,6 +164,6 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 * @return bool
 	 */
 	public function is_cookie_state_accepted( $state ) {
-		return in_array( $state, $this->states );
+		return in_array( $state, $this->states, true );
 	}
 }
