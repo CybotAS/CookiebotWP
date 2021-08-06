@@ -2,6 +2,8 @@
 
 namespace cookiebot_addons\lib\buffer;
 
+use function cookiebot_addons\lib\cookiebot_addons_manipulate_script;
+
 class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 
 	/**

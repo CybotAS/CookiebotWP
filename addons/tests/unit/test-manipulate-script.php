@@ -2,6 +2,8 @@
 
 namespace cookiebot_addons\tests\unit;
 
+use function cookiebot_addons\lib\cookiebot_addons_manipulate_script;
+
 class Test_Manipulate_Script extends \WP_UnitTestCase {
 	
 	/**

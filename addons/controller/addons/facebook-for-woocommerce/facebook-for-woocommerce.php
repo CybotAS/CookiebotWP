@@ -3,6 +3,7 @@
 namespace cookiebot_addons\controller\addons\facebook_for_woocommerce;
 
 use cookiebot_addons\controller\addons\Base_Cookiebot_Addon;
+use function cookiebot_addons\lib\cookiebot_addons_remove_class_action;
 
 class Facebook_For_Woocommerce extends Base_Cookiebot_Addon {
 

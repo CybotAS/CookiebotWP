@@ -3,6 +3,7 @@
 namespace cookiebot_addons\controller\addons\gadwp;
 
 use cookiebot_addons\controller\addons\Base_Cookiebot_Addon;
+use function cookiebot_addons\lib\cookiebot_addons_output_cookie_types;
 
 
 /**

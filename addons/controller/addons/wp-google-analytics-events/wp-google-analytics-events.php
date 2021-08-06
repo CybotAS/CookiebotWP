@@ -3,6 +3,7 @@
 namespace cookiebot_addons\controller\addons\wp_google_analytics_events;
 
 use cookiebot_addons\controller\addons\Base_Cookiebot_Addon;
+use function cookiebot_addons\lib\cookiebot_addons_remove_class_action;
 
 class Wp_Google_Analytics_Events extends Base_Cookiebot_Addon {
 

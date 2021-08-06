@@ -11,6 +11,7 @@ use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag;
 use cookiebot_addons\lib\Settings_Service;
 use cookiebot_addons\lib\Theme_Settings_Service;
 use Exception;
+use function cookiebot_addons\lib\cookiebot_get_local_file_json_contents;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

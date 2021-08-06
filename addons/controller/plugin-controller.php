@@ -8,6 +8,7 @@ use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
 use Cookiebot_WP;
 use Exception;
+use function cookiebot_addons\lib\cookiebot_addons_enabled_cache_plugin;
 
 /**
  * Class Plugin_Controller

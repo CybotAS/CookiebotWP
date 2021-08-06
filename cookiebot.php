@@ -10,6 +10,8 @@ Text Domain: cookiebot
 Domain Path: /langs
 */
 
+use function cookiebot_addons\lib\cookiebot_addons_plugin_activated;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
@@ -59,7 +61,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		public function __construct() {
 			add_action( 'after_setup_theme', array( $this, 'cookiebot_init' ), 5 );
 			register_activation_hook( __FILE__, array( $this, 'activation' ) );
-			register_deactivation_hook( __FILE__, 'cookiebot_addons_plugin_deactivated' );
+			register_deactivation_hook( __FILE__, 'cookiebot_addons\lib\cookiebot_addons_plugin_deactivated' );
 
 			$this->cookiebot_fix_plugin_conflicts();
 		}

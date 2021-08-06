@@ -4,6 +4,7 @@ namespace cookiebot_addons\controller\addons\add_to_any;
 
 use cookiebot_addons\controller\addons\Base_Cookiebot_Addon;
 use cookiebot_addons\controller\addons\Cookiebot_Addons_Interface;
+use function cookiebot_addons\lib\cookiebot_addons_cookieconsent_optout;
 
 class Add_To_Any extends Base_Cookiebot_Addon {
 

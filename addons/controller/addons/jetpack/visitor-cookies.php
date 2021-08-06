@@ -7,6 +7,8 @@ use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
 use cookiebot_addons\lib\Cookie_Consent_Interface;
 use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\Settings_Service_Interface;
+use function cookiebot_addons\lib\cookiebot_addons_cookieconsent_optout;
+use function cookiebot_addons\lib\cookiebot_addons_remove_class_action;
 
 class Visitor_Cookies implements Jetpack_Widget_Interface {
 

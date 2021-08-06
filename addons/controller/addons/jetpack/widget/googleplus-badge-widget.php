@@ -6,6 +6,8 @@ use cookiebot_addons\lib\Settings_Service_Interface;
 use cookiebot_addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cookiebot_addons\lib\Cookie_Consent_Interface;
 use cookiebot_addons\lib\buffer\Buffer_Output_Interface;
+use function cookiebot_addons\lib\cookiebot_addons_cookieconsent_optout;
+use function cookiebot_addons\lib\cookiebot_addons_output_cookie_types;
 
 class Googleplus_Badge_Widget {
 

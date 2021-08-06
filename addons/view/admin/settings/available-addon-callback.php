@@ -4,6 +4,8 @@
 $addon = $args['addon'];
 
 use cookiebot_addons\controller\addons\Base_Cookiebot_Addon;
+use function cookiebot_addons\lib\cookiebot_addons_checked_selected_helper;
+use function cookiebot_addons\lib\cookiebot_addons_get_dropdown_languages;
 
 require_once ABSPATH . '/wp-includes/l10n.php';
 require_once ABSPATH . '/wp-admin/includes/translation-install.php';

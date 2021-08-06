@@ -1,4 +1,8 @@
 <?php
+
+use function cookiebot_addons\lib\cookiebot_addons_checked_selected_helper;
+use function cookiebot_addons\lib\cookiebot_addons_get_dropdown_languages;
+
 $widget = $args['widget'];
 $addon  = $args['addon'];
 
