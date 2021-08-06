@@ -40,7 +40,7 @@ class Test_Addon_File_Name extends Addons_Base {
 	 */
 	public function test_plugins_are_valid() {
 		foreach ( $this->plugins as $plugin ) {
-			$check = is_object( $plugin ) && class_exists( $plugin->class );
+			$check = class_exists( $plugin );
 			$this->assertTrue( $check );
 		}
 	}

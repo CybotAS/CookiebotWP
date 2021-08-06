@@ -4,7 +4,6 @@ namespace cookiebot_addons\lib {
 
 	use cookiebot_addons\Cookiebot_Addons;
 	use Exception;
-	use stdClass;
 
 	/**
 	 * Check if a cache plugin is activated and in function.
@@ -414,9 +413,9 @@ namespace cookiebot_addons\lib {
 	function cookiebot_get_local_file_json_contents( $file_path ) {
 		$json = cookiebot_get_local_file_contents( $file_path );
 
-		$decoded_json = json_decode( $json );
+		$decoded_json = json_decode( $json, true );
 
-		if ( ! is_a( $decoded_json, stdClass::class ) ) {
+		if ( ! is_array( $decoded_json ) ) {
 			throw new Exception( 'Filepath ' . $file_path . ' could not be parsed as json file' );
 		}
 

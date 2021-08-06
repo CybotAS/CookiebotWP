@@ -56,13 +56,13 @@ class Cookiebot_Addons {
 	public $container;
 
 	/**
-	 * List of all supported addons
+	 * List of all supported plugin addons
 	 *
-	 * @var object
+	 * @var array
 	 *
 	 * @since 1.3.0
 	 */
-	public $plugins;
+	private $plugin_addons_list = array();
 
 	/**
 	 * @var   Cookiebot_Addons The single instance of the class
@@ -101,7 +101,7 @@ class Cookiebot_Addons {
 	 * @since 1.3.0
 	 */
 	public function __construct() {
-		$this->get_plugins();
+		$this->load_addons();
 		$this->build_container();
 		$this->assign_addons_to_container();
 
@@ -160,10 +160,10 @@ class Cookiebot_Addons {
 	 * @throws Exception
 	 * @since 1.3.0
 	 */
-	protected function get_plugins() {
-		$file = cookiebot_get_local_file_json_contents( COOKIEBOT_ADDONS_DIR . 'addons.json' );
-
-		$this->plugins = apply_filters( 'cookiebot_addons_list', $file );
+	protected function load_addons() {
+		$path                     = COOKIEBOT_ADDONS_DIR . 'addons.json';
+		$file                     = cookiebot_get_local_file_json_contents( $path );
+		$this->plugin_addons_list = apply_filters( 'cookiebot_plugin_addons_list', $file['plugins'] );
 	}
 
 	/**
@@ -174,7 +174,7 @@ class Cookiebot_Addons {
 			'Script_Loader_Tag_Interface' => new Script_Loader_Tag(),
 			'Cookie_Consent_Interface'    => new Cookie_Consent(),
 			'Buffer_Output_Interface'     => new Buffer_Output(),
-			'plugins'                     => $this->plugins,
+			'plugin_addons_list'          => $this->plugin_addons_list,
 		);
 
 		$this->container = new Dependency_Container( $dependencies );
@@ -201,25 +201,22 @@ class Cookiebot_Addons {
 		/**
 		 * Check plugins one by one and load addon configuration
 		 */
-		foreach ( $this->plugins as $plugin_class => $plugin ) {
+		foreach ( $this->plugin_addons_list as $plugin_addon ) {
 			/**
 			 * Load addon class to the container
 			 */
-
-			if ( class_exists( $plugin->class ) ) {
+			if ( class_exists( $plugin_addon ) ) {
 				$this->container->set(
-					$plugin->class,
-					new $plugin->class(
-						isset( $plugin->is_theme ) && $plugin->is_theme
-							? $this->container->get( 'Theme_Settings_Service_Interface' )
-							: $this->container->get( 'Settings_Service_Interface' ),
+					$plugin_addon,
+					new $plugin_addon(
+						$this->container->get( 'Settings_Service_Interface' ),
 						$this->container->get( 'Script_Loader_Tag_Interface' ),
 						$this->container->get( 'Cookie_Consent_Interface' ),
 						$this->container->get( 'Buffer_Output_Interface' )
 					)
 				);
 			} else {
-				throw new Exception( 'Class ' . $plugin->class . ' not found' );
+				throw new Exception( 'Class ' . $plugin_addon . ' not found' );
 			}
 		}
 	}

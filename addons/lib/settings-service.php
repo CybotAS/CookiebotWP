@@ -142,8 +142,8 @@ class Settings_Service implements Settings_Service_Interface {
 	public function get_addons() {
 		$addons = array();
 
-		foreach ( $this->container->get( 'plugins' ) as $addon ) {
-			$addons[] = $this->container->get( $addon->class );
+		foreach ( $this->container->get( 'plugin_addons_list' ) as $addon ) {
+			$addons[] = $this->container->get( $addon );
 		}
 
 		return $addons;
