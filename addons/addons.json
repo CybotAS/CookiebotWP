@@ -26,6 +26,9 @@
   "Google_Analytics_Plus": {
     "class": "cookiebot_addons\\controller\\addons\\google_analytics_plus\\Google_Analytics_Plus"
   },
+  "Google_Site_Kit": {
+    "class": "cookiebot_addons\\controller\\addons\\google_site_kit\\Google_Site_Kit"
+  },
   "Wd_Google_Analytics": {
     "class": "cookiebot_addons\\controller\\addons\\wd_google_analytics\\Wd_Google_Analytics"
   },
