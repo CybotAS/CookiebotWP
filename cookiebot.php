@@ -14,6 +14,9 @@ Domain Path: /langs
 */
 
 use cybot\cookiebot\addons\Cookiebot_Addons;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\lib\Settings_Service_Interface;
+use Exception;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_plugin_activated;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -1887,14 +1890,19 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				}
 			}
 
-			if ( class_exists( 'cybot\cookiebot\addons\Cookiebot_Addons' ) ) {
-				$ca             = new Cookiebot_Addons();
-				$settingservice = $ca->container->get( 'Settings_Service_Interface' );
-				$addons         = $settingservice->get_active_addons();
-				$debug_output  .= "\n--- Activated Cookiebot Addons ---\n";
+			try {
+				$cookiebot_addons = new Cookiebot_Addons();
+				/** @var Settings_Service_Interface $settings_service */
+				$settings_service = $cookiebot_addons->container->get( 'Settings_Service_Interface' );
+				$addons           = $settings_service->get_active_addons();
+				$debug_output    .= "\n--- Activated Cookiebot Addons ---\n";
+				/** @var Base_Cookiebot_Addon $addon */
 				foreach ( $addons as $addon ) {
-					$debug_output .= $addon->get_addon_name() . ' (' . implode( ', ', $addon->get_cookie_types() ) . ")\n";
+					$debug_output .= $addon::ADDON_NAME . ' (' . implode( ', ', $addon->get_cookie_types() ) . ")\n";
 				}
+			} catch ( Exception $exception ) {
+				$debug_output .= PHP_EOL . '--- Cookiebot Addons could not be activated ---' . PHP_EOL;
+				$debug_output .= $exception->getMessage() . PHP_EOL;
 			}
 
 			$debug_output .= "\n--- Activated Plugins ---\n";
