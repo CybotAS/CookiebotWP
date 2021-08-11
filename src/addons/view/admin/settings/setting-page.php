@@ -1,3 +1,11 @@
+<?php
+/** @var Settings_Page_Tab[] $settings_page_tabs */
+/** @var Settings_Page_Tab $active_tab */
+
+use cybot\cookiebot\addons\lib\Settings_Page_Tab;
+
+?>
+
 <!-- Create a header in the default WordPress 'wrap' container -->
 <div class="wrap">
 	<div id="icon-themes" class="icon32"></div>
@@ -24,46 +32,21 @@
 				?>
 			</strong>
 		</p>
-
 	</div>
-	<?php
-	if ( isset( $_GET['tab'] ) ) {
-		$active_tab = esc_attr( $_GET['tab'] );
-	} else {
-		$active_tab = 'available_addons';
-	}
-	?>
-
 	<h2 class="nav-tab-wrapper">
-		<a href="?page=cookiebot-addons&tab=available_addons" class="nav-tab <?php echo $active_tab === 'available_addons' ? 'nav-tab-active' : ''; ?>"
-		>Available Plugins</a>
-		<a href="?page=cookiebot-addons&tab=unavailable_addons" class="nav-tab <?php echo $active_tab === 'unavailable_addons' ? 'nav-tab-active' : ''; ?>">Unavailable
-			Plugins</a>
-		<?php
-		if ( is_plugin_active( 'jetpack/jetpack.php' ) ) {
-			?>
-			<a href="?page=cookiebot-addons&tab=jetpack" class="nav-tab <?php echo $active_tab === 'jetpack' ? 'nav-tab-active' : ''; ?>">Jetpack</a>
-			<?php
-		}
-		?>
-
+		<?php foreach ( $settings_page_tabs as $settings_page_tab ) : ?>
+			<a href="<?php echo esc_url( $settings_page_tab->get_tab_href() ); ?>" class="<?php echo esc_attr( $settings_page_tab->get_classes() ); ?>">
+				<?php echo esc_html( $settings_page_tab->get_label() ); ?>
+			</a>
+		<?php endforeach; ?>
 	</h2>
-	<form method="post" action="options.php" class="<?php echo esc_attr( $active_tab ); ?>">
+	<form method="post" action="options.php" class="<?php echo esc_attr( $active_tab->get_name() ); ?>">
 		<?php
-
-		if ( $active_tab === 'available_addons' ) {
-			settings_fields( 'cookiebot_available_addons' );
-			do_settings_sections( 'cookiebot-addons' );
-		} elseif ( $active_tab === 'jetpack' ) {
-			settings_fields( 'cookiebot_jetpack_addon' );
-			do_settings_sections( 'cookiebot-addons' );
-		} else {
-			settings_fields( 'cookiebot_not_installed_options' );
-			do_settings_sections( 'cookiebot-addons' );
-		} // end if/else
-
-		submit_button();
-
+		settings_fields( $active_tab->get_settings_fields_option_group() );
+		do_settings_sections( $active_tab->get_page_name() );
+		if ( $active_tab->has_submit_button() ) {
+			submit_button();
+		}
 		?>
 	</form>
 </div>

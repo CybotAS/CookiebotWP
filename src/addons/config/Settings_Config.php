@@ -4,6 +4,7 @@ namespace cybot\cookiebot\addons\config;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\Jetpack;
+use cybot\cookiebot\addons\lib\Settings_Page_Tab;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
 use Exception;
@@ -371,6 +372,48 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function setting_page() {
+		$available_addons_tab   = new Settings_Page_Tab(
+			'available_addons',
+			esc_html__( 'Available Addons', 'cookiebot' ),
+			'cookiebot_available_addons',
+			'cookiebot-addons'
+		);
+		$unavailable_addons_tab = new Settings_Page_Tab(
+			'unavailable_addons',
+			esc_html__( 'Unavailable Addons', 'cookiebot' ),
+			'cookiebot_not_installed_options',
+			'cookiebot-addons',
+			false
+		);
+		$settings_page_tabs     = array(
+			$available_addons_tab,
+			$unavailable_addons_tab,
+		);
+		if ( is_plugin_active( Jetpack::PLUGIN_FILE_PATH ) ) {
+			$settings_page_tabs[] = new Settings_Page_Tab(
+				'jetpack',
+				esc_html__( 'Jetpack', 'cookiebot' ),
+				'cookiebot_jetpack_addon',
+				'cookiebot-addons'
+			);
+		}
+		$active_tab = array_reduce(
+			$settings_page_tabs,
+			function( $active_tab, Settings_Page_Tab $settings_page_tab ) {
+				if ( ! is_null( $active_tab ) ) {
+					return $active_tab;
+				}
+				if ( $settings_page_tab->is_active() ) {
+					return $settings_page_tab;
+				}
+				return null;
+			},
+			null
+		);
+		if ( ! $active_tab ) {
+			$available_addons_tab->set_is_active( true );
+			$active_tab = $available_addons_tab;
+		}
 		include COOKIEBOT_ADDONS_DIR . 'view/admin/settings/setting-page.php';
 	}
 
