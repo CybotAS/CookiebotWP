@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\addons\controller\addons;
 
 use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
+use cybot\cookiebot\addons\lib\Class_Constant_Override_Validator;
 use cybot\cookiebot\addons\lib\Cookie_Consent_Interface;
 use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
@@ -14,6 +15,8 @@ use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
  * @package cybot\cookiebot\addons\controller\addons
  */
 abstract class Base_Cookiebot_Addon {
+
+	use Class_Constant_Override_Validator;
 
 	const ADDON_NAME                  = '';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.';
@@ -73,51 +76,19 @@ abstract class Base_Cookiebot_Addon {
 		$this->cookie_consent    = $cookie_consent;
 		$this->buffer_output     = $buffer_output;
 
-		$this->validate_class_constant_overrides();
-	}
-
-	/**
-	 * @throws Exception
-	 */
-	private function validate_class_constant_overrides() {
-		$required_class_constant_strings = array(
-			'ADDON_NAME',
-			'DEFAULT_PLACEHOLDER_CONTENT',
-			'OPTION_NAME',
-			'PLUGIN_FILE_PATH',
+		$this->validate_required_string_class_constants(
+			array(
+				'ADDON_NAME',
+				'DEFAULT_PLACEHOLDER_CONTENT',
+				'OPTION_NAME',
+				'PLUGIN_FILE_PATH',
+			)
 		);
-
-		foreach ( $required_class_constant_strings as $constant_name ) {
-			$value = constant( 'static::' . $constant_name );
-			if ( empty( $value ) || ! is_string( $value ) ) {
-				throw new Exception( $constant_name . ' must not be empty' );
-			}
-		}
-
-		if ( ! is_array( static::DEFAULT_COOKIE_TYPES ) ) {
-			throw new Exception( 'DEFAULT_COOKIE_TYPES must be an array' );
-		}
-
-		$valid_cookie_types            = array( 'necessary', 'marketing', 'statistics', 'preferences' );
-		$default_cookie_types_is_valid = array_reduce(
-			static::DEFAULT_COOKIE_TYPES,
-			function( $is_valid, $cookie_type ) use ( $valid_cookie_types ) {
-				if ( ! $is_valid ) {
-					return false;
-				}
-
-				return in_array( $cookie_type, $valid_cookie_types, true );
-			},
-			true
+		$this->validate_required_boolean_class_constant( 'ENABLE_ADDON_BY_DEFAULT' );
+		$this->validate_required_array_class_constant(
+			'DEFAULT_COOKIE_TYPES',
+			array( 'necessary', 'marketing', 'statistics', 'preferences' )
 		);
-
-		if ( ! $default_cookie_types_is_valid ) {
-			throw new Exception( 'DEFAULT_COOKIE_TYPES must only contain ' . implode( ', ', $valid_cookie_types ) );
-		}
-
-		if ( ! is_bool( static::ENABLE_ADDON_BY_DEFAULT ) ) {
-			throw new Exception( 'ENABLE_ADDON_BY_DEFAULT should be a boolean' );
-		}
 	}
 
 	/**
