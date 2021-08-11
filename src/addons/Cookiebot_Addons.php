@@ -11,7 +11,6 @@ use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag;
 use cybot\cookiebot\addons\lib\Settings_Service;
 use cybot\cookiebot\addons\lib\Theme_Settings_Service;
 use Exception;
-use function cybot\cookiebot\addons\lib\cookiebot_get_local_file_json_contents;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -140,20 +139,9 @@ class Cookiebot_Addons {
 		$settings_service->cookiebot_deactivated();
 	}
 
-	/**
-	 * Loads plugins from json file
-	 *
-	 * All the addon plugins are defined there.
-	 *
-	 * The file is located at the root map of this plugin
-	 *
-	 * @throws Exception
-	 * @since 1.3.0
-	 */
 	protected function load_addons() {
-		$path                     = COOKIEBOT_ADDONS_DIR . 'addons.json';
-		$file                     = cookiebot_get_local_file_json_contents( $path );
-		$this->plugin_addons_list = apply_filters( 'cookiebot_plugin_addons_list', $file['plugins'] );
+		require_once 'addons.php';
+		$this->plugin_addons_list = apply_filters( 'cookiebot_plugin_addons_list', PLUGIN_ADDONS );
 	}
 
 	/**

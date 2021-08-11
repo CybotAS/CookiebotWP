@@ -403,25 +403,4 @@ namespace cybot\cookiebot\addons\lib {
 
 		return ob_get_clean();
 	}
-
-	/**
-	 * @param $file_path
-	 *
-	 * @return array
-	 * @throws Exception
-	 */
-	function cookiebot_get_local_file_json_contents( $file_path ) {
-		$json = cookiebot_get_local_file_contents( $file_path );
-
-		$decoded_json = json_decode( $json, true );
-
-		if ( ! is_array( $decoded_json ) ) {
-			throw new Exception( 'Filepath ' . $file_path . ' could not be parsed as json file' );
-		}
-
-		/**
-		 * @var array $decoded_json
-		 */
-		return $decoded_json;
-	}
 }
