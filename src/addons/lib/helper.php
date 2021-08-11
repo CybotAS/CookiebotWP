@@ -184,7 +184,7 @@ namespace cybot\cookiebot\addons\lib {
 	 * @param $cookie_type
 	 */
 	function cookiebot_addons_checked_selected_helper( array $cookie_types, $cookie_type ) {
-		if ( is_array( $cookie_types ) && in_array( $cookie_type, $cookie_types, true ) ) {
+		if ( in_array( $cookie_type, $cookie_types, true ) ) {
 			echo " checked='checked'";
 		}
 	}
