@@ -2544,24 +2544,19 @@ endif;
 
 
 /**
- * Helper function to manipulate script tags
+ * @param string|string[] $type
  *
- * @return  string
- * @since   1.0
- * @version 1.6
+ * @return string
  */
 function cookiebot_assist( $type = 'statistics' ) {
-	//change to array
-	if ( ! is_array( $type ) ) {
-		$type = array( $type );
-	}
-
-	foreach ( $type as $tk => $tv ) {
-		if ( ! in_array( $tv, array( 'marketing', 'statistics', 'preferences' ) ) ) {
-			unset( $type[ $tk ] );
+	$type_array = array_filter(
+		is_array( $type ) ? $type : array( $type ),
+		function( $type ) {
+			return in_array( $type, array( 'marketing', 'statistics', 'preferences' ), true );
 		}
-	}
-	if ( sizeof( $type ) > 0 ) {
+	);
+
+	if ( count( $type_array ) > 0 ) {
 		return ' type="text/plain" data-cookieconsent="' . implode( ',', $type ) . '"';
 	}
 
