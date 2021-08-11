@@ -2,78 +2,25 @@
 
 namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 
-use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
-use cybot\cookiebot\addons\lib\Cookie_Consent_Interface;
-use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
 
-class Google_Maps_Widget implements Jetpack_Widget_Interface {
+/**
+ * Class Google_Maps_Widget
+ * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
+ */
+class Google_Maps_Widget extends Base_Widget {
+
+	const LABEL               = 'Google Maps';
+	const WIDGET_OPTION_NAME  = 'google_maps';
+	const DEFAULT_PLACEHOLDER = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable google maps.';
 
 	/**
 	 * @var array   list of supported cookie types
 	 *
 	 * @since 1.3.0
 	 */
-	protected $cookie_types;
-
-	/**
-	 * @var Settings_Service_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $settings;
-
-	/**
-	 * @var Script_Loader_Tag_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $script_loader_tag;
-
-	/**
-	 * @var Cookie_Consent_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $cookie_consent;
-
-	/**
-	 * @var Buffer_Output_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $buffer_output;
-
-	/**
-	 * Option name for jetpack addon
-	 *
-	 * @var string
-	 */
-	public $widget_option;
-
-	/**
-	 * This class is used to support facebook page widget in jetpack
-	 *
-	 * Google_Maps_Widget constructor.
-	 *
-	 * @param Settings_Service_Interface $settings
-	 * @param Script_Loader_Tag_Interface $script_loader_tag
-	 * @param Cookie_Consent_Interface $cookie_consent
-	 * @param Buffer_Output_Interface $buffer_output
-	 * @param string $widget_option
-	 *
-	 * @version 1.8.0
-	 * @since 1.2.0
-	 */
-	public function __construct( Settings_Service_Interface $settings, Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent, Buffer_Output_Interface $buffer_output, $widget_option ) {
-		$this->settings          = $settings;
-		$this->script_loader_tag = $script_loader_tag;
-		$this->cookie_consent    = $cookie_consent;
-		$this->buffer_output     = $buffer_output;
-		$this->widget_option     = $widget_option;
-	}
+	private $cookie_types = array();
 
 	public function load_configuration() {
 		/**
@@ -102,95 +49,6 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 				}
 			}
 		}
-	}
-
-	public function get_label() {
-		return 'Google Maps';
-	}
-
-	/**
-	 * Returns widget option name
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_widget_option_name() {
-		return 'google_maps';
-	}
-
-	/**
-	 * Returns cookie types for a widget
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_widget_cookie_types() {
-		return $this->settings->get_widget_cookie_types( $this->widget_option, $this->get_widget_option_name() );
-	}
-
-	/**
-	 * Checks if a widget is enabled
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function is_widget_enabled() {
-		return $this->settings->is_widget_enabled( $this->widget_option, $this->get_widget_option_name() );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable google maps.';
-	}
-
-	/**
-	 * Checks if a widget placeholder is enabled
-	 *
-	 * @return boolean  true    If widget placeholder is checked
-	 *                  false   If widget placeholder is not checked
-	 *
-	 * @since 1.8.0
-	 */
-	public function is_widget_placeholder_enabled() {
-		return $this->settings->is_widget_placeholder_enabled( $this->widget_option, $this->get_widget_option_name() );
-	}
-
-	/**
-	 * Checks if widget has existing placeholders
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function widget_has_placeholder() {
-		return $this->settings->widget_has_placeholder( $this->widget_option, $this->get_widget_option_name() );
-	}
-
-	/**
-	 * Returns all widget placeholders
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_widget_placeholders() {
-		return $this->settings->get_widget_placeholders( $this->widget_option, $this->get_widget_option_name() );
-	}
-
-	/**
-	 * returns widget placeholder
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_widget_placeholder() {
-		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_widget_cookie_types() ) );
 	}
 
 	/**
@@ -242,14 +100,17 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 				$pattern,
 				function ( $matches ) {
 
-					$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
-
-					$data = str_replace( 'src=', 'data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->cookie_types ) . '" data-src=', $data );
+					$data                = ( isset( $matches[0] ) ) ? $matches[0] : '';
+					$cookie_types_output = cookiebot_addons_output_cookie_types( $this->cookie_types );
 
 					/**
 					 * Return updated iframe tag
 					 */
-					return $data;
+					return str_replace(
+						'src=',
+						'data-cookieconsent="' . $cookie_types_output . '" data-src=',
+						$data
+					);
 				},
 				$buffer
 			);
@@ -264,12 +125,8 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 	}
 
 	/**
-	 * Show consent message when the consent is not given.
-	 *
-	 * @param $view     string
-	 * @param $widget   string
-	 *
-	 * @since 1.6.0
+	 * @param string $view
+	 * @param string $widget
 	 */
 	public function cookie_consent_div( $view, $widget ) {
 		if ( $widget === 'contact_info' && $view === 'widget_view' ) {
@@ -281,28 +138,6 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 						</div>';
 			}
 		}
-	}
-
-	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_extra_information() {
-		return false;
-	}
-
-	/**
-	 * Placeholder helper overlay in the settings page.
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_placeholder_helper() {
-		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
 
 }

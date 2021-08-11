@@ -9,10 +9,12 @@ use cybot\cookiebot\addons\controller\addons\jetpack\widget\Googleplus_Badge_Wid
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Goodreads_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Internet_Defense_League_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Twitter_Timeline_Widget;
+use cybot\cookiebot\addons\controller\addons\jetpack\widget\Visitor_Cookies_Widget;
 use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
 use cybot\cookiebot\addons\lib\Cookie_Consent_Interface;
 use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
+use Exception;
 
 /**
  * This class is used to support jetpack in cookiebot
@@ -31,7 +33,7 @@ class Jetpack extends Base_Cookiebot_Addon {
 	const DEFAULT_COOKIE_TYPES        = array( 'statistics', 'marketing' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
 
-	protected $widgets = array();
+	private $widgets = array();
 
 	/**
 	 * Jetpack constructor.
@@ -41,6 +43,7 @@ class Jetpack extends Base_Cookiebot_Addon {
 	 * @param $cookie_consent Cookie_Consent_Interface
 	 * @param $buffer_output Buffer_Output_Interface
 	 *
+	 * @throws Exception
 	 * @since 1.2.0
 	 */
 	public function __construct(
@@ -70,11 +73,12 @@ class Jetpack extends Base_Cookiebot_Addon {
 	/**
 	 * Sets every widget into this class
 	 *
+	 * @throws Exception
 	 * @since 1.8.0
 	 */
 	public function set_widgets() {
 		/**
-		 * Load configuration for google maps widget
+		 * Load configuration for Google Maps widget
 		 *
 		 * @since 1.2.0
 		 */
@@ -82,8 +86,7 @@ class Jetpack extends Base_Cookiebot_Addon {
 			$this->settings,
 			$this->script_loader_tag,
 			$this->cookie_consent,
-			$this->buffer_output,
-			$this->get_widget_option()
+			$this->buffer_output
 		);
 
 		/**
@@ -95,8 +98,7 @@ class Jetpack extends Base_Cookiebot_Addon {
 			$this->settings,
 			$this->script_loader_tag,
 			$this->cookie_consent,
-			$this->buffer_output,
-			$this->get_widget_option()
+			$this->buffer_output
 		);
 
 		/**
@@ -104,12 +106,11 @@ class Jetpack extends Base_Cookiebot_Addon {
 		 *
 		 * @since 1.2.0
 		 */
-		$this->widgets[] = new Visitor_Cookies(
+		$this->widgets[] = new Visitor_Cookies_Widget(
 			$this->settings,
 			$this->script_loader_tag,
 			$this->cookie_consent,
-			$this->buffer_output,
-			$this->get_widget_option()
+			$this->buffer_output
 		);
 
 		/**
@@ -121,8 +122,7 @@ class Jetpack extends Base_Cookiebot_Addon {
 			$this->settings,
 			$this->script_loader_tag,
 			$this->cookie_consent,
-			$this->buffer_output,
-			$this->get_widget_option()
+			$this->buffer_output
 		);
 
 		/**
@@ -134,8 +134,7 @@ class Jetpack extends Base_Cookiebot_Addon {
 			$this->settings,
 			$this->script_loader_tag,
 			$this->cookie_consent,
-			$this->buffer_output,
-			$this->get_widget_option()
+			$this->buffer_output
 		);
 
 		/**
@@ -147,12 +146,11 @@ class Jetpack extends Base_Cookiebot_Addon {
 			$this->settings,
 			$this->script_loader_tag,
 			$this->cookie_consent,
-			$this->buffer_output,
-			$this->get_widget_option()
+			$this->buffer_output
 		);
 
 		/**
-		 * If jetpack version is lower than 7 than add googleplus badge widget
+		 * If jetpack version is lower than 7 then add googleplus badge widget
 		 *
 		 * @since 2.2.1
 		 */
@@ -166,8 +164,7 @@ class Jetpack extends Base_Cookiebot_Addon {
 				$this->settings,
 				$this->script_loader_tag,
 				$this->cookie_consent,
-				$this->buffer_output,
-				$this->get_widget_option()
+				$this->buffer_output
 			);
 		}
 	}
@@ -182,19 +179,6 @@ class Jetpack extends Base_Cookiebot_Addon {
 			$widget->load_configuration();
 		}
 	}
-
-	/**
-	 * Returns widget option key for in the database
-	 *
-	 * @return string
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_widget_option() {
-		return 'cookiebot_jetpack_addon';
-	}
-
-
 
 	/**
 	 * Returns default cookie types

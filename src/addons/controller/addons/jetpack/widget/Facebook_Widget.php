@@ -2,81 +2,17 @@
 
 namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 
-use cybot\cookiebot\addons\lib\Settings_Service_Interface;
-use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cybot\cookiebot\addons\lib\Cookie_Consent_Interface;
-use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
 
 /**
- * This class is used to add cookiebot consent to facebook widget
- *
- * @since 1.2.0
+ * Class Facebook_Widget
+ * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
  */
-class Facebook_Widget {
+class Facebook_Widget extends Base_Widget {
+	const LABEL               = 'Facebook';
+	const WIDGET_OPTION_NAME  = 'facebook';
+	const DEFAULT_PLACEHOLDER = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to see facebook widget.';
 
-	/**
-	 * @var array   list of supported cookie types
-	 *
-	 * @since 1.3.0
-	 */
-	protected $cookie_types;
-
-	/**
-	 * @var Settings_Service_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $settings;
-
-	/**
-	 * @var Script_Loader_Tag_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $script_loader_tag;
-
-	/**
-	 * @var Cookie_Consent_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $cookie_consent;
-
-	/**
-	 * @var Buffer_Output_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $buffer_output;
-
-	/**
-	 * Option name for jetpack addon
-	 *
-	 * @var string
-	 */
-	public $widget_option;
-
-	/**
-	 * Facebook_Widget constructor.
-	 *
-	 * @param Settings_Service_Interface $settings
-	 * @param Script_Loader_Tag_Interface $script_loader_tag
-	 * @param Cookie_Consent_Interface $cookie_consent
-	 * @param Buffer_Output_Interface $buffer_output
-	 * @param string $widget_option
-	 *
-	 * @version 1.8.0
-	 * @since 1.2.0
-	 */
-	public function __construct( Settings_Service_Interface $settings, Script_Loader_Tag_Interface $script_loader_tag, Cookie_Consent_Interface $cookie_consent, Buffer_Output_Interface $buffer_output, $widget_option ) {
-		$this->settings          = $settings;
-		$this->script_loader_tag = $script_loader_tag;
-		$this->cookie_consent    = $cookie_consent;
-		$this->buffer_output     = $buffer_output;
-		$this->widget_option     = $widget_option;
-	}
 
 	public function load_configuration() {
 		/**
@@ -107,102 +43,12 @@ class Facebook_Widget {
 		}
 	}
 
-	public function get_label() {
-		return 'Facebook';
-	}
-
-	/**
-	 * Returns widget option name
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_widget_option_name() {
-		return 'facebook';
-	}
-
-	/**
-	 * Returns cookie types for a widget
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_widget_cookie_types() {
-		return $this->settings->get_widget_cookie_types( $this->widget_option, $this->get_widget_option_name() );
-	}
-
-	/**
-	 * Checks if a widget is enabled
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function is_widget_enabled() {
-		return $this->settings->is_widget_enabled( $this->widget_option, $this->get_widget_option_name() );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to see facebook widget.';
-	}
-
-	/**
-	 * Checks if a widget placeholder is enabled
-	 *
-	 * @return boolean  true    If widget placeholder is checked
-	 *                  false   If widget placeholder is not checked
-	 *
-	 * @since 1.8.0
-	 */
-	public function is_widget_placeholder_enabled() {
-		return $this->settings->is_widget_placeholder_enabled( $this->widget_option, $this->get_widget_option_name() );
-	}
-
-	/**
-	 * Checks if widget has existing placeholders
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function widget_has_placeholder() {
-		return $this->settings->widget_has_placeholder( $this->widget_option, $this->get_widget_option_name() );
-	}
-
-	/**
-	 * Returns all widget placeholders
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_widget_placeholders() {
-		return $this->settings->get_widget_placeholders( $this->widget_option, $this->get_widget_option_name() );
-	}
-
-	/**
-	 * returns widget placeholder
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_widget_placeholder() {
-		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_widget_cookie_types() ) );
-	}
-
-
 	/**
 	 * Tag external Facebook javascript file with cookiebot consent.
 	 *
 	 * @since 1.2.0
 	 */
-	protected function add_consent_attribute_to_facebook_embed_javascript() {
+	private function add_consent_attribute_to_facebook_embed_javascript() {
 		$this->script_loader_tag->add_tag( 'jetpack-facebook-embed', $this->get_widget_cookie_types() );
 	}
 
@@ -235,17 +81,6 @@ class Facebook_Widget {
 	 */
 	public function get_extra_information() {
 		return '<p>' . esc_html__( 'Facebook widget.', 'cookiebot-addons' ) . '</p>';
-	}
-
-	/**
-	 * Placeholder helper overlay in the settings page.
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_placeholder_helper() {
-		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
 
 }
