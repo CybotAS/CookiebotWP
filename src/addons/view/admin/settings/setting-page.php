@@ -1,6 +1,5 @@
 <!-- Create a header in the default WordPress 'wrap' container -->
 <div class="wrap">
-	
 	<div id="icon-themes" class="icon32"></div>
 	<h2><?php esc_html_e( 'Prior consent', 'cookiebot' ); ?></h2>
 	<div class="notice inline notice-warning notice-alt cookiebot-notice">
@@ -15,57 +14,58 @@
 		</p>
 		<p>
 			<strong>
-				<?php echo sprintf( esc_html__( 'If your favourite plugin isn\'t supported you\'re welcome to contribute or request on our <a href="%s" target="_blank">Github development page.</a>' ), 'https://github.com/CybotAS/CookiebotAddons' ); ?>
+				<?php
+				echo sprintf(
+					// translators: The first placeholder is the HTML anchor open tag, and the second placeholder is the closing tag.
+					esc_html__( 'If your favourite plugin isn\'t supported you\'re welcome to contribute or request on our %1$sGithub development page.%2$s' ),
+					'<a href="https://github.com/CybotAS/CookiebotAddons" target="_blank">',
+					'</a>'
+				);
+				?>
 			</strong>
 		</p>
-	
+
 	</div>
 	<?php
 	if ( defined( 'COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION' ) ) {
 		?>
 		<p><strong>
-			<?php
-			esc_html_e( 'This feature is only available in PHP 5.4 and above.' );
-			?>
-		</strong></p>
+				<?php
+				esc_html_e( 'This feature is only available in PHP 5.4 and above.' );
+				?>
+			</strong></p>
 		<?php
 	} else {
 		?>
 		<?php
 		if ( isset( $_GET['tab'] ) ) {
 			$active_tab = esc_attr( $_GET['tab'] );
-		} elseif ( $active_tab == 'unavailable_addons' ) {
-			$active_tab = 'unavailable_addons';
 		} else {
 			$active_tab = 'available_addons';
 		}
 		?>
-		
+
 		<h2 class="nav-tab-wrapper">
-			<a href="?page=cookiebot-addons&tab=available_addons"
-				 class="nav-tab <?php echo $active_tab == 'available_addons' ? 'nav-tab-active' : ''; ?>">Available
-				Plugins</a>
-			<a href="?page=cookiebot-addons&tab=unavailable_addons"
-				 class="nav-tab <?php echo $active_tab == 'unavailable_addons' ? 'nav-tab-active' : ''; ?>">Unavailable
+			<a href="?page=cookiebot-addons&tab=available_addons" class="nav-tab <?php echo $active_tab === 'available_addons' ? 'nav-tab-active' : ''; ?>"
+			>Available Plugins</a>
+			<a href="?page=cookiebot-addons&tab=unavailable_addons" class="nav-tab <?php echo $active_tab === 'unavailable_addons' ? 'nav-tab-active' : ''; ?>">Unavailable
 				Plugins</a>
 			<?php
 			if ( is_plugin_active( 'jetpack/jetpack.php' ) ) {
 				?>
-				<a href="?page=cookiebot-addons&tab=jetpack"
-					 class="nav-tab <?php echo $active_tab == 'jetpack' ? 'nav-tab-active' : ''; ?>">Jetpack</a>
+				<a href="?page=cookiebot-addons&tab=jetpack" class="nav-tab <?php echo $active_tab === 'jetpack' ? 'nav-tab-active' : ''; ?>">Jetpack</a>
 				<?php
 			}
 			?>
-		
+
 		</h2>
-		
-		<form method="post" action="options.php" class="<?php echo $active_tab; ?>">
+		<form method="post" action="options.php" class="<?php echo esc_attr( $active_tab ); ?>">
 			<?php
 
-			if ( $active_tab == 'available_addons' ) {
+			if ( $active_tab === 'available_addons' ) {
 				settings_fields( 'cookiebot_available_addons' );
 				do_settings_sections( 'cookiebot-addons' );
-			} elseif ( $active_tab == 'jetpack' ) {
+			} elseif ( $active_tab === 'jetpack' ) {
 				settings_fields( 'cookiebot_jetpack_addon' );
 				do_settings_sections( 'cookiebot-addons' );
 			} else {
@@ -80,4 +80,4 @@
 		<?php
 	}
 	?>
-</div><!-- /.wrap -->
+</div>

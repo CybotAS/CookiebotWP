@@ -368,11 +368,9 @@ class Settings_Config {
 	/**
 	 * Build up settings page
 	 *
-	 * @param string $active_tab
-	 *
 	 * @since 1.3.0
 	 */
-	public function setting_page( $active_tab = '' ) {
+	public function setting_page() {
 		include COOKIEBOT_ADDONS_DIR . 'view/admin/settings/setting-page.php';
 	}
 
