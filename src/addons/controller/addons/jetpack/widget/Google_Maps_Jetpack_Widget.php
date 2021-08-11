@@ -9,7 +9,7 @@ use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
  * Class Google_Maps_Widget
  * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
  */
-class Google_Maps_Widget extends Base_Widget {
+class Google_Maps_Jetpack_Widget extends Base_Jetpack_Widget {
 
 	const LABEL               = 'Google Maps';
 	const WIDGET_OPTION_NAME  = 'google_maps';

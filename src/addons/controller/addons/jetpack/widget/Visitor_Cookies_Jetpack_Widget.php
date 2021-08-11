@@ -9,7 +9,7 @@ use function cybot\cookiebot\addons\lib\cookiebot_addons_remove_class_action;
  * Class Visitor_Cookies_Widget
  * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
  */
-class Visitor_Cookies_Widget extends Base_Widget {
+class Visitor_Cookies_Jetpack_Widget extends Base_Jetpack_Widget {
 	const LABEL               = 'Visitor cookies';
 	const WIDGET_OPTION_NAME  = 'visitor_cookies';
 	const DEFAULT_PLACEHOLDER = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';

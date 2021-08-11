@@ -9,7 +9,7 @@ use function cybot\cookiebot\addons\lib\cookiebot_addons_manipulate_script;
  * Class Goodreads_Widget
  * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
  */
-class Goodreads_Widget extends Base_Widget {
+class Goodreads_Jetpack_Widget extends Base_Jetpack_Widget {
 	const LABEL               = 'Goodreads';
 	const WIDGET_OPTION_NAME  = 'goodreads';
 	const DEFAULT_PLACEHOLDER = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch goodreads.';

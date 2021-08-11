@@ -5,20 +5,20 @@ namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
 
 /**
- * Class Internet_Defense_League_Widget
+ * Class Facebook_Widget
  * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
  */
-class Internet_Defense_League_Widget extends Base_Widget {
+class Facebook_Jetpack_Widget extends Base_Jetpack_Widget {
+	const LABEL               = 'Facebook';
+	const WIDGET_OPTION_NAME  = 'facebook';
+	const DEFAULT_PLACEHOLDER = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to see facebook widget.';
 
-	const LABEL               = 'Internet defense league';
-	const WIDGET_OPTION_NAME  = 'internet_defense_league';
-	const DEFAULT_PLACEHOLDER = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable internet defense league.';
 
 	public function load_configuration() {
 		/**
 		 * The widget is active
 		 */
-		if ( is_active_widget( false, false, 'internet_defense_league_widget', true ) ) {
+		if ( is_active_widget( false, false, 'facebook-likebox', true ) ) {
 			/**
 			 * The widget is enabled in Prior consent
 			 */
@@ -28,18 +28,9 @@ class Internet_Defense_League_Widget extends Base_Widget {
 				 */
 				if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() ) ) {
 					/**
-					 * Remove wp_footer script when the cookieconsent for marketing is not given
-					 *
-					 * @since 1.2.0
+					 * Manipulate script attribute
 					 */
-					$this->buffer_output->add_tag(
-						'wp_footer',
-						10,
-						array(
-							'window._idl' => $this->get_widget_cookie_types(),
-						),
-						false
-					);
+					$this->add_consent_attribute_to_facebook_embed_javascript();
 
 					/**
 					 * Display placeholder if allowed in the backend settings
@@ -53,6 +44,15 @@ class Internet_Defense_League_Widget extends Base_Widget {
 	}
 
 	/**
+	 * Tag external Facebook javascript file with cookiebot consent.
+	 *
+	 * @since 1.2.0
+	 */
+	private function add_consent_attribute_to_facebook_embed_javascript() {
+		$this->script_loader_tag->add_tag( 'jetpack-facebook-embed', $this->get_widget_cookie_types() );
+	}
+
+	/**
 	 * Show consent message when the consent is not given.
 	 *
 	 * @param $view     string
@@ -61,7 +61,7 @@ class Internet_Defense_League_Widget extends Base_Widget {
 	 * @since 1.6.0
 	 */
 	public function cookie_consent_div( $view, $widget ) {
-		if ( $widget === 'internet_defense_league' && $view === 'widget_view' ) {
+		if ( $widget === 'facebook-likebox' && $view === 'widget_view' ) {
 			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
 				$classname  = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
 				$inner_html = $this->get_widget_placeholder();
@@ -71,4 +71,16 @@ class Internet_Defense_League_Widget extends Base_Widget {
 			}
 		}
 	}
+
+	/**
+	 * Adds extra information under the label
+	 *
+	 * @return string
+	 *
+	 * @since 1.8.0
+	 */
+	public function get_extra_information() {
+		return '<p>' . esc_html__( 'Facebook widget.', 'cookiebot-addons' ) . '</p>';
+	}
+
 }

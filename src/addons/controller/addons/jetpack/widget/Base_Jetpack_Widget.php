@@ -10,7 +10,7 @@ use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
 use Exception;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
 
-abstract class Base_Widget implements Jetpack_Widget_Interface {
+abstract class Base_Jetpack_Widget implements Jetpack_Widget_Interface {
 
 	use Class_Constant_Override_Validator;
 
