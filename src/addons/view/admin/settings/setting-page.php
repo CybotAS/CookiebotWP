@@ -27,57 +27,43 @@
 
 	</div>
 	<?php
-	if ( defined( 'COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION' ) ) {
-		?>
-		<p><strong>
-				<?php
-				esc_html_e( 'This feature is only available in PHP 5.4 and above.' );
-				?>
-			</strong></p>
-		<?php
+	if ( isset( $_GET['tab'] ) ) {
+		$active_tab = esc_attr( $_GET['tab'] );
 	} else {
-		?>
+		$active_tab = 'available_addons';
+	}
+	?>
+
+	<h2 class="nav-tab-wrapper">
+		<a href="?page=cookiebot-addons&tab=available_addons" class="nav-tab <?php echo $active_tab === 'available_addons' ? 'nav-tab-active' : ''; ?>"
+		>Available Plugins</a>
+		<a href="?page=cookiebot-addons&tab=unavailable_addons" class="nav-tab <?php echo $active_tab === 'unavailable_addons' ? 'nav-tab-active' : ''; ?>">Unavailable
+			Plugins</a>
 		<?php
-		if ( isset( $_GET['tab'] ) ) {
-			$active_tab = esc_attr( $_GET['tab'] );
-		} else {
-			$active_tab = 'available_addons';
+		if ( is_plugin_active( 'jetpack/jetpack.php' ) ) {
+			?>
+			<a href="?page=cookiebot-addons&tab=jetpack" class="nav-tab <?php echo $active_tab === 'jetpack' ? 'nav-tab-active' : ''; ?>">Jetpack</a>
+			<?php
 		}
 		?>
 
-		<h2 class="nav-tab-wrapper">
-			<a href="?page=cookiebot-addons&tab=available_addons" class="nav-tab <?php echo $active_tab === 'available_addons' ? 'nav-tab-active' : ''; ?>"
-			>Available Plugins</a>
-			<a href="?page=cookiebot-addons&tab=unavailable_addons" class="nav-tab <?php echo $active_tab === 'unavailable_addons' ? 'nav-tab-active' : ''; ?>">Unavailable
-				Plugins</a>
-			<?php
-			if ( is_plugin_active( 'jetpack/jetpack.php' ) ) {
-				?>
-				<a href="?page=cookiebot-addons&tab=jetpack" class="nav-tab <?php echo $active_tab === 'jetpack' ? 'nav-tab-active' : ''; ?>">Jetpack</a>
-				<?php
-			}
-			?>
-
-		</h2>
-		<form method="post" action="options.php" class="<?php echo esc_attr( $active_tab ); ?>">
-			<?php
-
-			if ( $active_tab === 'available_addons' ) {
-				settings_fields( 'cookiebot_available_addons' );
-				do_settings_sections( 'cookiebot-addons' );
-			} elseif ( $active_tab === 'jetpack' ) {
-				settings_fields( 'cookiebot_jetpack_addon' );
-				do_settings_sections( 'cookiebot-addons' );
-			} else {
-				settings_fields( 'cookiebot_not_installed_options' );
-				do_settings_sections( 'cookiebot-addons' );
-			} // end if/else
-
-			submit_button();
-
-			?>
-		</form>
+	</h2>
+	<form method="post" action="options.php" class="<?php echo esc_attr( $active_tab ); ?>">
 		<?php
-	}
-	?>
+
+		if ( $active_tab === 'available_addons' ) {
+			settings_fields( 'cookiebot_available_addons' );
+			do_settings_sections( 'cookiebot-addons' );
+		} elseif ( $active_tab === 'jetpack' ) {
+			settings_fields( 'cookiebot_jetpack_addon' );
+			do_settings_sections( 'cookiebot-addons' );
+		} else {
+			settings_fields( 'cookiebot_not_installed_options' );
+			do_settings_sections( 'cookiebot-addons' );
+		} // end if/else
+
+		submit_button();
+
+		?>
+	</form>
 </div>

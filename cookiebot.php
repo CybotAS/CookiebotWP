@@ -17,6 +17,7 @@ use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use Exception;
+use RuntimeException;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_plugin_activated;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -28,7 +29,8 @@ require_once 'vendor/autoload.php';
 if ( ! class_exists( 'Cookiebot_WP' ) ) :
 
 	final class Cookiebot_WP {
-		const COOKIEBOT_PLUGIN_VERSION = '3.11.0';
+		const COOKIEBOT_PLUGIN_VERSION  = '3.11.0';
+		const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 		/**
 		 * @var   Cookiebot_WP The single instance of the class
@@ -62,11 +64,24 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 * @access  public
 		 */
 		public function __construct() {
+			$this->throw_exception_if_php_version_is_incompatible();
+
 			add_action( 'after_setup_theme', array( $this, 'cookiebot_init' ), 5 );
 			register_activation_hook( __FILE__, array( $this, 'activation' ) );
 			register_deactivation_hook( __FILE__, 'cybot\cookiebot\addons\lib\cookiebot_addons_plugin_deactivated' );
 
 			$this->cookiebot_fix_plugin_conflicts();
+		}
+
+		private function throw_exception_if_php_version_is_incompatible() {
+			if ( version_compare( PHP_VERSION, self::COOKIEBOT_MIN_PHP_VERSION, '<' ) ) {
+				$message = sprintf(
+					// translators: The placeholder is for the COOKIEBOT_MIN_PHP_VERSION constant
+					__( 'The Cookiebot plugin requires PHP version %s or greater.', 'cookiebot' ),
+					self::COOKIEBOT_MIN_PHP_VERSION
+				);
+				throw new RuntimeException( $message );
+			}
 		}
 
 		/**
@@ -96,14 +111,11 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			 * Run through the addons and enable the default ones
 			 */
 			if ( ( ! defined( 'COOKIEBOT_ADDONS_STANDALONE' ) || COOKIEBOT_ADDONS_STANDALONE !== true || ! defined( 'COOKIE_ADDONS_LOADED' ) ) ) {
-				//Make sure we got a PHP version that works
-				if ( version_compare( PHP_VERSION, '5.6.0', '>=' ) ) {
-					define( 'COOKIEBOT_URL', plugin_dir_url( __FILE__ ) );
-					// activation hook doesn't have the addons loaded - so load it extra when the plugin is activated
-					include_once dirname( __FILE__ ) . '/addons/cookiebot-addons-init.php';
-					// run activated hook on the addons
-					cookiebot_addons_plugin_activated();
-				}
+				define( 'COOKIEBOT_URL', plugin_dir_url( __FILE__ ) );
+				// activation hook doesn't have the addons loaded - so load it extra when the plugin is activated
+				include_once dirname( __FILE__ ) . '/addons/cookiebot-addons-init.php';
+				// run activated hook on the addons
+				cookiebot_addons_plugin_activated();
 			}
 		}
 
@@ -116,15 +128,9 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 */
 		public function cookiebot_init() {
 			/* Load Cookiebot Addons Framework */
-			$dismiss_addons = false;
-			if ( ( ! defined( 'COOKIEBOT_ADDONS_STANDALONE' ) || COOKIEBOT_ADDONS_STANDALONE !== true || ! defined( 'COOKIE_ADDONS_LOADED' ) ) && $dismiss_addons !== true ) {
-				//Make sure we got a PHP version that works
-				if ( version_compare( PHP_VERSION, '5.6.0', '>=' ) ) {
-					define( 'COOKIEBOT_URL', plugin_dir_url( __FILE__ ) );
-					Cookiebot_Addons::instance();
-				} else {
-					define( 'COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION', true );
-				}
+			if ( ( ! defined( 'COOKIEBOT_ADDONS_STANDALONE' ) || COOKIEBOT_ADDONS_STANDALONE !== true || ! defined( 'COOKIE_ADDONS_LOADED' ) ) ) {
+				define( 'COOKIEBOT_URL', plugin_dir_url( __FILE__ ) );
+				Cookiebot_Addons::instance();
 			} else {
 				add_action(
 					'admin_notices',
@@ -368,19 +374,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				array( $this, 'iab_page' ),
 				30
 			);
-
-			if ( defined( 'COOKIEBOT_ADDONS_UNSUPPORTED_PHPVERSION' ) ) {
-				//Load prior consent page anyway - but from Cookiebot WP Core plugin.
-				add_submenu_page(
-					'cookiebot',
-					__( 'Prior Consent', 'cookiebot' ),
-					__( 'Prior Consent', 'cookiebot' ),
-					'manage_options',
-					'cookiebot-addons',
-					array( $this, 'setting_page_placeholder' ),
-					40
-				);
-			}
 		}
 
 		public function add_menu_legislations() {
@@ -428,7 +421,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				array( $this, 'network_settings_page' ),
 				$icon
 			);
-
 			add_submenu_page(
 				'cookiebot_network',
 				__( 'Cookiebot Settings', 'cookiebot' ),
@@ -445,17 +437,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				'cookiebot_support',
 				array( $this, 'support_page' )
 			);
-
-		}
-
-		/**
-		 * Cookiebot_WP Cookiebot prior consent placeholder page
-		 *
-		 * @version 1.4.0
-		 * @since   1.0.0
-		 */
-		public function setting_page_placeholder() {
-			include __DIR__ . DIRECTORY_SEPARATOR . 'addons' . DIRECTORY_SEPARATOR . 'view/admin/settings/setting-page.php';
 		}
 
 		/**
