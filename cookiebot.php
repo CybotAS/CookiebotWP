@@ -25,7 +25,7 @@ require_once 'vendor/autoload.php';
 if ( ! class_exists( 'Cookiebot_WP' ) ) :
 
 	final class Cookiebot_WP {
-		const COOKIEBOT_PLUGIN_VERSION   = '3.11.0';
+		const COOKIEBOT_PLUGIN_VERSION = '3.11.0';
 
 		/**
 		 * @var   Cookiebot_WP The single instance of the class
@@ -1838,51 +1838,51 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			$plugins        = get_plugins();
 			$active_plugins = get_option( 'active_plugins' );
 
-			$debugStr  = '';
-			$debugStr .= '##### Debug Information for ' . get_site_url() . ' generated at ' . date( 'c' ) . " #####\n\n";
-			$debugStr .= 'WordPress Version: ' . get_bloginfo( 'version' ) . "\n";
-			$debugStr .= 'WordPress Language: ' . get_bloginfo( 'language' ) . "\n";
-			$debugStr .= 'PHP Version: ' . phpversion() . "\n";
-			$debugStr .= 'MySQL Version: ' . $wpdb->db_version() . "\n";
-			$debugStr .= "\n--- Cookiebot Information ---\n";
-			$debugStr .= 'Plugin Version: ' . self::COOKIEBOT_PLUGIN_VERSION . "\n";
-			$debugStr .= 'Cookiebot ID: ' . $this->get_cbid() . "\n";
-			$debugStr .= 'Blocking mode: ' . get_option( 'cookiebot-cookie-blocking-mode' ) . "\n";
-			$debugStr .= 'Language: ' . get_option( 'cookiebot-language' ) . "\n";
-			$debugStr .= 'IAB: ' . ( get_option( 'cookiebot-iab' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
-			$debugStr .= 'CCPA banner for visitors from California: ' . ( get_option( 'cookiebot-ccpa' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
-			$debugStr .= 'CCPA domain group id: ' . get_option( 'cookiebot-ccpa-domain-group-id' ) . "\n";
-			$debugStr .= 'Add async/defer to banner tag: ' . ( get_option( 'cookiebot-script-tag-uc-attribute' ) != '' ? get_option( 'cookiebot-script-tag-uc-attribute' ) : 'None' ) . "\n";
-			$debugStr .= 'Add async/defer to declaration tag: ' . ( get_option( 'cookiebot-script-tag-cd-attribute' ) != '' ? get_option( 'cookiebot-script-tag-cd-attribute' ) : 'None' ) . "\n";
-			$debugStr .= 'Auto update: ' . ( get_option( 'cookiebot-autoupdate' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
-			$debugStr .= 'Hide Cookie Popup: ' . ( get_option( 'cookiebot-nooutput' ) == '1' ? 'Yes' : 'No' ) . "\n";
-			$debugStr .= 'Disable Cookiebot in WP Admin: ' . ( get_option( 'cookiebot-nooutput-admin' ) == '1' ? 'Yes' : 'No' ) . "\n";
-			$debugStr .= 'Enable Cookiebot on front end while logged in: ' . ( get_option( 'cookiebot-output-logged-in' ) == '1' ? 'Yes' : 'No' ) . "\n";
-			$debugStr .= 'Banner tag: ' . $this->add_js( false ) . "\n";
-			$debugStr .= 'Declaration tag: ' . $this->show_declaration() . "\n";
+			$debug_output  = '';
+			$debug_output .= '##### Debug Information for ' . get_site_url() . ' generated at ' . date( 'c' ) . " #####\n\n";
+			$debug_output .= 'WordPress Version: ' . get_bloginfo( 'version' ) . "\n";
+			$debug_output .= 'WordPress Language: ' . get_bloginfo( 'language' ) . "\n";
+			$debug_output .= 'PHP Version: ' . phpversion() . "\n";
+			$debug_output .= 'MySQL Version: ' . $wpdb->db_version() . "\n";
+			$debug_output .= "\n--- Cookiebot Information ---\n";
+			$debug_output .= 'Plugin Version: ' . self::COOKIEBOT_PLUGIN_VERSION . "\n";
+			$debug_output .= 'Cookiebot ID: ' . $this->get_cbid() . "\n";
+			$debug_output .= 'Blocking mode: ' . get_option( 'cookiebot-cookie-blocking-mode' ) . "\n";
+			$debug_output .= 'Language: ' . get_option( 'cookiebot-language' ) . "\n";
+			$debug_output .= 'IAB: ' . ( get_option( 'cookiebot-iab' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
+			$debug_output .= 'CCPA banner for visitors from California: ' . ( get_option( 'cookiebot-ccpa' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
+			$debug_output .= 'CCPA domain group id: ' . get_option( 'cookiebot-ccpa-domain-group-id' ) . "\n";
+			$debug_output .= 'Add async/defer to banner tag: ' . ( get_option( 'cookiebot-script-tag-uc-attribute' ) != '' ? get_option( 'cookiebot-script-tag-uc-attribute' ) : 'None' ) . "\n";
+			$debug_output .= 'Add async/defer to declaration tag: ' . ( get_option( 'cookiebot-script-tag-cd-attribute' ) != '' ? get_option( 'cookiebot-script-tag-cd-attribute' ) : 'None' ) . "\n";
+			$debug_output .= 'Auto update: ' . ( get_option( 'cookiebot-autoupdate' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
+			$debug_output .= 'Hide Cookie Popup: ' . ( get_option( 'cookiebot-nooutput' ) == '1' ? 'Yes' : 'No' ) . "\n";
+			$debug_output .= 'Disable Cookiebot in WP Admin: ' . ( get_option( 'cookiebot-nooutput-admin' ) == '1' ? 'Yes' : 'No' ) . "\n";
+			$debug_output .= 'Enable Cookiebot on front end while logged in: ' . ( get_option( 'cookiebot-output-logged-in' ) == '1' ? 'Yes' : 'No' ) . "\n";
+			$debug_output .= 'Banner tag: ' . $this->add_js( false ) . "\n";
+			$debug_output .= 'Declaration tag: ' . $this->show_declaration() . "\n";
 
 			if ( get_option( 'cookiebot-gtm' ) != false ) {
-				$debugStr .= 'GTM tag: ' . $this->add_GTM( false ) . "\n";
+				$debug_output .= 'GTM tag: ' . $this->add_GTM( false ) . "\n";
 			}
 
 			if ( get_option( 'cookiebot-gcm' ) != false ) {
-				$debugStr .= 'GCM tag: ' . $this->add_GCM( false ) . "\n";
+				$debug_output .= 'GCM tag: ' . $this->add_GCM( false ) . "\n";
 			}
 
 			if ( $this->is_wp_consent_api_active() ) {
-				$debugStr .= "\n--- WP Consent Level API Mapping ---\n";
-				$debugStr .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous' . "\n";
-				$m         = $this->get_wp_consent_api_mapping();
+				$debug_output .= "\n--- WP Consent Level API Mapping ---\n";
+				$debug_output .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous' . "\n";
+				$m             = $this->get_wp_consent_api_mapping();
 				foreach ( $m as $k => $v ) {
 					$cb = array();
 
-					$debugStr .= strtoupper( str_replace( ';', ', ', $k ) ) . '   =>   ';
+					$debug_output .= strtoupper( str_replace( ';', ', ', $k ) ) . '   =>   ';
 
-					$debugStr .= 'F=1, ';
-					$debugStr .= 'P=' . $v['preferences'] . ', ';
-					$debugStr .= 'M=' . $v['marketing'] . ', ';
-					$debugStr .= 'S=' . $v['statistics'] . ', ';
-					$debugStr .= 'SA=' . $v['statistics-anonymous'] . "\n";
+					$debug_output .= 'F=1, ';
+					$debug_output .= 'P=' . $v['preferences'] . ', ';
+					$debug_output .= 'M=' . $v['marketing'] . ', ';
+					$debug_output .= 'S=' . $v['statistics'] . ', ';
+					$debug_output .= 'SA=' . $v['statistics-anonymous'] . "\n";
 
 				}
 			}
@@ -1891,20 +1891,20 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				$ca             = new Cookiebot_Addons();
 				$settingservice = $ca->container->get( 'Settings_Service_Interface' );
 				$addons         = $settingservice->get_active_addons();
-				$debugStr      .= "\n--- Activated Cookiebot Addons ---\n";
+				$debug_output  .= "\n--- Activated Cookiebot Addons ---\n";
 				foreach ( $addons as $addon ) {
-					$debugStr .= $addon->get_addon_name() . ' (' . implode( ', ', $addon->get_cookie_types() ) . ")\n";
+					$debug_output .= $addon->get_addon_name() . ' (' . implode( ', ', $addon->get_cookie_types() ) . ")\n";
 				}
 			}
 
-			$debugStr .= "\n--- Activated Plugins ---\n";
+			$debug_output .= "\n--- Activated Plugins ---\n";
 			foreach ( $active_plugins as $p ) {
 				if ( $p != 'cookiebot/cookiebot.php' ) {
-					$debugStr .= $plugins[ $p ]['Name'] . ' (Version: ' . $plugins[ $p ]['Version'] . ")\n";
+					$debug_output .= $plugins[ $p ]['Name'] . ' (Version: ' . $plugins[ $p ]['Version'] . ")\n";
 				}
 			}
 
-			$debugStr .= "\n##### Debug Information END #####";
+			$debug_output .= "\n##### Debug Information END #####";
 
 			?>
 			<div class="wrap">
@@ -1928,7 +1928,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 					</button>
 				</p>
 				<textarea cols="100" rows="40" style="width:800px;max-width:100%;" id="cookiebot-debug-info"
-						  readonly><?php echo $debugStr; ?></textarea>
+						  readonly><?php echo $debug_output; ?></textarea>
 				<script>
 				  function copyDebugInfo () {
 					var t = document.getElementById('cookiebot-debug-info')
