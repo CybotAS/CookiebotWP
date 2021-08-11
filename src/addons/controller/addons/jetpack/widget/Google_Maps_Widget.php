@@ -233,7 +233,7 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 			/**
 			 * Pattern to get all iframes
 			 */
-			$pattern = '/\<iframe(.*?)?\>(.|\s)*?\<\/iframe\>/i';
+			$pattern = '/<iframe(.*?)?>(.|\s)*?<\/iframe>/i';
 
 			/**
 			 * Get all scripts and add cookieconsent if it does match with the criterion
