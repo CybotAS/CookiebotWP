@@ -9,7 +9,7 @@ use cybot\cookiebot\addons\lib\Settings_Page_Tab;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
 use Exception;
-use RuntimeException;
+use InvalidArgumentException;
 use ReflectionClass;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_get_dropdown_languages;
 use function cybot\cookiebot\addons\lib\include_view;
@@ -262,7 +262,7 @@ class Settings_Config {
 					$addon::ADDON_NAME . $this->get_extra_information( $addon ),
 					array(
 						$this,
-						'unavailable_addon_callback',
+						'unavailable_addon_settings_field_callback',
 					),
 					'cookiebot-addons',
 					'unavailable_addons',
@@ -307,11 +307,11 @@ class Settings_Config {
 		$addon  = isset( $args['addon'] ) ? $args['addon'] : null;
 
 		if ( ! is_a( $widget, Jetpack_Widget_Interface::class ) ) {
-			throw new RuntimeException();
+			throw new InvalidArgumentException();
 		}
 
 		if ( ! is_a( $addon, Base_Cookiebot_Addon::class ) ) {
-			throw new RuntimeException();
+			throw new InvalidArgumentException();
 		}
 
 		$widget_is_enabled                    = $widget->is_widget_enabled();
@@ -389,7 +389,7 @@ class Settings_Config {
 		$addon = isset( $args['addon'] ) ? $args['addon'] : null;
 
 		if ( ! is_a( $addon, Base_Cookiebot_Addon::class ) ) {
-			throw new RuntimeException();
+			throw new InvalidArgumentException();
 		}
 
 		$site_default_languages_dropdown_html = 'cookiebot_available_addons[' . $addon::OPTION_NAME . '][placeholder][languages][site-default]';
@@ -443,28 +443,27 @@ class Settings_Config {
 	}
 
 	/**
-	 * Unavailable addon callback
-	 *
 	 * @param $args
-	 *
-	 * @since 1.3.0
 	 */
-	public function unavailable_addon_callback( $args ) {
+	public function unavailable_addon_settings_field_callback( $args ) {
 		$addon = $args['addon'];
 
-		?>
-		<div class="postbox cookiebot-addon">
-			<i>
-			<?php
-			if ( ! $addon->is_addon_installed() ) {
-				esc_html_e( 'The plugin is not installed.', 'cookiebot' );
-			} elseif ( ! $addon->is_addon_activated() ) {
-				esc_html_e( 'The plugin is not activated.', 'cookiebot' );
-			}
-			?>
-				</i>
-		</div>
-		<?php
+		if ( ! is_a( $addon, Base_Cookiebot_Addon::class ) ) {
+			throw new InvalidArgumentException();
+		}
+
+		if ( ! $addon->is_addon_installed() ) {
+			$message = __( 'The plugin is not installed.', 'cookiebot' );
+		} elseif ( ! $addon->is_addon_activated() ) {
+			$message = __( 'The plugin is not activated.', 'cookiebot' );
+		} else {
+			$message = '';
+		}
+
+		$view_args = array(
+			'message' => $message,
+		);
+		include_view( 'admin/settings/prior-consent-tabs/unavailable-addons-settings-field.php', $view_args );
 	}
 
 	/**
