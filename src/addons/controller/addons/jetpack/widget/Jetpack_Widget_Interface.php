@@ -10,6 +10,9 @@ interface Jetpack_Widget_Interface {
 
 	public function get_widget_cookie_types();
 
+	/**
+	 * @return bool
+	 */
 	public function is_widget_enabled();
 
 	public function is_widget_placeholder_enabled();
@@ -18,7 +21,15 @@ interface Jetpack_Widget_Interface {
 
 	public function get_widget_placeholder();
 
+	/**
+	 * @return array|false
+	 */
 	public function get_widget_placeholders();
+
+	/**
+	 * @return string
+	 */
+	public function get_widget_default_placeholder();
 
 	public function load_configuration();
 

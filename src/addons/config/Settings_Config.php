@@ -4,11 +4,14 @@ namespace cybot\cookiebot\addons\config;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\Jetpack;
+use cybot\cookiebot\addons\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
 use cybot\cookiebot\addons\lib\Settings_Page_Tab;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
 use Exception;
+use RuntimeException;
 use ReflectionClass;
+use function cybot\cookiebot\addons\lib\cookiebot_addons_get_dropdown_languages;
 use function cybot\cookiebot\addons\lib\include_view;
 
 class Settings_Config {
@@ -300,7 +303,60 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function jetpack_addon_callback( $args ) {
-		include COOKIEBOT_ADDONS_DIR . 'view/admin/settings/jetpack-addon-callback.php';
+		$widget = isset( $args['widget'] ) ? $args['widget'] : null;
+		$addon  = isset( $args['addon'] ) ? $args['addon'] : null;
+
+		if ( ! is_a( $widget, Jetpack_Widget_Interface::class ) ) {
+			throw new RuntimeException();
+		}
+
+		if ( ! is_a( $addon, Base_Cookiebot_Addon::class ) ) {
+			throw new RuntimeException();
+		}
+
+		$widget_is_enabled                    = $widget->is_widget_enabled();
+		$widget_placeholder_is_enabled        = $widget->is_widget_placeholder_enabled();
+		$widget_has_placeholder               = $widget->widget_has_placeholder();
+		$widget_default_placeholder           = $widget->get_widget_default_placeholder();
+		$widget_option_name                   = $widget->get_widget_option_name();
+		$widget_placeholders_array            = $widget->get_widget_placeholders();
+		$site_default_languages_dropdown_html = 'cookiebot_jetpack_addon[' . $widget_option_name . '][placeholder][languages][site-default]';
+		$widget_placeholders                  = is_array( $widget_placeholders_array )
+			? array_map(
+				function( $language, $placeholder ) use ( $widget_option_name, $widget_placeholders_array ) {
+					$removable               = array_key_first( $widget_placeholders_array ) !== $language;
+					$name                    = 'cookiebot_jetpack_addon[' . $widget_option_name . '][placeholder][languages][' . $language . ']';
+					$languages_dropdown_html = cookiebot_addons_get_dropdown_languages(
+						'placeholder_select_language',
+						$name,
+						$language
+					);
+					return array(
+						'name'                    => $name,
+						'removable'               => $removable,
+						'language'                => $language,
+						'placeholder'             => $placeholder,
+						'languages_dropdown_html' => $languages_dropdown_html,
+					);
+				},
+				array_keys( $widget_placeholders_array ),
+				array_values( $widget_placeholders_array )
+			)
+		: array();
+
+		$view_args = array(
+			'widget_is_enabled'                    => $widget_is_enabled,
+			'widget_placeholder_is_enabled'        => $widget_placeholder_is_enabled,
+			'widget_has_placeholder'               => $widget_has_placeholder,
+			'widget_placeholders'                  => $widget_placeholders,
+			'widget_default_placeholder'           => $widget_default_placeholder,
+			'site_default_languages_dropdown_html' => $site_default_languages_dropdown_html,
+			'widget_option_name'                   => $widget_option_name,
+			'widget_cookie_types'                  => $widget->get_widget_cookie_types(),
+			'addon_placeholder_helper'             => $addon->get_placeholder_helper(),
+		);
+
+		include_view( 'admin/settings/prior-consent-tabs/jetpack-addon-settings-tab.php', $view_args );
 	}
 
 	/**

@@ -112,11 +112,7 @@ abstract class Base_Jetpack_Widget implements Jetpack_Widget_Interface {
 	}
 
 	/**
-	 * Checks if a widget is enabled
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
+	 * @return bool
 	 */
 	final public function is_widget_enabled() {
 		return $this->settings->is_widget_enabled(
@@ -162,11 +158,7 @@ abstract class Base_Jetpack_Widget implements Jetpack_Widget_Interface {
 	}
 
 	/**
-	 * Returns all widget placeholders
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
+	 * @return array|false
 	 */
 	final public function get_widget_placeholders() {
 		return $this->settings->get_widget_placeholders(
@@ -189,6 +181,13 @@ abstract class Base_Jetpack_Widget implements Jetpack_Widget_Interface {
 			static::DEFAULT_PLACEHOLDER,
 			cookiebot_addons_output_cookie_types( $this->get_widget_cookie_types() )
 		);
+	}
+
+	/**
+	 * @return string
+	 */
+	final public function get_widget_default_placeholder() {
+		return (string) static::DEFAULT_PLACEHOLDER;
 	}
 
 	/**

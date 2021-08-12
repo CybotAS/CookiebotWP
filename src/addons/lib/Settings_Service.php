@@ -250,20 +250,16 @@ class Settings_Service implements Settings_Service_Interface {
 	}
 
 	/**
-	 * Returns widget placeholders
-	 *
 	 * @param $option_key
 	 * @param $widget_key
 	 *
-	 * @return bool
-	 *
-	 * @since 1.8.0
+	 * @return array|false
 	 */
 	public function get_widget_placeholders( $option_key, $widget_key ) {
 		$option = get_option( $option_key );
 
-		if ( isset( $option[ $widget_key ]['placeholder']['languages'] ) ) {
-			return $option[ $widget_key ]['placeholder']['languages'];
+		if ( isset( $option[ $widget_key ]['placeholder']['languages'] ) && is_array( $option[ $widget_key ]['placeholder']['languages'] ) ) {
+			return (array) $option[ $widget_key ]['placeholder']['languages'];
 		}
 
 		return false;
