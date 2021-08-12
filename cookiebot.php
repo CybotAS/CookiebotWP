@@ -28,6 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once 'vendor/autoload.php';
 
 define( 'COOKIEBOT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'COOKIEBOT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 if ( ! class_exists( 'Cookiebot_WP' ) ) :
 

@@ -2,8 +2,9 @@
 
 namespace cybot\cookiebot\widgets;
 
-use cybot\cookiebot\Cookiebot_WP;
 use WP_Widget;
+use cybot\cookiebot\Cookiebot_WP;
+use function cybot\cookiebot\addons\lib\include_view;
 
 class Cookiebot_Declaration_Widget extends WP_Widget {
 
@@ -19,69 +20,64 @@ class Cookiebot_Declaration_Widget extends WP_Widget {
 	}
 
 	// The widget form (for the backend )
-	public function form( $instance ) {	
-		$defaults = array('lang'=>'');
-		extract( wp_parse_args( ( array ) $instance, $defaults ) );		
-		$title = (isset($title) ? $title : '');
-		?>
-		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'Cookiebot' ); ?></label>
-			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'lang' ); ?>"><?php esc_html_e( 'Language', 'cookiebot' ); ?></label>
-			<select name="<?php echo $this->get_field_name( 'lang' ); ?>" id="<?php echo $this->get_field_id( 'lang' ); ?>" class="widefat">
-				<option value=""><?php echo esc_html__('- Default -', 'cookiebot'); ?></option>
-				<?php
-				$options = Cookiebot_WP::get_supported_languages();
-				foreach ( $options as $key => $name ) {
-					echo '<option value="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '" '. selected( $lang, $key, false ) . '>'. $name . '</option>';
-				}
-				?>
-			</select>
-			
-		</p>
-		<?php
+	public function form( $instance ) {
+		$defaults   = array(
+			'lang'  => '',
+			'title' => '',
+		);
+		$fixed_args = array(
+			'title_field_id'      => $this->get_field_id( 'title' ),
+			'title_field_name'    => $this->get_field_name( 'title' ),
+			'lang_field_id'       => $this->get_field_id( 'lang' ),
+			'lang_field_name'     => $this->get_field_name( 'lang' ),
+			'supported_languages' => Cookiebot_WP::get_supported_languages(),
+		);
+		$view_args  = wp_parse_args( (array) $instance, array_merge( $defaults, $fixed_args ) );
+		include_view( 'admin/widgets/cookiebot-declaration-widget-form.php', $view_args );
 	}
 
 	// Update widget settings
 	public function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
-		$instance['lang']   = isset( $new_instance['lang'] ) ? wp_strip_all_tags( $new_instance['lang'] ) : '';
-		$instance['title']  = isset( $new_instance['title'] ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
+		$instance          = $old_instance;
+		$instance['lang']  = isset( $new_instance['lang'] ) ? wp_strip_all_tags( $new_instance['lang'] ) : '';
+		$instance['title'] = isset( $new_instance['title'] ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
 		return $instance;
 	}
 
 	// Display the widget
 	public function widget( $args, $instance ) {
-		extract( $args );
-		extract( $instance );
-		
-		// WordPress core before_widget hook
-		echo $before_widget;
-		
-		echo '<div class="widget-text wp_widget_plugin_box cookiebot_cookie_declaration">';
-		
-		// Display widget title if defined
-		if ( $title ) {
-			echo $before_title . $title . $after_title;
+		$before_widget_html    = isset( $args['before_widget'] ) && is_string( $args['before_widget'] )
+			? $args['before_widget']
+			: '';
+		$after_widget_html     = isset( $args['after_widget'] ) && is_string( $args['after_widget'] )
+			? $args['after_widget']
+			: '';
+		$has_before_title_html = isset( $args['before_title'] ) && is_string( $args['before_title'] );
+		$has_after_title_html  = isset( $args['after_title'] ) && is_string( $args['after_title'] );
+		if ( $has_before_title_html && $has_after_title_html ) {
+			$before_title_html = $args['before_title'];
+			$after_title_html  = $args['after_title'];
+		} else {
+			$before_title_html = '<h2>';
+			$after_title_html  = '</h2>';
 		}
-		
-		$cbid = Cookiebot_WP::get_cbid();
-		if(!empty($lang)) { $lang = '  data-culture="'.$lang.'"'; }
-		if(!is_multisite() || get_site_option('cookiebot-script-tag-cd-attribute','custom') == 'custom') {
-			$tagAttr = get_option('cookiebot-script-tag-cd-attribute','async');
+		$has_widget_title   = isset( $instance['title'] ) && is_string( $instance['title'] );
+		$widget_title_html  = $has_widget_title
+			? $before_title_html . $instance['title'] . $after_title_html
+			: '';
+		$tag_attribute_html = get_site_option( 'cookiebot-script-tag-cd-attribute', 'custom' );
+		if ( ! is_multisite() || $tag_attribute_html === 'custom' ) {
+			$tag_attribute_html = get_option( 'cookiebot-script-tag-cd-attribute', 'async' );
 		}
-		else {
-			$tagAttr = get_site_option('cookiebot-script-tag-cd-attribute');
-		}
-		
-		echo '<script id="CookieDeclaration" src="https://consent.cookiebot.com/'.$cbid.'/cd.js"'.$lang.' type="text/javascript" '.$tagAttr.'></script>';
-		
-		echo '</div>';
-		
-		// WordPress core after_widget hook
-		echo $after_widget;
+		$view_args = array(
+			'cookie_declaration_script_url' => 'https://consent.cookiebot.com/' . Cookiebot_WP::get_cbid() . '/cd.js',
+			'culture'                       => isset( $lang ) && is_string( $lang ) ? $lang : null,
+			'before_widget_html'            => $before_widget_html,
+			'after_widget_html'             => $after_widget_html,
+			'widget_title_html'             => $widget_title_html,
+			'tag_attribute_html'            => $tag_attribute_html,
+		);
+		include_view( 'frontend/widgets/cookiebot-declaration-widget.php', $view_args );
 	}
 
 }

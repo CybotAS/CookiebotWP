@@ -4,6 +4,7 @@ namespace cybot\cookiebot\addons\lib {
 
 	use cybot\cookiebot\addons\Cookiebot_Addons;
 	use Exception;
+	use InvalidArgumentException;
 
 	/**
 	 * Check if a cache plugin is activated and in function.
@@ -402,5 +403,19 @@ namespace cybot\cookiebot\addons\lib {
 		include $file_path;
 
 		return ob_get_clean();
+	}
+
+	/**
+	 * @param $relative_path
+	 * @throws InvalidArgumentException
+	 */
+	function include_view( $relative_path, array $view_args = array() ) {
+		$absolute_path = COOKIEBOT_PLUGIN_DIR . 'src/view/' . $relative_path;
+		if ( ! file_exists( $absolute_path ) ) {
+			throw new InvalidArgumentException( 'View could not be loaded from "' . $absolute_path . '"' );
+		}
+		// phpcs:ignore WordPress.PHP.DontExtract.extract_extract
+		extract( $view_args );
+		include $absolute_path;
 	}
 }
