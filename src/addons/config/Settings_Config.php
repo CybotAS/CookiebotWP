@@ -9,6 +9,7 @@ use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
 use Exception;
 use ReflectionClass;
+use function cybot\cookiebot\addons\lib\include_view;
 
 class Settings_Config {
 
@@ -414,7 +415,11 @@ class Settings_Config {
 			$available_addons_tab->set_is_active( true );
 			$active_tab = $available_addons_tab;
 		}
-		include COOKIEBOT_ADDONS_DIR . 'view/admin/settings/setting-page.php';
+		$view_args = array(
+			'settings_page_tabs' => $settings_page_tabs,
+			'active_tab'         => $active_tab,
+		);
+		include_view( 'admin/settings/prior-consent-settings-page.php', $view_args );
 	}
 
 	/**
