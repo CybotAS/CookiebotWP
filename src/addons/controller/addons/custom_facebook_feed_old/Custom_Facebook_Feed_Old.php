@@ -313,15 +313,6 @@ class Custom_Facebook_Feed_Old implements Cookiebot_Addons_Interface, Open_Sourc
 	}
 
 	/**
-	 * @return mixed
-	 *
-	 * @since 2.4.5
-	 */
-	public function extra_available_addon_option() {
-		//do nothing
-	}
-
-	/**
 	 * Returns boolean to enable/disable plugin by default
 	 *
 	 * @return bool

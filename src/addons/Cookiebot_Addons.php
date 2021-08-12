@@ -49,7 +49,7 @@ class Cookiebot_Addons {
 	 *
 	 * @since 1.3.0
 	 */
-	private $plugin_addons_list = array();
+	private $addons_list = array();
 
 	/**
 	 * @var   Cookiebot_Addons The single instance of the class
@@ -141,7 +141,10 @@ class Cookiebot_Addons {
 
 	protected function load_addons() {
 		require_once 'addons.php';
-		$this->plugin_addons_list = apply_filters( 'cookiebot_plugin_addons_list', PLUGIN_ADDONS );
+		$this->addons_list = apply_filters(
+			'cookiebot_plugin_addons_list',
+			array_merge( PLUGIN_ADDONS, OTHER_ADDONS )
+		);
 	}
 
 	/**
@@ -152,7 +155,7 @@ class Cookiebot_Addons {
 			'Script_Loader_Tag_Interface' => new Script_Loader_Tag(),
 			'Cookie_Consent_Interface'    => new Cookie_Consent(),
 			'Buffer_Output_Interface'     => new Buffer_Output(),
-			'plugin_addons_list'          => $this->plugin_addons_list,
+			'addons_list'                 => $this->addons_list,
 		);
 
 		$this->container = new Dependency_Container( $dependencies );
@@ -179,14 +182,15 @@ class Cookiebot_Addons {
 		/**
 		 * Check plugins one by one and load addon configuration
 		 */
-		foreach ( $this->plugin_addons_list as $plugin_addon ) {
+		foreach ( $this->addons_list as $addon ) {
 			/**
 			 * Load addon class to the container
 			 */
-			if ( class_exists( $plugin_addon ) ) {
+			if ( class_exists( $addon ) ) {
 				$this->container->set(
-					$plugin_addon,
-					new $plugin_addon(
+					$addon,
+					new $addon(
+						// TODO theme settings service for themes
 						$this->container->get( 'Settings_Service_Interface' ),
 						$this->container->get( 'Script_Loader_Tag_Interface' ),
 						$this->container->get( 'Cookie_Consent_Interface' ),
@@ -194,7 +198,7 @@ class Cookiebot_Addons {
 					)
 				);
 			} else {
-				throw new Exception( 'Class ' . $plugin_addon . ' not found' );
+				throw new Exception( 'Class ' . $addon . ' not found' );
 			}
 		}
 	}

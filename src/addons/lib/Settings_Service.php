@@ -5,6 +5,7 @@ namespace cybot\cookiebot\addons\lib;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\controller\addons\Cookiebot_Addons_Interface;
 use Exception;
+use Generator;
 use WP_Error;
 
 class Settings_Service implements Settings_Service_Interface {
@@ -132,21 +133,13 @@ class Settings_Service implements Settings_Service_Interface {
 	}
 
 	/**
-	 * Returns addons one by one through a generator
-	 *
-	 * @return array
+	 * @return Generator
 	 * @throws Exception
-	 *
-	 * @since 1.3.0
 	 */
 	public function get_addons() {
-		$addons = array();
-
-		foreach ( $this->container->get( 'plugin_addons_list' ) as $addon ) {
-			$addons[] = $this->container->get( $addon );
+		foreach ( $this->container->get( 'addons_list' ) as $addon ) {
+			yield $this->container->get( $addon );
 		}
-
-		return $addons;
 	}
 
 	/**

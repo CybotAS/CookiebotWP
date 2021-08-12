@@ -4,6 +4,7 @@ namespace cybot\cookiebot\addons {
 
 	use cybot\cookiebot\addons\controller\addons\add_to_any\Add_To_Any;
 	use cybot\cookiebot\addons\controller\addons\addthis\Addthis;
+	use cybot\cookiebot\addons\controller\addons\embed_autocorrect\Embed_Autocorrect;
 	use cybot\cookiebot\addons\controller\addons\enhanced_ecommerce_for_woocommerce_store\Enhanced_Ecommerce_For_WooCommerce_Store;
 	use cybot\cookiebot\addons\controller\addons\facebook_for_woocommerce\Facebook_For_Woocommerce;
 	use cybot\cookiebot\addons\controller\addons\ga_google_analytics\Ga_Google_Analytics;
@@ -62,5 +63,9 @@ namespace cybot\cookiebot\addons {
 		Litespeed_Cache::class,
 		matomo::class,
 		Instagram_Feed::class,
+	);
+
+	const OTHER_ADDONS = array(
+		Embed_Autocorrect::class,
 	);
 }

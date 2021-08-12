@@ -5,6 +5,7 @@ namespace cybot\cookiebot\addons\config;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\Jetpack;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
+use cybot\cookiebot\addons\lib\Addon_With_Extra_Options_Interface;
 use cybot\cookiebot\addons\lib\Settings_Page_Tab;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
@@ -416,6 +417,9 @@ class Settings_Config {
 				array_values( $addon_placeholders_array )
 			)
 			: array();
+		$addon_extra_options_html             = is_a( $addon, Addon_With_Extra_Options_Interface::class )
+			? $addon->get_extra_addon_options_html()
+			: '';
 
 		$view_args = array(
 			'addon_is_enabled'                     => $addon->is_addon_enabled(),
@@ -427,7 +431,7 @@ class Settings_Config {
 			'addon_option_name'                    => $addon::OPTION_NAME,
 			'addon_cookie_types'                   => $addon->get_cookie_types(),
 			'addon_placeholder_helper'             => $addon->get_placeholder_helper(),
-			'addon_extra_options_html'             => $addon->extra_available_addon_option(),
+			'addon_extra_options_html'             => $addon_extra_options_html,
 		);
 
 		include_view( 'admin/settings/prior-consent/available-addons/tab.php', $view_args );

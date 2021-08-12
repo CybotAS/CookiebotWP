@@ -284,15 +284,6 @@ class Enfold implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * @return mixed
-	 *
-	 * @since 2.4.5
-	 */
-	public function extra_available_addon_option() {
-		//do nothing
-	}
-
-	/**
 	 * Returns boolean to enable/disable plugin by default
 	 *
 	 * @return bool

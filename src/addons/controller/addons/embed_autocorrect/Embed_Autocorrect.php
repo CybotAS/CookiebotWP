@@ -2,74 +2,27 @@
 
 namespace cybot\cookiebot\addons\controller\addons\embed_autocorrect;
 
-use cybot\cookiebot\addons\controller\addons\Cookiebot_Addons_Interface;
-use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
-use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cybot\cookiebot\addons\lib\Cookie_Consent_Interface;
-use cybot\cookiebot\addons\lib\Settings_Service_Interface;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Other_Addon;
+use cybot\cookiebot\addons\lib\Addon_With_Extra_Options_Interface;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_get_domain_from_url;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_get_home_url_domain;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
+use function cybot\cookiebot\addons\lib\include_view;
 
-class Embed_Autocorrect implements Cookiebot_Addons_Interface {
+class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With_Extra_Options_Interface {
 
-	/**
-	 * @var Settings_Service_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $settings;
-
-	/**
-	 * @var Script_Loader_Tag_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $script_loader_tag;
-
-	/**
-	 * @var Cookie_Consent_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	public $cookie_consent;
-
-	/**
-	 * @var Buffer_Output_Interface
-	 *
-	 * @since 1.3.0
-	 */
-	protected $buffer_output;
-
-	/**
-	 * Jetpack constructor.
-	 *
-	 * @param $settings          Settings_Service_Interface
-	 * @param $script_loader_tag Script_Loader_Tag_Interface
-	 * @param $cookie_consent    Cookie_Consent_Interface
-	 * @param $buffer_output     Buffer_Output_Interface
-	 *
-	 * @since 1.2.0
-	 */
-	public function __construct(
-		Settings_Service_Interface $settings,
-		Script_Loader_Tag_Interface $script_loader_tag,
-		Cookie_Consent_Interface $cookie_consent,
-		Buffer_Output_Interface $buffer_output
-	) {
-		$this->settings          = $settings;
-		$this->script_loader_tag = $script_loader_tag;
-		$this->cookie_consent    = $cookie_consent;
-		$this->buffer_output     = $buffer_output;
-	}
+	const ADDON_NAME                  = 'Embed autocorrect';
+	const OPTION_NAME                 = 'embed_autocorrect';
+	const DEFAULT_COOKIE_TYPES        = array( 'marketing', 'statistics' );
+	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
 
 	/**
 	 * Loads addon configuration
 	 *
 	 * @since 1.3.0
 	 */
-	public function load_configuration() {
+	public function load_addon_configuration() {
 		/**
 		 * We add the action after wp_loaded and replace the original GA Google
 		 * Analytics action with our own adjusted version.
@@ -447,168 +400,12 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	 *
 	 * @return string
 	 */
-	public function generate_placeholder_with_src( $src = '' ) {
-		$cookieContentNotice  = '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_cookie_types() ) . '">';
-		$cookieContentNotice .= $this->get_placeholder( $src );
-		$cookieContentNotice .= '</div>';
+	private function generate_placeholder_with_src( $src = '' ) {
+		$cookie_content_notice  = '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_cookie_types() ) . '">';
+		$cookie_content_notice .= $this->get_placeholder( $src );
+		$cookie_content_notice .= '</div>';
 
-		return $cookieContentNotice;
-	}
-
-	/**
-	 * Return addon/plugin name
-	 *
-	 * @return string
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_addon_name() {
-		return 'Embed autocorrect';
-	}
-
-	/**
-	 * Option name in the database
-	 *
-	 * @return string
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_option_name() {
-		return 'embed_autocorrect';
-	}
-
-	/**
-	 * Plugin file path
-	 *
-	 * @return string
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_plugin_file() {
-		return false;
-	}
-
-	/**
-	 * Returns checked cookie types
-	 * @return mixed
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_cookie_types() {
-		return $this->settings->get_cookie_types( $this->get_option_name(), $this->get_default_cookie_types() );
-	}
-
-	/**
-	 * Returns default cookie types
-	 * @return array
-	 *
-	 * @since 1.5.0
-	 */
-	public function get_default_cookie_types() {
-		return array( 'marketing', 'statistics' );
-	}
-
-	/**
-	 * Check if plugin is activated and checked in the backend
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_enabled() {
-		return $this->settings->is_addon_enabled( $this->get_option_name() );
-	}
-
-	/**
-	 * Checks if addon is installed
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_installed() {
-		return $this->settings->is_addon_installed( $this->get_plugin_file() );
-	}
-
-	/**
-	 * Checks if addon is activated
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_activated() {
-		return $this->settings->is_addon_activated( $this->get_plugin_file() );
-	}
-
-	/**
-	 * Retrieves current installed version of the addon
-	 *
-	 * @return bool
-	 *
-	 * @since 2.2.1
-	 */
-	public function get_addon_version() {
-		return false;
-	}
-
-	/**
-	 * Default placeholder content
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
-	}
-
-	/**
-	 * Get placeholder content
-	 *
-	 * This function will check following features:
-	 * - Current language
-	 *
-	 * @param $src
-	 *
-	 * @return bool|mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_placeholder( $src = '' ) {
-		return $this->settings->get_placeholder(
-			$this->get_option_name(),
-			$this->get_default_placeholder(),
-			cookiebot_addons_output_cookie_types( $this->get_cookie_types() ),
-			$src
-		);
-	}
-
-	/**
-	 * Checks if it does have custom placeholder content
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function has_placeholder() {
-		return $this->settings->has_placeholder( $this->get_option_name() );
-	}
-
-	/**
-	 * returns all placeholder contents
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_placeholders() {
-		return $this->settings->get_placeholders( $this->get_option_name() );
-	}
-
-	/**
-	 * Return true if the placeholder is enabled
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.8.0
-	 */
-	public function is_placeholder_enabled() {
-		return $this->settings->is_placeholder_enabled( $this->get_option_name() );
+		return $cookie_content_notice;
 	}
 
 	/**
@@ -626,46 +423,6 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * Placeholder helper overlay in the settings page.
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_placeholder_helper() {
-		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%src - video source</li><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in the frontend</li></ul>';
-	}
-
-	/**
-	 * Returns parent class or false
-	 *
-	 * @return string|bool
-	 *
-	 * @since 2.1.3
-	 */
-	public function get_parent_class() {
-		return get_parent_class( $this );
-	}
-
-	/**
-	 * Action after enabling the addon on the settings page
-	 *
-	 * @since 2.2.0
-	 */
-	public function post_hook_after_enabling() {
-		//do nothing
-	}
-
-	/**
-	 * Cookiebot plugin is deactivated
-	 *
-	 * @since 2.2.0
-	 */
-	public function plugin_deactivated() {
-		//do nothing
-	}
-
-	/**
 	 * Returns regex from the database
 	 * If it does not exist then it will return the default regex
 	 *
@@ -676,7 +433,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	private function get_regex() {
 		return apply_filters(
 			'cookiebot_embed_regex',
-			$this->settings->get_addon_regex( $this->get_option_name(), $this->get_default_regex() )
+			$this->settings->get_addon_regex( self::OPTION_NAME, $this->get_default_regex() )
 		);
 	}
 
@@ -706,76 +463,18 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * @return mixed
-	 *
-	 * @since 2.4.6
+	 * @return string
 	 */
-	public function extra_available_addon_option() {
-		?>
-		<div class="show_advanced_options">
-			<button class="button button-secondary">
-			<?php
-			esc_html_e(
-				'Show advanced options',
-				'cookiebot-addons'
-			);
-			?>
-					</button>
-			<span class="help-tip"
-				  title="<?php echo esc_html__( 'This is for more advanced users.', 'cookiebot-addons' ); ?>"></span>
-		</div>
-		<div class="advanced_options">
-
-			<label for="embed_regex"><?php esc_html_e( 'Regex:', 'cookiebot-addons' ); ?></label>
-			<textarea
-					id="embed_regex"
-					cols="80"
-					rows="5"
-					name="cookiebot_available_addons[<?php echo $this->get_option_name(); ?>][regex]"
-					disabled
-			><?php echo esc_html( $this->get_regex() ); ?></textarea>
-
-			<?php if ( $this->is_regex_default() ) : ?>
-				<button id="edit_embed_regex" class="button">
-				<?php
-				esc_html_e(
-					'Edit regex',
-					'cookiebot-addons'
-				);
-				?>
-						</button>
-			<?php endif; ?>
-
-			<button
-					id="btn_default_embed_regex"
-					class="button<?php echo ( $this->is_regex_default() ) ? ' hidden' : ''; ?>"
-					type="button"
-					value="Reset to default regex">
-					<?php
-					esc_html_e(
-						'Reset to default regex',
-						'cookiebot-addons'
-					);
-					?>
-					</button>
-			<input
-					type="hidden"
-					name="default_embed_regex"
-					id="default_embed_regex"
-					value="<?php echo esc_html( $this->get_default_regex() ); ?>"/>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Returns boolean to enable/disable plugin by default
-	 *
-	 * @return bool
-	 *
-	 * @since 3.6.3
-	 */
-	public function enable_by_default() {
-		return false;
+	public function get_extra_addon_options_html() {
+		$view_args = array(
+			'addon_option_name' => self::OPTION_NAME,
+			'regex'             => $this->get_regex(),
+			'regex_is_default'  => $this->is_regex_default(),
+			'default_regex'     => $this->get_default_regex(),
+		);
+		ob_start();
+		include_view( 'admin/settings/prior-consent/other-addons/embed-autocorrect-extra-addon-options.php', $view_args );
+		return (string) ob_get_clean();
 	}
 
 	/**
@@ -788,8 +487,8 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	public function get_default_enable_setting() {
 		return array(
 			'enabled'     => 1,
-			'cookie_type' => $this->get_default_cookie_types(),
-			'placeholder' => $this->get_default_placeholder(),
+			'cookie_type' => static::DEFAULT_COOKIE_TYPES,
+			'placeholder' => static::DEFAULT_PLACEHOLDER_CONTENT,
 			'regex'       => $this->get_default_regex(),
 		);
 	}
