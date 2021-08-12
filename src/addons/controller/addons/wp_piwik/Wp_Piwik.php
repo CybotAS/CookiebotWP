@@ -4,13 +4,13 @@ namespace cybot\cookiebot\addons\controller\addons\wp_piwik;
 
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 /**
  * Class Wp_Piwik
  * @package cybot\cookiebot\addons\controller\addons\wp_piwik
  */
-class Wp_Piwik extends Base_Cookiebot_Addon {
+class Wp_Piwik extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'WP Piwik';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics.';

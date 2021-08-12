@@ -255,17 +255,6 @@ class Custom_Facebook_Feed_Pro implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
-	 *
-	 * @return string
-	 *
-	 * @since 2.1.4
-	 */
-	public function get_svn_url() {
-		return false;
-	}
-
-	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
 	 * @return string

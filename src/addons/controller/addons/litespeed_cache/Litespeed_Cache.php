@@ -2,9 +2,9 @@
 
 namespace cybot\cookiebot\addons\controller\addons\litespeed_cache;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
-class Litespeed_Cache extends Base_Cookiebot_Addon {
+class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Litespeed Cache';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'This is not used.';

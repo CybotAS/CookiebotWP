@@ -21,12 +21,8 @@ abstract class Base_Cookiebot_Addon {
 	const ADDON_NAME                  = '';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.';
 	const OPTION_NAME                 = '';
-	const PLUGIN_FILE_PATH            = '';
 	const DEFAULT_COOKIE_TYPES        = array();
 	const ENABLE_ADDON_BY_DEFAULT     = false;
-	const LATEST_PLUGIN_VERSION       = true;
-	/** @var bool|string False or PLUGIN FILE PATH OF THE LATEST PLUGIN VERSION  */
-	const PREVIOUS_PLUGIN_VERSION = false;
 
 	/**
 	 * @var Settings_Service_Interface
@@ -81,7 +77,6 @@ abstract class Base_Cookiebot_Addon {
 				'ADDON_NAME',
 				'DEFAULT_PLACEHOLDER_CONTENT',
 				'OPTION_NAME',
-				'PLUGIN_FILE_PATH',
 			)
 		);
 		$this->validate_required_boolean_class_constant( 'ENABLE_ADDON_BY_DEFAULT' );
@@ -145,36 +140,6 @@ abstract class Base_Cookiebot_Addon {
 	}
 
 	/**
-	 * Checks if addon is installed
-	 *
-	 * @since 1.3.0
-	 */
-	final public function is_addon_installed() {
-		return $this->settings->is_addon_installed( static::PLUGIN_FILE_PATH );
-	}
-
-	/**
-	 * Checks if addon is activated
-	 *
-	 * @since 1.3.0
-	 */
-	final public function is_addon_activated() {
-		return $this->settings->is_addon_activated( static::PLUGIN_FILE_PATH );
-	}
-
-	/**
-	 * Retrieves current installed version of the addon
-	 *
-	 * @return bool
-	 *
-	 * @since 2.2.1
-	 */
-	final public function get_addon_version() {
-		return $this->settings->get_addon_version( static::PLUGIN_FILE_PATH );
-	}
-
-
-	/**
 	 * Checks if it does have custom placeholder content
 	 *
 	 * @return mixed
@@ -211,16 +176,6 @@ abstract class Base_Cookiebot_Addon {
 	 * @since 1.8.0
 	 */
 	abstract public function get_extra_information();
-
-	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	abstract public function get_svn_url();
-
 
 	/**
 	 * Placeholder helper overlay in the settings page.
@@ -264,11 +219,6 @@ abstract class Base_Cookiebot_Addon {
 		// do nothing by default
 	}
 
-	/**
-	 * @return mixed
-	 *
-	 * @since 2.4.5
-	 */
 	public function extra_available_addon_option() {
 		// do nothing by default
 	}
@@ -286,26 +236,5 @@ abstract class Base_Cookiebot_Addon {
 			'cookie_type' => static::DEFAULT_COOKIE_TYPES,
 			'placeholder' => static::DEFAULT_PLACEHOLDER_CONTENT,
 		);
-	}
-
-	/**
-	 * @return bool|Base_Cookiebot_Addon
-	 */
-	final public function has_previous_version_plugin() {
-		return static::PREVIOUS_PLUGIN_VERSION;
-	}
-
-	/**
-	 * @return bool
-	 */
-	final public function is_latest_plugin_version() {
-		return static::LATEST_PLUGIN_VERSION;
-	}
-
-	/**
-	 * @return bool
-	 */
-	final public function is_previous_version_plugin_activated() {
-		return $this->settings->is_addon_activated( self::PREVIOUS_PLUGIN_VERSION );
 	}
 }

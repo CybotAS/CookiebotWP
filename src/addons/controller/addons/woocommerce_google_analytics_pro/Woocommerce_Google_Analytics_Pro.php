@@ -2,13 +2,13 @@
 
 namespace cybot\cookiebot\addons\controller\addons\woocommerce_google_analytics_pro;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 /**
  * Class Woocommerce_Google_Analytics_Pro
  * @package cybot\cookiebot\addons\controller\addons\woocommerce_google_analytics_pro
  */
-class Woocommerce_Google_Analytics_Pro extends Base_Cookiebot_Addon {
+class Woocommerce_Google_Analytics_Pro extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'WooCommerce Google Analytics Pro';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';

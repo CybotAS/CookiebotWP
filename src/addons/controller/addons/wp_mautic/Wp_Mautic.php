@@ -2,13 +2,13 @@
 
 namespace cybot\cookiebot\addons\controller\addons\wp_mautic;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 /**
  * Class Wp_Mautic
  * @package cybot\cookiebot\addons\controller\addons\wp_mautic
  */
-class Wp_Mautic extends Base_Cookiebot_Addon {
+class Wp_Mautic extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Mautic';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';

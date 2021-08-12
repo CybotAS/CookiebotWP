@@ -2,14 +2,14 @@
 
 namespace cybot\cookiebot\addons\controller\addons\wp_google_analytics_events;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_remove_class_action;
 
 /**
  * Class Wp_Google_Analytics_Events
  * @package cybot\cookiebot\addons\controller\addons\wp_google_analytics_events
  */
-class Wp_Google_Analytics_Events extends Base_Cookiebot_Addon {
+class Wp_Google_Analytics_Events extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'WP Google Analytics Events';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';

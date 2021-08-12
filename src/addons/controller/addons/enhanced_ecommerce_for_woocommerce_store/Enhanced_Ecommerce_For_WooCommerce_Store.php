@@ -2,9 +2,10 @@
 
 namespace cybot\cookiebot\addons\controller\addons\enhanced_ecommerce_for_woocommerce_store;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
+use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
 
-class Enhanced_Ecommerce_For_WooCommerce_Store extends Base_Cookiebot_Addon {
+class Enhanced_Ecommerce_For_WooCommerce_Store extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 
 	const ADDON_NAME                  = 'Enhanced Ecommerce Google Analytics Plugin for WooCommerce';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.';

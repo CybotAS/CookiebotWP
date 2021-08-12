@@ -2,9 +2,10 @@
 
 namespace cybot\cookiebot\addons\controller\addons\instagram_feed;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
+use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
 
-class Instagram_Feed extends Base_Cookiebot_Addon {
+class Instagram_Feed extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 
 	const ADDON_NAME                  = 'Instagram feed';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed.';

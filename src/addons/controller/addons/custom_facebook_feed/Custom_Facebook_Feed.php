@@ -2,14 +2,10 @@
 
 namespace cybot\cookiebot\addons\controller\addons\custom_facebook_feed;
 
-use cybot\cookiebot\addons\controller\addons\Cookiebot_Addons_Interface;
 use cybot\cookiebot\addons\controller\addons\custom_facebook_feed_old\Custom_Facebook_Feed_Old;
-use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
-use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cybot\cookiebot\addons\lib\Cookie_Consent_Interface;
-use cybot\cookiebot\addons\lib\Settings_Service_Interface;
+use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
 
-class Custom_Facebook_Feed extends Custom_Facebook_Feed_Old {
+class Custom_Facebook_Feed extends Custom_Facebook_Feed_Old implements Open_Source_Addon_Interface {
 
 	/**
 	 * Return addon/plugin name

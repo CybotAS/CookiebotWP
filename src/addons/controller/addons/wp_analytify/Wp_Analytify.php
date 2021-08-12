@@ -2,13 +2,13 @@
 
 namespace cybot\cookiebot\addons\controller\addons\wp_analytify;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 /**
  * Class Wp_Analytify
  * @package cybot\cookiebot\addons\controller\addons\wp_analytify
  */
-class Wp_Analytify extends Base_Cookiebot_Addon {
+class Wp_Analytify extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Analytify';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';

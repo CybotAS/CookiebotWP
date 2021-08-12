@@ -2,7 +2,7 @@
 
 namespace cybot\cookiebot\addons\controller\addons\jetpack;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Google_Maps_Jetpack_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Facebook_Jetpack_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Googleplus_Badge_Jetpack_Widget;
@@ -24,7 +24,7 @@ use Exception;
  *
  * @since 1.3.0
  */
-class Jetpack extends Base_Cookiebot_Addon {
+class Jetpack extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Jetpack';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';

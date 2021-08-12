@@ -2,9 +2,10 @@
 
 namespace cybot\cookiebot\addons\controller\addons\google_site_kit;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
+use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
 
-class Google_Site_Kit extends Base_Cookiebot_Addon {
+class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 
 	const ADDON_NAME                  = 'Google Site Kit';
 	const OPTION_NAME                 = 'google_site_kit';

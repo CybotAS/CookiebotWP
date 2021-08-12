@@ -2,13 +2,13 @@
 
 namespace cybot\cookiebot\addons\controller\addons\pixel_caffeine;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 /**
  * Class Pixel_Caffeine
  * @package cybot\cookiebot\addons\controller\addons\pixel_caffeine
  */
-class Pixel_Caffeine extends Base_Cookiebot_Addon {
+class Pixel_Caffeine extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Pixel Caffeine';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';

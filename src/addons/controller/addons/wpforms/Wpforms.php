@@ -2,10 +2,10 @@
 
 namespace cybot\cookiebot\addons\controller\addons\wpforms;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use cybot\cookiebot\Cookiebot_WP;
 
-class Wpforms extends Base_Cookiebot_Addon {
+class Wpforms extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'WPForms';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.';

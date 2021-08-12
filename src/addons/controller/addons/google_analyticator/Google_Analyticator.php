@@ -2,13 +2,14 @@
 
 namespace cybot\cookiebot\addons\controller\addons\google_analyticator;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
+use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
 
 /**
  * Class Google_Analyticator
  * @package cybot\cookiebot\addons\controller\addons\google_analyticator
  */
-class Google_Analyticator extends Base_Cookiebot_Addon {
+class Google_Analyticator extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 	const ADDON_NAME                  = 'Google Analyticator';
 	const OPTION_NAME                 = 'google_analyticator';
 	const PLUGIN_FILE_PATH            = 'google-analyticator/google-analyticator.php';

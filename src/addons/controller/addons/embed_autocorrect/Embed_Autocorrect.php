@@ -626,17 +626,6 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
-	 *
-	 * @return boolean
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_svn_url() {
-		return false;
-	}
-
-	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
 	 * @return string

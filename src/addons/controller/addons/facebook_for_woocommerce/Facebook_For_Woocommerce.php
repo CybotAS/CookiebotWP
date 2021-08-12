@@ -2,10 +2,11 @@
 
 namespace cybot\cookiebot\addons\controller\addons\facebook_for_woocommerce;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
+use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_remove_class_action;
 
-class Facebook_For_Woocommerce extends Base_Cookiebot_Addon {
+class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 
 	const ADDON_NAME                  = 'Facebook For WooCommerce';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.';

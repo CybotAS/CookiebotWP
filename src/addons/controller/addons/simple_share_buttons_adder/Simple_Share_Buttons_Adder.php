@@ -2,13 +2,13 @@
 
 namespace cybot\cookiebot\addons\controller\addons\simple_share_buttons_adder;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 /**
  * Class Simple_Share_Buttons_Adder
  * @package cybot\cookiebot\addons\controller\addons\simple_share_buttons_adder
  */
-class Simple_Share_Buttons_Adder extends Base_Cookiebot_Addon {
+class Simple_Share_Buttons_Adder extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Simple Share Buttons Adder';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to Social Share buttons.';

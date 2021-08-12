@@ -2,13 +2,13 @@
 
 namespace cybot\cookiebot\addons\controller\addons\wp_rocket;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 /**
  * Class Wp_Rocket
  * @package cybot\cookiebot\addons\controller\addons\wp_rocket
  */
-class Wp_Rocket extends Base_Cookiebot_Addon {
+class Wp_Rocket extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME              = 'WP Rocket';
 	const OPTION_NAME             = 'wp_rocket';

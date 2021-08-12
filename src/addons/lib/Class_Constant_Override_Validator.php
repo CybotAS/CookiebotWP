@@ -12,7 +12,7 @@ trait Class_Constant_Override_Validator {
 	 *
 	 * @throws Exception
 	 */
-	private function validate_fixed_class_constants( array $fixed_class_constant_names ) {
+	protected function validate_fixed_class_constants( array $fixed_class_constant_names ) {
 		foreach ( $fixed_class_constant_names as $fixed_class_constant_name ) {
 			$this->validate_fixed_class_constant( $fixed_class_constant_name );
 		}
@@ -23,7 +23,7 @@ trait Class_Constant_Override_Validator {
 	 *
 	 * @throws Exception
 	 */
-	private function validate_fixed_class_constant( $fixed_class_constant_name ) {
+	protected function validate_fixed_class_constant( $fixed_class_constant_name ) {
 		$value_self   = constant( 'self::' . $fixed_class_constant_name );
 		$value_static = constant( 'static::' . $fixed_class_constant_name );
 		if ( $value_self !== $value_static ) {
@@ -36,7 +36,7 @@ trait Class_Constant_Override_Validator {
 	 *
 	 * @throws Exception
 	 */
-	private function validate_required_string_class_constants( array $required_string_constant_names ) {
+	protected function validate_required_string_class_constants( array $required_string_constant_names ) {
 		foreach ( $required_string_constant_names as $required_string_constant_name ) {
 			$this->validate_required_string_class_constant( $required_string_constant_name );
 		}
@@ -47,7 +47,7 @@ trait Class_Constant_Override_Validator {
 	 *
 	 * @throws Exception
 	 */
-	private function validate_required_string_class_constant( $required_string_constant_name ) {
+	protected function validate_required_string_class_constant( $required_string_constant_name ) {
 		if ( ! is_string( $required_string_constant_name ) ) {
 			throw new InvalidArgumentException();
 		}
@@ -62,7 +62,7 @@ trait Class_Constant_Override_Validator {
 	 *
 	 * @throws Exception
 	 */
-	private function validate_required_boolean_class_constants( array $required_boolean_constant_names ) {
+	protected function validate_required_boolean_class_constants( array $required_boolean_constant_names ) {
 		foreach ( $required_boolean_constant_names as $required_boolean_constant_name ) {
 			$this->validate_required_boolean_class_constant( $required_boolean_constant_name );
 		}
@@ -73,7 +73,7 @@ trait Class_Constant_Override_Validator {
 	 *
 	 * @throws Exception
 	 */
-	private function validate_required_boolean_class_constant( $required_boolean_constant_name ) {
+	protected function validate_required_boolean_class_constant( $required_boolean_constant_name ) {
 		if ( ! is_string( $required_boolean_constant_name ) ) {
 			throw new InvalidArgumentException();
 		}
@@ -89,7 +89,7 @@ trait Class_Constant_Override_Validator {
 	 *
 	 * @throws Exception
 	 */
-	private function validate_required_array_class_constants( array $required_array_constant_names, array $allowed_item_values = null ) {
+	protected function validate_required_array_class_constants( array $required_array_constant_names, array $allowed_item_values = null ) {
 		foreach ( $required_array_constant_names as $required_array_constant_name ) {
 			$this->validate_required_array_class_constant( $required_array_constant_name );
 		}
@@ -101,7 +101,7 @@ trait Class_Constant_Override_Validator {
 	 *
 	 * @throws Exception
 	 */
-	private function validate_required_array_class_constant( $required_array_constant_name, array $allowed_item_values = null ) {
+	protected function validate_required_array_class_constant( $required_array_constant_name, array $allowed_item_values = null ) {
 		if ( ! is_string( $required_array_constant_name ) ) {
 			throw new InvalidArgumentException();
 		}

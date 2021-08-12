@@ -2,10 +2,10 @@
 
 namespace cybot\cookiebot\addons\controller\addons\official_facebook_pixel;
 
-use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_remove_class_action;
 
-class Official_Facebook_Pixel extends Base_Cookiebot_Addon {
+class Official_Facebook_Pixel extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Official Facebook Pixel';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel.';
