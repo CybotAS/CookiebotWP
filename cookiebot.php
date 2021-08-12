@@ -26,6 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once 'vendor/autoload.php';
 
+define( 'COOKIEBOT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+
 if ( ! class_exists( 'Cookiebot_WP' ) ) :
 
 	final class Cookiebot_WP {
@@ -245,7 +247,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			//Add Gutenberg Widget
 			wp_enqueue_script(
 				'cookiebot-declaration',
-				plugin_dir_url( __FILE__ ) . 'js/block.js',
+				COOKIEBOT_PLUGIN_URL . 'assets/js/block.js',
 				array( 'wp-blocks', 'wp-i18n', 'wp-element' ), // Required scripts for the block
 				self::COOKIEBOT_PLUGIN_VERSION,
 				false
@@ -567,7 +569,12 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 * @since   1.0.0
 		 */
 		public function settings_page() {
-			wp_enqueue_style( 'cookiebot-consent-mapping-table', plugins_url( 'css/consent_mapping_table.css', __FILE__ ), array(), '3.5.0' );
+			wp_enqueue_style(
+				'cookiebot-consent-mapping-table',
+				COOKIEBOT_PLUGIN_URL . 'assets/css/consent_mapping_table.css',
+				null,
+				self::COOKIEBOT_PLUGIN_VERSION
+			);
 
 			/* Check if multisite */
 			if ( $is_ms = is_multisite() ) {
@@ -743,7 +750,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 									</a>
 
 									<div id="add_language_guide" style="display:none;">
-										<img src="<?php echo plugin_dir_url( __FILE__ ); ?>/assets/guide_add_language.gif"
+										<img src="<?php echo plugin_dir_url( __FILE__ ); ?>/assets/img/guide_add_language.gif"
 											 alt="Add language in Cookiebot administration tool"/>
 										<br/>
 										<a href="#"
@@ -2350,7 +2357,10 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		public function cookiebot_enqueue_consent_api_scripts() {
 			wp_register_script(
 				'cookiebot-wp-consent-level-api-integration',
-				plugins_url( 'cookiebot/js/cookiebot-wp-consent-level-api-integration.js', 'cookiebot' )
+				COOKIEBOT_PLUGIN_URL . 'assets/js/cookiebot-wp-consent-level-api-integration.js',
+				null,
+				self::COOKIEBOT_PLUGIN_VERSION,
+				false
 			);
 			wp_enqueue_script( 'cookiebot-wp-consent-level-api-integration' );
 			wp_localize_script( 'cookiebot-wp-consent-level-api-integration', 'cookiebot_category_mapping', $this->get_wp_consent_api_mapping() );
@@ -2404,7 +2414,12 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
                                 <a href="' . $notices['later_link'] . '" class="dashicons dashicons-dismiss"></a>
                               </div>';
 
-			wp_enqueue_style( 'cookiebot-admin-notices', plugins_url( 'css/notice.css', __FILE__ ), array(), '2.0.4' );
+			wp_enqueue_style(
+				'cookiebot-admin-notices',
+				COOKIEBOT_PLUGIN_URL . 'assets/css/notice.css',
+				null,
+				self::COOKIEBOT_PLUGIN_VERSION
+			);
 		}
 
 

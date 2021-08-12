@@ -14,7 +14,7 @@
     clear: both;
     content: "";
     display: block;
-    background-image: url("../assets/icon.svg");
+    background-image: url("../img/icon.svg");
     background-size: 108px auto;
     background-repeat: no-repeat;
     background-position: 0 45%;

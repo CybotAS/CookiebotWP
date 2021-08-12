@@ -104,7 +104,7 @@ class Settings_Config {
 		);
 		wp_enqueue_style(
 			'cookiebot_addons_custom_css',
-			plugins_url( 'style/css/admin_styles.css', dirname( __FILE__ ) ),
+			COOKIEBOT_PLUGIN_URL . 'assets/css/admin_styles.css',
 			null,
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 		);
