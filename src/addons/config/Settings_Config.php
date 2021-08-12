@@ -386,7 +386,10 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function available_addon_callback( $args ) {
-		include COOKIEBOT_ADDONS_DIR . 'view/admin/settings/available-addon-callback.php';
+		$view_args = array(
+			'args' => $args,
+		);
+		include_view( 'admin/settings/prior-consent-tabs/available-addons-settings-tab.php', $view_args );
 	}
 
 	/**
