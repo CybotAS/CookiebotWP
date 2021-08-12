@@ -266,19 +266,15 @@ class Settings_Service implements Settings_Service_Interface {
 	}
 
 	/**
-	 * Returns all placeholders
-	 *
 	 * @param $option_key
 	 *
-	 * @return bool
-	 *
-	 * @since 1.8.0
+	 * @return array|false
 	 */
 	public function get_placeholders( $option_key ) {
 		$option = get_option( static::OPTION_NAME );
 
-		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) ) {
-			return $option[ $option_key ]['placeholder']['languages'];
+		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) && is_array( $option[ $option_key ]['placeholder']['languages'] ) ) {
+			return (array) $option[ $option_key ]['placeholder']['languages'];
 		}
 
 		return false;

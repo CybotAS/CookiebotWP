@@ -386,9 +386,50 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function available_addon_callback( $args ) {
+		$addon = isset( $args['addon'] ) ? $args['addon'] : null;
+
+		if ( ! is_a( $addon, Base_Cookiebot_Addon::class ) ) {
+			throw new RuntimeException();
+		}
+
+		$site_default_languages_dropdown_html = 'cookiebot_available_addons[' . $addon::OPTION_NAME . '][placeholder][languages][site-default]';
+		$addon_placeholders_array             = $addon->get_placeholders();
+		$addon_placeholders                   = is_array( $addon_placeholders_array )
+			? array_map(
+				function( $language, $placeholder ) use ( $addon, $addon_placeholders_array ) {
+					$removable               = array_key_first( $addon_placeholders_array ) !== $language;
+					$name                    = 'cookiebot_available_addons[' . $addon::OPTION_NAME . '][placeholder][languages][' . $language . ']';
+					$languages_dropdown_html = cookiebot_addons_get_dropdown_languages(
+						'placeholder_select_language',
+						$name,
+						$language
+					);
+					return array(
+						'name'                    => $name,
+						'removable'               => $removable,
+						'language'                => $language,
+						'placeholder'             => $placeholder,
+						'languages_dropdown_html' => $languages_dropdown_html,
+					);
+				},
+				array_keys( $addon_placeholders_array ),
+				array_values( $addon_placeholders_array )
+			)
+			: array();
+
 		$view_args = array(
-			'args' => $args,
+			'addon_is_enabled'                     => $addon->is_addon_enabled(),
+			'addon_placeholder_is_enabled'         => $addon->is_placeholder_enabled(),
+			'addon_has_placeholder'                => $addon->has_placeholder(),
+			'addon_placeholders'                   => $addon_placeholders,
+			'addon_default_placeholder'            => $addon::DEFAULT_PLACEHOLDER_CONTENT,
+			'site_default_languages_dropdown_html' => $site_default_languages_dropdown_html,
+			'addon_option_name'                    => $addon::OPTION_NAME,
+			'addon_cookie_types'                   => $addon->get_cookie_types(),
+			'addon_placeholder_helper'             => $addon->get_placeholder_helper(),
+			'addon_extra_options_html'             => $addon->extra_available_addon_option(),
 		);
+
 		include_view( 'admin/settings/prior-consent-tabs/available-addons-settings-tab.php', $view_args );
 	}
 
