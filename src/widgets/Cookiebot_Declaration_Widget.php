@@ -1,6 +1,10 @@
 <?php
 
-// The widget class for Cookiebot D
+namespace cybot\cookiebot\widgets;
+
+use cybot\cookiebot\Cookiebot_WP;
+use WP_Widget;
+
 class Cookiebot_Declaration_Widget extends WP_Widget {
 
 	// Main constructor

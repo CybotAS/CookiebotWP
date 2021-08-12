@@ -16,6 +16,7 @@ Domain Path: /langs
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
+use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
 use Exception;
 use RuntimeException;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_plugin_activated;
@@ -209,7 +210,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			}
 
 			//Loading widgets
-			include_once dirname( __FILE__ ) . '/widgets/cookiebot-declaration-widget.php';
 			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
 			//Add Gutenberg block
@@ -281,7 +281,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 * @since   2.5.0
 		 */
 		public function register_widgets() {
-			register_widget( 'Cookiebot_Declaration_Widget' );
+			register_widget( Cookiebot_Declaration_Widget::class );
 		}
 
 		/**
