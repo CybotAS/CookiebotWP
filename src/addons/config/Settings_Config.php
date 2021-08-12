@@ -196,7 +196,7 @@ class Settings_Config {
 			'Jetpack',
 			array(
 				$this,
-				'header_jetpack_addon',
+				'jetpack_addons_header_callback',
 			),
 			'cookiebot-addons'
 		);
@@ -242,7 +242,7 @@ class Settings_Config {
 			'Unavailable plugins',
 			array(
 				$this,
-				'header_unavailable_addons',
+				'unavailable_addons_header_callback',
 			),
 			'cookiebot-addons'
 		);
@@ -291,8 +291,8 @@ class Settings_Config {
 	 *
 	 * @since 1.3.0
 	 */
-	public function header_jetpack_addon() {
-		echo '<p>' . esc_html__( 'Jetpack settings.', 'cookiebot' ) . '</p>';
+	public function jetpack_addons_header_callback() {
+		include_view( 'admin/settings/prior-consent/jetpack-widgets/tab-header.php' );
 	}
 
 	/**
@@ -356,7 +356,7 @@ class Settings_Config {
 			'addon_placeholder_helper'             => $addon->get_placeholder_helper(),
 		);
 
-		include_view( 'admin/settings/prior-consent-tabs/jetpack-addon-settings-tab.php', $view_args );
+		include_view( 'admin/settings/prior-consent/jetpack-widgets/tab.php', $view_args );
 	}
 
 	/**
@@ -430,7 +430,7 @@ class Settings_Config {
 			'addon_extra_options_html'             => $addon->extra_available_addon_option(),
 		);
 
-		include_view( 'admin/settings/prior-consent-tabs/available-addons-settings-tab.php', $view_args );
+		include_view( 'admin/settings/prior-consent/available-addons/tab.php', $view_args );
 	}
 
 	/**
@@ -438,8 +438,8 @@ class Settings_Config {
 	 *
 	 * @since 1.3.0
 	 */
-	public function header_unavailable_addons() {
-		echo '<p>' . esc_html__( 'The following addons are unavailable. This is because the corresponding plugin is not installed.', 'cookiebot' ) . '</p>';
+	public function unavailable_addons_header_callback() {
+		include_view( 'admin/settings/prior-consent/unavailable-addons/tab-header.php' );
 	}
 
 	/**
@@ -463,7 +463,7 @@ class Settings_Config {
 		$view_args = array(
 			'message' => $message,
 		);
-		include_view( 'admin/settings/prior-consent-tabs/unavailable-addons-settings-field.php', $view_args );
+		include_view( 'admin/settings/prior-consent/unavailable-addons/field.php', $view_args );
 	}
 
 	/**
@@ -518,7 +518,7 @@ class Settings_Config {
 			'settings_page_tabs' => $settings_page_tabs,
 			'active_tab'         => $active_tab,
 		);
-		include_view( 'admin/settings/prior-consent-settings-page.php', $view_args );
+		include_view( 'admin/settings/prior-consent/page.php', $view_args );
 	}
 
 	/**
