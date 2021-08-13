@@ -17,6 +17,11 @@ use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use cybot\cookiebot\admin_notices\Cookiebot_Recommendation_Notice;
+use cybot\cookiebot\settings\Debug_Page;
+use cybot\cookiebot\settings\Gtm_Page;
+use cybot\cookiebot\settings\Iab_Page;
+use cybot\cookiebot\settings\Legislations_Page;
+use cybot\cookiebot\settings\Support_Page;
 use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
 use Exception;
 use RuntimeException;
@@ -364,7 +369,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				__( 'Support', 'cookiebot' ),
 				'manage_options',
 				'cookiebot_support',
-				array( $this, 'support_page' ),
+				array( new Support_Page(), 'display' ),
 				20
 			);
 			add_submenu_page(
@@ -373,7 +378,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				__( 'Google Tag Manager', 'cookiebot' ),
 				'manage_options',
 				'cookiebot_GTM',
-				array( $this, 'gtm_page' )
+				array( new Gtm_Page(), 'display' )
 			);
 			add_submenu_page(
 				'cookiebot',
@@ -381,7 +386,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				__( 'IAB', 'cookiebot' ),
 				'manage_options',
 				'cookiebot_iab',
-				array( $this, 'iab_page' ),
+				array( new Iab_Page(), 'display' ),
 				30
 			);
 		}
@@ -393,7 +398,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				__( 'Legislations', 'cookiebot' ),
 				'manage_options',
 				'cookiebot-legislations',
-				array( $this, 'legislations_page' ),
+				array( new Legislations_Page(), 'display' ),
 				50
 			);
 		}
@@ -411,7 +416,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				__( 'Debug info', 'cookiebot' ),
 				'manage_options',
 				'cookiebot_debug',
-				array( $this, 'debug_page' )
+				array( new Debug_Page(), 'display' )
 			);
 		}
 
@@ -1551,176 +1556,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				)
 			);
 			exit;
-		}
-
-		/**
-		 * Cookiebot_WP Cookiebot support page
-		 *
-		 * @version 2.2.0
-		 * @since   2.0.0
-		 */
-		public function support_page() {
-			include_view( 'admin/settings/support-page.php', array() );
-		}
-
-		/**
-		 * Cookiebot_WP Google Tag Manager page
-		 *
-		 * @version 3.8.1
-		 * @since   3.8.1
-		 */
-
-		public function gtm_page() {
-			include_view( 'admin/settings/gtm-page.php', array() );
-
-			wp_enqueue_style(
-				'cookiebot-gtm-page',
-				asset_url( 'css/gtm_page.css' ),
-				null,
-				self::COOKIEBOT_PLUGIN_VERSION
-			);
-		}
-
-		/**
-		 * Cookiebot_WP Cookiebot IAB page
-		 *
-		 * @version 2.0.0
-		 * @since   2.0.0
-		 */
-		public function iab_page() {
-			include_view( 'admin/settings/iab-page.php', array() );
-		}
-
-		/**
-		 * Cookiebot_WP Cookiebot legislations page
-		 *
-		 * @version 3.6.6
-		 * @since   3.6.6
-		 */
-		public function legislations_page() {
-			include_view( 'admin/settings/legislations-page.php', array() );
-		}
-
-		/**
-		 * Cookiebot_WP Debug Page
-		 *
-		 * @version   3.9.
-		 * @since     3.6.0
-		 */
-
-		public function debug_page() {
-			global $wpdb;
-
-			include_once ABSPATH . 'wp-admin/includes/plugin.php';
-			$plugins        = get_plugins();
-			$active_plugins = get_option( 'active_plugins' );
-
-			$debug_output  = '';
-			$debug_output .= '##### Debug Information for ' . get_site_url() . ' generated at ' . date( 'c' ) . " #####\n\n";
-			$debug_output .= 'WordPress Version: ' . get_bloginfo( 'version' ) . "\n";
-			$debug_output .= 'WordPress Language: ' . get_bloginfo( 'language' ) . "\n";
-			$debug_output .= 'PHP Version: ' . phpversion() . "\n";
-			$debug_output .= 'MySQL Version: ' . $wpdb->db_version() . "\n";
-			$debug_output .= "\n--- Cookiebot Information ---\n";
-			$debug_output .= 'Plugin Version: ' . self::COOKIEBOT_PLUGIN_VERSION . "\n";
-			$debug_output .= 'Cookiebot ID: ' . $this->get_cbid() . "\n";
-			$debug_output .= 'Blocking mode: ' . get_option( 'cookiebot-cookie-blocking-mode' ) . "\n";
-			$debug_output .= 'Language: ' . get_option( 'cookiebot-language' ) . "\n";
-			$debug_output .= 'IAB: ' . ( get_option( 'cookiebot-iab' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
-			$debug_output .= 'CCPA banner for visitors from California: ' . ( get_option( 'cookiebot-ccpa' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
-			$debug_output .= 'CCPA domain group id: ' . get_option( 'cookiebot-ccpa-domain-group-id' ) . "\n";
-			$debug_output .= 'Add async/defer to banner tag: ' . ( get_option( 'cookiebot-script-tag-uc-attribute' ) != '' ? get_option( 'cookiebot-script-tag-uc-attribute' ) : 'None' ) . "\n";
-			$debug_output .= 'Add async/defer to declaration tag: ' . ( get_option( 'cookiebot-script-tag-cd-attribute' ) != '' ? get_option( 'cookiebot-script-tag-cd-attribute' ) : 'None' ) . "\n";
-			$debug_output .= 'Auto update: ' . ( get_option( 'cookiebot-autoupdate' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
-			$debug_output .= 'Hide Cookie Popup: ' . ( get_option( 'cookiebot-nooutput' ) == '1' ? 'Yes' : 'No' ) . "\n";
-			$debug_output .= 'Disable Cookiebot in WP Admin: ' . ( get_option( 'cookiebot-nooutput-admin' ) == '1' ? 'Yes' : 'No' ) . "\n";
-			$debug_output .= 'Enable Cookiebot on front end while logged in: ' . ( get_option( 'cookiebot-output-logged-in' ) == '1' ? 'Yes' : 'No' ) . "\n";
-			$debug_output .= 'Banner tag: ' . $this->add_js( false ) . "\n";
-			$debug_output .= 'Declaration tag: ' . $this->show_declaration() . "\n";
-
-			if ( get_option( 'cookiebot-gtm' ) != false ) {
-				$debug_output .= 'GTM tag: ' . $this->add_GTM( false ) . "\n";
-			}
-
-			if ( get_option( 'cookiebot-gcm' ) != false ) {
-				$debug_output .= 'GCM tag: ' . $this->add_GCM( false ) . "\n";
-			}
-
-			if ( $this->is_wp_consent_api_active() ) {
-				$debug_output .= "\n--- WP Consent Level API Mapping ---\n";
-				$debug_output .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous' . "\n";
-				$m             = $this->get_wp_consent_api_mapping();
-				foreach ( $m as $k => $v ) {
-					$cb = array();
-
-					$debug_output .= strtoupper( str_replace( ';', ', ', $k ) ) . '   =>   ';
-
-					$debug_output .= 'F=1, ';
-					$debug_output .= 'P=' . $v['preferences'] . ', ';
-					$debug_output .= 'M=' . $v['marketing'] . ', ';
-					$debug_output .= 'S=' . $v['statistics'] . ', ';
-					$debug_output .= 'SA=' . $v['statistics-anonymous'] . "\n";
-
-				}
-			}
-
-			try {
-				$cookiebot_addons = new Cookiebot_Addons();
-				/** @var Settings_Service_Interface $settings_service */
-				$settings_service = $cookiebot_addons->container->get( 'Settings_Service_Interface' );
-				$addons           = $settings_service->get_active_addons();
-				$debug_output    .= "\n--- Activated Cookiebot Addons ---\n";
-				/** @var Base_Cookiebot_Addon $addon */
-				foreach ( $addons as $addon ) {
-					$debug_output .= $addon::ADDON_NAME . ' (' . implode( ', ', $addon->get_cookie_types() ) . ")\n";
-				}
-			} catch ( Exception $exception ) {
-				$debug_output .= PHP_EOL . '--- Cookiebot Addons could not be activated ---' . PHP_EOL;
-				$debug_output .= $exception->getMessage() . PHP_EOL;
-			}
-
-			$debug_output .= "\n--- Activated Plugins ---\n";
-			foreach ( $active_plugins as $p ) {
-				if ( $p != 'cookiebot/cookiebot.php' ) {
-					$debug_output .= $plugins[ $p ]['Name'] . ' (Version: ' . $plugins[ $p ]['Version'] . ")\n";
-				}
-			}
-
-			$debug_output .= "\n##### Debug Information END #####";
-
-			?>
-			<div class="wrap">
-				<h1><?php esc_html_e( 'Debug information', 'cookiebot' ); ?></h1>
-				<p>
-					<?php
-					esc_html_e(
-						'The information below is for debugging purpose. If you have any issues with your Cookiebot integration, the information below is usefull for a supporter to help you the best way.',
-						'cookiebot'
-					);
-					?>
-				</p>
-				<p>
-					<button class="button button-primary" onclick="copyDebugInfo();">
-						<?php
-						esc_html_e(
-							'Copy debug information to clipboard',
-							'cookiebot'
-						);
-						?>
-					</button>
-				</p>
-				<textarea cols="100" rows="40" style="width:800px;max-width:100%;" id="cookiebot-debug-info"
-						  readonly><?php echo $debug_output; ?></textarea>
-				<script>
-					function copyDebugInfo() {
-						var t = document.getElementById( 'cookiebot-debug-info' )
-						t.select()
-						t.setSelectionRange( 0, 99999 )
-						document.execCommand( 'copy' )
-					}
-				</script>
-			</div>
-			<?php
 		}
 
 		/**
