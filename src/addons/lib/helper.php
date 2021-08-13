@@ -406,10 +406,13 @@ namespace cybot\cookiebot\addons\lib {
 	}
 
 	/**
-	 * @param $relative_path
+	 * @param string $relative_path
 	 * @throws InvalidArgumentException
 	 */
 	function include_view( $relative_path, array $view_args = array() ) {
+		if ( isset( $view_args['absolute_path'] ) ) {
+			throw new InvalidArgumentException( 'Param $view_args array should not include an "absolute_path" key' );
+		}
 		$absolute_path = COOKIEBOT_PLUGIN_DIR . 'src/view/' . $relative_path;
 		if ( ! file_exists( $absolute_path ) ) {
 			throw new InvalidArgumentException( 'View could not be loaded from "' . $absolute_path . '"' );
