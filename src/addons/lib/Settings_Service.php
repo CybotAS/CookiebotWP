@@ -57,7 +57,8 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_installed( $addon ) {
-		return ( is_string( $addon ) && file_exists( $addon ) && ! is_wp_error( validate_plugin( $addon ) ) );
+		$path = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . $addon;
+		return ( is_string( $addon ) && file_exists( $path ) && ! is_wp_error( validate_plugin( $addon ) ) );
 	}
 
 	/**
