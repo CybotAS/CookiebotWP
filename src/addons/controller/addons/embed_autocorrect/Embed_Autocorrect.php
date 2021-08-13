@@ -8,6 +8,7 @@ use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_get_domain_from_url;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_get_home_url_domain;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
+use function cybot\cookiebot\addons\lib\get_view_html;
 use function cybot\cookiebot\addons\lib\include_view;
 
 class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With_Extra_Options_Interface {
@@ -472,9 +473,8 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 			'regex_is_default'  => $this->is_regex_default(),
 			'default_regex'     => $this->get_default_regex(),
 		);
-		ob_start();
-		include_view( 'admin/settings/prior-consent/other-addons/embed-autocorrect-extra-addon-options.php', $view_args );
-		return (string) ob_get_clean();
+
+		return get_view_html( 'admin/settings/prior-consent/other-addons/embed-autocorrect-extra-addon-options.php', $view_args );
 	}
 
 	/**
