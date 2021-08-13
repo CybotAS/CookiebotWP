@@ -6,6 +6,7 @@ namespace cybot\cookiebot\addons {
 	use cybot\cookiebot\addons\controller\addons\addthis\Addthis;
 	use cybot\cookiebot\addons\controller\addons\caos_host_analyticsjs_local\CAOS_Host_Analyticsjs_Local;
 	use cybot\cookiebot\addons\controller\addons\custom_facebook_feed\Custom_Facebook_Feed;
+	use cybot\cookiebot\addons\controller\addons\custom_facebook_feed_pro\Custom_Facebook_Feed_Pro;
 	use cybot\cookiebot\addons\controller\addons\embed_autocorrect\Embed_Autocorrect;
 	use cybot\cookiebot\addons\controller\addons\enhanced_ecommerce_for_woocommerce_store\Enhanced_Ecommerce_For_WooCommerce_Store;
 	use cybot\cookiebot\addons\controller\addons\facebook_for_woocommerce\Facebook_For_Woocommerce;
@@ -40,6 +41,7 @@ namespace cybot\cookiebot\addons {
 		Addthis::class,
 		CAOS_Host_Analyticsjs_Local::class,
 		Custom_Facebook_Feed::class,
+		Custom_Facebook_Feed_Pro::class,
 		Enhanced_Ecommerce_For_WooCommerce_Store::class,
 		Facebook_For_Woocommerce::class,
 		Ga_Google_Analytics::class,
