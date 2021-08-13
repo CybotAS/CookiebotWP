@@ -46,29 +46,6 @@ class Settings_Service implements Settings_Service_Interface {
 	}
 
 	/**
-	 * @param string $addon
-	 *
-	 * @return bool
-	 */
-	public function is_addon_installed( $addon ) {
-		$path = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . $addon;
-		return ( is_string( $addon ) && file_exists( $path ) && ! is_wp_error( validate_plugin( $addon ) ) );
-	}
-
-	/**
-	 * Returns true if the addon plugin is activated
-	 *
-	 * @param $addon
-	 *
-	 * @return bool
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_activated( $addon ) {
-		return $addon === false || is_plugin_active( $addon );
-	}
-
-	/**
 	 * Returns all cookie type for given addon
 	 *
 	 * @param $addon    string  option name

@@ -32,12 +32,11 @@ abstract class Base_Cookiebot_Plugin_Addon extends Base_Cookiebot_Addon {
 	}
 
 	/**
-	 * Checks if addon plugin is installed
-	 *
-	 * @since 1.3.0
+	 * @return bool
 	 */
 	final public function is_addon_installed() {
-		return $this->settings->is_addon_installed( static::PLUGIN_FILE_PATH );
+		$path = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . static::PLUGIN_FILE_PATH;
+		return ( file_exists( $path ) && ! is_wp_error( validate_plugin( static::PLUGIN_FILE_PATH ) ) );
 	}
 
 	/**
@@ -46,7 +45,7 @@ abstract class Base_Cookiebot_Plugin_Addon extends Base_Cookiebot_Addon {
 	 * @since 1.3.0
 	 */
 	final public function is_addon_activated() {
-		return $this->is_addon_installed() && $this->settings->is_addon_activated( static::PLUGIN_FILE_PATH );
+		return $this->is_addon_installed() && is_plugin_active( static::PLUGIN_FILE_PATH );
 	}
 
 	/**

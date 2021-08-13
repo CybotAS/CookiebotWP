@@ -170,24 +170,6 @@ class Enfold implements Cookiebot_Addons_Interface {
 	}
 
 	/**
-	 * Checks if addon is installed
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_installed() {
-		return $this->settings->is_addon_installed( $this->get_option_name() );
-	}
-
-	/**
-	 * Checks if addon is activated
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_activated() {
-		return $this->settings->is_addon_activated( $this->get_option_name() );
-	}
-
-	/**
 	 * Checks if it does have custom placeholder content
 	 *
 	 * @return mixed

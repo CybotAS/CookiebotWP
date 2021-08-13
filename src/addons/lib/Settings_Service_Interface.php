@@ -31,28 +31,6 @@ interface Settings_Service_Interface {
 	public function is_addon_enabled( $addon );
 
 	/**
-	 * Returns true if the addon is installed
-	 *
-	 * @param $addon    string  plugin file, for example: test/test.php
-	 *
-	 * @return bool
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_installed( $addon );
-
-	/**
-	 * Returns true if the addon plugin is activated
-	 *
-	 * @param $addon    string  plugin file, for example: test/test.php
-	 *
-	 * @return bool
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_activated( $addon );
-
-	/**
 	 * Returns all cookie type for given addon
 	 *
 	 * @param $addon    string  option name
