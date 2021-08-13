@@ -19,6 +19,7 @@ use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
 use Exception;
 use RuntimeException;
+use function cybot\cookiebot\addons\lib\asset_url;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_plugin_activated;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -248,7 +249,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			//Add Gutenberg Widget
 			wp_enqueue_script(
 				'cookiebot-declaration',
-				COOKIEBOT_PLUGIN_URL . 'assets/js/block.js',
+				asset_url( 'js/backend/gutenberg/cookie-declaration-gutenberg-block.js' ),
 				array( 'wp-blocks', 'wp-i18n', 'wp-element' ), // Required scripts for the block
 				self::COOKIEBOT_PLUGIN_VERSION,
 				false
@@ -572,7 +573,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		public function settings_page() {
 			wp_enqueue_style(
 				'cookiebot-consent-mapping-table',
-				COOKIEBOT_PLUGIN_URL . 'assets/css/consent_mapping_table.css',
+				asset_url( 'css/consent_mapping_table.css' ),
 				null,
 				self::COOKIEBOT_PLUGIN_VERSION
 			);
@@ -751,7 +752,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 									</a>
 
 									<div id="add_language_guide" style="display:none;">
-										<img src="<?php echo plugin_dir_url( __FILE__ ); ?>/assets/img/guide_add_language.gif"
+										<img src="<?php echo asset_url( 'img/guide_add_language.gif' ); ?>"
 											 alt="Add language in Cookiebot administration tool"/>
 										<br/>
 										<a href="#"
@@ -2358,7 +2359,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		public function cookiebot_enqueue_consent_api_scripts() {
 			wp_register_script(
 				'cookiebot-wp-consent-level-api-integration',
-				COOKIEBOT_PLUGIN_URL . 'assets/js/cookiebot-wp-consent-level-api-integration.js',
+				asset_url( 'js/frontend/cookiebot-wp-consent-level-api-integration.js' ),
 				null,
 				self::COOKIEBOT_PLUGIN_VERSION,
 				false
@@ -2417,7 +2418,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 
 			wp_enqueue_style(
 				'cookiebot-admin-notices',
-				COOKIEBOT_PLUGIN_URL . 'assets/css/notice.css',
+				asset_url( 'css/notice.css' ),
 				null,
 				self::COOKIEBOT_PLUGIN_VERSION
 			);

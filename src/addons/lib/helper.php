@@ -421,4 +421,32 @@ namespace cybot\cookiebot\addons\lib {
 		extract( $view_args );
 		include $absolute_path;
 	}
+
+	/**
+	 * @param string $relative_path
+	 *
+	 * @return string
+	 */
+	function asset_path( $relative_path ) {
+		$absolute_path = COOKIEBOT_PLUGIN_DIR . 'assets/' . $relative_path;
+		if ( ! file_exists( $absolute_path ) ) {
+			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
+		}
+		return $absolute_path;
+	}
+
+	/**
+	 * @param string $relative_path
+	 *
+	 * @return string
+	 */
+	function asset_url( $relative_path ) {
+		$absolute_path = COOKIEBOT_PLUGIN_DIR . 'assets/' . $relative_path;
+		$url           = esc_url( COOKIEBOT_PLUGIN_URL . 'assets/' . $relative_path );
+		if ( ! file_exists( $absolute_path ) || empty( $url ) ) {
+			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
+		}
+
+		return $url;
+	}
 }

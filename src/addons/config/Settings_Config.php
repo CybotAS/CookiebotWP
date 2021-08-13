@@ -12,6 +12,7 @@ use cybot\cookiebot\Cookiebot_WP;
 use Exception;
 use InvalidArgumentException;
 use ReflectionClass;
+use function cybot\cookiebot\addons\lib\asset_url;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_get_dropdown_languages;
 use function cybot\cookiebot\addons\lib\include_view;
 
@@ -90,14 +91,14 @@ class Settings_Config {
 
 		wp_enqueue_script(
 			'cookiebot_tiptip_js',
-			plugins_url( 'js/jquery.tipTip.js', dirname( __FILE__ ) ),
+			asset_url( 'js/backend/jquery.tipTip.js' ),
 			array( 'jquery' ),
 			'1.8',
 			true
 		);
 		wp_enqueue_script(
 			'cookiebot_addons_custom_js',
-			plugins_url( 'js/settings.js', dirname( __FILE__ ) ),
+			asset_url( 'js/backend/prior-consent-settings.js' ),
 			array( 'jquery' ),
 			'1.8',
 			true
@@ -109,7 +110,7 @@ class Settings_Config {
 		);
 		wp_enqueue_style(
 			'cookiebot_addons_custom_css',
-			COOKIEBOT_PLUGIN_URL . 'assets/css/admin_styles.css',
+			asset_url( 'css/admin_styles.css' ),
 			null,
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 		);
