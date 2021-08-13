@@ -50,9 +50,25 @@ abstract class Base_Cookiebot_Plugin_Addon extends Base_Cookiebot_Addon {
 	}
 
 	/**
-	 * @return bool|string
+	 * @return string
+	 * @throws Exception
 	 */
 	final public function get_version() {
-		return $this->settings->get_addon_version( static::PLUGIN_FILE_PATH );
+		$plugin_data = $this->get_plugin_data();
+		if ( ! isset( $plugin_data['Version'] ) ) {
+			throw new Exception( 'Check if plugin is installed before calling get_version()' );
+		}
+		return $plugin_data['Version'];
+	}
+
+	/**
+	 * @return string[]
+	 */
+	final private function get_plugin_data() {
+		return get_file_data(
+			WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . static::PLUGIN_FILE_PATH,
+			array( 'Version' => 'version' ),
+			false
+		);
 	}
 }

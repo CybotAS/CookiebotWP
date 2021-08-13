@@ -233,6 +233,7 @@ abstract class Base_Cookiebot_Addon {
 
 	/**
 	 * @return string
+	 * @throws Exception
 	 */
 	abstract public function get_version();
 

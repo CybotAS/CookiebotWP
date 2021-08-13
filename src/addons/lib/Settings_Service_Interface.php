@@ -35,7 +35,7 @@ interface Settings_Service_Interface {
 	 *
 	 * @param $addon    string  plugin file, for example: test/test.php
 	 *
-	 * @return int|\WP_Error
+	 * @return bool
 	 *
 	 * @since 1.3.0
 	 */
@@ -51,17 +51,6 @@ interface Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_activated( $addon );
-
-	/**
-	 * Returns the addon version
-	 *
-	 * @param $addon
-	 *
-	 * @return bool
-	 *
-	 * @since 2.2.1
-	 */
-	public function get_addon_version( $addon );
 
 	/**
 	 * Returns all cookie type for given addon
@@ -118,31 +107,6 @@ interface Settings_Service_Interface {
 	 * @return mixed
 	 */
 	public function get_placeholder( $option_key, $default_placeholder, $cookies, $src = '' );
-
-
-	/**
-	 * Check if the previous version is active
-	 *
-	 * @param $addons array         List of addons
-	 * @param $addon_class string   The name of the class
-	 *
-	 * @return bool
-	 *
-	 * @since 2.1.3
-	 */
-	public function is_previous_version_active( $addons, $addon_class );
-
-	/**
-	 * Checks if the addon is the latest plugin version.
-	 * Latest plugin version doesn't have extended class.
-	 *
-	 * @param $addon
-	 *
-	 * @return bool
-	 *
-	 * @since 2.1.3
-	 */
-	public function is_latest_plugin_version( $addon );
 
 	/**
 	 * The cookiebot plugin is deactivated
