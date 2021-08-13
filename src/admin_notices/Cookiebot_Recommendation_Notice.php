@@ -12,7 +12,7 @@ class Cookiebot_Recommendation_Notice {
 
 	const COOKIEBOT_RECOMMENDATION_OPTION_KEY = 'cookiebot_notice_recommend';
 
-	public function run_notice() {
+	public function show_notice_if_needed() {
 		/** Save actions when someone click on the notice message */
 		$this->save_notice_link();
 
@@ -24,7 +24,7 @@ class Cookiebot_Recommendation_Notice {
 		}
 	}
 
-	public function show_notice() {
+	private function show_notice() {
 		$two_week_review_ignore = wp_nonce_url(
 			add_query_arg( array( 'cookiebot_admin_notice' => 'hide' ) ),
 			'hide_recommendation',
@@ -90,7 +90,7 @@ class Cookiebot_Recommendation_Notice {
 	 * @version 2.0.5
 	 * @since 2.0.5
 	 */
-	public function save_notice_link() {
+	private function save_notice_link() {
 		if ( isset( $_GET['cookiebot_admin_notice'] ) && isset( $_GET['nonce'] ) ) {
 			if ( wp_verify_nonce( $_GET['nonce'], 'hide_recommendation' ) ) {
 				update_option( static::COOKIEBOT_RECOMMENDATION_OPTION_KEY, 'hide' );

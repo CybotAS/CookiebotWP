@@ -288,7 +288,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		}
 
 		public function register_admin_notices() {
-			( new Cookiebot_Recommendation_Notice() )->run_notice();
+			( new Cookiebot_Recommendation_Notice() )->show_notice_if_needed();
 		}
 
 		/**
