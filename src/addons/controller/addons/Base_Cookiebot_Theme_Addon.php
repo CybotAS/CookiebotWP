@@ -2,10 +2,6 @@
 
 namespace cybot\cookiebot\addons\controller\addons;
 
-use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
-use cybot\cookiebot\addons\lib\Cookie_Consent_Interface;
-use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use Exception;
 
 abstract class Base_Cookiebot_Theme_Addon extends Base_Cookiebot_Addon {

@@ -3,6 +3,8 @@
 namespace cybot\cookiebot\addons\config;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Theme_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\Jetpack;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
 use cybot\cookiebot\addons\lib\Addon_With_Extra_Options_Interface;
@@ -454,9 +456,19 @@ class Settings_Config {
 		}
 
 		if ( ! $addon->is_addon_installed() ) {
-			$message = __( 'The plugin is not installed.', 'cookiebot' );
+			if ( is_a( $addon, Base_Cookiebot_Plugin_Addon::class ) ) {
+				$message = __( 'The plugin is not installed.', 'cookiebot' );
+			}
+			if ( is_a( $addon, Base_Cookiebot_Theme_Addon::class ) ) {
+				$message = __( 'The theme is not installed.', 'cookiebot' );
+			}
 		} elseif ( ! $addon->is_addon_activated() ) {
-			$message = __( 'The plugin is not activated.', 'cookiebot' );
+			if ( is_a( $addon, Base_Cookiebot_Plugin_Addon::class ) ) {
+				$message = __( 'The plugin is not activated.', 'cookiebot' );
+			}
+			if ( is_a( $addon, Base_Cookiebot_Theme_Addon::class ) ) {
+				$message = __( 'The theme is not activated.', 'cookiebot' );
+			}
 		} else {
 			$message = '';
 		}

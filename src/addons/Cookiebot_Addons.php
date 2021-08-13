@@ -10,9 +10,7 @@ use cybot\cookiebot\addons\lib\Cookie_Consent;
 use cybot\cookiebot\addons\lib\Dependency_Container;
 use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag;
 use cybot\cookiebot\addons\lib\Settings_Service;
-use cybot\cookiebot\addons\lib\Theme_Settings_Service;
 use Exception;
-use RuntimeException;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -144,8 +142,8 @@ class Cookiebot_Addons {
 	protected function load_addons() {
 		require_once 'addons.php';
 		$this->addons_list = apply_filters(
-			'cookiebot_plugin_addons_list',
-			array_merge( PLUGIN_ADDONS, OTHER_ADDONS )
+			'cookiebot_addons_list',
+			array_merge( PLUGIN_ADDONS, THEME_ADDONS, OTHER_ADDONS )
 		);
 	}
 
@@ -165,11 +163,6 @@ class Cookiebot_Addons {
 		$this->container->set(
 			'Settings_Service_Interface',
 			new Settings_Service( $this->container )
-		);
-
-		$this->container->set(
-			'Theme_Settings_Service_Interface',
-			new Theme_Settings_Service( $this->container )
 		);
 	}
 
