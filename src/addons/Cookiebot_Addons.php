@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\addons;
 
 use cybot\cookiebot\addons\config\Settings_Config;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\controller\Plugin_Controller;
 use cybot\cookiebot\addons\lib\buffer\Buffer_Output;
 use cybot\cookiebot\addons\lib\Cookie_Consent;
@@ -11,6 +12,7 @@ use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag;
 use cybot\cookiebot\addons\lib\Settings_Service;
 use cybot\cookiebot\addons\lib\Theme_Settings_Service;
 use Exception;
+use RuntimeException;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -172,33 +174,30 @@ class Cookiebot_Addons {
 	}
 
 	/**
-	 * Assign addon class to the container to use it later
-	 *
-	 * @throws Exception
-	 *
-	 * @since 1.3.0
+	 * @throws \Exception
 	 */
 	protected function assign_addons_to_container() {
 		/**
 		 * Check plugins one by one and load addon configuration
 		 */
-		foreach ( $this->addons_list as $addon ) {
+		foreach ( $this->addons_list as $addon_class ) {
 			/**
 			 * Load addon class to the container
 			 */
-			if ( class_exists( $addon ) ) {
-				$this->container->set(
-					$addon,
-					new $addon(
-						// TODO theme settings service for themes
-						$this->container->get( 'Settings_Service_Interface' ),
-						$this->container->get( 'Script_Loader_Tag_Interface' ),
-						$this->container->get( 'Cookie_Consent_Interface' ),
-						$this->container->get( 'Buffer_Output_Interface' )
-					)
+			if ( class_exists( $addon_class ) ) {
+				$addon = call_user_func(
+					array( $addon_class, 'get_instance' ),
+					$this->container->get( 'Settings_Service_Interface' ),
+					$this->container->get( 'Script_Loader_Tag_Interface' ),
+					$this->container->get( 'Cookie_Consent_Interface' ),
+					$this->container->get( 'Buffer_Output_Interface' )
 				);
+				if ( ! is_a( $addon, Base_Cookiebot_Addon::class ) ) {
+					throw new Exception( 'Class ' . $addon_class . ' could not be instantiated' );
+				}
+				$this->container->set( $addon_class, $addon );
 			} else {
-				throw new Exception( 'Class ' . $addon . ' not found' );
+				throw new Exception( 'Class ' . $addon_class . ' not found' );
 			}
 		}
 	}

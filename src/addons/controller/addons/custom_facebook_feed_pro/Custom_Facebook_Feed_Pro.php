@@ -251,7 +251,7 @@ class Custom_Facebook_Feed_Pro implements Cookiebot_Addons_Interface {
 	 * @since 2.1.4
 	 */
 	public function get_extra_information() {
-		return false;
+		return '';
 	}
 
 	/**

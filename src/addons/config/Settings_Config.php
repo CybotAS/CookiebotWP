@@ -253,11 +253,7 @@ class Settings_Config {
 
 		/** @var Base_Cookiebot_Addon $addon */
 		foreach ( $addons as $addon ) {
-			if (
-					( ! $addon->is_addon_installed() || ! $addon->is_addon_activated() ) &&
-					$addon->is_latest_plugin_version() &&
-					! ( $addon->has_previous_version_plugin() && $addon->is_previous_version_plugin_activated() )
-			) {
+			if ( ! $addon->is_addon_installed() || ! $addon->is_addon_activated() ) {
 				// not installed plugins
 				add_settings_field(
 					$addon::ADDON_NAME,

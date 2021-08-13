@@ -89,6 +89,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.3.0
 	 */
 	public function is_addon_activated( $addon ) {
+		error_log(var_export(array("is_addon_activated" => $addon, is_plugin_active( $addon )), 1  /*AS_DEBUG*/ ));
 		return $addon === false || is_plugin_active( $addon );
 	}
 

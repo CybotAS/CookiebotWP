@@ -2,36 +2,17 @@
 
 namespace cybot\cookiebot\addons\controller\addons\custom_facebook_feed;
 
-use cybot\cookiebot\addons\controller\addons\custom_facebook_feed_old\Custom_Facebook_Feed_Old;
+use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
+use cybot\cookiebot\addons\lib\Addon_With_Alternative_Versions_Interface;
 use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
 
-class Custom_Facebook_Feed extends Custom_Facebook_Feed_Old implements Open_Source_Addon_Interface {
+class Custom_Facebook_Feed extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface, Addon_With_Alternative_Versions_Interface {
 
-	/**
-	 * Return addon/plugin name
-	 *
-	 * @return string
-	 *
-	 * @since 1.3.0
-	 */
-	public function get_addon_name() {
-		return 'Custom Facebook Feed';
-	}
-
-	/**
-	 * Checks if addon is installed
-	 *
-	 * @since 1.3.0
-	 */
-	public function is_addon_installed() {
-		$installed = $this->settings->is_addon_installed( $this->get_plugin_file() );
-
-		if ( $installed && version_compare( $this->get_addon_version(), '2.17.1', '<=' ) ) {
-			$installed = false;
-		}
-
-		return $installed;
-	}
+	const ADDON_NAME                  = 'Custom Facebook Feed';
+	const OPTION_NAME                 = 'custom_facebook_feed';
+	const PLUGIN_FILE_PATH            = 'custom-facebook-feed/custom-facebook-feed.php';
+	const DEFAULT_COOKIE_TYPES        = array( 'marketing' );
+	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
 
 	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
@@ -44,12 +25,7 @@ class Custom_Facebook_Feed extends Custom_Facebook_Feed_Old implements Open_Sour
 		return 'http://plugins.svn.wordpress.org/custom-facebook-feed/trunk/custom-facebook-feed.php';
 	}
 
-	/**
-	 * Manipulate the scripts if they are loaded.
-	 *
-	 * @since 1.1.0
-	 */
-	public function cookiebot_addon_custom_facebook_feed() {
+	public function load_addon_configuration() {
 
 		if ( class_exists( '\CustomFacebookFeed\Custom_Facebook_Feed' ) ) {
 			$instance = \CustomFacebookFeed\Custom_Facebook_Feed::instance();
@@ -71,4 +47,19 @@ class Custom_Facebook_Feed extends Custom_Facebook_Feed_Old implements Open_Sour
 		}
 	}
 
+	/**
+	 * @return string
+	 */
+	public function get_extra_information() {
+		return '';
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_alternative_addon_versions() {
+		return array(
+			'2.17.1' => Custom_Facebook_Feed_Version_2_17_1::class,
+		);
+	}
 }

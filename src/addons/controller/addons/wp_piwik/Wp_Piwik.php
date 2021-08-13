@@ -56,7 +56,7 @@ class Wp_Piwik extends Base_Cookiebot_Plugin_Addon {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return false;
+		return '';
 	}
 
 	/**

@@ -10,10 +10,7 @@ use Exception;
 
 abstract class Base_Cookiebot_Plugin_Addon extends Base_Cookiebot_Addon {
 
-	const PLUGIN_FILE_PATH      = '';
-	const LATEST_PLUGIN_VERSION = true;
-	/** @var bool|string False or PLUGIN FILE PATH OF THE LATEST PLUGIN VERSION  */
-	const PREVIOUS_PLUGIN_VERSION = false;
+	const PLUGIN_FILE_PATH = '';
 
 	/**
 	 * @param $settings          Settings_Service_Interface
@@ -32,7 +29,6 @@ abstract class Base_Cookiebot_Plugin_Addon extends Base_Cookiebot_Addon {
 	) {
 		parent::__construct( $settings, $script_loader_tag, $cookie_consent, $buffer_output );
 		$this->validate_required_string_class_constant( 'PLUGIN_FILE_PATH' );
-		$this->validate_required_boolean_class_constant( 'LATEST_PLUGIN_VERSION' );
 	}
 
 	/**
@@ -54,36 +50,9 @@ abstract class Base_Cookiebot_Plugin_Addon extends Base_Cookiebot_Addon {
 	}
 
 	/**
-	 * Retrieves current installed version of the addon plugin
-	 *
-	 * @return bool
-	 *
-	 * @since 2.2.1
+	 * @return bool|string
 	 */
-	final public function get_addon_version() {
+	final public function get_version() {
 		return $this->settings->get_addon_version( static::PLUGIN_FILE_PATH );
-	}
-
-	/**
-	 * @return bool
-	 */
-	final public function has_previous_version_plugin() {
-		return class_exists( static::PREVIOUS_PLUGIN_VERSION );
-	}
-
-	/**
-	 * @return bool
-	 */
-	final public function is_latest_plugin_version() {
-		return static::LATEST_PLUGIN_VERSION;
-	}
-
-	/**
-	 * @return bool
-	 */
-	final public function is_previous_version_plugin_activated() {
-		return $this->has_previous_version_plugin() && $this->settings->is_addon_activated(
-			self::PREVIOUS_PLUGIN_VERSION
-		);
 	}
 }

@@ -2,12 +2,15 @@
 
 namespace cybot\cookiebot\addons\controller\addons;
 
+use cybot\cookiebot\addons\lib\Alternative_Addon_Version_Manager;
 use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
 use cybot\cookiebot\addons\lib\Class_Constant_Override_Validator;
 use cybot\cookiebot\addons\lib\Cookie_Consent_Interface;
+use cybot\cookiebot\addons\lib\Addon_With_Alternative_Versions_Interface;
 use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use Exception;
+use RuntimeException;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
 
 /**
@@ -84,6 +87,36 @@ abstract class Base_Cookiebot_Addon {
 			'DEFAULT_COOKIE_TYPES',
 			array( 'necessary', 'marketing', 'statistics', 'preferences' )
 		);
+	}
+
+	/**
+	 * @param Settings_Service_Interface $settings
+	 * @param Script_Loader_Tag_Interface $script_loader_tag
+	 * @param Cookie_Consent_Interface $cookie_consent
+	 * @param Buffer_Output_Interface $buffer_output
+	 *
+	 * @return Base_Cookiebot_Addon
+	 * @throws Exception
+	 */
+	final public static function get_instance(
+		Settings_Service_Interface $settings,
+		Script_Loader_Tag_Interface $script_loader_tag,
+		Cookie_Consent_Interface $cookie_consent,
+		Buffer_Output_Interface $buffer_output
+	) {
+		$addon_class = static::class;
+		$addon       = new $addon_class( ...func_get_args() );
+
+		if ( is_a( $addon, Addon_With_Alternative_Versions_Interface::class ) ) {
+			$alternative_addon_version_manager = new Alternative_Addon_Version_Manager( ...func_get_args() );
+			$alternative_addon_version_manager->add_versions( $addon->get_alternative_addon_versions() );
+			$installed_addon_version = $alternative_addon_version_manager->get_installed_version();
+			if ( is_a( $installed_addon_version, self::class ) ) {
+				return $installed_addon_version;
+			}
+		}
+
+		return $addon;
 	}
 
 	/**
@@ -188,18 +221,20 @@ abstract class Base_Cookiebot_Addon {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
 
+	/**
+	 * @return bool
+	 */
+	abstract public function is_addon_installed();
 
 	/**
-	 * Returns parent class or false
-	 *
-	 * @return string|bool
-	 *
-	 * @since 2.1.3
-	 * @TODO check if this works!
+	 * @return bool
 	 */
-	public function get_parent_class() {
-		return get_parent_class( $this );
-	}
+	abstract public function is_addon_activated();
+
+	/**
+	 * @return string
+	 */
+	abstract public function get_version();
 
 	/**
 	 * Action after enabling the addon on the settings page

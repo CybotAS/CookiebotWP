@@ -492,4 +492,11 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 			'regex'       => $this->get_default_regex(),
 		);
 	}
+
+	/**
+	 * @return string
+	 */
+	public function get_version() {
+		return '0.0.1';
+	}
 }

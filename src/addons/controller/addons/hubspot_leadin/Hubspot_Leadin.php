@@ -38,7 +38,7 @@ class Hubspot_Leadin extends Base_Cookiebot_Plugin_Addon implements Open_Source_
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return false;
+		return '';
 	}
 
 	/**

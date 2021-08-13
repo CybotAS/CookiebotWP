@@ -154,7 +154,7 @@ class Jetpack extends Base_Cookiebot_Plugin_Addon {
 		 *
 		 * @since 2.2.1
 		 */
-		if ( version_compare( $this->get_addon_version(), '7', '<' ) ) {
+		if ( version_compare( $this->get_version(), '7', '<' ) ) {
 			/**
 			 * Load configuration for googleplus badge widget
 			 *
@@ -209,7 +209,7 @@ class Jetpack extends Base_Cookiebot_Plugin_Addon {
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return false;
+		return '';
 	}
 
 	/**

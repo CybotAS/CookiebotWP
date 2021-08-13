@@ -47,7 +47,7 @@ class Hubspot_Tracking_Code extends Base_Cookiebot_Plugin_Addon implements Open_
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return false;
+		return '';
 	}
 
 	/**
