@@ -16,6 +16,7 @@ Domain Path: /langs
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
+use cybot\cookiebot\admin_notices\Cookiebot_Recommendation_Notice;
 use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
 use Exception;
 use RuntimeException;
@@ -174,8 +175,8 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				//Adding dashboard widgets
 				add_action( 'wp_dashboard_setup', array( $this, 'add_dashboard_widgets' ) );
 
-				add_action( 'admin_notices', array( $this, 'cookiebot_admin_notices' ) );
-				add_action( 'admin_init', array( $this, 'save_notice_link' ) );
+				//cookiebot recommendation widget
+				add_action( 'admin_notices', array( $this, 'register_admin_notices' ) );
 
 				//Check if we should show cookie consent banner on admin pages
 				if ( ! $this->cookiebot_disabled_in_admin() ) {
@@ -284,6 +285,10 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 */
 		public function register_widgets() {
 			register_widget( Cookiebot_Declaration_Widget::class );
+		}
+
+		public function register_admin_notices() {
+			( new Cookiebot_Recommendation_Notice() )->run_notice();
 		}
 
 		/**
@@ -2367,107 +2372,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			wp_enqueue_script( 'cookiebot-wp-consent-level-api-integration' );
 			wp_localize_script( 'cookiebot-wp-consent-level-api-integration', 'cookiebot_category_mapping', $this->get_wp_consent_api_mapping() );
 		}
-
-
-		/**
-		 * Display admin notice for recommending cookiebot
-		 *
-		 * @version 2.0.5
-		 * @since 2.0.5
-		 */
-		public function cookiebot_admin_notices() {
-			if ( ! $this->cookiebot_valid_admin_recommendation() ) {
-				return false;
-			}
-			$two_week_review_ignore = add_query_arg( array( 'cookiebot_admin_notice' => 'hide' ) );
-			$two_week_review_temp   = add_query_arg( array( 'cookiebot_admin_notice' => 'two_week' ) );
-
-			$notices = array(
-				'title'      => esc_html__( 'Leave A Review?', 'cookiebot' ),
-				'msg'        => esc_html__(
-					'We hope you enjoy using WordPress Cookiebot! Would you consider leaving us a review on WordPress.org?',
-					'cookiebot'
-				),
-				'link'       => '<li><span class="dashicons dashicons-external"></span><a href="https://wordpress.org/support/plugin/cookiebot/reviews?filter=5&rate=5#new-post" target="_blank">' . esc_html__(
-					'Sure! I\'d love to!',
-					'cookiebot'
-				) . '</a></li>
-                         <li><span class="dashicons dashicons-smiley"></span><a href="' . $two_week_review_ignore . '"> ' . esc_html__(
-					'I\'ve already left a review',
-					'cookiebot'
-				) . '</a></li>
-                         <li><span class="dashicons dashicons-calendar-alt"></span><a href="' . $two_week_review_temp . '">' . esc_html__(
-					'Maybe Later',
-					'cookiebot'
-				) . '</a></li>
-                         <li><span class="dashicons dashicons-dismiss"></span><a href="' . $two_week_review_ignore . '">' . esc_html__(
-					'Never show again',
-					'cookiebot'
-				) . '</a></li>',
-				'later_link' => $two_week_review_temp,
-				'int'        => 14,
-			);
-
-			echo '<div class="update-nag cookiebot-admin-notice">
-                                <div class="cookiebot-notice-logo"></div>
-                                <p class="cookiebot-notice-title">' . $notices['title'] . '</p>
-                                <p class="cookiebot-notice-body">' . $notices['msg'] . '</p>
-                                <ul class="cookiebot-notice-body wd-blue">' . $notices['link'] . '</ul>
-                                <a href="' . $notices['later_link'] . '" class="dashicons dashicons-dismiss"></a>
-                              </div>';
-
-			wp_enqueue_style(
-				'cookiebot-admin-notices',
-				asset_url( 'css/notice.css' ),
-				null,
-				self::COOKIEBOT_PLUGIN_VERSION
-			);
-		}
-
-
-		/**
-		 * Validate if the last user action is valid for plugin recommendation
-		 *
-		 * @return bool
-		 *
-		 * @version 2.0.5
-		 * @since 2.0.5
-		 */
-		public function cookiebot_valid_admin_recommendation() {
-			//Default - the recommendation is allowed to be visible
-			$return = true;
-
-			$option = get_option( 'cookiebot_notice_recommend' );
-
-			if ( $option != false ) {
-				//Never show again is clicked
-				if ( $option == 'hide' ) {
-					$return = false;
-				} elseif ( is_numeric( $option ) && strtotime( 'now' ) < $option ) {
-					//Show me after 2 weeks is clicked and the time is not valid yet
-					$return = false;
-				}
-			}
-
-			return $return;
-		}
-
-		/**
-		 * Save the user action on cookiebot recommendation link
-		 *
-		 * @version 2.0.5
-		 * @since 2.0.5
-		 */
-		public function save_notice_link() {
-			if ( isset( $_GET['cookiebot_admin_notice'] ) ) {
-				if ( $_GET['cookiebot_admin_notice'] === 'hide' ) {
-					update_option( 'cookiebot_notice_recommend', 'hide' );
-				} else {
-					update_option( 'cookiebot_notice_recommend', strtotime( '+2 weeks' ) );
-				}
-			}
-		}
-
 
 		/**
 		 * Cookiebot_WP Fix plugin conflicts related to Cookiebot

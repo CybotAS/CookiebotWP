@@ -424,6 +424,16 @@ namespace cybot\cookiebot\addons\lib {
 
 	/**
 	 * @param string $relative_path
+	 * @throws InvalidArgumentException
+	 */
+	function get_view_html( $relative_path, array $view_args = array() ) {
+		ob_start();
+		include_view( $relative_path, $view_args );
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * @param string $relative_path
 	 *
 	 * @return string
 	 */
