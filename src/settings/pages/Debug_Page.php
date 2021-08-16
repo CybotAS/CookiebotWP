@@ -1,6 +1,6 @@
 <?php
 
-namespace cybot\cookiebot\settings;
+namespace cybot\cookiebot\settings\pages;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\Cookiebot_Addons;
@@ -10,7 +10,18 @@ use function cybot\cookiebot\addons\lib\include_view;
 use Exception;
 use function cybot\cookiebot\cookiebot;
 
-class Debug_Page implements Page_Interface {
+class Debug_Page implements Settings_Page_Interface {
+
+	public function menu() {
+		add_submenu_page(
+			'cookiebot',
+			__( 'Debug info', 'cookiebot' ),
+			__( 'Debug info', 'cookiebot' ),
+			'manage_options',
+			'cookiebot_debug',
+			array( $this, 'display' )
+		);
+	}
 
 	public function display() {
 		$debug_output = $this->prepare_debug_data();

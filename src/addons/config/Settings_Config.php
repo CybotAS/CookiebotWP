@@ -76,7 +76,8 @@ class Settings_Config {
 			array(
 				$this,
 				'setting_page',
-			)
+			),
+			40
 		);
 
 	}

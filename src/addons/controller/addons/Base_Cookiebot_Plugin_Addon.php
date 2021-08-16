@@ -63,7 +63,7 @@ abstract class Base_Cookiebot_Plugin_Addon extends Base_Cookiebot_Addon {
 	/**
 	 * @return string[]
 	 */
-	final private function get_plugin_data() {
+	private function get_plugin_data() {
 		return get_file_data(
 			WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . static::PLUGIN_FILE_PATH,
 			array( 'Version' => 'version' ),

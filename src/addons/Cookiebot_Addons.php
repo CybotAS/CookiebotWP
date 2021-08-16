@@ -88,6 +88,7 @@ class Cookiebot_Addons {
 	 * @since 1.3.0
 	 */
 	public function __construct() {
+		$this->load_init_files();
 		$this->load_addons();
 		$this->build_container();
 		$this->assign_addons_to_container();
@@ -113,6 +114,19 @@ class Cookiebot_Addons {
 		 */
 		$settings = new Settings_Config( $this->container->get( 'Settings_Service_Interface' ) );
 		$settings->load();
+	}
+
+	/**
+	 * Load init files to use 'validate_plugin' and 'is_plugin_active'
+	 *
+	 * @since 1.3.0
+	 */
+	private function load_init_files() {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once ABSPATH . '/wp-admin/includes/plugin.php';
+			require_once ABSPATH . '/wp-admin/includes/translation-install.php';
+			require_once ABSPATH . '/wp-includes/l10n.php';
+		}
 	}
 
 	/**

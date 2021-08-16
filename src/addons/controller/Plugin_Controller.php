@@ -34,20 +34,6 @@ class Plugin_Controller {
 	 */
 	public function __construct( Settings_Service_Interface $settings_service ) {
 		$this->settings_service = $settings_service;
-		$this->load_init_files();
-	}
-
-	/**
-	 * Load init files to use 'validate_plugin' and 'is_plugin_active'
-	 *
-	 * @since 1.3.0
-	 */
-	private function load_init_files() {
-		if ( ! function_exists( 'is_plugin_active' ) ) {
-			require_once ABSPATH . '/wp-admin/includes/plugin.php';
-			require_once ABSPATH . '/wp-includes/l10n.php';
-			require_once ABSPATH . '/wp-admin/includes/translation-install.php';
-		}
 	}
 
 	/**

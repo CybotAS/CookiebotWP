@@ -23,8 +23,13 @@
 			?>
 		</button>
 	</p>
-	<textarea cols="100" rows="40" style="width:800px;max-width:100%;" id="cookiebot-debug-info"
-			  readonly><?php echo esc_html( $debug_output ); ?></textarea>
+	<textarea
+			cols="100"
+			rows="40"
+			style="width:800px;max-width:100%;"
+			id="cookiebot-debug-info"
+			readonly="readonly"
+	><?php echo esc_textarea( $debug_output ); ?></textarea>
 	<script>
 		function copyDebugInfo() {
 			var t = document.getElementById( 'cookiebot-debug-info' )
