@@ -2,7 +2,9 @@
 
 namespace cybot\cookiebot\settings\pages;
 
+use cybot\cookiebot\Cookiebot_WP;
 use function cybot\cookiebot\addons\lib\include_view;
+use function cybot\cookiebot\addons\lib\asset_url;
 
 class Settings_Page implements Settings_Page_Interface {
 
@@ -35,6 +37,36 @@ class Settings_Page implements Settings_Page_Interface {
 	}
 
 	public function display() {
-		include_view( 'admin/settings/settings-page.php', array() );
+		wp_enqueue_style(
+			'cookiebot-consent-mapping-table',
+			asset_url( 'css/consent_mapping_table.css' ),
+			null,
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+		);
+
+		$cookiebot = Cookiebot_WP::instance();
+
+		$args = array(
+			'is_ms'                    => false,
+			'cookiebot_gdpr_url'       => 'https://www.cookiebot.com/goto/gdpr',
+			'cookiebot_logo'           => COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
+			'supported_languages'      => Cookiebot_WP::get_supported_languages(),
+			'current_lang'             => $cookiebot->get_language( true ),
+			'is_wp_consent_api_active' => $cookiebot->is_wp_consent_api_active(),
+			'mDefault'                 => $cookiebot->get_default_wp_consent_api_mapping(),
+			'm'                        => $cookiebot->get_wp_consent_api_mapping(),
+		);
+
+		/* Check if multisite */
+		if ( is_multisite() ) {
+			//Receive settings from multisite - this might change the way we render the form
+			$args['network_cbid']                 = get_site_option( 'cookiebot-cbid', '' );
+			$args['network_scrip_tag_uc_attr']    = get_site_option( 'cookiebot-script-tag-uc-attribute', 'custom' );
+			$args['network_scrip_tag_cd_attr']    = get_site_option( 'cookiebot-script-tag-cd-attribute', 'custom' );
+			$args['network_cookie_blocking_mode'] = get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
+			$args['is_ms']                        = true;
+		}
+
+		include_view( 'admin/settings/settings-page.php', $args );
 	}
 }
