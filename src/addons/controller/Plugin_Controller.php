@@ -3,51 +3,32 @@
 namespace cybot\cookiebot\addons\controller;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
-use cybot\cookiebot\addons\controller\addons\Cookiebot_Addons_Interface;
 use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
 use cybot\cookiebot\addons\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
 use Exception;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_enabled_cache_plugin;
+use function cybot\cookiebot\cookiebot_active;
 
-/**
- * Class Plugin_Controller
- * @package cybot\cookiebot\addons\controller
- */
 class Plugin_Controller {
 
 	/**
-	 * IoC container - Dependency Injection
-	 *
 	 * @var Settings_Service_Interface
-	 *
-	 * @since 1.1.0
 	 */
 	private $settings_service;
 
 	/**
-	 * Plugin_Controller constructor.
-	 *
-	 * @param $settings_service  Settings_Service_Interface IoC Container
-	 *
-	 * @since 1.2.0
+	 * @param Settings_Service_Interface $settings_service
 	 */
 	public function __construct( Settings_Service_Interface $settings_service ) {
 		$this->settings_service = $settings_service;
 	}
 
 	/**
-	 *  Load addon configuration if the plugin is activated
-	 *
 	 * @throws Exception
-	 * @since 1.2.0
-	 * @version 1.3.0
 	 */
 	public function load_active_addons() {
-		/**
-		 * Check if Cookiebot is activated and active. Return if cookiebot is inactive
-		 */
-		if ( ! function_exists( 'cookiebot_active' ) || ! cookiebot_active() ) {
+		if ( ! cookiebot_active() ) {
 			return;
 		}
 
@@ -55,11 +36,6 @@ class Plugin_Controller {
 			return;
 		}
 
-		/**
-		 * Check plugins one by one and load configuration if it is active
-		 *
-		 * @var $plugin Cookiebot_Addons_Interface
-		 */
 		$addons_enabled_counter = 0;
 		/** @var Base_Cookiebot_Addon $addon */
 		foreach ( $this->settings_service->get_active_addons() as $addon ) {
