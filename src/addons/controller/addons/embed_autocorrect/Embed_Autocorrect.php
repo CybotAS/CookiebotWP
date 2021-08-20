@@ -4,12 +4,14 @@ namespace cybot\cookiebot\addons\controller\addons\embed_autocorrect;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Other_Addon;
 use cybot\cookiebot\addons\lib\Addon_With_Extra_Options_Interface;
+use cybot\cookiebot\Cookiebot_WP;
+use InvalidArgumentException;
+use function cybot\cookiebot\addons\lib\asset_url;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_get_domain_from_url;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_get_home_url_domain;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
 use function cybot\cookiebot\addons\lib\get_view_html;
-use function cybot\cookiebot\addons\lib\include_view;
 
 class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With_Extra_Options_Interface {
 
@@ -95,32 +97,40 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 	public function cookiebot_addon_embed_autocorrect_javascript() {
 		$library = apply_filters( 'wp_video_shortcode_library', 'mediaelement' );
 		if ( $library === 'mediaelement' ) {
-			?>
-			<style type="text/css">video.wp-video-shortcode__disabled, audio.wp-audio-shortcode__disabled {
-					display: none;
-				}</style>
-			<script>
-				window.addEventListener( 'CookiebotOnTagsExecuted', function ( e ) {
-					if (
-					<?php
-					echo 'Cookiebot.consent.' . implode(
-						' && Cookiebot.consent.',
-						$this->get_cookie_types()
-					);
-					?>
-							) {
-						jQuery( '.wp-video-shortcode__disabled' ).addClass( 'wp-video-shortcode' ).removeClass( 'wp-video-shortcode__disabled' );
-						jQuery( '.wp-audio-shortcode__disabled' ).addClass( 'wp-audio-shortcode' ).removeClass( 'wp-audio-shortcode__disabled' );
-						if ( window.wp && window.wp.mediaelement && window.wp.mediaelement.initialize ) {
-							window.wp.mediaelement.initialize();
-						}
-					}
-				}, false );
-			</script>
-			<?php
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_mediaelement_style' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_mediaelement_script' ) );
 		}
 	}
 
+	/**
+	 * @throws InvalidArgumentException
+	 */
+	public function enqueue_mediaelement_style() {
+		wp_enqueue_style(
+			'embed_autocorrect_mediaelement_style',
+			asset_url( 'css/frontend/addons/embed-autocorrect/mediaelement.css' ),
+			null,
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+		);
+	}
+
+	/**
+	 * @throws InvalidArgumentException
+	 */
+	public function enqueue_mediaelement_script() {
+		wp_register_script(
+			'embed_autocorrect_mediaelement_script',
+			asset_url( 'js/frontend/addons/embed-autocorrect/mediaelement.js' ),
+			array( 'jQuery' ),
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+			false
+		);
+		wp_localize_script(
+			'embed_autocorrect_mediaelement_script',
+			'cookieTypes',
+			$this->get_cookie_types()
+		);
+	}
 
 	/**
 	 * Autocorrection of Vimeo and Youtube tags to make them GDPR compatible

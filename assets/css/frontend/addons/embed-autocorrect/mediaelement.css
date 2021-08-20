@@ -1,0 +1,3 @@
+video.wp-video-shortcode__disabled, audio.wp-audio-shortcode__disabled {
+	display: none;
+}
