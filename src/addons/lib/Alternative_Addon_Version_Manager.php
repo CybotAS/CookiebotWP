@@ -68,12 +68,7 @@ class Alternative_Addon_Version_Manager {
 			throw new InvalidArgumentException( 'Version "' . $version_string . '" has already been added.' );
 		}
 		$this->alternative_versions[ $version_string ] = $addon_class;
-		uksort(
-			$this->alternative_versions,
-			function( $version_string_a, $version_string_b ) {
-				return version_compare( $version_string_a, $version_string_b );
-			}
-		);
+		uksort( $this->alternative_versions, 'version_compare' );
 	}
 
 	/**
