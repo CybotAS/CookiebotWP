@@ -18,7 +18,6 @@ use cybot\cookiebot\admin_notices\Cookiebot_Recommendation_Notice;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
 use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
-use Exception;
 use RuntimeException;
 use function cybot\cookiebot\addons\lib\asset_url;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_plugin_activated;

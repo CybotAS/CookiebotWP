@@ -184,7 +184,7 @@ abstract class Base_Cookiebot_Addon {
 	}
 
 	/**
-	 * @return array|false
+	 * @return array
 	 */
 	final public function get_placeholders() {
 		return $this->settings->get_placeholders( static::OPTION_NAME );

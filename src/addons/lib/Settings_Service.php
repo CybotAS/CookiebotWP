@@ -199,7 +199,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @param $option_key
 	 * @param $widget_key
 	 *
-	 * @return array|false
+	 * @return array
 	 */
 	public function get_widget_placeholders( $option_key, $widget_key ) {
 		$option = get_option( $option_key );
@@ -208,13 +208,13 @@ class Settings_Service implements Settings_Service_Interface {
 			return (array) $option[ $widget_key ]['placeholder']['languages'];
 		}
 
-		return false;
+		return array();
 	}
 
 	/**
 	 * @param $option_key
 	 *
-	 * @return array|false
+	 * @return array
 	 */
 	public function get_placeholders( $option_key ) {
 		$option = get_option( static::OPTION_NAME );
@@ -223,7 +223,7 @@ class Settings_Service implements Settings_Service_Interface {
 			return (array) $option[ $option_key ]['placeholder']['languages'];
 		}
 
-		return false;
+		return array();
 	}
 
 	/**

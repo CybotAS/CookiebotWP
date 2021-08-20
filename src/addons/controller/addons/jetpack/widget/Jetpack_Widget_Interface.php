@@ -22,7 +22,7 @@ interface Jetpack_Widget_Interface {
 	public function get_widget_placeholder();
 
 	/**
-	 * @return array|false
+	 * @return array
 	 */
 	public function get_widget_placeholders();
 

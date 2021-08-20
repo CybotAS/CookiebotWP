@@ -158,7 +158,7 @@ abstract class Base_Jetpack_Widget implements Jetpack_Widget_Interface {
 	}
 
 	/**
-	 * @return array|false
+	 * @return array
 	 */
 	final public function get_widget_placeholders() {
 		return $this->settings->get_widget_placeholders(

@@ -16,6 +16,7 @@ use InvalidArgumentException;
 use ReflectionClass;
 use function cybot\cookiebot\addons\lib\asset_url;
 use function cybot\cookiebot\addons\lib\cookiebot_addons_get_dropdown_languages;
+use function cybot\cookiebot\addons\lib\get_view_html;
 use function cybot\cookiebot\addons\lib\include_view;
 
 class Settings_Config {
@@ -85,6 +86,7 @@ class Settings_Config {
 	/**
 	 * Load css styling to the settings page
 	 *
+	 * @throws \InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function add_wp_admin_style_script( $hook ) {
@@ -290,6 +292,7 @@ class Settings_Config {
 	/**
 	 * Jetpack tab - header
 	 *
+	 * @throws \InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function jetpack_addons_header_callback() {
@@ -301,6 +304,7 @@ class Settings_Config {
 	 *
 	 * @param $args array   Information about the widget addon and the option
 	 *
+	 * @throws \InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function jetpack_addon_callback( $args ) {
@@ -317,44 +321,59 @@ class Settings_Config {
 
 		$widget_is_enabled                    = $widget->is_widget_enabled();
 		$widget_placeholder_is_enabled        = $widget->is_widget_placeholder_enabled();
-		$widget_has_placeholder               = $widget->widget_has_placeholder();
 		$widget_default_placeholder           = $widget->get_widget_default_placeholder();
 		$widget_option_name                   = $widget->get_widget_option_name();
 		$widget_placeholders_array            = $widget->get_widget_placeholders();
+		$widget_placeholders_array_keys       = array_keys( $widget_placeholders_array );
+		$first_placeholder_language           = isset( $widget_placeholders_array_keys[0] )
+			? $widget_placeholders_array_keys[0]
+			: null;
 		$site_default_languages_dropdown_html = 'cookiebot_jetpack_addon[' . $widget_option_name . '][placeholder][languages][site-default]';
-		$widget_placeholders                  = is_array( $widget_placeholders_array )
-			? array_map(
-				function( $language, $placeholder ) use ( $widget_option_name, $widget_placeholders_array ) {
-					$removable               = array_key_first( $widget_placeholders_array ) !== $language;
-					$name                    = 'cookiebot_jetpack_addon[' . $widget_option_name . '][placeholder][languages][' . $language . ']';
-					$languages_dropdown_html = cookiebot_addons_get_dropdown_languages(
-						'placeholder_select_language',
-						$name,
-						$language
-					);
-					return array(
-						'name'                    => $name,
-						'removable'               => $removable,
-						'language'                => $language,
-						'placeholder'             => $placeholder,
-						'languages_dropdown_html' => $languages_dropdown_html,
-					);
-				},
-				array_keys( $widget_placeholders_array ),
-				array_values( $widget_placeholders_array )
+		$widget_placeholders                  = array_map(
+			function( $language, $placeholder ) use ( $widget_option_name, $widget_placeholders_array, $first_placeholder_language ) {
+				$removable               = $first_placeholder_language !== $language;
+				$option_name             = 'cookiebot_jetpack_addon[' . $widget_option_name . '][placeholder][languages][' . $language . ']';
+				$languages_dropdown_html = cookiebot_addons_get_dropdown_languages(
+					'placeholder_select_language',
+					$option_name,
+					$language
+				);
+				return array(
+					'name'                    => $option_name,
+					'removable'               => $removable,
+					'language'                => $language,
+					'placeholder'             => $placeholder,
+					'languages_dropdown_html' => $languages_dropdown_html,
+				);
+			},
+			array_keys( $widget_placeholders_array ),
+			array_values( $widget_placeholders_array )
+		);
+		$placeholder_helper                   = $addon->get_placeholder_helper();
+		$placeholders_html                    = $widget->widget_has_placeholder()
+			? get_view_html(
+				'admin/settings/prior-consent/partials/placeholder-submitboxes.php',
+				array(
+					'placeholders'       => $widget_placeholders,
+					'placeholder_helper' => $placeholder_helper,
+				)
 			)
-		: array();
+			: get_view_html(
+				'admin/settings/prior-consent/partials/placeholder-submitbox-default.php',
+				array(
+					'site_default_languages_dropdown_html' => $site_default_languages_dropdown_html,
+					'name'                                 => 'cookiebot_jetpack_addon[' . $widget_option_name . '][placeholder][languages][site-default]',
+					'default_placeholder'                  => $widget_default_placeholder,
+					'placeholder_helper'                   => $placeholder_helper,
+				)
+			);
 
 		$view_args = array(
-			'widget_is_enabled'                    => $widget_is_enabled,
-			'widget_placeholder_is_enabled'        => $widget_placeholder_is_enabled,
-			'widget_has_placeholder'               => $widget_has_placeholder,
-			'widget_placeholders'                  => $widget_placeholders,
-			'widget_default_placeholder'           => $widget_default_placeholder,
-			'site_default_languages_dropdown_html' => $site_default_languages_dropdown_html,
-			'widget_option_name'                   => $widget_option_name,
-			'widget_cookie_types'                  => $widget->get_widget_cookie_types(),
-			'addon_placeholder_helper'             => $addon->get_placeholder_helper(),
+			'widget_option_name'            => $widget_option_name,
+			'widget_is_enabled'             => $widget_is_enabled,
+			'widget_cookie_types'           => $widget->get_widget_cookie_types(),
+			'widget_placeholder_is_enabled' => $widget_placeholder_is_enabled,
+			'placeholders_html'             => $placeholders_html,
 		);
 
 		include_view( 'admin/settings/prior-consent/jetpack-widgets/tab.php', $view_args );
@@ -384,6 +403,7 @@ class Settings_Config {
 	 *
 	 * @param $args
 	 *
+	 * @throws \InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function available_addon_callback( $args ) {
@@ -395,43 +415,59 @@ class Settings_Config {
 
 		$site_default_languages_dropdown_html = 'cookiebot_available_addons[' . $addon::OPTION_NAME . '][placeholder][languages][site-default]';
 		$addon_placeholders_array             = $addon->get_placeholders();
-		$addon_placeholders                   = is_array( $addon_placeholders_array )
-			? array_map(
-				function( $language, $placeholder ) use ( $addon, $addon_placeholders_array ) {
-					$removable               = array_key_first( $addon_placeholders_array ) !== $language;
-					$name                    = 'cookiebot_available_addons[' . $addon::OPTION_NAME . '][placeholder][languages][' . $language . ']';
-					$languages_dropdown_html = cookiebot_addons_get_dropdown_languages(
-						'placeholder_select_language',
-						$name,
-						$language
-					);
-					return array(
-						'name'                    => $name,
-						'removable'               => $removable,
-						'language'                => $language,
-						'placeholder'             => $placeholder,
-						'languages_dropdown_html' => $languages_dropdown_html,
-					);
-				},
-				array_keys( $addon_placeholders_array ),
-				array_values( $addon_placeholders_array )
-			)
-			: array();
+		$addon_placeholders_array_keys        = array_keys( $addon_placeholders_array );
+		$first_placeholder_language           = isset( $addon_placeholders_array_keys[0] )
+			? $addon_placeholders_array_keys[0]
+			: null;
+		$addon_placeholders                   = array_map(
+			function( $language, $placeholder ) use ( $addon, $addon_placeholders_array, $first_placeholder_language ) {
+				$removable               = $first_placeholder_language !== $language;
+				$option_name             = 'cookiebot_available_addons[' . $addon::OPTION_NAME . '][placeholder][languages][' . $language . ']';
+				$languages_dropdown_html = cookiebot_addons_get_dropdown_languages(
+					'placeholder_select_language',
+					$option_name,
+					$language
+				);
+				return array(
+					'name'                    => $option_name,
+					'removable'               => $removable,
+					'language'                => $language,
+					'placeholder'             => $placeholder,
+					'languages_dropdown_html' => $languages_dropdown_html,
+				);
+			},
+			$addon_placeholders_array_keys,
+			$addon_placeholders_array
+		);
+		$placeholder_helper                   = $addon->get_placeholder_helper();
 		$addon_extra_options_html             = is_a( $addon, Addon_With_Extra_Options_Interface::class )
 			? $addon->get_extra_addon_options_html()
 			: '';
+		$placeholders_html                    = $addon->has_placeholder()
+			? get_view_html(
+				'admin/settings/prior-consent/partials/placeholder-submitboxes.php',
+				array(
+					'placeholders'       => $addon_placeholders,
+					'placeholder_helper' => $placeholder_helper,
+				)
+			)
+			: get_view_html(
+				'admin/settings/prior-consent/partials/placeholder-submitbox-default.php',
+				array(
+					'site_default_languages_dropdown_html' => $site_default_languages_dropdown_html,
+					'name'                                 => 'cookiebot_available_addons[' . $addon::OPTION_NAME . '][placeholder][languages][site-default]',
+					'default_placeholder'                  => $addon::DEFAULT_PLACEHOLDER_CONTENT,
+					'placeholder_helper'                   => $placeholder_helper,
+				)
+			);
 
 		$view_args = array(
-			'addon_is_enabled'                     => $addon->is_addon_enabled(),
-			'addon_placeholder_is_enabled'         => $addon->is_placeholder_enabled(),
-			'addon_has_placeholder'                => $addon->has_placeholder(),
-			'addon_placeholders'                   => $addon_placeholders,
-			'addon_default_placeholder'            => $addon::DEFAULT_PLACEHOLDER_CONTENT,
-			'site_default_languages_dropdown_html' => $site_default_languages_dropdown_html,
-			'addon_option_name'                    => $addon::OPTION_NAME,
-			'addon_cookie_types'                   => $addon->get_cookie_types(),
-			'addon_placeholder_helper'             => $addon->get_placeholder_helper(),
-			'addon_extra_options_html'             => $addon_extra_options_html,
+			'addon_option_name'            => $addon::OPTION_NAME,
+			'addon_is_enabled'             => $addon->is_addon_enabled(),
+			'addon_cookie_types'           => $addon->get_cookie_types(),
+			'addon_placeholder_is_enabled' => $addon->is_placeholder_enabled(),
+			'placeholders_html'            => $placeholders_html,
+			'addon_extra_options_html'     => $addon_extra_options_html,
 		);
 
 		include_view( 'admin/settings/prior-consent/available-addons/tab.php', $view_args );
@@ -440,6 +476,7 @@ class Settings_Config {
 	/**
 	 * Returns header for unavailable plugins
 	 *
+	 * @throws \InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function unavailable_addons_header_callback() {
@@ -448,6 +485,8 @@ class Settings_Config {
 
 	/**
 	 * @param $args
+	 *
+	 * @throws \InvalidArgumentException
 	 */
 	public function unavailable_addon_settings_field_callback( $args ) {
 		$addon = $args['addon'];
@@ -456,6 +495,7 @@ class Settings_Config {
 			throw new InvalidArgumentException();
 		}
 
+		$message = '';
 		if ( ! $addon->is_addon_installed() ) {
 			if ( is_a( $addon, Base_Cookiebot_Plugin_Addon::class ) ) {
 				$message = __( 'The plugin is not installed.', 'cookiebot' );
@@ -470,8 +510,6 @@ class Settings_Config {
 			if ( is_a( $addon, Base_Cookiebot_Theme_Addon::class ) ) {
 				$message = __( 'The theme is not activated.', 'cookiebot' );
 			}
-		} else {
-			$message = '';
 		}
 
 		$view_args = array(
@@ -483,6 +521,7 @@ class Settings_Config {
 	/**
 	 * Build up settings page
 	 *
+	 * @throws \InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function setting_page() {

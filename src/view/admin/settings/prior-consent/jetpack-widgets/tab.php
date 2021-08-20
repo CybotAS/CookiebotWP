@@ -2,15 +2,11 @@
 
 use function cybot\cookiebot\addons\lib\cookiebot_addons_checked_selected_helper;
 
-/** @var $widget_is_enabled bool */
-/** @var $widget_placeholder_is_enabled bool */
-/** @var $widget_has_placeholder bool */
-/** @var $widget_default_placeholder string */
-/** @var $widget_placeholders array */
-/** @var $widget_option_name string */
-/** @var $widget_cookie_types array */
-/** @var $addon_placeholder_helper string */
-/** @var $site_default_languages_dropdown_html string */
+/** @var string $widget_option_name */
+/** @var bool $widget_is_enabled */
+/** @var array $widget_cookie_types */
+/** @var bool $widget_placeholder_is_enabled */
+/** @var string $placeholders_html */
 
 ?>
 <div class="postbox cookiebot-addon">
@@ -68,62 +64,12 @@ use function cybot\cookiebot\addons\lib\cookiebot_addons_checked_selected_helper
 			data-addon="<?php echo esc_attr( $widget_option_name ); ?>"
 
 	>
-		<?php if ( $widget_has_placeholder ) : ?>
-			<?php
-			foreach (
-				$widget_placeholders as list(
-				'name' => $name,
-				'removable' => $removable,
-				'language' => $language,
-				'placeholder' => $placeholder,
-				'languages_dropdown_html' => $languages_dropdown_html
-			)
-			) :
-				?>
-				<div class="placeholder_content submitbox">
-					<p>
-						<label><?php esc_html_e( 'Language', 'cookiebot-addons' ); ?></label>
-						<?php
-						echo $languages_dropdown_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						?>
-						<?php if ( $removable ) : ?>
-							<a href="" class="submitdelete deletion">
-								<?php esc_html_e( 'Remove language', 'cookiebot-addons' ); ?>
-							</a>
-						<?php endif; ?>
-					</p>
-					<p>
-						<textarea
-								cols="80"
-								rows="5"
-								name="<?php echo esc_attr( $name ); ?>"
-						><?php echo esc_textarea( $placeholder ); ?></textarea>
-						<span class="help-tip" title="<?php echo esc_attr( $addon_placeholder_helper ); ?>"></span>
-					</p>
-				</div>
-			<?php endforeach; ?>
-		<?php else : ?>
-			<div class="placeholder_content">
-				<p>
-					<label><?php esc_html_e( 'Language', 'cookiebot-addons' ); ?></label>
-					<?php
-					echo $site_default_languages_dropdown_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					?>
-				</p>
-				<p>
-						<textarea
-								cols="80"
-								rows="5"
-								name="cookiebot_jetpack_addon[<?php echo esc_attr( $widget_option_name ); ?>][placeholder][languages][site-default]"
-						><?php echo esc_textarea( $widget_default_placeholder ); ?></textarea>
-					<span class="help-tip" title="<?php echo esc_attr( $addon_placeholder_helper ); ?>"></span>
-				</p>
-			</div>
-		<?php endif; ?>
-
+		<?php echo $placeholders_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<p class="add_placeholder_language">
 			<button class="btn_add_language button button-secondary"
-					data-addon="<?php echo esc_attr( $widget_option_name ); ?>"><?php esc_html_e( '+ Add language', 'cookiebot-addons' ); ?></button>
+					data-addon="<?php echo esc_attr( $widget_option_name ); ?>">
+				<?php esc_html_e( '+ Add language', 'cookiebot-addons' ); ?>
+			</button>
 		</p>
 	</div>
 </div>
