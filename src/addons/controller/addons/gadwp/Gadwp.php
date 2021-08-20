@@ -3,8 +3,8 @@
 namespace cybot\cookiebot\addons\controller\addons\gadwp;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
+use cybot\cookiebot\lib\Open_Source_Addon_Interface;
+use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 
 /**

@@ -3,8 +3,8 @@
 namespace cybot\cookiebot\addons\controller\addons\add_to_any;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
+use cybot\cookiebot\lib\Open_Source_Addon_Interface;
+use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 
 class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 

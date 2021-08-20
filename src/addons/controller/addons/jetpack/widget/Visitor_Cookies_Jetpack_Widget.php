@@ -2,8 +2,8 @@
 
 namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 
-use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_remove_class_action;
+use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
+use function cybot\cookiebot\lib\cookiebot_addons_remove_class_action;
 
 /**
  * Class Visitor_Cookies_Widget

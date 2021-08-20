@@ -3,7 +3,7 @@
 namespace cybot\cookiebot\settings;
 
 use cybot\cookiebot\settings\pages\Support_Page;
-use function cybot\cookiebot\addons\lib\include_view;
+use function cybot\cookiebot\lib\include_view;
 
 class Network_Menu_Settings {
 

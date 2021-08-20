@@ -3,7 +3,7 @@
 namespace cybot\cookiebot\addons\controller\addons\custom_facebook_feed;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
+use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
 class Custom_Facebook_Feed_Version_2_17_1 extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 

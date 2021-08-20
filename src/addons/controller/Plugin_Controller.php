@@ -3,11 +3,11 @@
 namespace cybot\cookiebot\addons\controller;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
-use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
-use cybot\cookiebot\addons\lib\Settings_Service_Interface;
+use cybot\cookiebot\lib\buffer\Buffer_Output_Interface;
+use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
 use Exception;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_enabled_cache_plugin;
+use function cybot\cookiebot\lib\cookiebot_addons_enabled_cache_plugin;
 use function cybot\cookiebot\cookiebot_active;
 
 class Plugin_Controller {

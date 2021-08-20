@@ -1,10 +1,10 @@
 <?php
 
-namespace cybot\cookiebot\addons\lib;
+namespace cybot\cookiebot\lib;
 
 /**
  * Class Cookie_Consent
- * @package cybot\cookiebot\addons\lib
+ * @package cybot\cookiebot\lib
  */
 class Cookie_Consent implements Cookie_Consent_Interface {
 

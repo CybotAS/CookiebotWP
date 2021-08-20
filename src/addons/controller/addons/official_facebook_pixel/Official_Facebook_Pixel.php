@@ -3,7 +3,7 @@
 namespace cybot\cookiebot\addons\controller\addons\official_facebook_pixel;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_remove_class_action;
+use function cybot\cookiebot\lib\cookiebot_addons_remove_class_action;
 
 class Official_Facebook_Pixel extends Base_Cookiebot_Plugin_Addon {
 

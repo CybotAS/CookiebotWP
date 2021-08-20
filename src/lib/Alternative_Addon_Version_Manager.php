@@ -1,10 +1,10 @@
 <?php
 
-namespace cybot\cookiebot\addons\lib;
+namespace cybot\cookiebot\lib;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
-use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
-use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cybot\cookiebot\lib\buffer\Buffer_Output_Interface;
+use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use Exception;
 use InvalidArgumentException;
 

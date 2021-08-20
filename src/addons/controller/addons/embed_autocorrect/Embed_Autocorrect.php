@@ -3,15 +3,15 @@
 namespace cybot\cookiebot\addons\controller\addons\embed_autocorrect;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Other_Addon;
-use cybot\cookiebot\addons\lib\Addon_With_Extra_Options_Interface;
+use cybot\cookiebot\lib\Addon_With_Extra_Options_Interface;
 use cybot\cookiebot\Cookiebot_WP;
 use InvalidArgumentException;
-use function cybot\cookiebot\addons\lib\asset_url;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_cookieconsent_optout;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_get_domain_from_url;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_get_home_url_domain;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
-use function cybot\cookiebot\addons\lib\get_view_html;
+use function cybot\cookiebot\lib\asset_url;
+use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
+use function cybot\cookiebot\lib\cookiebot_addons_get_domain_from_url;
+use function cybot\cookiebot\lib\cookiebot_addons_get_home_url_domain;
+use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
+use function cybot\cookiebot\lib\get_view_html;
 
 class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With_Extra_Options_Interface {
 

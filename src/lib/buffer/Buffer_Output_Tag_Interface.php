@@ -1,6 +1,6 @@
 <?php
 
-namespace cybot\cookiebot\addons\lib\buffer;
+namespace cybot\cookiebot\lib\buffer;
 
 interface Buffer_Output_Tag_Interface {
 

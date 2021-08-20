@@ -1,6 +1,6 @@
 <?php
 
-use function cybot\cookiebot\addons\lib\asset_url;
+use function cybot\cookiebot\lib\asset_url;
 
 /**
  * @var string $cbid

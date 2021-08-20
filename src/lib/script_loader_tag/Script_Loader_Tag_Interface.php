@@ -1,6 +1,6 @@
 <?php
 
-namespace cybot\cookiebot\addons\lib\script_loader_tag;
+namespace cybot\cookiebot\lib\script_loader_tag;
 
 interface Script_Loader_Tag_Interface {
 

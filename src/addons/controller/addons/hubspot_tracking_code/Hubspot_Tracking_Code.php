@@ -5,7 +5,7 @@ namespace cybot\cookiebot\addons\controller\addons\hubspot_tracking_code;
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
+use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
 class Hubspot_Tracking_Code extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 

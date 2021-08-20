@@ -5,11 +5,11 @@ namespace cybot\cookiebot\addons;
 use cybot\cookiebot\addons\config\Settings_Config;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\controller\Plugin_Controller;
-use cybot\cookiebot\addons\lib\buffer\Buffer_Output;
-use cybot\cookiebot\addons\lib\Cookie_Consent;
-use cybot\cookiebot\addons\lib\Dependency_Container;
-use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag;
-use cybot\cookiebot\addons\lib\Settings_Service;
+use cybot\cookiebot\lib\buffer\Buffer_Output;
+use cybot\cookiebot\lib\Cookie_Consent;
+use cybot\cookiebot\lib\Dependency_Container;
+use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag;
+use cybot\cookiebot\lib\Settings_Service;
 use Exception;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,11 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * __DIR__ of the cookiebot_addons folder
  */
 define( 'COOKIEBOT_ADDONS_DIR', __DIR__ . DIRECTORY_SEPARATOR );
-
-/**
- * Load helper functions
- */
-require_once COOKIEBOT_ADDONS_DIR . 'lib/helper.php';
 
 /**
  * Class Cookiebot_Addons

@@ -2,16 +2,16 @@
 
 namespace cybot\cookiebot\addons\controller\addons;
 
-use cybot\cookiebot\addons\lib\Alternative_Addon_Version_Manager;
-use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
-use cybot\cookiebot\addons\lib\Class_Constant_Override_Validator;
-use cybot\cookiebot\addons\lib\Cookie_Consent_Interface;
-use cybot\cookiebot\addons\lib\Addon_With_Alternative_Versions_Interface;
-use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cybot\cookiebot\addons\lib\Settings_Service_Interface;
+use cybot\cookiebot\lib\Alternative_Addon_Version_Manager;
+use cybot\cookiebot\lib\buffer\Buffer_Output_Interface;
+use cybot\cookiebot\lib\Class_Constant_Override_Validator;
+use cybot\cookiebot\lib\Cookie_Consent_Interface;
+use cybot\cookiebot\lib\Addon_With_Alternative_Versions_Interface;
+use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cybot\cookiebot\lib\Settings_Service_Interface;
 use Exception;
 use RuntimeException;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_output_cookie_types;
+use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 /**
  * Class Base_Cookiebot_Addon

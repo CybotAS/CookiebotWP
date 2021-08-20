@@ -1,6 +1,6 @@
 <?php
 
-use function cybot\cookiebot\addons\lib\cookiebot_addons_checked_selected_helper;
+use function cybot\cookiebot\lib\cookiebot_addons_checked_selected_helper;
 
 /** @var string $widget_option_name */
 /** @var bool $widget_is_enabled */

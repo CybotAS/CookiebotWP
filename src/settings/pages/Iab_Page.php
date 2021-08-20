@@ -2,7 +2,7 @@
 
 namespace cybot\cookiebot\settings\pages;
 
-use function cybot\cookiebot\addons\lib\include_view;
+use function cybot\cookiebot\lib\include_view;
 
 class Iab_Page implements Settings_Page_Interface {
 

@@ -7,17 +7,17 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Theme_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\Jetpack;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
-use cybot\cookiebot\addons\lib\Addon_With_Extra_Options_Interface;
-use cybot\cookiebot\addons\lib\Settings_Page_Tab;
-use cybot\cookiebot\addons\lib\Settings_Service_Interface;
+use cybot\cookiebot\lib\Addon_With_Extra_Options_Interface;
+use cybot\cookiebot\lib\Settings_Page_Tab;
+use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
 use Exception;
 use InvalidArgumentException;
 use ReflectionClass;
-use function cybot\cookiebot\addons\lib\asset_url;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_get_dropdown_languages;
-use function cybot\cookiebot\addons\lib\get_view_html;
-use function cybot\cookiebot\addons\lib\include_view;
+use function cybot\cookiebot\lib\asset_url;
+use function cybot\cookiebot\lib\cookiebot_addons_get_dropdown_languages;
+use function cybot\cookiebot\lib\get_view_html;
+use function cybot\cookiebot\lib\include_view;
 
 class Settings_Config {
 

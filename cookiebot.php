@@ -19,14 +19,15 @@ use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
 use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
 use RuntimeException;
-use function cybot\cookiebot\addons\lib\asset_url;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_plugin_activated;
+use function cybot\cookiebot\lib\asset_url;
+use function cybot\cookiebot\lib\cookiebot_addons_plugin_activated;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
 require_once 'vendor/autoload.php';
+require_once 'src/lib/helper.php';
 
 define( 'COOKIEBOT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'COOKIEBOT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
@@ -73,7 +74,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 
 			add_action( 'after_setup_theme', array( $this, 'cookiebot_init' ), 5 );
 			register_activation_hook( __FILE__, array( $this, 'activation' ) );
-			register_deactivation_hook( __FILE__, 'cybot\cookiebot\addons\lib\cookiebot_addons_plugin_deactivated' );
+			register_deactivation_hook( __FILE__, 'cybot\cookiebot\lib\cookiebot_addons_plugin_deactivated' );
 
 			$this->cookiebot_fix_plugin_conflicts();
 		}

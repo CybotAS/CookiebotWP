@@ -1,12 +1,12 @@
 <?php
 
-namespace cybot\cookiebot\addons\lib;
+namespace cybot\cookiebot\lib;
 
 use Exception;
 
 /**
  * Interface Settings_Service_Interface
- * @package cybot\cookiebot\addons\lib
+ * @package cybot\cookiebot\lib
  */
 interface Settings_Service_Interface {
 

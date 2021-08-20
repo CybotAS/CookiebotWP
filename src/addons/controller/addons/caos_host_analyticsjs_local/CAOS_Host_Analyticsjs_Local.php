@@ -3,8 +3,8 @@
 namespace cybot\cookiebot\addons\controller\addons\caos_host_analyticsjs_local;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\addons\lib\Addon_With_Alternative_Versions_Interface;
-use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
+use cybot\cookiebot\lib\Addon_With_Alternative_Versions_Interface;
+use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
 class CAOS_Host_Analyticsjs_Local extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface, Addon_With_Alternative_Versions_Interface {
 

@@ -4,9 +4,9 @@ namespace cybot\cookiebot\settings\pages;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\Cookiebot_Addons;
-use cybot\cookiebot\addons\lib\Settings_Service_Interface;
+use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
-use function cybot\cookiebot\addons\lib\include_view;
+use function cybot\cookiebot\lib\include_view;
 use Exception;
 use function cybot\cookiebot\cookiebot;
 

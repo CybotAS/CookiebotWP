@@ -4,7 +4,7 @@ namespace cybot\cookiebot\widgets;
 
 use WP_Widget;
 use cybot\cookiebot\Cookiebot_WP;
-use function cybot\cookiebot\addons\lib\include_view;
+use function cybot\cookiebot\lib\include_view;
 
 class Cookiebot_Declaration_Widget extends WP_Widget {
 

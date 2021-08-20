@@ -1,6 +1,6 @@
 <?php
 
-namespace cybot\cookiebot\addons\lib\buffer;
+namespace cybot\cookiebot\lib\buffer;
 
 class Buffer_Output implements Buffer_Output_Interface {
 

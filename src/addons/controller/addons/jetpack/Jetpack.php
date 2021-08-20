@@ -10,10 +10,10 @@ use cybot\cookiebot\addons\controller\addons\jetpack\widget\Goodreads_Jetpack_Wi
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Internet_Defense_League_Jetpack_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Twitter_Timeline_Jetpack_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Visitor_Cookies_Jetpack_Widget;
-use cybot\cookiebot\addons\lib\buffer\Buffer_Output_Interface;
-use cybot\cookiebot\addons\lib\Cookie_Consent_Interface;
-use cybot\cookiebot\addons\lib\script_loader_tag\Script_Loader_Tag_Interface;
-use cybot\cookiebot\addons\lib\Settings_Service_Interface;
+use cybot\cookiebot\lib\buffer\Buffer_Output_Interface;
+use cybot\cookiebot\lib\Cookie_Consent_Interface;
+use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag_Interface;
+use cybot\cookiebot\lib\Settings_Service_Interface;
 use Exception;
 
 /**

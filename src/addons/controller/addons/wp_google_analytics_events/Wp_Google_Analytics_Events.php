@@ -3,7 +3,7 @@
 namespace cybot\cookiebot\addons\controller\addons\wp_google_analytics_events;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_remove_class_action;
+use function cybot\cookiebot\lib\cookiebot_addons_remove_class_action;
 
 /**
  * Class Wp_Google_Analytics_Events

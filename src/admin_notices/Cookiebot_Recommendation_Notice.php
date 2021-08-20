@@ -4,9 +4,9 @@ namespace cybot\cookiebot\admin_notices;
 
 use Exception;
 use cybot\cookiebot\Cookiebot_WP;
-use function cybot\cookiebot\addons\lib\asset_url;
-use function cybot\cookiebot\addons\lib\get_view_html;
-use function cybot\cookiebot\addons\lib\include_view;
+use function cybot\cookiebot\lib\asset_url;
+use function cybot\cookiebot\lib\get_view_html;
+use function cybot\cookiebot\lib\include_view;
 
 class Cookiebot_Recommendation_Notice {
 

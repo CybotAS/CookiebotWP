@@ -1,6 +1,6 @@
 <?php
 
-namespace cybot\cookiebot\addons\lib;
+namespace cybot\cookiebot\lib;
 
 interface Open_Source_Addon_Interface {
 	/**

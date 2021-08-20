@@ -7,7 +7,7 @@
 /** @var string $placeholders_html */
 /** @var string $addon_extra_options_html */
 
-use function cybot\cookiebot\addons\lib\cookiebot_addons_checked_selected_helper;
+use function cybot\cookiebot\lib\cookiebot_addons_checked_selected_helper;
 
 require_once ABSPATH . '/wp-includes/l10n.php';
 require_once ABSPATH . '/wp-admin/includes/translation-install.php';

@@ -1,12 +1,12 @@
 <?php
 
-namespace cybot\cookiebot\addons\lib;
+namespace cybot\cookiebot\lib;
 
 use Exception;
 
 /**
  * Class Dependency_Container
- * @package cybot\cookiebot\addons\lib
+ * @package cybot\cookiebot\lib
  */
 class Dependency_Container {
 

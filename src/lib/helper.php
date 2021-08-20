@@ -1,6 +1,6 @@
 <?php
 
-namespace cybot\cookiebot\addons\lib {
+namespace cybot\cookiebot\lib {
 
 	use cybot\cookiebot\addons\Cookiebot_Addons;
 	use Exception;

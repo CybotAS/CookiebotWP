@@ -3,7 +3,7 @@
 namespace cybot\cookiebot\addons\controller\addons\google_analytics;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
+use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
 /**
  * Class Google_Analytics

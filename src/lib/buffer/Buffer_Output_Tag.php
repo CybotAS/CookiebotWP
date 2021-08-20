@@ -1,8 +1,8 @@
 <?php
 
-namespace cybot\cookiebot\addons\lib\buffer;
+namespace cybot\cookiebot\lib\buffer;
 
-use function cybot\cookiebot\addons\lib\cookiebot_addons_manipulate_script;
+use function cybot\cookiebot\lib\cookiebot_addons_manipulate_script;
 
 class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 

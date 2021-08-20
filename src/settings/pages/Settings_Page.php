@@ -3,8 +3,8 @@
 namespace cybot\cookiebot\settings\pages;
 
 use cybot\cookiebot\Cookiebot_WP;
-use function cybot\cookiebot\addons\lib\include_view;
-use function cybot\cookiebot\addons\lib\asset_url;
+use function cybot\cookiebot\lib\include_view;
+use function cybot\cookiebot\lib\asset_url;
 
 class Settings_Page implements Settings_Page_Interface {
 

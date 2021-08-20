@@ -3,8 +3,8 @@
 namespace cybot\cookiebot\addons\controller\addons\facebook_for_woocommerce;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\addons\lib\Open_Source_Addon_Interface;
-use function cybot\cookiebot\addons\lib\cookiebot_addons_remove_class_action;
+use cybot\cookiebot\lib\Open_Source_Addon_Interface;
+use function cybot\cookiebot\lib\cookiebot_addons_remove_class_action;
 
 class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 

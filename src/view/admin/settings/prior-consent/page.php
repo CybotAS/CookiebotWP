@@ -2,7 +2,7 @@
 /** @var Settings_Page_Tab[] $settings_page_tabs */
 /** @var Settings_Page_Tab $active_tab */
 
-use cybot\cookiebot\addons\lib\Settings_Page_Tab;
+use cybot\cookiebot\lib\Settings_Page_Tab;
 
 ?>
 
