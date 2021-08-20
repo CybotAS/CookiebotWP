@@ -436,6 +436,7 @@ namespace cybot\cookiebot\addons\lib {
 	 * @param string $relative_path
 	 *
 	 * @return string
+	 * @throws InvalidArgumentException
 	 */
 	function asset_path( $relative_path ) {
 		$absolute_path = COOKIEBOT_PLUGIN_DIR . 'assets/' . $relative_path;
@@ -449,6 +450,7 @@ namespace cybot\cookiebot\addons\lib {
 	 * @param string $relative_path
 	 *
 	 * @return string
+	 * @throws InvalidArgumentException
 	 */
 	function asset_url( $relative_path ) {
 		$absolute_path = COOKIEBOT_PLUGIN_DIR . 'assets/' . $relative_path;
