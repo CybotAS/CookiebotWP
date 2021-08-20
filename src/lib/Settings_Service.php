@@ -421,9 +421,11 @@ class Settings_Service implements Settings_Service_Interface {
 	 * The cookiebot plugin is deactivated
 	 * so run this function to cleanup the addons.
 	 *
+	 * @throws Exception
 	 * @since 2.2.0
 	 */
 	public function cookiebot_deactivated() {
+		/** @var Base_Cookiebot_Addon $addon */
 		foreach ( $this->get_active_addons() as $addon ) {
 			$addon->plugin_deactivated();
 		}
@@ -432,6 +434,7 @@ class Settings_Service implements Settings_Service_Interface {
 	/**
 	 * The cookiebot plugin is activated and the addon settings is activated
 	 *
+	 * @throws Exception
 	 * @since 3.6.3
 	 */
 	public function cookiebot_activated() {
@@ -440,9 +443,10 @@ class Settings_Service implements Settings_Service_Interface {
 		if ( $option === false ) {
 			$option = array();
 
+			/** @var Base_Cookiebot_Addon $addon */
 			foreach ( $this->get_addons() as $addon ) {
-				if ( $addon->enable_by_default() ) {
-					$option[ $addon->get_option_name() ] = $addon->get_default_enable_setting();
+				if ( $addon::ENABLE_ADDON_BY_DEFAULT ) {
+					$option[ $addon::OPTION_NAME ] = $addon->get_default_enable_setting();
 				}
 			}
 

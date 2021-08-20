@@ -10,47 +10,29 @@ use cybot\cookiebot\lib\Cookie_Consent;
 use cybot\cookiebot\lib\Dependency_Container;
 use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag;
 use cybot\cookiebot\lib\Settings_Service;
+use cybot\cookiebot\lib\Settings_Service_Interface;
 use Exception;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-
-/**
- * __DIR__ of the cookiebot_addons folder
- */
-define( 'COOKIEBOT_ADDONS_DIR', __DIR__ . DIRECTORY_SEPARATOR );
-
-/**
- * Class Cookiebot_Addons
- * @package cookiebot_addons
- */
 class Cookiebot_Addons {
 
 	/**
-	 * Dependency Container - is used for dependency injections
-	 *
 	 * @var Dependency_Container
-	 *
-	 * @since 1.3.0
 	 */
 	public $container;
 
 	/**
-	 * List of all supported plugin addons
-	 *
 	 * @var array
-	 *
-	 * @since 1.3.0
 	 */
 	private $addons_list = array();
 
 	/**
-	 * @var   Cookiebot_Addons The single instance of the class
-	 * @since 1.0.0
+	 * @var Cookiebot_Addons
 	 */
-	private static $instance = null;
+	private static $instance;
 
 	/**
 	 * Main Cookiebot_WP Instance
@@ -64,7 +46,7 @@ class Cookiebot_Addons {
 	 * @version 2.2.0
 	 */
 	public static function instance() {
-		if ( is_null( self::$instance ) ) {
+		if ( ! is_a( self::$instance, self::class ) ) {
 			try {
 				self::$instance = new self();
 			} catch ( Exception $e ) {
@@ -132,6 +114,7 @@ class Cookiebot_Addons {
 	 * @since 2.2.0
 	 */
 	public function cookiebot_activated() {
+		/** @var Settings_Service_Interface $settings_service */
 		$settings_service = $this->container->get( 'Settings_Service_Interface' );
 		$settings_service->cookiebot_activated();
 	}
@@ -144,6 +127,7 @@ class Cookiebot_Addons {
 	 * @since 2.2.0
 	 */
 	public function cookiebot_deactivated() {
+		/** @var Settings_Service_Interface $settings_service */
 		$settings_service = $this->container->get( 'Settings_Service_Interface' );
 		$settings_service->cookiebot_deactivated();
 	}
@@ -176,7 +160,7 @@ class Cookiebot_Addons {
 	}
 
 	/**
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	protected function assign_addons_to_container() {
 		/**
@@ -204,8 +188,3 @@ class Cookiebot_Addons {
 		}
 	}
 }
-
-/**
- * Initiate the cookiebot addons framework plugin
- */
-Cookiebot_Addons::instance();

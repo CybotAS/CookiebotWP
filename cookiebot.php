@@ -18,6 +18,7 @@ use cybot\cookiebot\admin_notices\Cookiebot_Recommendation_Notice;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
 use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
+use Exception;
 use RuntimeException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\cookiebot_addons_plugin_activated;
@@ -91,11 +92,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		}
 
 		/**
-		 * Cookiebot_WP Installation actions
-		 *
-		 * @version 2.1.4
-		 * @since       2.1.4
-		 * @accces  public
+		 * @throws Exception
 		 */
 		public function activation() {
 			//Delay display of recommendation notice in 3 days if not activated ealier
@@ -116,41 +113,12 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			/**
 			 * Run through the addons and enable the default ones
 			 */
-			if ( ( ! defined( 'COOKIEBOT_ADDONS_STANDALONE' ) || COOKIEBOT_ADDONS_STANDALONE !== true || ! defined( 'COOKIE_ADDONS_LOADED' ) ) ) {
-				define( 'COOKIEBOT_URL', plugin_dir_url( __FILE__ ) );
-				// activation hook doesn't have the addons loaded - so load it extra when the plugin is activated
-				include_once dirname( __FILE__ ) . '/addons/cookiebot-addons-init.php';
-				// run activated hook on the addons
-				cookiebot_addons_plugin_activated();
-			}
+			cookiebot_addons_plugin_activated();
 		}
 
-		/**
-		 * Cookiebot_WP Init Cookiebot.
-		 *
-		 * @version 3.8.1
-		 * @since   1.6.2
-		 * @access  public
-		 */
 		public function cookiebot_init() {
-			/* Load Cookiebot Addons Framework */
-			if ( ( ! defined( 'COOKIEBOT_ADDONS_STANDALONE' ) || COOKIEBOT_ADDONS_STANDALONE !== true || ! defined( 'COOKIE_ADDONS_LOADED' ) ) ) {
-				define( 'COOKIEBOT_URL', plugin_dir_url( __FILE__ ) );
-				Cookiebot_Addons::instance();
-			} else {
-				add_action(
-					'admin_notices',
-					function () {
-						?>
-						<div class="notice notice-warning">
-							<p>
-								<?php esc_html_e( 'You are using Cookiebot Addons Standalone.', 'cookiebot' ); ?>
-							</p>
-						</div>
-						<?php
-					}
-				);
-			}
+			Cookiebot_Addons::instance();
+
 			if ( is_admin() ) {
 
 				//Adding menu to WP admin
