@@ -56,6 +56,8 @@ class Alternative_Addon_Version_Manager {
 	/**
 	 * @param $version_string
 	 * @param $addon_class
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function add_version( $version_string, $addon_class ) {
 		if ( ! version_compare( $version_string, '0.0.1', '>=' ) ) {
@@ -73,6 +75,7 @@ class Alternative_Addon_Version_Manager {
 
 	/**
 	 * @param array $versions
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function add_versions( array $versions ) {
@@ -81,9 +84,9 @@ class Alternative_Addon_Version_Manager {
 		}
 	}
 
-
 	/**
 	 * @return Base_Cookiebot_Addon|null
+	 * @throws Exception
 	 */
 	public function get_installed_version() {
 		foreach ( $this->alternative_versions as $version_string => $addon_class ) {
