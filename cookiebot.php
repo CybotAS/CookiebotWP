@@ -601,42 +601,23 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		}
 
 		/**
-		 * Cookiebot_WP Get cookiebot cbid
-		 *
-		 * @version 2.2.0
-		 * @since       1.0.0
+		 * @return string
 		 */
 		public static function get_cbid() {
-			$cbid = get_option( 'cookiebot-cbid' );
-			if ( is_multisite() && ( $network_cbid = get_site_option( 'cookiebot-cbid' ) ) ) {
-				if ( empty( $cbid ) ) {
-					return $network_cbid;
-				}
-			}
-
-			return $cbid;
+			$network_setting = (string) get_site_option( 'cookiebot-cbid', '' );
+			$setting         = (string) get_option( 'cookiebot-cbid', $network_setting );
+			return empty( $setting ) ? $network_setting : $setting;
 		}
 
 		/**
-		 * Cookiebot_WP Get cookie blocking mode (auto | manual)
-		 *
-		 * @version 2.2.0
-		 * @since       1.0.0
+		 * @return string
 		 */
 		public static function get_cookie_blocking_mode() {
-			$cbm = get_option( 'cookiebot-cookie-blocking-mode' );
-			if ( is_multisite() && ( $network_cbm = get_site_option( 'cookiebot-cookie-blocking-mode' ) ) ) {
-				if ( empty( $cbm ) ) {
-					return $network_cbm;
-				}
-			}
-			if ( empty( $cbm ) ) {
-				$cbm = 'manual';
-			}
-
-			return $cbm;
+			$allowed_modes   = array( 'auto', 'manual' );
+			$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
+			$setting         = (string) get_option( 'cookiebot-cookie-blocking-mode', $network_setting );
+			return in_array( $setting, $allowed_modes, true ) ? $setting : 'manual';
 		}
-
 
 		/**
 		 * Cookiebot_WP Check if Cookiebot is active in admin

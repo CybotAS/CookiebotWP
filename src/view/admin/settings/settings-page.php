@@ -3,11 +3,11 @@
 use function cybot\cookiebot\addons\lib\asset_url;
 
 /**
+ * @var string $cbid
  * @var bool $is_ms
  * @var string $network_cbid
  * @var string $network_scrip_tag_uc_attr
  * @var string $network_scrip_tag_cd_attr
- * @var string $network_cookie_blocking_mode
  * @var string $cookiebot_gdpr_url
  * @var string $cookiebot_logo
  * @var array $supported_languages
@@ -15,6 +15,7 @@ use function cybot\cookiebot\addons\lib\asset_url;
  * @var bool $is_wp_consent_api_active
  * @var array $mDefault
  * @var array $m
+ * @var string $cookie_blocking_mode
  */
 ?>
 <div class="wrap">
@@ -49,9 +50,11 @@ use function cybot\cookiebot\addons\lib\asset_url;
 			<tr valign="top">
 				<th scope="row"><?php esc_html_e( 'Cookiebot ID', 'cookiebot' ); ?></th>
 				<td>
-					<input type="text" name="cookiebot-cbid"
-						   value="<?php echo esc_attr( get_option( 'cookiebot-cbid' ) ); ?>"<?php echo ( $is_ms ) ? ' placeholder="' . $network_cbid . '"' : ''; ?>
-						   style="width:300px"/>
+					<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
+							type="text" name="cookiebot-cbid"
+							value="<?php echo esc_attr( $cbid ); ?>"
+							style="width:300px"
+					/>
 					<p class="description">
 						<?php esc_html_e( 'Need an ID?', 'cookiebot' ); ?>
 						<a href="https://www.cookiebot.com/goto/signup" target="_blank">
@@ -70,21 +73,21 @@ use function cybot\cookiebot\addons\lib\asset_url;
 					<?php esc_html_e( 'Cookie-blocking mode', 'cookiebot' ); ?>
 				</th>
 				<td>
-					<?php
-					$cbm = get_option( 'cookiebot-cookie-blocking-mode', 'manual' );
-					if ( $is_ms && $network_cookie_blocking_mode !== 'custom' ) {
-						$cbm = $network_cookie_blocking_mode;
-					}
-					?>
 					<label>
-						<input type="radio" name="cookiebot-cookie-blocking-mode"
-							   value="auto" <?php checked( 'auto', $cbm, true ); ?> />
+						<input <?php checked( 'auto', $cookie_blocking_mode, true ); ?>
+								type="radio"
+								name="cookiebot-cookie-blocking-mode"
+								value="auto"
+						/>
 						<?php esc_html_e( 'Automatic', 'cookiebot' ); ?>
 					</label>
 					&nbsp; &nbsp;
 					<label>
-						<input type="radio" name="cookiebot-cookie-blocking-mode"
-							   value="manual" <?php checked( 'manual', $cbm, true ); ?> />
+						<input <?php checked( 'manual', $cookie_blocking_mode, true ); ?>
+								type="radio"
+								name="cookiebot-cookie-blocking-mode"
+								value="manual"
+						/>
 						<?php esc_html_e( 'Manual', 'cookiebot' ); ?>
 					</label>
 					<p class="description">
@@ -96,7 +99,7 @@ use function cybot\cookiebot\addons\lib\asset_url;
 					</p>
 					<script>
 						jQuery( document ).ready( function ( $ ) {
-							var cookieBlockingMode = '<?php echo $cbm; ?>'
+							var cookieBlockingMode = '<?php echo $cookie_blocking_mode; ?>'
 							$( 'input[type=radio][name=cookiebot-cookie-blocking-mode]' ).on( 'change', function () {
 								if ( this.value == 'auto' && cookieBlockingMode != this.value ) {
 									$( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 )
