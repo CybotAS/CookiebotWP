@@ -2,7 +2,9 @@
 
 namespace cybot\cookiebot\settings;
 
+use cybot\cookiebot\Cookiebot_WP;
 use cybot\cookiebot\settings\pages\Support_Page;
+use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
 
 class Network_Menu_Settings {
@@ -89,11 +91,29 @@ class Network_Menu_Settings {
 	 * @since   2.2.0
 	 */
 	public function display() {
+		$cbm = get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
+
+		wp_enqueue_script(
+			'cookiebot-network-settings-page-js',
+			asset_url( 'js/backend/network-settings-page.js' ),
+			null,
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+			true
+		);
+
+		wp_add_inline_script(
+			'cookiebot-network-settings-page-js',
+			'const cookiebotNetworkSettings = ' . wp_json_encode( array( 'cbm' => esc_attr( $cbm ) ) ),
+			'before',
+			''
+		);
+
 		include_view(
 			'admin/settings/network-settings-page.php',
 			array(
 				'cookiebot_gdpr_url' => 'https://www.cookiebot.com/goto/gdpr',
 				'logo'               => COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
+				'cbm'                => $cbm,
 			)
 		);
 	}

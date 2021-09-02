@@ -19,9 +19,12 @@
 		<?php settings_fields( 'cookiebot-iab' ); ?>
 		<?php do_settings_sections( 'cookiebot-iab' ); ?>
 
-		<label><?php esc_html_e( 'Enable IAB integration', 'cookiebot' ); ?></label>
-		<input type="checkbox" name="cookiebot-iab"
-			   value="1" <?php checked( 1, get_option( 'cookiebot-iab' ), true ); ?>>
+		<label for="cookiebot-iab"><?php esc_html_e( 'Enable IAB integration', 'cookiebot' ); ?></label>
+		<input
+			type="checkbox"
+			name="cookiebot-iab"
+			id="cookiebot-iab"
+			value="1" <?php checked( 1, get_option( 'cookiebot-iab' ), true ); ?>>
 
 		<?php submit_button(); ?>
 	</form>

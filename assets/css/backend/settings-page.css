@@ -1,0 +1,14 @@
+.cookiebot_fieldset_header {
+    cursor: pointer;
+}
+
+.cookiebot_fieldset_header::after {
+    content: "\f140";
+    font: normal 24px/1 dashicons;
+    position: relative;
+    top: 5px;
+}
+
+.cookiebot_fieldset_header.active::after {
+    content: "\f142";
+}

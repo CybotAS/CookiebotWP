@@ -4,6 +4,7 @@
 	<p>
 		<?php
 		echo sprintf(
+				/* translators: The first placeholder is the HTML anchor open tag, and the second placeholder is the closing tag. */
 			esc_html__(
 				'For more details about Cookiebot\'s CCPA Legislation integration, see %1$sarticle about cookiebot and the CCPA compliance%2$s',
 				'cookiebot'
@@ -21,20 +22,25 @@
 
 		<table class="form-table">
 			<tbody>
-			<tr valign="top">
+			<tr>
 				<th scope="row">
 					<label><?php esc_html_e( 'Enable CCPA configuration for visitors from California', 'cookiebot' ); ?></label>
 				</th>
 				<td>
-					<input type="checkbox" name="cookiebot-ccpa"
-					       value="1" <?php checked( 1, get_option( 'cookiebot-ccpa' ), true ); ?>>
+					<input
+						type="checkbox"
+						name="cookiebot-ccpa"
+						value="1" <?php checked( 1, esc_attr( get_option( 'cookiebot-ccpa' ) ), true ); ?>>
 				</td>
 			</tr>
 			<tr>
-				<th valign="top"><label><?php esc_html_e( 'Domain Group ID', 'cookiebot' ); ?></label></th>
+				<th><label><?php esc_html_e( 'Domain Group ID', 'cookiebot' ); ?></label></th>
 				<td>
-					<input type="text" style="width: 300px;" name="cookiebot-ccpa-domain-group-id"
-					       value="<?php echo get_option( 'cookiebot-ccpa-domain-group-id' ); ?>">
+					<input
+						type="text"
+						style="width: 300px;"
+						name="cookiebot-ccpa-domain-group-id"
+						value="<?php echo esc_attr( get_option( 'cookiebot-ccpa-domain-group-id' ) ); ?>">
 				</td>
 			</tr>
 			</tbody>

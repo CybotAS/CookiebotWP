@@ -7,11 +7,11 @@
 
 		<p><?php esc_html_e( 'Enable GTM', 'cookiebot' ); ?></p>
 		<div class="GTM_check">
-			<input <?php checked( 1, get_option( 'cookiebot-gtm' ), true ); ?>
+			<input
 					type="checkbox"
 					name="cookiebot-gtm"
 					id="cookiebot-gtm"
-					value="1">
+					value="1" <?php checked( 1, get_option( 'cookiebot-gtm' ), true ); ?>>
 			<p>
 				<?php
 				esc_html_e(

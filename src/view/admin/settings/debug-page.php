@@ -30,12 +30,4 @@
 			id="cookiebot-debug-info"
 			readonly="readonly"
 	><?php echo esc_textarea( $debug_output ); ?></textarea>
-	<script>
-		function copyDebugInfo() {
-			var t = document.getElementById( 'cookiebot-debug-info' )
-			t.select()
-			t.setSelectionRange( 0, 99999 )
-			document.execCommand( 'copy' )
-		}
-	</script>
 </div>

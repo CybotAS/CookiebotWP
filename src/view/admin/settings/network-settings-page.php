@@ -2,17 +2,21 @@
 /**
  * @var string $logo
  * @var string $cookiebot_gdpr_url
+ * @var string $cbm
  */
 ?>
 <div class="wrap">
 	<h1><?php esc_html_e( 'Cookiebot Network Settings', 'cookiebot' ); ?></h1>
 	<a href="https://www.cookiebot.com">
-		<img src="<?php echo $logo; ?>"
-		     style="float:right;margin-left:1em;">
+		<img
+			src="<?php echo esc_attr( $logo ); ?>"
+			alt="Cookiebot"
+			style="float:right;margin-left:1em;">
 	</a>
 	<p>
 		<?php
 		printf(
+				/* translators: first link is for GDPR, second is more information about third-party services */
 			esc_html__(
 				'Cookiebot enables your website to comply with current legislation in the EU on the use of cookies for user tracking and profiling. The EU ePrivacy Directive requires prior, informed consent of your site users, while the  %1$s %2$s.',
 				'cookiebot'
@@ -30,24 +34,26 @@
 		?>
 	</p>
 	<p>
-		<b><big style="color:red;">
+		<b style="color:red;font-size: larger">
 				<?php
 				esc_html_e(
 					'The settings below is network wide settings. See notes below each field.',
 					'cookiebot'
 				);
 				?>
-			</big></b>
+			</b>
 	</p>
 	<form method="post" action="edit.php?action=cookiebot_network_settings">
 		<?php wp_nonce_field( 'cookiebot-network-settings' ); ?>
 		<table class="form-table">
-			<tr valign="top">
+			<tr>
 				<th scope="row"><?php esc_html_e( 'Network Cookiebot ID', 'cookiebot' ); ?></th>
 				<td>
-					<input type="text" name="cookiebot-cbid"
-					       value="<?php echo esc_attr( get_site_option( 'cookiebot-cbid', '' ) ); ?>"
-					       style="width:300px"/>
+					<input
+						type="text"
+						name="cookiebot-cbid"
+						value="<?php echo esc_attr( get_site_option( 'cookiebot-cbid', '' ) ); ?>"
+						style="width:300px"/>
 					<p class="description">
 						<b>
 							<?php
@@ -70,23 +76,24 @@
 					</p>
 				</td>
 			</tr>
-			<tr valign="top">
+			<tr>
 				<th scope="row">
 					<?php esc_html_e( 'Cookie-blocking mode', 'cookiebot' ); ?>
 				</th>
 				<td>
-					<?php
-					$cbm = get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
-					?>
 					<label>
-						<input type="radio" name="cookiebot-cookie-blocking-mode"
-						       value="auto" <?php checked( 'auto', $cbm, true ); ?> />
+						<input
+								type="radio"
+								name="cookiebot-cookie-blocking-mode"
+								value="auto" <?php checked( 'auto', $cbm, true ); ?> />
 						<?php esc_html_e( 'Automatic', 'cookiebot' ); ?>
 					</label>
 					&nbsp; &nbsp;
 					<label>
-						<input type="radio" name="cookiebot-cookie-blocking-mode"
-						       value="manual" <?php checked( 'manual', $cbm, true ); ?> />
+						<input
+								type="radio"
+								name="cookiebot-cookie-blocking-mode"
+								value="manual" <?php checked( 'manual', $cbm, true ); ?> />
 						<?php esc_html_e( 'Manual', 'cookiebot' ); ?>
 					</label>
 					<p class="description">
@@ -94,27 +101,7 @@
 					</p>
 				</td>
 			</tr>
-			<script>
-                jQuery( document ).ready( function ( $ ) {
-                    var cookieBlockingMode = '<?php echo $cbm; ?>'
-                    $( 'input[type=radio][name=cookiebot-cookie-blocking-mode]' ).on( 'change', function () {
-                        if ( this.value == 'auto' && cookieBlockingMode != this.value ) {
-                            $( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 )
-                            $( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true )
-                        }
-                        if ( this.value == 'manual' && cookieBlockingMode != this.value ) {
-                            $( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 1 )
-                            $( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', false )
-                        }
-                        cookieBlockingMode = this.value
-                    } )
-                    if ( cookieBlockingMode == 'auto' ) {
-                        $( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 )
-                        $( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true )
-                    }
-                } )
-			</script>
-			<tr valign="top" id="cookiebot-setting-async">
+			<tr id="cookiebot-setting-async">
 				<th scope="row">
 					<?php esc_html_e( 'Add async or defer attribute', 'cookiebot' ); ?>
 					<br/><?php esc_html_e( 'Consent banner script tag', 'cookiebot' ); ?>
@@ -124,26 +111,34 @@
 					$cv = get_site_option( 'cookiebot-script-tag-uc-attribute', 'custom' );
 					?>
 					<label>
-						<input type="radio" name="cookiebot-script-tag-uc-attribute"
-						       value="" <?php checked( '', $cv, true ); ?> />
+						<input
+								type="radio"
+								name="cookiebot-script-tag-uc-attribute"
+								value="" <?php checked( '', $cv, true ); ?> />
 						<i><?php esc_html_e( 'None', 'cookiebot' ); ?></i>
 					</label>
 					&nbsp; &nbsp;
 					<label>
-						<input type="radio" name="cookiebot-script-tag-uc-attribute"
-						       value="async" <?php checked( 'async', $cv, true ); ?> />
+						<input
+								type="radio"
+								name="cookiebot-script-tag-uc-attribute"
+								value="async" <?php checked( 'async', $cv, true ); ?> />
 						async
 					</label>
 					&nbsp; &nbsp;
 					<label>
-						<input type="radio" name="cookiebot-script-tag-uc-attribute"
-						       value="defer" <?php checked( 'defer', $cv, true ); ?> />
+						<input
+								type="radio"
+								name="cookiebot-script-tag-uc-attribute"
+								value="defer" <?php checked( 'defer', $cv, true ); ?> />
 						defer
 					</label>
 					&nbsp; &nbsp;
 					<label>
-						<input type="radio" name="cookiebot-script-tag-uc-attribute"
-						       value="custom" <?php checked( 'custom', $cv, true ); ?> />
+						<input
+								type="radio"
+								name="cookiebot-script-tag-uc-attribute"
+								value="custom" <?php checked( 'custom', $cv, true ); ?> />
 						<i><?php esc_html_e( 'Choose per subsite', 'cookiebot' ); ?></i>
 					</label>
 					<p class="description">
@@ -159,7 +154,7 @@
 					</p>
 				</td>
 			</tr>
-			<tr valign="top">
+			<tr>
 				<th scope="row">
 					<?php esc_html_e( 'Add async or defer attribute', 'cookiebot' ); ?>
 					<br/><?php esc_html_e( 'Cookie declaration script tag', 'cookiebot' ); ?>
@@ -169,26 +164,34 @@
 					$cv = get_site_option( 'cookiebot-script-tag-cd-attribute', 'custom' );
 					?>
 					<label>
-						<input type="radio" name="cookiebot-script-tag-cd-attribute"
-						       value="" <?php checked( '', $cv, true ); ?> />
+						<input
+								type="radio"
+								name="cookiebot-script-tag-cd-attribute"
+								value="" <?php checked( '', $cv, true ); ?> />
 						<i><?php esc_html_e( 'None', 'cookiebot' ); ?></i>
 					</label>
 					&nbsp; &nbsp;
 					<label>
-						<input type="radio" name="cookiebot-script-tag-cd-attribute"
-						       value="async" <?php checked( 'async', $cv, true ); ?> />
+						<input
+								type="radio"
+								name="cookiebot-script-tag-cd-attribute"
+								value="async" <?php checked( 'async', $cv, true ); ?> />
 						async
 					</label>
 					&nbsp; &nbsp;
 					<label>
-						<input type="radio" name="cookiebot-script-tag-cd-attribute"
-						       value="defer" <?php checked( 'defer', $cv, true ); ?> />
+						<input
+								type="radio"
+								name="cookiebot-script-tag-cd-attribute"
+								value="defer" <?php checked( 'defer', $cv, true ); ?> />
 						defer
 					</label>
 					&nbsp; &nbsp;
 					<label>
-						<input type="radio" name="cookiebot-script-tag-cd-attribute"
-						       value="custom" <?php checked( 'custom', $cv, true ); ?> />
+						<input
+								type="radio"
+								name="cookiebot-script-tag-cd-attribute"
+								value="custom" <?php checked( 'custom', $cv, true ); ?> />
 						<i><?php esc_html_e( 'Choose per subsite', 'cookiebot' ); ?></i>
 					</label>
 					<p class="description">
@@ -204,10 +207,13 @@
 					</p>
 				</td>
 			</tr>
-			<tr valign="top">
+			<tr>
 				<th scope="row"><?php esc_html_e( 'Auto-update Cookiebot', 'cookiebot' ); ?></th>
 				<td>
-					<input type="checkbox" name="cookiebot-autoupdate" value="1"
+					<input
+							type="checkbox"
+							name="cookiebot-autoupdate"
+							value="1"
 						<?php
 						checked(
 							1,
@@ -221,7 +227,7 @@
 					</p>
 				</td>
 			</tr>
-			<tr valign="top" id="cookiebot-setting-hide-popup">
+			<tr id="cookiebot-setting-hide-popup">
 				<th scope="row"><?php esc_html_e( 'Hide Cookie Popup', 'cookiebot' ); ?></th>
 				<td>
 					<input type="checkbox" name="cookiebot-nooutput" value="1"
@@ -258,7 +264,7 @@
 					</p>
 				</td>
 			</tr>
-			<tr valign="top">
+			<tr>
 				<th scope="row"><?php esc_html_e( 'Hide Cookie Popup in WP Admin', 'cookiebot' ); ?></th>
 				<td>
 					<input type="checkbox" name="cookiebot-nooutput-admin" value="1"

@@ -22,12 +22,5 @@ class Support_Page implements Settings_Page_Interface {
 
 	public function display() {
 		include_view( 'admin/settings/support-page.php', array() );
-
-		wp_enqueue_style(
-			'cookiebot-gtm-page',
-			asset_url( 'css/gtm_page.css' ),
-			null,
-			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
-		);
 	}
 }

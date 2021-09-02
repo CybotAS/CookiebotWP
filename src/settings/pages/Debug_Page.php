@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
+use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
 use Exception;
 use function cybot\cookiebot\cookiebot;
@@ -24,6 +25,13 @@ class Debug_Page implements Settings_Page_Interface {
 	}
 
 	public function display() {
+		wp_enqueue_script(
+			'cookiebot-debug-page-js',
+			asset_url( 'js/backend/debug-page.js' ),
+			null,
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+			true
+		);
 		$debug_output = $this->prepare_debug_data();
 
 		include_view( 'admin/settings/debug-page.php', array( 'debug_output' => $debug_output ) );
@@ -53,15 +61,15 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= 'Cookiebot ID: ' . Cookiebot_WP::get_cbid() . "\n";
 		$debug_output .= 'Blocking mode: ' . get_option( 'cookiebot-cookie-blocking-mode' ) . "\n";
 		$debug_output .= 'Language: ' . get_option( 'cookiebot-language' ) . "\n";
-		$debug_output .= 'IAB: ' . ( get_option( 'cookiebot-iab' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
-		$debug_output .= 'CCPA banner for visitors from California: ' . ( get_option( 'cookiebot-ccpa' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
+		$debug_output .= 'IAB: ' . ( get_option( 'cookiebot-iab' ) === '1' ? 'Enabled' : 'Not enabled' ) . "\n";
+		$debug_output .= 'CCPA banner for visitors from California: ' . ( get_option( 'cookiebot-ccpa' ) === '1' ? 'Enabled' : 'Not enabled' ) . "\n";
 		$debug_output .= 'CCPA domain group id: ' . get_option( 'cookiebot-ccpa-domain-group-id' ) . "\n";
-		$debug_output .= 'Add async/defer to banner tag: ' . ( get_option( 'cookiebot-script-tag-uc-attribute' ) != '' ? get_option( 'cookiebot-script-tag-uc-attribute' ) : 'None' ) . "\n";
-		$debug_output .= 'Add async/defer to declaration tag: ' . ( get_option( 'cookiebot-script-tag-cd-attribute' ) != '' ? get_option( 'cookiebot-script-tag-cd-attribute' ) : 'None' ) . "\n";
-		$debug_output .= 'Auto update: ' . ( get_option( 'cookiebot-autoupdate' ) == '1' ? 'Enabled' : 'Not enabled' ) . "\n";
-		$debug_output .= 'Hide Cookie Popup: ' . ( get_option( 'cookiebot-nooutput' ) == '1' ? 'Yes' : 'No' ) . "\n";
-		$debug_output .= 'Disable Cookiebot in WP Admin: ' . ( get_option( 'cookiebot-nooutput-admin' ) == '1' ? 'Yes' : 'No' ) . "\n";
-		$debug_output .= 'Enable Cookiebot on front end while logged in: ' . ( get_option( 'cookiebot-output-logged-in' ) == '1' ? 'Yes' : 'No' ) . "\n";
+		$debug_output .= 'Add async/defer to banner tag: ' . ( get_option( 'cookiebot-script-tag-uc-attribute' ) !== '' ? get_option( 'cookiebot-script-tag-uc-attribute' ) : 'None' ) . "\n";
+		$debug_output .= 'Add async/defer to declaration tag: ' . ( get_option( 'cookiebot-script-tag-cd-attribute' ) !== '' ? get_option( 'cookiebot-script-tag-cd-attribute' ) : 'None' ) . "\n";
+		$debug_output .= 'Auto update: ' . ( get_option( 'cookiebot-autoupdate' ) === '1' ? 'Enabled' : 'Not enabled' ) . "\n";
+		$debug_output .= 'Hide Cookie Popup: ' . ( get_option( 'cookiebot-nooutput' ) === '1' ? 'Yes' : 'No' ) . "\n";
+		$debug_output .= 'Disable Cookiebot in WP Admin: ' . ( get_option( 'cookiebot-nooutput-admin' ) === '1' ? 'Yes' : 'No' ) . "\n";
+		$debug_output .= 'Enable Cookiebot on front end while logged in: ' . ( get_option( 'cookiebot-output-logged-in' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Banner tag: ' . $cookiebot->add_js( false ) . "\n";
 		$debug_output .= 'Declaration tag: ' . $cookiebot->show_declaration() . "\n";
 
