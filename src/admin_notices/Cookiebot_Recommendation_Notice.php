@@ -12,6 +12,10 @@ class Cookiebot_Recommendation_Notice {
 
 	const COOKIEBOT_RECOMMENDATION_OPTION_KEY = 'cookiebot_notice_recommend';
 
+	public function register_hooks() {
+		add_action( 'admin_notices', array( $this, 'show_notice_if_needed' ) );
+	}
+
 	public function show_notice_if_needed() {
 		/** Save actions when someone click on the notice message */
 		$this->save_notice_link();

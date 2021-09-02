@@ -15,13 +15,14 @@ Domain Path: /langs
 
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\admin_notices\Cookiebot_Recommendation_Notice;
+use cybot\cookiebot\lib\Cookiebot_Activated;
+use cybot\cookiebot\lib\Cookiebot_Deactivated;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
 use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
 use Exception;
 use RuntimeException;
 use function cybot\cookiebot\lib\asset_url;
-use function cybot\cookiebot\lib\cookiebot_addons_plugin_activated;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -74,8 +75,8 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			$this->throw_exception_if_php_version_is_incompatible();
 
 			add_action( 'after_setup_theme', array( $this, 'cookiebot_init' ), 5 );
-			register_activation_hook( __FILE__, array( $this, 'activation' ) );
-			register_deactivation_hook( __FILE__, 'cybot\cookiebot\lib\cookiebot_addons_plugin_deactivated' );
+			register_activation_hook( __FILE__, array( new Cookiebot_Activated(), 'run' ) );
+			register_deactivation_hook( __FILE__, array( new Cookiebot_Deactivated(), 'run' ) );
 
 			$this->cookiebot_fix_plugin_conflicts();
 		}
@@ -89,31 +90,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				);
 				throw new RuntimeException( $message );
 			}
-		}
-
-		/**
-		 * @throws Exception
-		 */
-		public function activation() {
-			//Delay display of recommendation notice in 3 days if not activated ealier
-			if ( get_option( 'cookiebot_notice_recommend', false ) === false ) {
-				//Not set yet - this must be first activation - delay in 3 days
-				update_option( 'cookiebot_notice_recommend', strtotime( '+3 days' ) );
-			}
-			if ( $this->get_cbid() === '' ) {
-				if ( is_multisite() ) {
-					update_site_option( 'cookiebot-cookie-blocking-mode', 'auto' );
-					update_site_option( 'cookiebot-nooutput-admin', true );
-				} else {
-					update_option( 'cookiebot-cookie-blocking-mode', 'auto' );
-					update_option( 'cookiebot-nooutput-admin', true );
-				}
-			}
-
-			/**
-			 * Run through the addons and enable the default ones
-			 */
-			cookiebot_addons_plugin_activated();
 		}
 
 		public function cookiebot_init() {
@@ -131,8 +107,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				//Adding dashboard widgets
 				add_action( 'wp_dashboard_setup', array( $this, 'add_dashboard_widgets' ) );
 
-				//cookiebot recommendation widget
-				add_action( 'admin_notices', array( $this, 'register_admin_notices' ) );
+				( new Cookiebot_Recommendation_Notice() )->register_hooks();
 
 				//Check if we should show cookie consent banner on admin pages
 				if ( ! $this->cookiebot_disabled_in_admin() ) {
@@ -241,10 +216,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 */
 		public function register_widgets() {
 			register_widget( Cookiebot_Declaration_Widget::class );
-		}
-
-		public function register_admin_notices() {
-			( new Cookiebot_Recommendation_Notice() )->show_notice_if_needed();
 		}
 
 		/**
@@ -575,6 +546,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		public static function get_cbid() {
 			$network_setting = (string) get_site_option( 'cookiebot-cbid', '' );
 			$setting         = (string) get_option( 'cookiebot-cbid', $network_setting );
+
 			return empty( $setting ) ? $network_setting : $setting;
 		}
 
@@ -585,6 +557,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			$allowed_modes   = array( 'auto', 'manual' );
 			$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
 			$setting         = (string) get_option( 'cookiebot-cookie-blocking-mode', $network_setting );
+
 			return in_array( $setting, $allowed_modes, true ) ? $setting : 'manual';
 		}
 
@@ -813,8 +786,8 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		public function _cookiebot_plugin_conflict_divi() {
 			if ( defined( 'ET_FB_ENABLED' ) ) {
 				if ( ET_FB_ENABLED &&
-					 $this->cookiebot_disabled_in_admin() &&
-					 $this->get_cookie_blocking_mode() == 'auto' ) {
+				     $this->cookiebot_disabled_in_admin() &&
+				     $this->get_cookie_blocking_mode() == 'auto' ) {
 
 					define( 'COOKIEBOT_DISABLE_ON_PAGE', true ); //Disable Cookiebot on the current page
 

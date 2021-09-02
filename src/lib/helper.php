@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\lib {
 
 	use cybot\cookiebot\addons\Cookiebot_Addons;
+	use cybot\cookiebot\Cookiebot_WP;
 	use Exception;
 	use InvalidArgumentException;
 
@@ -325,28 +326,6 @@ namespace cybot\cookiebot\lib {
 		$output = str_replace( 'select ', 'select class="' . $class . '" ', $dropdown );
 
 		return str_replace( 'value="" ', 'value="en_US" ', $output );
-	}
-
-	/**
-	 * Run actions when the cookiebot plugin is deactivated
-	 *
-	 * @throws Exception
-	 * @since 2.2.0
-	 */
-	function cookiebot_addons_plugin_deactivated() {
-		$cookiebot_addons = Cookiebot_Addons::instance();
-		$cookiebot_addons->cookiebot_deactivated();
-	}
-
-	/**
-	 * Run actions when the cookiebot plugin is deactivated
-	 *
-	 * @throws Exception
-	 * @since 3.6.3
-	 */
-	function cookiebot_addons_plugin_activated() {
-		$cookiebot_addons = Cookiebot_Addons::instance();
-		$cookiebot_addons->cookiebot_activated();
 	}
 
 	/**
