@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
 use Exception;
@@ -71,7 +72,7 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= 'Disable Cookiebot in WP Admin: ' . ( get_option( 'cookiebot-nooutput-admin' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Enable Cookiebot on front end while logged in: ' . ( get_option( 'cookiebot-output-logged-in' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Banner tag: ' . $cookiebot->add_js( false ) . "\n";
-		$debug_output .= 'Declaration tag: ' . $cookiebot->show_declaration() . "\n";
+		$debug_output .= 'Declaration tag: ' . Cookiebot_Declaration_Shortcode::show_declaration() . "\n";
 
 		if ( get_option( 'cookiebot-gtm' ) !== false ) {
 			$debug_output .= 'GTM tag: ' . $cookiebot->add_GTM( false ) . "\n";

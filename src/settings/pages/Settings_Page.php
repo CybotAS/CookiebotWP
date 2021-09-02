@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\settings\pages;
 
 use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Supported_Languages;
 use function cybot\cookiebot\lib\include_view;
 use function cybot\cookiebot\lib\asset_url;
 
@@ -44,7 +45,7 @@ class Settings_Page implements Settings_Page_Interface {
 			'is_ms'                    => false,
 			'cookiebot_gdpr_url'       => 'https://www.cookiebot.com/goto/gdpr',
 			'cookiebot_logo'           => COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
-			'supported_languages'      => Cookiebot_WP::get_supported_languages(),
+			'supported_languages'      => Supported_Languages::get(),
 			'current_lang'             => $cookiebot->get_language( true ),
 			'is_wp_consent_api_active' => $cookiebot->is_wp_consent_api_active(),
 			'm_default'                => $cookiebot->get_default_wp_consent_api_mapping(),

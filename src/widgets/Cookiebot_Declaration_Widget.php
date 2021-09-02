@@ -2,6 +2,7 @@
 
 namespace cybot\cookiebot\widgets;
 
+use cybot\cookiebot\lib\Supported_Languages;
 use WP_Widget;
 use cybot\cookiebot\Cookiebot_WP;
 use function cybot\cookiebot\lib\include_view;
@@ -30,7 +31,7 @@ class Cookiebot_Declaration_Widget extends WP_Widget {
 			'title_field_name'    => $this->get_field_name( 'title' ),
 			'lang_field_id'       => $this->get_field_id( 'lang' ),
 			'lang_field_name'     => $this->get_field_name( 'lang' ),
-			'supported_languages' => Cookiebot_WP::get_supported_languages(),
+			'supported_languages' => Supported_Languages::get(),
 		);
 		$view_args  = wp_parse_args( (array) $instance, array_merge( $defaults, $fixed_args ) );
 		include_view( 'admin/widgets/cookiebot-declaration-widget-form.php', $view_args );

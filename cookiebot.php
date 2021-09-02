@@ -15,11 +15,15 @@ Domain Path: /langs
 
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\admin_notices\Cookiebot_Recommendation_Notice;
+use cybot\cookiebot\gutenberg\Cookiebot_Gutenberg_Declaration_Block;
 use cybot\cookiebot\lib\Cookiebot_Activated;
+use cybot\cookiebot\lib\Cookiebot_Automatic_Updates;
 use cybot\cookiebot\lib\Cookiebot_Deactivated;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
+use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
 use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
+use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
 use Exception;
 use RuntimeException;
 use function cybot\cookiebot\lib\asset_url;
@@ -93,6 +97,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		}
 
 		public function cookiebot_init() {
+			// cookiebot addon trigger
 			Cookiebot_Addons::instance();
 
 			if ( is_admin() ) {
@@ -105,7 +110,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				}
 
 				//Adding dashboard widgets
-				add_action( 'wp_dashboard_setup', array( $this, 'add_dashboard_widgets' ) );
+				( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();
 
 				( new Cookiebot_Recommendation_Notice() )->register_hooks();
 
@@ -128,7 +133,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			add_action( 'wp_head', array( $this, 'add_js' ), - 9997 );
 			add_action( 'wp_head', array( $this, 'add_GTM' ), - 9998 );
 			add_action( 'wp_head', array( $this, 'add_GCM' ), - 9999 );
-			add_shortcode( 'cookie_declaration', array( $this, 'show_declaration' ) );
+			( new Cookiebot_Declaration_Shortcode() )->register_hooks();
 
 			//Add filter if WP rocket is enabled
 			if ( defined( 'WP_ROCKET_VERSION' ) ) {
@@ -138,64 +143,13 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			//Add filter
 			add_filter( 'sgo_javascript_combine_excluded_external_paths', array( $this, 'sgo_exclude_external_js' ) );
 
-			//Automatic update plugin
-			if ( is_admin() || ( defined( 'DOING_CRON' ) && DOING_CRON ) ) {
-				add_filter( 'auto_update_plugin', array( $this, 'automatic_updates' ), 10, 2 );
-			}
+			( new Cookiebot_Automatic_Updates() )->register_hooks();
 
 			//Loading widgets
 			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
 			//Add Gutenberg block
-			add_action( 'init', array( $this, 'gutenberg_block_setup' ) );
-			add_action( 'enqueue_block_editor_assets', array( $this, 'gutenberg_block_admin_assets' ) );
-		}
-
-
-		/**
-		 * Cookiebot_WP Setup Gutenberg block
-		 *
-		 * @version 3.7.0
-		 * @since       3.7.0
-		 */
-		public function gutenberg_block_setup() {
-			if ( ! function_exists( 'register_block_type' ) ) {
-				return; //gutenberg not active
-			}
-
-			register_block_type(
-				'cookiebot/cookie-declaration',
-				array(
-					'render_callback' => array( $this, 'block_cookie_declaration' ),
-				)
-			);
-		}
-
-		/**
-		 * Cookiebot_WP Add block JS
-		 *
-		 * @version 3.7.1
-		 * @since       3.7.1
-		 */
-		public function gutenberg_block_admin_assets() {
-			//Add Gutenberg Widget
-			wp_enqueue_script(
-				'cookiebot-declaration',
-				asset_url( 'js/backend/gutenberg/cookie-declaration-gutenberg-block.js' ),
-				array( 'wp-blocks', 'wp-i18n', 'wp-element' ), // Required scripts for the block
-				self::COOKIEBOT_PLUGIN_VERSION,
-				false
-			);
-		}
-
-		/**
-		 * Cookiebot_WP Render Cookiebot Declaration as Gutenberg block
-		 *
-		 * @version 3.7.0
-		 * @since       3.7.0
-		 */
-		public function block_cookie_declaration() {
-			return $this->show_declaration();
+			( new Cookiebot_Gutenberg_Declaration_Block() )->register_hooks();
 		}
 
 		/**
@@ -219,137 +173,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		}
 
 		/**
-		 * Cookiebot_WP Add dashboard widgets to admin
-		 *
-		 * @version 1.0.0
-		 * @since   1.0.0
-		 */
-
-		public function add_dashboard_widgets() {
-			wp_add_dashboard_widget(
-				'cookiebot_status',
-				esc_html__( 'Cookiebot Status', 'cookiebot' ),
-				array(
-					$this,
-					'dashboard_widget_status',
-				)
-			);
-		}
-
-		/**
-		 * Cookiebot_WP Output Dashboard Status Widget
-		 *
-		 * @version 1.0.0
-		 * @since   1.0.0
-		 */
-		public function dashboard_widget_status() {
-			$cbid = $this->get_cbid();
-			if ( empty( $cbid ) ) {
-				echo '<p>' . esc_html__( 'You need to enter your Cookiebot ID.', 'cookiebot' ) . '</p>';
-				echo '<p><a href="options-general.php?page=cookiebot">';
-				echo esc_html__( 'Update your Cookiebot ID', 'cookiebot' );
-				echo '</a></p>';
-			} else {
-				echo '<p>' . esc_html_e( 'Your Cookiebot is working!', 'cookiebot' ) . '</p>';
-			}
-		}
-
-		/**
-		 * Cookiebot_WP Automatic update plugin if activated
-		 *
-		 * @version 2.2.0
-		 * @since       1.5.0
-		 */
-		public function automatic_updates( $update, $item ) {
-			//Do not update from subsite on a multisite installation
-			if ( is_multisite() && ! is_main_site() ) {
-				return $update;
-			}
-
-			//Check if we have everything we need
-			$item = (array) $item;
-			if ( ! isset( $item['new_version'] ) || ! isset( $item['slug'] ) ) {
-				return $update;
-			}
-
-			//It is not Cookiebot
-			if ( $item['slug'] !== 'cookiebot' ) {
-				return $update;
-			}
-
-			// Check if cookiebot autoupdate is disabled
-			if ( ! get_option( 'cookiebot-autoupdate', false ) ) {
-				return $update;
-			}
-
-			// Check if multisite autoupdate is disabled
-			if ( is_multisite() && ! get_site_option( 'cookiebot-autoupdate', false ) ) {
-				return $update;
-			}
-
-			return true;
-		}
-
-
-		/**
-		 * Cookiebot_WP Get list of supported languages
-		 *
-		 * @version 1.4.0
-		 * @since       1.4.0
-		 */
-		public static function get_supported_languages() {
-			$supported_languages       = array();
-			$supported_languages['nb'] = __( 'Norwegian Bokmål', 'cookiebot' );
-			$supported_languages['tr'] = __( 'Turkish', 'cookiebot' );
-			$supported_languages['de'] = __( 'German', 'cookiebot' );
-			$supported_languages['cs'] = __( 'Czech', 'cookiebot' );
-			$supported_languages['da'] = __( 'Danish', 'cookiebot' );
-			$supported_languages['sq'] = __( 'Albanian', 'cookiebot' );
-			$supported_languages['he'] = __( 'Hebrew', 'cookiebot' );
-			$supported_languages['ko'] = __( 'Korean', 'cookiebot' );
-			$supported_languages['it'] = __( 'Italian', 'cookiebot' );
-			$supported_languages['nl'] = __( 'Dutch', 'cookiebot' );
-			$supported_languages['vi'] = __( 'Vietnamese', 'cookiebot' );
-			$supported_languages['ta'] = __( 'Tamil', 'cookiebot' );
-			$supported_languages['is'] = __( 'Icelandic', 'cookiebot' );
-			$supported_languages['ro'] = __( 'Romanian', 'cookiebot' );
-			$supported_languages['si'] = __( 'Sinhala', 'cookiebot' );
-			$supported_languages['ca'] = __( 'Catalan', 'cookiebot' );
-			$supported_languages['bg'] = __( 'Bulgarian', 'cookiebot' );
-			$supported_languages['uk'] = __( 'Ukrainian', 'cookiebot' );
-			$supported_languages['zh'] = __( 'Chinese', 'cookiebot' );
-			$supported_languages['en'] = __( 'English', 'cookiebot' );
-			$supported_languages['ar'] = __( 'Arabic', 'cookiebot' );
-			$supported_languages['hr'] = __( 'Croatian', 'cookiebot' );
-			$supported_languages['th'] = __( 'Thai', 'cookiebot' );
-			$supported_languages['el'] = __( 'Greek', 'cookiebot' );
-			$supported_languages['lt'] = __( 'Lithuanian', 'cookiebot' );
-			$supported_languages['pl'] = __( 'Polish', 'cookiebot' );
-			$supported_languages['lv'] = __( 'Latvian', 'cookiebot' );
-			$supported_languages['fr'] = __( 'French', 'cookiebot' );
-			$supported_languages['id'] = __( 'Indonesian', 'cookiebot' );
-			$supported_languages['mk'] = __( 'Macedonian', 'cookiebot' );
-			$supported_languages['et'] = __( 'Estonian', 'cookiebot' );
-			$supported_languages['pt'] = __( 'Portuguese', 'cookiebot' );
-			$supported_languages['ga'] = __( 'Irish', 'cookiebot' );
-			$supported_languages['ms'] = __( 'Malay', 'cookiebot' );
-			$supported_languages['sl'] = __( 'Slovenian', 'cookiebot' );
-			$supported_languages['ru'] = __( 'Russian', 'cookiebot' );
-			$supported_languages['ja'] = __( 'Japanese', 'cookiebot' );
-			$supported_languages['hi'] = __( 'Hindi', 'cookiebot' );
-			$supported_languages['sk'] = __( 'Slovak', 'cookiebot' );
-			$supported_languages['es'] = __( 'Spanish', 'cookiebot' );
-			$supported_languages['sv'] = __( 'Swedish', 'cookiebot' );
-			$supported_languages['sr'] = __( 'Serbian', 'cookiebot' );
-			$supported_languages['fi'] = __( 'Finnish', 'cookiebot' );
-			$supported_languages['eu'] = __( 'Basque', 'cookiebot' );
-			$supported_languages['hu'] = __( 'Hungarian', 'cookiebot' );
-			asort( $supported_languages, SORT_LOCALE_STRING );
-
-			return $supported_languages;
-		}
-
-		/**
 		 * Cookiebot_WP Add Cookiebot JS to <head>
 		 *
 		 * @version 3.9.0
@@ -366,7 +189,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 					return; //Do not show JS - output disabled
 				}
 
-				if ( $this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() && $printTag !== false && get_site_option( 'cookiebot-output-logged-in' ) == false ) {
+				if ( $this->get_cookie_blocking_mode() === 'auto' && $this->can_current_user_edit_theme() && $printTag !== false && get_site_option( 'cookiebot-output-logged-in' ) === false ) {
 					return;
 				}
 
@@ -381,11 +204,11 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 					$tagAttr = get_site_option( 'cookiebot-script-tag-uc-attribute' );
 				}
 
-				if ( $this->get_cookie_blocking_mode() == 'auto' ) {
+				if ( $this->get_cookie_blocking_mode() === 'auto' ) {
 					$tagAttr = 'data-blockingmode="auto"';
 				}
 
-				if ( get_option( 'cookiebot-gtm' ) != false ) {
+				if ( get_option( 'cookiebot-gtm' ) !== false ) {
 					if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
 						$data_layer = 'data-layer-name="dataLayer"';
 					} else {
@@ -395,9 +218,9 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 					$data_layer = '';
 				}
 
-				$iab = ( get_option( 'cookiebot-iab' ) != false ) ? 'data-framework="IAB"' : '';
+				$iab = ( get_option( 'cookiebot-iab' ) !== false ) ? 'data-framework="IAB"' : '';
 
-				$ccpa = ( get_option( 'cookiebot-ccpa' ) != false ) ? 'data-georegions="{\'region\':\'US-06\',\'cbid\':\'' . get_option( 'cookiebot-ccpa-domain-group-id' ) . '\'}"' : '';
+				$ccpa = ( get_option( 'cookiebot-ccpa' ) !== false ) ? 'data-georegions="{\'region\':\'US-06\',\'cbid\':\'' . get_option( 'cookiebot-ccpa-domain-group-id' ) . '\'}"' : '';
 
 				$tag = '<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" ' . $iab . ' ' . $ccpa . ' ' . $data_layer . ' data-cbid="' . $cbid . '"' . $lang . ' type="text/javascript" ' . $tagAttr . '></script>';
 				if ( $printTag === false ) {
@@ -416,7 +239,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 
 		public function add_GTM( $printTag = true ) {
 
-			if ( get_option( 'cookiebot-gtm' ) != false ) {
+			if ( get_option( 'cookiebot-gtm' ) !== false ) {
 
 				if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
 					$data_layer = 'dataLayer';
@@ -455,7 +278,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 
 		public function add_GCM( $printTag = true ) {
 
-			if ( get_option( 'cookiebot-gcm' ) != false ) {
+			if ( get_option( 'cookiebot-gcm' ) !== false ) {
 
 				if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
 					$data_layer = 'dataLayer';
@@ -502,42 +325,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			}
 
 			return false;
-		}
-
-		/**
-		 * Cookiebot_WP Output declation shortcode [cookie_declaration]
-		 * Support attribute lang="LANGUAGE_CODE". Eg. lang="en".
-		 *
-		 * @version 2.2.0
-		 * @since   1.0.0
-		 */
-		public function show_declaration( $atts = array() ) {
-			$cbid = $this->get_cbid();
-			$lang = '';
-			if ( ! empty( $cbid ) ) {
-
-				$atts = shortcode_atts(
-					array(
-						'lang' => $this->get_language(),
-					),
-					$atts,
-					'cookie_declaration'
-				);
-
-				if ( ! empty( $atts['lang'] ) ) {
-					$lang = ' data-culture="' . strtoupper( $atts['lang'] ) . '"'; //Use data-culture to define language
-				}
-
-				if ( ! is_multisite() || get_site_option( 'cookiebot-script-tag-cd-attribute', 'custom' ) == 'custom' ) {
-					$tagAttr = get_option( 'cookiebot-script-tag-cd-attribute', 'async' );
-				} else {
-					$tagAttr = get_site_option( 'cookiebot-script-tag-cd-attribute' );
-				}
-
-				return '<script id="CookieDeclaration" src="https://consent.cookiebot.com/' . $cbid . '/cd.js"' . $lang . ' type="text/javascript" ' . $tagAttr . '></script>';
-			} else {
-				return esc_html__( 'Please add your Cookiebot ID to show Cookie Declarations', 'cookiebot' );
-			}
 		}
 
 		/**
