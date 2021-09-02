@@ -268,13 +268,43 @@ namespace cybot\cookiebot\lib {
 	 *
 	 * @since 1.9.0
 	 */
-	function cookiebot_addons_get_language() {
+	function cookiebot_get_current_site_language() {
 		$lang = get_locale(); //Gets language in en-US format
 
 		/**
 		 *  Add support for 3rd party plugins
 		 */
 		return apply_filters( 'cookiebot_addons_language', $lang );
+	}
+
+	/**
+	 * Cookiebot_WP Get the language code for Cookiebot
+	 *
+	 * @version 1.4.0
+	 * @since   1.4.0
+	 */
+	function cookiebot_get_language_from_setting( $only_from_setting = false ) {
+		// Get language set in setting page - if empty use WP language info
+		$lang = get_option( 'cookiebot-language' );
+		if ( ! empty( $lang ) ) {
+			if ( $lang !== '_wp' ) {
+				return $lang;
+			}
+		}
+
+		if ( $only_from_setting ) {
+			return $lang; //We want only to get if already set
+		}
+
+		//Language not set - use WP language
+		if ( $lang === '_wp' ) {
+			$lang = get_bloginfo( 'language' ); //Gets language in en-US format
+			if ( ! empty( $lang ) ) {
+				list( $lang ) = explode( '-', $lang ); //Changes format from eg. en-US to en.
+			}
+		}
+
+		return $lang;
 	}
 
 	/**

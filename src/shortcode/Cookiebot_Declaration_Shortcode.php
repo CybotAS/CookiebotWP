@@ -2,6 +2,7 @@
 namespace cybot\cookiebot\shortcode;
 
 use cybot\cookiebot\Cookiebot_WP;
+use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
 
 class Cookiebot_Declaration_Shortcode {
 
@@ -26,7 +27,7 @@ class Cookiebot_Declaration_Shortcode {
 
 			$atts = shortcode_atts(
 				array(
-					'lang' => $cookiebot_wp->get_language(),
+					'lang' => cookiebot_get_language_from_setting(),
 				),
 				$atts,
 				'cookie_declaration'

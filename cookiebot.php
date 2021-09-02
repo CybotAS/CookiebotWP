@@ -27,6 +27,7 @@ use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
 use Exception;
 use RuntimeException;
 use function cybot\cookiebot\lib\asset_url;
+use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -193,7 +194,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 					return;
 				}
 
-				$lang = $this->get_language();
+				$lang = cookiebot_get_language_from_setting();
 				if ( ! empty( $lang ) ) {
 					$lang = ' data-culture="' . strtoupper( $lang ) . '"'; //Use data-culture to define language
 				}
@@ -362,36 +363,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			}
 
 			return false;
-		}
-
-		/**
-		 * Cookiebot_WP Get the language code for Cookiebot
-		 *
-		 * @version 1.4.0
-		 * @since   1.4.0
-		 */
-		public function get_language( $onlyFromSetting = false ) {
-			// Get language set in setting page - if empty use WP language info
-			$lang = get_option( 'cookiebot-language' );
-			if ( ! empty( $lang ) ) {
-				if ( $lang != '_wp' ) {
-					return $lang;
-				}
-			}
-
-			if ( $onlyFromSetting ) {
-				return $lang; //We want only to get if already set
-			}
-
-			//Language not set - use WP language
-			if ( $lang == '_wp' ) {
-				$lang = get_bloginfo( 'language' ); //Gets language in en-US format
-				if ( ! empty( $lang ) ) {
-					list( $lang ) = explode( '-', $lang ); //Changes format from eg. en-US to en.
-				}
-			}
-
-			return $lang;
 		}
 
 		/**

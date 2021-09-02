@@ -321,7 +321,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @since 1.9.0
 	 */
 	private function get_translated_placeholder( $option, $option_key, $default_placeholder, $cookies, $src = '' ) {
-		$current_lang = cookiebot_addons_get_language();
+		$current_lang = cookiebot_get_current_site_language();
 
 		if ( $current_lang === false || $current_lang === '' ) {
 			$current_lang = 'site-default';
