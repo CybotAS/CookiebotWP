@@ -33,7 +33,7 @@ class Dashboard_Widget_Cookiebot_Status {
 	 * @since   1.0.0
 	 */
 	public function dashboard_widget_status() {
-		if ( empty( ( Cookiebot_WP::instance() )->get_cbid() ) ) {
+		if ( empty( Cookiebot_WP::get_cbid() ) ) {
 			echo '<p>' . esc_html__( 'You need to enter your Cookiebot ID.', 'cookiebot' ) . '</p>';
 			echo '<p><a href="options-general.php?page=cookiebot">';
 			echo esc_html__( 'Update your Cookiebot ID', 'cookiebot' );

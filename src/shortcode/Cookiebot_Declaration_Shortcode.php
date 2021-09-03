@@ -18,9 +18,7 @@ class Cookiebot_Declaration_Shortcode {
 	 * @since   1.0.0
 	 */
 	public static function show_declaration( $atts = array() ) {
-		$cookiebot_wp = Cookiebot_WP::instance();
-
-		$cbid = $cookiebot_wp->get_cbid();
+		$cbid = Cookiebot_WP::get_cbid();
 
 		$lang = '';
 		if ( ! empty( $cbid ) ) {

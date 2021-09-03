@@ -24,7 +24,7 @@ class Cookiebot_Activated {
 	}
 
 	private function set_to_mode_auto_when_no_cookiebot_id_is_set() {
-		if ( ( Cookiebot_WP::instance() )->get_cbid() === '' ) {
+		if ( Cookiebot_WP::get_cbid() === '' ) {
 			if ( is_multisite() ) {
 				update_site_option( 'cookiebot-cookie-blocking-mode', 'auto' );
 				update_site_option( 'cookiebot-nooutput-admin', true );

@@ -180,7 +180,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 * @since   1.0.0
 		 */
 		public function add_js( $printTag = true ) {
-			$cbid = $this->get_cbid();
+			$cbid = self::get_cbid();
 			if ( ! empty( $cbid ) && ! defined( 'COOKIEBOT_DISABLE_ON_PAGE' ) ) {
 				if ( is_multisite() && get_site_option( 'cookiebot-nooutput', false ) ) {
 					return; //Is multisite - and disabled output is checked as network setting
