@@ -45,7 +45,7 @@ class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon implements Open_Source
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_svn_url() {
+	public static function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/google-site-kit/trunk/google-site-kit.php';
 	}
 }

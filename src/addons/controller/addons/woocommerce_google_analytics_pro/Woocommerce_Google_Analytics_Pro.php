@@ -43,7 +43,7 @@ class Woocommerce_Google_Analytics_Pro extends Base_Cookiebot_Plugin_Addon {
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_svn_url() {
+	public static function get_svn_url() {
 		return false; //Commercial plugin - not available
 	}
 }

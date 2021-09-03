@@ -10,5 +10,5 @@ interface Open_Source_Addon_Interface {
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_svn_url();
+	public static function get_svn_url();
 }

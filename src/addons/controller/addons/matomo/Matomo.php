@@ -48,7 +48,7 @@ class Matomo extends Base_Cookiebot_Plugin_Addon {
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_svn_url() {
+	public static function get_svn_url() {
 		return 'https://plugins.svn.wordpress.org/matomo/trunk/matomo.php';
 	}
 }

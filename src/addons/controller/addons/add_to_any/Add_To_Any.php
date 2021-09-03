@@ -92,7 +92,7 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addo
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_svn_url() {
+	public static function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/add-to-any/trunk/add-to-any.php';
 	}
 

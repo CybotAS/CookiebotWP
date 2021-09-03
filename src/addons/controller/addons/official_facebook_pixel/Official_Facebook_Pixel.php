@@ -263,7 +263,7 @@ class Official_Facebook_Pixel extends Base_Cookiebot_Plugin_Addon implements Add
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_svn_url() {
+	public static function get_svn_url() {
 		return 'https://plugins.svn.wordpress.org/official-facebook-pixel/trunk/facebook-for-wordpress.php';
 	}
 }

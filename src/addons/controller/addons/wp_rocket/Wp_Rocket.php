@@ -69,7 +69,7 @@ class Wp_Rocket extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_svn_url() {
+	public static function get_svn_url() {
 		return false;
 	}
 }

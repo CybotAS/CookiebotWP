@@ -77,7 +77,7 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_In
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_svn_url() {
+	public static function get_svn_url() {
 		return false;
 	}
 

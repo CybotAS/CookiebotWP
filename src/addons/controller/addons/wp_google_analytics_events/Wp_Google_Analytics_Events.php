@@ -63,7 +63,7 @@ class Wp_Google_Analytics_Events extends Base_Cookiebot_Plugin_Addon implements 
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_svn_url() {
+	public static function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/wp-google-analytics-events/trunk/ga-scroll-event.php';
 	}
 }

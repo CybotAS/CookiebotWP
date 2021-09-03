@@ -38,7 +38,7 @@ class Custom_Facebook_Feed_Version_2_17_1 extends Base_Cookiebot_Plugin_Addon im
 	/**
 	 * @return string
 	 */
-	public function get_svn_url() {
+	public static function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/custom-facebook-feed/tags/2.17.1/custom-facebook-feed.php';
 	}
 }

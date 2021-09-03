@@ -123,7 +123,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon implements Op
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_svn_url() {
+	public static function get_svn_url() {
 		return 'https://raw.githubusercontent.com/facebookincubator/facebook-for-woocommerce/master/facebook-commerce.php';
 	}
 
