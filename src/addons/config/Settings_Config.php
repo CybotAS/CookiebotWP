@@ -7,6 +7,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Theme_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\Jetpack;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
+use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use cybot\cookiebot\lib\Addon_With_Extra_Options_Interface;
 use cybot\cookiebot\lib\Settings_Page_Tab;
 use cybot\cookiebot\lib\Settings_Service_Interface;
@@ -284,7 +285,7 @@ class Settings_Config {
 	 * @return string
 	 */
 	private function get_extra_information( $addon ) {
-		return $addon->get_extra_information()
+		return is_a( $addon, Addon_With_Extra_Information_Interface::class ) && $addon->get_extra_information()
 			? '<div class="extra_information">' . $addon->get_extra_information() . '</div>'
 			: '';
 	}

@@ -80,17 +80,6 @@ class CAOS_Host_Analyticsjs_Local_Version_1_97 extends Base_Cookiebot_Plugin_Add
 	}
 
 	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_extra_information() {
-		return '';
-	}
-
-	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
 	 *
 	 * @return string

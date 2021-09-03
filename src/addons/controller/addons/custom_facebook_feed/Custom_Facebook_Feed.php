@@ -48,13 +48,6 @@ class Custom_Facebook_Feed extends Base_Cookiebot_Plugin_Addon implements Open_S
 	}
 
 	/**
-	 * @return string
-	 */
-	public function get_extra_information() {
-		return '';
-	}
-
-	/**
 	 * @return array
 	 */
 	public function get_alternative_addon_versions() {

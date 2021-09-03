@@ -3,8 +3,9 @@
 namespace cybot\cookiebot\addons\controller\addons\optinmonster;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
+use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 
-class Optinmonster extends Base_Cookiebot_Plugin_Addon {
+class Optinmonster extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_Information_Interface {
 
 	const ADDON_NAME                  = 'Optinmonster';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';

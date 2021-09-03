@@ -35,15 +35,4 @@ class Custom_Facebook_Feed_Pro extends Base_Cookiebot_Plugin_Addon {
 			$this->script_loader_tag->add_tag( 'cffscripts', $this->get_cookie_types(), false );
 		}
 	}
-
-	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string
-	 *
-	 * @since 2.1.4
-	 */
-	public function get_extra_information() {
-		return '';
-	}
 }

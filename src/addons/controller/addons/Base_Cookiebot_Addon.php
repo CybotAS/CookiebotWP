@@ -202,15 +202,6 @@ abstract class Base_Cookiebot_Addon {
 	}
 
 	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	abstract public function get_extra_information();
-
-	/**
 	 * Placeholder helper overlay in the settings page.
 	 *
 	 * @return string

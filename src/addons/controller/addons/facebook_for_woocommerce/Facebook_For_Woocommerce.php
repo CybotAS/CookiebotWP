@@ -117,17 +117,6 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon implements Op
 	}
 
 	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public function get_extra_information() {
-		return '';
-	}
-
-	/**
 	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
 	 *
 	 * @return string
