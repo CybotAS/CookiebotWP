@@ -55,13 +55,11 @@
 	</p>
 	<code>
 		<?php
-        /* phpcs:disable */
-		echo htmlentities( '<script type="text/plain" data-cookieconsent="statistics">' ) . '<br>';
-		echo htmlentities( "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');" ) . '<br>';
-		echo htmlentities( "ga('create', 'UA-00000000-0', 'auto');" ) . '<br />';
-		echo htmlentities( "ga('send', 'pageview');" ) . '<br />';
-		echo htmlentities( '</script>' ) . '<br />';
-		/* phpcs:enable */
+		echo esc_html( htmlentities( '<script type="text/plain" data-cookieconsent="statistics">' ) ) . '<br>';
+		echo esc_html( htmlentities( "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');" ) ) . '<br>';
+		echo esc_html( htmlentities( "ga('create', 'UA-00000000-0', 'auto');" ) ) . '<br />';
+		echo esc_html( htmlentities( "ga('send', 'pageview');" ) ) . '<br />';
+		echo esc_html( htmlentities( '</script>' ) );
 		?>
 	</code>
 	<p>
@@ -90,9 +88,8 @@
 	printf(
 			/* translators: first script is an example script tag, second is the modified script tag */
 		esc_html__( '%1$s to %2$s', 'cookiebot' ),
-		'<code>' . htmlentities( '<script type="text/javascript">' ) . '</code>', //phpcs:disable
-		'<code>' . htmlentities( '<script<?php echo cookiebot_assist(\'marketing\') ?>>' ) . '</code>'
+		'<code>' . esc_html( htmlentities( '<script type="text/javascript">' ) ) . '</code>',
+		'<code>' . esc_html( htmlentities( '<script<?php echo cookiebot_assist(\'marketing\') ?>>' ) ) . '</code>'
 	);
-	//phpcs:enable
 	?>
 </div>
