@@ -423,15 +423,17 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 	/**
 	 * Adds extra information under the label
 	 *
-	 * @return string
+	 * @return string[]
 	 *
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__(
-			'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
-			'cookiebot-addons'
-		) . '</p>';
+		return array(
+			__(
+				'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
+				'cookiebot-addons'
+			),
+		);
 	}
 
 	/**

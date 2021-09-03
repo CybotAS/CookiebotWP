@@ -48,15 +48,17 @@ class Wp_Rocket extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_
 	/**
 	 * Adds extra information under the label
 	 *
-	 * @return string
+	 * @return string[]
 	 *
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__(
-			'Excludes cookiebot javascript files when the WP-Rocket deter option is enabled.',
-			'cookiebot-addons'
-		) . '</p>';
+		return array(
+			__(
+				'Excludes cookiebot javascript files when the WP-Rocket deter option is enabled.',
+				'cookiebot-addons'
+			),
+		);
 
 	}
 

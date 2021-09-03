@@ -39,12 +39,14 @@ class Enhanced_Ecommerce_For_WooCommerce_Store extends Base_Cookiebot_Plugin_Add
 	/**
 	 * Adds extra information under the label
 	 *
-	 * @return string
+	 * @return string[]
 	 *
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__( 'Blocks enhanced e-commerce for WooCommerce store', 'cookiebot-addons' ) . '</p>';
+		return array(
+			__( 'Blocks enhanced e-commerce for WooCommerce store', 'cookiebot-addons' ),
+		);
 	}
 
 	/**

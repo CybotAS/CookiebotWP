@@ -40,6 +40,4 @@ interface Jetpack_Widget_Interface {
 	 * @return void
 	 */
 	public function cookie_consent_div( $view, $widget );
-
-	public function get_extra_information();
 }

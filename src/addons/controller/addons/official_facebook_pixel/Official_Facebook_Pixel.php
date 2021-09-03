@@ -246,12 +246,14 @@ class Official_Facebook_Pixel extends Base_Cookiebot_Plugin_Addon implements Add
 	/**
 	 * Adds extra information under the label
 	 *
-	 * @return string
+	 * @return string[]
 	 *
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__( 'Blocks Official Facebook Pixel scripts', 'cookiebot-addons' ) . '</p>';
+		return array(
+			__( 'Blocks Official Facebook Pixel scripts', 'cookiebot-addons' ),
+		);
 	}
 
 	/**

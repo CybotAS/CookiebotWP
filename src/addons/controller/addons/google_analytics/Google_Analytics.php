@@ -36,12 +36,14 @@ class Google_Analytics extends Base_Cookiebot_Plugin_Addon implements Open_Sourc
 	/**
 	 * Adds extra information under the label
 	 *
-	 * @return string
+	 * @return string[]
 	 *
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__( 'Google Analytics is used to track how visitor interact with website content.', 'cookiebot-addons' ) . '</p>';
+		return array(
+			__( 'Google Analytics is used to track how visitor interact with website content.', 'cookiebot-addons' ),
+		);
 	}
 
 	/**

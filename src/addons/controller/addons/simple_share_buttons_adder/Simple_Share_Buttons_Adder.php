@@ -30,12 +30,14 @@ class Simple_Share_Buttons_Adder extends Base_Cookiebot_Plugin_Addon implements 
 	/**
 	 * Adds extra information under the label
 	 *
-	 * @return string
+	 * @return string[]
 	 *
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__( 'Blocks Simple Share Buttons Adder.', 'cookiebot-addons' ) . '</p>';
+		return array(
+			__( 'Blocks Simple Share Buttons Adder.', 'cookiebot-addons' ),
+		);
 	}
 
 	/**

@@ -168,7 +168,13 @@ class Settings_Config {
 			if ( $addon->is_addon_installed() && $addon->is_addon_activated() ) {
 				add_settings_field(
 					$addon::OPTION_NAME,
-					$addon::ADDON_NAME . $this->get_extra_information( $addon ),
+					get_view_html(
+						'admin/settings/prior-consent/partials/extra-information.php',
+						array(
+							'label'                   => $addon::ADDON_NAME,
+							'extra_information_lines' => $this->get_extra_information( $addon ),
+						)
+					),
 					array(
 						$this,
 						'available_addon_callback',
@@ -217,7 +223,13 @@ class Settings_Config {
 					foreach ( $addon->get_widgets() as $widget ) {
 						add_settings_field(
 							$widget->get_widget_option_name(),
-							$widget->get_label() . $this->get_extra_information( $widget ),
+							get_view_html(
+								'admin/settings/prior-consent/partials/extra-information.php',
+								array(
+									'label' => $widget->get_label(),
+									'extra_information_lines' => $this->get_extra_information( $widget ),
+								)
+							),
 							array(
 								$this,
 								'jetpack_addon_callback',
@@ -263,7 +275,13 @@ class Settings_Config {
 				// not installed plugins
 				add_settings_field(
 					$addon::ADDON_NAME,
-					$addon::ADDON_NAME . $this->get_extra_information( $addon ),
+					get_view_html(
+						'admin/settings/prior-consent/partials/extra-information.php',
+						array(
+							'label'                   => $addon::ADDON_NAME,
+							'extra_information_lines' => $this->get_extra_information( $addon ),
+						)
+					),
 					array(
 						$this,
 						'unavailable_addon_settings_field_callback',
@@ -282,12 +300,12 @@ class Settings_Config {
 	 *
 	 * @param Base_Cookiebot_Addon $addon
 	 *
-	 * @return string
+	 * @return string[]
 	 */
 	private function get_extra_information( $addon ) {
 		return is_a( $addon, Addon_With_Extra_Information_Interface::class ) && $addon->get_extra_information()
-			? '<div class="extra_information">' . $addon->get_extra_information() . '</div>'
-			: '';
+			? $addon->get_extra_information()
+			: array();
 	}
 
 	/**

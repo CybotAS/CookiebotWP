@@ -26,12 +26,14 @@ class Optinmonster extends Base_Cookiebot_Plugin_Addon implements Addon_With_Ext
 	/**
 	 * Adds extra information under the label
 	 *
-	 * @return string
+	 * @return string[]
 	 *
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__( 'OptinMonster API plugin to connect your WordPress site to your OptinMonster account.', 'cookiebot-addons' ) . '</p>';
+		return array(
+			__( 'OptinMonster API plugin to connect your WordPress site to your OptinMonster account.', 'cookiebot-addons' ),
+		);
 	}
 
 	/**

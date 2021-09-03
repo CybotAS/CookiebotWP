@@ -74,17 +74,15 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addo
 	}
 
 	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
+	 * @return string[]
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__(
-			'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
-			'cookiebot-addons'
-		) . '</p>';
+		return array(
+			__(
+				'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
+				'cookiebot-addons'
+			),
+		);
 	}
 
 	/**

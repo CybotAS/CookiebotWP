@@ -32,11 +32,13 @@ class Google_Analytics_Plus extends Base_Cookiebot_Plugin_Addon implements Addon
 	/**
 	 * Adds extra information under the label
 	 *
-	 * @return string
+	 * @return string[]
 	 *
 	 * @since 1.8.0
 	 */
 	public function get_extra_information() {
-		return '<p>' . esc_html__( 'Google Analytics is a simple, easy-to-use tool that helps website owners measure how users interact with website content', 'cookiebot-addons' ) . '</p>';
+		return array(
+			__( 'Google Analytics is a simple, easy-to-use tool that helps website owners measure how users interact with website content', 'cookiebot-addons' ),
+		);
 	}
 }
