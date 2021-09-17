@@ -180,9 +180,12 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 1.2.0
 	 */
 	protected function disable_comment_subscriptions() {
-		add_filter( 'comment_cookie_lifetime', function ( $time ) {
-			return 0;
-		} );
+		add_filter(
+			'comment_cookie_lifetime',
+			function ( $time ) {
+				return 0;
+			}
+		);
 	}
 
 	/**
@@ -212,7 +215,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 		cookiebot_addons_remove_class_action( 'comment_post', 'Highlander_Comments_Base', 'set_comment_cookies' );
 
 		/**
-		 * Remove action comment cookies in wordpress core
+		 * Remove action comment cookies in WordPress core
 		 *
 		 * we have to remove this action, because it does manually add the cookie.
 		 */
