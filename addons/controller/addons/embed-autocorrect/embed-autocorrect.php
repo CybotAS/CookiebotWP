@@ -143,14 +143,9 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 				}</style>
 			<script>
 				window.addEventListener( 'CookiebotOnTagsExecuted', function ( e ) {
-					if (
-					<?php
-					echo 'Cookiebot.consent.' . implode(
-						' && Cookiebot.consent.',
-						$this->get_cookie_types()
-					);
-					?>
-							) {
+					<?php $cookie_types = implode( ',', $this->get_cookie_types() ); ?>
+					const cookieTypes = '<?php echo esc_js( $cookie_types ); ?>'
+					if ( cookieTypes.split(',').all( (cookie_type) => Cookiebot.consent[cookie_type] ) {
 						jQuery( '.wp-video-shortcode__disabled' ).addClass( 'wp-video-shortcode' ).removeClass( 'wp-video-shortcode__disabled' );
 						jQuery( '.wp-audio-shortcode__disabled' ).addClass( 'wp-audio-shortcode' ).removeClass( 'wp-audio-shortcode__disabled' );
 						if ( window.wp && window.wp.mediaelement && window.wp.mediaelement.initialize ) {
@@ -738,7 +733,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 					id="embed_regex"
 					cols="80"
 					rows="5"
-					name="cookiebot_available_addons[<?php echo $this->get_option_name(); ?>][regex]"
+					name="cookiebot_available_addons[<?php echo esc_attr( $this->get_option_name() ); ?>][regex]"
 					disabled
 			><?php echo esc_html( $this->get_regex() ); ?></textarea>
 
