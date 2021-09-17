@@ -254,9 +254,12 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 1.2.0
 	 */
 	public function view_accept_preferences_consent() {
-		echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() ) . '">
-						  ' . $this->get_default_placeholder() . '
-						</div>';
+		$class_name = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
+		?>
+		<div class="<?php echo esc_attr( $class_name ); ?>">
+			<?php echo esc_html( $this->get_default_placeholder() ); ?>
+		</div>
+		<?php
 	}
 
 	/**
