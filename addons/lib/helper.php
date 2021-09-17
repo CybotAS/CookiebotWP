@@ -188,19 +188,18 @@ function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
  * @since 1.3.0
  */
 function cookiebot_addons_checked_selected_helper( $helper, $current, $echo = true, $type = 'checked' ) {
-	if ( is_array( $helper ) && in_array( $current, $helper ) ) {
-		$result = " $type='$type'";
-	} elseif ( is_string( $helper ) && is_string( $current ) && $helper === $current ) {
-		$result = " $type='$type'";
-	} else {
-		$result = '';
+	$current_in_helper_array      = is_array( $helper ) && in_array( $current, $helper, true );
+	$current_equals_helper_string = is_string( $helper ) && is_string( $current ) && $helper === $current;
+
+	if ( $current_in_helper_array || $current_equals_helper_string ) {
+		if ( $echo ) {
+			echo ' ' . esc_attr( $type ) . '=\'' . esc_attr( $type ) . '\'';
+		}
+
+		return " $type='$type'";
 	}
 
-	if ( $echo ) {
-		echo $result;
-	}
-
-	return $result;
+	return '';
 }
 
 /**
