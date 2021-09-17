@@ -231,22 +231,26 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 			/**
 			 * Pattern to get all iframes
 			 */
-			$pattern = "/\<iframe(.*?)?\>(.|\s)*?\<\/iframe\>/i";
+			$pattern = '/\<iframe(.*?)?\>(.|\s)*?\<\/iframe\>/i';
 
 			/**
 			 * Get all scripts and add cookieconsent if it does match with the criterion
 			 */
-			$updated_scripts = preg_replace_callback( $pattern, function ( $matches ) {
+			$updated_scripts = preg_replace_callback(
+				$pattern,
+				function ( $matches ) {
 
-				$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
+					$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
 
-				$data = str_replace( 'src=', 'data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->cookie_types ) . '" data-src=', $data );
+					$data = str_replace( 'src=', 'data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->cookie_types ) . '" data-src=', $data );
 
-				/**
-				 * Return updated iframe tag
-				 */
-				return $data;
-			}, $buffer );
+					/**
+					 * Return updated iframe tag
+					 */
+					return $data;
+				},
+				$buffer
+			);
 
 			/**
 			 * Set cache for 15 minutes
@@ -266,11 +270,14 @@ class Google_Maps_Widget implements Jetpack_Widget_Interface {
 	 * @since 1.6.0
 	 */
 	public function cookie_consent_div( $view, $widget ) {
-		if ( $widget == 'contact_info' && $view == 'widget_view' ) {
+		if ( $widget === 'contact_info' && $view === 'widget_view' ) {
 			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
-				echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() ) . '">
-						  ' . $this->get_widget_placeholder() . '
-						</div>';
+				$class_name = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
+				?>
+				<div class="<?php esc_attr( $class_name ); ?>">
+					<?php echo esc_html( $this->get_widget_placeholder() ); ?>
+				</div>
+				<?php
 			}
 		}
 	}
