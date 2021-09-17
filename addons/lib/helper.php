@@ -352,13 +352,14 @@ function cookiebot_addons_get_supported_languages() {
 }
 
 /**
+ * Returns an escaped HTML "select" element
  * Show languages in a select field
  *
  * @param $class
  * @param $name
  * @param $selected
  *
- * @return mixed
+ * @return string
  *
  * @since 1.8.0
  */
@@ -371,12 +372,9 @@ function cookiebot_addons_get_dropdown_languages( $class, $name, $selected ) {
 		'languages'                => get_available_languages(),
 	);
 	$dropdown = wp_dropdown_languages( $args );
+	$output   = str_replace( '<select ', '<select class="' . esc_attr( $class ) . '" ', $dropdown );
 
-	$output = str_replace( 'select ', 'select class="' . $class . '" ', $dropdown );
-
-	$output = str_replace( 'value="" ', 'value="en_US" ', $output );
-
-	return $output;
+	return str_replace( ' value="" ', 'value="en_US" ', $output );
 }
 
 /**
