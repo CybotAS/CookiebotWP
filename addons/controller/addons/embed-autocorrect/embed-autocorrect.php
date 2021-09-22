@@ -145,7 +145,7 @@ class Embed_Autocorrect implements Cookiebot_Addons_Interface {
 				window.addEventListener( 'CookiebotOnTagsExecuted', function ( e ) {
 					<?php $cookie_types = implode( ',', $this->get_cookie_types() ); ?>
 					const cookieTypes = '<?php echo esc_js( $cookie_types ); ?>'
-					if ( cookieTypes.split(',').all( (cookie_type) => Cookiebot.consent[cookie_type] ) {
+					if ( cookieTypes.split(',').every( (cookie_type) => Cookiebot.consent[cookie_type] ) ) {
 						jQuery( '.wp-video-shortcode__disabled' ).addClass( 'wp-video-shortcode' ).removeClass( 'wp-video-shortcode__disabled' );
 						jQuery( '.wp-audio-shortcode__disabled' ).addClass( 'wp-audio-shortcode' ).removeClass( 'wp-audio-shortcode__disabled' );
 						if ( window.wp && window.wp.mediaelement && window.wp.mediaelement.initialize ) {
