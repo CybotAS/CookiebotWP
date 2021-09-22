@@ -1531,41 +1531,44 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				<ol>
 					<li>
 					<?php
-					sprintf(
+					echo sprintf(
 						// translators: the first placeholder string will be replaced with a html anchor open tag and the second placeholder string will be replaced by the html anchor closing tag
 						esc_html__( 'Log in to your %1$sCookiebot account%2$s.', 'cookiebot' ),
-						array(
-							'<a href="https://www.cookiebot.com/goto/account" target="_blank">',
-							'</a>',
-						)
+						'<a href="https://www.cookiebot.com/goto/account" target="_blank">',
+                        '</a>'
 					);
 					?>
 					</li>
 					<li>
 					<?php
-					sprintf(
+					echo sprintf(
 						// translators: the placeholder strings denote the positions of <b>, </b>, <b> and </b> HTML tags
 						esc_html__( 'Go to %1$sManage%2$s > %3$sSettings%4$s and add setup your Cookiebot', 'cookiebot' ),
-						array( '<b>', '</b>', '<b>', '</b>' )
+						'<b>',
+                        '</b>',
+                        '<b>',
+                        '</b>'
 					);
 					?>
 					</li>
 					<li>
 					<?php
-					sprintf(
+					echo sprintf(
 						// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
 						esc_html__( 'Go to the %1$s"Your scripts"%2$s tab', 'cookiebot' ),
-						array( '<b>', '</b>' )
+						'<b>',
+                        '</b>'
 					);
 					?>
 					</li>
 					<li><?php esc_html_e( 'Copy the value inside the data-cid parameter - eg.: abcdef12-3456-7890-abcd-ef1234567890', 'cookiebot' ); ?></li>
 					<li>
 					<?php
-					sprintf(
+					echo sprintf(
 						// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
 						esc_html__( 'Add %1$s[cookie_declaration]%2$s shortcode to a page to show the declation', 'cookiebot' ),
-						array( '<b>', '</b>' )
+						'<b>',
+                        '</b>'
 					);
 					?>
 					</li>
@@ -1575,18 +1578,22 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				<h2><?php esc_html_e( 'Add the Cookie Declaration to your website', 'cookiebot' ); ?></h2>
 				<p>
 					<?php
-					sprintf(
+					echo sprintf(
 					// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
 						esc_html__( 'Use the shortcode %1$s[cookie_declaration]%2$s to add the cookie declaration a page or post. The cookie declaration will always show the latest version from Cookiebot.', 'cookiebot' ),
-						array( '<b>', '</b>' )
+						'<b>',
+                        '</b>'
 					);
 					?>
 					<br/>
 					<?php
-					sprintf(
+					echo sprintf(
 					// translators: the placeholder strings denote the positions of <i>, </i>, <b> and </b> HTML tags
 						esc_html__( 'If you need to force language of the cookie declaration, you can add the %1$slang%2$s attribute. Eg. %3$s[cookie_declaration lang="de"]%4$s.', 'cookiebot' ),
-						array( '<i>', '</i>', '<b>', '</b>' )
+						'<i>',
+                        '</i>',
+                        '<b>',
+                        '</b>'
 					);
 					?>
 				</p>
