@@ -211,7 +211,7 @@ class Internet_Defense_league_Widget implements Jetpack_Widget_Interface {
 				$class_name = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
 				?>
 				<div class="<?php echo esc_attr( $class_name ); ?>">
-					<?php echo esc_html( $this->get_widget_placeholder() ); ?>
+					<?php echo $this->get_widget_placeholder(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 				<?php
 			}
