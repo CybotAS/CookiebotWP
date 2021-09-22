@@ -5,28 +5,28 @@ $addon  = $args['addon'];
 ?>
 <div class="postbox cookiebot-addon">
     <p>
-        <label for="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"><?php esc_html_e( 'Enable', 'cookiebot' ); ?></label>
-        <input type="checkbox" id="<?php echo 'enabled_' . $widget->get_widget_option_name(); ?>"
-               name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][enabled]"
+        <label for="<?php echo 'enabled_' . esc_attr( $widget->get_widget_option_name() ); ?>"><?php esc_html_e( 'Enable', 'cookiebot' ); ?></label>
+        <input type="checkbox" id="<?php echo 'enabled_' . esc_attr( $widget->get_widget_option_name() ); ?>"
+               name="cookiebot_jetpack_addon[<?php echo esc_attr( $widget->get_widget_option_name() ); ?>][enabled]"
                value="1" <?php checked( 1, $widget->is_widget_enabled(), true ); ?> />
     </p>
     <p>
         <span><?php esc_html_e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></span><br>
     <ul class="cookietypes">
-        <li><input type="checkbox" id="cookie_type_preferences_<?php echo $widget->get_widget_option_name(); ?>"
+        <li><input type="checkbox" id="cookie_type_preferences_<?php echo esc_attr( $widget->get_widget_option_name() ); ?>"
                    value="preferences"
 				<?php cookiebot_addons_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'preferences' ); ?>
-                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Preferences</label>
+                   name="cookiebot_jetpack_addon[<?php echo esc_attr( $widget->get_widget_option_name() ); ?>][cookie_type][]"><label>Preferences</label>
         </li>
-        <li><input type="checkbox" id="cookie_type_statistics_<?php echo $widget->get_widget_option_name(); ?>"
+        <li><input type="checkbox" id="cookie_type_statistics_<?php echo esc_attr( $widget->get_widget_option_name() ); ?>"
                    value="statistics"
 				<?php cookiebot_addons_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'statistics' ); ?>
-                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Statistics</label>
+                   name="cookiebot_jetpack_addon[<?php echo esc_attr( $widget->get_widget_option_name() ); ?>][cookie_type][]"><label>Statistics</label>
         </li>
-        <li><input type="checkbox" id="cookie_type_marketing_<?php echo $widget->get_widget_option_name(); ?>"
+        <li><input type="checkbox" id="cookie_type_marketing_<?php echo esc_attr( $widget->get_widget_option_name() ); ?>"
                    value="marketing"
 				<?php cookiebot_addons_checked_selected_helper( $widget->get_widget_cookie_types( $widget->get_widget_option_name() ), 'marketing' ); ?>
-                   name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][cookie_type][]"><label>Marketing</label>
+                   name="cookiebot_jetpack_addon[<?php echo esc_attr( $widget->get_widget_option_name() ); ?>][cookie_type][]"><label>Marketing</label>
         </li>
     </ul>
     </p>
@@ -35,14 +35,14 @@ $addon  = $args['addon'];
         <label><?php esc_html_e( 'Display a placeholder', 'cookiebot' ); ?></label>
         <input type="checkbox"
                class="placeholder_enable"
-               data-addon="<?php echo $widget->get_widget_option_name(); ?>"
-               name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][enabled]"
+               data-addon="<?php echo esc_attr( $widget->get_widget_option_name() ); ?>"
+               name="cookiebot_jetpack_addon[<?php echo esc_attr( $widget->get_widget_option_name() ); ?>][placeholder][enabled]"
 			<?php checked( 1, $widget->is_widget_placeholder_enabled() ); ?>
                value="1">
     </p>
 
     <div class="placeholder"
-         data-addon="<?php echo $widget->get_widget_option_name(); ?>" <?php echo ( ! $widget->is_widget_placeholder_enabled() ) ? 'style="display:none"' : ''; ?>>
+         data-addon="<?php echo esc_attr( $widget->get_widget_option_name() ); ?>" <?php echo ( ! $widget->is_widget_placeholder_enabled() ) ? 'style="display:none"' : ''; ?>>
 		<?php if ( $widget->widget_has_placeholder() ): ?>
 			<?php $count = 0; ?>
 			<?php foreach ( $widget->get_widget_placeholders() as $placeholder_lang => $placeholder_value ): ?>
@@ -51,7 +51,9 @@ $addon  = $args['addon'];
                         <label><?php esc_html_e( 'Language', 'cookiebot-addons' ); ?></label>
 						<?php
 						$name = 'cookiebot_jetpack_addon[' . $widget->get_widget_option_name() . '][placeholder][languages][' . $placeholder_lang . ']';
-						echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, $placeholder_lang );
+						// the "cookiebot_addons_get_dropdown_languages" function already sufficiently escapes the output
+						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, $placeholder_lang );
 						?>
 						<?php if ( $count != 0 ): ?>
                             <a href=""
@@ -60,8 +62,9 @@ $addon  = $args['addon'];
                     </p>
                     <p>
                         <textarea cols="60" rows="5"
-                                  name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][<?php echo $placeholder_lang; ?>]"><?php echo $placeholder_value; ?></textarea>
-                        <span class="help-tip" title="<?php echo $addon->get_placeholder_helper(); ?>"></span>
+                                  name="cookiebot_jetpack_addon[<?php echo esc_attr( $widget->get_widget_option_name() ); ?>][placeholder][languages][<?php echo esc_attr( $placeholder_lang ); ?>]"
+                        ><?php echo esc_html( $placeholder_value ); ?></textarea>
+                        <span class="help-tip" title="<?php echo esc_attr( $addon->get_placeholder_helper() ); ?>"></span>
                     </p>
                 </div>
 				<?php $count ++; ?>
@@ -72,13 +75,16 @@ $addon  = $args['addon'];
                     <label><?php esc_html_e( 'Language', 'cookiebot-addons' ); ?></label>
 					<?php
 					$name = 'cookiebot_jetpack_addon[' . $widget->get_widget_option_name() . '][placeholder][languages][site-default]';
+					// the "cookiebot_addons_get_dropdown_languages" function already sufficiently escapes the output
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo cookiebot_addons_get_dropdown_languages( 'placeholder_select_language', $name, '' );
 					?>
                 </p>
                 <p>
                         <textarea cols="80" rows="5"
-                                  name="cookiebot_jetpack_addon[<?php echo $widget->get_widget_option_name(); ?>][placeholder][languages][site-default]"><?php echo $widget->get_default_placeholder(); ?></textarea>
-                    <span class="help-tip" title="<?php echo $addon->get_placeholder_helper(); ?>"></span>
+                                  name="cookiebot_jetpack_addon[<?php echo esc_attr( $widget->get_widget_option_name() ); ?>][placeholder][languages][site-default]"
+                        ><?php echo esc_html( $widget->get_default_placeholder() ); ?></textarea>
+                    <span class="help-tip" title="<?php echo esc_attr( $addon->get_placeholder_helper() ); ?>"></span>
                 </p>
             </div>
 		<?php endif; ?>
@@ -86,7 +92,7 @@ $addon  = $args['addon'];
 
 		<p class="add_placeholder_language">
 			<button class="btn_add_language button button-secondary"
-			        data-addon="<?php echo $widget->get_widget_option_name(); ?>"><?php esc_html_e( '+ Add language', 'cookiebot-addons' ); ?></button>
+			        data-addon="<?php echo esc_attr( $widget->get_widget_option_name() ); ?>"><?php esc_html_e( '+ Add language', 'cookiebot-addons' ); ?></button>
 		</p>
 	</div>
 </div>

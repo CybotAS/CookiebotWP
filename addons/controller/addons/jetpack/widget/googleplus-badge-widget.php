@@ -206,11 +206,15 @@ class Googleplus_Badge_Widget {
 	 * @since 1.2.0
 	 */
 	public function display_div_message_to_go_to_consent_settings( $view, $widget ) {
-		if ( $widget == 'googleplus-badge' && $view == 'widget_view' ) {
+		if ( $widget === 'googleplus-badge' && $view === 'widget_view' ) {
 			if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
-				echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->cookie_types ) . '">' . $this->get_widget_placeholder() . '</div>';
+				$class_name = cookiebot_addons_cookieconsent_optout( $this->cookie_types );
+				?>
+				<div class="<?php echo esc_attr( $class_name ); ?>">
+					<?php echo $this->get_widget_placeholder(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				</div>
+				<?php
 			}
-
 		}
 	}
 

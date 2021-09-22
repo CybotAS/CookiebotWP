@@ -188,19 +188,18 @@ function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
  * @since 1.3.0
  */
 function cookiebot_addons_checked_selected_helper( $helper, $current, $echo = true, $type = 'checked' ) {
-	if ( is_array( $helper ) && in_array( $current, $helper ) ) {
-		$result = " $type='$type'";
-	} elseif ( is_string( $helper ) && is_string( $current ) && $helper === $current ) {
-		$result = " $type='$type'";
-	} else {
-		$result = '';
+	$current_in_helper_array      = is_array( $helper ) && in_array( $current, $helper, true );
+	$current_equals_helper_string = is_string( $helper ) && is_string( $current ) && $helper === $current;
+
+	if ( $current_in_helper_array || $current_equals_helper_string ) {
+		if ( $echo ) {
+			echo ' ' . esc_attr( $type ) . '=\'' . esc_attr( $type ) . '\'';
+		}
+
+		return " $type='$type'";
 	}
 
-	if ( $echo ) {
-		echo $result;
-	}
-
-	return $result;
+	return '';
 }
 
 /**
@@ -353,13 +352,14 @@ function cookiebot_addons_get_supported_languages() {
 }
 
 /**
+ * Returns an escaped HTML "select" element
  * Show languages in a select field
  *
  * @param $class
  * @param $name
  * @param $selected
  *
- * @return mixed
+ * @return string
  *
  * @since 1.8.0
  */
@@ -372,12 +372,9 @@ function cookiebot_addons_get_dropdown_languages( $class, $name, $selected ) {
 		'languages'                => get_available_languages(),
 	);
 	$dropdown = wp_dropdown_languages( $args );
+	$output   = str_replace( '<select ', '<select class="' . esc_attr( $class ) . '" ', $dropdown );
 
-	$output = str_replace( 'select ', 'select class="' . $class . '" ', $dropdown );
-
-	$output = str_replace( 'value="" ', 'value="en_US" ', $output );
-
-	return $output;
+	return str_replace( ' value="" ', 'value="en_US" ', $output );
 }
 
 /**

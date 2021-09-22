@@ -213,7 +213,7 @@ class Goodreads_Widget implements Jetpack_Widget_Interface {
 	public function display_div_message_to_go_to_consent_settings( $widget ) {
 		$callback = $widget['callback'][0];
 
-		if ( $callback->id_base == 'wpcom-goodreads' ) {
+		if ( $callback->id_base === 'wpcom-goodreads' ) {
 			ob_start( array( $this, 'manipulate_script' ) );
 		}
 	}
@@ -224,9 +224,12 @@ class Goodreads_Widget implements Jetpack_Widget_Interface {
 	 * @since 1.2.0
 	 */
 	public function output_manipulated() {
-		add_action( 'dynamic_sidebar_after', function ( $index ) {
-			ob_end_flush();
-		} );
+		add_action(
+			'dynamic_sidebar_after',
+			function ( $index ) {
+				ob_end_flush();
+			}
+		);
 	}
 
 	/**
@@ -269,11 +272,14 @@ class Goodreads_Widget implements Jetpack_Widget_Interface {
 	 * @since 1.6.0
 	 */
 	public function cookie_consent_div( $view, $widget ) {
-		if ( $widget == 'goodreads' && $view == 'widget_view' ) {
+		if ( $widget === 'goodreads' && $view === 'widget_view' ) {
 			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
-				echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() ) . '">
-						  ' . $this->get_widget_placeholder() . '
-						</div>';
+				$class_name = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
+				?>
+				<div class="<?php echo esc_attr( $class_name ); ?>">
+					<?php echo $this->get_widget_placeholder(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				</div>
+				<?php
 			}
 		}
 	}

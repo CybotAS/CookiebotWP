@@ -197,6 +197,10 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ## Changelog ##
 
+### 3.11.1 - 2021-09-22 ###
+* Fixed unescaped PHP output
+* Updated some translations
+
 ### 3.11.0 - 2021-07-16 ###
 * Removed PHP-DI
 * Fixed number of arguments in the settings-service-interface.php get_placeholder method signature

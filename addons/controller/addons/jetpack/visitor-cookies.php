@@ -126,7 +126,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @return string
 	 */
 	public function get_default_placeholder() {
-		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
+		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow tracking.';
 	}
 
 	/**
@@ -171,7 +171,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 1.8.0
 	 */
 	public function get_widget_placeholder() {
-		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), $this->get_widget_cookie_types() );
+		return $this->settings->get_widget_placeholder( $this->widget_option, $this->get_widget_option_name(), $this->get_default_placeholder(), cookiebot_addons_output_cookie_types( $this->get_widget_cookie_types() ) );
 	}
 
 	/**
@@ -180,9 +180,12 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 1.2.0
 	 */
 	protected function disable_comment_subscriptions() {
-		add_filter( 'comment_cookie_lifetime', function ( $time ) {
-			return 0;
-		} );
+		add_filter(
+			'comment_cookie_lifetime',
+			function ( $time ) {
+				return 0;
+			}
+		);
 	}
 
 	/**
@@ -212,7 +215,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 		cookiebot_addons_remove_class_action( 'comment_post', 'Highlander_Comments_Base', 'set_comment_cookies' );
 
 		/**
-		 * Remove action comment cookies in wordpress core
+		 * Remove action comment cookies in WordPress core
 		 *
 		 * we have to remove this action, because it does manually add the cookie.
 		 */
@@ -251,9 +254,12 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 1.2.0
 	 */
 	public function view_accept_preferences_consent() {
-		echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() ) . '">
-						  ' . $this->get_default_placeholder() . '
-						</div>';
+		$class_name = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
+		?>
+		<div class="<?php echo esc_attr( $class_name ); ?>">
+			<?php echo $this->get_widget_placeholder(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		</div>
+		<?php
 	}
 
 	/**

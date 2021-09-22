@@ -58,7 +58,7 @@
 		
 		</h2>
 		
-		<form method="post" action="options.php" class="<?php echo $active_tab; ?>">
+		<form method="post" action="options.php" class="<?php echo esc_attr( $active_tab ); ?>">
 			<?php
 			
 			if ( $active_tab == 'available_addons' ) {
