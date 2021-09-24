@@ -1,5 +1,5 @@
-# This uses newer and faster docker based build system
-sudo: false
+os: linux
+dist: xenial
 
 services:
   - mysql
@@ -7,29 +7,33 @@ services:
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
 
-# list any PHP version you want to test against
-php:
-  # aliased to a recent 5.4.x version
-  - '5.6'
-  - '7.1'
-  - '7.3'
-
-env:
-  - WP_PROJECT_TYPE=plugin WP_VERSION=latest WP_MULTISITE=0 WP_TEST_URL=http://localhost:12000 WP_TEST_USER=test WP_TEST_USER_PASS=test XDEBUG_MODE=coverage
+jobs:
+  include:
+    - php: 7.3
+      env: PHPUNIT_VERSION=7.5.20
+    - php: 7.2
+      env: PHPUNIT_VERSION=7.5.20
+    - php: 7.1
+      env: PHPUNIT_VERSION=7.5.20
+    - php: 7.0
+      env: PHPUNIT_VERSION=6.5.14
+    - php: 5.6
+      env: PHPUNIT_VERSION=5.7.27
 
 before_script:
-  # Install composer packages before trying to activate themes or plugins
-  # - composer install
-
-  # Install an older version of PHPUnit as WordPress does not support 8.x yet
-  - if [[ "$TRAVIS_PHP_VERSION" == "5.6" ]]; then PHPUNIT_VERSION=5.7.9; else PHPUNIT_VERSION=6.5.9; fi
-  - wget https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar -O /tmp/phpunit; chmod +x /tmp/phpunit
-
-  # Install test framework
-  - git clone https://github.com/Seravo/wordpress-test-template wp-tests
-  - bash wp-tests/bin/install-wp-tests.sh test root '' localhost $WP_VERSION
-  - rm -rf /tmp/wordpress-tests-lib/includes/
-  - svn co --quiet http://develop.svn.wordpress.org/tags/5.4.2/tests/phpunit/includes/ /tmp/wordpress-tests-lib/includes/
+  - if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+      phpenv config-rm xdebug.ini
+    else
+      echo "xdebug.ini does not exist"
+    fi
+  - |
+    bash bin/install-wp-tests.sh wordpress_test root '' localhost latest
+  - |
+    wget https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar -O /tmp/phpunit
+  - |
+    chmod +x /tmp/phpunit
 
 script:
   - /tmp/phpunit
+  - |
+    WP_MULTISITE=1 /tmp/phpunit
