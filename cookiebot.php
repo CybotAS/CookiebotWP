@@ -7,7 +7,7 @@ Plugin Name: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control
 Plugin URI: https://cookiebot.com/
 Description: Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites.
 Author: Cybot A/S
-Version: 3.11.0
+Version: 3.11.1
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs
@@ -42,7 +42,7 @@ define( 'COOKIEBOT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 if ( ! class_exists( 'Cookiebot_WP' ) ) :
 
 	final class Cookiebot_WP {
-		const COOKIEBOT_PLUGIN_VERSION  = '3.11.0';
+		const COOKIEBOT_PLUGIN_VERSION  = '3.11.1';
 		const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 		/**
@@ -179,8 +179,8 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 * @version 3.9.0
 		 * @since   1.0.0
 		 */
-		public function add_js( $printTag = true ) {
-			$cbid = self::get_cbid();
+		public function add_js( $print_tag = true ) {
+			$cbid = $this->get_cbid();
 			if ( ! empty( $cbid ) && ! defined( 'COOKIEBOT_DISABLE_ON_PAGE' ) ) {
 				if ( is_multisite() && get_site_option( 'cookiebot-nooutput', false ) ) {
 					return; //Is multisite - and disabled output is checked as network setting
@@ -190,14 +190,11 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 					return; //Do not show JS - output disabled
 				}
 
-				if ( $this->get_cookie_blocking_mode() === 'auto' && $this->can_current_user_edit_theme() && $printTag !== false && get_site_option( 'cookiebot-output-logged-in' ) === false ) {
+				if ( $this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() && $print_tag !== false && get_site_option( 'cookiebot-output-logged-in' ) == false ) {
 					return;
 				}
 
-				$lang = cookiebot_get_language_from_setting();
-				if ( ! empty( $lang ) ) {
-					$lang = ' data-culture="' . strtoupper( $lang ) . '"'; //Use data-culture to define language
-				}
+				$lang = $this->get_language();
 
 				if ( ! is_multisite() || get_site_option( 'cookiebot-script-tag-uc-attribute', 'custom' ) == 'custom' ) {
 					$tagAttr = get_option( 'cookiebot-script-tag-uc-attribute', 'async' );
@@ -205,29 +202,40 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 					$tagAttr = get_site_option( 'cookiebot-script-tag-uc-attribute' );
 				}
 
-				if ( $this->get_cookie_blocking_mode() === 'auto' ) {
-					$tagAttr = 'data-blockingmode="auto"';
+				if ( $print_tag === false ) {
+					ob_start();
 				}
-
-				if ( get_option( 'cookiebot-gtm' ) !== false ) {
-					if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
-						$data_layer = 'data-layer-name="dataLayer"';
-					} else {
-						$data_layer = 'data-layer-name="' . get_option( 'cookiebot-data-layer' ) . '"';
-					}
-				} else {
-					$data_layer = '';
+				?>
+				<script type="text/javascript"
+						id="Cookiebot"
+						src="https://consent.cookiebot.com/uc.js"
+						data-cbid="<?php echo esc_attr( $cbid ); ?>"
+					<?php if ( (bool) get_option( 'cookiebot-iab' ) !== false ) : ?>
+						data-framework="IAB"
+					<?php endif; ?>
+					<?php if ( (bool) get_option( 'cookiebot-ccpa' ) !== false ) : ?>
+						data-georegions="{'region':'US-06','cbid':'<?php echo esc_attr( get_option( 'cookiebot-ccpa-domain-group-id' ) ); ?>'}"
+					<?php endif; ?>
+					<?php if ( (bool) get_option( 'cookiebot-gtm' ) !== false ) : ?>
+						<?php if ( empty( get_option( 'cookiebot-data-layer' ) ) ) : ?>
+							data-layer-name="dataLayer"
+						<?php else : ?>
+							data-layer-name="<?php echo esc_attr( get_option( 'cookiebot-data-layer' ) ); ?>"
+						<?php endif; ?>
+					<?php endif; ?>
+					<?php if ( ! empty( $lang ) ) : ?>
+						data-culture="<?php echo esc_attr( strtoupper( $lang ) ); ?>"
+					<?php endif; ?>
+					<?php if ( $this->get_cookie_blocking_mode() === 'auto' ) : ?>
+						data-blockingmode="auto"
+					<?php else : ?>
+						<?php echo esc_attr( $tagAttr ); ?>
+					<?php endif; ?>
+				></script>
+				<?php
+				if ( $print_tag === false ) {
+					return ob_get_clean();
 				}
-
-				$iab = ( get_option( 'cookiebot-iab' ) !== false ) ? 'data-framework="IAB"' : '';
-
-				$ccpa = ( get_option( 'cookiebot-ccpa' ) !== false ) ? 'data-georegions="{\'region\':\'US-06\',\'cbid\':\'' . get_option( 'cookiebot-ccpa-domain-group-id' ) . '\'}"' : '';
-
-				$tag = '<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" ' . $iab . ' ' . $ccpa . ' ' . $data_layer . ' data-cbid="' . $cbid . '"' . $lang . ' type="text/javascript" ' . $tagAttr . '></script>';
-				if ( $printTag === false ) {
-					return $tag;
-				}
-				echo $tag;
 			}
 		}
 
@@ -248,25 +256,25 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 					$data_layer = get_option( 'cookiebot-data-layer' );
 				}
 
-				$GTM = '<script>';
-				if ( get_option( 'cookiebot-iab' ) ) {
-					$GTM .= 'window ["gtag_enable_tcf_support"] = true;';
+				if ( $print_tag === false ) {
+					ob_start();
 				}
-
-				$GTM .= "(function (w, d, s, l, i) {
-				w[l] = w[l] || []; w[l].push({'gtm.start':new Date().getTime(), event: 'gtm.js'}); 
-			  var f = d.getElementsByTagName(s)[0],  j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; 
-			  j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; 
-			  f.parentNode.insertBefore(j, f);})
-			  (window, document, 'script', '" . $data_layer . "', '" . get_option( 'cookiebot-gtm-id' ) . "');";
-
-				$GTM .= '</script>';
-
-				if ( $printTag === false ) {
-					return $GTM;
+				?>
+				<script>
+					<?php if ( get_option( 'cookiebot-iab' ) ) : ?>
+					window ["gtag_enable_tcf_support"] = true;
+					<?php endif; ?>
+					(function (w, d, s, l, i) {
+					  w[l] = w[l] || []; w[l].push({'gtm.start':new Date().getTime(), event: 'gtm.js'});
+					  var f = d.getElementsByTagName(s)[0],  j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+					  j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+					  f.parentNode.insertBefore(j, f);})
+					(window, document, 'script', '<?php echo esc_js( $data_layer ); ?>', '<?php echo esc_js( get_option( 'cookiebot-gtm-id' ) ); ?>');
+				</script>
+				<?php
+				if ( $print_tag === false ) {
+					return ob_get_clean();
 				}
-
-				echo $GTM;
 			}
 		}
 
@@ -287,18 +295,19 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 					$data_layer = get_option( 'cookiebot-data-layer' );
 				}
 
-				$GCM = '<script data-cookieconsent="ignore">
-			(function(w,d,l){w[l]=w[l]||[];function gtag(){w[l].push(arguments)};
-			gtag("consent","default",{ad_storage:d,analytics_storage:d,wait_for_update:500,});
-			gtag("set", "ads_data_redaction", true);})(window,"denied","' . $data_layer . '");';
-
-				$GCM .= '</script>';
-
-				if ( $printTag === false ) {
-					return $GCM;
+				if ( $print_tag === false ) {
+					ob_start();
 				}
-
-				echo $GCM;
+				?>
+				<script data-cookieconsent="ignore">
+				  (function(w,d,l){w[l]=w[l]||[];function gtag(){w[l].push(arguments)}
+					gtag("consent","default",{ad_storage:d,analytics_storage:d,wait_for_update:500,});
+					gtag("set", "ads_data_redaction", true);})(window,"denied","<?php echo esc_js( $data_layer ); ?>");
+				</script>
+				<?php
+				if ( $print_tag === false ) {
+					return ob_get_clean();
+				}
 			}
 		}
 
@@ -544,8 +553,8 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		public function _cookiebot_plugin_conflict_divi() {
 			if ( defined( 'ET_FB_ENABLED' ) ) {
 				if ( ET_FB_ENABLED &&
-				     $this->cookiebot_disabled_in_admin() &&
-				     $this->get_cookie_blocking_mode() == 'auto' ) {
+					 $this->cookiebot_disabled_in_admin() &&
+					 $this->get_cookie_blocking_mode() == 'auto' ) {
 
 					define( 'COOKIEBOT_DISABLE_ON_PAGE', true ); //Disable Cookiebot on the current page
 

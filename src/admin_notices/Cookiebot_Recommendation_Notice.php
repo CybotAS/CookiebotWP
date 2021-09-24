@@ -40,13 +40,13 @@ class Cookiebot_Recommendation_Notice {
 			'nonce'
 		);
 
-		$notices = array(
-			'title'      => esc_html__( 'Leave A Review?', 'cookiebot' ),
-			'msg'        => esc_html__(
+		$notice = array(
+			'title'      => __( 'Leave A Review?', 'cookiebot' ),
+			'msg'        => __(
 				'We hope you enjoy using WordPress Cookiebot! Would you consider leaving us a review on WordPress.org?',
 				'cookiebot'
 			),
-			'link'       => get_view_html(
+			'link_html'  => get_view_html(
 				'admin/notices/cookiebot-recommendation-notice-links.php',
 				array(
 					'two_week_review_ignore' => $two_week_review_ignore,
@@ -57,7 +57,7 @@ class Cookiebot_Recommendation_Notice {
 			'int'        => 14,
 		);
 
-		include_view( 'admin/notices/cookiebot-recommendation-notice.php', array( 'notices' => $notices ) );
+		include_view( 'admin/notices/cookiebot-recommendation-notice.php', array( 'notice' => $notice ) );
 
 		wp_enqueue_style(
 			'cookiebot-admin-notices',
