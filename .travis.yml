@@ -4,11 +4,22 @@ dist: xenial
 services:
   - mysql
 
-# see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
 
-jobs:
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: 7.4
+      env: PHPCS=1
   include:
+    - php: 7.4
+      env: PHPCS=1
+    - php: 7.4
+      env: PHPUNIT_VERSION=7.5.20
     - php: 7.3
       env: PHPUNIT_VERSION=7.5.20
     - php: 7.2
@@ -21,19 +32,31 @@ jobs:
       env: PHPUNIT_VERSION=5.7.27
 
 before_script:
-  - if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+  - |
+    if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
       phpenv config-rm xdebug.ini
     else
       echo \"xdebug.ini does not exist\"
     fi
   - |
-    bash bin/install-wp-tests.sh wordpress_test root '' localhost latest
-  - |
-    wget https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar -O /tmp/phpunit
-  - |
-    chmod +x /tmp/phpunit
-
+    if [ "$PHPCS" == "1" ]; then
+      composer require squizlabs/php_codesniffer
+      composer require wp-coding-standards/wpcs
+      composer require phpcompatibility/php-compatibility
+      composer require phpcompatibility/phpcompatibility-paragonie
+      composer require phpcompatibility/phpcompatibility-wp
+      composer install
+      vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs,vendor/phpcompatibility/php-compatibility,vendor/phpcompatibility/phpcompatibility-paragonie,vendor/phpcompatibility/phpcompatibility-wp
+    else
+      bash bin/install-wp-tests.sh wordpress_test root '' localhost latest
+      wget https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar -O /tmp/phpunit
+      chmod +x /tmp/phpunit
+    fi
 script:
-  - /tmp/phpunit
   - |
-    WP_MULTISITE=1 /tmp/phpunit
+    if [ "$PHPCS" == "1" ]; then
+      vendor/bin/phpcs
+    else
+      /tmp/phpunit
+      WP_MULTISITE=1 /tmp/phpunit
+    fi

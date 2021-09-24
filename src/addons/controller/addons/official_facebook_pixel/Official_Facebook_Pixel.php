@@ -252,7 +252,7 @@ class Official_Facebook_Pixel extends Base_Cookiebot_Plugin_Addon implements Add
 	 */
 	public function get_extra_information() {
 		return array(
-			__( 'Blocks Official Facebook Pixel scripts', 'cookiebot-addons' ),
+			__( 'Blocks Official Facebook Pixel scripts', 'cookiebot' ),
 		);
 	}
 

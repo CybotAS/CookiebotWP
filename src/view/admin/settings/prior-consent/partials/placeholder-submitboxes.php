@@ -15,13 +15,13 @@ foreach ( $placeholders as $placeholder ) :
 	?>
 	<div class="placeholder_content submitbox">
 		<p>
-			<label><?php esc_html_e( 'Language', 'cookiebot-addons' ); ?></label>
+			<label><?php esc_html_e( 'Language', 'cookiebot' ); ?></label>
 			<?php
 			echo $languages_dropdown_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>
 			<?php if ( $removable ) : ?>
 				<a href="" class="submitdelete deletion">
-					<?php esc_html_e( 'Remove language', 'cookiebot-addons' ); ?>
+					<?php esc_html_e( 'Remove language', 'cookiebot' ); ?>
 				</a>
 			<?php endif; ?>
 		</p>

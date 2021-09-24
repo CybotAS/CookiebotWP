@@ -82,7 +82,7 @@ class Facebook_Jetpack_Widget extends Base_Jetpack_Widget implements Addon_With_
 	 */
 	public function get_extra_information() {
 		return array(
-			__( 'Facebook widget.', 'cookiebot-addons' ),
+			__( 'Facebook widget.', 'cookiebot' ),
 		);
 	}
 

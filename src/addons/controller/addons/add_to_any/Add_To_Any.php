@@ -80,7 +80,7 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addo
 		return array(
 			__(
 				'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
-				'cookiebot-addons'
+				'cookiebot'
 			),
 		);
 	}

@@ -68,7 +68,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_checked_selected_helper;
 		<p class="add_placeholder_language">
 			<button class="btn_add_language button button-secondary"
 					data-addon="<?php echo esc_attr( $widget_option_name ); ?>">
-				<?php esc_html_e( '+ Add language', 'cookiebot-addons' ); ?>
+				<?php esc_html_e( '+ Add language', 'cookiebot' ); ?>
 			</button>
 		</p>
 	</div>

@@ -431,7 +431,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 		return array(
 			__(
 				'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
-				'cookiebot-addons'
+				'cookiebot'
 			),
 		);
 	}

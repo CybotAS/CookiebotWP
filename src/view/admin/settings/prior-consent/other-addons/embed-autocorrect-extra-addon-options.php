@@ -9,18 +9,18 @@
 		<?php
 		esc_html_e(
 			'Show advanced options',
-			'cookiebot-addons'
+			'cookiebot'
 		);
 		?>
 	</button>
 	<span
 			class="help-tip"
-			title="<?php echo esc_html__( 'This is for more advanced users.', 'cookiebot-addons' ); ?>"
+			title="<?php echo esc_html__( 'This is for more advanced users.', 'cookiebot' ); ?>"
 	></span>
 </div>
 <div class="advanced_options">
 
-	<label for="embed_regex"><?php esc_html_e( 'Regex:', 'cookiebot-addons' ); ?></label>
+	<label for="embed_regex"><?php esc_html_e( 'Regex:', 'cookiebot' ); ?></label>
 	<textarea
 			id="embed_regex"
 			cols="80"
@@ -34,7 +34,7 @@
 			<?php
 			esc_html_e(
 				'Edit regex',
-				'cookiebot-addons'
+				'cookiebot'
 			);
 			?>
 		</button>
@@ -48,7 +48,7 @@
 		<?php
 		esc_html_e(
 			'Reset to default regex',
-			'cookiebot-addons'
+			'cookiebot'
 		);
 		?>
 	</button>

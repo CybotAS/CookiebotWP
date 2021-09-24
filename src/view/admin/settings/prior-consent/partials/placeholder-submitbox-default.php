@@ -6,7 +6,7 @@
 ?>
 <div class="placeholder_content">
 	<p>
-		<label><?php esc_html_e( 'Language', 'cookiebot-addons' ); ?></label>
+		<label><?php esc_html_e( 'Language', 'cookiebot' ); ?></label>
 		<?php
 		echo $site_default_languages_dropdown_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>

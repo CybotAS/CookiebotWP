@@ -56,7 +56,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 	</ul>
 
 	<p>
-		<label><?php esc_html_e( 'Display a placeholder', 'cookiebot-addons' ); ?></label>
+		<label><?php esc_html_e( 'Display a placeholder', 'cookiebot' ); ?></label>
 		<input <?php checked( 1, $addon_placeholder_is_enabled ); ?>
 				type="checkbox"
 				class="placeholder_enable"
@@ -74,7 +74,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 		<p class="add_placeholder_language">
 			<button class="btn_add_language button button-secondary"
 					data-addon="<?php echo esc_attr( $addon_option_name ); ?>">
-				<?php esc_html_e( '+ Add language', 'cookiebot-addons' ); ?>
+				<?php esc_html_e( '+ Add language', 'cookiebot' ); ?>
 			</button>
 		</p>
 	</div>

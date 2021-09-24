@@ -112,7 +112,7 @@ class Settings_Config {
 		wp_localize_script(
 			'cookiebot_addons_custom_js',
 			'php',
-			array( 'remove_link' => ' <a href="" class="submitdelete deletion">' . esc_html__( 'Remove language', 'cookiebot-addons' ) . '</a>' )
+			array( 'remove_link' => ' <a href="" class="submitdelete deletion">' . esc_html__( 'Remove language', 'cookiebot' ) . '</a>' )
 		);
 		wp_enqueue_style(
 			'cookiebot_addons_custom_css',

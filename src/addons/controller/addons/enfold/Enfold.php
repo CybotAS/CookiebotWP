@@ -31,7 +31,7 @@ class Enfold extends Base_Cookiebot_Theme_Addon implements Addon_With_Extra_Info
 	 */
 	public function get_extra_information() {
 		return array(
-			__( 'Blocks cookies created by Enfold theme\'s Google Services.', 'cookiebot-addons' ),
+			__( 'Blocks cookies created by Enfold theme\'s Google Services.', 'cookiebot' ),
 		);
 	}
 }

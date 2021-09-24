@@ -63,8 +63,8 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_In
 	 */
 	public function get_extra_information() {
 		return array(
-			__( 'If the user gives correct consent, IP and Unique User ID will be saved on form submissions, otherwise not.', 'cookiebot-addons' ),
-			__( 'Increases opt-in rate compared to WPForms "GDPR mode".', 'cookiebot-addons' ),
+			__( 'If the user gives correct consent, IP and Unique User ID will be saved on form submissions, otherwise not.', 'cookiebot' ),
+			__( 'Increases opt-in rate compared to WPForms "GDPR mode".', 'cookiebot' ),
 		);
 	}
 

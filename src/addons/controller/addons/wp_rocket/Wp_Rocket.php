@@ -56,7 +56,7 @@ class Wp_Rocket extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_
 		return array(
 			__(
 				'Excludes cookiebot javascript files when the WP-Rocket deter option is enabled.',
-				'cookiebot-addons'
+				'cookiebot'
 			),
 		);
 

@@ -53,7 +53,7 @@ class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon implements Addon_With_
 		return array(
 			__(
 				'Excludes cookiebot javascript files when the Litespeed Cache deter option is enabled.',
-				'cookiebot-addons'
+				'cookiebot'
 			),
 		);
 

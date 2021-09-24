@@ -51,7 +51,7 @@ class Wp_Google_Analytics_Events extends Base_Cookiebot_Plugin_Addon implements 
 		return array(
 			__(
 				'The plugin allows you to fire events whenever someone interacts or views elements on your website.',
-				'cookiebot-addons'
+				'cookiebot'
 			),
 		);
 	}
