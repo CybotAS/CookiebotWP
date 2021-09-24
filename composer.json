@@ -2,7 +2,14 @@
   "name": "cybot/cookiebot",
   "autoload": {
     "psr-4": {
-      "cybot\\cookiebot\\" : "src/"
+      "cybot\\cookiebot\\": "src/",
+      "cybot\\cookiebot\\tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "docker.phpunit": "cd tests && docker-compose run cookiebot phpunit",
+    "docker.phpcs": "cd tests && docker-compose run cookiebot phpcs",
+    "phpcs": "phpcs --standard=./.phpcs-local.xml ./",
+    "phpcbf": "phpcbf --standard=./.phpcs-local.xml ./"
   }
 }

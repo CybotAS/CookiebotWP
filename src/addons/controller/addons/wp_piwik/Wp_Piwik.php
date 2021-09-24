@@ -55,7 +55,7 @@ class Wp_Piwik extends Base_Cookiebot_Plugin_Addon {
 	 *
 	 * @since 1.8.0
 	 */
-	public static function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/wp-piwik/trunk/wp-piwik.php';
+	public static function get_svn_url( $path = 'wp-piwik.php' ) {
+		return 'http://plugins.svn.wordpress.org/wp-piwik/trunk/' . $path;
 	}
 }

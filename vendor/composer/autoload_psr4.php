@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'cybot\\cookiebot\\tests\\' => array($baseDir . '/tests'),
     'cybot\\cookiebot\\' => array($baseDir . '/src'),
 );

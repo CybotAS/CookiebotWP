@@ -63,7 +63,7 @@ class Pixel_Caffeine extends Base_Cookiebot_Plugin_Addon {
 	 *
 	 * @since 1.8.0
 	 */
-	public static function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/pixel-caffeine/trunk/pixel-caffeine.php';
+	public static function get_svn_url( $path = 'pixel-caffeine.php' ) {
+		return 'http://plugins.svn.wordpress.org/pixel-caffeine/trunk/' . $path;
 	}
 }

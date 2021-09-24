@@ -46,7 +46,7 @@ class Hubspot_Tracking_Code extends Base_Cookiebot_Plugin_Addon implements Open_
 	 *
 	 * @since 1.8.0
 	 */
-	public static function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/hubspot-tracking-code/trunk/hubspot-tracking-code.php';
+	public static function get_svn_url( $path = 'hubspot-tracking-code.php' ) {
+		return 'http://plugins.svn.wordpress.org/hubspot-tracking-code/trunk/' . $path;
 	}
 }

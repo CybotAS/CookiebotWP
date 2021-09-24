@@ -41,7 +41,7 @@ class Wd_Google_Analytics extends Base_Cookiebot_Plugin_Addon {
 	 *
 	 * @since 1.8.0
 	 */
-	public static function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/wd-google-analytics/trunk/google-analytics-wd.php';
+	public static function get_svn_url( $path = 'google-analytics-wd.php' ) {
+		return 'http://plugins.svn.wordpress.org/wd-google-analytics/trunk/' . $path;
 	}
 }

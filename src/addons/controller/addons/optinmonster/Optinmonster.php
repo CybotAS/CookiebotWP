@@ -43,7 +43,7 @@ class Optinmonster extends Base_Cookiebot_Plugin_Addon implements Addon_With_Ext
 	 *
 	 * @since 1.8.0
 	 */
-	public static function get_svn_url() {
-		return 'https://plugins.svn.wordpress.org/optinmonster/trunk/optin-monster-wp-api.php';
+	public static function get_svn_url( $path = 'optin-monster-wp-api.php' ) {
+		return 'https://plugins.svn.wordpress.org/optinmonster/trunk/' . $path;
 	}
 }

@@ -9,11 +9,16 @@ class ComposerStaticInitc34673f28de77716fffd4fc05531c6e9
     public static $prefixLengthsPsr4 = array (
         'c' => 
         array (
+            'cybot\\cookiebot\\tests\\' => 22,
             'cybot\\cookiebot\\' => 16,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'cybot\\cookiebot\\tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
+        ),
         'cybot\\cookiebot\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',

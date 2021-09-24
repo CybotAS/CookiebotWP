@@ -21,8 +21,8 @@ class Custom_Facebook_Feed extends Base_Cookiebot_Plugin_Addon implements Open_S
 	 *
 	 * @since 1.8.0
 	 */
-	public static function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/custom-facebook-feed/trunk/custom-facebook-feed.php';
+	public static function get_svn_url( $path = 'custom-facebook-feed.php' ) {
+		return 'http://plugins.svn.wordpress.org/custom-facebook-feed/trunk/' . $path;
 	}
 
 	public function load_addon_configuration() {

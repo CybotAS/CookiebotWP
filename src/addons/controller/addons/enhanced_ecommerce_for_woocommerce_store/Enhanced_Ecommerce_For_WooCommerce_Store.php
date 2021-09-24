@@ -56,7 +56,7 @@ class Enhanced_Ecommerce_For_WooCommerce_Store extends Base_Cookiebot_Plugin_Add
 	 *
 	 * @since 1.8.0
 	 */
-	public static function get_svn_url() {
-		return 'https://plugins.svn.wordpress.org/enhanced-e-commerce-for-woocommerce-store/trunk/enhanced-ecommerce-google-analytics.php';
+	public static function get_svn_url( $path = 'enhanced-ecommerce-google-analytics.php' ) {
+		return 'https://plugins.svn.wordpress.org/enhanced-e-commerce-for-woocommerce-store/trunk/' . $path;
 	}
 }

@@ -49,7 +49,7 @@ class Addthis extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_I
 	 *
 	 * @since 1.8.0
 	 */
-	public static function get_svn_url() {
-		return 'https://plugins.svn.wordpress.org/addthis/trunk/addthis_social_widget.php';
+	public static function get_svn_url( $path = 'addthis_social_widget.php' ) {
+		return 'https://plugins.svn.wordpress.org/addthis/trunk/' . $path;
 	}
 }
