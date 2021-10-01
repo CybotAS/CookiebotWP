@@ -58,11 +58,12 @@ class Settings_Page_Tab {
 			throw new InvalidArgumentException( 'The constructor argument "page_name" is a required string ' );
 		}
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$this->is_active                    = isset( $_GET['tab'] ) && $_GET['tab'] === $this->name;
 		$this->name                         = $name;
 		$this->label                        = $label;
 		$this->settings_fields_option_group = $settings_fields_option_group;
 		$this->page_name                    = $page_name;
-		$this->is_active                    = isset( $_GET['tab'] ) && $_GET['tab'] === $this->name;
 		$this->has_submit_button            = $has_submit_button;
 	}
 
