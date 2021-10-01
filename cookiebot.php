@@ -47,7 +47,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) {
 		 * @var   Cookiebot_WP The single instance of the class
 		 * @since 1.0.0
 		 */
-		protected static $instance = null;
+		private static $instance = null;
 
 		/**
 		 * Main Cookiebot_WP Instance
