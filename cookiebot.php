@@ -346,12 +346,12 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 * @since   3.5.0
 		 */
 		public function get_wp_consent_api_mapping() {
-			$mDefault = $this->get_default_wp_consent_api_mapping();
-			$mapping  = get_option( 'cookiebot-consent-mapping', $mDefault );
+			$default_wp_consent_api_mapping = $this->get_default_wp_consent_api_mapping();
+			$mapping                        = get_option( 'cookiebot-consent-mapping', $default_wp_consent_api_mapping );
 
-			$mapping = ( '' === $mapping ) ? $mDefault : $mapping;
+			$mapping = ( '' === $mapping ) ? $default_wp_consent_api_mapping : $mapping;
 
-			foreach ( $mDefault as $k => $v ) {
+			foreach ( $default_wp_consent_api_mapping as $k => $v ) {
 				if ( ! isset( $mapping[ $k ] ) ) {
 					$mapping[ $k ] = $v;
 				} else {
