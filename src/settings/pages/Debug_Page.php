@@ -4,15 +4,16 @@ namespace cybot\cookiebot\settings\pages;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\Cookiebot_Addons;
+use cybot\cookiebot\lib\Consent_API_Helper;
 use cybot\cookiebot\lib\Cookiebot_Javascript_Helper;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
 use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
 use InvalidArgumentException;
+use RuntimeException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
 use Exception;
-use function cybot\cookiebot\cookiebot;
 
 class Debug_Page implements Settings_Page_Interface {
 
@@ -42,12 +43,13 @@ class Debug_Page implements Settings_Page_Interface {
 
 	/**
 	 * @throws InvalidArgumentException
+	 * @throws RuntimeException
 	 */
 	private function prepare_debug_data() {
 		global $wpdb;
 
-		$cookiebot                   = cookiebot();
 		$cookiebot_javascript_helper = new Cookiebot_Javascript_Helper();
+		$consent_api_helper          = new Consent_API_Helper();
 
 		if ( ! function_exists( 'get_plugins' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -88,10 +90,10 @@ class Debug_Page implements Settings_Page_Interface {
 			$debug_output .= 'GCM tag: ' . $cookiebot_javascript_helper->include_google_consent_mode_js( true ) . "\n";
 		}
 
-		if ( $cookiebot->is_wp_consent_api_active() ) {
+		if ( $consent_api_helper->is_wp_consent_api_active() ) {
 			$debug_output .= "\n--- WP Consent Level API Mapping ---\n";
 			$debug_output .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous' . "\n";
-			$m             = $cookiebot->get_wp_consent_api_mapping();
+			$m             = $consent_api_helper->get_wp_consent_api_mapping();
 			foreach ( $m as $k => $v ) {
 				$cb = array();
 

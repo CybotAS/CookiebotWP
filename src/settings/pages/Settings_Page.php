@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\settings\pages;
 
 use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Consent_API_Helper;
 use cybot\cookiebot\lib\Supported_Languages;
 use function cybot\cookiebot\lib\include_view;
 use function cybot\cookiebot\lib\asset_url;
@@ -39,7 +40,7 @@ class Settings_Page implements Settings_Page_Interface {
 	}
 
 	public function display() {
-		$cookiebot = Cookiebot_WP::instance();
+		$consent_api_helper = new Consent_API_Helper();
 
 		$args = array(
 			'cbid'                     => Cookiebot_WP::get_cbid(),
@@ -48,9 +49,9 @@ class Settings_Page implements Settings_Page_Interface {
 			'cookiebot_logo'           => CYBOT_COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
 			'supported_languages'      => Supported_Languages::get(),
 			'current_lang'             => cookiebot_get_language_from_setting( true ),
-			'is_wp_consent_api_active' => $cookiebot->is_wp_consent_api_active(),
-			'm_default'                => $cookiebot->get_default_wp_consent_api_mapping(),
-			'm'                        => $cookiebot->get_wp_consent_api_mapping(),
+			'is_wp_consent_api_active' => $consent_api_helper->is_wp_consent_api_active(),
+			'm_default'                => $consent_api_helper->get_default_wp_consent_api_mapping(),
+			'm'                        => $consent_api_helper->get_wp_consent_api_mapping(),
 			'cookie_blocking_mode'     => Cookiebot_WP::get_cookie_blocking_mode(),
 		);
 
