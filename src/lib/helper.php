@@ -115,7 +115,6 @@ namespace cybot\cookiebot\lib {
 		$updated_scripts = preg_replace_callback(
 			$pattern,
 			function ( $matches ) use ( $keywords ) {
-
 				$script           = $matches[0]; // the full script html
 				$script_tag_open  = $matches[1]; // only the script open tag with all attributes
 				$script_tag_inner = $matches[2]; // only the script's innerText

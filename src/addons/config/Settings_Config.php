@@ -81,7 +81,6 @@ class Settings_Config {
 			),
 			40
 		);
-
 	}
 
 	/**
@@ -219,7 +218,6 @@ class Settings_Config {
 		foreach ( $this->settings_service->get_addons() as $addon ) {
 			if ( 'Jetpack' === ( new ReflectionClass( $addon ) )->getShortName() ) {
 				if ( $addon->is_addon_installed() && $addon->is_addon_activated() ) {
-
 					foreach ( $addon->get_widgets() as $widget ) {
 						add_settings_field(
 							$widget->get_widget_option_name(),

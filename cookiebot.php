@@ -40,7 +40,6 @@ define( 'COOKIEBOT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'COOKIEBOT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 if ( ! class_exists( 'Cookiebot_WP' ) ) :
-
 	final class Cookiebot_WP {
 		const COOKIEBOT_PLUGIN_VERSION  = '3.11.1';
 		const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
@@ -247,9 +246,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 */
 
 		public function add_GTM( $printTag = true ) {
-
 			if ( get_option( 'cookiebot-gtm' ) !== false ) {
-
 				if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
 					$data_layer = 'dataLayer';
 				} else {
@@ -286,9 +283,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 */
 
 		public function add_GCM( $printTag = true ) {
-
 			if ( get_option( 'cookiebot-gcm' ) !== false ) {
-
 				if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
 					$data_layer = 'dataLayer';
 				} else {
@@ -478,7 +473,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 						'marketing'            => 0,
 					),
 			);
-
 		}
 
 		/**
@@ -555,7 +549,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				if ( ET_FB_ENABLED &&
 					 $this->cookiebot_disabled_in_admin() &&
 					 $this->get_cookie_blocking_mode() == 'auto' ) {
-
 					define( 'COOKIEBOT_DISABLE_ON_PAGE', true ); //Disable Cookiebot on the current page
 
 				}

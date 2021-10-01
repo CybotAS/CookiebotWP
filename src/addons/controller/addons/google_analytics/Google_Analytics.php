@@ -30,7 +30,6 @@ class Google_Analytics extends Base_Cookiebot_Plugin_Addon implements Open_Sourc
 		if ( has_action( 'wp_enqueue_scripts', 'Ga_Frontend::platform_sharethis' ) ) {
 			$this->script_loader_tag->add_tag( GA_NAME . '-platform-sharethis', $this->get_cookie_types() );
 		}
-
 	}
 
 	/**

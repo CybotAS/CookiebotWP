@@ -31,7 +31,6 @@ class Ga_Google_Analytics extends Base_Cookiebot_Plugin_Addon implements Open_So
 				),
 				false
 			);
-
 		} elseif ( has_action( 'wp_footer', 'ga_google_analytics_tracking_code' ) ) {
 			/**
 			 * Consent not given - no cache

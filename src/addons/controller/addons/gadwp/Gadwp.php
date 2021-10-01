@@ -71,7 +71,6 @@ class Gadwp extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Int
 				return $atts;
 			}
 		);
-
 	}
 
 	/**

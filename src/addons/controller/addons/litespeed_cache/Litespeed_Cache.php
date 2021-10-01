@@ -56,7 +56,6 @@ class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon implements Addon_With_
 				'cookiebot'
 			),
 		);
-
 	}
 
 	/**

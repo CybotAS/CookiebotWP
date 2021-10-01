@@ -15,7 +15,6 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon implements Op
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing' );
 
 	public function load_addon_configuration() {
-
 		add_filter( 'wc_facebook_pixel_script_attributes', array( $this, 'cookiebot_addon_facebook_for_woocommerce_script_attributes' ) );
 
 		/* Keep for old version */

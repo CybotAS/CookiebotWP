@@ -96,7 +96,6 @@ class Debug_Page implements Settings_Page_Interface {
 				$debug_output .= 'M=' . $v['marketing'] . ', ';
 				$debug_output .= 'S=' . $v['statistics'] . ', ';
 				$debug_output .= 'SA=' . $v['statistics-anonymous'] . "\n";
-
 			}
 		}
 

@@ -31,7 +31,6 @@ class Goodreads_Jetpack_Widget extends Base_Jetpack_Widget {
 				 * The visitor didn't check the required cookie types
 				 */
 				if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() ) ) {
-
 					if ( $this->is_widget_placeholder_enabled() ) {
 						add_action( 'jetpack_stats_extra', array( $this, 'cookie_consent_div' ), 10, 2 );
 					}
@@ -102,7 +101,6 @@ class Goodreads_Jetpack_Widget extends Base_Jetpack_Widget {
 		 * If cache is not set then build it
 		 */
 		if ( $updated_scripts === false ) {
-
 			$updated_scripts = cookiebot_addons_manipulate_script( $buffer, $this->keywords );
 
 			/**

@@ -36,7 +36,6 @@ class Hubspot_Tracking_Code extends Base_Cookiebot_Plugin_Addon implements Open_
 		if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) && isset( $_COOKIE['hubspotutk'] ) ) {
 			unset( $_COOKIE['hubspotutk'] );
 		}
-
 	}
 
 	/**

@@ -121,7 +121,6 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_In
 	 * @return mixed
 	 */
 	public function wpforms_set_setting( $key, $new_value, $option = 'wpforms_settings' ) {
-
 		$key          = wpforms_sanitize_key( $key );
 		$options      = get_option( $option, false );
 		$option_value = is_array( $options ) && ! empty( $options[ $key ] ) ? $options[ $key ] : false;

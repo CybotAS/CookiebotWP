@@ -26,7 +26,6 @@ class Custom_Facebook_Feed extends Base_Cookiebot_Plugin_Addon implements Open_S
 	}
 
 	public function load_addon_configuration() {
-
 		if ( class_exists( '\CustomFacebookFeed\Custom_Facebook_Feed' ) ) {
 			$instance = \CustomFacebookFeed\Custom_Facebook_Feed::instance();
 

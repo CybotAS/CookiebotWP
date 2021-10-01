@@ -42,7 +42,6 @@ class Pixel_Caffeine extends Base_Cookiebot_Plugin_Addon {
 			),
 			false
 		);
-
 	}
 
 	/**

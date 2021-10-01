@@ -180,7 +180,6 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 
 			$adjusted .= $placeholder;
 			$content   = str_replace( $match, $adjusted, $content );
-
 		}
 		unset( $matches );
 
@@ -228,7 +227,6 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 
 			$adjusted .= $placeholder;
 			$content   = str_replace( $match, $adjusted, $content );
-
 		}
 		unset( $matches );
 

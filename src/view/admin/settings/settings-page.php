@@ -486,7 +486,6 @@ use function cybot\cookiebot\lib\asset_url;
 					</thead>
 					<?php
 					foreach ( $states as $state ) {
-
 						$key   = array();
 						$key[] = 'n=1';
 						$key[] = 'p=' . ( $state['preferences'] ? '1' : '0' );

@@ -99,7 +99,6 @@ class Google_Maps_Jetpack_Widget extends Base_Jetpack_Widget {
 			$updated_scripts = preg_replace_callback(
 				$pattern,
 				function ( $matches ) {
-
 					$data                = ( isset( $matches[0] ) ) ? $matches[0] : '';
 					$cookie_types_output = cookiebot_addons_output_cookie_types( $this->cookie_types );
 

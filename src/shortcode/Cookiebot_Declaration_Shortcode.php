@@ -22,7 +22,6 @@ class Cookiebot_Declaration_Shortcode {
 
 		$lang = '';
 		if ( ! empty( $cbid ) ) {
-
 			$atts = shortcode_atts(
 				array(
 					'lang' => cookiebot_get_language_from_setting(),

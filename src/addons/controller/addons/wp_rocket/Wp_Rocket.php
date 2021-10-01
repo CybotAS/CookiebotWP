@@ -59,7 +59,6 @@ class Wp_Rocket extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_
 				'cookiebot'
 			),
 		);
-
 	}
 
 	/**

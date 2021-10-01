@@ -17,7 +17,6 @@ abstract class Base_Cookiebot_Theme_Addon extends Base_Cookiebot_Addon {
 	 * @return bool
 	 */
 	final public function is_addon_activated() {
-
 		$addon = strtolower( static::ADDON_NAME );
 
 		$addon_theme      = wp_get_theme( $addon );

@@ -31,7 +31,6 @@ class Wd_Google_Analytics extends Base_Cookiebot_Plugin_Addon {
 			),
 			false
 		);
-
 	}
 
 	/**
