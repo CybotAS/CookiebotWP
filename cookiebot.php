@@ -242,8 +242,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 * @version 3.8.1
 		 * @since   3.8.1
 		 */
-
-		public function add_GTM( $printTag = true ) {
+		public function add_google_tag_manager( $print_tag = true ) {
 			if ( get_option( 'cookiebot-gtm' ) !== false ) {
 				if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
 					$data_layer = 'dataLayer';
