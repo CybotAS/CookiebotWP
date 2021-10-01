@@ -505,11 +505,7 @@ function cookiebot_assist( $type = 'statistics' ) {
  */
 function cookiebot_active() {
 	$cbid = Cookiebot_WP::get_cbid();
-	if ( ! empty( $cbid ) ) {
-		return true;
-	}
-
-	return false;
+	return ! empty( $cbid );
 }
 
 
