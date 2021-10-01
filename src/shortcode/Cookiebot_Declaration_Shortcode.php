@@ -3,6 +3,7 @@ namespace cybot\cookiebot\shortcode;
 
 use cybot\cookiebot\Cookiebot_WP;
 use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
+use function cybot\cookiebot\lib\get_view_html;
 
 class Cookiebot_Declaration_Shortcode {
 
@@ -17,22 +18,20 @@ class Cookiebot_Declaration_Shortcode {
 	 * @version 2.2.0
 	 * @since   1.0.0
 	 */
-	public static function show_declaration( $atts = array() ) {
+	public static function show_declaration( $shortcode_attributes = array() ) {
 		$cbid = Cookiebot_WP::get_cbid();
 
-		$lang = '';
 		if ( ! empty( $cbid ) ) {
-			$atts = shortcode_atts(
+			$url                  = 'https://consent.cookiebot.com/' . $cbid . '/cd.js';
+			$shortcode_attributes = shortcode_atts(
 				array(
 					'lang' => cookiebot_get_language_from_setting(),
 				),
-				$atts,
+				$shortcode_attributes,
 				'cookie_declaration'
 			);
 
-			if ( ! empty( $atts['lang'] ) ) {
-				$lang = ' data-culture="' . strtoupper( $atts['lang'] ) . '"'; //Use data-culture to define language
-			}
+			$lang = empty( $shortcode_attributes['lang'] ) ? '' : strtoupper( $shortcode_attributes['lang'] );
 
 			if ( ! is_multisite() || get_site_option( 'cookiebot-script-tag-cd-attribute', 'custom' ) === 'custom' ) {
 				$tag_attr = get_option( 'cookiebot-script-tag-cd-attribute', 'async' );
@@ -40,7 +39,14 @@ class Cookiebot_Declaration_Shortcode {
 				$tag_attr = get_site_option( 'cookiebot-script-tag-cd-attribute' );
 			}
 
-			return '<script id="CookieDeclaration" src="https://consent.cookiebot.com/' . $cbid . '/cd.js"' . $lang . ' type="text/javascript" ' . $tag_attr . '></script>';
+			return get_view_html(
+				'frontend/shortcodes/cookie-declaration.php',
+				array(
+					'url'      => $url,
+					'lang'     => $lang,
+					'tag_attr' => $tag_attr,
+				)
+			);
 		} else {
 			return esc_html__( 'Please add your Cookiebot ID to show Cookie Declarations', 'cookiebot' );
 		}
