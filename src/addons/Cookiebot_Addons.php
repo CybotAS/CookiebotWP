@@ -135,7 +135,7 @@ class Cookiebot_Addons {
 	protected function load_addons() {
 		require_once 'addons.php';
 		$this->addons_list = apply_filters(
-			'cookiebot_addons_list',
+			'cybot_cookiebot_addons_list',
 			array_merge( PLUGIN_ADDONS, THEME_ADDONS, OTHER_ADDONS )
 		);
 	}
