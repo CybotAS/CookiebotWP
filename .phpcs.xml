@@ -32,6 +32,7 @@
         <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
     </rule>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<exclude-pattern>/src/view/</exclude-pattern>
 		<properties>
 			<!-- Value: replace the function, class, and variable prefixes used. Separate multiple prefixes with a comma. -->
 			<property name="prefixes" type="array" value="cybot"/>
