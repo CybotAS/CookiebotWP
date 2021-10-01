@@ -273,7 +273,7 @@ namespace cybot\cookiebot\lib {
 		/**
 		 *  Add support for 3rd party plugins
 		 */
-		return apply_filters( 'cookiebot_addons_language', $lang );
+		return apply_filters( 'cybot_cookiebot_addons_language', $lang );
 	}
 
 	/**

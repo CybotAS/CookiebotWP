@@ -4,4 +4,5 @@
 
 ### Breaking changes
 - The `cookiebot_addons_list` filter hook was renamed to `cybot_cookiebot_addons_list` and the initial/expected value has been restructured.
+- The `cookiebot_addons_language` filter hook was renamed to `cybot_cookiebot_addons_language`.
 - 
