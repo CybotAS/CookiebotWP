@@ -6,7 +6,9 @@ use cybot\cookiebot\Cookiebot_WP;
 class Dashboard_Widget_Cookiebot_Status {
 
 	public function register_hooks() {
-		add_action( 'wp_dashboard_setup', array( $this, 'add_dashboard_widgets' ) );
+		if ( is_admin() ) {
+			add_action( 'wp_dashboard_setup', array( $this, 'add_dashboard_widgets' ) );
+		}
 	}
 
 	/**

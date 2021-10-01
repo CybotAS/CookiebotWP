@@ -21,9 +21,9 @@ use cybot\cookiebot\lib\Cookiebot_Activated;
 use cybot\cookiebot\lib\Cookiebot_Automatic_Updates;
 use cybot\cookiebot\lib\Cookiebot_Deactivated;
 use cybot\cookiebot\lib\Cookiebot_Javascript_Helper;
+use cybot\cookiebot\lib\Widgets;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
-use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
 use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
 use RuntimeException;
 
@@ -98,66 +98,31 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) {
 		}
 
 		public function cookiebot_init() {
-			// cookiebot addon trigger
 			Cookiebot_Addons::instance();
+			load_plugin_textdomain( 'cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
 
 			if ( is_admin() ) {
-
-				//Adding menu to WP admin
 				( new Menu_Settings() )->add_menu();
-
 				if ( is_multisite() ) {
 					( new Network_Menu_Settings() )->add_menu();
 				}
-
-				//Adding dashboard widgets
 				( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();
-
 				( new Cookiebot_Recommendation_Notice() )->register_hooks();
 			}
 
 			( new Consent_API_Helper() )->register_hooks();
-
-			// Set up localisation
-			load_plugin_textdomain( 'cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
-
 			( new Cookiebot_Javascript_Helper() )->register_hooks();
+			( new Cookiebot_Automatic_Updates() )->register_hooks();
+			( new Widgets() )->register_hooks();
+			( new Cookiebot_Gutenberg_Declaration_Block() )->register_hooks();
 
 			//Add filter if WP rocket is enabled
 			if ( defined( 'WP_ROCKET_VERSION' ) ) {
 				add_filter( 'rocket_minify_excluded_external_js', array( $this, 'wp_rocket_exclude_external_js' ) );
 			}
 
-			//Add filter
+			//Add filter SiteGround Optimizer
 			add_filter( 'sgo_javascript_combine_excluded_external_paths', array( $this, 'sgo_exclude_external_js' ) );
-
-			( new Cookiebot_Automatic_Updates() )->register_hooks();
-
-			//Loading widgets
-			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
-
-			//Add Gutenberg block
-			( new Cookiebot_Gutenberg_Declaration_Block() )->register_hooks();
-		}
-
-		/**
-		 * Cookiebot_WP Load text domain
-		 *
-		 * @version 2.0.0
-		 * @since       2.0.0
-		 */
-		public function load_textdomain() {
-			load_plugin_textdomain( 'cookiebot', false, basename( dirname( __FILE__ ) ) . '/langs' );
-		}
-
-		/**
-		 * Cookiebot_WP Register widgets
-		 *
-		 * @version 2.5.0
-		 * @since   2.5.0
-		 */
-		public function register_widgets() {
-			register_widget( Cookiebot_Declaration_Widget::class );
 		}
 
 		/**
