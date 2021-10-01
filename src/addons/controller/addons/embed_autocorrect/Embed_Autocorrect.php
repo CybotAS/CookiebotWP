@@ -160,7 +160,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 			 */
 			$placeholder = $this->generate_placeholder_with_src(
 				apply_filters(
-					'cookiebot_addons_embed_source',
+					'cybot_cookiebot_addons_embed_source',
 					$src
 				)
 			);
@@ -173,7 +173,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 			 * @param   $this           array   Array of required cookie types
 			 */
 			$placeholder = apply_filters(
-				'cookiebot_addons_embed_placeholder',
+				'cybot_cookiebot_addons_embed_placeholder',
 				$placeholder,
 				$src,
 				$this->get_cookie_types()
@@ -207,7 +207,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 			 */
 			$placeholder = $this->generate_placeholder_with_src(
 				apply_filters(
-					'cookiebot_addons_embed_source',
+					'cybot_cookiebot_addons_embed_source',
 					$src
 				)
 			);
@@ -220,7 +220,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 			 * @param   $this           array   Array of required cookie types
 			 */
 			$placeholder = apply_filters(
-				'cookiebot_addons_embed_placeholder',
+				'cybot_cookiebot_addons_embed_placeholder',
 				$placeholder,
 				$src,
 				$this->get_cookie_types()
@@ -260,7 +260,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 			/** Generate placeholder */
 			$placeholder = $this->generate_placeholder_with_src(
 				apply_filters(
-					'cookiebot_addons_embed_source',
+					'cybot_cookiebot_addons_embed_source',
 					$src
 				)
 			);
@@ -273,7 +273,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 			 * @param   $this           array   Array of required cookie types
 			 */
 			$placeholder = apply_filters(
-				'cookiebot_addons_embed_placeholder',
+				'cybot_cookiebot_addons_embed_placeholder',
 				$placeholder,
 				$src,
 				$this->get_cookie_types()
@@ -301,7 +301,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 			 */
 			$placeholder = $this->generate_placeholder_with_src(
 				apply_filters(
-					'cookiebot_addons_embed_source',
+					'cybot_cookiebot_addons_embed_source',
 					$src
 				)
 			);
@@ -313,7 +313,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 			 * @param   $this           array   Array of required cookie types
 			 */
 			$placeholder = apply_filters(
-				'cookiebot_addons_embed_placeholder',
+				'cybot_cookiebot_addons_embed_placeholder',
 				$placeholder,
 				$src,
 				$this->get_cookie_types()
@@ -349,9 +349,9 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 		/**
 		 * Generate placeholder
 		 */
-		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
+		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cybot_cookiebot_addons_embed_source', $src ) );
 		$placeholder = apply_filters(
-			'cookiebot_addons_embed_placeholder',
+			'cybot_cookiebot_addons_embed_placeholder',
 			$placeholder,
 			$src,
 			$this->get_cookie_types()
@@ -385,9 +385,9 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 		/**
 		 * Generate placeholder
 		 */
-		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cookiebot_addons_embed_source', $src ) );
+		$placeholder = $this->generate_placeholder_with_src( apply_filters( 'cybot_cookiebot_addons_embed_source', $src ) );
 		$placeholder = apply_filters(
-			'cookiebot_addons_embed_placeholder',
+			'cybot_cookiebot_addons_embed_placeholder',
 			$placeholder,
 			$src,
 			$this->get_cookie_types()
@@ -445,7 +445,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 	 */
 	private function get_regex() {
 		return apply_filters(
-			'cookiebot_embed_regex',
+			'cybot_cookiebot_embed_regex',
 			$this->settings->get_addon_regex( self::OPTION_NAME, $this->get_default_regex() )
 		);
 	}
@@ -459,7 +459,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 	 */
 	private function get_default_regex() {
 		return apply_filters(
-			'cookiebot_embed_default_regex',
+			'cybot_cookiebot_embed_default_regex',
 			'/<iframe[^>]* src=("|\').*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com|soundcloud\.com|spotify\.com|speakerdeck\.com|slideshare\.net|screencast\.com|reverbnation\.com|mixcloud\.com|cloudup\.com|animoto\.com|video\.WordPress\.com|embed\.ted\.com|embedly\.com|kickstarter\.com).*[^>].*>.*?<\/iframe>/mi'
 		);
 	}
