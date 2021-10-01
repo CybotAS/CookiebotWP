@@ -279,7 +279,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 * @since   3.8.1
 		 */
 
-		public function add_GCM( $printTag = true ) {
+		public function add_GCM( $print_tag = true ) {
 			if ( get_option( 'cookiebot-gcm' ) !== false ) {
 				if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
 					$data_layer = 'dataLayer';
