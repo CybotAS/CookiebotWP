@@ -391,7 +391,7 @@ use function cybot\cookiebot\lib\asset_url;
 						<p class="description">
 							<?php
 							if ( $disabled ) {
-								echo '<b>' . esc_html__( 'Network setting applied. Please contact website administrator to change this setting.' ) . '</b><br />';
+								echo '<b>' . esc_html__( 'Network setting applied. Please contact website administrator to change this setting.', 'cookiebot' ) . '</b><br />';
 							}
 							?>
 							<b><?php esc_html_e( 'This checkbox will disable Cookiebot in the WordPress Admin area.', 'cookiebot' ); ?></b>
@@ -423,7 +423,7 @@ use function cybot\cookiebot\lib\asset_url;
 						<p class="description">
 							<?php
 							if ( $disabled ) {
-								echo '<b>' . esc_html__( 'Network setting applied. Please contact website administrator to change this setting.' ) . '</b><br />';
+								echo '<b>' . esc_html__( 'Network setting applied. Please contact website administrator to change this setting.', 'cookiebot' ) . '</b><br />';
 							}
 							?>
 							<b><?php esc_html_e( 'This checkbox will enable Cookiebot on front end while you\'re logged in', 'cookiebot' ); ?></b>

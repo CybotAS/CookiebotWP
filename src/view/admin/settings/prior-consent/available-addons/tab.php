@@ -15,7 +15,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 <div class="postbox cookiebot-addon">
 	<p>
 		<label for="<?php echo 'enabled_' . esc_attr( $addon_option_name ); ?>">
-			<?php esc_html_e( 'Enable', 'cookie' ); ?>
+			<?php esc_html_e( 'Enable', 'cookiebot' ); ?>
 		</label>
 		<input <?php checked( 1, $addon_is_enabled ); ?>
 				id="<?php echo 'enabled_' . esc_attr( $addon_option_name ); ?>"
