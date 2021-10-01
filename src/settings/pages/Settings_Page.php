@@ -45,7 +45,7 @@ class Settings_Page implements Settings_Page_Interface {
 			'cbid'                     => Cookiebot_WP::get_cbid(),
 			'is_ms'                    => false,
 			'cookiebot_gdpr_url'       => 'https://www.cookiebot.com/goto/gdpr',
-			'cookiebot_logo'           => COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
+			'cookiebot_logo'           => CYBOT_COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
 			'supported_languages'      => Supported_Languages::get(),
 			'current_lang'             => cookiebot_get_language_from_setting( true ),
 			'is_wp_consent_api_active' => $cookiebot->is_wp_consent_api_active(),

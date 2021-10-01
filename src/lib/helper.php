@@ -421,7 +421,7 @@ namespace cybot\cookiebot\lib {
 		if ( isset( $view_args['absolute_path'] ) ) {
 			throw new InvalidArgumentException( 'Param $view_args array should not include an "absolute_path" key' );
 		}
-		$absolute_path = COOKIEBOT_PLUGIN_DIR . 'src/view/' . $relative_path;
+		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . 'src/view/' . $relative_path;
 		if ( ! file_exists( $absolute_path ) ) {
 			throw new InvalidArgumentException( 'View could not be loaded from "' . $absolute_path . '"' );
 		}
@@ -447,7 +447,7 @@ namespace cybot\cookiebot\lib {
 	 * @throws InvalidArgumentException
 	 */
 	function asset_path( $relative_path ) {
-		$absolute_path = COOKIEBOT_PLUGIN_DIR . 'assets/' . $relative_path;
+		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . 'assets/' . $relative_path;
 		if ( ! file_exists( $absolute_path ) ) {
 			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
 		}
@@ -461,8 +461,8 @@ namespace cybot\cookiebot\lib {
 	 * @throws InvalidArgumentException
 	 */
 	function asset_url( $relative_path ) {
-		$absolute_path = COOKIEBOT_PLUGIN_DIR . 'assets/' . $relative_path;
-		$url           = esc_url( COOKIEBOT_PLUGIN_URL . 'assets/' . $relative_path );
+		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . 'assets/' . $relative_path;
+		$url           = esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/' . $relative_path );
 		if ( ! file_exists( $absolute_path ) || empty( $url ) ) {
 			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
 		}

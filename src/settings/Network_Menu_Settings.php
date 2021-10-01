@@ -112,7 +112,7 @@ class Network_Menu_Settings {
 			'admin/settings/network-settings-page.php',
 			array(
 				'cookiebot_gdpr_url' => 'https://www.cookiebot.com/goto/gdpr',
-				'logo'               => COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
+				'logo'               => CYBOT_COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
 				'cbm'                => $cbm,
 			)
 		);

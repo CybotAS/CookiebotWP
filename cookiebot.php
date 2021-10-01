@@ -24,10 +24,8 @@ use cybot\cookiebot\settings\Network_Menu_Settings;
 use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
 use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
 use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
-use Exception;
 use RuntimeException;
 use function cybot\cookiebot\lib\asset_url;
-use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -36,8 +34,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once 'vendor/autoload.php';
 require_once 'src/lib/helper.php';
 
-define( 'COOKIEBOT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'COOKIEBOT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'CYBOT_COOKIEBOT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'CYBOT_COOKIEBOT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 if ( ! class_exists( 'Cookiebot_WP' ) ) :
 	final class Cookiebot_WP {
