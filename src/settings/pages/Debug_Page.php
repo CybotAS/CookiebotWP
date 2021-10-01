@@ -4,9 +4,11 @@ namespace cybot\cookiebot\settings\pages;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\Cookiebot_Addons;
+use cybot\cookiebot\lib\Cookiebot_Javascript_Helper;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\Cookiebot_WP;
 use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
+use InvalidArgumentException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
 use Exception;
@@ -38,10 +40,14 @@ class Debug_Page implements Settings_Page_Interface {
 		include_view( 'admin/settings/debug-page.php', array( 'debug_output' => $debug_output ) );
 	}
 
+	/**
+	 * @throws InvalidArgumentException
+	 */
 	private function prepare_debug_data() {
 		global $wpdb;
 
-		$cookiebot = cookiebot();
+		$cookiebot                   = cookiebot();
+		$cookiebot_javascript_helper = new Cookiebot_Javascript_Helper();
 
 		if ( ! function_exists( 'get_plugins' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -71,15 +77,15 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= 'Hide Cookie Popup: ' . ( get_option( 'cookiebot-nooutput' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Disable Cookiebot in WP Admin: ' . ( get_option( 'cookiebot-nooutput-admin' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Enable Cookiebot on front end while logged in: ' . ( get_option( 'cookiebot-output-logged-in' ) === '1' ? 'Yes' : 'No' ) . "\n";
-		$debug_output .= 'Banner tag: ' . $cookiebot->add_js( false ) . "\n";
+		$debug_output .= 'Banner tag: ' . $cookiebot_javascript_helper->include_cookiebot_js( true ) . "\n";
 		$debug_output .= 'Declaration tag: ' . Cookiebot_Declaration_Shortcode::show_declaration() . "\n";
 
 		if ( get_option( 'cookiebot-gtm' ) !== false ) {
-			$debug_output .= 'GTM tag: ' . $cookiebot->add_GTM( false ) . "\n";
+			$debug_output .= 'GTM tag: ' . $cookiebot_javascript_helper->include_google_tag_manager_js( true ) . "\n";
 		}
 
 		if ( get_option( 'cookiebot-gcm' ) !== false ) {
-			$debug_output .= 'GCM tag: ' . $cookiebot->add_GCM( false ) . "\n";
+			$debug_output .= 'GCM tag: ' . $cookiebot_javascript_helper->include_google_consent_mode_js( true ) . "\n";
 		}
 
 		if ( $cookiebot->is_wp_consent_api_active() ) {

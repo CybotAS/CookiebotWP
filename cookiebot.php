@@ -19,14 +19,13 @@ use cybot\cookiebot\gutenberg\Cookiebot_Gutenberg_Declaration_Block;
 use cybot\cookiebot\lib\Cookiebot_Activated;
 use cybot\cookiebot\lib\Cookiebot_Automatic_Updates;
 use cybot\cookiebot\lib\Cookiebot_Deactivated;
+use cybot\cookiebot\lib\Cookiebot_Javascript_Helper;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
-use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
 use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
 use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
 use RuntimeException;
 use function cybot\cookiebot\lib\asset_url;
-use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -112,12 +111,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 				( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();
 
 				( new Cookiebot_Recommendation_Notice() )->register_hooks();
-
-				//Check if we should show cookie consent banner on admin pages
-				if ( ! $this->cookiebot_disabled_in_admin() ) {
-					//adding cookie banner in admin area too
-					add_action( 'admin_head', array( $this, 'add_js' ), - 9999 );
-				}
 			}
 
 			//Include integration to WP Consent Level API if available
@@ -128,11 +121,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			// Set up localisation
 			load_plugin_textdomain( 'cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
 
-			//add JS
-			add_action( 'wp_head', array( $this, 'add_js' ), - 9997 );
-			add_action( 'wp_head', array( $this, 'add_GTM' ), - 9998 );
-			add_action( 'wp_head', array( $this, 'add_GCM' ), - 9999 );
-			( new Cookiebot_Declaration_Shortcode() )->register_hooks();
+			( new Cookiebot_Javascript_Helper() )->register_hooks();
 
 			//Add filter if WP rocket is enabled
 			if ( defined( 'WP_ROCKET_VERSION' ) ) {
@@ -172,139 +161,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		}
 
 		/**
-		 * Cookiebot_WP Add Cookiebot JS to <head>
-		 *
-		 * @version 3.9.0
-		 * @since   1.0.0
-		 */
-		public function add_js( $print_tag = true ) {
-			$cbid = $this->get_cbid();
-			if ( ! empty( $cbid ) && ! defined( 'COOKIEBOT_DISABLE_ON_PAGE' ) ) {
-				if ( is_multisite() && get_site_option( 'cookiebot-nooutput', false ) ) {
-					return; //Is multisite - and disabled output is checked as network setting
-				}
-
-				if ( get_option( 'cookiebot-nooutput', false ) ) {
-					return; //Do not show JS - output disabled
-				}
-
-				if ( $this->get_cookie_blocking_mode() == 'auto' && $this->can_current_user_edit_theme() && $print_tag !== false && get_site_option( 'cookiebot-output-logged-in' ) == false ) {
-					return;
-				}
-
-				$lang = cookiebot_get_language_from_setting();
-
-				if ( ! is_multisite() || get_site_option( 'cookiebot-script-tag-uc-attribute', 'custom' ) == 'custom' ) {
-					$tagAttr = get_option( 'cookiebot-script-tag-uc-attribute', 'async' );
-				} else {
-					$tagAttr = get_site_option( 'cookiebot-script-tag-uc-attribute' );
-				}
-
-				if ( $print_tag === false ) {
-					ob_start();
-				}
-				?>
-				<script type="text/javascript"
-						id="Cookiebot"
-						src="https://consent.cookiebot.com/uc.js"
-						data-cbid="<?php echo esc_attr( $cbid ); ?>"
-					<?php if ( (bool) get_option( 'cookiebot-iab' ) !== false ) : ?>
-						data-framework="IAB"
-					<?php endif; ?>
-					<?php if ( (bool) get_option( 'cookiebot-ccpa' ) !== false ) : ?>
-						data-georegions="{'region':'US-06','cbid':'<?php echo esc_attr( get_option( 'cookiebot-ccpa-domain-group-id' ) ); ?>'}"
-					<?php endif; ?>
-					<?php if ( (bool) get_option( 'cookiebot-gtm' ) !== false ) : ?>
-						<?php if ( empty( get_option( 'cookiebot-data-layer' ) ) ) : ?>
-							data-layer-name="dataLayer"
-						<?php else : ?>
-							data-layer-name="<?php echo esc_attr( get_option( 'cookiebot-data-layer' ) ); ?>"
-						<?php endif; ?>
-					<?php endif; ?>
-					<?php if ( ! empty( $lang ) ) : ?>
-						data-culture="<?php echo esc_attr( strtoupper( $lang ) ); ?>"
-					<?php endif; ?>
-					<?php if ( $this->get_cookie_blocking_mode() === 'auto' ) : ?>
-						data-blockingmode="auto"
-					<?php else : ?>
-						<?php echo esc_attr( $tagAttr ); ?>
-					<?php endif; ?>
-				></script>
-				<?php
-				if ( $print_tag === false ) {
-					return ob_get_clean();
-				}
-			}
-		}
-
-		/**
-		 * Cookiebot_WP Add Google Tag Manager JS to <head>
-		 *
-		 * @version 3.8.1
-		 * @since   3.8.1
-		 */
-		public function add_google_tag_manager( $print_tag = true ) {
-			if ( get_option( 'cookiebot-gtm' ) !== false ) {
-				if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
-					$data_layer = 'dataLayer';
-				} else {
-					$data_layer = get_option( 'cookiebot-data-layer' );
-				}
-
-				if ( $print_tag === false ) {
-					ob_start();
-				}
-				?>
-				<script>
-					<?php if ( get_option( 'cookiebot-iab' ) ) : ?>
-					window ["gtag_enable_tcf_support"] = true;
-					<?php endif; ?>
-					(function (w, d, s, l, i) {
-					  w[l] = w[l] || []; w[l].push({'gtm.start':new Date().getTime(), event: 'gtm.js'});
-					  var f = d.getElementsByTagName(s)[0],  j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-					  j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-					  f.parentNode.insertBefore(j, f);})
-					(window, document, 'script', '<?php echo esc_js( $data_layer ); ?>', '<?php echo esc_js( get_option( 'cookiebot-gtm-id' ) ); ?>');
-				</script>
-				<?php
-				if ( $print_tag === false ) {
-					return ob_get_clean();
-				}
-			}
-		}
-
-		/**
-		 * Cookiebot_WP Add Google Consent Mode JS to <head>
-		 *
-		 * @version 3.8.1
-		 * @since   3.8.1
-		 */
-
-		public function add_GCM( $print_tag = true ) {
-			if ( get_option( 'cookiebot-gcm' ) !== false ) {
-				if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
-					$data_layer = 'dataLayer';
-				} else {
-					$data_layer = get_option( 'cookiebot-data-layer' );
-				}
-
-				if ( $print_tag === false ) {
-					ob_start();
-				}
-				?>
-				<script data-cookieconsent="ignore">
-				  (function(w,d,l){w[l]=w[l]||[];function gtag(){w[l].push(arguments)}
-					gtag("consent","default",{ad_storage:d,analytics_storage:d,wait_for_update:500,});
-					gtag("set", "ads_data_redaction", true);})(window,"denied","<?php echo esc_js( $data_layer ); ?>");
-				</script>
-				<?php
-				if ( $print_tag === false ) {
-					return ob_get_clean();
-				}
-			}
-		}
-
-		/**
 		 * Returns true if an user is logged in and has an edit_themes capability
 		 *
 		 * @return bool
@@ -312,7 +168,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 * @since 3.3.1
 		 * @version 3.4.1
 		 */
-		public function can_current_user_edit_theme() {
+		public static function can_current_user_edit_theme() {
 			if ( is_user_logged_in() ) {
 				if ( current_user_can( 'edit_themes' ) ) {
 					return true;
