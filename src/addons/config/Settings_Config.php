@@ -64,11 +64,6 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function add_submenu() {
-		/*add_submenu_page('cookiebot', 'Prior Consent', esc_html__( 'Prior Consent', 'cookiebot' ), 'manage_options', 'cookiebot_addons', array(
-			$this,
-			'setting_page'
-		) );*/
-
 		add_submenu_page(
 			'cookiebot',
 			esc_html__( 'Prior Consent', 'cookiebot' ),
@@ -162,7 +157,7 @@ class Settings_Config {
 			'cookiebot-addons'
 		);
 
-		/* @var Base_Cookiebot_Addon $addon */
+		/** @var Base_Cookiebot_Addon $addon */
 		foreach ( $this->settings_service->get_addons() as $addon ) {
 			if ( $addon->is_addon_installed() && $addon->is_addon_activated() ) {
 				add_settings_field(
@@ -214,7 +209,7 @@ class Settings_Config {
 			'cookiebot-addons'
 		);
 
-		/* @var Jetpack $addon */
+		/** @var Jetpack $addon */
 		foreach ( $this->settings_service->get_addons() as $addon ) {
 			if ( 'Jetpack' === ( new ReflectionClass( $addon ) )->getShortName() ) {
 				if ( $addon->is_addon_installed() && $addon->is_addon_activated() ) {
