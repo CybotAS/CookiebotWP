@@ -24,6 +24,7 @@ use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
 use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
 use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
+use InvalidArgumentException;
 use RuntimeException;
 use function cybot\cookiebot\lib\asset_url;
 
@@ -37,7 +38,7 @@ require_once 'src/lib/helper.php';
 define( 'CYBOT_COOKIEBOT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'CYBOT_COOKIEBOT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
-if ( ! class_exists( 'Cookiebot_WP' ) ) :
+if ( ! class_exists( 'Cookiebot_WP' ) ) {
 	final class Cookiebot_WP {
 		const COOKIEBOT_PLUGIN_VERSION  = '3.11.1';
 		const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
@@ -81,8 +82,6 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			add_action( 'after_setup_theme', array( $this, 'cookiebot_init' ), 5 );
 			register_activation_hook( __FILE__, array( new Cookiebot_Activated(), 'run' ) );
 			register_deactivation_hook( __FILE__, array( new Cookiebot_Deactivated(), 'run' ) );
-
-			$this->cookiebot_fix_plugin_conflicts();
 		}
 
 		/**
@@ -369,8 +368,9 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		/**
 		 * Cookiebot_WP Enqueue JS for integration with WP Consent Level API
 		 *
-		 * @version 3.5.0
+		 * @throws InvalidArgumentException
 		 * @since   3.5.0
+		 * @version 3.5.0
 		 */
 		public function cookiebot_enqueue_consent_api_scripts() {
 			wp_register_script(
@@ -384,94 +384,8 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			wp_localize_script( 'cookiebot-wp-consent-level-api-integration', 'cookiebot_category_mapping', $this->get_wp_consent_api_mapping() );
 		}
 
-		/**
-		 * Cookiebot_WP Fix plugin conflicts related to Cookiebot
-		 *
-		 * @version 3.2.0
-		 * @since   3.3.0
-		 */
-		public function cookiebot_fix_plugin_conflicts() {
-			//Fix for Divi Page Builder
-			//Disabled - using another method now (can_current_user_edit_theme())
-			//add_action( 'wp', array( $this, '_cookiebot_plugin_conflict_divi' ), 100 );
-
-			//Fix for Elementor and WPBakery Page Builder Builder
-			//Disabled - using another method now (can_current_user_edit_theme())
-			//add_filter( 'script_loader_tag', array( $this, '_cookiebot_plugin_conflict_scripttags' ), 10, 2 );
-		}
-
-		/**
-		 * Cookiebot_WP Fix Divi builder conflict when blocking mode is in auto.
-		 *
-		 * @version 3.2.0
-		 * @since   3.2.0
-		 */
-		public function _cookiebot_plugin_conflict_divi() {
-			if ( defined( 'ET_FB_ENABLED' ) ) {
-				if ( ET_FB_ENABLED &&
-					 $this->cookiebot_disabled_in_admin() &&
-					 $this->get_cookie_blocking_mode() == 'auto' ) {
-					define( 'COOKIEBOT_DISABLE_ON_PAGE', true ); //Disable Cookiebot on the current page
-
-				}
-			}
-		}
-
-		/**
-		 * Cookiebot_WP Fix plugin conflicts with page builders - whitelist JS files in automode
-		 *
-		 * @version 3.2.0
-		 * @since   3.3.0
-		 */
-		public function _cookiebot_plugin_conflict_scripttags( $tag, $handle ) {
-
-			//Check if Elementor Page Builder active
-			if ( defined( 'ELEMENTOR_VERSION' ) ) {
-				if ( in_array(
-					$handle,
-					array(
-						'jquery-core',
-						'elementor-frontend-modules',
-						'elementor-frontend',
-						'wp-tinymce',
-						'underscore',
-						'backbone',
-						'backbone-marionette',
-						'backbone-radio',
-						'elementor-common-modules',
-						'elementor-dialog',
-						'elementor-common',
-					)
-				) ) {
-					$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
-				}
-			}
-
-			//Check if WPBakery Page Builder active
-			if ( defined( 'WPB_VC_VERSION' ) ) {
-				if ( in_array(
-					$handle,
-					array(
-						'jquery-core',
-						'jquery-ui-core',
-						'jquery-ui-sortable',
-						'jquery-ui-mouse',
-						'jquery-ui-widget',
-						'vc_editors-templates-preview-js',
-						'vc-frontend-editor-min-js',
-						'vc_inline_iframe_js',
-						'wpb_composer_front_js',
-					)
-				) ) {
-					$tag = str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
-				}
-			}
-
-			return $tag;
-		}
-
 	}
-endif;
+}
 
 
 /**
@@ -514,8 +428,9 @@ if ( ! function_exists( 'cookiebot' ) ) {
 	 * Returns the main instance of Cookiebot_WO to prevent the need to use globals.
 	 *
 	 * @return  Cookiebot_WP
-	 * @since   1.0.0
+	 * @throws RuntimeException
 	 * @version 1.0.0
+	 * @since   1.0.0
 	 */
 	function cookiebot() {
 		return Cookiebot_WP::instance();
