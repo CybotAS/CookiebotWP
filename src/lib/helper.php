@@ -2,8 +2,6 @@
 
 namespace cybot\cookiebot\lib {
 
-	use cybot\cookiebot\addons\Cookiebot_Addons;
-	use cybot\cookiebot\Cookiebot_WP;
 	use Exception;
 	use InvalidArgumentException;
 
