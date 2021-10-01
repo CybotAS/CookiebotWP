@@ -125,9 +125,12 @@ class Settings_Config {
 	public function register_settings() {
 		global $pagenow;
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( ( isset( $_GET['page'] ) && $_GET['page'] === 'cookiebot-addons' ) || $pagenow === 'options.php' ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			if ( isset( $_GET['tab'] ) && 'unavailable_addons' === $_GET['tab'] ) {
 				$this->register_unavailable_addons();
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			} elseif ( ( isset( $_GET['tab'] ) && 'jetpack' === $_GET['tab'] ) ) {
 				$this->register_jetpack_addon();
 			} else {
