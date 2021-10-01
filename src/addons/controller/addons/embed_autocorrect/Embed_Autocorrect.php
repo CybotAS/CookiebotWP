@@ -145,8 +145,8 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 		preg_match_all( '|<div[^>]*id=\"fb-root\">.*?</blockquote>|si', $content, $matches );
 		foreach ( $matches[0] as $match ) {
 			//Find src.
-			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></p></blockquote>|', $match, $matchSrc );
-			$src = $matchSrc[1];
+			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></p></blockquote>|', $match, $match_src );
+			$src = $match_src[1];
 
 			//Replace - and add cookie consent notice.
 			$adjusted = str_replace(
@@ -187,13 +187,13 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 		preg_match_all( '|<blockquote[^>]*class=\"twitter-tweet\"[^>]*>.*?</script>|si', $content, $matches );
 		foreach ( $matches[0] as $match ) {
 			//Find src.
-			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></blockquote>|', $match, $matchSrc );
+			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></blockquote>|', $match, $match_src );
 
-			if ( empty( $matchSrc ) ) {
+			if ( empty( $match_src ) ) {
 				continue;
 			}
 
-			$src = $matchSrc[1];
+			$src = $match_src[1];
 
 			//Replace - and add cookie consent notice.
 			$adjusted = str_replace(
