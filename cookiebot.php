@@ -26,6 +26,7 @@ use cybot\cookiebot\widgets\Cookiebot_Declaration_Widget;
 use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
 use RuntimeException;
 use function cybot\cookiebot\lib\asset_url;
+use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -191,7 +192,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 					return;
 				}
 
-				$lang = $this->get_language();
+				$lang = cookiebot_get_language_from_setting();
 
 				if ( ! is_multisite() || get_site_option( 'cookiebot-script-tag-uc-attribute', 'custom' ) == 'custom' ) {
 					$tagAttr = get_option( 'cookiebot-script-tag-uc-attribute', 'async' );
