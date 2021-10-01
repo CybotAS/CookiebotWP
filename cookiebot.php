@@ -244,7 +244,10 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 */
 		public function sgo_exclude_external_js( $exclude_list ) {
 			//Uses same format as WP Rocket - for now we just use WP Rocket function
-			return wp_rocket_exclude_external_js( $exclude_list );
+			if ( function_exists( 'wp_rocket_exclude_external_js' ) ) {
+				return wp_rocket_exclude_external_js( $exclude_list );
+			}
+			return $exclude_list;
 		}
 
 
