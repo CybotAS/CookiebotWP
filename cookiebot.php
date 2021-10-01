@@ -54,9 +54,10 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		 * Ensures only one instance of Cookiebot_WP is loaded or can be loaded.
 		 *
 		 * @return  Cookiebot_WP - Main instance
+		 * @throws RuntimeException
+		 * @version 1.0.0
 		 * @since   1.0.0
 		 * @static
-		 * @version 1.0.0
 		 */
 		public static function instance() {
 			if ( is_null( self::$instance ) ) {
@@ -69,9 +70,10 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 		/**
 		 * Cookiebot_WP Constructor.
 		 *
-		 * @version 2.1.4
+		 * @throws RuntimeException
 		 * @since   1.0.0
 		 * @access  public
+		 * @version 2.1.4
 		 */
 		public function __construct() {
 			$this->throw_exception_if_php_version_is_incompatible();
@@ -83,6 +85,9 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) :
 			$this->cookiebot_fix_plugin_conflicts();
 		}
 
+		/**
+		 * @throws RuntimeException
+		 */
 		private function throw_exception_if_php_version_is_incompatible() {
 			if ( version_compare( PHP_VERSION, self::COOKIEBOT_MIN_PHP_VERSION, '<' ) ) {
 				$message = sprintf(
