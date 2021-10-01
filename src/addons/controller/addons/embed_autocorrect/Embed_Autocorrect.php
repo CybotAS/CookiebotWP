@@ -96,6 +96,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 	 * @since 1.1.0
 	 */
 	public function cookiebot_addon_embed_autocorrect_javascript() {
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$library = apply_filters( 'wp_video_shortcode_library', 'mediaelement' );
 		if ( $library === 'mediaelement' ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_mediaelement_style' ) );
