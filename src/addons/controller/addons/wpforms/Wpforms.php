@@ -69,19 +69,6 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_In
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
-	 *
-	 * @return string
-	 *
-	 * TODO return empty string or throw exception
-	 *
-	 * @since 1.8.0
-	 */
-	public static function get_svn_url() {
-		return false;
-	}
-
-	/**
 	 * Action after enabling the addon on the settings page
 	 *
 	 * Clear gdpr settings in the wpforms
@@ -112,13 +99,9 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_In
 	/**
 	 * Set the value of a specific WPForms setting.
 	 *
-	 * @since 1.5.0.4
-	 *
-	 * @param string $key
-	 * @param mixed $new_value
+	 * @param $key
+	 * @param $new_value
 	 * @param string $option
-	 *
-	 * @return mixed
 	 */
 	public function wpforms_set_setting( $key, $new_value, $option = 'wpforms_settings' ) {
 		$key          = wpforms_sanitize_key( $key );

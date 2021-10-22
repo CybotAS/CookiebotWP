@@ -37,11 +37,9 @@ class Optinmonster extends Base_Cookiebot_Plugin_Addon implements Addon_With_Ext
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+	 * @param string $path
 	 *
-	 * @return boolean
-	 *
-	 * @since 1.8.0
+	 * @return string
 	 */
 	public static function get_svn_url( $path = 'optin-monster-wp-api.php' ) {
 		return 'https://plugins.svn.wordpress.org/optinmonster/trunk/' . $path;

@@ -34,11 +34,7 @@ class Wp_Analytify extends Base_Cookiebot_Plugin_Addon {
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
-	 *
-	 * @return boolean
-	 *
-	 * @since 1.8.0
+	 * @return string
 	 */
 	public static function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/wp-analytify/trunk/wp-analytify.php';

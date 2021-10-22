@@ -86,12 +86,9 @@ class CAOS_Host_Analyticsjs_Local extends Base_Cookiebot_Plugin_Addon implements
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+	 * @param string $path
 	 *
 	 * @return string
-	 *
-	 * @since 1.8.0
-	 * @version 2.1.3
 	 */
 	public static function get_svn_url( $path = 'host-analyticsjs-local.php' ) {
 		return 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/' . $path;

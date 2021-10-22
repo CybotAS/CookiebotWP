@@ -43,11 +43,9 @@ class Addthis extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_I
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+	 * @param string $path
 	 *
-	 * @return boolean
-	 *
-	 * @since 1.8.0
+	 * @return string
 	 */
 	public static function get_svn_url( $path = 'addthis_social_widget.php' ) {
 		return 'https://plugins.svn.wordpress.org/addthis/trunk/' . $path;

@@ -39,11 +39,9 @@ class Hubspot_Tracking_Code extends Base_Cookiebot_Plugin_Addon implements Open_
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+	 * @param string $path
 	 *
-	 * @return boolean
-	 *
-	 * @since 1.8.0
+	 * @return string
 	 */
 	public static function get_svn_url( $path = 'hubspot-tracking-code.php' ) {
 		return 'http://plugins.svn.wordpress.org/hubspot-tracking-code/trunk/' . $path;

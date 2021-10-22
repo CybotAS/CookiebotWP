@@ -70,11 +70,7 @@ class Google_Analyticator extends Base_Cookiebot_Plugin_Addon implements Open_So
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
-	 *
 	 * @return string
-	 *
-	 * @since 1.8.0
 	 */
 	public static function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/google-analyticator/trunk/google-analyticator.php';

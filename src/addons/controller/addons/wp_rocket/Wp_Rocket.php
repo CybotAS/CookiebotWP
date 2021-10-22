@@ -60,15 +60,4 @@ class Wp_Rocket extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_
 			),
 		);
 	}
-
-	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
-	 *
-	 * @return boolean
-	 *
-	 * @since 1.8.0
-	 */
-	public static function get_svn_url() {
-		return false;
-	}
 }

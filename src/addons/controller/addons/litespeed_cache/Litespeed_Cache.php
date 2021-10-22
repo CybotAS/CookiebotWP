@@ -59,11 +59,9 @@ class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon implements Addon_With_
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+	 * @param string $path
 	 *
-	 * @return boolean
-	 *
-	 * @since 1.8.0
+	 * @return string
 	 */
 	public static function get_svn_url( $path = 'litespeed-cache.php' ) {
 		return 'http://plugins.svn.wordpress.org/litespeed-cache/trunk/' . $path;

@@ -116,11 +116,9 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon implements Op
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+	 * @param string $path
 	 *
 	 * @return string
-	 *
-	 * @since 1.8.0
 	 */
 	public static function get_svn_url( $path = 'facebook-commerce.php' ) {
 		return 'https://raw.githubusercontent.com/facebookincubator/facebook-for-woocommerce/master/' . $path;

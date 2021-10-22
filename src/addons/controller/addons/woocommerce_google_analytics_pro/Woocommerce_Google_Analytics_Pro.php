@@ -35,15 +35,4 @@ class Woocommerce_Google_Analytics_Pro extends Base_Cookiebot_Plugin_Addon {
 		$attr['data-cookieconsent'] = implode( ',', $this->get_cookie_types() );
 		return $attr;
 	}
-
-	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
-	 *
-	 * @return string
-	 *
-	 * @since 1.8.0
-	 */
-	public static function get_svn_url() {
-		return false; //Commercial plugin - not available
-	}
 }

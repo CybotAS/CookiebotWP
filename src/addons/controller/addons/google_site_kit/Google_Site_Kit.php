@@ -39,11 +39,9 @@ class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon implements Open_Source
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
+	 * @param string $path
 	 *
 	 * @return string
-	 *
-	 * @since 1.8.0
 	 */
 	public static function get_svn_url( $path = 'google-site-kit.php' ) {
 		return 'http://plugins.svn.wordpress.org/google-site-kit/trunk/' . $path;

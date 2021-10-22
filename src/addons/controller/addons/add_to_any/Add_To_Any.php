@@ -86,11 +86,7 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addo
 	}
 
 	/**
-	 * Returns the url of WordPress SVN repository or another link where we can verify the plugin file.
-	 *
 	 * @return string
-	 *
-	 * @since 1.8.0
 	 */
 	public static function get_svn_url() {
 		return 'http://plugins.svn.wordpress.org/add-to-any/trunk/add-to-any.php';
