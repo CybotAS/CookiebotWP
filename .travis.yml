@@ -40,13 +40,7 @@ before_script:
     fi
   - |
     if [ "$PHPCS" == "1" ]; then
-      composer require squizlabs/php_codesniffer
-      composer require wp-coding-standards/wpcs
-      composer require phpcompatibility/php-compatibility
-      composer require phpcompatibility/phpcompatibility-paragonie
-      composer require phpcompatibility/phpcompatibility-wp
-      composer install
-      vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs,vendor/phpcompatibility/php-compatibility,vendor/phpcompatibility/phpcompatibility-paragonie,vendor/phpcompatibility/phpcompatibility-wp
+      (cd tests && composer install)
     else
       bash bin/install-wp-tests.sh wordpress_test root '' localhost latest
       wget https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar -O /tmp/phpunit
@@ -55,7 +49,7 @@ before_script:
 script:
   - |
     if [ "$PHPCS" == "1" ]; then
-      vendor/bin/phpcs
+      tests/vendor/bin/phpcs
     else
       /tmp/phpunit
       WP_MULTISITE=1 /tmp/phpunit

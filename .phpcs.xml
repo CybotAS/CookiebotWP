@@ -2,6 +2,9 @@
 <ruleset name="WordPress Coding Standards based custom ruleset for your plugin">
 	<description>Generally-applicable sniffs for WordPress plugins.</description>
 
+	<config name="installed_paths"
+			value="tests/vendor/wp-coding-standards/wpcs,tests/vendor/phpcompatibility/php-compatibility,tests/vendor/phpcompatibility/phpcompatibility-paragonie,tests/vendor/phpcompatibility/phpcompatibility-wp"
+	/>
 	<!-- What to scan -->
 	<file>.</file>
 	<exclude-pattern>/vendor/</exclude-pattern>
