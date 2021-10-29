@@ -2,7 +2,6 @@
 
 namespace cybot\cookiebot\lib;
 
-use cybot\cookiebot\Cookiebot_WP;
 use InvalidArgumentException;
 
 class Consent_API_Helper {

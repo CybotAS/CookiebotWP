@@ -4,6 +4,17 @@ namespace cybot\cookiebot\lib {
 
 	use Exception;
 	use InvalidArgumentException;
+	use RuntimeException;
+
+	/**
+	 * @param string $type
+	 * @param string $deprecated_name
+	 * @param string $alternative_name
+	 */
+	function deprecation_error( $type, $deprecated_name, $alternative_name ) {
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
+		trigger_error( esc_html( $type . ' `' . $deprecated_name . '` is deprecated. Use `' . $alternative_name . '` instead.' ), E_USER_DEPRECATED );
+	}
 
 	/**
 	 * Check if a cache plugin is activated and in function.
@@ -466,5 +477,51 @@ namespace cybot\cookiebot\lib {
 		}
 
 		return $url;
+	}
+
+	/**
+	 * Helper function to update your scripts
+	 * @param  string|string[]  $type
+	 *
+	 * @return string
+	 */
+	function cookiebot_assist( $type = 'statistics' ) {
+		$type_array = array_filter(
+			is_array( $type ) ? $type : array( $type ),
+			function ( $type ) {
+				return in_array( $type, array( 'marketing', 'statistics', 'preferences' ), true );
+			}
+		);
+
+		if ( count( $type_array ) > 0 ) {
+			return ' type="text/plain" data-cookieconsent="' . implode( ',', $type ) . '"';
+		}
+
+		return '';
+	}
+
+	/**
+	 * Helper function to check if cookiebot is active.
+	 * Useful for other plugins adding support for Cookiebot.
+	 *
+	 * @return  bool
+	 * @since   1.2
+	 * @version 2.2.2
+	 */
+	function cookiebot_active() {
+		$cbid = Cookiebot_WP::get_cbid();
+		return ! empty( $cbid );
+	}
+
+	/**
+	 * Returns the main instance of Cookiebot_WP to prevent the need to use globals.
+	 *
+	 * @return  Cookiebot_WP
+	 * @throws RuntimeException
+	 * @version 1.0.0
+	 * @since   1.0.0
+	 */
+	function cookiebot() {
+		return Cookiebot_WP::instance();
 	}
 }

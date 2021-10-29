@@ -11,7 +11,7 @@ use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use cybot\cookiebot\lib\Addon_With_Extra_Options_Interface;
 use cybot\cookiebot\lib\Settings_Page_Tab;
 use cybot\cookiebot\lib\Settings_Service_Interface;
-use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Cookiebot_WP;
 use Exception;
 use InvalidArgumentException;
 use ReflectionClass;

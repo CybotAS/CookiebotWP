@@ -1,7 +1,7 @@
 <?php
 namespace cybot\cookiebot\shortcode;
 
-use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Cookiebot_WP;
 use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
 use function cybot\cookiebot\lib\get_view_html;
 

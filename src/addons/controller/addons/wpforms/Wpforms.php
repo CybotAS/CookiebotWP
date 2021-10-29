@@ -3,7 +3,7 @@
 namespace cybot\cookiebot\addons\controller\addons\wpforms;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 
 class Wpforms extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_Information_Interface {

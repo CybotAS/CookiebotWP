@@ -2,7 +2,7 @@
 
 namespace cybot\cookiebot\settings;
 
-use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\settings\pages\Support_Page;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;

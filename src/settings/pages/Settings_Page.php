@@ -2,7 +2,7 @@
 
 namespace cybot\cookiebot\settings\pages;
 
-use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\lib\Consent_API_Helper;
 use cybot\cookiebot\lib\Supported_Languages;
 use function cybot\cookiebot\lib\include_view;

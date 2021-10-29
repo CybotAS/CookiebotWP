@@ -1,7 +1,7 @@
 <?php
 namespace cybot\cookiebot\widgets;
 
-use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Cookiebot_WP;
 
 class Dashboard_Widget_Cookiebot_Status {
 

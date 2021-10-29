@@ -3,7 +3,7 @@
 namespace cybot\cookiebot\admin_notices;
 
 use Exception;
-use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Cookiebot_WP;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\get_view_html;
 use function cybot\cookiebot\lib\include_view;

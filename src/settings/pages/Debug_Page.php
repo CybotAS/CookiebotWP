@@ -7,7 +7,7 @@ use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\lib\Consent_API_Helper;
 use cybot\cookiebot\lib\Cookiebot_Javascript_Helper;
 use cybot\cookiebot\lib\Settings_Service_Interface;
-use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
 use InvalidArgumentException;
 use RuntimeException;

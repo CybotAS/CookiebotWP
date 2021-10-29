@@ -1,7 +1,7 @@
 <?php
 namespace cybot\cookiebot\gutenberg;
 
-use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
 use function cybot\cookiebot\lib\asset_url;
 

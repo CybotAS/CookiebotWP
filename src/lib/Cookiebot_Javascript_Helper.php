@@ -2,7 +2,6 @@
 
 namespace cybot\cookiebot\lib;
 
-use cybot\cookiebot\Cookiebot_WP;
 use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
 use InvalidArgumentException;
 

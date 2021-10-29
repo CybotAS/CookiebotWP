@@ -3,7 +3,6 @@ namespace cybot\cookiebot\lib;
 
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\admin_notices\Cookiebot_Recommendation_Notice;
-use cybot\cookiebot\Cookiebot_WP;
 
 class Cookiebot_Activated {
 

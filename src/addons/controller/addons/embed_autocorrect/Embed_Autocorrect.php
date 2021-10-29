@@ -5,7 +5,7 @@ namespace cybot\cookiebot\addons\controller\addons\embed_autocorrect;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Other_Addon;
 use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use cybot\cookiebot\lib\Addon_With_Extra_Options_Interface;
-use cybot\cookiebot\Cookiebot_WP;
+use cybot\cookiebot\lib\Cookiebot_WP;
 use InvalidArgumentException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
