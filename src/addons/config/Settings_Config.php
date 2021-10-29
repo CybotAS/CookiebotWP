@@ -81,7 +81,7 @@ class Settings_Config {
 	/**
 	 * Load css styling to the settings page
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function add_wp_admin_style_script( $hook ) {
@@ -307,7 +307,7 @@ class Settings_Config {
 	/**
 	 * Jetpack tab - header
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function jetpack_addons_header_callback() {
@@ -319,7 +319,7 @@ class Settings_Config {
 	 *
 	 * @param $args array   Information about the widget addon and the option
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function jetpack_addon_callback( $args ) {
@@ -418,7 +418,7 @@ class Settings_Config {
 	 *
 	 * @param $args
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function available_addon_callback( $args ) {
@@ -491,7 +491,7 @@ class Settings_Config {
 	/**
 	 * Returns header for unavailable plugins
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function unavailable_addons_header_callback() {
@@ -501,7 +501,7 @@ class Settings_Config {
 	/**
 	 * @param $args
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function unavailable_addon_settings_field_callback( $args ) {
 		$addon = $args['addon'];
@@ -536,7 +536,7 @@ class Settings_Config {
 	/**
 	 * Build up settings page
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @since 1.3.0
 	 */
 	public function setting_page() {

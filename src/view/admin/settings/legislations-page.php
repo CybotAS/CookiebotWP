@@ -30,7 +30,7 @@
 					<input
 						type="checkbox"
 						name="cookiebot-ccpa"
-						value="1" <?php checked( 1, esc_attr( get_option( 'cookiebot-ccpa' ) ), true ); ?>>
+						value="1" <?php checked( 1, esc_attr( get_option( 'cookiebot-ccpa' ) ) ); ?>>
 				</td>
 			</tr>
 			<tr>

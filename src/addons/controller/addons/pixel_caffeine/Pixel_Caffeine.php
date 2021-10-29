@@ -4,10 +4,6 @@ namespace cybot\cookiebot\addons\controller\addons\pixel_caffeine;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
-/**
- * Class Pixel_Caffeine
- * @package cybot\cookiebot\addons\controller\addons\pixel_caffeine
- */
 class Pixel_Caffeine extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Pixel Caffeine';

@@ -28,6 +28,9 @@ class Debug_Page implements Settings_Page_Interface {
 		);
 	}
 
+	/**
+	 * @throws InvalidArgumentException
+	 */
 	public function display() {
 		wp_enqueue_script(
 			'cookiebot-debug-page-js',
@@ -43,7 +46,6 @@ class Debug_Page implements Settings_Page_Interface {
 
 	/**
 	 * @throws InvalidArgumentException
-	 * @throws RuntimeException
 	 */
 	private function prepare_debug_data() {
 		global $wpdb;
@@ -95,10 +97,7 @@ class Debug_Page implements Settings_Page_Interface {
 			$debug_output .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous' . "\n";
 			$m             = $consent_api_helper->get_wp_consent_api_mapping();
 			foreach ( $m as $k => $v ) {
-				$cb = array();
-
 				$debug_output .= strtoupper( str_replace( ';', ', ', $k ) ) . '   =>   ';
-
 				$debug_output .= 'F=1, ';
 				$debug_output .= 'P=' . $v['preferences'] . ', ';
 				$debug_output .= 'M=' . $v['marketing'] . ', ';

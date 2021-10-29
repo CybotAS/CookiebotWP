@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Other_Addon;
 use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use cybot\cookiebot\lib\Addon_With_Extra_Options_Interface;
 use cybot\cookiebot\lib\Cookiebot_WP;
+use Exception;
 use InvalidArgumentException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
@@ -138,6 +139,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 	 * Autocorrection of Vimeo and Youtube tags to make them GDPR compatible
 	 *
 	 * @since 1.1.0
+	 * @todo refactor this function, reduce duplicate code, fix the behaviour in places where variables are "probably undefined"
 	 */
 	public function cookiebot_addon_embed_autocorrect_content( $content ) {
 		//Make sure Cookiebot is active and the user has enabled autocorrection
@@ -289,7 +291,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 			$content,
 			$matches
 		);
-		foreach ( $matches[0] as $x => $match ) {
+		foreach ( $matches[0] as $match ) {
 			//Replace - and add cookie consent notice.
 			$adjusted = str_replace(
 				' src=',
@@ -328,6 +330,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 
 	/**
 	 * Implementation of filter wp_video_shortcode - fixing code for cookiebot.
+	 * @throws Exception
 	 */
 	public function cookiebot_addon_embed_autocorrect_handle_video(
 		$output,
@@ -477,6 +480,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 
 	/**
 	 * @return string
+	 * @throws InvalidArgumentException
 	 */
 	public function get_extra_addon_options_html() {
 		$view_args = array(

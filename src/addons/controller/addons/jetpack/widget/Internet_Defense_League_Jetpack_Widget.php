@@ -4,10 +4,6 @@ namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 
 use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 
-/**
- * Class Internet_Defense_League_Widget
- * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
- */
 class Internet_Defense_League_Jetpack_Widget extends Base_Jetpack_Widget {
 
 	const LABEL               = 'Internet defense league';

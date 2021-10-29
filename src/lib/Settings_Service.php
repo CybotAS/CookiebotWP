@@ -31,18 +31,14 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @param $addon
 	 *
-	 * @return mixed
+	 * @return bool
 	 *
 	 * @since 1.3.0
 	 */
 	public function is_addon_enabled( $addon ) {
 		$option = get_option( static::OPTION_NAME );
 
-		if ( isset( $option[ $addon ]['enabled'] ) ) {
-			return true;
-		}
-
-		return false;
+		return isset( $option[ $addon ]['enabled'] );
 	}
 
 	/**
@@ -180,6 +176,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * Checks if addon has placeholders
 	 *
 	 * @param $option_key
+	 * @param $widget_key
 	 *
 	 * @return bool
 	 *
@@ -290,8 +287,9 @@ class Settings_Service implements Settings_Service_Interface {
 	 * returns the placeholder if it does exist
 	 *
 	 * @param $option_key
+	 * @param $widget_key
 	 * @param $default_placeholder
-	 * @param $cookies
+	 * @param string $cookies
 	 *
 	 * @return bool|mixed
 	 *
@@ -371,7 +369,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @param $placeholder
 	 * @param $cookies
-	 *
+	 * @param $src
 	 * @return mixed
 	 *
 	 * @since 1.8.0

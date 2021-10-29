@@ -4,10 +4,6 @@ namespace cybot\cookiebot\addons\controller\addons\wd_google_analytics;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
-/**
- * Class Wd_Google_Analytics
- * @package cybot\cookiebot\addons\controller\addons\wd_google_analytics
- */
 class Wd_Google_Analytics extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'WD google analytics';

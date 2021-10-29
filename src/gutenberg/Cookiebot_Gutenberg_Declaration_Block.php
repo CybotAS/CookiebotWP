@@ -3,6 +3,7 @@ namespace cybot\cookiebot\gutenberg;
 
 use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
+use InvalidArgumentException;
 use function cybot\cookiebot\lib\asset_url;
 
 class Cookiebot_Gutenberg_Declaration_Block {
@@ -34,8 +35,9 @@ class Cookiebot_Gutenberg_Declaration_Block {
 	/**
 	 * Cookiebot_WP Render Cookiebot Declaration as Gutenberg block
 	 *
-	 * @version 3.7.0
+	 * @throws InvalidArgumentException
 	 * @since       3.7.0
+	 * @version 3.7.0
 	 */
 	public function block_cookie_declaration() {
 		return Cookiebot_Declaration_Shortcode::show_declaration();
@@ -44,8 +46,9 @@ class Cookiebot_Gutenberg_Declaration_Block {
 	/**
 	 * Cookiebot_WP Add block JS
 	 *
-	 * @version 3.7.1
+	 * @throws InvalidArgumentException
 	 * @since       3.7.1
+	 * @version 3.7.1
 	 */
 	public function gutenberg_block_admin_assets() {
 		//Add Gutenberg Widget

@@ -5,10 +5,6 @@ namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 
-/**
- * Class Facebook_Widget
- * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
- */
 class Facebook_Jetpack_Widget extends Base_Jetpack_Widget implements Addon_With_Extra_Information_Interface {
 	const LABEL               = 'Facebook';
 	const WIDGET_OPTION_NAME  = 'facebook';

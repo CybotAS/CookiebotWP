@@ -10,13 +10,8 @@ use cybot\cookiebot\lib\Addon_With_Alternative_Versions_Interface;
 use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use Exception;
-use RuntimeException;
 use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
-/**
- * Class Base_Cookiebot_Addon
- * @package cybot\cookiebot\addons\controller\addons
- */
 abstract class Base_Cookiebot_Addon {
 
 	use Class_Constant_Override_Validator;
@@ -123,11 +118,9 @@ abstract class Base_Cookiebot_Addon {
 	 * Loads addon configuration
 	 *
 	 * @since 1.3.0
-	 *
-	 * @TODO why do we need to use priority 5? and not 0? or anything else?
 	 */
 	final public function register_hooks() {
-		add_action( 'wp_loaded', array( $this, 'load_addon_configuration' ), 5 );
+		add_action( 'wp_loaded', array( $this, 'load_addon_configuration' ) );
 	}
 
 	abstract public function load_addon_configuration();
@@ -155,7 +148,7 @@ abstract class Base_Cookiebot_Addon {
 
 	/**
 	 * Returns checked cookie types
-	 * @return mixed
+	 * @return array
 	 *
 	 * @since 1.3.0
 	 */
@@ -175,7 +168,7 @@ abstract class Base_Cookiebot_Addon {
 	/**
 	 * Checks if it does have custom placeholder content
 	 *
-	 * @return mixed
+	 * @return bool
 	 *
 	 * @since 1.8.0
 	 */
@@ -193,7 +186,7 @@ abstract class Base_Cookiebot_Addon {
 	/**
 	 * Return true if the placeholder is enabled
 	 *
-	 * @return mixed
+	 * @return bool
 	 *
 	 * @since 1.8.0
 	 */
@@ -243,10 +236,6 @@ abstract class Base_Cookiebot_Addon {
 	 * @since 2.2.0
 	 */
 	public function plugin_deactivated() {
-		// do nothing by default
-	}
-
-	public function extra_available_addon_option() {
 		// do nothing by default
 	}
 

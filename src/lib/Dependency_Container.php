@@ -4,10 +4,6 @@ namespace cybot\cookiebot\lib;
 
 use Exception;
 
-/**
- * Class Dependency_Container
- * @package cybot\cookiebot\lib
- */
 class Dependency_Container {
 
 	/**

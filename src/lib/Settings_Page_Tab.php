@@ -37,6 +37,8 @@ class Settings_Page_Tab {
 	 * @param $settings_fields_option_group
 	 * @param $page_name
 	 * @param bool $has_submit_button
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		$name,

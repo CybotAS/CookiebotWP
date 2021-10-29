@@ -4,6 +4,7 @@ namespace cybot\cookiebot\admin_notices;
 
 use Exception;
 use cybot\cookiebot\lib\Cookiebot_WP;
+use InvalidArgumentException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\get_view_html;
 use function cybot\cookiebot\lib\include_view;
@@ -28,6 +29,9 @@ class Cookiebot_Recommendation_Notice {
 		}
 	}
 
+	/**
+	 * @throws InvalidArgumentException
+	 */
 	private function show_notice() {
 		$two_week_review_ignore = wp_nonce_url(
 			add_query_arg( array( 'cookiebot_admin_notice' => 'hide' ) ),

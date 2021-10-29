@@ -24,7 +24,7 @@
 			type="checkbox"
 			name="cookiebot-iab"
 			id="cookiebot-iab"
-			value="1" <?php checked( 1, get_option( 'cookiebot-iab' ), true ); ?>>
+			value="1" <?php checked( 1, get_option( 'cookiebot-iab' ) ); ?>>
 
 		<?php submit_button(); ?>
 	</form>

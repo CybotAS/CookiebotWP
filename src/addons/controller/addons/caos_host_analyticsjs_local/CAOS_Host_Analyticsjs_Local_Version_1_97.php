@@ -15,7 +15,7 @@ class CAOS_Host_Analyticsjs_Local_Version_1_97 extends Base_Cookiebot_Plugin_Add
 
 	public function load_addon_configuration() {
 
-		/* Priority need to be more than 0 so we are able to hook in before output begins */
+		/* Priority need to be more than 0, so we are able to hook in before output begins */
 		$script_priority = $this->cookiebot_addon_host_analyticsjs_local_priority();
 		if ( $script_priority <= 0 ) {
 			//Force priority to 2

@@ -85,11 +85,10 @@ trait Class_Constant_Override_Validator {
 
 	/**
 	 * @param array $required_array_constant_names
-	 * @param array|null $allowed_item_values
 	 *
 	 * @throws Exception
 	 */
-	protected function validate_required_array_class_constants( array $required_array_constant_names, array $allowed_item_values = null ) {
+	protected function validate_required_array_class_constants( array $required_array_constant_names ) {
 		foreach ( $required_array_constant_names as $required_array_constant_name ) {
 			$this->validate_required_array_class_constant( $required_array_constant_name );
 		}

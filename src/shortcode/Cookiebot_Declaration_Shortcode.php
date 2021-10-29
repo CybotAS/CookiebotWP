@@ -2,6 +2,7 @@
 namespace cybot\cookiebot\shortcode;
 
 use cybot\cookiebot\lib\Cookiebot_WP;
+use InvalidArgumentException;
 use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
 use function cybot\cookiebot\lib\get_view_html;
 
@@ -15,8 +16,9 @@ class Cookiebot_Declaration_Shortcode {
 	 * Cookiebot_WP Output declation shortcode [cookie_declaration]
 	 * Support attribute lang="LANGUAGE_CODE". Eg. lang="en".
 	 *
-	 * @version 2.2.0
+	 * @throws InvalidArgumentException
 	 * @since   1.0.0
+	 * @version 2.2.0
 	 */
 	public static function show_declaration( $shortcode_attributes = array() ) {
 		$cbid = Cookiebot_WP::get_cbid();

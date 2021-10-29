@@ -74,11 +74,10 @@ namespace cybot\cookiebot\lib {
 						if ( $def_class === $class ) {
 							if ( is_object( $wp_filter[ $action ] ) && isset( $wp_filter[ $action ]->callbacks ) ) {
 								$wp_filter[ $action ]->remove_filter( $action, $name, $priority );
-								$deleted = true;
 							} else {
 								unset( $wp_filter[ $action ][ $priority ][ $name ] );
-								$deleted = true;
 							}
+							$deleted = true;
 						}
 					}
 				}
@@ -160,7 +159,6 @@ namespace cybot\cookiebot\lib {
 						 * reconstruct the script and break the foreach loop
 						 */
 						$script = $script_tag_open . $script_tag_inner . $script_tag_close;
-						continue;
 					}
 				}
 
@@ -347,7 +345,7 @@ namespace cybot\cookiebot\lib {
 	 * @param $name
 	 * @param $selected
 	 *
-	 * @return mixed
+	 * @return string
 	 *
 	 * @since 1.8.0
 	 */
@@ -363,7 +361,7 @@ namespace cybot\cookiebot\lib {
 
 		$output = str_replace( 'select ', 'select class="' . $class . '" ', $dropdown );
 
-		return str_replace( 'value="" ', 'value="en_US" ', $output );
+		return (string) str_replace( 'value="" ', 'value="en_US" ', $output );
 	}
 
 	/**

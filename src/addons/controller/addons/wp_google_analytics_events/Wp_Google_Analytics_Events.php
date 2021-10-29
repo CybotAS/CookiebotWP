@@ -6,10 +6,6 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use function cybot\cookiebot\lib\cookiebot_addons_remove_class_action;
 
-/**
- * Class Wp_Google_Analytics_Events
- * @package cybot\cookiebot\addons\controller\addons\wp_google_analytics_events
- */
 class Wp_Google_Analytics_Events extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_Information_Interface {
 
 	const ADDON_NAME                  = 'WP Google Analytics Events';

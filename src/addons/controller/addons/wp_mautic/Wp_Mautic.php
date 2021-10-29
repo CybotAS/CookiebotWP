@@ -4,10 +4,6 @@ namespace cybot\cookiebot\addons\controller\addons\wp_mautic;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
-/**
- * Class Wp_Mautic
- * @package cybot\cookiebot\addons\controller\addons\wp_mautic
- */
 class Wp_Mautic extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Mautic';

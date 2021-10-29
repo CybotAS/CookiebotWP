@@ -5,10 +5,6 @@ namespace cybot\cookiebot\addons\controller\addons\google_analytics_plus;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 
-/**
- * Class Google_Analytics_Plus
- * @package cybot\cookiebot\addons\controller\addons\google_analytics_plus
- */
 class Google_Analytics_Plus extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_Information_Interface {
 	const ADDON_NAME           = 'Google Analytics +';
 	const OPTION_NAME          = 'google_analytics_plus';

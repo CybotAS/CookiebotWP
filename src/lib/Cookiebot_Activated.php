@@ -3,9 +3,13 @@ namespace cybot\cookiebot\lib;
 
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\admin_notices\Cookiebot_Recommendation_Notice;
+use Exception;
 
 class Cookiebot_Activated {
 
+	/**
+	 * @throws Exception
+	 */
 	public function run() {
 		$this->delay_notice_recommandation_when_it_is_first_activation();
 
@@ -34,6 +38,9 @@ class Cookiebot_Activated {
 		}
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	private function set_addons_default_settings() {
 		$cookiebot_addons = Cookiebot_Addons::instance();
 		$cookiebot_addons->cookiebot_activated();

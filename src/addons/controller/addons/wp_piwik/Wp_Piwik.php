@@ -6,10 +6,6 @@ require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
-/**
- * Class Wp_Piwik
- * @package cybot\cookiebot\addons\controller\addons\wp_piwik
- */
 class Wp_Piwik extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'WP Piwik';

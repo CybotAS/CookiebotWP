@@ -5,6 +5,7 @@ namespace cybot\cookiebot\settings\pages;
 use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\lib\Consent_API_Helper;
 use cybot\cookiebot\lib\Supported_Languages;
+use InvalidArgumentException;
 use function cybot\cookiebot\lib\include_view;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
@@ -39,6 +40,9 @@ class Settings_Page implements Settings_Page_Interface {
 		);
 	}
 
+	/**
+	 * @throws InvalidArgumentException
+	 */
 	public function display() {
 		$consent_api_helper = new Consent_API_Helper();
 
@@ -53,6 +57,7 @@ class Settings_Page implements Settings_Page_Interface {
 			'm_default'                => $consent_api_helper->get_default_wp_consent_api_mapping(),
 			'm'                        => $consent_api_helper->get_wp_consent_api_mapping(),
 			'cookie_blocking_mode'     => Cookiebot_WP::get_cookie_blocking_mode(),
+			'add_language_gif_url'     => asset_url( 'img/guide_add_language.gif' ),
 		);
 
 		/* Check if multisite */

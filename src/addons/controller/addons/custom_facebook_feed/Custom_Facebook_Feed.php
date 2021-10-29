@@ -39,7 +39,7 @@ class Custom_Facebook_Feed extends Base_Cookiebot_Plugin_Addon implements Open_S
 				/**
 				 * Consent not given - no cache
 				 */
-				$this->script_loader_tag->add_tag( 'cffscripts', $this->get_cookie_types(), false );
+				$this->script_loader_tag->add_tag( 'cffscripts', $this->get_cookie_types() );
 			}
 		}
 	}

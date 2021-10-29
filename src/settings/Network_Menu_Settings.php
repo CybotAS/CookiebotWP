@@ -4,6 +4,7 @@ namespace cybot\cookiebot\settings;
 
 use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\settings\pages\Support_Page;
+use InvalidArgumentException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
 
@@ -87,8 +88,9 @@ class Network_Menu_Settings {
 	/**
 	 * Cookiebot_WP Cookiebot network setting page
 	 *
-	 * @version 2.2.0
+	 * @throws InvalidArgumentException
 	 * @since   2.2.0
+	 * @version 2.2.0
 	 */
 	public function display() {
 		$cbm = get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
@@ -104,8 +106,7 @@ class Network_Menu_Settings {
 		wp_add_inline_script(
 			'cookiebot-network-settings-page-js',
 			'const cookiebotNetworkSettings = ' . wp_json_encode( array( 'cbm' => esc_attr( $cbm ) ) ),
-			'before',
-			''
+			'before'
 		);
 
 		include_view(

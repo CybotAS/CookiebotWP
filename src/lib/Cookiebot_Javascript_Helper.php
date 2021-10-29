@@ -94,7 +94,7 @@ class Cookiebot_Javascript_Helper {
 			$view_path = 'frontend/scripts/google-tag-manager-js.php';
 			$view_args = array( 'data_layer' => $data_layer );
 			if ( $return_html ) {
-				return get_view_html( $view_path, $view_args, true );
+				return get_view_html( $view_path, $view_args );
 			} else {
 				include_view( $view_path, $view_args );
 			}
@@ -121,7 +121,7 @@ class Cookiebot_Javascript_Helper {
 			$view_path = 'frontend/scripts/google-consent-mode-js.php';
 			$view_args = array( 'data_layer' => $data_layer );
 			if ( $return_html ) {
-				return get_view_html( $view_path, $view_args, true );
+				return get_view_html( $view_path, $view_args );
 			} else {
 				include_view( $view_path, $view_args );
 			}

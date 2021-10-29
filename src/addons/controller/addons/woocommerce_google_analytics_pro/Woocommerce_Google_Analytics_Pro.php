@@ -4,10 +4,6 @@ namespace cybot\cookiebot\addons\controller\addons\woocommerce_google_analytics_
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
-/**
- * Class Woocommerce_Google_Analytics_Pro
- * @package cybot\cookiebot\addons\controller\addons\woocommerce_google_analytics_pro
- */
 class Woocommerce_Google_Analytics_Pro extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'WooCommerce Google Analytics Pro';

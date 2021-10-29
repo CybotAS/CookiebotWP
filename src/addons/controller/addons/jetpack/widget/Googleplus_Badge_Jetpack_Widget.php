@@ -4,10 +4,6 @@ namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 
 use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 
-/**
- * Class Googleplus_Badge_Widget
- * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
- */
 class Googleplus_Badge_Jetpack_Widget extends Base_Jetpack_Widget {
 
 	const LABEL               = 'Google Plus Badge';

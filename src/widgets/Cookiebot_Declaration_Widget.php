@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\widgets;
 
 use cybot\cookiebot\lib\Supported_Languages;
+use InvalidArgumentException;
 use WP_Widget;
 use cybot\cookiebot\lib\Cookiebot_WP;
 use function cybot\cookiebot\lib\include_view;
@@ -21,6 +22,10 @@ class Cookiebot_Declaration_Widget extends WP_Widget {
 	}
 
 	// The widget form (for the backend )
+
+	/**
+	 * @throws InvalidArgumentException
+	 */
 	public function form( $instance ) {
 		$defaults   = array(
 			'lang'  => '',
@@ -45,7 +50,10 @@ class Cookiebot_Declaration_Widget extends WP_Widget {
 		return $instance;
 	}
 
-	// Display the widget
+	/**
+	 * Display the widget
+	 * @throws InvalidArgumentException
+	 */
 	public function widget( $args, $instance ) {
 		$before_widget_html    = isset( $args['before_widget'] ) && is_string( $args['before_widget'] )
 			? $args['before_widget']

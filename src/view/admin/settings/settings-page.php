@@ -1,6 +1,5 @@
 <?php
 
-use function cybot\cookiebot\lib\asset_url;
 
 /**
  * @var string $cbid
@@ -16,6 +15,7 @@ use function cybot\cookiebot\lib\asset_url;
  * @var array $m_default
  * @var array $m
  * @var string $cookie_blocking_mode
+ * @var string $add_language_gif_url
  */
 ?>
 <div class="wrap">
@@ -77,7 +77,7 @@ use function cybot\cookiebot\lib\asset_url;
 				</th>
 				<td>
 					<label>
-						<input <?php checked( 'auto', $cookie_blocking_mode, true ); ?>
+						<input <?php checked( 'auto', $cookie_blocking_mode ); ?>
 								type="radio"
 								name="cookiebot-cookie-blocking-mode"
 								value="auto"
@@ -86,7 +86,7 @@ use function cybot\cookiebot\lib\asset_url;
 					</label>
 					&nbsp; &nbsp;
 					<label>
-						<input <?php checked( 'manual', $cookie_blocking_mode, true ); ?>
+						<input <?php checked( 'manual', $cookie_blocking_mode ); ?>
 								type="radio"
 								name="cookiebot-cookie-blocking-mode"
 								value="manual"
@@ -172,7 +172,7 @@ use function cybot\cookiebot\lib\asset_url;
 
 						<div id="add_language_guide" style="display:none;">
 							<img
-								src="<?php echo esc_attr( asset_url( 'img/guide_add_language.gif' ) ); ?>"
+								src="<?php echo esc_attr( $add_language_gif_url ); ?>"
 								alt="Add language in Cookiebot administration tool"/>
 							<br/>
 							<a
@@ -207,7 +207,7 @@ use function cybot\cookiebot\lib\asset_url;
 							<input
 								type="radio"
 								name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-								value="" <?php checked( '', $cv, true ); ?> />
+								value="" <?php checked( '', $cv ); ?> />
 							<i><?php esc_html_e( 'None', 'cookiebot' ); ?></i>
 						</label>
 						&nbsp; &nbsp;
@@ -215,7 +215,7 @@ use function cybot\cookiebot\lib\asset_url;
 							<input
 									type="radio"
 									name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-									value="async" <?php checked( 'async', $cv, true ); ?> />
+									value="async" <?php checked( 'async', $cv ); ?> />
 							async
 						</label>
 						&nbsp; &nbsp;
@@ -223,7 +223,7 @@ use function cybot\cookiebot\lib\asset_url;
 							<input
 									type="radio"
 									name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-									value="defer" <?php checked( 'defer', $cv, true ); ?> />
+									value="defer" <?php checked( 'defer', $cv ); ?> />
 							defer
 						</label>
 						<p class="description">
@@ -257,7 +257,7 @@ use function cybot\cookiebot\lib\asset_url;
 							<input
 								type="radio"
 								name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-								value="" <?php checked( '', $cv, true ); ?>/>
+								value="" <?php checked( '', $cv ); ?>/>
 							<i><?php esc_html_e( 'None', 'cookiebot' ); ?></i>
 						</label>
 						&nbsp; &nbsp;
@@ -265,7 +265,7 @@ use function cybot\cookiebot\lib\asset_url;
 							<input
 								type="radio"
 								name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-								value="async" <?php checked( 'async', $cv, true ); ?>/>
+								value="async" <?php checked( 'async', $cv ); ?>/>
 							async
 						</label>
 						&nbsp; &nbsp;
@@ -273,7 +273,7 @@ use function cybot\cookiebot\lib\asset_url;
 							<input
 								type="radio"
 								name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-								value="defer" <?php checked( 'defer', $cv, true ); ?>/>
+								value="defer" <?php checked( 'defer', $cv ); ?>/>
 							defer
 						</label>
 						<p class="description">
@@ -299,8 +299,7 @@ use function cybot\cookiebot\lib\asset_url;
 								<?php
 								checked(
 									1,
-									get_option( 'cookiebot-autoupdate', false ),
-									true
+									get_option( 'cookiebot-autoupdate', false )
 								);
 								?>
 							/>
@@ -317,7 +316,7 @@ use function cybot\cookiebot\lib\asset_url;
 					<td>
 						<?php
 						$disabled = false;
-						if ( $is_ms && get_site_option( 'cookiebot-nooutput', false ) ) {
+						if ( $is_ms && get_site_option( 'cookiebot-nooutput' ) ) {
 							$disabled = true;
 							echo '<input type="checkbox" checked disabled />';
 						} else {
@@ -326,8 +325,7 @@ use function cybot\cookiebot\lib\asset_url;
 								<?php
 								checked(
 									1,
-									get_option( 'cookiebot-nooutput', false ),
-									true
+									get_option( 'cookiebot-nooutput', false )
 								);
 								?>
 							/>
@@ -371,7 +369,7 @@ use function cybot\cookiebot\lib\asset_url;
 					<td>
 						<?php
 						$disabled = false;
-						if ( $is_ms && get_site_option( 'cookiebot-nooutput-admin', false ) ) {
+						if ( $is_ms && get_site_option( 'cookiebot-nooutput-admin' ) ) {
 							echo '<input type="checkbox" checked disabled />';
 							$disabled = true;
 						} else {
@@ -380,8 +378,7 @@ use function cybot\cookiebot\lib\asset_url;
 								<?php
 								checked(
 									1,
-									get_option( 'cookiebot-nooutput-admin', false ),
-									true
+									get_option( 'cookiebot-nooutput-admin', false )
 								);
 								?>
 							/>
@@ -403,7 +400,7 @@ use function cybot\cookiebot\lib\asset_url;
 					<td>
 						<?php
 						$disabled = false;
-						if ( $is_ms && get_site_option( 'cookiebot-output-logged-in', false ) ) {
+						if ( $is_ms && get_site_option( 'cookiebot-output-logged-in' ) ) {
 							echo '<input type="checkbox" checked disabled />';
 							$disabled = true;
 						} else {
@@ -412,8 +409,7 @@ use function cybot\cookiebot\lib\asset_url;
 								<?php
 								checked(
 									1,
-									get_option( 'cookiebot-output-logged-in', false ),
-									true
+									get_option( 'cookiebot-output-logged-in', false )
 								);
 								?>
 							/>

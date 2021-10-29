@@ -2,10 +2,6 @@
 
 namespace cybot\cookiebot\lib;
 
-/**
- * Class Cookie_Consent
- * @package cybot\cookiebot\lib
- */
 class Cookie_Consent implements Cookie_Consent_Interface {
 
 	/**

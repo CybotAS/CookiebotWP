@@ -60,6 +60,6 @@ class Buffer_Output implements Buffer_Output_Interface {
 	 * @since 1.2.0
 	 */
 	public function has_action() {
-		return ( count( $this->tags ) > 0 ) ? true : false;
+		return count( $this->tags ) > 0;
 	}
 }

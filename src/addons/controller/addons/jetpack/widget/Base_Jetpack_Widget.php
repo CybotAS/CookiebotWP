@@ -100,7 +100,7 @@ abstract class Base_Jetpack_Widget implements Jetpack_Widget_Interface {
 	/**
 	 * Returns cookie types for a widget
 	 *
-	 * @return mixed
+	 * @return array
 	 *
 	 * @since 1.8.0
 	 */

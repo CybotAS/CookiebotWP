@@ -11,7 +11,7 @@
 					type="checkbox"
 					name="cookiebot-gtm"
 					id="cookiebot-gtm"
-					value="1" <?php checked( 1, get_option( 'cookiebot-gtm' ), true ); ?>>
+					value="1" <?php checked( 1, get_option( 'cookiebot-gtm' ) ); ?>>
 			<p>
 				<?php
 				esc_html_e(
@@ -51,7 +51,7 @@
 					type="checkbox"
 					name="cookiebot-gcm"
 					id="gcm"
-					value="1" <?php checked( 1, get_option( 'cookiebot-gcm' ), true ); ?>>
+					value="1" <?php checked( 1, get_option( 'cookiebot-gcm' ) ); ?>>
 			<p>
 				<?php
 				esc_html_e(

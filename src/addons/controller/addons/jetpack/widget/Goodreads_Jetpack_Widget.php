@@ -5,10 +5,6 @@ namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 use function cybot\cookiebot\lib\cookiebot_addons_manipulate_script;
 
-/**
- * Class Goodreads_Widget
- * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
- */
 class Goodreads_Jetpack_Widget extends Base_Jetpack_Widget {
 	const LABEL               = 'Goodreads';
 	const WIDGET_OPTION_NAME  = 'goodreads';

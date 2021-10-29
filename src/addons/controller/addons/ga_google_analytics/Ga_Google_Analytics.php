@@ -5,10 +5,6 @@ namespace cybot\cookiebot\addons\controller\addons\ga_google_analytics;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
-/**
- * Class Ga_Google_Analytics
- * @package cybot\cookiebot\addons\controller\addons\ga_google_analytics
- */
 class Ga_Google_Analytics extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 	const ADDON_NAME                  = 'GA Google Analytics';
 	const OPTION_NAME                 = 'ga_google_analytics';

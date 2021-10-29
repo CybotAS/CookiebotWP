@@ -4,10 +4,6 @@ namespace cybot\cookiebot\addons\controller\addons\wp_analytify;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
-/**
- * Class Wp_Analytify
- * @package cybot\cookiebot\addons\controller\addons\wp_analytify
- */
 class Wp_Analytify extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Analytify';

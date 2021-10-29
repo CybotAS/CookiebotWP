@@ -2,6 +2,7 @@
 
 namespace cybot\cookiebot\settings\pages;
 
+use InvalidArgumentException;
 use function cybot\cookiebot\lib\include_view;
 
 class Legislations_Page implements Settings_Page_Interface {
@@ -17,6 +18,10 @@ class Legislations_Page implements Settings_Page_Interface {
 			50
 		);
 	}
+
+	/**
+	 * @throws InvalidArgumentException
+	 */
 	public function display() {
 		include_view( 'admin/settings/legislations-page.php', array() );
 	}

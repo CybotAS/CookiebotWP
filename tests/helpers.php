@@ -6,7 +6,7 @@ namespace cybot\cookiebot\tests {
 	 *
 	 * @param $url
 	 *
-	 * @return bool|string
+	 * @return string
 	 */
 	function remote_get_svn_contents( $url ) {
 		$response = wp_remote_get( $url );

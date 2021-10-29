@@ -4,10 +4,6 @@ namespace cybot\cookiebot\addons\controller\addons\matomo;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
-/**
- * Class Matomo
- * @package cybot\cookiebot\addons\controller\addons\wp_mautic
- */
 class Matomo extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Matomo Analytics';

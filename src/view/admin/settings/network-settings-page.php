@@ -85,7 +85,7 @@
 						<input
 								type="radio"
 								name="cookiebot-cookie-blocking-mode"
-								value="auto" <?php checked( 'auto', $cbm, true ); ?> />
+								value="auto" <?php checked( 'auto', $cbm ); ?> />
 						<?php esc_html_e( 'Automatic', 'cookiebot' ); ?>
 					</label>
 					&nbsp; &nbsp;
@@ -93,7 +93,7 @@
 						<input
 								type="radio"
 								name="cookiebot-cookie-blocking-mode"
-								value="manual" <?php checked( 'manual', $cbm, true ); ?> />
+								value="manual" <?php checked( 'manual', $cbm ); ?> />
 						<?php esc_html_e( 'Manual', 'cookiebot' ); ?>
 					</label>
 					<p class="description">
@@ -114,7 +114,7 @@
 						<input
 								type="radio"
 								name="cookiebot-script-tag-uc-attribute"
-								value="" <?php checked( '', $cv, true ); ?> />
+								value="" <?php checked( '', $cv ); ?> />
 						<i><?php esc_html_e( 'None', 'cookiebot' ); ?></i>
 					</label>
 					&nbsp; &nbsp;
@@ -122,7 +122,7 @@
 						<input
 								type="radio"
 								name="cookiebot-script-tag-uc-attribute"
-								value="async" <?php checked( 'async', $cv, true ); ?> />
+								value="async" <?php checked( 'async', $cv ); ?> />
 						async
 					</label>
 					&nbsp; &nbsp;
@@ -130,7 +130,7 @@
 						<input
 								type="radio"
 								name="cookiebot-script-tag-uc-attribute"
-								value="defer" <?php checked( 'defer', $cv, true ); ?> />
+								value="defer" <?php checked( 'defer', $cv ); ?> />
 						defer
 					</label>
 					&nbsp; &nbsp;
@@ -138,7 +138,7 @@
 						<input
 								type="radio"
 								name="cookiebot-script-tag-uc-attribute"
-								value="custom" <?php checked( 'custom', $cv, true ); ?> />
+								value="custom" <?php checked( 'custom', $cv ); ?> />
 						<i><?php esc_html_e( 'Choose per subsite', 'cookiebot' ); ?></i>
 					</label>
 					<p class="description">
@@ -167,7 +167,7 @@
 						<input
 								type="radio"
 								name="cookiebot-script-tag-cd-attribute"
-								value="" <?php checked( '', $cv, true ); ?> />
+								value="" <?php checked( '', $cv ); ?> />
 						<i><?php esc_html_e( 'None', 'cookiebot' ); ?></i>
 					</label>
 					&nbsp; &nbsp;
@@ -175,7 +175,7 @@
 						<input
 								type="radio"
 								name="cookiebot-script-tag-cd-attribute"
-								value="async" <?php checked( 'async', $cv, true ); ?> />
+								value="async" <?php checked( 'async', $cv ); ?> />
 						async
 					</label>
 					&nbsp; &nbsp;
@@ -183,7 +183,7 @@
 						<input
 								type="radio"
 								name="cookiebot-script-tag-cd-attribute"
-								value="defer" <?php checked( 'defer', $cv, true ); ?> />
+								value="defer" <?php checked( 'defer', $cv ); ?> />
 						defer
 					</label>
 					&nbsp; &nbsp;
@@ -191,7 +191,7 @@
 						<input
 								type="radio"
 								name="cookiebot-script-tag-cd-attribute"
-								value="custom" <?php checked( 'custom', $cv, true ); ?> />
+								value="custom" <?php checked( 'custom', $cv ); ?> />
 						<i><?php esc_html_e( 'Choose per subsite', 'cookiebot' ); ?></i>
 					</label>
 					<p class="description">
@@ -217,8 +217,7 @@
 						<?php
 						checked(
 							1,
-							get_site_option( 'cookiebot-autoupdate', false ),
-							true
+							get_site_option( 'cookiebot-autoupdate' )
 						);
 						?>
 					/>
@@ -234,8 +233,7 @@
 						<?php
 						checked(
 							1,
-							get_site_option( 'cookiebot-nooutput', false ),
-							true
+							get_site_option( 'cookiebot-nooutput' )
 						);
 						?>
 					/>
@@ -271,8 +269,7 @@
 						<?php
 						checked(
 							1,
-							get_site_option( 'cookiebot-nooutput-admin', false ),
-							true
+							get_site_option( 'cookiebot-nooutput-admin' )
 						);
 						?>
 					/>

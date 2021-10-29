@@ -5,10 +5,6 @@ namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 use function cybot\cookiebot\lib\cookiebot_addons_remove_class_action;
 
-/**
- * Class Visitor_Cookies_Widget
- * @package cybot\cookiebot\addons\controller\addons\jetpack\widget
- */
 class Visitor_Cookies_Jetpack_Widget extends Base_Jetpack_Widget {
 	const LABEL               = 'Visitor cookies';
 	const WIDGET_OPTION_NAME  = 'visitor_cookies';
@@ -18,6 +14,7 @@ class Visitor_Cookies_Jetpack_Widget extends Base_Jetpack_Widget {
 		/**
 		 * When consent is not given
 		 * Then disable comment cookies
+		 * @TODO is_cookie_state_accepted only accepts a string but an array is given, what should be the correct behaviour?
 		 */
 		if ( ! $this->cookie_consent->is_cookie_state_accepted( $this->get_widget_cookie_types() ) ) {
 			$this->disable_comment_cookies();

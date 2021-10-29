@@ -31,7 +31,7 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_In
 	public function enqueue_script_for_adding_the_cookie_after_the_consent() {
 		wp_enqueue_script(
 			'wpforms-gdpr-cookiebot',
-			COOKIEBOT_URL . 'addons/controller/addons/wpforms/cookie-after-consent.js',
+			CYBOT_COOKIEBOT_PLUGIN_URL . 'addons/controller/addons/wpforms/cookie-after-consent.js',
 			array( 'jquery' ),
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			true
@@ -104,14 +104,16 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_In
 	 * @param string $option
 	 */
 	public function wpforms_set_setting( $key, $new_value, $option = 'wpforms_settings' ) {
-		$key          = wpforms_sanitize_key( $key );
-		$options      = get_option( $option, false );
-		$option_value = is_array( $options ) && ! empty( $options[ $key ] ) ? $options[ $key ] : false;
+		if ( function_exists( 'wpforms_sanitize_key' ) ) {
+			$key          = wpforms_sanitize_key( $key );
+			$options      = get_option( $option, false );
+			$option_value = is_array( $options ) && ! empty( $options[ $key ] ) ? $options[ $key ] : false;
 
-		if ( $new_value !== $option_value ) {
-			$options[ $key ] = $new_value;
+			if ( $new_value !== $option_value ) {
+				$options[ $key ] = $new_value;
+			}
+
+			update_option( $option, $options );
 		}
-
-		update_option( $option, $options );
 	}
 }

@@ -5,10 +5,6 @@ namespace cybot\cookiebot\addons\controller\addons\simple_share_buttons_adder;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 
-/**
- * Class Simple_Share_Buttons_Adder
- * @package cybot\cookiebot\addons\controller\addons\simple_share_buttons_adder
- */
 class Simple_Share_Buttons_Adder extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_Information_Interface {
 
 	const ADDON_NAME                  = 'Simple Share Buttons Adder';

@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\lib;
 
 use Exception;
+use Generator;
 
 /**
  * Interface Settings_Service_Interface
@@ -57,7 +58,7 @@ interface Settings_Service_Interface {
 	/**
 	 * Returns addons one by one through a generator
 	 *
-	 * @return \Generator
+	 * @return Generator
 	 * @throws Exception
 	 *
 	 * @since 1.3.0

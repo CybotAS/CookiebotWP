@@ -7,10 +7,6 @@ use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 
-/**
- * Class Gadwp
- * @package cybot\cookiebot\addons\controller\addons\gadwp
- */
 class Gadwp extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 	const ADDON_NAME                  = 'Google Analytics Dashboard for WP by ExactMetrics';
 	const OPTION_NAME                 = 'gadwp';

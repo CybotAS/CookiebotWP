@@ -16,14 +16,6 @@ use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use Exception;
 
-/**
- * This class is used to support jetpack in cookiebot
- *
- * Class Jetpack
- * @package cybot\cookiebot\addons\controller\addons\jetpack
- *
- * @since 1.3.0
- */
 class Jetpack extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Jetpack';

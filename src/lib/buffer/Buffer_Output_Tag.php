@@ -67,7 +67,7 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 		$this->priority = $priority;
 		$this->keywords = $keywords;
 
-		$this->transient_name = "cookiebot_output_buffer_{$tag}_{$priority}";
+		$this->transient_name = "cookiebot_output_buffer_{$tag}_$priority";
 
 		$this->set_use_cache( $use_cache );
 	}
@@ -123,9 +123,7 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 		/**
 		 * Get wp head scripts from the cache
 		 */
-		if ( $this->use_cache ) {
-			$updated_scripts = get_transient( $this->transient_name );
-		}
+		$updated_scripts = $this->use_cache ? get_transient( $this->transient_name ) : false;
 
 		/**
 		 * If cache is not set then build it

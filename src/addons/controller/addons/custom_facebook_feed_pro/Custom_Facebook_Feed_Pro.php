@@ -32,7 +32,7 @@ class Custom_Facebook_Feed_Pro extends Base_Cookiebot_Plugin_Addon {
 			/**
 			 * Consent not given - no cache
 			 */
-			$this->script_loader_tag->add_tag( 'cffscripts', $this->get_cookie_types(), false );
+			$this->script_loader_tag->add_tag( 'cffscripts', $this->get_cookie_types() );
 		}
 	}
 }
