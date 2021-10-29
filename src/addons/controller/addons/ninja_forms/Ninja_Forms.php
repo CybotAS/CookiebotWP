@@ -50,6 +50,6 @@ class Ninja_Forms extends Base_Cookiebot_Plugin_Addon {
 	 * @return string
 	 */
 	public static function get_svn_url( $path = 'ninja-forms.php' ) {
-		return 'http://plugins.svn.wordpress.org/ninja-forms/trunk/' . $path;
+		return 'https://plugins.svn.wordpress.org/ninja-forms/trunk/' . $path;
 	}
 }

@@ -32,6 +32,6 @@ class Instagram_Feed extends Base_Cookiebot_Plugin_Addon implements Open_Source_
 	 * @return string
 	 */
 	public static function get_svn_url( $path = 'instagram-feed.php' ) {
-		return 'http://plugins.svn.wordpress.org/instagram-feed/trunk/' . $path;
+		return 'https://plugins.svn.wordpress.org/instagram-feed/trunk/' . $path;
 	}
 }

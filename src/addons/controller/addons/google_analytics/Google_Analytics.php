@@ -47,6 +47,6 @@ class Google_Analytics extends Base_Cookiebot_Plugin_Addon implements Open_Sourc
 	 * @return string
 	 */
 	public static function get_svn_url( $path = 'googleanalytics.php' ) {
-		return 'http://plugins.svn.wordpress.org/googleanalytics/trunk/' . $path;
+		return 'https://plugins.svn.wordpress.org/googleanalytics/trunk/' . $path;
 	}
 }

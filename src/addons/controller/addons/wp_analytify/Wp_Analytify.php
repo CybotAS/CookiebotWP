@@ -33,6 +33,6 @@ class Wp_Analytify extends Base_Cookiebot_Plugin_Addon {
 	 * @return string
 	 */
 	public static function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/wp-analytify/trunk/wp-analytify.php';
+		return 'https://plugins.svn.wordpress.org/wp-analytify/trunk/wp-analytify.php';
 	}
 }

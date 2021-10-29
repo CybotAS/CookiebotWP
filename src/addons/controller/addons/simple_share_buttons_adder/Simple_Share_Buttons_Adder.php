@@ -42,6 +42,6 @@ class Simple_Share_Buttons_Adder extends Base_Cookiebot_Plugin_Addon implements 
 	 * @return string
 	 */
 	public static function get_svn_url( $path = 'simple-share-buttons-adder.php' ) {
-		return 'http://plugins.svn.wordpress.org/simple-share-buttons-adder/trunk/' . $path;
+		return 'https://plugins.svn.wordpress.org/simple-share-buttons-adder/trunk/' . $path;
 	}
 }

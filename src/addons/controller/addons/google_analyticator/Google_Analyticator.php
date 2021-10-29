@@ -69,6 +69,6 @@ class Google_Analyticator extends Base_Cookiebot_Plugin_Addon implements Open_So
 	 * @return string
 	 */
 	public static function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/google-analyticator/trunk/google-analyticator.php';
+		return 'https://plugins.svn.wordpress.org/google-analyticator/trunk/google-analyticator.php';
 	}
 }

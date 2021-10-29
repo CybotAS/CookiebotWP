@@ -199,6 +199,6 @@ class Jetpack extends Base_Cookiebot_Plugin_Addon {
 	 * @return string
 	 */
 	public static function get_svn_url( $path = 'jetpack.php' ) {
-		return 'http://plugins.svn.wordpress.org/jetpack/trunk/' . $path;
+		return 'https://plugins.svn.wordpress.org/jetpack/trunk/' . $path;
 	}
 }

@@ -91,7 +91,7 @@ class CAOS_Host_Analyticsjs_Local extends Base_Cookiebot_Plugin_Addon implements
 	 * @return string
 	 */
 	public static function get_svn_url( $path = 'host-analyticsjs-local.php' ) {
-		return 'http://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/' . $path;
+		return 'https://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/' . $path;
 	}
 
 	/**

@@ -83,6 +83,6 @@ class CAOS_Host_Analyticsjs_Local_Version_1_97 extends Base_Cookiebot_Plugin_Add
 	 * @return string
 	 */
 	public static function get_svn_url() {
-		return 'http://plugins.svn.wordpress.org/host-analyticsjs-local/tags/1.97/save-ga-local.php';
+		return 'https://plugins.svn.wordpress.org/host-analyticsjs-local/tags/1.97/save-ga-local.php';
 	}
 }

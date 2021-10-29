@@ -75,6 +75,6 @@ class Gadwp extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Int
 	 * @return string
 	 */
 	public static function get_svn_url( $path = 'gadwp.php' ) {
-		return 'http://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/' . $path;
+		return 'https://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/' . $path;
 	}
 }

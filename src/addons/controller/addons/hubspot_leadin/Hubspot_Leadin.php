@@ -38,6 +38,6 @@ class Hubspot_Leadin extends Base_Cookiebot_Plugin_Addon implements Open_Source_
 	 * @return string
 	 */
 	public static function get_svn_url( $path = 'leadin.php' ) {
-		return 'http://plugins.svn.wordpress.org/leadin/trunk/' . $path;
+		return 'https://plugins.svn.wordpress.org/leadin/trunk/' . $path;
 	}
 }

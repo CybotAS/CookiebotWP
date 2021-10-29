@@ -64,6 +64,6 @@ class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon implements Addon_With_
 	 * @return string
 	 */
 	public static function get_svn_url( $path = 'litespeed-cache.php' ) {
-		return 'http://plugins.svn.wordpress.org/litespeed-cache/trunk/' . $path;
+		return 'https://plugins.svn.wordpress.org/litespeed-cache/trunk/' . $path;
 	}
 }
