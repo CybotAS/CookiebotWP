@@ -59,7 +59,7 @@ class Settings_Page_Tab {
 		}
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$this->is_active                    = isset( $_GET['tab'] ) && $_GET['tab'] === $this->name;
+		$this->is_active                    = isset( $_GET['tab'] ) && $_GET['tab'] === $name;
 		$this->name                         = $name;
 		$this->label                        = $label;
 		$this->settings_fields_option_group = $settings_fields_option_group;
