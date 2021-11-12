@@ -54,6 +54,7 @@ script:
     if [ "$PHPCS" == "1" ]; then
       tests/vendor/bin/phpcs
     else
+      composer require yoast/phpunit-polyfills
       /tmp/phpunit
       WP_MULTISITE=1 /tmp/phpunit
     fi
