@@ -1,12 +1,40 @@
-# How to add new addon
+# How to add a new addon
+
+This document explains how the CookieBot plugin can be expanded with addons to block cookies set by specific third-party WordPress Themes and Plugins.
+
+Addon classes
+---
+Every addon is contained in its own class.
+- All addon classes should be located in a subdirectory of [src/addons/controller/addons](../src/addons/controller/addons)
+- Addon classes for third party plugins should extend the `Base_Cookiebot_Plugin_Addon` abstract class.
+- Addon classes for third party themes should extend the `Base_Cookiebot_Theme_Addon` abstract class.
+- There is also a miscellaneous `Base_Cookiebot_Other_Addon` abstract class, which is used for WordPress core features like embedded videos.
+
+Addon interfaces
+---
+Depending on the addon, you can implement several interfaces:
+- [Open_Source_Addon_Interface](../src/lib/Open_Source_Addon_Interface.php) should be implemented for addons that are open source.
+  - The `get_svn_url` method should return the correct svn URL for the plugin or theme.
+  - Every open source addon should have a corresponding integration test in [the tests directory](../tests/integration/addons)
+  - The integration test should use the svn url to test if the third party plugin or theme is still adding cookies in the same manner as when the addon was first written.
+- [Addon_With_Extra_Information_Interface](../src/lib/Addon_With_Extra_Information_Interface.php) should be implemented for addons that want to display a little bit of extra information in the `Prior Consent` settings page.
+  - The `get_extra_information` method should return an array of (preferably localized) strings.
+  - The `Prior Consent` settings page will render each of the strings in a paragraph below the addon title.
+- [Addon_With_Extra_Options_Interface](../src/lib/Addon_With_Extra_Options_Interface.php) should be implemented by addons that need extra configuration in the `Prior Consent` settings page.
+  - The `get_extra_addon_options_html` method should return a view. The only example right now is [Embed_Autocorrect](../src/addons/controller/addons/embed_autocorrect/Embed_Autocorrect.php)
+- [Addon_With_Alternative_Versions_Interface](../src/lib/Addon_With_Alternative_Versions_Interface.php) should be implemented by addons that have one or more incompatible previous versions.
+   - The `get_alternative_addon_versions` method should return an array of strings.
+   - Each array key should correspond to a valid semver version number of the plugin or theme.
+   - Each array value should point to the classname of the addon for that previous plugin/theme version.
+   - One example is the [Custom_Facebook_Feed](../src/addons/controller/addons/custom_facebook_feed/Custom_Facebook_Feed.php) addon, which had to block its cookies in a different manner for [an older version](../src/addons/controller/addons/custom_facebook_feed/Custom_Facebook_Feed_Version_2_17_1.php)
 
 Steps
 ---
 
-1. Add new addon to src/addons/addons.php
-2. Create a directory in src/addons/controller/addons
-3. Create a class in that new directory (copy class from another addon and adjust the namespace, classname and methods.)
-4. Edit 'load_addon_configuration' method. That is the only method that needs to be worked on to block the cookies.
+1. Add a new addon to [src/addons/addons.php](../src/addons/addons.php)
+2. Create a directory in [src/addons/controller/addons](../src/addons/controller/addons)
+3. Create a class in that new directory (copy class from another addon and adjust the namespace, classname, interfaces and methods.)
+4. Edit the `load_addon_configuration` method. This is the only method that needs to be worked on in order to block the cookies.
 5. Update all variables and methods according to the addon plugin.
 6. Test
 7. Create integration test if you did use dependencies from the addon plugin. (We run daily tests to see if the dependencies from the addons plugin are still valid.)
@@ -14,7 +42,7 @@ Steps
 
 Example
 ---
-1. New addon to addons.php
+1. New addon to [src/addons/addons.php](../src/addons/addons.php)
 
     ```php
     Litespeed_Cache::class,
