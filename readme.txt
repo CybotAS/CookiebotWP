@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent, ccpa
 * Requires at least: 4.4
 * Tested up to: 5.8.1
-* Stable tag: 3.11.1
+* Stable tag: 3.11.2
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -140,11 +140,11 @@ The test scans up to five pages of your website and sends you a complete report 
 If you want a complete overview of the cookies and online tracking going on on all of your website, sign up to the Cookiebot solution.
 
 ### What is the GDPR and the ePrivacy Directive? ###
-The GDPR is the General Data Protection Regulation, an EU-law enforced since May 2018, that protects EU citizens’ personal data globally and affects all organizations and websites that handle such data. If you have a website with users from the EU, and if your websites uses cookies (it probably does), then you need to make your use of cookies and tracking compliant with the GDPR.  
+The GDPR is the General Data Protection Regulation, an EU-law enforced since May 2018, that protects EU citizens’ personal data globally and affects all organizations and websites that handle such data. If you have a website with users from the EU, and if your websites uses cookies (it probably does), then you need to make your use of cookies and tracking compliant with the GDPR.
 
 See the [EU homepage of the GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32016R0679) for more information, and their infographic for businesses: [Data Protection: Better rules for small businesses](http://ec.europa.eu/justice/smedataprotect/index_en.htm)
 
-The ePrivacy Directive is another legal instrument of the EU that specifically aims to protect EU citizens’ online data such as data from online communication. It is in the process of becoming an actual Regulation such as the GDPR, which will probably happen in 2020. 
+The ePrivacy Directive is another legal instrument of the EU that specifically aims to protect EU citizens’ online data such as data from online communication. It is in the process of becoming an actual Regulation such as the GDPR, which will probably happen in 2020.
 
 ### What is the CCPA? ###
 The California Consumer Privacy Act (CCPA) is a state-wide law that regulates how businesses all over the world are allowed to handle the personal information of California residents.
@@ -159,7 +159,7 @@ Cookies and other tracking technologies are classified as unique identifiers tha
 
 If your business has a website, you must know and disclose to consumers, at or before the point of collection, the data you collect and which third parties you share it with. This can be done through the Cookiebot cookie declaration that also features the required Do Not Sell My Personal Information link, so end-users can opt out of having their data sold.
 
-If your website is visited by consumers under the age of 16, you are required by the CCPA to first obtain their opt-in. This can be done through Cookiebot’s CCPA opt-in banner. 
+If your website is visited by consumers under the age of 16, you are required by the CCPA to first obtain their opt-in. This can be done through Cookiebot’s CCPA opt-in banner.
 
 Visit [Cookiebot](https://www.cookiebot.com/en/what-is-ccpa/) to read more about the CCPA, how to achieve CCPA compliance, and what the CCPA says about your website’s use of cookies.
 
@@ -178,12 +178,12 @@ if(function_exists('cookiebot_active') && cookiebot_active()) {
 The developer of the plugin can see more details on [our Github repository](https://github.com/CybotAS/CookiebotAddons)
 
 ### Can I use Cookiebot with Google Tag Manager? ###
-Cookiebot works with GTM. There are two different options setting up GTM with Cookiebot: 
+Cookiebot works with GTM. There are two different options setting up GTM with Cookiebot:
 
-1. Use the Google Tag Manager option in the plugin settings to enable GTM together with Cookiebot. Here you also have the option to enable Google Consent Mode for GTM. 
-2. Add the GTM script manually or by using another plugin to your site. 
+1. Use the Google Tag Manager option in the plugin settings to enable GTM together with Cookiebot. Here you also have the option to enable Google Consent Mode for GTM.
+2. Add the GTM script manually or by using another plugin to your site.
 
-Should you choose one of these methods, Cookiebot must not be implemented using GTM as this would result in Cookiebot being loaded twice. 
+Should you choose one of these methods, Cookiebot must not be implemented using GTM as this would result in Cookiebot being loaded twice.
 
 If you prefer the latter method, you should select ´Hide Cookie Popup´ in the Cookiebot WordPress plugin settings.
 
@@ -196,6 +196,9 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 
 ## Changelog ##
+
+### 3.11.2 - 2021-11-17 ###
+* Updated CookieBot logo on settings page + network settings page
 
 ### 3.11.1 - 2021-09-22 ###
 * Fixed unescaped PHP output
@@ -226,7 +229,7 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ### 3.9.0 - 2020-10-20 ###
 * Added support for Google Tag Manager and Google Consent Mode
-* Added gtag TCF support 
+* Added gtag TCF support
 * Added WooCommerce Google Analytics Pro addon
 * Support for enabling Cookiebot in administration
 
@@ -255,7 +258,7 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 * Added filter tp addon list
 
 ### 3.6.2 - 2020-04-22 ###
-* Adding WP Rocket addon 
+* Adding WP Rocket addon
 * Adding WP Mautic addon
 
 ### 3.6.1 - 2020-03-12 ###
@@ -282,11 +285,11 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ### 3.3.0 - 2019-11-09 ###
 * Fix for conflict with WPBakery Page Builder when Cookie blocking is in auto mode
-* Fix for Elementor Extras causing JS errors in frontend when Cookie blocking is in auto mode 
+* Fix for Elementor Extras causing JS errors in frontend when Cookie blocking is in auto mode
 * Removing prepending of composer autoloader - causing conflicts with other plugins.
 
 ### 3.2.0 - 2019-10-29 ###
-* Adding fix for conflict with Elementor Page Builder when Cookie blocking is in auto mode 
+* Adding fix for conflict with Elementor Page Builder when Cookie blocking is in auto mode
 * Adding fix for conflict with Divi Builder when Cookie blocking is in auto mode (still need to disable Cookiebot on admin pages to work properly).
 * Minor adjustments to code style and unit tests
 
@@ -318,12 +321,12 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 * Minor fixes
 
 ### 2.4.1 - 2019-03-19 ###
-* Fix jetpack related warning 
+* Fix jetpack related warning
 
 ### 2.4.0 - 2019-03-19 ###
 * Fixed bug resulting in some tags where not tagged
 * Change Piwik addon to use output buffering
-* Clean up redundant code in addons 
+* Clean up redundant code in addons
 
 ### 2.3.0 - 2019-03-13 ###
 * Added GADWP addon
