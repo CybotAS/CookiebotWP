@@ -51,7 +51,12 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addo
 
 		// External js, so manipulate attributes
 		if ( has_action( 'wp_enqueue_scripts', 'A2A_SHARE_SAVE_enqueue_script' ) ) {
+			// add-to-any plugin version < 1.8.2
 			$this->script_loader_tag->add_tag( 'addtoany', $this->get_cookie_types() );
+
+			// add-to-any-plugin version >= 1.8.2
+			$this->script_loader_tag->add_tag( 'addtoany-core', $this->get_cookie_types() );
+			$this->script_loader_tag->add_tag( 'addtoany-jquery', $this->get_cookie_types() );
 		}
 
 		add_filter(
