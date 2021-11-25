@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent, ccpa
 * Requires at least: 4.4
 * Tested up to: 5.8.1
-* Stable tag: 3.11.2
+* Stable tag: 3.11.3
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -197,7 +197,7 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ## Changelog ##
 
-### fix/243-travis-build-is-failing-for-test-add-to-any ###
+### 3.11.3 - 2021-11-25 ###
 * Updated tests for add-to-any plugin version >= 1.8.2
 * Added support for blocking the new script handles for add-to-any plugin version >= 1.8.2
 
