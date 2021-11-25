@@ -197,6 +197,10 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ## Changelog ##
 
+### fix/243-travis-build-is-failing-for-test-add-to-any ###
+* Updated tests for add-to-any plugin version >= 1.8.2
+* Added support for blocking the new script handles for add-to-any plugin version >= 1.8.2
+
 ### 3.11.2 - 2021-11-17 ###
 * Updated CookieBot logo on settings page + network settings page
 
