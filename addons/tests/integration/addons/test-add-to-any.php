@@ -16,6 +16,9 @@ class Test_Add_To_Any extends Addons_Base {
 		$content = $this->curl_get_content( $url );
 
 		// test the content
-		$this->assertNotFalse( strpos( $content, "wp_enqueue_script( 'addtoany'" ) );
+		$this->assertNotFalse( strpos( $content, "add_action( 'wp_enqueue_scripts', 'A2A_SHARE_SAVE_stylesheet'" ) );
+		$this->assertNotFalse( strpos( $content, "\$script_handle = 'addtoany-core';" ) );
+		$this->assertNotFalse( strpos( $content, "wp_enqueue_script( \$script_handle );" ) );
+		$this->assertNotFalse( strpos( $content, "wp_enqueue_script( 'addtoany-jquery'" ) );
 	}
 }
