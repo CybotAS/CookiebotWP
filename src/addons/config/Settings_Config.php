@@ -7,7 +7,6 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Theme_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\Jetpack;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
-use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use cybot\cookiebot\lib\Settings_Page_Tab;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\lib\Cookiebot_WP;
@@ -168,7 +167,7 @@ class Settings_Config {
 						'admin/settings/prior-consent/partials/extra-information.php',
 						array(
 							'label'                   => $addon::ADDON_NAME,
-							'extra_information_lines' => $this->get_extra_information( $addon ),
+							'extra_information_lines' => $addon->get_extra_information(),
 						)
 					),
 					array(
@@ -222,7 +221,7 @@ class Settings_Config {
 								'admin/settings/prior-consent/partials/extra-information.php',
 								array(
 									'label' => $widget->get_label(),
-									'extra_information_lines' => $this->get_extra_information( $widget ),
+									'extra_information_lines' => $widget->get_extra_information(),
 								)
 							),
 							array(
@@ -274,7 +273,7 @@ class Settings_Config {
 						'admin/settings/prior-consent/partials/extra-information.php',
 						array(
 							'label'                   => $addon::ADDON_NAME,
-							'extra_information_lines' => $this->get_extra_information( $addon ),
+							'extra_information_lines' => $addon->get_extra_information(),
 						)
 					),
 					array(
@@ -288,19 +287,6 @@ class Settings_Config {
 				register_setting( $addon::OPTION_NAME, 'cookiebot_unavailable_addons' );
 			}
 		}
-	}
-
-	/**
-	 * Adds extra information under the label.
-	 *
-	 * @param Base_Cookiebot_Addon $addon
-	 *
-	 * @return string[]
-	 */
-	private function get_extra_information( $addon ) {
-		return is_a( $addon, Addon_With_Extra_Information_Interface::class ) && $addon->get_extra_information()
-			? $addon->get_extra_information()
-			: array();
 	}
 
 	/**

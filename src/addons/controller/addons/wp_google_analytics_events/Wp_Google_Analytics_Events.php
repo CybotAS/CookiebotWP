@@ -3,10 +3,9 @@
 namespace cybot\cookiebot\addons\controller\addons\wp_google_analytics_events;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use function cybot\cookiebot\lib\cookiebot_addons_remove_class_action;
 
-class Wp_Google_Analytics_Events extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_Information_Interface {
+class Wp_Google_Analytics_Events extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'WP Google Analytics Events';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';
@@ -37,11 +36,7 @@ class Wp_Google_Analytics_Events extends Base_Cookiebot_Plugin_Addon implements 
 	}
 
 	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string[]
-	 *
-	 * @since 1.8.0
+	 * @return array
 	 */
 	public function get_extra_information() {
 		return array(

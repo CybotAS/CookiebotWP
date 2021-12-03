@@ -2,10 +2,9 @@
 
 namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 
-use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 
-class Facebook_Jetpack_Widget extends Base_Jetpack_Widget implements Addon_With_Extra_Information_Interface {
+class Facebook_Jetpack_Widget extends Base_Jetpack_Widget {
 	const LABEL               = 'Facebook';
 	const WIDGET_OPTION_NAME  = 'facebook';
 	const DEFAULT_PLACEHOLDER = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to see facebook widget.';
@@ -70,11 +69,7 @@ class Facebook_Jetpack_Widget extends Base_Jetpack_Widget implements Addon_With_
 	}
 
 	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string[]
-	 *
-	 * @since 1.8.0
+	 * @return array
 	 */
 	public function get_extra_information() {
 		return array(

@@ -7,12 +7,14 @@ use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cybot\cookiebot\lib\Cookie_Consent_Interface;
 use cybot\cookiebot\lib\buffer\Buffer_Output_Interface;
+use cybot\cookiebot\lib\traits\Extra_Information_Trait;
 use Exception;
 use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 abstract class Base_Jetpack_Widget implements Jetpack_Widget_Interface {
 
 	use Class_Constant_Override_Validator;
+	use Extra_Information_Trait;
 
 	/**
 	 * @var string ADDON_OPTION_NAME

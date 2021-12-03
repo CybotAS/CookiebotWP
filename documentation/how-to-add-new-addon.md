@@ -17,9 +17,6 @@ Depending on the addon, you can implement several interfaces:
   - The `get_svn_url` method should return the correct svn URL for the plugin or theme.
   - Every open source addon should have a corresponding integration test in [the tests directory](../tests/integration/addons)
   - The integration test should use the svn url to test if the third party plugin or theme is still adding cookies in the same manner as when the addon was first written.
-- [Addon_With_Extra_Information_Interface](../src/lib/Addon_With_Extra_Information_Interface.php) should be implemented for addons that want to display a little bit of extra information in the `Prior Consent` settings page.
-  - The `get_extra_information` method should return an array of (preferably localized) strings.
-  - The `Prior Consent` settings page will render each of the strings in a paragraph below the addon title.
 - [Addon_With_Alternative_Versions_Interface](../src/lib/Addon_With_Alternative_Versions_Interface.php) should be implemented by addons that have one or more incompatible previous versions.
    - The `get_alternative_addon_versions` method should return an array of strings.
    - Each array key should correspond to a valid semver version number of the plugin or theme.

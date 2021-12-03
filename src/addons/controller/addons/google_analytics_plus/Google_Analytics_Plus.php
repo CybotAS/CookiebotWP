@@ -3,9 +3,8 @@
 namespace cybot\cookiebot\addons\controller\addons\google_analytics_plus;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 
-class Google_Analytics_Plus extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_Information_Interface {
+class Google_Analytics_Plus extends Base_Cookiebot_Plugin_Addon {
 	const ADDON_NAME           = 'Google Analytics +';
 	const OPTION_NAME          = 'google_analytics_plus';
 	const PLUGIN_FILE_PATH     = 'google-analytics-async/google-analytics-async.php';
@@ -26,11 +25,7 @@ class Google_Analytics_Plus extends Base_Cookiebot_Plugin_Addon implements Addon
 	}
 
 	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string[]
-	 *
-	 * @since 1.8.0
+	 * @return array
 	 */
 	public function get_extra_information() {
 		return array(

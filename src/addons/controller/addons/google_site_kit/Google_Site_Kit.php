@@ -3,10 +3,9 @@
 namespace cybot\cookiebot\addons\controller\addons\google_site_kit;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
-class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface, Addon_With_Extra_Information_Interface {
+class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 
 	const ADDON_NAME                  = 'Google Site Kit';
 	const OPTION_NAME                 = 'google_site_kit';
@@ -26,11 +25,7 @@ class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon implements Open_Source
 	}
 
 	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string[]
-	 *
-	 * @since 1.8.0
+	 * @return array
 	 */
 	public function get_extra_information() {
 		return array(

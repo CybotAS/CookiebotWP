@@ -3,11 +3,10 @@
 namespace cybot\cookiebot\addons\controller\addons\add_to_any;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 
-class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface, Addon_With_Extra_Information_Interface {
+class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 
 	const ADDON_NAME                  = 'addToAny Share Buttons';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.';
@@ -79,7 +78,7 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addo
 	}
 
 	/**
-	 * @return string[]
+	 * @return array
 	 */
 	public function get_extra_information() {
 		return array(

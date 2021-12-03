@@ -9,12 +9,14 @@ use cybot\cookiebot\lib\Cookie_Consent_Interface;
 use cybot\cookiebot\lib\Addon_With_Alternative_Versions_Interface;
 use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cybot\cookiebot\lib\Settings_Service_Interface;
+use cybot\cookiebot\lib\traits\Extra_Information_Trait;
 use Exception;
 use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 abstract class Base_Cookiebot_Addon {
 
 	use Class_Constant_Override_Validator;
+	use Extra_Information_Trait;
 
 	const ADDON_NAME                  = '';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.';

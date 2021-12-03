@@ -3,9 +3,8 @@
 namespace cybot\cookiebot\addons\controller\addons\wp_rocket;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 
-class Wp_Rocket extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_Information_Interface {
+class Wp_Rocket extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME              = 'WP Rocket';
 	const OPTION_NAME             = 'wp_rocket';
@@ -42,11 +41,7 @@ class Wp_Rocket extends Base_Cookiebot_Plugin_Addon implements Addon_With_Extra_
 	}
 
 	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string[]
-	 *
-	 * @since 1.8.0
+	 * @return array
 	 */
 	public function get_extra_information() {
 		return array(

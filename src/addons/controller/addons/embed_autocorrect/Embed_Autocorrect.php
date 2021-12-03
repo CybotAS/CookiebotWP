@@ -3,7 +3,6 @@
 namespace cybot\cookiebot\addons\controller\addons\embed_autocorrect;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Other_Addon;
-use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use cybot\cookiebot\lib\Cookiebot_WP;
 use Exception;
 use InvalidArgumentException;
@@ -14,7 +13,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_get_home_url_domain;
 use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 use function cybot\cookiebot\lib\get_view_html;
 
-class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With_Extra_Information_Interface {
+class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 
 	const ADDON_NAME                  = 'Embed autocorrect';
 	const OPTION_NAME                 = 'embed_autocorrect';
@@ -422,11 +421,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon implements Addon_With
 	}
 
 	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string[]
-	 *
-	 * @since 1.8.0
+	 * @return array
 	 */
 	public function get_extra_information() {
 		return array(

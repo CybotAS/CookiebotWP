@@ -3,10 +3,9 @@
 namespace cybot\cookiebot\addons\controller\addons\enhanced_ecommerce_for_woocommerce_store;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
 use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
-class Enhanced_Ecommerce_For_WooCommerce_Store extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface, Addon_With_Extra_Information_Interface {
+class Enhanced_Ecommerce_For_WooCommerce_Store extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
 
 	const ADDON_NAME                  = 'Enhanced Ecommerce Google Analytics Plugin for WooCommerce';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.';
@@ -37,11 +36,7 @@ class Enhanced_Ecommerce_For_WooCommerce_Store extends Base_Cookiebot_Plugin_Add
 	}
 
 	/**
-	 * Adds extra information under the label
-	 *
-	 * @return string[]
-	 *
-	 * @since 1.8.0
+	 * @return array
 	 */
 	public function get_extra_information() {
 		return array(
