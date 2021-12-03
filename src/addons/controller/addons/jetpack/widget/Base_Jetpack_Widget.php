@@ -2,7 +2,7 @@
 
 namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 
-use cybot\cookiebot\lib\Class_Constant_Override_Validator;
+use cybot\cookiebot\lib\traits\Class_Constant_Override_Validator_Trait;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cybot\cookiebot\lib\Cookie_Consent_Interface;
@@ -13,7 +13,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 abstract class Base_Jetpack_Widget implements Jetpack_Widget_Interface {
 
-	use Class_Constant_Override_Validator;
+	use Class_Constant_Override_Validator_Trait;
 	use Extra_Information_Trait;
 
 	/**

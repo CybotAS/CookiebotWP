@@ -4,7 +4,7 @@ namespace cybot\cookiebot\addons\controller\addons;
 
 use cybot\cookiebot\lib\Alternative_Addon_Version_Manager;
 use cybot\cookiebot\lib\buffer\Buffer_Output_Interface;
-use cybot\cookiebot\lib\Class_Constant_Override_Validator;
+use cybot\cookiebot\lib\traits\Class_Constant_Override_Validator_Trait;
 use cybot\cookiebot\lib\Cookie_Consent_Interface;
 use cybot\cookiebot\lib\Addon_With_Alternative_Versions_Interface;
 use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag_Interface;
@@ -15,7 +15,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 abstract class Base_Cookiebot_Addon {
 
-	use Class_Constant_Override_Validator;
+	use Class_Constant_Override_Validator_Trait;
 	use Extra_Information_Trait;
 
 	const ADDON_NAME                  = '';

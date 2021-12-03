@@ -1,11 +1,11 @@
 <?php
 
-namespace cybot\cookiebot\lib;
+namespace cybot\cookiebot\lib\traits;
 
 use Exception;
 use InvalidArgumentException;
 
-trait Class_Constant_Override_Validator {
+trait Class_Constant_Override_Validator_Trait {
 
 	/**
 	 * @param array $fixed_class_constant_names
