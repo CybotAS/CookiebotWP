@@ -11,7 +11,7 @@ use cybot\cookiebot\lib\traits\Extra_Information_Trait;
 use Exception;
 use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
-abstract class Base_Jetpack_Widget implements Jetpack_Widget_Interface {
+abstract class Base_Jetpack_Widget {
 
 	use Class_Constant_Override_Validator_Trait;
 	use Extra_Information_Trait;
@@ -203,10 +203,11 @@ abstract class Base_Jetpack_Widget implements Jetpack_Widget_Interface {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
 
+	abstract public function load_configuration();
+
 	/**
 	 * @param string $view
 	 * @param string $widget
 	 */
 	public function cookie_consent_div( $view, $widget ) {}
-
 }

@@ -6,7 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Theme_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\Jetpack;
-use cybot\cookiebot\addons\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
+use cybot\cookiebot\addons\controller\addons\jetpack\widget\Base_Jetpack_Widget;
 use cybot\cookiebot\lib\Settings_Page_Tab;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\lib\Cookiebot_WP;
@@ -311,7 +311,7 @@ class Settings_Config {
 		$widget = isset( $args['widget'] ) ? $args['widget'] : null;
 		$addon  = isset( $args['addon'] ) ? $args['addon'] : null;
 
-		if ( ! is_a( $widget, Jetpack_Widget_Interface::class ) ) {
+		if ( ! is_a( $widget, Base_Jetpack_Widget::class ) ) {
 			throw new InvalidArgumentException();
 		}
 

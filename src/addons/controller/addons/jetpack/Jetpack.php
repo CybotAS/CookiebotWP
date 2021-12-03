@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\addons\controller\addons\jetpack;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
+use cybot\cookiebot\addons\controller\addons\jetpack\widget\Base_Jetpack_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Google_Maps_Jetpack_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Facebook_Jetpack_Widget;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Googleplus_Badge_Jetpack_Widget;
@@ -187,7 +188,7 @@ class Jetpack extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * Returns all supported widgets
 	 *
-	 * @return array
+	 * @return Base_Jetpack_Widget[]
 	 *
 	 * @since 1.3.0
 	 */
