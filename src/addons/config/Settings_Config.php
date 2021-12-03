@@ -8,7 +8,6 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Theme_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\Jetpack;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Jetpack_Widget_Interface;
 use cybot\cookiebot\lib\Addon_With_Extra_Information_Interface;
-use cybot\cookiebot\lib\Addon_With_Extra_Options_Interface;
 use cybot\cookiebot\lib\Settings_Page_Tab;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\lib\Cookiebot_WP;
@@ -455,9 +454,7 @@ class Settings_Config {
 			$addon_placeholders_array
 		);
 		$placeholder_helper                   = $addon->get_placeholder_helper();
-		$addon_extra_options_html             = is_a( $addon, Addon_With_Extra_Options_Interface::class )
-			? $addon->get_extra_addon_options_html()
-			: '';
+		$addon_extra_options_html             = $addon->get_extra_addon_options_html();
 		$placeholders_html                    = $addon->has_placeholder()
 			? get_view_html(
 				'admin/settings/prior-consent/partials/placeholder-submitboxes.php',

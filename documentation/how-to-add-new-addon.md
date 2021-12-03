@@ -20,8 +20,6 @@ Depending on the addon, you can implement several interfaces:
 - [Addon_With_Extra_Information_Interface](../src/lib/Addon_With_Extra_Information_Interface.php) should be implemented for addons that want to display a little bit of extra information in the `Prior Consent` settings page.
   - The `get_extra_information` method should return an array of (preferably localized) strings.
   - The `Prior Consent` settings page will render each of the strings in a paragraph below the addon title.
-- [Addon_With_Extra_Options_Interface](../src/lib/Addon_With_Extra_Options_Interface.php) should be implemented by addons that need extra configuration in the `Prior Consent` settings page.
-  - The `get_extra_addon_options_html` method should return a view. The only example right now is [Embed_Autocorrect](../src/addons/controller/addons/embed_autocorrect/Embed_Autocorrect.php)
 - [Addon_With_Alternative_Versions_Interface](../src/lib/Addon_With_Alternative_Versions_Interface.php) should be implemented by addons that have one or more incompatible previous versions.
    - The `get_alternative_addon_versions` method should return an array of strings.
    - Each array key should correspond to a valid semver version number of the plugin or theme.

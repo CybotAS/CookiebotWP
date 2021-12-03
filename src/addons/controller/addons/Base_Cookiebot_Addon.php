@@ -253,4 +253,11 @@ abstract class Base_Cookiebot_Addon {
 			'placeholder' => static::DEFAULT_PLACEHOLDER_CONTENT,
 		);
 	}
+
+	/**
+	 * @return string
+	 */
+	public function get_extra_addon_options_html() {
+		return '';
+	}
 }
