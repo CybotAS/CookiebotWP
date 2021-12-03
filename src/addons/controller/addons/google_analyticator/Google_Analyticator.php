@@ -3,14 +3,15 @@
 namespace cybot\cookiebot\addons\controller\addons\google_analyticator;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
-class Google_Analyticator extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
+class Google_Analyticator extends Base_Cookiebot_Plugin_Addon {
 	const ADDON_NAME                  = 'Google Analyticator';
 	const OPTION_NAME                 = 'google_analyticator';
 	const PLUGIN_FILE_PATH            = 'google-analyticator/google-analyticator.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'statistics' );
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/google-analyticator/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'google-analyticator.php';
 
 	public function load_addon_configuration() {
 		/**
@@ -63,12 +64,5 @@ class Google_Analyticator extends Base_Cookiebot_Plugin_Addon implements Open_So
 			 */
 			$this->script_loader_tag->add_tag( 'ga-external-tracking', $this->get_cookie_types() );
 		}
-	}
-
-	/**
-	 * @return string
-	 */
-	public static function get_svn_url() {
-		return 'https://plugins.svn.wordpress.org/google-analyticator/trunk/google-analyticator.php';
 	}
 }

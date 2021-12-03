@@ -3,9 +3,8 @@
 namespace cybot\cookiebot\addons\controller\addons\hubspot_leadin;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
-class Hubspot_Leadin extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
+class Hubspot_Leadin extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'HubSpot - Free Marketing Plugin for WordPress';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';
@@ -13,6 +12,8 @@ class Hubspot_Leadin extends Base_Cookiebot_Plugin_Addon implements Open_Source_
 	const PLUGIN_FILE_PATH            = 'leadin/leadin.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing', 'statistics' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/leadin/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'leadin.php';
 
 	/**
 	 * Manipulate the scripts if they are loaded.
@@ -30,14 +31,5 @@ class Hubspot_Leadin extends Base_Cookiebot_Plugin_Addon implements Open_Source_
 				$this->script_loader_tag->add_tag( 'leadin-scriptloader-js', $this->get_cookie_types() );
 			}
 		}
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'leadin.php' ) {
-		return 'https://plugins.svn.wordpress.org/leadin/trunk/' . $path;
 	}
 }

@@ -12,6 +12,8 @@ class Simple_Share_Buttons_Adder extends Base_Cookiebot_Plugin_Addon {
 	const PLUGIN_FILE_PATH            = 'simple-share-buttons-adder/simple-share-buttons-adder.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/simple-share-buttons-adder/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'simple-share-buttons-adder.php';
 
 	/**
 	 * Disable scripts if state not accepted
@@ -29,14 +31,5 @@ class Simple_Share_Buttons_Adder extends Base_Cookiebot_Plugin_Addon {
 		return array(
 			__( 'Blocks Simple Share Buttons Adder.', 'cookiebot' ),
 		);
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'simple-share-buttons-adder.php' ) {
-		return 'https://plugins.svn.wordpress.org/simple-share-buttons-adder/trunk/' . $path;
 	}
 }

@@ -3,9 +3,8 @@
 namespace cybot\cookiebot\addons\controller\addons\instagram_feed;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
-class Instagram_Feed extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
+class Instagram_Feed extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Instagram feed';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed.';
@@ -13,6 +12,8 @@ class Instagram_Feed extends Base_Cookiebot_Plugin_Addon implements Open_Source_
 	const PLUGIN_FILE_PATH            = 'instagram-feed/instagram-feed.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/instagram-feed/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'instagram-feed.php';
 
 	/**
 	 * Disable scripts if state not accepted
@@ -24,14 +25,5 @@ class Instagram_Feed extends Base_Cookiebot_Plugin_Addon implements Open_Source_
 		if ( has_action( 'wp_enqueue_scripts', 'sb_instagram_scripts_enqueue' ) ) {
 			$this->script_loader_tag->add_tag( 'sb_instagram_scripts', $this->get_cookie_types() );
 		}
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'instagram-feed.php' ) {
-		return 'https://plugins.svn.wordpress.org/instagram-feed/trunk/' . $path;
 	}
 }

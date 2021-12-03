@@ -5,9 +5,8 @@ namespace cybot\cookiebot\addons\controller\addons\hubspot_tracking_code;
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
-class Hubspot_Tracking_Code extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
+class Hubspot_Tracking_Code extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Hubspot Tracking Code';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';
@@ -15,6 +14,8 @@ class Hubspot_Tracking_Code extends Base_Cookiebot_Plugin_Addon implements Open_
 	const PLUGIN_FILE_PATH            = 'hubspot-tracking-code/hubspot-tracking-code.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing', 'statistics' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/hubspot-tracking-code/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'hubspot-tracking-code.php';
 
 	/**
 	 * Manipulate the scripts if they are loaded.
@@ -36,14 +37,5 @@ class Hubspot_Tracking_Code extends Base_Cookiebot_Plugin_Addon implements Open_
 		if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) && isset( $_COOKIE['hubspotutk'] ) ) {
 			unset( $_COOKIE['hubspotutk'] );
 		}
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'hubspot-tracking-code.php' ) {
-		return 'https://plugins.svn.wordpress.org/hubspot-tracking-code/trunk/' . $path;
 	}
 }

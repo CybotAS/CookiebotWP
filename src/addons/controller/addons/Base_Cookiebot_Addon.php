@@ -2,13 +2,13 @@
 
 namespace cybot\cookiebot\addons\controller\addons;
 
+use cybot\cookiebot\lib\Addon_With_Alternative_Versions_Interface;
 use cybot\cookiebot\lib\Alternative_Addon_Version_Manager;
 use cybot\cookiebot\lib\buffer\Buffer_Output_Interface;
-use cybot\cookiebot\lib\traits\Class_Constant_Override_Validator_Trait;
 use cybot\cookiebot\lib\Cookie_Consent_Interface;
-use cybot\cookiebot\lib\Addon_With_Alternative_Versions_Interface;
 use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cybot\cookiebot\lib\Settings_Service_Interface;
+use cybot\cookiebot\lib\traits\Class_Constant_Override_Validator_Trait;
 use cybot\cookiebot\lib\traits\Extra_Information_Trait;
 use Exception;
 use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
@@ -23,6 +23,8 @@ abstract class Base_Cookiebot_Addon {
 	const OPTION_NAME                 = '';
 	const DEFAULT_COOKIE_TYPES        = array();
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = '';
+	const SVN_URL_DEFAULT_SUB_PATH    = '';
 
 	/**
 	 * @var Settings_Service_Interface
@@ -261,5 +263,39 @@ abstract class Base_Cookiebot_Addon {
 	 */
 	public function get_extra_addon_options_html() {
 		return '';
+	}
+
+	/**
+	 * @param string $path
+	 *
+	 * @return string
+	 * @throws Exception
+	 */
+	final private static function get_svn_url( $path = '' ) {
+		if ( ! is_string( $path ) || $path === '' ) {
+			$path = static::SVN_URL_DEFAULT_SUB_PATH;
+		}
+
+		if ( ! is_string( $path ) || $path === '' ) {
+			throw new Exception( 'Invalid $path argument or SVN_URL_DEFAULT_SUB_PATH class constant override in ' . static::class );
+		}
+
+		if ( ! is_string( static::SVN_URL_BASE_PATH ) || static::SVN_URL_BASE_PATH === '' ) {
+			throw new Exception( 'The addon class does not correctly override the SVN_URL_BASE_PATH class constant in ' . static::class );
+		}
+
+		return static::SVN_URL_BASE_PATH . $path;
+	}
+
+	/**
+	 * @param string $path
+	 *
+	 * @return string
+	 * @throws Exception
+	 */
+	final public static function get_svn_file_content( $path = '' ) {
+		$url      = self::get_svn_url( $path );
+		$response = wp_remote_get( $url );
+		return wp_remote_retrieve_body( $response );
 	}
 }

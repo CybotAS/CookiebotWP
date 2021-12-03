@@ -3,9 +3,8 @@
 namespace cybot\cookiebot\addons\controller\addons\google_site_kit;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
-class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
+class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Google Site Kit';
 	const OPTION_NAME                 = 'google_site_kit';
@@ -13,6 +12,8 @@ class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon implements Open_Source
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics.';
 	const PLUGIN_FILE_PATH            = 'google-site-kit/google-site-kit.php';
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/google-site-kit/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'google-site-kit.php';
 
 	/**
 	 * Disable scripts if state not accepted
@@ -31,14 +32,5 @@ class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon implements Open_Source
 		return array(
 			__( 'Blocks Google Analytics scripts', 'cookiebot' ),
 		);
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'google-site-kit.php' ) {
-		return 'https://plugins.svn.wordpress.org/google-site-kit/trunk/' . $path;
 	}
 }

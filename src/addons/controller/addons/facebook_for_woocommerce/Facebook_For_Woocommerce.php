@@ -3,16 +3,17 @@
 namespace cybot\cookiebot\addons\controller\addons\facebook_for_woocommerce;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 use function cybot\cookiebot\lib\cookiebot_addons_remove_class_action;
 
-class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
+class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Facebook For WooCommerce';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.';
 	const OPTION_NAME                 = 'facebook_for_woocommerce';
 	const PLUGIN_FILE_PATH            = 'facebook-for-woocommerce/facebook-for-woocommerce.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing' );
+	const SVN_URL_BASE_PATH           = 'https://raw.githubusercontent.com/facebookincubator/facebook-for-woocommerce/master/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'facebook-commerce.php';
 
 	public function load_addon_configuration() {
 		add_filter( 'wc_facebook_pixel_script_attributes', array( $this, 'cookiebot_addon_facebook_for_woocommerce_script_attributes' ) );
@@ -113,15 +114,6 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon implements Op
 		 */
 		//We always need to remove this untill consent is given - because we can force no execution before consent it given
 		cookiebot_addons_remove_class_action( 'wp_footer', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel_noscript' );
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'facebook-commerce.php' ) {
-		return 'https://raw.githubusercontent.com/facebookincubator/facebook-for-woocommerce/master/' . $path;
 	}
 
 	/**

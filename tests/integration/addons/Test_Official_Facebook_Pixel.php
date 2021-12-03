@@ -6,7 +6,6 @@ use cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Fa
 use PHPUnit\Framework\ExpectationFailedException;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 use WP_UnitTestCase;
-use function cybot\cookiebot\tests\remote_get_svn_contents;
 
 class Test_Official_Facebook_Pixel extends WP_UnitTestCase {
 
@@ -17,9 +16,10 @@ class Test_Official_Facebook_Pixel extends WP_UnitTestCase {
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_pageview() {
-		$content = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'core/FacebookPixel.php' ) );
+		$content = Official_Facebook_Pixel::get_svn_file_content( 'core/FacebookPixel.php' );
 		$snippet = <<<TEXT
 <!-- Facebook Pixel Code -->
 <script type='text/javascript'>
@@ -39,9 +39,10 @@ TEXT;
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_caldera_form() {
-		$content = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'integration/FacebookWordpressCalderaForm.php' ) );
+		$content = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressCalderaForm.php' );
 		$snippet = <<<TEXT
 add_action(
       'caldera_forms_ajax_return',
@@ -56,9 +57,10 @@ TEXT;
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_contact_form_7() {
-		$content    = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'integration/FacebookWordpressContactForm7.php' ) );
+		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressContactForm7.php' );
 		$snippets[] = <<<TEXT
 add_action(
       'wpcf7_submit',
@@ -82,9 +84,10 @@ TEXT;
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_formidable_form() {
-		$content    = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'integration/FacebookWordpressFormidableForm.php' ) );
+		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressFormidableForm.php' );
 		$snippets[] = <<<TEXT
 add_action(
       'frm_after_create_entry',
@@ -111,9 +114,10 @@ TEXT;
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_easy_digital_downloads() {
-		$content    = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'integration/FacebookWordpressEasyDigitalDownloads.php' ) );
+		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressEasyDigitalDownloads.php' );
 		$snippets[] = <<<TEXT
 add_action(
       'edd_payment_receipt_after',
@@ -152,9 +156,10 @@ TEXT;
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_gravity_forms() {
-		$content = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'integration/FacebookWordpressGravityForms.php' ) );
+		$content = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressGravityForms.php' );
 		$snippet = <<<TEXT
 add_filter(
       'gform_confirmation',
@@ -169,9 +174,10 @@ TEXT;
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_mailchimp_for_wp() {
-		$content = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'integration/FacebookWordpressMailchimpForWp.php' ) );
+		$content = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressMailchimpForWp.php' );
 		$snippet = <<<TEXT
 self::addPixelFireForHook(array(
       'hook_name' => 'mc4wp_form_subscribed',
@@ -187,9 +193,10 @@ TEXT;
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_ninja_forms() {
-		$content = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'integration/FacebookWordpressNinjaForms.php' ) );
+		$content = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressNinjaForms.php' );
 		$snippet = <<<TEXT
 add_action(
       'ninja_forms_submission_actions',
@@ -204,9 +211,10 @@ TEXT;
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_woocommerce() {
-		$content    = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'integration/FacebookWordpressWooCommerce.php' ) );
+		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressWooCommerce.php' );
 		$snippets[] = <<<TEXT
 add_action('woocommerce_after_checkout_form',
         array(__CLASS__, 'trackInitiateCheckout'),
@@ -240,9 +248,10 @@ TEXT;
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_WPECommerce() {
-		$content    = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'integration/FacebookWordpressWPECommerce.php' ) );
+		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressWPECommerce.php' );
 		$snippets[] = <<<TEXT
 add_action('wpsc_add_to_cart_json_response',
       array(__CLASS__, 'injectAddToCartEvent'), 11);
@@ -270,9 +279,10 @@ TEXT;
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_wp_forms() {
-		$content    = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'integration/FacebookWordpressWPForms.php' ) );
+		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressWPForms.php' );
 		$snippets[] = <<<TEXT
 add_action(
       'wp_footer',
@@ -299,9 +309,10 @@ TEXT;
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_official_facebook_pixel_integration_base() {
-		$content = remote_get_svn_contents( Official_Facebook_Pixel::get_svn_url( 'integration/FacebookWordpressIntegrationBase.php' ) );
+		$content = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressIntegrationBase.php' );
 
 		$snippet = <<<TEXT
 add_action(

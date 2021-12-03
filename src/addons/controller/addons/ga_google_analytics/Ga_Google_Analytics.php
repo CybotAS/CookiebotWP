@@ -3,14 +3,15 @@
 namespace cybot\cookiebot\addons\controller\addons\ga_google_analytics;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
-class Ga_Google_Analytics extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
+class Ga_Google_Analytics extends Base_Cookiebot_Plugin_Addon {
 	const ADDON_NAME                  = 'GA Google Analytics';
 	const OPTION_NAME                 = 'ga_google_analytics';
 	const PLUGIN_FILE_PATH            = 'ga-google-analytics/ga-google-analytics.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'statistics' );
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.';
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/ga-google-analytics/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'ga-google-analytics.php';
 
 	public function load_addon_configuration() {
 
@@ -43,14 +44,5 @@ class Ga_Google_Analytics extends Base_Cookiebot_Plugin_Addon implements Open_So
 				false
 			);
 		}
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'ga-google-analytics.php' ) {
-		return 'https://plugins.svn.wordpress.org/ga-google-analytics/trunk/' . $path;
 	}
 }

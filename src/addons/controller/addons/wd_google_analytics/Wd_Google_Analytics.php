@@ -12,6 +12,8 @@ class Wd_Google_Analytics extends Base_Cookiebot_Plugin_Addon {
 	const PLUGIN_FILE_PATH            = 'wd-google-analytics/google-analytics-wd.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'statistics' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/wd-google-analytics/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'google-analytics-wd.php';
 
 	/**
 	 * Disable scripts if state not accepted
@@ -27,14 +29,5 @@ class Wd_Google_Analytics extends Base_Cookiebot_Plugin_Addon {
 			),
 			false
 		);
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'google-analytics-wd.php' ) {
-		return 'https://plugins.svn.wordpress.org/wd-google-analytics/trunk/' . $path;
 	}
 }

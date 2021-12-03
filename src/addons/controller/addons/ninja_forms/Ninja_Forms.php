@@ -12,6 +12,8 @@ class Ninja_Forms extends Base_Cookiebot_Plugin_Addon {
 	const PLUGIN_FILE_PATH            = 'ninja-forms/ninja-forms.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing', 'statistics' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/ninja-forms/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'ninja-forms.php';
 
 	/**
 	 * Manipulate the scripts if they are loaded.
@@ -42,14 +44,5 @@ class Ninja_Forms extends Base_Cookiebot_Plugin_Addon {
 				1
 			);
 		}
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'ninja-forms.php' ) {
-		return 'https://plugins.svn.wordpress.org/ninja-forms/trunk/' . $path;
 	}
 }

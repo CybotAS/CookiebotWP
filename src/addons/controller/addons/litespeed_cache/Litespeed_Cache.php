@@ -12,6 +12,8 @@ class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon {
 	const PLUGIN_FILE_PATH            = 'litespeed-cache/litespeed-cache.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'necessary' );
 	const ENABLE_ADDON_BY_DEFAULT     = true;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/litespeed-cache/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'litespeed-cache.php';
 
 	/**
 	 * Loads addon configuration
@@ -51,14 +53,5 @@ class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon {
 				'cookiebot'
 			),
 		);
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'litespeed-cache.php' ) {
-		return 'https://plugins.svn.wordpress.org/litespeed-cache/trunk/' . $path;
 	}
 }

@@ -6,7 +6,6 @@ use cybot\cookiebot\addons\controller\addons\wp_google_analytics_events\Wp_Googl
 use PHPUnit\Framework\ExpectationFailedException;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 use WP_UnitTestCase;
-use function cybot\cookiebot\tests\remote_get_svn_contents;
 
 class Test_Wp_Google_Analytics_Events extends WP_UnitTestCase {
 
@@ -16,9 +15,10 @@ class Test_Wp_Google_Analytics_Events extends WP_UnitTestCase {
 	 * @covers \cybot\cookiebot\addons\controller\addons\wp_google_analytics_events\Wp_Google_Analytics_Events
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_is_plugin_compatible() {
-		$content = remote_get_svn_contents( Wp_Google_Analytics_Events::get_svn_url() );
+		$content = Wp_Google_Analytics_Events::get_svn_file_content();
 
 		$wp_head_snippet = <<<TEXT
 add_action('wp_head',

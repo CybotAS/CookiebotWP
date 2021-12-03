@@ -13,10 +13,6 @@ Every addon is contained in its own class.
 Addon interfaces
 ---
 Depending on the addon, you can implement several interfaces:
-- [Open_Source_Addon_Interface](../src/lib/Open_Source_Addon_Interface.php) should be implemented for addons that are open source.
-  - The `get_svn_url` method should return the correct svn URL for the plugin or theme.
-  - Every open source addon should have a corresponding integration test in [the tests directory](../tests/integration/addons)
-  - The integration test should use the svn url to test if the third party plugin or theme is still adding cookies in the same manner as when the addon was first written.
 - [Addon_With_Alternative_Versions_Interface](../src/lib/Addon_With_Alternative_Versions_Interface.php) should be implemented by addons that have one or more incompatible previous versions.
    - The `get_alternative_addon_versions` method should return an array of strings.
    - Each array key should correspond to a valid semver version number of the plugin or theme.

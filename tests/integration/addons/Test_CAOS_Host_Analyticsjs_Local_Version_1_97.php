@@ -6,7 +6,6 @@ use cybot\cookiebot\addons\controller\addons\caos_host_analyticsjs_local\CAOS_Ho
 use WP_UnitTestCase;
 use PHPUnit\Framework\ExpectationFailedException;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
-use function cybot\cookiebot\tests\remote_get_svn_contents;
 
 class Test_CAOS_Host_Analyticsjs_Local_Version_1_97 extends WP_UnitTestCase {
 
@@ -14,9 +13,10 @@ class Test_CAOS_Host_Analyticsjs_Local_Version_1_97 extends WP_UnitTestCase {
 	 * @covers \cybot\cookiebot\addons\controller\addons\caos_host_analyticsjs_local\CAOS_Host_Analyticsjs_Local_Version_1_97
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function test_is_plugin_compatible() {
-		$content = remote_get_svn_contents( CAOS_Host_Analyticsjs_Local_Version_1_97::get_svn_url() );
+		$content = CAOS_Host_Analyticsjs_Local_Version_1_97::get_svn_file_content();
 
 		$this->assertNotFalse(
 			strpos(

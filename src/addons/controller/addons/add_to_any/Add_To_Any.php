@@ -3,10 +3,9 @@
 namespace cybot\cookiebot\addons\controller\addons\add_to_any;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 
-class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
+class Add_To_Any extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'addToAny Share Buttons';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.';
@@ -14,6 +13,8 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addo
 	const PLUGIN_FILE_PATH            = 'add-to-any/add-to-any.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing', 'statistics' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/add-to-any/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'add-to-any.php';
 
 	/**
 	 * Disable scripts if state not accepted
@@ -87,13 +88,6 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addo
 				'cookiebot'
 			),
 		);
-	}
-
-	/**
-	 * @return string
-	 */
-	public static function get_svn_url() {
-		return 'https://plugins.svn.wordpress.org/add-to-any/trunk/add-to-any.php';
 	}
 
 	/**

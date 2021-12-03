@@ -3,9 +3,8 @@
 namespace cybot\cookiebot\addons\controller\addons\addthis;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
-class Addthis extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
+class Addthis extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'WordPress Share Buttons Plugin – AddThis';
 	const OPTION_NAME                 = 'addthis';
@@ -13,6 +12,8 @@ class Addthis extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_I
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element.';
 	const PLUGIN_FILE_PATH            = 'addthis/addthis_social_widget.php';
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/addthis/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'addthis_social_widget.php';
 
 	/**
 	 * Manipulate the scripts if they are loaded.
@@ -40,14 +41,5 @@ class Addthis extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_I
 			),
 			false
 		);
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'addthis_social_widget.php' ) {
-		return 'https://plugins.svn.wordpress.org/addthis/trunk/' . $path;
 	}
 }

@@ -14,6 +14,8 @@ class Wp_Piwik extends Base_Cookiebot_Plugin_Addon {
 	const PLUGIN_FILE_PATH            = 'wp-piwik/wp-piwik.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'statistics' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/wp-piwik/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'wp-piwik.php';
 
 	/**
 	 * Manipulate the scripts if they are loaded.
@@ -42,14 +44,5 @@ class Wp_Piwik extends Base_Cookiebot_Plugin_Addon {
 				false
 			);
 		}
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'wp-piwik.php' ) {
-		return 'https://plugins.svn.wordpress.org/wp-piwik/trunk/' . $path;
 	}
 }

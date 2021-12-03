@@ -12,6 +12,8 @@ class Pixel_Caffeine extends Base_Cookiebot_Plugin_Addon {
 	const PLUGIN_FILE_PATH            = 'pixel-caffeine/pixel-caffeine.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'statistics', 'marketing' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/pixel-caffeine/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'pixel-caffeine.php';
 
 	/**
 	 * Disable scripts if state not accepted
@@ -49,14 +51,5 @@ class Pixel_Caffeine extends Base_Cookiebot_Plugin_Addon {
 	 */
 	public function get_default_placeholder() {
 		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook pixel.';
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'pixel-caffeine.php' ) {
-		return 'https://plugins.svn.wordpress.org/pixel-caffeine/trunk/' . $path;
 	}
 }

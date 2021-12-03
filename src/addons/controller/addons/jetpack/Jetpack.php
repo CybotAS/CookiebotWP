@@ -24,6 +24,8 @@ class Jetpack extends Base_Cookiebot_Plugin_Addon {
 	const PLUGIN_FILE_PATH            = 'jetpack/jetpack.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'statistics', 'marketing' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/jetpack/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'jetpack.php';
 
 	private $widgets = array();
 
@@ -191,14 +193,5 @@ class Jetpack extends Base_Cookiebot_Plugin_Addon {
 	 */
 	public function get_widgets() {
 		return $this->widgets;
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'jetpack.php' ) {
-		return 'https://plugins.svn.wordpress.org/jetpack/trunk/' . $path;
 	}
 }

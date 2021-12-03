@@ -3,16 +3,17 @@
 namespace cybot\cookiebot\addons\controller\addons\gadwp;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 
-class Gadwp extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
+class Gadwp extends Base_Cookiebot_Plugin_Addon {
 	const ADDON_NAME                  = 'Google Analytics Dashboard for WP by ExactMetrics';
 	const OPTION_NAME                 = 'gadwp';
 	const PLUGIN_FILE_PATH            = 'google-analytics-dashboard-for-wp/gadwp.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'statistics' );
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'gadwp.php';
 
 	public function load_addon_configuration() {
 		$this->script_loader_tag->add_tag( 'gadwp-nprogress', $this->get_cookie_types() );
@@ -67,14 +68,5 @@ class Gadwp extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Int
 				return $atts;
 			}
 		);
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'gadwp.php' ) {
-		return 'https://plugins.svn.wordpress.org/google-analytics-dashboard-for-wp/trunk/' . $path;
 	}
 }

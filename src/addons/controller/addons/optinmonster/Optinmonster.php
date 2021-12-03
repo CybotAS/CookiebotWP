@@ -12,6 +12,8 @@ class Optinmonster extends Base_Cookiebot_Plugin_Addon {
 	const PLUGIN_FILE_PATH            = 'optinmonster/optin-monster-wp-api.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing', 'statistics' );
 	const ENABLE_ADDON_BY_DEFAULT     = false;
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/optinmonster/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'optin-monster-wp-api.php';
 
 	/**
 	 * Check for optinmonster action hooks
@@ -29,14 +31,5 @@ class Optinmonster extends Base_Cookiebot_Plugin_Addon {
 		return array(
 			__( 'OptinMonster API plugin to connect your WordPress site to your OptinMonster account.', 'cookiebot' ),
 		);
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'optin-monster-wp-api.php' ) {
-		return 'https://plugins.svn.wordpress.org/optinmonster/trunk/' . $path;
 	}
 }

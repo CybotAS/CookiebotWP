@@ -3,14 +3,15 @@
 namespace cybot\cookiebot\addons\controller\addons\google_analytics;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Open_Source_Addon_Interface;
 
-class Google_Analytics extends Base_Cookiebot_Plugin_Addon implements Open_Source_Addon_Interface {
+class Google_Analytics extends Base_Cookiebot_Plugin_Addon {
 	const ADDON_NAME                  = 'Google Analytics'; // @TODO is this even the correct name for this plugin?
 	const OPTION_NAME                 = 'google_analytics';
 	const PLUGIN_FILE_PATH            = 'googleanalytics/googleanalytics.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'statistics' );
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for google analytics.';
+	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/googleanalytics/trunk/';
+	const SVN_URL_DEFAULT_SUB_PATH    = 'googleanalytics.php';
 
 	public function load_addon_configuration() {
 		$this->buffer_output->add_tag(
@@ -34,14 +35,5 @@ class Google_Analytics extends Base_Cookiebot_Plugin_Addon implements Open_Sourc
 		return array(
 			__( 'Google Analytics is used to track how visitor interact with website content.', 'cookiebot' ),
 		);
-	}
-
-	/**
-	 * @param string $path
-	 *
-	 * @return string
-	 */
-	public static function get_svn_url( $path = 'googleanalytics.php' ) {
-		return 'https://plugins.svn.wordpress.org/googleanalytics/trunk/' . $path;
 	}
 }
