@@ -3,9 +3,8 @@
 namespace cybot\cookiebot\addons\controller\addons\caos_host_analyticsjs_local;
 
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
-use cybot\cookiebot\lib\Addon_With_Alternative_Versions_Interface;
 
-class CAOS_Host_Analyticsjs_Local extends Base_Cookiebot_Plugin_Addon implements Addon_With_Alternative_Versions_Interface {
+class CAOS_Host_Analyticsjs_Local extends Base_Cookiebot_Plugin_Addon {
 
 	const ADDON_NAME                  = 'Complete Analytics Optimization Suite (CAOS)';
 	const OPTION_NAME                 = 'caos_host_analyticsjs_local';
@@ -14,6 +13,10 @@ class CAOS_Host_Analyticsjs_Local extends Base_Cookiebot_Plugin_Addon implements
 	const PLUGIN_FILE_PATH            = 'host-analyticsjs-local/host-analyticsjs-local.php';
 	const SVN_URL_BASE_PATH           = 'https://plugins.svn.wordpress.org/host-analyticsjs-local/trunk/';
 	const SVN_URL_DEFAULT_SUB_PATH    = 'host-analyticsjs-local.php';
+	const ALTERNATIVE_ADDON_VERSIONS  = array(
+		'1.97' => CAOS_Host_Analyticsjs_Local_Version_1_97::class,
+	);
+
 	/**
 	 * Check for Host Analyticsjs Local action hooks
 	 *
@@ -83,14 +86,5 @@ class CAOS_Host_Analyticsjs_Local extends Base_Cookiebot_Plugin_Addon implements
 	 */
 	public function cookiebot_addon_host_analyticsjs_local_priority() {
 		return ( esc_attr( get_option( 'sgal_enqueue_order' ) ) ) ? esc_attr( get_option( 'sgal_enqueue_order' ) ) : 0;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_alternative_addon_versions() {
-		return array(
-			'1.97' => CAOS_Host_Analyticsjs_Local_Version_1_97::class,
-		);
 	}
 }

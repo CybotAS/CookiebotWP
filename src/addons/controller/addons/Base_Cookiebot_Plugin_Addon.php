@@ -21,7 +21,7 @@ abstract class Base_Cookiebot_Plugin_Addon extends Base_Cookiebot_Addon {
 	 * @throws Exception
 	 * @since 1.3.0
 	 */
-	public function __construct(
+	protected function __construct(
 		Settings_Service_Interface $settings,
 		Script_Loader_Tag_Interface $script_loader_tag,
 		Cookie_Consent_Interface $cookie_consent,

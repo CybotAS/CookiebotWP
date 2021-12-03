@@ -10,11 +10,10 @@ Every addon is contained in its own class.
 - Addon classes for third party themes should extend the `Base_Cookiebot_Theme_Addon` abstract class.
 - There is also a miscellaneous `Base_Cookiebot_Other_Addon` abstract class, which is used for WordPress core features like embedded videos.
 
-Addon interfaces
+Addons with alternative versions
 ---
-Depending on the addon, you can implement several interfaces:
-- [Addon_With_Alternative_Versions_Interface](../src/lib/Addon_With_Alternative_Versions_Interface.php) should be implemented by addons that have one or more incompatible previous versions.
-   - The `get_alternative_addon_versions` method should return an array of strings.
+Addons can return a different addon class for each incompatible version.
+   - The `ALTERNATIVE_ADDON_VERSIONS` class constant should contain an array of strings.
    - Each array key should correspond to a valid semver version number of the plugin or theme.
    - Each array value should point to the classname of the addon for that previous plugin/theme version.
    - One example is the [Custom_Facebook_Feed](../src/addons/controller/addons/custom_facebook_feed/Custom_Facebook_Feed.php) addon, which had to block its cookies in a different manner for [an older version](../src/addons/controller/addons/custom_facebook_feed/Custom_Facebook_Feed_Version_2_17_1.php)
