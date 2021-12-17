@@ -28,6 +28,19 @@ matrix:
     - php: 5.6
       env: PHPUNIT_VERSION=5.7.27
 
+before_install:
+  - |
+    which composer
+    if ! composer --version; then
+      sudo apt-get update
+      sudo apt-get install -y php-cli unzip
+      curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+      sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+      PATH="/usr/local/bin:${PATH}"
+      which composer
+    fi
+  - composer --version
+
 before_script:
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
