@@ -7,8 +7,8 @@ This can be done following way:
 
 ```php
 $scriptTag = ";
-if(function_exists('cookiebot_active') && cookiebot_active()) {
-$scriptTag = '<script'.cookiebot_assist('statistics').'>';
+if(function_exists('\cybot\cookiebot\lib\cookiebot_active') && \cybot\cookiebot\lib\cookiebot_active()) {
+$scriptTag = '<script'.\cybot\cookiebot\lib\cookiebot_assist('statistics').'>';
 }
 ```
 
