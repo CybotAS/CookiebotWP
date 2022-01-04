@@ -107,5 +107,8 @@
   },
   "Wp_Google_Analytics_Events": {
     "class": "cookiebot_addons\\controller\\addons\\wp_google_analytics_events\\Wp_Google_Analytics_Events"
+  },
+  "Wp_Seopress": {
+    "class": "cookiebot_addons\\controller\\addons\\wp_seopress\\Wp_Seopress"
   }
 }
