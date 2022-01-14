@@ -312,6 +312,46 @@
 				}
 				?>
 				<tr id="cookiebot-setting-hide-popup">
+					<th scope="row"><?php esc_html_e( 'Show CMP Widget', 'cookiebot' ); ?></th>
+					<td>
+						<?php
+						$disabled = false;
+						if ( $is_ms && get_site_option( 'cookiebot-widget' ) ) {
+							$disabled = true;
+							echo '<input type="checkbox" checked disabled />';
+						} else {
+							?>
+							<input type="checkbox" name="cookiebot-widget" value="1"
+								<?php
+								checked(
+									1,
+									get_option( 'cookiebot-widget', false )
+								);
+								?>
+							/>
+							<?php
+						}
+						?>
+						<p class="description">
+							<?php
+							if ( $disabled ) {
+								echo '<b>' . esc_html__(
+									'Network setting applied. Please contact website administrator to change this setting.',
+									'cookiebot'
+								) . '</b><br />';
+							}
+							?>
+
+							<?php
+							esc_html_e(
+								'Allow the cookiebot CMP widget for your website.',
+								'cookiebot'
+							);
+							?>
+						</p>
+					</td>
+				</tr>
+				<tr id="cookiebot-setting-hide-popup">
 					<th scope="row"><?php esc_html_e( 'Hide Cookie Popup', 'cookiebot' ); ?></th>
 					<td>
 						<?php

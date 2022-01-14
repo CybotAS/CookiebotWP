@@ -227,6 +227,27 @@
 				</td>
 			</tr>
 			<tr id="cookiebot-setting-hide-popup">
+				<th scope="row"><?php esc_html_e( 'Show CMP Widget', 'cookiebot' ); ?></th>
+				<td>
+					<input type="checkbox" name="cookiebot-widget" value="1"
+						<?php
+						checked(
+							1,
+							get_site_option( 'cookiebot-widget' )
+						);
+						?>
+					/>
+					<p class="description">
+						<?php
+						esc_html_e(
+							'Allow the cookiebot CMP widget for your website.',
+							'cookiebot'
+						);
+						?>
+					</p>
+				</td>
+			</tr>
+			<tr id="cookiebot-setting-hide-popup">
 				<th scope="row"><?php esc_html_e( 'Hide Cookie Popup', 'cookiebot' ); ?></th>
 				<td>
 					<input type="checkbox" name="cookiebot-nooutput" value="1"

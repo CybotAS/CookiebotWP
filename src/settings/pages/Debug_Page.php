@@ -78,6 +78,7 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= 'Add async/defer to banner tag: ' . ( get_option( 'cookiebot-script-tag-uc-attribute' ) !== '' ? get_option( 'cookiebot-script-tag-uc-attribute' ) : 'None' ) . "\n";
 		$debug_output .= 'Add async/defer to declaration tag: ' . ( get_option( 'cookiebot-script-tag-cd-attribute' ) !== '' ? get_option( 'cookiebot-script-tag-cd-attribute' ) : 'None' ) . "\n";
 		$debug_output .= 'Auto update: ' . ( get_option( 'cookiebot-autoupdate' ) === '1' ? 'Enabled' : 'Not enabled' ) . "\n";
+		$debug_output .= 'CMP Widget: ' . ( get_option( 'cookiebot-widget' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Hide Cookie Popup: ' . ( get_option( 'cookiebot-nooutput' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Disable Cookiebot in WP Admin: ' . ( get_option( 'cookiebot-nooutput-admin' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Enable Cookiebot on front end while logged in: ' . ( get_option( 'cookiebot-output-logged-in' ) === '1' ? 'Yes' : 'No' ) . "\n";

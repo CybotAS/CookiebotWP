@@ -8,6 +8,9 @@
 		id="Cookiebot"
 		src="https://consent.cookiebot.com/uc.js"
 		data-cbid="<?php echo esc_attr( $cbid ); ?>"
+	<?php if ( (bool) get_option( 'cookiebot-widget' ) !== false ) : ?>
+		data-widget-enabled="true"
+	<?php endif; ?>
 	<?php if ( (bool) get_option( 'cookiebot-iab' ) !== false ) : ?>
 		data-framework="IAB"
 	<?php endif; ?>

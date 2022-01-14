@@ -70,6 +70,7 @@ class Network_Menu_Settings {
 		update_site_option( 'cookiebot-script-tag-cd-attribute', $_POST['cookiebot-script-tag-cd-attribute'] );
 		update_site_option( 'cookiebot-autoupdate', $_POST['cookiebot-autoupdate'] );
 		update_site_option( 'cookiebot-nooutput', $_POST['cookiebot-nooutput'] );
+		update_site_option( 'cookiebot-widget', $_POST['cookiebot-widget'] );
 		update_site_option( 'cookiebot-nooutput-admin', $_POST['cookiebot-nooutput-admin'] );
 		update_site_option( 'cookiebot-cookie-blocking-mode', $_POST['cookiebot-cookie-blocking-mode'] );
 

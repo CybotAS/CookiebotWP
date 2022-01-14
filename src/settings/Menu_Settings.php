@@ -50,6 +50,7 @@ class Menu_Settings {
 		register_setting( 'cookiebot', 'cookiebot-cbid' );
 		register_setting( 'cookiebot', 'cookiebot-language' );
 		register_setting( 'cookiebot', 'cookiebot-nooutput' );
+		register_setting( 'cookiebot', 'cookiebot-widget' );
 		register_setting( 'cookiebot', 'cookiebot-nooutput-admin' );
 		register_setting( 'cookiebot', 'cookiebot-output-logged-in' );
 		register_setting( 'cookiebot', 'cookiebot-autoupdate' );
