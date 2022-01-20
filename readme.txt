@@ -196,6 +196,10 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 
 ## Changelog ##
+### 4.0.0 - 2022-01-20 ###
+* Added support for SEOPress
+* Updated code structure to improve maintainability
+* Replaced filters & function names. Check [GitHub upgrade guide](https://github.com/CybotAS/CookiebotWP/blob/master/documentation/upgrade-guide.md) for more information about deprecations and breaking changes.
 
 ### 3.11.3 - 2021-11-25 ###
 * Updated tests for add-to-any plugin version >= 1.8.2
