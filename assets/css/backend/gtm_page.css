@@ -1,0 +1,44 @@
+.form_gtm {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    grid-row-gap: 20px;
+    width: 700px;
+    align-items: center;
+}
+
+#cookiebot-gtm {
+    float: left;
+    margin: 2px 4px 0 0;
+}
+
+.GTM_check p {
+    margin: 0;
+    font-style: italic;
+}
+
+.GTM_check a {
+    margin: 0;
+    font-style: italic;
+}
+
+#cookiebot-gtm-id {
+    height: 30px;
+}
+
+#data_layer {
+    height: 30px;
+}
+
+#gcm {
+    float: left;
+    margin: 2px 4px 0 0;
+}
+
+#gtm_save {
+    background-color: rgb(0, 124, 186);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    justify-self: start;
+}

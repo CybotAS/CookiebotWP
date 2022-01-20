@@ -4,3 +4,4 @@ tmp
 .idea/
 .vscode/
 cybot-cookiebot-*.zip
+/tests/vendor/

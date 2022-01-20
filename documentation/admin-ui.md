@@ -37,23 +37,13 @@ Both tag will be replaced by a link element with a href to the cookiebot setting
 
 On top of that, there are also few filters to manipulate the placeholders:
 
-#### Twitter
-
-- ```add_filter('cookiebot_addons_embed_twitter_source', $source)```   
-
-This filter is used to manipulate the source attribute for twitter videos
-
-- ```add_filter('cookiebot_addons_embed_twitter_placeholder', $content, $source, $cookie_types)```
-
-This filter is used to manipulate the placeholder output
-
 #### Youtube, Vimeo and Facebook
 
-- ```add_filter('cookiebot_addons_embed_source', $source)```   
+- ```add_filter('cybot_cookiebot_addons_embed_source', $source)```   
 
 This filter is used to manipulate the source attribute for embedded video
 
-- ```add_filter('cookiebot_addons_embed_placeholder', $content, $source, $cookie_types)```
+- ```add_filter('cybot_cookiebot_addons_embed_placeholder', $content, $source, $cookie_types)```
 
 This filter is used to manipulate the placeholder output
 

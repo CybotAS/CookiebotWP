@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  database:
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    image: mysql:5.7
+
+  cookiebot:
+    command:
+      - bash
+    depends_on:
+      - database
+    environment:
+      DATABASE_PASSWORD: root
+    image: futureys/phpunit-wordpress-plugin
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../:/plugin

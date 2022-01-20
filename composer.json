@@ -1,19 +1,14 @@
 {
   "name": "cybot/cookiebot",
-  "type": "wordpress-plugin",
-  "scripts": {
-    "build": "composer archive --format=zip"
+  "autoload": {
+    "psr-4": {
+      "cybot\\cookiebot\\": "src/",
+      "cybot\\cookiebot\\tests\\": "tests/"
+    }
   },
-  "archive": {
-    "exclude": [
-      ".gitignore",
-      ".git/",
-      "*.yml",
-      "tests/",
-      "bin/",
-      "composer.json",
-      "composer.lock",
-      "phpunit.xml"
-    ]
+  "scripts": {
+    "phpunit": "cd tests && docker-compose run cookiebot phpunit",
+    "phpcs": "tests/vendor/bin/phpcs",
+    "phpcbf": "tests/vendor/bin/phpcbf"
   }
 }

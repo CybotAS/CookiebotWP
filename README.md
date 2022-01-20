@@ -28,7 +28,7 @@ Regular users should use [Cookiebot WordPress plugin](https://wordpress.org/plug
 If you want the most recent changes get the [latest release](https://github.com/CybotAS/CookiebotAddons/releases/latest) of the plugin and upliad it to your WP plugins folder
 
 # How do I make my plugin support Cookiebot?
-See [the Cookiebot API readme for more details about the Cookiebot API](CookiebotAPI.md)
+See [the Cookiebot API readme for more details about the Cookiebot API](documentation/CookiebotAPI.md)
 
 See [How to block cookies](documentation/how-to-block-cookies.md)
 
@@ -95,6 +95,5 @@ Way to go!
 # Need to get in touch?
 
 There are several ways you can get in touch with us. <br>
-We are available on the Making Wordpress Slack workspace. <br>
-Username: Kenan <br>
+We are available on GitHub and [WordPress.org](https://wordpress.org/support/plugin/cookiebot/) <br>
 You can also reach us through our helpdesk at www.cookiebot.com/goto/helpdesk/

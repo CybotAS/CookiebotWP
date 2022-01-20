@@ -1,0 +1,160 @@
+.cookiebot-addon.postbox {
+	padding: 12px 0 12px 15px;
+}
+
+.cookiebot-addon.postbox h2 {
+	padding-top: 0;
+	padding-bottom: 10px;
+	margin: 0;
+	font-size: 16px;
+}
+
+form.not_installed_plugins p.submit {
+	display: none;
+}
+
+ul.cookietypes li {
+	display: inline;
+}
+
+.placeholder {
+	margin: 0 15px 15px 0;
+	background: #EEE;
+	padding: 15px;
+}
+
+.placeholder_enable,
+.placeholder_select_div {
+	width: 100%;
+	display: block;
+}
+
+div.extra_information {
+	font-weight: 400;
+}
+
+.placeholder_content .textarea {
+	display: flex;
+}
+
+/**
+ * Help Tip
+ */
+.help-tip {
+	color: #666;
+	display: inline-block;
+	font-size: 1.5em;
+	font-style: normal;
+	height: 16px;
+	line-height: 16px;
+	position: relative;
+	vertical-align: middle;
+	width: 16px
+}
+
+.help-tip::after {
+	font-family: Dashicons;
+	speak: none;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	margin: 0;
+	text-indent: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	content: "";
+	cursor: help
+}
+
+#tiptip_holder{
+	position: absolute;
+	top: 0;
+}
+
+#tiptip_holder.tip_top {
+	padding-bottom: 5px
+}
+
+#tiptip_holder.tip_top #tiptip_arrow_inner {
+	margin-top: -7px;
+	margin-left: -6px;
+	border-top-color: #333
+}
+
+#tiptip_holder.tip_bottom {
+	padding-top: 5px
+}
+
+#tiptip_holder.tip_bottom #tiptip_arrow_inner {
+	margin-top: -5px;
+	margin-left: -6px;
+	border-bottom-color: #333
+}
+
+#tiptip_holder.tip_right {
+	padding-left: 5px
+}
+
+#tiptip_holder.tip_right #tiptip_arrow_inner {
+	margin-top: -6px;
+	margin-left: -5px;
+	border-right-color: #333
+}
+
+#tiptip_holder.tip_left {
+	padding-right: 5px
+}
+
+#tiptip_holder.tip_left #tiptip_arrow_inner {
+	margin-top: -6px;
+	margin-left: -7px;
+	border-left-color: #333
+}
+
+#tiptip_content, .chart-tooltip, .wc_error_tip {
+	color: #fff;
+	font-size: .8em;
+	max-width: 300px;
+	background: #333;
+	text-align: center;
+	border-radius: 3px;
+	padding: .618em 1em;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2)
+}
+
+#tiptip_content code, .chart-tooltip code, .wc_error_tip code {
+	padding: 1px;
+	background: #888
+}
+
+#tiptip_arrow, #tiptip_arrow_inner {
+	position: absolute;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 6px;
+	height: 0;
+	width: 0
+}
+
+/**
+Show advanced options
+ */
+.show_advanced_options {
+	margin: 15px 0 10px 0;
+}
+.advanced_options{
+	display: none;
+}
+.advanced_options label{
+	vertical-align: top;
+}
+#embed_regex {
+	width: 400px;
+}
