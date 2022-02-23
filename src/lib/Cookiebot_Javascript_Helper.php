@@ -84,7 +84,9 @@ class Cookiebot_Javascript_Helper {
 	 * @throws InvalidArgumentException
 	 */
 	public function include_google_tag_manager_js( $return_html = false ) {
-		if ( get_option( 'cookiebot-gtm' ) !== false ) {
+		$option = get_option( 'cookiebot-gtm' );
+
+		if ( $option !== false && $option !== '' ) {
 			if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
 				$data_layer = 'dataLayer';
 			} else {
@@ -111,7 +113,9 @@ class Cookiebot_Javascript_Helper {
 	 * @throws InvalidArgumentException
 	 */
 	public function include_google_consent_mode_js( $return_html = false ) {
-		if ( get_option( 'cookiebot-gcm' ) !== false ) {
+		$option = get_option( 'cookiebot-gcm' );
+
+		if ( $option !== false && $option !== '' ) {
 			if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
 				$data_layer = 'dataLayer';
 			} else {
