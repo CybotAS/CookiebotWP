@@ -196,6 +196,9 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 
 ## Changelog ##
+### Unreleased ###
+* Updated addon to support latest version of CAOS
+
 ### 4.0.2 - 2022-01-20 ###
 * Fixed missing dir path for require_once
 
