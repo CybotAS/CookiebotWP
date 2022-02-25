@@ -199,6 +199,7 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 ### 4.0.3 - 2022-02-23 ###
 * Fixed wp-rocket not ignoring cookiebot script
 * Fixed including gtm and gtc scripts when the setting was unchecked
+* Updated addon to support latest version of CAOS
 
 ### 4.0.2 - 2022-01-20 ###
 * Fixed missing dir path for require_once
