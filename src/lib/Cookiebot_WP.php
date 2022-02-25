@@ -11,7 +11,7 @@ use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
 use RuntimeException;
 
 class Cookiebot_WP {
-	const COOKIEBOT_PLUGIN_VERSION  = '4.0.2';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.0.3';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -87,6 +87,7 @@ class Cookiebot_WP {
 		( new Cookiebot_Automatic_Updates() )->register_hooks();
 		( new Widgets() )->register_hooks();
 		( new Cookiebot_Gutenberg_Declaration_Block() )->register_hooks();
+		( new WP_Rocket_Helper() )->register_hooks();
 	}
 
 	/**
