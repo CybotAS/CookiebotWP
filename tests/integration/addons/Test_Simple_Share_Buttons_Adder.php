@@ -18,6 +18,6 @@ class Test_Simple_Share_Buttons_Adder extends WP_UnitTestCase {
 	public function test_is_plugin_compatible() {
 		$content = Simple_Share_Buttons_Adder::get_svn_file_content( 'php/class-styles.php' );
 
-		$this->assertNotFalse( strpos( $content, "wp_enqueue_script('ssba-sharethis'" ) );
+		$this->assertNotFalse( strpos( $content, "wp_enqueue_script( 'ssba-sharethis'" ) );
 	}
 }

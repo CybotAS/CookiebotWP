@@ -32,14 +32,12 @@ if ( ! file_exists( "{$cybot_cookiebot_tests_dir}/includes/functions.php" ) ) {
 // Give access to tests_add_filter() function.
 require_once "{$cybot_cookiebot_tests_dir}/includes/functions.php";
 
-/**
- * Manually load the plugin being tested.
- */
-function cybot_cookiebot_manually_load_plugin() {
-	require dirname( dirname( __FILE__ ) ) . '/cookiebot.php';
-}
-
-tests_add_filter( 'muplugins_loaded', 'cybot_cookiebot_manually_load_plugin' );
+tests_add_filter(
+	'muplugins_loaded',
+	function () {
+		require dirname( dirname( __FILE__ ) ) . '/cookiebot.php';
+	}
+);
 
 // Start up the WP testing environment.
 require "{$cybot_cookiebot_tests_dir}/includes/bootstrap.php";
