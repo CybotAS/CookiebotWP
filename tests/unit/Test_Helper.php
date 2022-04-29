@@ -17,4 +17,16 @@ class Test_Helper extends \WP_UnitTestCase {
 
 		$this->assertEquals( ' type="text/plain" data-cookieconsent="statistics"', $output );
 	}
+
+	public function test_cookiebot_assist_with_no_parameter() {
+		$output = cookiebot_assist();
+
+		$this->assertEquals( ' type="text/plain" data-cookieconsent="statistics"', $output );
+	}
+
+	public function test_cookiebot_assist_with_empty_parameter() {
+		$output = cookiebot_assist( '' );
+
+		$this->assertEmpty( $output );
+	}
 }
