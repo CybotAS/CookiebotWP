@@ -492,7 +492,7 @@ namespace cybot\cookiebot\lib {
 		);
 
 		if ( count( $type_array ) > 0 ) {
-			return ' type="text/plain" data-cookieconsent="' . implode( ',', $type ) . '"';
+			return ' type="text/plain" data-cookieconsent="' . implode( ',', $type_array ) . '"';
 		}
 
 		return '';
