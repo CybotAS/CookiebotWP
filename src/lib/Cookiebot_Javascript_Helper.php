@@ -45,7 +45,7 @@ class Cookiebot_Javascript_Helper {
 				Cookiebot_WP::get_cookie_blocking_mode() === 'auto' &&
 				Cookiebot_WP::can_current_user_edit_theme() &&
 				$return_html === '' &&
-				get_site_option( 'cookiebot-output-logged-in' ) == false
+				( get_site_option( 'cookiebot-output-logged-in' ) === false || get_site_option( 'cookiebot-output-logged-in' ) === '' )
 			) {
 				return '';
 			}
