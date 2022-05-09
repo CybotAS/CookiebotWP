@@ -427,7 +427,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Cookiebot ignore enqueued scripts', 'cookiebot' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Cookiebot consent ignore enqueued scripts', 'cookiebot' ); ?></th>
 					<td>
 						<textarea
 								name="cookiebot-ignore-scripts"
