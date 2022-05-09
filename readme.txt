@@ -197,6 +197,7 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 
 ## Changelog ##
 ### Unreleased ###
+* Added setting to ignore scripts from cookiebot consent
 * Fixed PHP8 warnings
 * Fixed attribute builder function for scripts
 * Fixed block cookiebot script when editing theme

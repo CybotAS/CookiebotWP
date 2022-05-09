@@ -58,7 +58,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 * @since 1.2.0
 	 */
 	public function cookiebot_add_consent_attribute_to_tag( $tag, $handle, $src ) {
-		if ( array_key_exists( $handle, $this->tags ) ) {
+		if ( array_key_exists( $handle, $this->tags ) && ! empty( $this->tags[ $handle ] ) ) {
 			//phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 			return '<script src="' . $src . '" type="text/plain" data-cookieconsent="' . implode( ',', $this->tags[ $handle ] ) . '"></script>';
 		}
