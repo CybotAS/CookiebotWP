@@ -14,6 +14,13 @@ interface Script_Loader_Tag_Interface {
 
 	/**
 	 * @param $tag
+	 *
+	 * @return mixed
+	 */
+	public function ignore_tag( $tag );
+
+	/**
+	 * @param $tag
 	 * @param $handle
 	 * @param $src
 	 *

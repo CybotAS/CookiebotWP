@@ -14,6 +14,12 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	private $tags = array();
 
 	/**
+	 * List of tags to ignore cookiebot
+	 * @var array
+	 */
+	private $ignore_tags = array();
+
+	/**
 	 * Cookiebot_Script_Loader_Tag constructor.
 	 * Adds filter to enhance script attribute
 	 *
@@ -36,6 +42,10 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 		$this->tags[ $tag ] = $type;
 	}
 
+	public function ignore_tag( $tag ) {
+		array_push( $this->ignore_tags, $tag );
+	}
+
 	/**
 	 * Modifies external links to google analytics
 	 *
@@ -51,6 +61,13 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 		if ( array_key_exists( $handle, $this->tags ) ) {
 			//phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 			return '<script src="' . $src . '" type="text/plain" data-cookieconsent="' . implode( ',', $this->tags[ $handle ] ) . '"></script>';
+		}
+
+		apply_filters( 'cybot_cookiebot_ignore_scripts', $this->ignore_tags );
+
+		if ( in_array( $handle, $this->ignore_tags, true ) ) {
+            //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
+			return str_replace( '></script>', ' data-cookieconsent="ignore"></script>', $tag );
 		}
 
 		return $tag;

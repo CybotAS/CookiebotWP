@@ -52,6 +52,7 @@ class Menu_Settings {
 		register_setting( 'cookiebot', 'cookiebot-nooutput' );
 		register_setting( 'cookiebot', 'cookiebot-nooutput-admin' );
 		register_setting( 'cookiebot', 'cookiebot-output-logged-in' );
+		register_setting( 'cookiebot', 'cookiebot-ignore-scripts' );
 		register_setting( 'cookiebot', 'cookiebot-autoupdate' );
 		register_setting( 'cookiebot', 'cookiebot-script-tag-uc-attribute' );
 		register_setting( 'cookiebot', 'cookiebot-script-tag-cd-attribute' );

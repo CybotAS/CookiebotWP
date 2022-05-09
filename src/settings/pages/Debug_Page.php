@@ -81,6 +81,7 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= 'Hide Cookie Popup: ' . ( get_option( 'cookiebot-nooutput' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Disable Cookiebot in WP Admin: ' . ( get_option( 'cookiebot-nooutput-admin' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Enable Cookiebot on front end while logged in: ' . ( get_option( 'cookiebot-output-logged-in' ) === '1' ? 'Yes' : 'No' ) . "\n";
+		$debug_output .= 'List of ignored javascript files: ' . get_option( 'cookiebot-ignore-scripts' ) . "\n";
 		$debug_output .= 'Banner tag: ' . $cookiebot_javascript_helper->include_cookiebot_js( true ) . "\n";
 		$debug_output .= 'Declaration tag: ' . Cookiebot_Declaration_Shortcode::show_declaration() . "\n";
 

@@ -426,6 +426,19 @@
 						</p>
 					</td>
 				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Cookiebot ignore enqueued scripts', 'cookiebot' ); ?></th>
+					<td>
+						<textarea
+								name="cookiebot-ignore-scripts"
+								rows="4"
+								cols="50"
+								placeholder="<?php esc_attr_e( 'add script handle, one per line', 'cookiebot' ); ?>"
+						><?php echo esc_html( get_option( 'cookiebot-ignore-scripts', false ) ); ?></textarea>
+						<br/>
+						<span><?php esc_html_e( 'List enqueued scripts handles (one per line) to ignore cookiebot consent', 'cookiebot' ); ?></span>
+					</td>
+				</tr>
 			</table>
 		</div>
 		<?php if ( $is_wp_consent_api_active ) { ?>
