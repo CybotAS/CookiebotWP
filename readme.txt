@@ -199,6 +199,7 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 ### Unreleased ###
 * Fixed PHP8 warnings
 * Fixed attribute builder function for scripts
+* Fixed block cookiebot script when editing theme
 
 ### 4.0.3 - 2022-02-23 ###
 * Fixed wp-rocket not ignoring cookiebot script
