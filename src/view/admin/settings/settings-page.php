@@ -427,7 +427,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Ignore cookiebot consent on enqueued scripts', 'cookiebot' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Ignore enqueued scripts from cookiebot scan', 'cookiebot' ); ?></th>
 					<td>
 						<textarea
 								name="cookiebot-ignore-scripts"
@@ -436,7 +436,7 @@
 								placeholder="<?php esc_attr_e( 'add script handle, one per line', 'cookiebot' ); ?>"
 						><?php echo esc_html( get_option( 'cookiebot-ignore-scripts', false ) ); ?></textarea>
 						<br/>
-						<span><?php esc_html_e( 'List enqueued scripts handles (one per line) to ignore cookiebot consent', 'cookiebot' ); ?></span>
+						<span><?php esc_html_e( 'List enqueued scripts handles (one per line) to ignore cookiebot scan. You can add * as a wildcard after script handle. (Before script handle is not supported)', 'cookiebot' ); ?></span>
 					</td>
 				</tr>
 			</table>

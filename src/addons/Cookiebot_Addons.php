@@ -198,13 +198,14 @@ class Cookiebot_Addons {
 		}
 
 		$ignore_scripts = explode( PHP_EOL, $ignore_scripts );
+
 		/**
 		 * @var Script_Loader_Tag_Interface
 		 */
 		$script_loader_tag = $this->container->get( 'Script_Loader_Tag_Interface' );
 
 		foreach ( $ignore_scripts as $ignore_script ) {
-			$script_loader_tag->ignore_tag( $ignore_script );
+			$script_loader_tag->ignore_tag( trim( $ignore_script ) );
 		}
 	}
 }

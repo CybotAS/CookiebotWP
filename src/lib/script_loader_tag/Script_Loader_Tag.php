@@ -65,11 +65,31 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 
 		apply_filters( 'cybot_cookiebot_ignore_scripts', $this->ignore_tags );
 
-		if ( in_array( $handle, $this->ignore_tags, true ) ) {
+		if ( $this->check_ignore_handle( $handle ) ) {
             //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 			return str_replace( '></script>', ' data-cookieconsent="ignore"></script>', $tag );
 		}
 
 		return $tag;
+	}
+
+	private function check_ignore_handle( $handle ) {
+		foreach ( $this->ignore_tags as $ignore_tag ) {
+			$ignore_tag_regex = explode( '*', $ignore_tag );
+
+			if ( count( $ignore_tag_regex ) > 0 ) {
+				if ( strpos( $handle, $ignore_tag_regex[0] ) === 0 ) {
+					return true;
+				} else {
+					continue;
+				}
+			}
+
+			if ( $ignore_tag === $handle ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
