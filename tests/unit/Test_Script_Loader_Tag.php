@@ -10,9 +10,9 @@ class Test_Script_Loader_Tag extends WP_UnitTestCase {
 
 	const EXAMPLE_SRC = 'path-to-file';
 
-	public function test_script_loader_tag_with_ignore_handle() {
+	public function test_script_loader_tag_with_ignore_script() {
 		$script_loader_tag = new Script_Loader_Tag();
-		$script_loader_tag->ignore_tag( 'test' );
+		$script_loader_tag->ignore_script( static::EXAMPLE_SRC );
 
         //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 		$html = '<script src="' . static::EXAMPLE_SRC . '" id="test"></script>';
@@ -20,12 +20,12 @@ class Test_Script_Loader_Tag extends WP_UnitTestCase {
 		$return = $script_loader_tag->cookiebot_add_consent_attribute_to_tag( $html, 'test', static::EXAMPLE_SRC );
 
         //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
-		$expected_result = '<script src="' . static::EXAMPLE_SRC . '" id="test" data-cookieconsent="ignore"></script>';
+		$expected_result = '<script data-cookieconsent="ignore" src="' . static::EXAMPLE_SRC . '" id="test"></script>';
 
 		$this->assertEquals( $return, $expected_result );
 	}
 
-	public function test_script_loader_tag_without_ignore_handle() {
+	public function test_script_loader_tag_without_ignore_script() {
 		$script_loader_tag = new Script_Loader_Tag();
 
         //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript

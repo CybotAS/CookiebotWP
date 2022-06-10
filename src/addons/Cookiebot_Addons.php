@@ -205,7 +205,7 @@ class Cookiebot_Addons {
 		$script_loader_tag = $this->container->get( 'Script_Loader_Tag_Interface' );
 
 		foreach ( $ignore_scripts as $ignore_script ) {
-			$script_loader_tag->ignore_tag( trim( $ignore_script ) );
+			$script_loader_tag->ignore_script( trim( $ignore_script ) );
 		}
 	}
 }

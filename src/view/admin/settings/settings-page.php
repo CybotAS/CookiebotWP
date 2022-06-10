@@ -436,7 +436,11 @@
 								placeholder="<?php esc_attr_e( 'add script handle, one per line', 'cookiebot' ); ?>"
 						><?php echo esc_html( get_option( 'cookiebot-ignore-scripts', false ) ); ?></textarea>
 						<br/>
-						<span><?php esc_html_e( 'List enqueued scripts handles (one per line) to ignore cookiebot scan. You can add * as a wildcard after script handle. (Before script handle is not supported)', 'cookiebot' ); ?></span>
+						<span>
+                            <?php esc_html_e( 'List enqueued scripts source URL (one per line) to ignore cookiebot scan. Partial source URL will also work. Ex. wp-content/plugins/woocommerce will block every WooCommerce scripts.', 'cookiebot' ); ?>
+                            <br>
+                            <?php esc_html_e( 'This feature works only for scripts loaded via wp_enqueue_script! Manually added scripts must be manually edited!', 'cookiebot' ); ?>
+                        </span>
 					</td>
 				</tr>
 			</table>

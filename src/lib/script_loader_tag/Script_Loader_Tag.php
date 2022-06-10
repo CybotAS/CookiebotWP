@@ -14,10 +14,10 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	private $tags = array();
 
 	/**
-	 * List of tags to ignore cookiebot
+	 * List of scripts to ignore cookiebot scan
 	 * @var array
 	 */
-	private $ignore_tags = array();
+	private $ignore_scripts = array();
 
 	/**
 	 * Cookiebot_Script_Loader_Tag constructor.
@@ -42,8 +42,8 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 		$this->tags[ $tag ] = $type;
 	}
 
-	public function ignore_tag( $tag ) {
-		array_push( $this->ignore_tags, $tag );
+	public function ignore_script( $script ) {
+		array_push( $this->ignore_scripts, $script );
 	}
 
 	/**
@@ -63,29 +63,19 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 			return '<script src="' . $src . '" type="text/plain" data-cookieconsent="' . implode( ',', $this->tags[ $handle ] ) . '"></script>';
 		}
 
-		apply_filters( 'cybot_cookiebot_ignore_scripts', $this->ignore_tags );
+		apply_filters( 'cybot_cookiebot_ignore_scripts', $this->ignore_scripts );
 
-		if ( $this->check_ignore_handle( $handle ) ) {
+		if ( $this->check_ignore_script( $src ) ) {
             //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
-			return str_replace( '></script>', ' data-cookieconsent="ignore"></script>', $tag );
+			return str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag );
 		}
 
 		return $tag;
 	}
 
-	private function check_ignore_handle( $handle ) {
-		foreach ( $this->ignore_tags as $ignore_tag ) {
-			$ignore_tag_regex = explode( '*', $ignore_tag );
-
-			if ( count( $ignore_tag_regex ) > 0 ) {
-				if ( strpos( $handle, $ignore_tag_regex[0] ) === 0 ) {
-					return true;
-				} else {
-					continue;
-				}
-			}
-
-			if ( $ignore_tag === $handle ) {
+	private function check_ignore_script( $src ) {
+		foreach ( $this->ignore_scripts as $ignore_script ) {
+			if ( strpos( $src, $ignore_script ) !== false ) {
 				return true;
 			}
 		}
