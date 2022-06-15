@@ -2,8 +2,8 @@
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent, ccpa
 * Requires at least: 4.4
-* Tested up to: 5.9.1
-* Stable tag: 4.0.3
+* Tested up to: 6.0.0
+* Stable tag: 4.1.0
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -198,11 +198,11 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 Cookiebot is compatible with translation plugins when you set language to "Use WordPress Language".
 
 ## Changelog ##
-### Unreleased ###
+### 4.1.0 - 2022-06-15 ###
 * Added setting to ignore scripts from cookiebot scan
 * Fixed PHP8 warnings
 * Fixed attribute builder function for scripts
-* Fixed block cookiebot script when editing theme
+* Fixed blocking cookiebot script when editing theme
 
 ### 4.0.3 - 2022-02-23 ###
 * Fixed wp-rocket not ignoring cookiebot script
