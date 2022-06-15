@@ -194,6 +194,8 @@ Cookiebot is fully integrated with the WP Consent API. When your visitors give c
 
 You are able to define the mapping between Cookiebot and the WP Consent API in the administration interface (Cookiebot WP plugin).
 
+### Does Cookiebot work with translation plugins?
+Cookiebot is compatible with translation plugins when you set language to "Use WordPress Language".
 
 ## Changelog ##
 ### Unreleased ###
