@@ -44,6 +44,21 @@ class Debug_Page implements Settings_Page_Interface {
 		include_view( 'admin/settings/debug-page.php', array( 'debug_output' => $debug_output ) );
 	}
 
+	private function get_ignored_scripts() {
+		$ignored_scripts = get_option( 'cookiebot-ignore-scripts' );
+
+		$ignored_scripts = array_map(
+			function( $ignore_tag ) {
+				return trim( $ignore_tag );
+			},
+			explode( PHP_EOL, $ignored_scripts )
+		);
+
+		$ignored_scripts = apply_filters( 'cybot_cookiebot_ignore_scripts', $ignored_scripts );
+
+		return implode( ', ', $ignored_scripts );
+	}
+
 	/**
 	 * @throws InvalidArgumentException
 	 */
@@ -81,6 +96,7 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= 'Hide Cookie Popup: ' . ( get_option( 'cookiebot-nooutput' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Disable Cookiebot in WP Admin: ' . ( get_option( 'cookiebot-nooutput-admin' ) === '1' ? 'Yes' : 'No' ) . "\n";
 		$debug_output .= 'Enable Cookiebot on front end while logged in: ' . ( get_option( 'cookiebot-output-logged-in' ) === '1' ? 'Yes' : 'No' ) . "\n";
+		$debug_output .= 'List of ignored javascript files: ' . $this->get_ignored_scripts() . "\n";
 		$debug_output .= 'Banner tag: ' . $cookiebot_javascript_helper->include_cookiebot_js( true ) . "\n";
 		$debug_output .= 'Declaration tag: ' . Cookiebot_Declaration_Shortcode::show_declaration() . "\n";
 

@@ -19,7 +19,7 @@ class Test_Google_Analytics extends WP_UnitTestCase {
 	 * @throws \Exception
 	 */
 	public function test_is_plugin_compatible() {
-		$content = Google_Analytics::get_svn_file_content( 'class/Ga_Frontend.php' );
+		$content = Google_Analytics::get_svn_file_content( 'class/class-ga-frontend.php' );
 
 		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_head\', \'Ga_Frontend::insert_ga_script\' );' ) );
 		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_enqueue_scripts\', \'Ga_Frontend::platform_sharethis\' );' ) );

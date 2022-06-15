@@ -13,6 +13,13 @@ interface Script_Loader_Tag_Interface {
 	public function add_tag( $tag, $type );
 
 	/**
+	 * @param $script
+	 *
+	 * @return mixed
+	 */
+	public function ignore_script( $script );
+
+	/**
 	 * @param $tag
 	 * @param $handle
 	 * @param $src

@@ -9,6 +9,7 @@ use cybot\cookiebot\lib\buffer\Buffer_Output;
 use cybot\cookiebot\lib\Cookie_Consent;
 use cybot\cookiebot\lib\Dependency_Container;
 use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag;
+use cybot\cookiebot\lib\script_loader_tag\Script_Loader_Tag_Interface;
 use cybot\cookiebot\lib\Settings_Service;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use Exception;
@@ -69,6 +70,7 @@ class Cookiebot_Addons {
 		$this->load_addons();
 		$this->build_container();
 		$this->assign_addons_to_container();
+		$this->assign_ignore_scripts_from_settings();
 
 		/**
 		 * Load plugin controller to check if addons are active
@@ -185,6 +187,25 @@ class Cookiebot_Addons {
 			} else {
 				throw new Exception( 'Class ' . $addon_class . ' not found' );
 			}
+		}
+	}
+
+	protected function assign_ignore_scripts_from_settings() {
+		$ignore_scripts = get_option( 'cookiebot-ignore-scripts' );
+
+		if ( empty( $ignore_scripts ) ) {
+			return;
+		}
+
+		$ignore_scripts = explode( PHP_EOL, $ignore_scripts );
+
+		/**
+		 * @var Script_Loader_Tag_Interface
+		 */
+		$script_loader_tag = $this->container->get( 'Script_Loader_Tag_Interface' );
+
+		foreach ( $ignore_scripts as $ignore_script ) {
+			$script_loader_tag->ignore_script( trim( $ignore_script ) );
 		}
 	}
 }
