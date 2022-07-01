@@ -198,6 +198,9 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 Cookiebot is compatible with translation plugins when you set language to "Use WordPress Language".
 
 ## Changelog ##
+### Unreleased
+* Fixed undefined variable src when using instagram embed
+
 ### 4.1.0 - 2022-06-15 ###
 * Added setting to ignore scripts from cookiebot scan
 * Fixed PHP8 warnings
