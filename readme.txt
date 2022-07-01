@@ -3,7 +3,7 @@
 * Tags: cookie, compliance, eu, gdpr, europe, cookie consent, consent, ccpa
 * Requires at least: 4.4
 * Tested up to: 6.0.0
-* Stable tag: 4.1.0
+* Stable tag: 4.1.1
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -198,7 +198,7 @@ You are able to define the mapping between Cookiebot and the WP Consent API in t
 Cookiebot is compatible with translation plugins when you set language to "Use WordPress Language".
 
 ## Changelog ##
-### Unreleased
+### 4.1.1 - 2022-07-01 ###
 * Fixed undefined variable src when using instagram embed
 
 ### 4.1.0 - 2022-06-15 ###
