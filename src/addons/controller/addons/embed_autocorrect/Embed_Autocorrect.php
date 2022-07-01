@@ -290,10 +290,10 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 			$matches
 		);
 		foreach ( $matches[0] as $match ) {
-			preg_match('/src\s*=\s*"(.+?)"/', $match, $src);
+			preg_match( '/src\s*=\s*"(.+?)"/', $match, $src );
 
 			//$matches[1] will have the text that matched the first captured parenthesized
-			if( isset( $src[1] ) ) {
+			if ( isset( $src[1] ) ) {
 				$src = $src[1];
 			} else {
 				$src = '';
