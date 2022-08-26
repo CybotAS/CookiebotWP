@@ -21,7 +21,7 @@ class Test_Official_Facebook_Pixel extends WP_UnitTestCase {
 	public function test_official_facebook_pixel_pageview() {
 		$content = Official_Facebook_Pixel::get_svn_file_content( 'core/FacebookPixel.php' );
 		$snippet = <<<TEXT
-<!-- Facebook Pixel Code -->
+<!-- Meta Pixel Code -->
 <script type='text/javascript'>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -29,7 +29,7 @@ n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
 </script>
-<!-- End Facebook Pixel Code -->
+<!-- End Meta Pixel Code -->
 TEXT;
 
 		$this->assertNotFalse( strpos( $content, $snippet ) );
