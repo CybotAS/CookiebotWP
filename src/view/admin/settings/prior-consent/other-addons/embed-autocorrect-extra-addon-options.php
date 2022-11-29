@@ -5,7 +5,7 @@
 /** @var $default_regex string */
 ?>
 <div class="show_advanced_options">
-	<button class="button button-secondary">
+	<button class="cb-btn cb-main-btn">
 		<?php
 		esc_html_e(
 			'Show advanced options',
@@ -30,7 +30,7 @@
 	><?php echo esc_textarea( $regex ); ?></textarea>
 
 	<?php if ( $regex_is_default ) : ?>
-		<button id="edit_embed_regex" class="button">
+		<button id="edit_embed_regex" class="cb-btn cb-main-btn">
 			<?php
 			esc_html_e(
 				'Edit regex',
@@ -42,7 +42,7 @@
 
 	<button
 			id="btn_default_embed_regex"
-			class="button<?php echo ( $regex_is_default ) ? ' hidden' : ''; ?>"
+			class="cb-btn cb-main-btn<?php echo ( $regex_is_default ) ? ' hidden' : ''; ?>"
 			type="button"
 			value="Reset to default regex">
 		<?php

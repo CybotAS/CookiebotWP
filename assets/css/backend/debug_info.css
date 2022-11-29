@@ -1,0 +1,52 @@
+.cb-debug__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 18px;
+    margin-bottom: 50px;
+}
+
+.cb-debug__info__card {
+    padding: 25px 20px 0;
+}
+
+.cb-debug__info__title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 20px;
+}
+
+.cb-debug__info__text {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.cb-debug__support__inner {
+    background-color: #efefef;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.cb-debug__support__title {
+    font-size: 15px;
+    margin: 0;
+}
+
+.cb-debug__code__container {
+    width: 100%;
+    border: 3px solid #d3d3d3;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cb-debug__code__container textarea {
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    border: none;
+    margin: 20px;
+    max-height: 430px;
+    background: transparent;
+}
+
+.cb-debug__code__container textarea:focus, .cb-debug__code__container textarea:active {
+    box-shadow: none;
+}

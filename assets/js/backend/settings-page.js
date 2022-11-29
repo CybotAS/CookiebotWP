@@ -9,6 +9,9 @@ function init() {
     language_toggle();
     advanced_settings_toggle();
     cookie_blocking_mode();
+    activeSettingsTab();
+    closeSubmitMsg();
+    submitEnable();
 }
 
 function language_toggle() {
@@ -58,11 +61,13 @@ function cookie_blocking_mode() {
 
     jQuery( 'input[type=radio][name=cookiebot-cookie-blocking-mode]' ).on( 'change', function () {
         if ( this.value === 'auto' && cookieBlockingMode !== this.value ) {
-            jQuery( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 )
+            jQuery( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 );
+            jQuery( '#declaration-tag, #cookie-popup').addClass('disabled__item');
             jQuery( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true )
         }
         if ( this.value === 'manual' && cookieBlockingMode !== this.value ) {
-            jQuery( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 1 )
+            jQuery( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 1 );
+            jQuery( '#declaration-tag, #cookie-popup').removeClass('disabled__item');
             jQuery( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', false )
         }
         cookieBlockingMode = this.value
@@ -71,4 +76,39 @@ function cookie_blocking_mode() {
         jQuery( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 )
         jQuery( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true )
     }
+}
+
+function activeSettingsTab() {
+    jQuery('.cb-settings__tabs__item').on('click', function(){
+        let currentTab = jQuery('.cb-settings__tabs__item.active-item').data('tab');
+        let tab = jQuery(this).data('tab');
+        let tabSelector = '#'+tab;
+        jQuery('.cb-settings__tabs__item.active-item, .cb-settings__tabs__content--item.active-item').removeClass('active-item');
+        jQuery(this).addClass('active-item');
+        jQuery(tabSelector).addClass('active-item');
+
+        window.history.replaceState(null, null, '?page=cookiebot_settings&tab='+tab );
+        let referrer = jQuery('input[name="_wp_http_referer"]');
+        let referrerVal = referrer.val();
+        if(referrerVal.indexOf('tab=')!==-1) {
+            referrerVal = referrerVal.replace(currentTab,tab);
+        }else{
+            referrerVal += '&tab=' + tab;
+        }
+        referrer.val(referrerVal);
+    });
+}
+
+function closeSubmitMsg() {
+    jQuery('.cb-submit__msg').on('click',function(){
+        jQuery(this).addClass('hidden');
+    });
+}
+
+function submitEnable() {
+    jQuery(':input').change(
+        function(){
+            jQuery('p.submit #submit').addClass('enabled');
+        }
+    );
 }

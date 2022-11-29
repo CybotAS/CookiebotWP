@@ -13,18 +13,19 @@ require_once ABSPATH . '/wp-includes/l10n.php';
 require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 ?>
 <div class="postbox cookiebot-addon">
-	<p>
-		<label for="<?php echo 'enabled_' . esc_attr( $addon_option_name ); ?>">
-			<?php esc_html_e( 'Enable', 'cookiebot' ); ?>
+	<div class="cookiebot-addon-enable">
+		<label class="switch-checkbox" for="<?php echo 'enabled_' . esc_attr( $addon_option_name ); ?>">
+            <input <?php checked( 1, $addon_is_enabled ); ?>
+                    id="<?php echo 'enabled_' . esc_attr( $addon_option_name ); ?>"
+                    name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][enabled]"
+                    type="checkbox"
+                    value="1"
+            />
+            <div class="switcher"></div>
+			<?php esc_html_e( 'Plugin enabled', 'cookiebot' ); ?>
 		</label>
-		<input <?php checked( 1, $addon_is_enabled ); ?>
-				id="<?php echo 'enabled_' . esc_attr( $addon_option_name ); ?>"
-				name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][enabled]"
-				type="checkbox"
-				value="1"
-		/>
-	</p>
-	<p><?php esc_html_e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></p>
+	</div>
+	<p class="cookiebot-addon-text"><?php esc_html_e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></p>
 	<ul class="cookietypes">
 		<li>
 			<input <?php cookiebot_addons_checked_selected_helper( $addon_cookie_types, 'preferences' ); ?>
@@ -33,7 +34,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 					value="preferences"
 					name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][cookie_type][]"
 			>
-			<label>Preferences</label>
+			<label class="cookiebot-addon-text">Preferences</label>
 		</li>
 		<li>
 			<input <?php cookiebot_addons_checked_selected_helper( $addon_cookie_types, 'statistics' ); ?>
@@ -42,7 +43,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 					value="statistics"
 					name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][cookie_type][]"
 			>
-			<label>Statistics</label>
+			<label class="cookiebot-addon-text">Statistics</label>
 		</li>
 		<li>
 			<input <?php cookiebot_addons_checked_selected_helper( $addon_cookie_types, 'marketing' ); ?>
@@ -51,12 +52,11 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 					value="marketing"
 					name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][cookie_type][]"
 			>
-			<label>Marketing</label>
+			<label class="cookiebot-addon-text">Marketing</label>
 		</li>
 	</ul>
-
-	<p>
-		<label><?php esc_html_e( 'Display a placeholder', 'cookiebot' ); ?></label>
+    <p class="cookiebot-addon-text"><?php esc_html_e( 'Placeholder text:', 'cookiebot' ); ?></p>
+	<p class="cookiebot-addon-placeholder">
 		<input <?php checked( 1, $addon_placeholder_is_enabled ); ?>
 				type="checkbox"
 				class="placeholder_enable"
@@ -64,6 +64,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 				name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][placeholder][enabled]"
 				value="1"
 		>
+        <label class="cookiebot-addon-text"><?php esc_html_e( 'Display a placeholder', 'cookiebot' ); ?></label>
 	</p>
 
 	<div <?php echo ( ! $addon_placeholder_is_enabled ) ? 'style="display:none"' : ''; ?>
@@ -72,7 +73,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 	>
 		<?php echo $placeholders_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<p class="add_placeholder_language">
-			<button class="btn_add_language button button-secondary"
+			<button class="btn_add_language cb-btn cb-main-btn"
 					data-addon="<?php echo esc_attr( $addon_option_name ); ?>">
 				<?php esc_html_e( '+ Add language', 'cookiebot' ); ?>
 			</button>

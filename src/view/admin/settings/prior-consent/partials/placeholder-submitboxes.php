@@ -15,22 +15,22 @@ foreach ( $placeholders as $placeholder ) :
 	?>
 	<div class="placeholder_content submitbox">
 		<p>
-			<label><?php esc_html_e( 'Language', 'cookiebot' ); ?></label>
+			<label class="placeholder_title"><?php esc_html_e( 'Language', 'cookiebot' ); ?>:</label>
 			<?php
 			echo $languages_dropdown_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>
 			<?php if ( $removable ) : ?>
-				<a href="" class="submitdelete deletion">
+				<a href="" class="submitdelete deletion cb-btn cb-main-btn">
 					<?php esc_html_e( 'Remove language', 'cookiebot' ); ?>
 				</a>
 			<?php endif; ?>
 		</p>
 		<p>
-						<textarea
-							cols="80"
-							rows="5"
-							name="<?php echo esc_attr( $name ); ?>"
-						><?php echo esc_textarea( $placeholder_content ); ?></textarea>
+            <textarea class="placeholder_textarea"
+                cols="5"
+                rows="5"
+                name="<?php echo esc_attr( $name ); ?>"
+            ><?php echo esc_textarea( $placeholder_content ); ?></textarea>
 			<span class="help-tip" title="<?php echo esc_attr( $placeholder_helper ); ?>"></span>
 		</p>
 	</div>

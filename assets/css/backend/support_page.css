@@ -1,0 +1,123 @@
+.cb-support__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 18px;
+    margin-bottom: 50px;
+}
+
+.cb-support__info__card {
+    padding: 25px 20px 0;
+}
+
+.cb-support__info__title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 20px;
+}
+
+.cb-support__info__text {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.cb-support__video__inner {
+    background-color: #efefef;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.cb-support__video__title {
+    font-size: 15px;
+    margin: 0;
+}
+
+.cb-main__video {
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+
+.cb-faq__container {
+    border-radius: 8px;
+    background-color: #efefef;
+    padding: 24px 24px 0;
+}
+
+.cb-faq__container:not(:first-of-type) {
+    margin-top: 4px;
+}
+
+.cb-faq__question {
+    margin: 0;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.6em;
+    letter-spacing: .1px;
+    transition: color .25s ease;
+}
+
+.cb-faq__container.cb-faq--opened .cb-faq__question {
+    color: #1032cf;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.cb-faq__toggle {
+    display: inline-block;
+    position: relative;
+    min-width: 24px;
+    height: 24px;
+    margin-left: 10px;
+}
+
+.cb-faq__toggle:after, .cb-faq__toggle:before {
+    content: "";
+    width: 14px;
+    height: 2px;
+    background-color: #141414;
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+    top: 11px;
+    transition: color .25s ease;
+}
+
+.cb-faq__toggle:after {
+    transform: rotate(90deg);
+    transition: transform .25s ease,color .25s ease;
+}
+
+.cb-faq__container.cb-faq--opened .cb-faq__toggle:after {
+    transform: rotate(0deg);
+}
+
+.cb-faq__container.cb-faq--opened .cb-faq__toggle:after, .cb-faq__container.cb-faq--opened .cb-faq__toggle:before {
+    background-color: #1032cf;
+}
+
+.cb-faq__answer {
+    overflow: hidden;
+    height: 0;
+    transition: height .25s ease;
+}
+
+.cb-faq__container.cb-faq--opened .cb-faq__answer {
+    height: initial;
+    padding-bottom: 24px;
+}
+
+.cb-faq__code {
+    padding: 0 10px;
+    font-family: monospace;
+    overflow-wrap: initial;
+    overflow-x: auto;
+    background-image: linear-gradient(white 50%, rgb(215 221 250) 50%);
+    background-size: 1em 2.85em;
+    background-origin: content-box;
+    display: inline-block;
+    width: 100%;
+}

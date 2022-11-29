@@ -11,8 +11,8 @@
 	<?php if ( (bool) get_option( 'cookiebot-iab' ) !== false ) : ?>
 		data-framework="IAB"
 	<?php endif; ?>
-	<?php if ( (bool) get_option( 'cookiebot-ccpa' ) !== false ) : ?>
-		data-georegions="{'region':'US-06','cbid':'<?php echo esc_attr( get_option( 'cookiebot-ccpa-domain-group-id' ) ); ?>'}"
+	<?php if ( (bool) get_option( 'cookiebot-multiple-config' ) !== false && !empty(get_option( 'cookiebot-second-banner-regions' )) && !empty(get_option( 'cookiebot-second-banner-id' ))) : ?>
+		data-georegions="{'region':'<?php echo esc_attr( get_option( 'cookiebot-second-banner-regions' ) ); ?>','cbid':'<?php echo esc_attr( get_option( 'cookiebot-second-banner-id' ) ); ?>'}"
 	<?php endif; ?>
 	<?php if ( (bool) get_option( 'cookiebot-gtm' ) !== false ) : ?>
 		<?php if ( empty( get_option( 'cookiebot-data-layer' ) ) ) : ?>

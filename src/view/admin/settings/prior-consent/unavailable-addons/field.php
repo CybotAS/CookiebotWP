@@ -3,5 +3,5 @@
 
 ?>
 <div class="postbox cookiebot-addon">
-	<i><?php echo esc_html( $message ); ?></i>
+	<p><?php echo esc_html( $message ); ?></p>
 </div>

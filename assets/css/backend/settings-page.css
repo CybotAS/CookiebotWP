@@ -12,3 +12,209 @@
 .cookiebot_fieldset_header.active::after {
     content: "\f142";
 }
+
+.cb-settings__header {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: start;
+}
+
+.cb-settings__header .cb-main__page_title {
+    margin: 0;
+}
+
+.cb-settings__header p.submit {
+    text-align: right;
+    margin: 0;
+    padding: 0;
+}
+
+.cb-settings__header p.submit #submit {
+    background-color: rgba(0, 0, 0, 0.16);
+    color: #666666;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    pointer-events: none;
+}
+
+.cb-settings__header p.submit #submit.enabled{
+    background-color: #076646;
+    color: #ffffff;
+    pointer-events: initial;
+}
+
+.cb-settings__tabs {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    margin: 25px 0 50px;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.cb-settings__tabs__item {
+    display: grid;
+    padding: 15px 10px;
+    align-items: center;
+    border-bottom: 3px solid transparent;
+    color: #141414;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+}
+
+.cb-settings__tabs__item.active-item, .cb-settings__tabs__item:hover {
+    border-color: #1032cf;
+}
+
+.cb-settings__tabs__content--item {
+    display: none;
+}
+
+.cb-settings__tabs__content--item.active-item {
+    display: block;
+}
+
+.cb-general__new__account, .cb-general__consent__mode, .cb-general__prior__consent {
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 50px;
+}
+
+.cb-general__info__title {
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 30px;
+    margin: 0;
+}
+
+.cb-general__info__text {
+    width: 100%;
+    max-width: 620px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.new-account-actions .cb-btn:first-of-type {
+    margin-right: 20px;
+}
+
+.cb-settings__config__item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 50px;
+}
+
+.cb-settings__config__content {
+    padding-right: 40px;
+}
+
+.cb-settings__config__subtitle {
+    font-size: 20px;
+    margin: 0;
+}
+
+.cb-settings__config__data__inner {
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.cb-settings__data__subtitle {
+    font-size: 15px;
+    margin: 0 0 15px;
+}
+
+#show_add_language_guide {
+    display: block;
+}
+
+.cb-settings__config__data__inner label {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #141414;
+}
+
+.cb-settings__config__data__inner label.switch-checkbox {
+    display: flex;
+}
+
+.cb-settings__config__data__inner label:not(:first-of-type) {
+    margin-top: 20px;
+}
+
+.recommended-item:after {
+    content: 'Recommended';
+    font-size: 13px;
+    background-color: #0e1848;
+    color: #ffffff;
+    padding: 3px 7px;
+    border-radius: 5px;
+}
+
+.cb-settings__config__item.secondary__item {
+    border-left: 4px solid #1032cf;
+}
+
+.cb-settings__config__item.secondary__item .cb-settings__config__content {
+    padding-left: 90px;
+}
+
+.cb-general__info__note {
+    font-size: 13px;
+    font-style: oblique;
+}
+
+.disabled__item {
+    filter: grayscale(1);
+    opacity: .5;
+    pointer-events: none;
+}
+
+.cb-prior__tab__selector {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    border: 2px solid #e3e3e3;
+    border-radius: 150px;
+}
+
+.cb-prior__tab__selector:before {
+    position: absolute;
+    content: '';
+    width: calc(50% - 6px);
+    height: calc(100% - 6px);
+    background: #1032cf;
+    border-radius: 150px;
+    left: 3px;
+    z-index: 0;
+}
+
+.cb-prior__tab__item {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 500;
+    z-index: 1;
+}
+
+.cb-prior__tab__item.active-item {
+    color: #ffffff;
+}
+
+.cb-prior__tab__content__item {
+    display: none;
+}
+
+.cb-prior__tab__content__item.active-item {
+    display: block;
+}

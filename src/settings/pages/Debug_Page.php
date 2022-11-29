@@ -17,14 +17,17 @@ use Exception;
 
 class Debug_Page implements Settings_Page_Interface {
 
-	public function menu() {
+    const ADMIN_SLUG = 'cookiebot_debug';
+
+    public function menu() {
 		add_submenu_page(
 			'cookiebot',
 			__( 'Debug info', 'cookiebot' ),
 			__( 'Debug info', 'cookiebot' ),
 			'manage_options',
-			'cookiebot_debug',
-			array( $this, 'display' )
+			self::ADMIN_SLUG,
+			array( $this, 'display' ),
+            25
 		);
 	}
 
@@ -39,6 +42,20 @@ class Debug_Page implements Settings_Page_Interface {
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			true
 		);
+
+        $style_sheets = [
+            [ 'cookiebot-debug-css' , 'css/backend/debug_info.css' ]
+        ];
+
+        foreach ($style_sheets as $style ){
+            wp_enqueue_style(
+                $style[0],
+                asset_url($style[1]),
+                null,
+                Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+            );
+        }
+
 		$debug_output = $this->prepare_debug_data();
 
 		include_view( 'admin/settings/debug-page.php', array( 'debug_output' => $debug_output ) );
