@@ -445,6 +445,7 @@ $header->display();
                                         <div class="switcher"></div>
                                         <?php esc_html_e( 'Google Consent Mode', 'cookiebot' ); ?>
                                     </label>
+                                    <input type="hidden" name="cookiebot-gcm-first-run" value="1">
                                 </div>
                             </div>
                         </div>
