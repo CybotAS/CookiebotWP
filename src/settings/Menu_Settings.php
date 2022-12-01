@@ -2,6 +2,7 @@
 
 namespace cybot\cookiebot\settings;
 
+use cybot\cookiebot\settings\pages\Dashboard_Page;
 use cybot\cookiebot\settings\pages\Debug_Page;
 use cybot\cookiebot\settings\pages\Gtm_Page;
 use cybot\cookiebot\settings\pages\Iab_Page;
@@ -12,14 +13,12 @@ use cybot\cookiebot\settings\pages\Support_Page;
 class Menu_Settings {
 
 	const MENU = array(
-		Settings_Page::class,
+        Dashboard_Page::class,
+        Settings_Page::class,
 	);
 
 	const SUBMENU = array(
-		Support_Page::class,
-		Gtm_Page::class,
-		Iab_Page::class,
-		Legislations_Page::class,
+        Support_Page::class,
 		Debug_Page::class,
 	);
 
@@ -58,12 +57,16 @@ class Menu_Settings {
 		register_setting( 'cookiebot', 'cookiebot-script-tag-cd-attribute' );
 		register_setting( 'cookiebot', 'cookiebot-cookie-blocking-mode' );
 		register_setting( 'cookiebot', 'cookiebot-consent-mapping' );
-		register_setting( 'cookiebot-iab', 'cookiebot-iab' );
-		register_setting( 'cookiebot-legislations', 'cookiebot-ccpa' );
+		register_setting( 'cookiebot', 'cookiebot-iab' );
+		register_setting( 'cookiebot', 'cookiebot-ccpa' );
 		register_setting( 'cookiebot-legislations', 'cookiebot-ccpa-domain-group-id' );
-		register_setting( 'cookiebot-gtm', 'cookiebot-gtm' );
-		register_setting( 'cookiebot-gtm', 'cookiebot-gtm-id' );
-		register_setting( 'cookiebot-gtm', 'cookiebot-data-layer' );
-		register_setting( 'cookiebot-gtm', 'cookiebot-gcm' );
+		register_setting( 'cookiebot', 'cookiebot-gtm' );
+		register_setting( 'cookiebot', 'cookiebot-gtm-id' );
+		register_setting( 'cookiebot', 'cookiebot-data-layer' );
+		register_setting( 'cookiebot', 'cookiebot-gcm' );
+        register_setting( 'cookiebot', 'cookiebot-gcm-first-run' );
+        register_setting( 'cookiebot', 'cookiebot-multiple-config' );
+        register_setting( 'cookiebot', 'cookiebot-second-banner-regions' );
+        register_setting( 'cookiebot', 'cookiebot-second-banner-id' );
 	}
 }

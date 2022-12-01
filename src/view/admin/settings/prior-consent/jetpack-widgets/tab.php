@@ -66,7 +66,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_checked_selected_helper;
 	>
 		<?php echo $placeholders_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<p class="add_placeholder_language">
-			<button class="btn_add_language button button-secondary"
+			<button class="btn_add_language cb-btn cb-main-btn"
 					data-addon="<?php echo esc_attr( $widget_option_name ); ?>">
 				<?php esc_html_e( '+ Add language', 'cookiebot' ); ?>
 			</button>

@@ -25,6 +25,8 @@ class Settings_Config {
 	 */
 	protected $settings_service;
 
+    const ADMIN_SLUG = 'cookiebot-addons';
+
 	/**
 	 * Settings_Config constructor.
 	 *
@@ -42,7 +44,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function load() {
-		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
+		add_action( 'admin_menu', array( $this, 'add_submenu' ),2 );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_wp_admin_style_script' ) );
 		add_action(
@@ -64,15 +66,15 @@ class Settings_Config {
 	public function add_submenu() {
 		add_submenu_page(
 			'cookiebot',
-			esc_html__( 'Prior Consent', 'cookiebot' ),
-			esc_html__( 'Prior Consent', 'cookiebot' ),
+			esc_html__( 'Plugins', 'cookiebot' ),
+			esc_html__( 'Plugins', 'cookiebot' ),
 			'manage_options',
 			'cookiebot-addons',
 			array(
 				$this,
 				'setting_page',
 			),
-			40
+			2
 		);
 	}
 
@@ -108,10 +110,16 @@ class Settings_Config {
 		);
 		wp_enqueue_style(
 			'cookiebot_addons_custom_css',
-			asset_url( 'css/admin_styles.css' ),
+			asset_url( 'css/backend/addons_page.css' ),
 			null,
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 		);
+        wp_enqueue_style(
+            'cookiebot_admin_css',
+            asset_url( 'css/backend/cookiebot_admin_main.css' ),
+            null,
+            Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+        );
 	}
 
 	/**
@@ -129,17 +137,47 @@ class Settings_Config {
 			if ( isset( $_GET['tab'] ) && 'unavailable_addons' === $_GET['tab'] ) {
 				$this->register_unavailable_addons();
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			} elseif ( ( isset( $_GET['tab'] ) && 'available_addons' === $_GET['tab'] ) ) {
+                $this->register_available_addons();
 			} elseif ( ( isset( $_GET['tab'] ) && 'jetpack' === $_GET['tab'] ) ) {
-				$this->register_jetpack_addon();
-			} else {
-				$this->register_available_addons();
-			}
+                $this->register_jetpack_addon();
+			}else{
+                $this->register_addons_info();
+            }
 
 			if ( $pagenow === 'options.php' ) {
 				$this->register_jetpack_addon();
+                $this->register_available_addons();
 			}
 		}
 	}
+
+    /**
+     * Register addons info
+     *
+     * @throws Exception
+     * @since 1.3.0
+     */
+    private function register_addons_info() {
+        add_settings_section(
+            'info_addons',
+            '',
+            array(
+                $this,
+                'header_addons_info',
+            ),
+            'cookiebot-addons'
+        );
+    }
+
+    /**
+     * Returns header for info tab
+     *
+     * @since 1.3.0
+     */
+    public function header_addons_info() {
+        include_view( 'admin/settings/prior-consent/partials/info-tab-header.php' );
+    }
 
 	/**
 	 * Register available addons
@@ -150,7 +188,7 @@ class Settings_Config {
 	private function register_available_addons() {
 		add_settings_section(
 			'available_addons',
-			'Available plugins',
+			'',
 			array(
 				$this,
 				'header_available_addons',
@@ -202,7 +240,7 @@ class Settings_Config {
 	private function register_jetpack_addon() {
 		add_settings_section(
 			'jetpack_addon',
-			'Jetpack',
+			'',
 			array(
 				$this,
 				'jetpack_addons_header_callback',
@@ -253,7 +291,7 @@ class Settings_Config {
 	private function register_unavailable_addons() {
 		add_settings_section(
 			'unavailable_addons',
-			'Unavailable plugins',
+			'',
 			array(
 				$this,
 				'unavailable_addons_header_callback',
@@ -385,15 +423,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function header_available_addons() {
-		?>
-		<p>
-			<?php esc_html_e( 'Below is a list of addons for Cookiebot. Addons help you make installed plugins GDPR compliant.', 'cookiebot' ); ?>
-			<br/>
-			<?php esc_html_e( 'These addons are available because you have the corresponding plugins installed and activated.', 'cookiebot' ); ?>
-			<br/>
-			<?php esc_html_e( 'Deactivate an addon if you want to handle GDPR compliance yourself, or through another plugin.', 'cookiebot' ); ?>
-		</p>
-		<?php
+        include_view( 'admin/settings/prior-consent/available-addons/tab-header.php' );
 	}
 
 	/**
@@ -523,20 +553,28 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function setting_page() {
+        $addons_info_tab   = new Settings_Page_Tab(
+            'addons_info',
+            esc_html__( 'Info', 'cookiebot' ),
+            'info_addons',
+            'cookiebot-addons',
+            false
+        );
 		$available_addons_tab   = new Settings_Page_Tab(
 			'available_addons',
-			esc_html__( 'Available Addons', 'cookiebot' ),
+			esc_html__( 'Available Add-ons', 'cookiebot' ),
 			'cookiebot_available_addons',
 			'cookiebot-addons'
 		);
 		$unavailable_addons_tab = new Settings_Page_Tab(
 			'unavailable_addons',
-			esc_html__( 'Unavailable Addons', 'cookiebot' ),
+			esc_html__( 'Unavailable Add-ons', 'cookiebot' ),
 			'cookiebot_not_installed_options',
 			'cookiebot-addons',
 			false
 		);
 		$settings_page_tabs     = array(
+            $addons_info_tab,
 			$available_addons_tab,
 			$unavailable_addons_tab,
 		);
@@ -562,8 +600,8 @@ class Settings_Config {
 			null
 		);
 		if ( ! $active_tab ) {
-			$available_addons_tab->set_is_active( true );
-			$active_tab = $available_addons_tab;
+            $addons_info_tab->set_is_active( true );
+			$active_tab = $addons_info_tab;
 		}
 		$view_args = array(
 			'settings_page_tabs' => $settings_page_tabs,

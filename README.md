@@ -1,4 +1,4 @@
-# Cookiebot WordPress Plugin
+# Cookiebot CMP WordPress Plugin
 Cookiebot Wordpress plugin is a plugin that make other plugins compatible with Cookiebot. 
 The addons hook into the original plugin and render the cookie setting tags as advised by the Cookiebot guidelines at https://www.cookiebot.com/goto/help/.
 

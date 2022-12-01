@@ -1,11 +1,11 @@
 <?php
 
 /*
-Plugin Name: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control
+Plugin Name: Cookiebot CMP by Usercentrics | The reliable, flexible and easy to use consent solution by Usercentrics A/S
 Plugin URI: https://cookiebot.com/
-Description: Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites.
+Description: Cookiebot consent management platform (CMP) provides a plug-and-play cookie consent solution that enables compliance with the GDPR, LGPD, CCPA and other international regulations.
 Author: Cybot A/S
-Version: 4.1.1
+Version: 4.2.0
 Author URI: http://cookiebot.com
 Text Domain: cookiebot
 Domain Path: /langs

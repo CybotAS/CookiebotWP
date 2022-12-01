@@ -1,0 +1,279 @@
+.cb-main__content {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(100px, 1fr));
+    grid-template-rows: repeat(3, minmax(100px, 1fr));
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+}
+
+.cb-main__content.sync-account {
+    grid-template-rows: initial;
+}
+
+.cb-main__dashboard__card--container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 30px;
+}
+
+.cb-main__content.sync-account .cb-main__dashboard__card--container:first-of-type {
+    grid-template-columns: 1fr;
+    grid-row-gap: 30px;
+}
+
+.cb-main__dashboard__card {
+    width: 100%;
+    display: grid;
+}
+
+.cb-main__card__inner {
+    display: grid;
+    align-self: stretch;
+    position: relative;
+    padding: 25px;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.cb-main__card__inner.legislations_card {
+    border-radius: initial;
+    grid-row-gap: 7px;
+    align-self: start;
+    padding: 0;
+}
+
+.cb-main__card__inner.account_card {
+    position: relative;
+    background-image: url(/wp-content/plugins/cookiebot/assets/img/existing-account.png);
+    background-size: cover;
+    background-position: center center;
+}
+
+.cb-main__card__inner.account_card:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(0,205,172);
+    background: -moz-linear-gradient(58deg, rgba(0,205,172,1) 0%, rgba(16,50,207,1) 100%);
+    background: -webkit-linear-gradient(58deg, rgba(0,205,172,1) 0%, rgba(16,50,207,1) 100%);
+    background: linear-gradient(58deg, rgba(0,205,172,1) 0%, rgba(16,50,207,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00cdac",endColorstr="#1032cf",GradientType=1);
+    z-index: 0;
+    opacity: .7;
+}
+
+.cb-main__card__inner.new_card {
+    position: relative;
+    background-image: url(/wp-content/plugins/cookiebot/assets/img/new-account.png);
+    background-size: cover;
+    background-position: center center;
+}
+
+.cb-main__card__inner.new_card:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(16,50,207);
+    background: -moz-linear-gradient(0deg, rgba(16,50,207,1) 20%, rgba(16,50,207,0) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(16,50,207,1) 20%, rgba(16,50,207,0) 100%);
+    background: linear-gradient(0deg, rgba(16,50,207,1) 20%, rgba(16,50,207,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1032cf",endColorstr="#1032cf",GradientType=1);
+    z-index: 0;
+    opacity: .7;
+}
+
+.cb-main__card__inner.start_card {
+    background-color: #efefef;
+}
+
+.cb-main__card__content {
+    align-self: end;
+    z-index: 1;
+}
+
+.cb-main__card__title {
+    color: #ffffff;
+    font-size: 30px;
+    line-height: 32px;
+    margin: 0;
+    width: 100%;
+    max-width: 300px;
+}
+
+.start_card .cb-main__card__title {
+    color: #141414;
+}
+
+.cb-main__content.sync-account .cb-main__card__title {
+    max-width: 100%;
+}
+
+.cb-main__card__subtitle {
+    margin: 0;
+}
+
+.cb-main__success__text {
+    width: 100%;
+    max-width: 420px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.cb-wp {
+    z-index: 1;
+    align-self: end;
+    justify-self: center;
+}
+
+.cb-main__card__label {
+    display: inline-block;
+    padding: 4px 7px;
+    margin: 0 0 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.new_card .cb-main__card__label {
+    background-color: #00008d;
+    color: #ffffff;
+}
+
+.start_card .cb-main__card__label {
+    background-color: #00C6FB;
+    color: #141414;
+}
+
+.cb-main__card__success {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-column-gap: 15px;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.cb-main__card__success .cb-btn.cb-success-btn {
+    margin-top: 0;
+}
+
+.cb-main__video {
+    margin-bottom: 25px;
+}
+
+.cb-main__legislation__item {
+    display: grid;
+    grid-template-columns: 1fr 0fr 3fr 2fr;
+    background-color: #efefef;
+    border-radius: 6px;
+    padding: 20px;
+    align-items: center;
+}
+
+.cb-main__legislation__name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-right: 7px;
+}
+
+.cb-main__legislation__region {
+    font-weight: 600;
+    color: #666666;
+}
+
+.cb-link-btn.legislation-link {
+    margin: 0;
+    text-align: right;
+}
+
+.cb-main__dashboard__promo {
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.cb-main__dashboard__promo--inner {
+    position: relative;
+    padding: 50px 65px 20px;
+    background: rgb(10,20,62);
+    background: -moz-linear-gradient(90deg, rgba(10,20,62,1) 50%, rgba(10,20,62,0.5046393557422969) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(10,20,62,1) 50%, rgba(10,20,62,0.5046393557422969) 100%);
+    background: linear-gradient(90deg, rgba(10,20,62,1) 50%, rgba(10,20,62,0.5046393557422969) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0a143e",endColorstr="#0a143e",GradientType=1);
+    z-index: 1;
+    height: 100%;
+}
+
+.cb-main__dashboard__promo:before {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-image: url(/wp-content/plugins/cookiebot/assets/img/extra/sale-black.jpg);
+    background-position: -40px center;
+    background-size: auto 100%;
+    top: 0;
+    right: 0;
+    z-index: 0;
+}
+
+.cb-dashboard__promo--label {
+    color: #F4C20E;
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 700;
+    display: grid;
+    grid-template-columns: 0fr 1fr;
+}
+
+.time-icon {
+    margin-right: 8px;
+    width: 25px;
+    height: 25px;
+    transition: background-color .25s ease;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/clock.svg);
+    mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/clock.svg);
+    background-color: #F4C20E;
+}
+
+.cb-dashboard__promo--title {
+    color: #FFFFFF;
+    font-size: 58px;
+    line-height: 60px;
+    text-transform: uppercase;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 790px;
+}
+
+.cb-dashboard__promo--title .highlight {
+    color: #17EFA6;
+    background: none;
+}
+
+.cb-btn.cb-promo-btn {
+    background-color: #17EFA6;
+    color: #141414;
+    width: 100%;
+    max-width: 298px;
+    box-shadow: 0px 4px 52px rgb(23 239 166 / 40%);
+    border-radius: 4px;
+    text-align: center;
+    padding: 20px;
+}
+
+.promo-condition {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #ffffff;
+    width: 100%;
+    max-width: 550px;
+}

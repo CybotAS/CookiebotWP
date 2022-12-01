@@ -1,5 +1,10 @@
 <?php
+use cybot\cookiebot\settings\templates\Header;
+use cybot\cookiebot\settings\templates\Main_Tabs;
 
+use cybot\cookiebot\settings\pages\Gtm_Page;
+use cybot\cookiebot\settings\pages\Iab_Page;
+use cybot\cookiebot\settings\pages\Multiple_Page;
 
 /**
  * @var string $cbid
@@ -17,587 +22,447 @@
  * @var string $cookie_blocking_mode
  * @var string $add_language_gif_url
  */
+
+$header = new Header;
+$main_tabs = new Main_Tabs;
+
+$active_tab = $_GET['tab'] ?? false;
+
+$header->display();
 ?>
-<div class="wrap">
-	<h1><?php esc_html_e( 'Cookiebot Settings', 'cookiebot' ); ?></h1>
-	<a href="https://www.cookiebot.com">
-		<img
-			src="<?php echo esc_url( $cookiebot_logo ); ?>"
-			alt="Cookiebot logo"
-			style="float:right;margin-left:1em;">
-	</a>
-	<p>
-		<?php
-		printf(
-			/* translators: %1$s: GDPR URL; %2$s: extra information about the requirements */
-			esc_html__(
-				'Cookiebot enables your website to comply with current legislation in the EU on the use of cookies for user tracking and profiling. The EU ePrivacy Directive requires prior, informed consent of your site users, while the  %1$s %2$s.',
-				'cookiebot'
-			),
-			sprintf(
-				'<a href="%s" target="_blank">%s</a>',
-				esc_url( $cookiebot_gdpr_url ),
-				esc_html__( 'General Data Protection Regulation (GDPR)', 'cookiebot' )
-			),
-			esc_html__(
-				' requires you to document each consent. At the same time you must be able to account for what user data you share with embedded third-party services on your website and where in the world the user data is sent.',
-				'cookiebot'
-			)
-		);
-		?>
-	</p>
-	<form method="post" action="options.php">
-		<?php settings_fields( 'cookiebot' ); ?>
-		<?php do_settings_sections( 'cookiebot' ); ?>
-		<table class="form-table">
-			<tr>
-				<th scope="row"><?php esc_html_e( 'Cookiebot ID', 'cookiebot' ); ?></th>
-				<td>
-					<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
-							type="text" name="cookiebot-cbid"
-							value="<?php echo esc_attr( $cbid ); ?>"
-							style="width:300px"
-					/>
-					<p class="description">
-						<?php esc_html_e( 'Need an ID?', 'cookiebot' ); ?>
-						<a href="https://www.cookiebot.com/goto/signup" target="_blank">
-							<?php
-							esc_html_e(
-								'Sign up for free on cookiebot.com',
-								'cookiebot'
-							);
-							?>
-						</a>
-					</p>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">
-					<?php esc_html_e( 'Cookie-blocking mode', 'cookiebot' ); ?>
-				</th>
-				<td>
-					<label>
-						<input <?php checked( 'auto', $cookie_blocking_mode ); ?>
-								type="radio"
-								name="cookiebot-cookie-blocking-mode"
-								value="auto"
-						/>
-						<?php esc_html_e( 'Automatic', 'cookiebot' ); ?>
-					</label>
-					&nbsp; &nbsp;
-					<label>
-						<input <?php checked( 'manual', $cookie_blocking_mode ); ?>
-								type="radio"
-								name="cookiebot-cookie-blocking-mode"
-								value="manual"
-						/>
-						<?php esc_html_e( 'Manual', 'cookiebot' ); ?>
-					</label>
-					<p class="description">
-						<?php esc_html_e( 'Automatic block cookies (except necessary) until the user has given their consent.', 'cookiebot' ); ?>
-						<a
-							href="https://support.cookiebot.com/hc/en-us/articles/360009063100-Automatic-Cookie-Blocking-How-does-it-work-"
-							target="_blank">
-							<?php esc_html_e( 'Learn more', 'cookiebot' ); ?>
-						</a>
-					</p>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row"><?php esc_html_e( 'Cookiebot Language', 'cookiebot' ); ?></th>
-				<td>
-					<div>
-						<select name="cookiebot-language" id="cookiebot-language">
-							<option value=""><?php esc_html_e( 'Default (Autodetect)', 'cookiebot' ); ?></option>
-							<option value="_wp"<?php echo ( $current_lang === '_wp' ) ? ' selected' : ''; ?>>
-								<?php
-								esc_html_e(
-									'Use WordPress Language',
-									'cookiebot'
-								);
-								?>
-							</option>
-							<?php
-							foreach ( $supported_languages as $lang_code => $lang_name ) {
-								echo '<option value="' . esc_attr( $lang_code ) . '"' . ( ( $current_lang === esc_attr( $lang_code ) ) ? ' selected' : '' ) . '>' . esc_html( $lang_name ) . '</option>';
-							}
-							?>
-						</select>
-					</div>
-					<div
-						class="notice inline notice-warning notice-alt cookiebot-notice"
-						style="padding:12px;font-size:13px;display:inline-block;">
-						<div
-							style="<?php echo ( $current_lang === '' ) ? 'display:none;' : ''; ?>"
-							id="info_lang_specified">
-							<?php esc_html_e( 'You need to add the language in the Cookiebot administration tool.', 'cookiebot' ); ?>
-						</div>
-						<div
-							style="<?php echo ( $current_lang === '' ) ? '' : 'display:none;'; ?>"
-							id="info_lang_autodetect">
-							<?php
-							esc_html_e(
-								'You need to add all languages that you want auto-detected in the Cookiebot administration tool.',
-								'cookiebot'
-							);
-							?>
-							<br/>
-							<?php
-							esc_html_e(
-								'The auto-detect checkbox needs to be enabled in the Cookiebot administration tool.',
-								'cookiebot'
-							);
-							?>
-							<br/>
-							<?php
-							esc_html_e(
-								'If the auto-detected language is not supported, Cookiebot will use the default language.',
-								'cookiebot'
-							);
-							?>
-						</div>
-						<br>
 
-						<a
-							href="#"
-							id="show_add_language_guide">
-							<?php esc_html_e( 'Show guide to add languages', 'cookiebot' ); ?>
-						</a>
-						&nbsp;
-						<a
-							href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-do-I-set-the-language-of-the-consent-banner-dialog-"
-							target="_blank">
-							<?php esc_html_e( 'Read more here', 'cookiebot' ); ?>
-						</a>
+<div class="cb-body">
+    <div class="cb-wrapper">
+        <?php $main_tabs->display('settings'); ?>
+        <div class="cb-main__content">
+            <form method="post" action="options.php">
+                <?php settings_fields( 'cookiebot' ); ?>
+                <?php do_settings_sections( 'cookiebot' ); ?>
+                <div class="cb-settings__header">
+                    <h1 class="cb-main__page_title"><?php esc_html_e( 'Settings', 'cookiebot' ); ?></h1>
+                    <?php submit_button(); ?>
+                </div>
 
-						<div id="add_language_guide" style="display:none;">
-							<img
-								src="<?php echo esc_attr( $add_language_gif_url ); ?>"
-								alt="Add language in Cookiebot administration tool"/>
-							<br/>
-							<a
-								href="#"
-								id="hide_add_language_guide">
-								<?php esc_html_e( 'Hide guide', 'cookiebot' ); ?>
-							</a>
-						</div>
-					</div>
-				</td>
-			</tr>
-		</table>
-		<h3 id="advanced_settings_link"
-			class="cookiebot_fieldset_header"><?php esc_html_e( 'Advanced settings', 'cookiebot' ); ?></h3>
-		<div id="advanced_settings" style="display:none;">
-			<table class="form-table">
-				<tr id="cookiebot-setting-async">
-					<th scope="row">
-						<?php esc_html_e( 'Add async or defer attribute', 'cookiebot' ); ?>
-						<br/><?php esc_html_e( 'Consent banner script tag', 'cookiebot' ); ?>
-					</th>
-					<td>
-						<?php
-						$cv       = get_option( 'cookiebot-script-tag-uc-attribute', 'async' );
-						$disabled = false;
-						if ( $is_ms && $network_scrip_tag_uc_attr !== 'custom' ) {
-							$disabled = true;
-							$cv       = $network_scrip_tag_uc_attr;
-						}
-						?>
-						<label>
-							<input
-								type="radio"
-								name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-								value="" <?php checked( '', $cv ); ?> />
-							<i><?php esc_html_e( 'None', 'cookiebot' ); ?></i>
-						</label>
-						&nbsp; &nbsp;
-						<label>
-							<input
-									type="radio"
-									name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-									value="async" <?php checked( 'async', $cv ); ?> />
-							async
-						</label>
-						&nbsp; &nbsp;
-						<label>
-							<input
-									type="radio"
-									name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-									value="defer" <?php checked( 'defer', $cv ); ?> />
-							defer
-						</label>
-						<p class="description">
-							<?php
-							if ( $disabled ) {
-								echo '<b>' . esc_html__(
-									'Network setting applied. Please contact website administrator to change this setting.',
-									'cookiebot'
-								) . '</b><br />';
-							}
-							?>
-							<?php esc_html_e( 'Add async or defer attribute to Cookiebot script tag. Default: async', 'cookiebot' ); ?>
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">
-						<?php esc_html_e( 'Add async or defer attribute', 'cookiebot' ); ?>
-						<br/><?php esc_html_e( 'Cookie declaration script tag', 'cookiebot' ); ?>
-					</th>
-					<td>
-						<?php
-						$cv       = get_option( 'cookiebot-script-tag-cd-attribute', 'async' );
-						$disabled = false;
-						if ( $is_ms && $network_scrip_tag_cd_attr !== 'custom' ) {
-							$disabled = true;
-							$cv       = $network_scrip_tag_cd_attr;
-						}
-						?>
-						<label>
-							<input
-								type="radio"
-								name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-								value="" <?php checked( '', $cv ); ?>/>
-							<i><?php esc_html_e( 'None', 'cookiebot' ); ?></i>
-						</label>
-						&nbsp; &nbsp;
-						<label>
-							<input
-								type="radio"
-								name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-								value="async" <?php checked( 'async', $cv ); ?>/>
-							async
-						</label>
-						&nbsp; &nbsp;
-						<label>
-							<input
-								type="radio"
-								name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-								value="defer" <?php checked( 'defer', $cv ); ?>/>
-							defer
-						</label>
-						<p class="description">
-							<?php
-							if ( $disabled ) {
-								echo '<b>' . esc_html__(
-									'Network setting applied. Please contact website administrator to change this setting.',
-									'cookiebot'
-								) . '</b><br />';
-							}
-							?>
-							<?php esc_html_e( 'Add async or defer attribute to Cookiebot script tag. Default: async', 'cookiebot' ); ?>
-						</p>
-					</td>
-				</tr>
-				<?php
-				if ( ! is_multisite() ) {
-					?>
-					<tr>
-						<th scope="row"><?php esc_html_e( 'Auto-update Cookiebot', 'cookiebot' ); ?></th>
-						<td>
-							<input type="checkbox" name="cookiebot-autoupdate" value="1"
-								<?php
-								checked(
-									1,
-									get_option( 'cookiebot-autoupdate', false )
-								);
-								?>
-							/>
-							<p class="description">
-								<?php esc_html_e( 'Automatic update your Cookiebot plugin when new releases becomes available.', 'cookiebot' ); ?>
-							</p>
-						</td>
-					</tr>
-					<?php
-				}
-				?>
-				<tr id="cookiebot-setting-hide-popup">
-					<th scope="row"><?php esc_html_e( 'Hide Cookie Popup', 'cookiebot' ); ?></th>
-					<td>
-						<?php
-						$disabled = false;
-						if ( $is_ms && get_site_option( 'cookiebot-nooutput' ) ) {
-							$disabled = true;
-							echo '<input type="checkbox" checked disabled />';
-						} else {
-							?>
-							<input type="checkbox" name="cookiebot-nooutput" value="1"
-								<?php
-								checked(
-									1,
-									get_option( 'cookiebot-nooutput', false )
-								);
-								?>
-							/>
-							<?php
-						}
-						?>
-						<p class="description">
-							<?php
-							if ( $disabled ) {
-								echo '<b>' . esc_html__(
-									'Network setting applied. Please contact website administrator to change this setting.',
-									'cookiebot'
-								) . '</b><br />';
-							}
-							?>
-							<b>
-								<?php
-								esc_html_e(
-									'This checkbox will remove the cookie consent banner from your website. The <i>[cookie_declaration]</i> shortcode will still be available.',
-									'cookiebot'
-								);
-								?>
-							</b><br/>
-							<?php
-							esc_html_e(
-								'If you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager.',
-								'cookiebot'
-							);
-							?>
-							<br/>
-							<a
-								href="https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment"
-								target="_blank">
-								<?php esc_html_e( 'See a detailed guide here', 'cookiebot' ); ?>
-							</a>
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row"><?php esc_html_e( 'Disable Cookiebot in WP Admin', 'cookiebot' ); ?></th>
-					<td>
-						<?php
-						$disabled = false;
-						if ( $is_ms && get_site_option( 'cookiebot-nooutput-admin' ) ) {
-							echo '<input type="checkbox" checked disabled />';
-							$disabled = true;
-						} else {
-							?>
-							<input type="checkbox" name="cookiebot-nooutput-admin" value="1"
-								<?php
-								checked(
-									1,
-									get_option( 'cookiebot-nooutput-admin', false )
-								);
-								?>
-							/>
-							<?php
-						}
-						?>
-						<p class="description">
-							<?php
-							if ( $disabled ) {
-								echo '<b>' . esc_html__( 'Network setting applied. Please contact website administrator to change this setting.', 'cookiebot' ) . '</b><br />';
-							}
-							?>
-							<b><?php esc_html_e( 'This checkbox will disable Cookiebot in the WordPress Admin area.', 'cookiebot' ); ?></b>
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row"><?php esc_html_e( 'Enable Cookiebot on front end while logged in', 'cookiebot' ); ?></th>
-					<td>
-						<?php
-						$disabled = false;
-						if ( $is_ms && get_site_option( 'cookiebot-output-logged-in' ) ) {
-							echo '<input type="checkbox" checked disabled />';
-							$disabled = true;
-						} else {
-							?>
-							<input type="checkbox" name="cookiebot-output-logged-in" value="1"
-								<?php
-								checked(
-									1,
-									get_option( 'cookiebot-output-logged-in', false )
-								);
-								?>
-							/>
-							<?php
-						}
-						?>
-						<p class="description">
-							<?php
-							if ( $disabled ) {
-								echo '<b>' . esc_html__( 'Network setting applied. Please contact website administrator to change this setting.', 'cookiebot' ) . '</b><br />';
-							}
-							?>
-							<b><?php esc_html_e( 'This checkbox will enable Cookiebot on front end while you\'re logged in', 'cookiebot' ); ?></b>
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row"><?php esc_html_e( 'Ignore enqueued scripts from cookiebot scan', 'cookiebot' ); ?></th>
-					<td>
-						<textarea
-								name="cookiebot-ignore-scripts"
-								rows="4"
-								cols="50"
-								placeholder="<?php esc_attr_e( 'add script source URL, one per line', 'cookiebot' ); ?>"
-						><?php echo esc_html( get_option( 'cookiebot-ignore-scripts', false ) ); ?></textarea>
-						<br/>
-						<span>
-							<?php esc_html_e( 'List enqueued scripts source URL (one per line) to ignore cookiebot scan. Partial source URL will also work. Ex. wp-content/plugins/woocommerce will block every WooCommerce scripts.', 'cookiebot' ); ?>
-							<br>
-							<?php esc_html_e( 'This feature works only for scripts loaded via wp_enqueue_script! Manually added scripts must be manually edited!', 'cookiebot' ); ?>
-						</span>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<?php if ( $is_wp_consent_api_active ) { ?>
-			<h3 id="consent_level_api_settings" class="cookiebot_fieldset_header">
-				<?php
-				esc_html_e(
-					'Consent Level API Settings',
-					'cookiebot'
-				);
-				?>
-			</h3>
-			<div id="consent_level_api_settings" style="display:none;">
-				<p>
-					<?php
-					esc_html_e(
-						'WP Consent Level API and Cookiebot categorise cookies a bit different. The default settings should fit mosts needs - but if you need to change the mapping you are able to do it below.',
-						'cookiebot'
-					);
-					?>
-				</p>
+                <div class="cb-settings__tabs">
+                    <div class="cb-settings__tabs__item <?= !$active_tab || $active_tab === 'general-settings' ? 'active-item' : '' ;?>" data-tab="general-settings">
+                        <?php esc_html_e( 'General Settings', 'cookiebot' ); ?>
+                    </div>
+                    <div class="cb-settings__tabs__item <?= $active_tab === 'additional-settings' ? 'active-item' : '' ;?>" data-tab="additional-settings">
+                        <?php esc_html_e( 'Additional Settings', 'cookiebot' ); ?>
+                    </div>
+                    <div class="cb-settings__tabs__item <?= $active_tab === 'tag-manager' ? 'active-item' : '' ;?>" data-tab="tag-manager">
+                        <?php esc_html_e( 'Google Tag Manager', 'cookiebot' ); ?>
+                    </div>
+                    <div class="cb-settings__tabs__item <?= $active_tab === 'consent-mode' ? 'active-item' : '' ;?>" data-tab="consent-mode">
+                        <?php esc_html_e( 'Google Consent Mode', 'cookiebot' ); ?>
+                    </div>
+                    <div class="cb-settings__tabs__item <?= $active_tab === 'iab' ? 'active-item' : '' ;?>" data-tab="iab">
+                        <?php esc_html_e( 'IAB', 'cookiebot' ); ?>
+                    </div>
+                    <div class="cb-settings__tabs__item <?= $active_tab === 'multiple-configurations' ? 'active-item' : '' ;?>" data-tab="multiple-configurations">
+                        <?php esc_html_e( 'Multiple Configurations', 'cookiebot' ); ?>
+                    </div>
+                </div>
 
-				<?php
-				$consent_types = array( 'preferences', 'statistics', 'marketing' );
-				$states        = array_reduce(
-					$consent_types,
-					function ( $t, $v ) {
-						$newt = array();
-						if ( empty( $t ) ) {
-							$newt = array(
-								array( $v => true ),
-								array( $v => false ),
-							);
-						} else {
-							foreach ( $t as $item ) {
-								$newt[] = array_merge( $item, array( $v => true ) );
-								$newt[] = array_merge( $item, array( $v => false ) );
-							}
-						}
+                <div class="cb-settings__tabs__content">
+                    <div class="cb-settings__tabs__content--item <?= !$active_tab || $active_tab === 'general-settings' ? 'active-item' : '' ;?>" id="general-settings">
+                        <?php if(!$cbid) : ?>
+                        <div class="cb-general__new__account">
+                            <h2 class="cb-general__info__title"><?php esc_html_e( 'Do you not have an account yet?', 'cookiebot' ); ?></h2>
+                            <p class="cb-general__info__text">
+                                <?php esc_html_e( 'Before you can get started with Cookiebot CMP for Wordpress, you need to create an account on our website by clicking on "Create a new account" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find your ID in the Cookiebot Manager by navigating to "Settings" and "Your Scripts".', 'cookiebot' ); ?>
+                            </p>
+                            <div class="new-account-actions">
+                                <a href="https://manage.cookiebot.com/en/signup" target="_blank" class="cb-btn cb-main-btn"><?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?></a>
+                                <a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress" class="cb-btn cb-link-btn"><?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?></a>
+                            </div>
+                        </div>
+                        <?php endif; ?>
 
-						return $newt;
-					},
-					array()
-				);
+                        <div class="cb-settings__config__item">
+                            <div class="cb-settings__config__content">
+                                <h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Connect your Domain Group:', 'cookiebot' ); ?></h3>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'To connect your Domain Group, paste your Domain Group ID here. If you want to connect a second ID for other regions, you can do this under the "Multiple Configurations" tab.', 'cookiebot' ); ?>
+                                </p>
+                                <a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Read more on the Domain Group ID', 'cookiebot' ); ?></a>
+                            </div>
+                            <div class="cb-settings__config__data">
+                                <div class="cb-settings__config__data__inner">
+                                    <h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Add your Domain Group ID', 'cookiebot' ); ?></h3>
+                                    <input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
+                                            type="text" name="cookiebot-cbid"
+                                            value="<?php echo esc_attr( $cbid ); ?>"
+                                    />
+                                </div>
+                            </div>
+                        </div>
 
-				?>
+                        <div class="cb-settings__config__item">
+                            <div class="cb-settings__config__content">
+                                <h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Language:', 'cookiebot' ); ?></h3>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'Select your main language here. Please make sure that the language selected has also been added in the Cookiebot Manager.', 'cookiebot' ); ?>
+                                </p>
+                                <a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-to-set-the-language-of-the-consent-banner-"
+                                   target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Read more on how to add languages', 'cookiebot' ); ?></a>
+                            </div>
+                            <div class="cb-settings__config__data">
+                                <div class="cb-settings__config__data__inner">
+                                    <h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Select the language', 'cookiebot' ); ?></h3>
+                                    <select name="cookiebot-language" id="cookiebot-language">
+                                        <option value=""><?php esc_html_e( 'Default (Autodetect)', 'cookiebot' ); ?></option>
+                                        <option value="_wp"<?php echo ( $current_lang === '_wp' ) ? ' selected' : ''; ?>>
+                                            <?php
+                                            esc_html_e(
+                                                'Use WordPress Language',
+                                                'cookiebot'
+                                            );
+                                            ?>
+                                        </option>
+                                        <?php
+                                        foreach ( $supported_languages as $lang_code => $lang_name ) {
+                                            echo '<option value="' . esc_attr( $lang_code ) . '"' . ( ( $current_lang === esc_attr( $lang_code ) ) ? ' selected' : '' ) . '>' . esc_html( $lang_name ) . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cb-settings__config__item">
+                            <div class="cb-settings__config__content">
+                                <h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookie-blocking mode', 'cookiebot' ); ?></h3>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:', 'cookiebot' ); ?>
+                                </p>
+                                <a href="https://support.cookiebot.com/hc/en-us/articles/360009063100-How-does-Automatic-Cookie-Blocking-work-" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?></a>
+                                <a href="https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Guide to manual cookie-blocking', 'cookiebot' ); ?></a>
+                            </div>
+                            <div class="cb-settings__config__data">
+                                <div class="cb-settings__config__data__inner">
+                                    <h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Select the cookie-blocking mode', 'cookiebot' ); ?></h3>
+                                    <label class="recommended-item">
+                                        <input <?php checked( 'auto', $cookie_blocking_mode ); ?>
+                                                type="radio"
+                                                name="cookiebot-cookie-blocking-mode"
+                                                value="auto"
+                                        />
+                                        <?php esc_html_e( 'Automatic cookie-blocking mode', 'cookiebot' ); ?>
+                                    </label>
+                                    <label>
+                                        <input <?php checked( 'manual', $cookie_blocking_mode ); ?>
+                                                type="radio"
+                                                name="cookiebot-cookie-blocking-mode"
+                                                value="manual"
+                                        />
+                                        <?php esc_html_e( 'Manual cookie-blocking mode', 'cookiebot' ); ?>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                        $cv       = get_option( 'cookiebot-script-tag-uc-attribute', 'async' );
+                        $disabled = false;
+                        if ( $is_ms && $network_scrip_tag_uc_attr !== 'custom' ) {
+                            $disabled = true;
+                            $cv       = $network_scrip_tag_uc_attr;
+                        }
+                        ?>
+
+                        <div class="cb-settings__config__item secondary__item" id="declaration-tag">
+                            <div class="cb-settings__config__content">
+                                <h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookiebot script tag', 'cookiebot' ); ?></h3>
+                                <p class="cb-general__info__note">
+                                    <?php esc_html_e( 'Depending on cookie-blocking mode', 'cookiebot' ); ?>
+                                </p>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'Add async or defer attribute to cookie declaration script tag', 'cookiebot' ); ?>
+                                </p>
+                            </div>
+                            <div class="cb-settings__config__data">
+                                <div class="cb-settings__config__data__inner">
+                                    <label>
+                                        <input
+                                                type="radio"
+                                                name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+                                                value="" <?php checked( '', $cv ); ?> />
+                                        <?php esc_html_e( 'None', 'cookiebot' ); ?>
+                                    </label>
+                                    <label>
+                                        <input
+                                                type="radio"
+                                                name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+                                                value="async" <?php checked( 'async', $cv ); ?> />
+                                        async
+                                    </label>
+                                    <label>
+                                        <input
+                                                type="radio"
+                                                name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+                                                value="defer" <?php checked( 'defer', $cv ); ?> />
+                                        defer
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cb-settings__config__item secondary__item" id="cookie-popup">
+                            <div class="cb-settings__config__content">
+                                <h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Hide cookie popup', 'cookiebot' ); ?></h3>
+                                <p class="cb-general__info__note">
+                                    <?php esc_html_e( 'Depending on cookie-blocking mode', 'cookiebot' ); ?>
+                                </p>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'This checkbox will remove the cookie consent banner from your website. The declaration shortcode will still be available. If you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager.', 'cookiebot' ); ?>
+                                </p>
+                            </div>
+                            <div class="cb-settings__config__data">
+                                <div class="cb-settings__config__data__inner">
+                                    <label>
+                                        <?php
+                                        $disabled = false;
+                                        if ( $is_ms && get_site_option( 'cookiebot-nooutput' ) ) {
+                                            $disabled = true;
+                                            echo '<input type="checkbox" checked disabled />';
+                                        } else {
+                                            ?>
+                                            <input type="checkbox" name="cookiebot-nooutput" value="1"
+                                                <?php
+                                                checked(
+                                                    1,
+                                                    get_option( 'cookiebot-nooutput', false )
+                                                );
+                                                ?>
+                                            />
+                                        <?php } ?>
+                                        <?php esc_html_e( 'Hide the cookie popup banner', 'cookiebot' ); ?>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="cb-settings__tabs__content--item <?= $active_tab === 'additional-settings' ? 'active-item' : '' ;?>" id="additional-settings">
+
+                        <div class="cb-settings__config__item">
+                            <div class="cb-settings__config__content">
+                                <h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Auto-update Cookiebot Plugin:', 'cookiebot' ); ?></h3>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'Automatically update your Cookiebot plugin when new releases becomes available.', 'cookiebot' ); ?>
+                                </p>
+                            </div>
+                            <div class="cb-settings__config__data">
+                                <div class="cb-settings__config__data__inner">
+                                    <label class="switch-checkbox" for="cookiebot-autoupdate">
+                                        <input id="cookiebot-autoupdate" type="checkbox" name="cookiebot-autoupdate" value="1"
+                                            <?php
+                                            checked(
+                                                1,
+                                                get_option( 'cookiebot-autoupdate', false )
+                                            );
+                                            ?>
+                                        />
+                                        <div class="switcher"></div>
+                                        <?php esc_html_e( 'Automatically update Cookiebot Plugin', 'cookiebot' ); ?>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cb-settings__config__item">
+                            <div class="cb-settings__config__content">
+                                <h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookiebot CMP in WP Admin:', 'cookiebot' ); ?></h3>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'This checkbox will disable Cookiebot CMP to act within the WordPress Admin area', 'cookiebot' ); ?>
+                                </p>
+                            </div>
+                            <div class="cb-settings__config__data">
+                                <div class="cb-settings__config__data__inner">
+                                    <label class="switch-checkbox" for="cookiebot-nooutput-admin">
+                                        <?php
+                                        $disabled = false;
+                                        if ( $is_ms && get_site_option( 'cookiebot-nooutput-admin' ) ) {
+                                            echo '<input type="checkbox" checked disabled />';
+                                            $disabled = true;
+                                        } else {
+                                            ?>
+                                            <input id="cookiebot-nooutput-admin" type="checkbox" name="cookiebot-nooutput-admin" value="1"
+                                                <?php
+                                                checked(
+                                                    1,
+                                                    get_option( 'cookiebot-nooutput-admin', false )
+                                                );
+                                                ?>
+                                            />
+                                            <?php
+                                        }
+                                        ?>
+                                        <div class="switcher"></div>
+                                        <?php esc_html_e( 'Disable Cookiebot CMP in the WordPress Admin area', 'cookiebot' ); ?>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cb-settings__config__item">
+                            <div class="cb-settings__config__content">
+                                <h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookiebot CMP on front-end while logged in:', 'cookiebot' ); ?></h3>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'This setting will enable Cookiebot CMP on the front-end while you\'re logged in.', 'cookiebot' ); ?>
+                                </p>
+                            </div>
+                            <div class="cb-settings__config__data">
+                                <div class="cb-settings__config__data__inner">
+                                    <label class="switch-checkbox" for="cookiebot-output-logged-in">
+                                        <?php
+                                        $disabled = false;
+                                        if ( $is_ms && get_site_option( 'cookiebot-output-logged-in' ) ) {
+                                            echo '<input type="checkbox" checked disabled />';
+                                            $disabled = true;
+                                        } else {
+                                            ?>
+                                            <input id="cookiebot-output-logged-in" type="checkbox" name="cookiebot-output-logged-in" value="1"
+                                                <?php
+                                                checked(
+                                                    1,
+                                                    get_option( 'cookiebot-output-logged-in', false )
+                                                );
+                                                ?>
+                                            />
+                                            <?php
+                                        }
+                                        ?>
+                                        <div class="switcher"></div>
+                                        <?php esc_html_e( 'Render Cookiebot CMP on front-end while logged in', 'cookiebot' ); ?>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cb-settings__config__item">
+                            <div class="cb-settings__config__content">
+                                <h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookie declaration script tag:', 'cookiebot' ); ?></h3>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'If you implemented the declaration on your page through our widget in WordPress, you can choose here how the script should be loaded.', 'cookiebot' ); ?>
+                                </p>
+                            </div>
+                            <div class="cb-settings__config__data">
+                                <div class="cb-settings__config__data__inner">
+                                    <h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Select the cookie declaration script loading setting', 'cookiebot' ); ?></h3>
+                                    <?php
+                                    $cv       = get_option( 'cookiebot-script-tag-cd-attribute', 'async' );
+                                    $disabled = false;
+                                    if ( $is_ms && $network_scrip_tag_cd_attr !== 'custom' ) {
+                                        $disabled = true;
+                                        $cv       = $network_scrip_tag_cd_attr;
+                                    }
+                                    ?>
+                                    <label>
+                                        <input
+                                                type="radio"
+                                                name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+                                                value="" <?php checked( '', $cv ); ?>/>
+                                        <?php esc_html_e( 'None', 'cookiebot' ); ?>
+                                    </label>
+                                    <label>
+                                        <input
+                                                type="radio"
+                                                name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+                                                value="async" <?php checked( 'async', $cv ); ?>/>
+                                        async
+                                    </label>
+                                    <label>
+                                        <input
+                                                type="radio"
+                                                name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+                                                value="defer" <?php checked( 'defer', $cv ); ?>/>
+                                        defer
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cb-settings__config__item">
+                            <div class="cb-settings__config__content">
+                                <h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Ignore scripts in queue from Cookiebot CMP scan:', 'cookiebot' ); ?></h3>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'List scripts source URL (one per line) from the queue to ignore Cookiebot CMP scan. Partial source URL will also work, e.g. wp-content/plugins/woocommerce will block every WooCommerce script.', 'cookiebot' ); ?>
+                                </p>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'This feature only works for scripts loaded via wp_enqueue_script. Manually added scripts must be manually edited.', 'cookiebot' ); ?>
+                                </p>
+                            </div>
+                            <div class="cb-settings__config__data">
+                                <div class="cb-settings__config__data__inner">
+                                    <h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Script source URL:', 'cookiebot' ); ?></h3>
+                                    <textarea
+                                            name="cookiebot-ignore-scripts"
+                                            rows="4"
+                                            cols="50"
+                                            placeholder="<?php esc_attr_e( 'Add script source URL, one per line', 'cookiebot' ); ?>"
+                                    ><?php echo esc_html( get_option( 'cookiebot-ignore-scripts', false ) ); ?></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="cb-settings__tabs__content--item <?= $active_tab === 'tag-manager' ? 'active-item' : '' ;?>" id="tag-manager">
+                        <?php $gtm_settings = new Gtm_Page; $gtm_settings->display();?>
+                    </div>
+
+                    <div class="cb-settings__tabs__content--item <?= $active_tab === 'consent-mode' ? 'active-item' : '' ;?>" id="consent-mode">
+                        <div class="cb-general__consent__mode">
+                            <h2 class="cb-general__info__title"><?php esc_html_e( 'What is Google Consent Mode and why should you enable it?', 'cookiebot' ); ?></h2>
+                            <p class="cb-general__info__text">
+                                <?php esc_html_e( 'Google Consent Mode is a way for your website to measure conversions and get analytics insights while being fully GDPR-compliant when using services like Google Analytics, Google Tag Manager (GTM) and Google Ads.', 'cookiebot' ); ?>
+                            </p>
+                            <p class="cb-general__info__text">
+                                <?php esc_html_e( 'Cookiebot consent managment platform (CMP) and Google Consent Mode integrate seamlessly to offer you plug-and-play compliance and streamlined use of all Google\'s services in one easy solution.', 'cookiebot' ); ?>
+                            </p>
+                            <a class="cb-btn cb-link-btn" target="_blank" href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode"><?php esc_html_e( 'Read more about Cookiebot CMP and Google Consent Mode', 'cookiebot' ); ?></a>
+                        </div>
+
+                        <div class="cb-settings__config__item">
+                            <div class="cb-settings__config__content">
+                                <h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Google Consent Mode:', 'cookiebot' ); ?></h3>
+                                <p class="cb-general__info__text">
+                                    <?php esc_html_e( 'Enable Google Consent Mode with default settings on your WordPress page.', 'cookiebot' ); ?>
+                                </p>
+                                <a class="cb-btn cb-link-btn" target="_blank" href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode"><?php esc_html_e( 'Read more', 'cookiebot' ); ?></a>
+                            </div>
+                            <div class="cb-settings__config__data">
+                                <div class="cb-settings__config__data__inner">
+                                    <label class="switch-checkbox" for="gcm">
+                                        <input
+                                                type="checkbox"
+                                                name="cookiebot-gcm"
+                                                id="gcm"
+                                                value="1" <?php checked( 1, get_option( 'cookiebot-gcm' ) ); ?>>
+                                        <div class="switcher"></div>
+                                        <?php esc_html_e( 'Google Consent Mode', 'cookiebot' ); ?>
+                                    </label>
+                                    <input type="hidden" name="cookiebot-gcm-first-run" value="1">
+                                </div>
+                            </div>
+                        </div>
 
 
-				<table class="widefat striped consent_mapping_table">
-					<thead>
-					<tr>
-						<th><?php esc_html_e( 'Cookiebot categories', 'cookiebot' ); ?></th>
-						<th class="consent_mapping"><?php esc_html_e( 'WP Consent Level categories', 'cookiebot' ); ?></th>
-					</tr>
-					</thead>
-					<?php
-					foreach ( $states as $state ) {
-						$key   = array();
-						$key[] = 'n=1';
-						$key[] = 'p=' . ( $state['preferences'] ? '1' : '0' );
-						$key[] = 's=' . ( $state['statistics'] ? '1' : '0' );
-						$key[] = 'm=' . ( $state['marketing'] ? '1' : '0' );
-						$key   = implode( ';', $key );
-						?>
-						<tr>
-							<td>
-								<div class="cb_consent">
-												<span class="forceconsent">
-													<?php esc_html_e( 'Necessary', 'cookiebot' ); ?>
-												</span>
-									<span class="<?php echo( $state['preferences'] ? 'consent' : 'noconsent' ); ?>">
-													<?php esc_html_e( 'Preferences', 'cookiebot' ); ?>
-												</span>
-									<span class="<?php echo( $state['statistics'] ? 'consent' : 'noconsent' ); ?>">
-													<?php esc_html_e( 'Statistics', 'cookiebot' ); ?>
-												</span>
-									<span class="<?php echo( $state['marketing'] ? 'consent' : 'noconsent' ); ?>">
-													<?php esc_html_e( 'Marketing', 'cookiebot' ); ?>
-												</span>
-								</div>
-							</td>
-							<td>
-								<div class="consent_mapping">
-									<label><input
-												type="checkbox"
-												name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][functional]"
-												data-default-value="1" value="1" checked disabled
-										> <?php esc_html_e( 'Functional', 'cookiebot' ); ?> </label>
-									<label><input
-												type="checkbox"
-												name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][preferences]"
-												data-default-value="<?php echo esc_attr( $m_default[ $key ]['preferences'] ); ?>"
-												value="1"
-											<?php
-											if ( $m[ $key ]['preferences'] ) {
-												echo 'checked';
-											}
-											?>
-										> <?php esc_html_e( 'Preferences', 'cookiebot' ); ?> </label>
-									<label><input
-												type="checkbox"
-												name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][statistics]"
-												data-default-value="<?php echo esc_attr( $m_default[ $key ]['statistics'] ); ?>"
-												value="1"
-											<?php
-											if ( $m[ $key ]['statistics'] ) {
-												echo 'checked';
-											}
-											?>
-										> <?php esc_html_e( 'Statistics', 'cookiebot' ); ?> </label>
-									<label><input
-												type="checkbox"
-												name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][statistics-anonymous]"
-												data-default-value="<?php echo esc_attr( $m_default[ $key ]['statistics-anonymous'] ); ?>"
-												value="1"
-											<?php
-											if ( $m[ $key ]['statistics-anonymous'] ) {
-												echo 'checked';
-											}
-											?>
-										> <?php esc_html_e( 'Statistics Anonymous', 'cookiebot' ); ?>
-									</label>
-									<label><input
-												type="checkbox"
-												name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][marketing]"
-												data-default-value="<?php echo esc_attr( $m_default[ $key ]['marketing'] ); ?>"
-												value="1"
-											<?php
-											if ( $m[ $key ]['marketing'] ) {
-												echo 'checked';
-											}
-											?>
-										> <?php esc_html_e( 'Marketing', 'cookiebot' ); ?></label>
-								</div>
-							</td>
-						</tr>
-						<?php
-					}
-					?>
-					<tfoot>
-					<tr>
-						<td colspan="2" style="text-align:right;">
-							<button class="button" onclick="return resetConsentMapping();">
-								<?php
-								esc_html_e(
-									'Reset to default mapping',
-									'cookiebot'
-								);
-								?>
-							</button>
-						</td>
-					</tr>
-					</tfoot>
-				</table>
-			</div>
-		<?php } ?>
-		<?php submit_button(); ?>
-	</form>
+                    </div>
+
+                    <div class="cb-settings__tabs__content--item <?= $active_tab === 'iab' ? 'active-item' : '' ;?>" id="iab">
+                        <?php $iab_settings = new Iab_Page; $iab_settings->display();?>
+                    </div>
+
+                    <div class="cb-settings__tabs__content--item <?= $active_tab === 'multiple-configurations' ? 'active-item' : '' ;?>" id="multiple-configurations">
+                        <?php $multiple_settings = new Multiple_Page; $multiple_settings->display();?>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

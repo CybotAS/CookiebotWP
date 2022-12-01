@@ -19,6 +19,8 @@ function init() {
 	show_advanced_options();
 	edit_embed_regex();
 	set_default_embed_regex();
+	closeSubmitMsg();
+	submitEnable();
 }
 
 /**
@@ -226,6 +228,20 @@ function set_default_embed_regex() {
 			jQuery( '#embed_regex' ).val( default_regex );
 
 			return false;
+		}
+	);
+}
+
+function closeSubmitMsg() {
+	jQuery('.cb-submit__msg').on('click',function(){
+		jQuery(this).addClass('hidden');
+	});
+}
+
+function submitEnable() {
+	jQuery(':input').change(
+		function(){
+			jQuery('p.submit #submit').addClass('enabled');
 		}
 	);
 }
