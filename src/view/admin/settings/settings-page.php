@@ -26,7 +26,7 @@ use cybot\cookiebot\settings\pages\Multiple_Page;
 $header = new Header;
 $main_tabs = new Main_Tabs;
 
-$active_tab = $_GET['tab'] ?? false;
+$active_tab = $_GET['tab'] ? $_GET['tab'] : false;
 
 $header->display();
 ?>
