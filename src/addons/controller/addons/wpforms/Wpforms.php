@@ -96,7 +96,7 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon {
 	 *
 	 * @param $key
 	 * @param $new_value
-	 * @param string $option
+	 * @param string    $option
 	 */
 	public function wpforms_set_setting( $key, $new_value, $option = 'wpforms_settings' ) {
 		if ( function_exists( 'wpforms_sanitize_key' ) ) {

@@ -29,6 +29,7 @@ class Wp_Google_Analytics_Events extends Base_Cookiebot_Plugin_Addon {
 
 	/**
 	 * Returns default cookie types
+	 *
 	 * @return array
 	 *
 	 * @since 1.5.0

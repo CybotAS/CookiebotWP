@@ -14,6 +14,7 @@ class Visitor_Cookies_Jetpack_Widget extends Base_Jetpack_Widget {
 		/**
 		 * When consent is not given
 		 * Then disable comment cookies
+		 *
 		 * @TODO is_cookie_state_accepted only accepts a string but an array is given, what should be the correct behaviour?
 		 */
 		if ( ! $this->cookie_consent->is_cookie_state_accepted( $this->get_widget_cookie_types() ) ) {
@@ -56,6 +57,7 @@ class Visitor_Cookies_Jetpack_Widget extends Base_Jetpack_Widget {
 	 * - comment_author_{HASH}
 	 * - comment_author_email_{HASH}
 	 * - comment_author_url_{HASH}
+	 *
 	 * @since 1.2.0
 	 */
 	private function disable_comment_cookies() {

@@ -66,7 +66,7 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon {
 				'cookiebot_addon_add_to_any_content',
 			),
 			1000
-		); //Ensure it is executed as the last filter
+		); // Ensure it is executed as the last filter
 
 		add_filter(
 			'the_excerpt',
@@ -75,7 +75,7 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon {
 				'cookiebot_addon_add_to_any_content',
 			),
 			1000
-		); //Ensure it is executed as the last filter
+		); // Ensure it is executed as the last filter
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * Display a placeholder on elements with "addtoany_share_save_container" class name.
 	 *
-	 * @param  string  $content
+	 * @param  string $content
 	 *
 	 * @return string
 	 */

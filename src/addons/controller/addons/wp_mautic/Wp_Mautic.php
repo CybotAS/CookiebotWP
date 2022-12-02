@@ -38,7 +38,7 @@ class Wp_Mautic extends Base_Cookiebot_Plugin_Addon {
 				false
 			);
 
-		//Remove noscript tracking
+		// Remove noscript tracking
 		if ( has_action( 'wp_footer', 'wpmautic_inject_noscript' ) ) {
 			remove_action( 'wp_footer', 'wpmautic_inject_noscript' );
 		}

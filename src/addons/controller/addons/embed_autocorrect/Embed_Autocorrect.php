@@ -40,7 +40,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 */
 	public function cookiebot_addon_embed_autocorrect() {
 
-		//add filters to handle autocorrection in content
+		// add filters to handle autocorrection in content
 		add_filter(
 			'the_content',
 			array(
@@ -48,9 +48,9 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 				'cookiebot_addon_embed_autocorrect_content',
 			),
 			1000
-		); //Ensure it is executed as the last filter
+		); // Ensure it is executed as the last filter
 
-		//add filters to handle autocorrection in widget text
+		// add filters to handle autocorrection in widget text
 		add_filter(
 			'widget_text',
 			array(
@@ -58,9 +58,9 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 				'cookiebot_addon_embed_autocorrect_content',
 			),
 			1000
-		); //Ensure it is executed as the last filter
+		); // Ensure it is executed as the last filter
 
-		//add fitler to handle video shortcodes
+		// add fitler to handle video shortcodes
 		add_filter(
 			'wp_video_shortcode',
 			array(
@@ -70,7 +70,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 			1000
 		);
 
-		//add fitler to handle audio shortcodes
+		// add fitler to handle audio shortcodes
 		add_filter(
 			'wp_audio_shortcode',
 			array(
@@ -140,15 +140,15 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 * @todo refactor this function, reduce duplicate code, fix the behaviour in places where variables are "probably undefined"
 	 */
 	public function cookiebot_addon_embed_autocorrect_content( $content ) {
-		//Make sure Cookiebot is active and the user has enabled autocorrection
+		// Make sure Cookiebot is active and the user has enabled autocorrection
 
 		preg_match_all( '|<div[^>]*id=\"fb-root\">.*?</blockquote>|si', $content, $matches );
 		foreach ( $matches[0] as $match ) {
-			//Find src.
+			// Find src.
 			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></p></blockquote>|', $match, $match_src );
 			$src = $match_src[1];
 
-			//Replace - and add cookie consent notice.
+			// Replace - and add cookie consent notice.
 			$adjusted = str_replace(
 				'<script>',
 				'<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '">',
@@ -186,7 +186,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 
 		preg_match_all( '|<blockquote[^>]*class=\"twitter-tweet\"[^>]*>.*?</script>|si', $content, $matches );
 		foreach ( $matches[0] as $match ) {
-			//Find src.
+			// Find src.
 			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></blockquote>|', $match, $match_src );
 
 			if ( empty( $match_src ) ) {
@@ -195,7 +195,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 
 			$src = $match_src[1];
 
-			//Replace - and add cookie consent notice.
+			// Replace - and add cookie consent notice.
 			$adjusted = str_replace(
 				'<script ',
 				'<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" ',
@@ -231,7 +231,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 		}
 		unset( $matches );
 
-		//Match all speakerdeck, slideshare, screencast, reverbnation, mixcloud, kickstarter,
+		// Match all speakerdeck, slideshare, screencast, reverbnation, mixcloud, kickstarter,
 		// dailymoition, collegehumor, cloudup, animoto, videopress, youtube, vimeo and facebook iframes.
 		preg_match_all(
 			$this->get_regex(),
@@ -292,14 +292,14 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 		foreach ( $matches[0] as $match ) {
 			preg_match( '/src\s*=\s*"(.+?)"/', $match, $src );
 
-			//$matches[1] will have the text that matched the first captured parenthesized
+			// $matches[1] will have the text that matched the first captured parenthesized
 			if ( isset( $src[1] ) ) {
 				$src = $src[1];
 			} else {
 				$src = '';
 			}
 
-			//Replace - and add cookie consent notice.
+			// Replace - and add cookie consent notice.
 			$adjusted = str_replace(
 				' src=',
 				' data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" data-src=',
@@ -337,6 +337,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 
 	/**
 	 * Implementation of filter wp_video_shortcode - fixing code for cookiebot.
+	 *
 	 * @throws Exception
 	 */
 	public function cookiebot_addon_embed_autocorrect_handle_video(

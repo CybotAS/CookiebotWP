@@ -30,7 +30,7 @@ class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * Exclude scripts from Litespeed cache’s defer JS option.
 	 *
-	 * @param  array  $excluded_files  Array of script URLs to be excluded
+	 * @param  array $excluded_files  Array of script URLs to be excluded
 	 *
 	 * @return array                    Extended array script URLs to be excluded
 	 *

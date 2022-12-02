@@ -13,19 +13,19 @@ use cybot\cookiebot\settings\pages\Support_Page;
 class Menu_Settings {
 
 	const MENU = array(
-        Dashboard_Page::class,
-        Settings_Page::class,
+		Dashboard_Page::class,
+		Settings_Page::class,
 	);
 
 	const SUBMENU = array(
-        Support_Page::class,
+		Support_Page::class,
 		Debug_Page::class,
 	);
 
 	public function add_menu() {
 		add_action( 'admin_menu', array( $this, 'load_menu' ), 1 );
 
-		//Register settings
+		// Register settings
 		add_action( 'admin_init', array( $this, 'register_cookiebot_settings' ) );
 	}
 
@@ -64,9 +64,9 @@ class Menu_Settings {
 		register_setting( 'cookiebot', 'cookiebot-gtm-id' );
 		register_setting( 'cookiebot', 'cookiebot-data-layer' );
 		register_setting( 'cookiebot', 'cookiebot-gcm' );
-        register_setting( 'cookiebot', 'cookiebot-gcm-first-run' );
-        register_setting( 'cookiebot', 'cookiebot-multiple-config' );
-        register_setting( 'cookiebot', 'cookiebot-second-banner-regions' );
-        register_setting( 'cookiebot', 'cookiebot-second-banner-id' );
+		register_setting( 'cookiebot', 'cookiebot-gcm-first-run' );
+		register_setting( 'cookiebot', 'cookiebot-multiple-config' );
+		register_setting( 'cookiebot', 'cookiebot-second-banner-regions' );
+		register_setting( 'cookiebot', 'cookiebot-second-banner-id' );
 	}
 }
