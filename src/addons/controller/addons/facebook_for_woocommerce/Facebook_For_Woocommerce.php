@@ -112,7 +112,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 		/**
 		 * inject base pixel
 		 */
-		//We always need to remove this untill consent is given - because we can force no execution before consent it given
+		// We always need to remove this untill consent is given - because we can force no execution before consent it given
 		cookiebot_addons_remove_class_action( 'wp_footer', 'WC_Facebookcommerce_EventsTracker', 'inject_base_pixel_noscript' );
 	}
 

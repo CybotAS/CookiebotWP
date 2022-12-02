@@ -62,10 +62,10 @@ abstract class Base_Jetpack_Widget {
 	protected $buffer_output;
 
 	/**
-	 * @param Settings_Service_Interface $settings
+	 * @param Settings_Service_Interface  $settings
 	 * @param Script_Loader_Tag_Interface $script_loader_tag
-	 * @param Cookie_Consent_Interface $cookie_consent
-	 * @param Buffer_Output_Interface $buffer_output
+	 * @param Cookie_Consent_Interface    $cookie_consent
+	 * @param Buffer_Output_Interface     $buffer_output
 	 *
 	 * @throws Exception
 	 */

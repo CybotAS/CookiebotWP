@@ -15,13 +15,13 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 <div class="postbox cookiebot-addon">
 	<div class="cookiebot-addon-enable">
 		<label class="switch-checkbox" for="<?php echo 'enabled_' . esc_attr( $addon_option_name ); ?>">
-            <input <?php checked( 1, $addon_is_enabled ); ?>
-                    id="<?php echo 'enabled_' . esc_attr( $addon_option_name ); ?>"
-                    name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][enabled]"
-                    type="checkbox"
-                    value="1"
-            />
-            <div class="switcher"></div>
+			<input <?php checked( 1, $addon_is_enabled ); ?>
+					id="<?php echo 'enabled_' . esc_attr( $addon_option_name ); ?>"
+					name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][enabled]"
+					type="checkbox"
+					value="1"
+			/>
+			<div class="switcher"></div>
 			<?php esc_html_e( 'Plugin enabled', 'cookiebot' ); ?>
 		</label>
 	</div>
@@ -55,7 +55,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 			<label class="cookiebot-addon-text">Marketing</label>
 		</li>
 	</ul>
-    <p class="cookiebot-addon-text"><?php esc_html_e( 'Placeholder text:', 'cookiebot' ); ?></p>
+	<p class="cookiebot-addon-text"><?php esc_html_e( 'Placeholder text:', 'cookiebot' ); ?></p>
 	<p class="cookiebot-addon-placeholder">
 		<input <?php checked( 1, $addon_placeholder_is_enabled ); ?>
 				type="checkbox"
@@ -64,7 +64,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 				name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][placeholder][enabled]"
 				value="1"
 		>
-        <label class="cookiebot-addon-text"><?php esc_html_e( 'Display a placeholder', 'cookiebot' ); ?></label>
+		<label class="cookiebot-addon-text"><?php esc_html_e( 'Display a placeholder', 'cookiebot' ); ?></label>
 	</p>
 
 	<div <?php echo ( ! $addon_placeholder_is_enabled ) ? 'style="display:none"' : ''; ?>

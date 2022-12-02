@@ -19,7 +19,7 @@ class CAOS_Host_Analyticsjs_Local_Version_4_2_6 extends Base_Cookiebot_Plugin_Ad
 		/* Priority need to be more than 0 so we are able to hook in before output begins */
 		$script_priority = $this->cookiebot_addon_host_analyticsjs_local_priority();
 		if ( $script_priority <= 0 ) {
-			//Force priority to 2
+			// Force priority to 2
 			$script_priority = 2;
 			update_option( 'sgal_enqueue_order', $script_priority );
 		}

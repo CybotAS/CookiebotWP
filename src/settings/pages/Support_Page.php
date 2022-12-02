@@ -9,9 +9,9 @@ use function cybot\cookiebot\lib\include_view;
 
 class Support_Page implements Settings_Page_Interface {
 
-    const ADMIN_SLUG = 'cookiebot_support';
+	const ADMIN_SLUG = 'cookiebot_support';
 
-    public function menu() {
+	public function menu() {
 		add_submenu_page(
 			'cookiebot',
 			__( 'Cookiebot Support', 'cookiebot' ),
@@ -27,33 +27,32 @@ class Support_Page implements Settings_Page_Interface {
 	 * @throws InvalidArgumentException
 	 */
 	public function display() {
+		$scripts = array(
+			array( 'cookiebot-support-page-js', 'js/backend/support-page.js' ),
+		);
 
-        $scripts = [
-            [ 'cookiebot-support-page-js' , 'js/backend/support-page.js' ]
-        ];
+		foreach ( $scripts as $script ) {
+			wp_enqueue_script(
+				$script[0],
+				asset_url( $script[1] ),
+				null,
+				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+				true
+			);
+		}
 
-        foreach ($scripts as $script ){
-            wp_enqueue_script(
-                $script[0],
-                asset_url( $script[1] ),
-                null,
-                Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
-                true
-            );
-        }
+		$style_sheets = array(
+			array( 'cookiebot-support-css', 'css/backend/support_page.css' ),
+		);
 
-        $style_sheets = [
-            [ 'cookiebot-support-css' , 'css/backend/support_page.css' ]
-        ];
-
-        foreach ($style_sheets as $style ){
-            wp_enqueue_style(
-                $style[0],
-                asset_url($style[1]),
-                null,
-                Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
-            );
-        }
+		foreach ( $style_sheets as $style ) {
+			wp_enqueue_style(
+				$style[0],
+				asset_url( $style[1] ),
+				null,
+				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+			);
+		}
 
 		include_view( 'admin/settings/support-page.php', array() );
 	}

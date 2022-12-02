@@ -26,11 +26,11 @@ foreach ( $placeholders as $placeholder ) :
 			<?php endif; ?>
 		</p>
 		<p>
-            <textarea class="placeholder_textarea"
-                cols="5"
-                rows="5"
-                name="<?php echo esc_attr( $name ); ?>"
-            ><?php echo esc_textarea( $placeholder_content ); ?></textarea>
+			<textarea class="placeholder_textarea"
+				cols="5"
+				rows="5"
+				name="<?php echo esc_attr( $name ); ?>"
+			><?php echo esc_textarea( $placeholder_content ); ?></textarea>
 			<span class="help-tip" title="<?php echo esc_attr( $placeholder_helper ); ?>"></span>
 		</p>
 	</div>

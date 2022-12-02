@@ -12,44 +12,44 @@ use cybot\cookiebot\settings\pages\Debug_Page;
 $isnw = is_network_admin();
 ?>
 <div class="cb-main__tabs">
-    <?php if(!$isnw) : ?>
-        <div class="cb-main__tabs_item <?= $active_tab==='dashboard'? 'active-item' : ''; ?>">
-            <a href="/wp-admin/admin.php?page=<?= Dashboard_Page::ADMIN_SLUG?>" class="cb-main__tabs__link">
-                <div class="cb-main__tabs__icon dashboard-icon"></div>
-                <span><?php esc_html_e( 'Dashboard', 'cookiebot' ); ?></span>
-            </a>
-        </div>
-    <?php endif; ?>
-    <div class="cb-main__tabs_item <?= $active_tab==='settings'? 'active-item' : ''; ?>">
-        <?php if($isnw) : ?>
-        <a href="/wp-admin/network/admin.php?page=cookiebot_network" class="cb-main__tabs__link">
-            <?php else: ?>
-            <a href="/wp-admin/admin.php?page=<?= Settings_Page::ADMIN_SLUG?>" class="cb-main__tabs__link">
-                <?php endif; ?>
-                <div class="cb-main__tabs__icon settings-icon"></div>
-                <span><?php esc_html_e( 'Settings', 'cookiebot' ); ?></span>
-            </a>
-    </div>
-    <?php if(!$isnw) : ?>
-        <div class="cb-main__tabs_item <?= $active_tab==='addons'? 'active-item' : ''; ?>">
-            <a href="/wp-admin/admin.php?page=<?= Settings_Config::ADMIN_SLUG?>" class="cb-main__tabs__link">
-                <div class="cb-main__tabs__icon plugins-icon"></div>
-                <span><?php esc_html_e( 'Plugins', 'cookiebot' ); ?></span>
-            </a>
-        </div>
-    <?php endif; ?>
-    <div class="cb-main__tabs_item <?= $active_tab==='support'? 'active-item' : ''; ?>">
-        <a href="/wp-admin/<?= $isnw ? 'network/' : '';?>admin.php?page=<?= Support_Page::ADMIN_SLUG?>" class="cb-main__tabs__link">
-            <div class="cb-main__tabs__icon support-icon"></div>
-            <span><?php esc_html_e( 'Support', 'cookiebot' ); ?></span>
-        </a>
-    </div>
-    <?php if(!$isnw) : ?>
-        <div class="cb-main__tabs_item <?= $active_tab==='debug'? 'active-item' : ''; ?>">
-            <a href="/wp-admin/admin.php?page=<?= Debug_Page::ADMIN_SLUG?>" class="cb-main__tabs__link">
-                <div class="cb-main__tabs__icon debug-icon"></div>
-                <span><?php esc_html_e( 'Debug info', 'cookiebot' ); ?></span>
-            </a>
-        </div>
-    <?php endif; ?>
+	<?php if ( ! $isnw ) : ?>
+		<div class="cb-main__tabs_item <?php echo $active_tab === 'dashboard' ? 'active-item' : ''; ?>">
+			<a href="/wp-admin/admin.php?page=<?php echo esc_html( Dashboard_Page::ADMIN_SLUG ); ?>" class="cb-main__tabs__link">
+				<div class="cb-main__tabs__icon dashboard-icon"></div>
+				<span><?php esc_html_e( 'Dashboard', 'cookiebot' ); ?></span>
+			</a>
+		</div>
+	<?php endif; ?>
+	<div class="cb-main__tabs_item <?php echo $active_tab === 'settings' ? 'active-item' : ''; ?>">
+		<?php if ( $isnw ) : ?>
+		<a href="/wp-admin/network/admin.php?page=cookiebot_network" class="cb-main__tabs__link">
+			<?php else : ?>
+			<a href="/wp-admin/admin.php?page=<?php echo esc_html( Settings_Page::ADMIN_SLUG ); ?>" class="cb-main__tabs__link">
+				<?php endif; ?>
+				<div class="cb-main__tabs__icon settings-icon"></div>
+				<span><?php esc_html_e( 'Settings', 'cookiebot' ); ?></span>
+			</a>
+	</div>
+	<?php if ( ! $isnw ) : ?>
+		<div class="cb-main__tabs_item <?php echo $active_tab === 'addons' ? 'active-item' : ''; ?>">
+			<a href="/wp-admin/admin.php?page=<?php echo esc_html( Settings_Config::ADMIN_SLUG ); ?>" class="cb-main__tabs__link">
+				<div class="cb-main__tabs__icon plugins-icon"></div>
+				<span><?php esc_html_e( 'Plugins', 'cookiebot' ); ?></span>
+			</a>
+		</div>
+	<?php endif; ?>
+	<div class="cb-main__tabs_item <?php echo $active_tab === 'support' ? 'active-item' : ''; ?>">
+		<a href="/wp-admin/<?php echo $isnw ? 'network/' : ''; ?>admin.php?page=<?php echo esc_html( Support_Page::ADMIN_SLUG ); ?>" class="cb-main__tabs__link">
+			<div class="cb-main__tabs__icon support-icon"></div>
+			<span><?php esc_html_e( 'Support', 'cookiebot' ); ?></span>
+		</a>
+	</div>
+	<?php if ( ! $isnw ) : ?>
+		<div class="cb-main__tabs_item <?php echo $active_tab === 'debug' ? 'active-item' : ''; ?>">
+			<a href="/wp-admin/admin.php?page=<?php echo esc_html( Debug_Page::ADMIN_SLUG ); ?>" class="cb-main__tabs__link">
+				<div class="cb-main__tabs__icon debug-icon"></div>
+				<span><?php esc_html_e( 'Debug info', 'cookiebot' ); ?></span>
+			</a>
+		</div>
+	<?php endif; ?>
 </div>

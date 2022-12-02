@@ -15,7 +15,7 @@ class Ga_Google_Analytics extends Base_Cookiebot_Plugin_Addon {
 
 	public function load_addon_configuration() {
 
-		//Remove GA Google action and replace it with our own
+		// Remove GA Google action and replace it with our own
 		if ( has_action( 'wp_head', 'ga_google_analytics_tracking_code' ) ) {
 			$this->buffer_output->add_tag(
 				'wp_head',

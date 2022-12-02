@@ -27,7 +27,7 @@ class Wp_Rocket extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * Exclude scripts from WP Rocket’s defer JS option.
 	 *
-	 * @param  array  $excluded_files  Array of script URLs to be excluded
+	 * @param  array $excluded_files  Array of script URLs to be excluded
 	 *
 	 * @return array                    Extended array script URLs to be excluded
 	 *

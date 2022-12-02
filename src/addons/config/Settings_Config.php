@@ -25,7 +25,7 @@ class Settings_Config {
 	 */
 	protected $settings_service;
 
-    const ADMIN_SLUG = 'cookiebot-addons';
+	const ADMIN_SLUG = 'cookiebot-addons';
 
 	/**
 	 * Settings_Config constructor.
@@ -44,7 +44,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function load() {
-		add_action( 'admin_menu', array( $this, 'add_submenu' ),2 );
+		add_action( 'admin_menu', array( $this, 'add_submenu' ), 2 );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_wp_admin_style_script' ) );
 		add_action(
@@ -114,12 +114,12 @@ class Settings_Config {
 			null,
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 		);
-        wp_enqueue_style(
-            'cookiebot_admin_css',
-            asset_url( 'css/backend/cookiebot_admin_main.css' ),
-            null,
-            Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
-        );
+		wp_enqueue_style(
+			'cookiebot_admin_css',
+			asset_url( 'css/backend/cookiebot_admin_main.css' ),
+			null,
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+		);
 	}
 
 	/**
@@ -138,46 +138,47 @@ class Settings_Config {
 				$this->register_unavailable_addons();
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			} elseif ( ( isset( $_GET['tab'] ) && 'available_addons' === $_GET['tab'] ) ) {
-                $this->register_available_addons();
+				$this->register_available_addons();
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			} elseif ( ( isset( $_GET['tab'] ) && 'jetpack' === $_GET['tab'] ) ) {
-                $this->register_jetpack_addon();
-			}else{
-                $this->register_addons_info();
-            }
+				$this->register_jetpack_addon();
+			} else {
+				$this->register_addons_info();
+			}
 
 			if ( $pagenow === 'options.php' ) {
 				$this->register_jetpack_addon();
-                $this->register_available_addons();
+				$this->register_available_addons();
 			}
 		}
 	}
 
-    /**
-     * Register addons info
-     *
-     * @throws Exception
-     * @since 1.3.0
-     */
-    private function register_addons_info() {
-        add_settings_section(
-            'info_addons',
-            '',
-            array(
-                $this,
-                'header_addons_info',
-            ),
-            'cookiebot-addons'
-        );
-    }
+	/**
+	 * Register addons info
+	 *
+	 * @throws Exception
+	 * @since 1.3.0
+	 */
+	private function register_addons_info() {
+		add_settings_section(
+			'info_addons',
+			'',
+			array(
+				$this,
+				'header_addons_info',
+			),
+			'cookiebot-addons'
+		);
+	}
 
-    /**
-     * Returns header for info tab
-     *
-     * @since 1.3.0
-     */
-    public function header_addons_info() {
-        include_view( 'admin/settings/prior-consent/partials/info-tab-header.php' );
-    }
+	/**
+	 * Returns header for info tab
+	 *
+	 * @since 1.3.0
+	 */
+	public function header_addons_info() {
+		include_view( 'admin/settings/prior-consent/partials/info-tab-header.php' );
+	}
 
 	/**
 	 * Register available addons
@@ -423,7 +424,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function header_available_addons() {
-        include_view( 'admin/settings/prior-consent/available-addons/tab-header.php' );
+		include_view( 'admin/settings/prior-consent/available-addons/tab-header.php' );
 	}
 
 	/**
@@ -553,13 +554,13 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function setting_page() {
-        $addons_info_tab   = new Settings_Page_Tab(
-            'addons_info',
-            esc_html__( 'Info', 'cookiebot' ),
-            'info_addons',
-            'cookiebot-addons',
-            false
-        );
+		$addons_info_tab        = new Settings_Page_Tab(
+			'addons_info',
+			esc_html__( 'Info', 'cookiebot' ),
+			'info_addons',
+			'cookiebot-addons',
+			false
+		);
 		$available_addons_tab   = new Settings_Page_Tab(
 			'available_addons',
 			esc_html__( 'Available Add-ons', 'cookiebot' ),
@@ -574,7 +575,7 @@ class Settings_Config {
 			false
 		);
 		$settings_page_tabs     = array(
-            $addons_info_tab,
+			$addons_info_tab,
 			$available_addons_tab,
 			$unavailable_addons_tab,
 		);
@@ -600,7 +601,7 @@ class Settings_Config {
 			null
 		);
 		if ( ! $active_tab ) {
-            $addons_info_tab->set_is_active( true );
+			$addons_info_tab->set_is_active( true );
 			$active_tab = $addons_info_tab;
 		}
 		$view_args = array(

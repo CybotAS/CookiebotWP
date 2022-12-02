@@ -19,7 +19,7 @@ class Custom_Facebook_Feed_Pro extends Base_Cookiebot_Plugin_Addon {
 	 */
 	public function load_addon_configuration() {
 
-		//Remove cff_js action and replace it with our own
+		// Remove cff_js action and replace it with our own
 		if ( has_action( 'wp_footer', 'cff_js' ) ) {
 			/**
 			 * Consent not given - no cache
