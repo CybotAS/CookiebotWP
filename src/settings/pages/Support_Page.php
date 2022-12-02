@@ -27,7 +27,6 @@ class Support_Page implements Settings_Page_Interface {
 	 * @throws InvalidArgumentException
 	 */
 	public function display() {
-
 		$scripts = array(
 			array( 'cookiebot-support-page-js', 'js/backend/support-page.js' ),
 		);

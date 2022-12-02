@@ -53,7 +53,6 @@ class Multiple_Page implements Settings_Page_Interface {
 	 * @throws InvalidArgumentException
 	 */
 	public function display() {
-
 		$args = array(
 			'cbid'               => Cookiebot_WP::get_cbid(),
 			'secondary_group_id' => $this->retroSecondaryId(),

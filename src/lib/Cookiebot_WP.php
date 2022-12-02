@@ -89,7 +89,7 @@ class Cookiebot_WP {
 		( new Cookiebot_Gutenberg_Declaration_Block() )->register_hooks();
 		( new WP_Rocket_Helper() )->register_hooks();
 
-        $this->set_consent_mode_default();
+		$this->set_consent_mode_default();
 	}
 
 	/**
@@ -155,14 +155,14 @@ class Cookiebot_WP {
 		return false;
 	}
 
-    private function set_consent_mode_default() {
-        if ( !get_option( 'cookiebot-gcm' ) && !get_option('cookiebot-gcm-first-run') ) {
-            update_option( 'cookiebot-gcm', '1' );
-        }
+	private function set_consent_mode_default() {
+		if ( ! get_option( 'cookiebot-gcm' ) && ! get_option( 'cookiebot-gcm-first-run' ) ) {
+			update_option( 'cookiebot-gcm', '1' );
+		}
 
-        if( get_option( 'cookiebot-gcm' ) && !get_option('cookiebot-gcm-first-run' ) ){
-            update_option( 'cookiebot-gcm', '1' );
-            update_option( 'cookiebot-gcm-first-run', '1' );
-        }
-    }
+		if ( get_option( 'cookiebot-gcm' ) && ! get_option( 'cookiebot-gcm-first-run' ) ) {
+			update_option( 'cookiebot-gcm', '1' );
+			update_option( 'cookiebot-gcm-first-run', '1' );
+		}
+	}
 }

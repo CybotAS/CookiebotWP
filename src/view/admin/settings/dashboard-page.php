@@ -21,7 +21,7 @@ $header->display();
 ?>
 <div class="cb-body">
 	<div class="cb-wrapper">
-	   <?php $main_tabs->display( 'dashboard' ); ?>
+		<?php $main_tabs->display( 'dashboard' ); ?>
 		<div class="cb-main__content <?php echo $cbid ? 'sync-account' : ''; ?>">
 			<?php
 			if ( ! $cbid ) :
