@@ -3,7 +3,7 @@
 * Tags: cookie banner, cookies, GDPR, CCPA, cookie notice, dsgvo, ePrivacy, privacy compliance, cookie law, data privacy, cmp
 * Requires at least: 4.4
 * Tested up to: 6.1.1
-* Stable tag: 4.2.1
+* Stable tag: 4.2.2
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -220,7 +220,11 @@ You can define the mapping between Cookiebot and the WP Consent API in the admin
 Cookiebot CMP is compatible with translation plugins when you set language to “Use WordPress Language”.
 
 ## Changelog ##
-### 4.2.1 - 2022-11-28 ###
+### 4.2.2 - 2022-12-05 ###
+* Resources delivery on subfolders environments fix Props: [fritzprod](https://profiles.wordpress.org/fritzprod/)
+* Fix security issue - remove possible vulnerable files Props: [ajaffri](https://profiles.wordpress.org/ajaffri/)
+
+### 4.2.1 - 2022-12-02 ###
 * PHP 5.6 compatibility fix
 * Code formatting update
 
