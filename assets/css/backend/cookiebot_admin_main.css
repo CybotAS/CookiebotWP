@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Inter';
-    src: url('/wp-content/plugins/cookiebot/assets/fonts/Inter-VariableFont.woff2') format('woff2-variations');
+    src: url('../../fonts/Inter-VariableFont.woff2') format('woff2-variations');
     font-weight: 300 900;
     font-stretch: 100%;
     font-style: normal;
@@ -84,28 +84,28 @@
 }
 
 .dashboard-icon {
-    -webkit-mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/dashboard.svg);
-    mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/dashboard.svg);
+    -webkit-mask-image: url(../../img/icons/dashboard.svg);
+    mask-image: url(../../img/icons/dashboard.svg);
 }
 
 .settings-icon {
-    -webkit-mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/settings.svg);
-    mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/settings.svg);
+    -webkit-mask-image: url(../../img/icons/settings.svg);
+    mask-image: url(../../img/icons/settings.svg);
 }
 
 .plugins-icon {
-    -webkit-mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/plugins.svg);
-    mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/plugins.svg);
+    -webkit-mask-image: url(../../img/icons/plugins.svg);
+    mask-image: url(../../img/icons/plugins.svg);
 }
 
 .support-icon {
-    -webkit-mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/support.svg);
-    mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/support.svg);
+    -webkit-mask-image: url(../../img/icons/support.svg);
+    mask-image: url(../../img/icons/support.svg);
 }
 
 .debug-icon {
-    -webkit-mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/debug.svg);
-    mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/debug.svg);
+    -webkit-mask-image: url(../../img/icons/debug.svg);
+    mask-image: url(../../img/icons/debug.svg);
 }
 
 .cb-main__page_title {
@@ -308,7 +308,7 @@ textarea {
 }
 
 .cb-submit__msg:before {
-    content: url(/wp-content/plugins/cookiebot/assets/img/icons/check.svg);
+    content: url(../../img/icons/check.svg);
     position: absolute;
     left: 30px;
     top: 25px;

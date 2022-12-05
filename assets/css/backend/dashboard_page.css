@@ -44,7 +44,7 @@
 
 .cb-main__card__inner.account_card {
     position: relative;
-    background-image: url(/wp-content/plugins/cookiebot/assets/img/existing-account.png);
+    background-image: url(../../img/existing-account.png);
     background-size: cover;
     background-position: center center;
 }
@@ -65,7 +65,7 @@
 
 .cb-main__card__inner.new_card {
     position: relative;
-    background-image: url(/wp-content/plugins/cookiebot/assets/img/new-account.png);
+    background-image: url(../../img/new-account.png);
     background-size: cover;
     background-position: center center;
 }
@@ -210,7 +210,7 @@
     position: absolute;
     width: 50%;
     height: 100%;
-    background-image: url(/wp-content/plugins/cookiebot/assets/img/extra/sale-black.jpg);
+    background-image: url(../../img/extra/sale-black.jpg);
     background-position: -40px center;
     background-size: auto 100%;
     top: 0;
@@ -238,8 +238,8 @@
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-    -webkit-mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/clock.svg);
-    mask-image: url(/wp-content/plugins/cookiebot/assets/img/icons/clock.svg);
+    -webkit-mask-image: url(../../img/icons/clock.svg);
+    mask-image: url(../../img/icons/clock.svg);
     background-color: #F4C20E;
 }
 
