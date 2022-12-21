@@ -447,16 +447,16 @@ $header->display();
 												value="1" <?php checked( 1, $gcm_enabled_option ); ?>>
 										<div class="switcher"></div>
 										<?php esc_html_e( 'Google Consent Mode', 'cookiebot' ); ?>
-										<?php echo ( $gcm_enabled_option === '1' ) ? 'enabled' : 'disabled' ?>
+										<?php echo ( $gcm_enabled_option === '1' ) ? 'enabled' : 'disabled'; ?>
 									</label>
 									<input type="hidden" name="cookiebot-gcm-first-run" value="1">
 								</div>
 							</div>
 						</div>
 
-						<?php $gcm_url_passthrough_option = get_option( 'cookiebot-gcm-url-passthrough', 1 ) ?>
+						<?php $gcm_url_passthrough_option = get_option( 'cookiebot-gcm-url-passthrough', 1 ); ?>
 
-						<div class="cb-settings__config__item"<?php echo ( (string) $gcm_enabled_option === '1' ) ? '' : ' style="display: none"' ?>>
+						<div class="cb-settings__config__item"<?php echo ( (string) $gcm_enabled_option === '1' ) ? '' : ' style="display: none"'; ?>>
 							<div class="cb-settings__config__content">
 								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'URL passthrough:', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__text">
@@ -474,7 +474,7 @@ $header->display();
 												value="1" <?php checked( 1, $gcm_url_passthrough_option ); ?>>
 										<div class="switcher"></div>
 										<?php esc_html_e( 'URL passthrough', 'cookiebot' ); ?>
-										<?php echo ( $gcm_url_passthrough_option === '1' ) ? 'enabled' : 'disabled' ?>
+										<?php echo ( $gcm_url_passthrough_option === '1' ) ? 'enabled' : 'disabled'; ?>
 									</label>
 								</div>
 							</div>

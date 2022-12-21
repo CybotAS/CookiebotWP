@@ -18,8 +18,10 @@ $is_url_passthrough_enabled = '1' === (string) get_option( 'cookiebot-gcm-url-pa
 		wait_for_update: 500,
 	});
 	gtag("set", "ads_data_redaction", true);
-	<?php if ( $is_url_passthrough_enabled ) {
+	<?php
+	if ( $is_url_passthrough_enabled ) {
 		echo /** @lang JavaScript */
 		'gtag("set", "url_passthrough", true);' . PHP_EOL;
-	} ?>
+	}
+	?>
 </script>
