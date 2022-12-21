@@ -65,6 +65,7 @@ class Menu_Settings {
 		register_setting( 'cookiebot', 'cookiebot-data-layer' );
 		register_setting( 'cookiebot', 'cookiebot-gcm' );
 		register_setting( 'cookiebot', 'cookiebot-gcm-first-run' );
+		register_setting( 'cookiebot', 'cookiebot-gcm-url-passthrough' );
 		register_setting( 'cookiebot', 'cookiebot-multiple-config' );
 		register_setting( 'cookiebot', 'cookiebot-second-banner-regions' );
 		register_setting( 'cookiebot', 'cookiebot-second-banner-id' );
