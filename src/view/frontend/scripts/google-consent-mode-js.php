@@ -1,5 +1,8 @@
 <?php
 /** @var string $data_layer */
+
+$is_url_passthrough_enabled = '1' === (string) get_option( 'cookiebot-gcm-url-passthrough', 1 );
+
 ?>
 <script data-cookieconsent="ignore">
 	window.<?php echo esc_js( $data_layer ); ?> = window.<?php echo esc_js( $data_layer ); ?> || [];
@@ -15,5 +18,8 @@
 		wait_for_update: 500,
 	});
 	gtag("set", "ads_data_redaction", true);
-	gtag("set", "url_passthrough", true);
+	<?php if ( $is_url_passthrough_enabled ) {
+		echo /** @lang JavaScript */
+		'gtag("set", "url_passthrough", true);' . PHP_EOL;
+	} ?>
 </script>

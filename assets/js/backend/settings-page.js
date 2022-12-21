@@ -12,6 +12,7 @@ function init() {
     activeSettingsTab();
     closeSubmitMsg();
     submitEnable();
+    googleConsentModeUrlPassthrough();
 }
 
 function language_toggle() {
@@ -111,4 +112,26 @@ function submitEnable() {
             jQuery('p.submit #submit').addClass('enabled');
         }
     );
+}
+
+function googleConsentModeUrlPassthrough() {
+    jQuery('input#gcm').on('change', function () {
+        jQuery(this)
+          .parents('#consent-mode')
+          .find('.cb-settings__config__item:has(input#gcm-url-pasthrough)')
+          .toggle(
+            jQuery(this)
+              .is(':checked')
+          )
+    });
+    jQuery('input#gcm, input#gcm-url-pasthrough').on('change', function () {
+        const input = jQuery(this);
+        const label = input.parents('label.switch-checkbox')[0];
+        if (!label || !label.childNodes.length)
+            return;
+        label.childNodes[label.childNodes.length - 1].textContent = (
+          (input.attr('id') === 'gcm' ? 'Google Consent Mode' : 'URL passthrough') + ' ' +
+          (input.is(':checked') ? 'enabled' : 'disabled')
+        );
+    });
 }
