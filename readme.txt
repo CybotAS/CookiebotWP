@@ -221,7 +221,7 @@ Cookiebot CMP is compatible with translation plugins when you set language to â€
 
 ## Changelog ##
 ### 4.2.4 - 2022-12-28 ###
-* "Undefined index: tab" issue fix
+* Fix "Undefined index: tab" warning
 
 ### 4.2.3 - 2022-12-21 ###
 * Allow disabling URL passthrough when Google Consent Mode is activated
