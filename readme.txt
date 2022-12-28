@@ -220,6 +220,9 @@ You can define the mapping between Cookiebot and the WP Consent API in the admin
 Cookiebot CMP is compatible with translation plugins when you set language to “Use WordPress Language”.
 
 ## Changelog ##
+### 4.2.4 - 2022-12-28 ###
+* "Undefined index: tab" issue fix
+
 ### 4.2.3 - 2022-12-21 ###
 * Allow disabling URL passthrough when Google Consent Mode is activated
 
