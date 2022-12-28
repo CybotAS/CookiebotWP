@@ -27,7 +27,7 @@ $header    = new Header();
 $main_tabs = new Main_Tabs();
 
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-$active_tab = $_GET['tab'] ? $_GET['tab'] : false;
+$active_tab = ! empty( $_GET['tab'] ) ? $_GET['tab'] : false;
 
 $header->display();
 ?>
