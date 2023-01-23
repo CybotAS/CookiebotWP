@@ -43,13 +43,13 @@ $header->display();
 				</div>
 
 				<?php if ( $cbid ) : ?>
-                <div class="cb-main__dashboard__card">
-                    <div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
-                        <h3 class="cb-main__card__subtitle"><?php echo esc_html__( 'Your opinion matters', 'cookiebot' ); ?></h3>
-                        <p class="cb-main__review__text"><?php echo esc_html__( 'Are you happy with our WordPress plugin? Your feedback will help us make our product better for you.', 'cookiebot' ); ?></p>
-                        <a href="https://wordpress.org/support/plugin/cookiebot/reviews/#new-post" target="_blank" class="cb-btn cb-link-btn"><?php echo esc_html__( 'Write a review', 'cookiebot' ); ?></a>
-                    </div>
-                </div>
+				<div class="cb-main__dashboard__card">
+					<div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
+						<h3 class="cb-main__card__subtitle"><?php echo esc_html__( 'Your opinion matters', 'cookiebot' ); ?></h3>
+						<p class="cb-main__review__text"><?php echo esc_html__( 'Are you happy with our WordPress plugin? Your feedback will help us make our product better for you.', 'cookiebot' ); ?></p>
+						<a href="https://wordpress.org/support/plugin/cookiebot/reviews/#new-post" target="_blank" class="cb-btn cb-link-btn"><?php echo esc_html__( 'Write a review', 'cookiebot' ); ?></a>
+					</div>
+				</div>
 				<?php endif; ?>
 
 				<div class="cb-main__dashboard__card">

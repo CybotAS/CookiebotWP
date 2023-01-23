@@ -94,7 +94,7 @@ class Cookiebot_WP {
 		( new WP_Rocket_Helper() )->register_hooks();
 
 		$this->set_consent_mode_default();
-		add_filter( 'plugin_action_links_cookiebot/cookiebot.php' , [ $this , 'set_settings_action_link' ] );
+		add_filter( 'plugin_action_links_cookiebot/cookiebot.php', array( $this, 'set_settings_action_link' ) );
 	}
 
 	/**
@@ -173,7 +173,7 @@ class Cookiebot_WP {
 
 	public function set_settings_action_link( $actions ) {
 		$cblinks = array(
-			'<a href="' . admin_url( 'admin.php?page=cookiebot' ) . '">'.esc_html__('Dashboard','cookiebot').'</a>',
+			'<a href="' . admin_url( 'admin.php?page=cookiebot' ) . '">' . esc_html__( 'Dashboard', 'cookiebot' ) . '</a>',
 		);
 		$actions = array_merge( $actions, $cblinks );
 		return $actions;
