@@ -47,7 +47,7 @@ class Cookiebot_Recommendation_Notice {
 		$notice = array(
 			'title'      => __( 'Leave A Review?', 'cookiebot' ),
 			'msg'        => __(
-				'We hope you enjoy using WordPress Cookiebot! Would you consider leaving us a review on WordPress.org?',
+				'We hope you enjoy using WordPress Cookiebot™! Would you consider leaving us a review on WordPress.org?',
 				'cookiebot'
 			),
 			'link_html'  => get_view_html(

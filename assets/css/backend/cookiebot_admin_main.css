@@ -154,6 +154,7 @@
     background-color: transparent;
     color: #1032cf;
     padding: 0;
+    width: fit-content;
 }
 
 .cb-link-btn:hover {

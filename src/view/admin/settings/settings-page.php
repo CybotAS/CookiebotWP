@@ -27,7 +27,7 @@ $header    = new Header();
 $main_tabs = new Main_Tabs();
 
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-$active_tab = $_GET['tab'] ? $_GET['tab'] : false;
+$active_tab = ! empty( $_GET['tab'] ) ? $_GET['tab'] : false;
 
 $header->display();
 ?>
@@ -103,7 +103,7 @@ $header->display();
 							<div class="cb-settings__config__content">
 								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Language:', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Select your main language here. Please make sure that the language selected has also been added in the Cookiebot Manager.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Select your main language here. Please make sure that the language selected has also been added in the Cookiebot™ Manager.', 'cookiebot' ); ?>
 								</p>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-to-set-the-language-of-the-consent-banner-" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Read more on how to add languages', 'cookiebot' ); ?></a>
 							</div>
@@ -136,7 +136,7 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:', 'cookiebot' ); ?>
 								</p>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/360009063100-How-does-Automatic-Cookie-Blocking-work-" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?></a>
+								<a href="https://support.cookiebot.com/hc/en-us/articles/360009074960-Automatic-cookie-blocking" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?></a>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Guide to manual cookie-blocking', 'cookiebot' ); ?></a>
 							</div>
 							<div class="cb-settings__config__data">
@@ -173,7 +173,7 @@ $header->display();
 
 						<div class="cb-settings__config__item secondary__item" id="declaration-tag">
 							<div class="cb-settings__config__content">
-								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookiebot script tag', 'cookiebot' ); ?></h3>
+								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookiebot™ script tag', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__note">
 									<?php esc_html_e( 'Depending on cookie-blocking mode', 'cookiebot' ); ?>
 								</p>
@@ -249,9 +249,9 @@ $header->display();
 
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
-								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Auto-update Cookiebot Plugin:', 'cookiebot' ); ?></h3>
+								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Auto-update Cookiebot™ Plugin:', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Automatically update your Cookiebot plugin when new releases becomes available.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Automatically update your Cookiebot™ plugin when new releases becomes available.', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">

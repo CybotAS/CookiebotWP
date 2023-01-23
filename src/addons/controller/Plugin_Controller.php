@@ -65,8 +65,8 @@ class Plugin_Controller {
 					function() {
 						echo '<div class="notice notice-warning">
 						<p>
-						<strong>' . esc_html__( 'You enabled Cookiebot auto blocking mode but still using addons', 'cookiebot' ) . '</strong><br>
-						' . esc_html__( 'In some occasions this may cause client side errors. If you notice any errors please try to disable Cookiebot addons or contact Cookiebot support.', 'cookiebot' ) . '
+						<strong>' . esc_html__( 'You enabled Cookiebot™ auto blocking mode but still using addons', 'cookiebot' ) . '</strong><br>
+						' . esc_html__( 'In some occasions this may cause client side errors. If you notice any errors please try to disable Cookiebot™ addons or contact Cookiebot™ support.', 'cookiebot' ) . '
 						</p>
 					</div>';
 					}

@@ -51,7 +51,7 @@ $header->display();
 			<div class="cb-faqs">
 				<h2 class="cb-support__info__title">FAQ:</h2>
 				<div class="cb-faq__container cb-faq--opened">
-					<h3 class="cb-faq__question"><?php esc_html_e( 'How to find my Cookiebot ID', 'cookiebot' ); ?><span class="cb-faq__toggle"></span></h3>
+					<h3 class="cb-faq__question"><?php esc_html_e( 'How to find my Cookiebot™ ID', 'cookiebot' ); ?><span class="cb-faq__toggle"></span></h3>
 					<div class="cb-faq__answer">
 						<p class="cb-faq__answer__content">
 							<ol>
