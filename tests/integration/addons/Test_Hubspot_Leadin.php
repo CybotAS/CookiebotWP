@@ -19,7 +19,7 @@ class Test_Hubspot_Leadin extends WP_UnitTestCase {
 	 * @throws \Exception
 	 */
 	public function test_is_plugin_compatible() {
-		$content = Hubspot_Leadin::get_svn_file_content( 'src/class-assetsmanager.php' );
+		$content = Hubspot_Leadin::get_svn_file_content( 'public/class-assetsmanager.php' );
 
 		$this->assertNotFalse( strpos( $content, "const TRACKING_CODE      = 'leadin-script-loader-js';" ) );
 	}
