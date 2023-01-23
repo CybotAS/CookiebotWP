@@ -71,7 +71,11 @@ class Cookiebot_WP {
 
 	public function cookiebot_init() {
 		Cookiebot_Addons::instance();
-		load_plugin_textdomain( 'cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
+		load_textdomain(
+			'cookiebot',
+			CYBOT_COOKIEBOT_PLUGIN_DIR . 'langs/cookiebot-' . get_locale() . '.mo'
+		);
+		load_plugin_textdomain( 'cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs' );
 
 		if ( is_admin() ) {
 			( new Menu_Settings() )->add_menu();
@@ -90,6 +94,7 @@ class Cookiebot_WP {
 		( new WP_Rocket_Helper() )->register_hooks();
 
 		$this->set_consent_mode_default();
+		add_filter( 'plugin_action_links_cookiebot/cookiebot.php' , [ $this , 'set_settings_action_link' ] );
 	}
 
 	/**
@@ -164,5 +169,13 @@ class Cookiebot_WP {
 			update_option( 'cookiebot-gcm', '1' );
 			update_option( 'cookiebot-gcm-first-run', '1' );
 		}
+	}
+
+	public function set_settings_action_link( $actions ) {
+		$cblinks = array(
+			'<a href="' . admin_url( 'admin.php?page=cookiebot' ) . '">'.esc_html__('Dashboard','cookiebot').'</a>',
+		);
+		$actions = array_merge( $actions, $cblinks );
+		return $actions;
 	}
 }

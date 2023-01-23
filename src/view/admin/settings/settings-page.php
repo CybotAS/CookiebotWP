@@ -103,7 +103,7 @@ $header->display();
 							<div class="cb-settings__config__content">
 								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Language:', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Select your main language here. Please make sure that the language selected has also been added in the Cookiebot Manager.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Select your main language here. Please make sure that the language selected has also been added in the Cookiebot™ Manager.', 'cookiebot' ); ?>
 								</p>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-to-set-the-language-of-the-consent-banner-" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Read more on how to add languages', 'cookiebot' ); ?></a>
 							</div>
@@ -173,7 +173,7 @@ $header->display();
 
 						<div class="cb-settings__config__item secondary__item" id="declaration-tag">
 							<div class="cb-settings__config__content">
-								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookiebot script tag', 'cookiebot' ); ?></h3>
+								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookiebot™ script tag', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__note">
 									<?php esc_html_e( 'Depending on cookie-blocking mode', 'cookiebot' ); ?>
 								</p>
@@ -249,9 +249,9 @@ $header->display();
 
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
-								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Auto-update Cookiebot Plugin:', 'cookiebot' ); ?></h3>
+								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Auto-update Cookiebot™ Plugin:', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Automatically update your Cookiebot plugin when new releases becomes available.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Automatically update your Cookiebot™ plugin when new releases becomes available.', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">
