@@ -123,6 +123,12 @@ function googleConsentModeUrlPassthrough() {
             jQuery(this)
               .is(':checked')
           )
+        const input = jQuery('input#gcm-url-pasthrough');
+        const label = input.parents('label.switch-checkbox')[0];
+        if (!label || !label.childNodes.length)
+            return;
+        label.childNodes[label.childNodes.length - 1].textContent = 'URL passthrough' + ' ' +
+            (input.is(':checked') ? 'enabled' : 'disabled');
     });
     jQuery('input#gcm, input#gcm-url-pasthrough').on('change', function () {
         const input = jQuery(this);
