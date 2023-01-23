@@ -23,25 +23,6 @@ $header->display();
 	<div class="cb-wrapper">
 		<?php $main_tabs->display( 'dashboard' ); ?>
 		<div class="cb-main__content <?php echo $cbid ? 'sync-account' : ''; ?>">
-			<?php
-			if ( ! $cbid ) :
-				$today    = new DateTime( 'now' );
-				$end_date = new DateTime( '2022-12-31' );
-
-				if ( $today < $end_date ) :
-					?>
-			<div class="cb-main__dashboard__promo">
-				<div class="cb-main__dashboard__promo--inner">
-					<div class="cb-dashboard__promo--label"><div class="time-icon"></div><span>End of Year Promotion</span></div>
-					<h2 class="cb-dashboard__promo--title">Get <span class="highlight">30% off</span> your premium Cookiebot CMP subscription*</h2>
-					<a href="https://www.cookiebot.com/en/new-wp-cookie-plugin/?utm_source=wordpress&utm_medium=organic&utm_campaign=banner" target="_blank" class="cb-btn cb-promo-btn">SIGN UP NOW</a>
-					<p class="promo-condition">* This promotion is valid until December 31st, 2022 and will be calculated automatically. The discount only applies to new subscriptions and is valid for the first 12 months.</p>
-				</div>
-			</div>
-					<?php
-				endif;
-				endif;
-			?>
 			<div class="cb-main__dashboard__card--container">
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner <?php echo $cbid ? 'start_card' : 'account_card'; ?>">
@@ -60,6 +41,16 @@ $header->display();
 						<?php endif; ?>
 					</div>
 				</div>
+
+				<?php if ( $cbid ) : ?>
+                <div class="cb-main__dashboard__card">
+                    <div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
+                        <h3 class="cb-main__card__subtitle"><?php echo esc_html__( 'Your opinion matters', 'cookiebot' ); ?></h3>
+                        <p class="cb-main__review__text"><?php echo esc_html__( 'Are you happy with our WordPress plugin? Your feedback will help us make our product better for you.', 'cookiebot' ); ?></p>
+                        <a href="https://wordpress.org/support/plugin/cookiebot/reviews/#new-post" target="_blank" class="cb-btn cb-link-btn"><?php echo esc_html__( 'Write a review', 'cookiebot' ); ?></a>
+                    </div>
+                </div>
+				<?php endif; ?>
 
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
