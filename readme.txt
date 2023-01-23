@@ -229,7 +229,6 @@ Cookiebot CMP is compatible with translation plugins when you set language to â€
 * Fix Wrong label on Url passthrough input on first load
 * Fix Menu links url on multisite
 
-## Changelog ##
 ### 4.2.3 - 2022-12-21 ###
 * Allow disabling URL passthrough when Google Consent Mode is activated
 
