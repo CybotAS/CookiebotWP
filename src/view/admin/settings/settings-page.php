@@ -136,7 +136,7 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:', 'cookiebot' ); ?>
 								</p>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/360009063100-How-does-Automatic-Cookie-Blocking-work-" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?></a>
+								<a href="https://support.cookiebot.com/hc/en-us/articles/360009074960-Automatic-cookie-blocking" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?></a>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Guide to manual cookie-blocking', 'cookiebot' ); ?></a>
 							</div>
 							<div class="cb-settings__config__data">

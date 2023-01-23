@@ -141,7 +141,7 @@ Please find here **[our step by step guide](https://support.cookiebot.com/hc/en-
 ### How does Cookiebot CMP block cookies and trackers?###
 Cookiebot CMP provides two modes to block cookies and trackers before consent has been given.
 
-1. **Auto cookie-blocking mode** will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. [Learn more about the auto cookie-blocking mode](https://support.cookiebot.com/hc/en-us/articles/360009063100-How-does-Automatic-Cookie-Blocking-work-).
+1. **Auto cookie-blocking mode** will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. [Learn more about the auto cookie-blocking mode](https://support.cookiebot.com/hc/en-us/articles/360009074960-Automatic-cookie-blocking).
 2. **Manual cookie-blocking mode** requests manual adjustments to the cookie-setting scripts. [Read more about the manual cookie-blocking mode](https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking).
 
 ### What is the GDPR and the ePrivacy Directive? ####
@@ -224,6 +224,7 @@ Cookiebot CMP is compatible with translation plugins when you set language to �
 * Add review card on dashboard
 * Add settings quick access link on plugins page list
 * Add translations German, French, Spanish, Italian and Portuguese
+* Update Auto blocking mode guide url
 * Fix “Undefined index: tab” warning
 * Fix Wrong label on Url passthrough input on first load
 * Fix Menu links url on multisite
