@@ -3,7 +3,7 @@
 * Tags: cookie banner, cookies, GDPR, CCPA, cookie notice, dsgvo, ePrivacy, privacy compliance, cookie law, data privacy, cmp
 * Requires at least: 4.4
 * Tested up to: 6.1.1
-* Stable tag: 4.2.3
+* Stable tag: 4.2.4
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -229,7 +229,6 @@ Cookiebot CMP is compatible with translation plugins when you set language to â€
 * Fix Wrong label on Url passthrough input on first load
 * Fix Menu links url on multisite
 
-## Changelog ##
 ### 4.2.3 - 2022-12-21 ###
 * Allow disabling URL passthrough when Google Consent Mode is activated
 
