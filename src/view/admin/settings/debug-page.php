@@ -40,7 +40,7 @@ $header->display();
 				<div class="cb-debug__support__card">
 					<div class="cb-debug__support__inner">
 						<h2 class="cb-debug__support__title"><?php esc_html_e( 'If you have any issues with the implemenation of Cookiebot CMP, please visit our Support Center.', 'cookiebot' ); ?></h2>
-						<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn">
+						<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 							<?php
 							esc_html_e(
 								'Visit Support Center',

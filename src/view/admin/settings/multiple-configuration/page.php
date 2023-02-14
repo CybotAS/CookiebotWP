@@ -13,7 +13,7 @@
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'You can add a second alternative banner or configuration to your website by creating a second Domain Group and specify it on a region.', 'cookiebot' ); ?>
 		</p>
-		<a href="https://support.cookiebot.com/hc/en-us/articles/360010932419-Multiple-banners-on-the-same-website-example-CCPA-GDPR-" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Read more about multiple configurations here', 'cookiebot' ); ?></a>
+		<a href="https://support.cookiebot.com/hc/en-us/articles/360010932419-Multiple-banners-on-the-same-website-example-CCPA-GDPR-" target="_blank" class="cb-btn cb-link-btn" rel="noopener"><?php esc_html_e( 'Read more about multiple configurations here', 'cookiebot' ); ?></a>
 	</div>
 	<div class="cb-settings__config__data">
 		<div class="cb-settings__config__data__inner">

@@ -6,7 +6,7 @@
 ?>
 <li>
 	<span class="dashicons dashicons-external"></span>
-	<a href="https://wordpress.org/support/plugin/cookiebot/reviews?filter=5&rate=5#new-post" target="_blank">
+	<a href="https://wordpress.org/support/plugin/cookiebot/reviews?filter=5&rate=5#new-post" target="_blank" rel="noopener">
 		<?php
 		echo esc_html__(
 			'Sure! I\'d love to!',

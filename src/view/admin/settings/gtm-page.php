@@ -4,7 +4,7 @@
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'For more details about Cookiebot CMP and Google Tag Manager.', 'cookiebot' ); ?>
 		</p>
-		<a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/" class="cb-btn cb-link-btn" target="_blank">
+		<a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/" class="cb-btn cb-link-btn" target="_blank" rel="noopener">
 			&nbsp;<?php esc_html_e( 'Read more', 'cookiebot' ); ?>
 		</a>
 	</div>
@@ -25,7 +25,7 @@
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'Paste your Tag Manager ID into the field on the right.', 'cookiebot' ); ?>
 		</p>
-		<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174#3" class="cb-btn cb-link-btn" target="_blank">
+		<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174#3" class="cb-btn cb-link-btn" target="_blank" rel="noopener">
 			&nbsp;<?php esc_html_e( 'How to find the GTM ID', 'cookiebot' ); ?>
 		</a>
 	</div>
@@ -43,7 +43,7 @@
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'You can also paste your Data Layer Name here. This is optional information.', 'cookiebot' ); ?>
 		</p>
-		<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174#3" class="cb-btn cb-link-btn" target="_blank">
+		<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174#3" class="cb-btn cb-link-btn" target="_blank" rel="noopener">
 			&nbsp;<?php esc_html_e( 'How to find the Data Layer Name', 'cookiebot' ); ?>
 		</a>
 	</div>

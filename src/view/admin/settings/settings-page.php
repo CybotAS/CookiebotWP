@@ -74,7 +74,7 @@ $header->display();
 								<?php esc_html_e( 'Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on "Create a new account" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find your ID in the Cookiebot Manager by navigating to "Settings" and "Your Scripts".', 'cookiebot' ); ?>
 							</p>
 							<div class="new-account-actions">
-								<a href="https://manage.cookiebot.com/en/signup/?utm_source=wordpress&utm_medium=organic&utm_campaign=banner" target="_blank" class="cb-btn cb-main-btn"><?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?></a>
+								<a href="https://manage.cookiebot.com/en/signup/?utm_source=wordpress&utm_medium=organic&utm_campaign=banner" target="_blank" class="cb-btn cb-main-btn" rel="noopener"><?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?></a>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress" class="cb-btn cb-link-btn"><?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?></a>
 							</div>
 						</div>
@@ -86,7 +86,7 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'To connect your Domain Group, paste your Domain Group ID here. If you want to connect a second ID for other regions, you can do this under the "Multiple Configurations" tab.', 'cookiebot' ); ?>
 								</p>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Read more on the Domain Group ID', 'cookiebot' ); ?></a>
+								<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it" target="_blank" class="cb-btn cb-link-btn" rel="noopener"><?php esc_html_e( 'Read more on the Domain Group ID', 'cookiebot' ); ?></a>
 							</div>
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
@@ -105,7 +105,7 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'Select your main language here. Please make sure that the language selected has also been added in the Cookiebot™ Manager.', 'cookiebot' ); ?>
 								</p>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-to-set-the-language-of-the-consent-banner-" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Read more on how to add languages', 'cookiebot' ); ?></a>
+								<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-to-set-the-language-of-the-consent-banner-" target="_blank" class="cb-btn cb-link-btn" rel="noopener"><?php esc_html_e( 'Read more on how to add languages', 'cookiebot' ); ?></a>
 							</div>
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
@@ -136,8 +136,8 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:', 'cookiebot' ); ?>
 								</p>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/360009074960-Automatic-cookie-blocking" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?></a>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Guide to manual cookie-blocking', 'cookiebot' ); ?></a>
+								<a href="https://support.cookiebot.com/hc/en-us/articles/360009074960-Automatic-cookie-blocking" target="_blank" class="cb-btn cb-link-btn" rel="noopener"><?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?></a>
+								<a href="https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking" target="_blank" class="cb-btn cb-link-btn" rel="noopener"><?php esc_html_e( 'Guide to manual cookie-blocking', 'cookiebot' ); ?></a>
 							</div>
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
@@ -424,7 +424,7 @@ $header->display();
 							<p class="cb-general__info__text">
 								<?php esc_html_e( 'Cookiebot consent managment platform (CMP) and Google Consent Mode integrate seamlessly to offer you plug-and-play compliance and streamlined use of all Google\'s services in one easy solution.', 'cookiebot' ); ?>
 							</p>
-							<a class="cb-btn cb-link-btn" target="_blank" href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode"><?php esc_html_e( 'Read more about Cookiebot CMP and Google Consent Mode', 'cookiebot' ); ?></a>
+							<a class="cb-btn cb-link-btn" target="_blank" rel="noopener" href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode"><?php esc_html_e( 'Read more about Cookiebot CMP and Google Consent Mode', 'cookiebot' ); ?></a>
 						</div>
 
 						<?php $gcm_enabled_option = get_option( 'cookiebot-gcm' ); ?>
@@ -435,7 +435,7 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'Enable Google Consent Mode with default settings on your WordPress page.', 'cookiebot' ); ?>
 								</p>
-								<a class="cb-btn cb-link-btn" target="_blank" href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode"><?php esc_html_e( 'Read more', 'cookiebot' ); ?></a>
+								<a class="cb-btn cb-link-btn" target="_blank" rel="noopener" href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode"><?php esc_html_e( 'Read more', 'cookiebot' ); ?></a>
 							</div>
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
@@ -462,7 +462,7 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'This feature will allow you to pass data between pages when not able to use cookies without/prior consent.', 'cookiebot' ); ?>
 								</p>
-								<a class="cb-btn cb-link-btn" target="_blank" href="https://developers.google.com/tag-platform/devguides/consent#passing_ad_click_client_id_and_session_id_information_in_urls"><?php esc_html_e( 'Read more', 'cookiebot' ); ?></a>
+								<a class="cb-btn cb-link-btn" target="_blank" rel="noopener" href="https://developers.google.com/tag-platform/devguides/consent#passing_ad_click_client_id_and_session_id_information_in_urls"><?php esc_html_e( 'Read more', 'cookiebot' ); ?></a>
 							</div>
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
