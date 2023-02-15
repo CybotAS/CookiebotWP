@@ -290,6 +290,10 @@ textarea {
     width: 30px;
 }
 
+.switch-checkbox input[type=checkbox]:disabled + .switcher {
+    opacity: .5;
+}
+
 .cb-submit__msg {
     box-sizing: border-box;
     width: 468px;

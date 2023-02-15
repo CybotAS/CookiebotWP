@@ -20,6 +20,7 @@ use cybot\cookiebot\settings\pages\Multiple_Page;
  * @var array $m_default
  * @var array $m
  * @var string $cookie_blocking_mode
+ * @var bool $network_auto
  * @var string $add_language_gif_url
  */
 
@@ -68,16 +69,16 @@ $header->display();
 				<div class="cb-settings__tabs__content">
 					<div class="cb-settings__tabs__content--item <?php echo ! $active_tab || $active_tab === 'general-settings' ? 'active-item' : ''; ?>" id="general-settings">
 						<?php if ( ! $cbid ) : ?>
-						<div class="cb-general__new__account">
-							<h2 class="cb-general__info__title"><?php esc_html_e( 'Do you not have an account yet?', 'cookiebot' ); ?></h2>
-							<p class="cb-general__info__text">
-								<?php esc_html_e( 'Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on "Create a new account" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find your ID in the Cookiebot Manager by navigating to "Settings" and "Your Scripts".', 'cookiebot' ); ?>
-							</p>
-							<div class="new-account-actions">
-								<a href="https://manage.cookiebot.com/en/signup/?utm_source=wordpress&utm_medium=organic&utm_campaign=banner" target="_blank" class="cb-btn cb-main-btn"><?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?></a>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress" class="cb-btn cb-link-btn"><?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?></a>
+							<div class="cb-general__new__account">
+								<h2 class="cb-general__info__title"><?php esc_html_e( 'Do you not have an account yet?', 'cookiebot' ); ?></h2>
+								<p class="cb-general__info__text">
+									<?php esc_html_e( 'Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on "Create a new account" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find your ID in the Cookiebot Manager by navigating to "Settings" and "Your Scripts".', 'cookiebot' ); ?>
+								</p>
+								<div class="new-account-actions">
+									<a href="https://manage.cookiebot.com/en/signup/?utm_source=wordpress&utm_medium=organic&utm_campaign=banner" target="_blank" class="cb-btn cb-main-btn"><?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?></a>
+									<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress" class="cb-btn cb-link-btn"><?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?></a>
+								</div>
 							</div>
-						</div>
 						<?php endif; ?>
 
 						<div class="cb-settings__config__item">
@@ -147,7 +148,7 @@ $header->display();
 												type="radio"
 												name="cookiebot-cookie-blocking-mode"
 												value="auto"
-										/>
+											<?php echo $is_ms && $network_auto ? ' disabled' : ''; ?>/>
 										<?php esc_html_e( 'Automatic cookie-blocking mode', 'cookiebot' ); ?>
 									</label>
 									<label>
@@ -155,9 +156,12 @@ $header->display();
 												type="radio"
 												name="cookiebot-cookie-blocking-mode"
 												value="manual"
-										/>
+											<?php echo $is_ms && $network_auto ? ' disabled' : ''; ?>/>
 										<?php esc_html_e( 'Manual cookie-blocking mode', 'cookiebot' ); ?>
 									</label>
+									<?php if ( $is_ms && $network_auto ) { ?>
+										<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
@@ -204,6 +208,9 @@ $header->display();
 												value="defer" <?php checked( 'defer', $cv ); ?> />
 										defer
 									</label>
+									<?php if ( $is_ms && $network_auto || $is_ms && $network_scrip_tag_uc_attr !== 'custom' ) { ?>
+										<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
@@ -223,9 +230,13 @@ $header->display();
 									<label>
 										<?php
 										$disabled = false;
-										if ( $is_ms && get_site_option( 'cookiebot-nooutput' ) ) {
+										if ( $is_ms && get_site_option( 'cookiebot-nooutput' ) || $is_ms && $network_auto ) {
 											$disabled = true;
-											echo '<input type="checkbox" checked disabled />';
+											if ( ! $network_auto ) {
+												echo '<input type="checkbox" checked disabled />';
+											} else {
+												echo '<input type="checkbox" disabled />';
+											}
 										} else {
 											?>
 											<input type="checkbox" name="cookiebot-nooutput" value="1"
@@ -239,6 +250,9 @@ $header->display();
 										<?php } ?>
 										<?php esc_html_e( 'Hide the cookie popup banner', 'cookiebot' ); ?>
 									</label>
+									<?php if ( $is_ms && get_site_option( 'cookiebot-nooutput' ) || $is_ms && $network_auto ) { ?>
+										<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
@@ -303,6 +317,11 @@ $header->display();
 										<div class="switcher"></div>
 										<?php esc_html_e( 'Disable Cookiebot CMP in the WordPress Admin area', 'cookiebot' ); ?>
 									</label>
+									<?php
+									if ( $is_ms && get_site_option( 'cookiebot-nooutput-admin' ) ) {
+										?>
+										<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
@@ -381,6 +400,9 @@ $header->display();
 												value="defer" <?php checked( 'defer', $cv ); ?>/>
 										defer
 									</label>
+									<?php if ( $disabled ) { ?>
+										<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
+									<?php } ?>
 								</div>
 							</div>
 						</div>

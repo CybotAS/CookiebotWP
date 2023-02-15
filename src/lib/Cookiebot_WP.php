@@ -79,7 +79,7 @@ class Cookiebot_WP {
 
 		if ( is_admin() ) {
 			( new Menu_Settings() )->add_menu();
-			if ( is_multisite() ) {
+			if ( is_multisite() && is_plugin_active_for_network( 'cookiebot/cookiebot.php' ) ) {
 				( new Network_Menu_Settings() )->add_menu();
 			}
 			( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();
@@ -142,6 +142,15 @@ class Cookiebot_WP {
 		$setting         = (string) get_option( 'cookiebot-cookie-blocking-mode', $network_setting );
 
 		return in_array( $setting, $allowed_modes, true ) ? $setting : 'manual';
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function check_networK_auto_blocking_mode() {
+		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode' );
+
+		return $network_setting === 'auto' ? true : false;
 	}
 
 	/**
