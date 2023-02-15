@@ -87,7 +87,7 @@ class Google_Maps_Jetpack_Widget extends Base_Jetpack_Widget {
 			/**
 			 * Pattern to get all iframes
 			 */
-			$pattern = '/<iframe.*?>.*?<\/iframe>/i';
+			$pattern = '/<iframe(.*?)?>(.|\s)*?<\/iframe>/i';
 
 			/**
 			 * Get all scripts and add cookieconsent if it does match with the criterion
