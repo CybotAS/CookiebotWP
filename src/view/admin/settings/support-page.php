@@ -28,7 +28,7 @@ $header->display();
 						);
 						?>
 					</p>
-					<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn">
+					<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 						<?php
 						esc_html_e(
 							'Visit Cookiebot CMP Help Center',
@@ -60,7 +60,7 @@ $header->display();
 									echo sprintf(
 									// translators: the first placeholder string will be replaced with a html anchor open tag and the second placeholder string will be replaced by the html anchor closing tag
 										esc_html__( 'Log in to your %1$sCookiebot CMP account%2$s.', 'cookiebot' ),
-										'<a href="https://www.cookiebot.com/goto/account" target="_blank">',
+										'<a href="https://www.cookiebot.com/goto/account" target="_blank" rel="noopener">',
 										'</a>'
 									);
 									?>
@@ -128,7 +128,7 @@ $header->display();
 							?>
 						</p>
 						<p class="cb-faq__answer__content">
-							<a href="https://www.youtube.com/watch?v=OCXz2bt4H_w" target="_blank" class="cb-btn cb-main-btn">
+							<a href="https://www.youtube.com/watch?v=OCXz2bt4H_w" target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 								<?php
 								esc_html_e(
 									'Watch video demonstration',
@@ -156,7 +156,7 @@ $header->display();
 							echo sprintf(
 							// translators: the placeholder strings denote the positions of <i>, </i>, <b> and </b> HTML tags
 								esc_html__( 'Example on modifying an existing Google Analytics Universal script tag can be found %1$shere in step 4%2$s.', 'cookiebot' ),
-								'<a href="https://www.cookiebot.com/en/manual-implementation/" target="_blank">',
+								'<a href="https://www.cookiebot.com/en/manual-implementation/" target="_blank" rel="noopener">',
 								'</a>'
 							);
 							?>
@@ -172,7 +172,7 @@ $header->display();
 							?>
 						</code>
 						<p class="cb-faq__answer__content">
-							<a href="https://www.youtube.com/watch?v=MeHycvV2QCQ" target="_blank" class="cb-btn cb-main-btn">
+							<a href="https://www.youtube.com/watch?v=MeHycvV2QCQ" target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 								<?php
 								esc_html_e(
 									'Watch video demonstration',
