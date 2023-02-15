@@ -57,8 +57,8 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 	 *
 	 * @param $tag
 	 * @param $priority
-	 * @param array $keywords
-	 * @param boolean $use_cache
+	 * @param array    $keywords
+	 * @param boolean  $use_cache
 	 *
 	 * @since 1.2.0
 	 */

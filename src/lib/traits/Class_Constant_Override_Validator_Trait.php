@@ -96,7 +96,7 @@ trait Class_Constant_Override_Validator_Trait {
 
 	/**
 	 * @param $required_array_constant_name
-	 * @param array|null $allowed_item_values
+	 * @param array|null                   $allowed_item_values
 	 *
 	 * @throws Exception
 	 */

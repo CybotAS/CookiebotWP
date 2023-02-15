@@ -120,7 +120,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @param       $option_key
 	 * @param       $widget
-	 * @param  array  $default
+	 * @param  array      $default
 	 *
 	 * @return array
 	 *
@@ -267,7 +267,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @param $option_key
 	 * @param $default_placeholder
 	 * @param $cookies
-	 * @param  string  $src
+	 * @param  string              $src
 	 *
 	 * @return bool|mixed
 	 *
@@ -289,7 +289,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @param $option_key
 	 * @param $widget_key
 	 * @param $default_placeholder
-	 * @param string $cookies
+	 * @param string              $cookies
 	 *
 	 * @return bool|mixed
 	 *
@@ -312,7 +312,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @param        $option_key
 	 * @param        $default_placeholder
 	 * @param        $cookies
-	 * @param  string  $src
+	 * @param  string              $src
 	 *
 	 * @return mixed
 	 *

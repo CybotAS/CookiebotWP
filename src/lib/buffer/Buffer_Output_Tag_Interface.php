@@ -9,7 +9,7 @@ interface Buffer_Output_Tag_Interface {
 	 *
 	 * @param $tag
 	 * @param $priority
-	 * @param array $keywords
+	 * @param array    $keywords
 	 *
 	 * @version 1.3.0
 	 * @since 1.1.0

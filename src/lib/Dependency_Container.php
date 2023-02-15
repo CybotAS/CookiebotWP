@@ -14,7 +14,7 @@ class Dependency_Container {
 	/**
 	 * Dependency_Container constructor.
 	 *
-	 * @param  array  $dependencies
+	 * @param  array $dependencies
 	 */
 	public function __construct( array $dependencies = array() ) {
 		$this->dependencies = $dependencies;
