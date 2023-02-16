@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2022-06-10 11:05+0200\n"
-"PO-Revision-Date: 2023-01-20 17:44+0100\n"
+"PO-Revision-Date: 2023-02-16 12:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1852,6 +1852,14 @@ msgstr ""
 msgid "Hide the cookie popup banner"
 msgstr "Cookie-Popup-Banner ausblenden"
 
+#: view/admin/settings/settings-page.php:163
+#: view/admin/settings/settings-page.php:212
+#: view/admin/settings/settings-page.php:254
+#: view/admin/settings/settings-page.php:323
+#: view/admin/settings/settings-page.php:404
+msgid "Disabled by active setting in Network Settings"
+msgstr "Deaktiviert durch aktive Einstellung in den Netzwerkeinstellungen"
+
 #: view/admin/settings/prior-consent/available-addons/tab-header.php:4
 #: view/admin/settings/prior-consent/jetpack-widgets/tab-header.php:14
 msgid "Remember to save your changes before switching tabs"
@@ -2370,11 +2378,12 @@ msgid "Your Cookiebot is working!"
 msgstr "Ihr Cookiebot funktioniert!"
 
 #. Plugin Name of the plugin/theme
-msgid "Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control"
+msgid "Cookie banner plugin for WordPress – Cookiebot CMP by Usercentrics"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "https://cookiebot.com/"
+#. Author URI of the plugin/theme
+msgid "https://www.cookiebot.com/"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -2385,8 +2394,4 @@ msgstr ""
 
 #. Author of the plugin/theme
 msgid "Usercentrics A/S"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "http://cookiebot.com"
 msgstr ""
