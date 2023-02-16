@@ -187,4 +187,20 @@ class Cookiebot_WP {
 		$actions = array_merge( $actions, $cblinks );
 		return $actions;
 	}
+
+	/**
+	 * @return string
+	 */
+	public static function get_manager_language(): string {
+		$locale          = get_locale();
+		$supported_langs = array(
+			'de_DE' => 'de',
+			'da_DK' => 'da',
+			'fr_FR' => 'fr',
+			'it_IT' => 'it',
+			'es_ES' => 'es',
+		);
+
+		return array_key_exists( $locale, $supported_langs ) ? $supported_langs[ $locale ] : 'en';
+	}
 }
