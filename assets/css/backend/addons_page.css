@@ -167,6 +167,10 @@
     color: #141414;
 }
 
+.cookiebot-addon input + label.cookiebot-addon-text {
+    text-transform: capitalize;
+}
+
 .cookiebot-addon .cookietypes {
     margin-bottom: 30px;
 }
