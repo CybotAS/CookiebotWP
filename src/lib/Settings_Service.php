@@ -338,8 +338,9 @@ class Settings_Service implements Settings_Service_Interface {
 					$cookies_array           = explode( ', ', $cookies );
 					$translated_cookie_names = cookiebot_translate_cookie_names( $cookies_array );
 					$translated_cookie_names = implode( ', ', $translated_cookie_names );
+					$placeholder             = esc_html__( $option[ $option_key ]['placeholder']['languages'][ $key ], 'cookiebot' );
 					return $this->placeholder_merge_tag(
-						$option[ $option_key ]['placeholder']['languages'][ $key ],
+						$placeholder,
 						$translated_cookie_names,
 						$src
 					);
@@ -351,8 +352,9 @@ class Settings_Service implements Settings_Service_Interface {
 		 * Returns site-default text if no match found.
 		 */
 		if ( isset( $option[ $option_key ]['placeholder']['languages']['site-default'] ) ) {
+			$placeholder = esc_html__( $option[ $option_key ]['placeholder']['languages']['site-default'], 'cookiebot' );
 			return $this->placeholder_merge_tag(
-				$option[ $option_key ]['placeholder']['languages']['site-default'],
+				$placeholder,
 				$cookies,
 				$src
 			);
