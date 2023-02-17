@@ -203,7 +203,7 @@ $header->display();
 						// translators: %1$s refers to the original script tag HTML, and %2$s refers to its replacement
 							esc_html__( '%1$s to %2$s', 'cookiebot' ),
 							'<code class="cb-faq__code">' . esc_html( '<script type="text/javascript">' ) . '</code>',
-							'<code class="cb-faq__code">' . esc_html( '<script<?php echo cookiebot_assist(\'marketing\') ?>>' ) . '</code>'
+							'<code class="cb-faq__code">' . esc_html( '<script<?php echo function_exists(\'cookiebot_assist\') ? cookiebot_assist(\'marketing\') : \' type="text/javascript"\' ?>>' ) . '</code>'
 						);
 						?>
 					</div>
