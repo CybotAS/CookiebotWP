@@ -73,6 +73,7 @@ function placeholder_enable( addon ) {
  * @since 1.8.0
  */
 function button_add_placeholder_language() {
+    const initialValues = jQuery('form').serialize();
 	jQuery( '.btn_add_language' ).on(
 		'click',
 		function ( e ) {
@@ -81,6 +82,10 @@ function button_add_placeholder_language() {
 			var addon = jQuery( this ).data( 'addon' );
 
 			add_placeholder_language_content( addon );
+
+            let newValues = jQuery('form').serialize();
+            if(newValues!==initialValues)
+                jQuery('p.submit #submit').addClass('enabled');
 
 			return false;
 		}
@@ -136,6 +141,7 @@ function placeholder_select_language() {
  * @since 1.8.0
  */
 function button_delete_language() {
+    const initialValues = jQuery('form').serialize();
 	jQuery( document ).on(
 		'click',
 		'.submitdelete',
@@ -143,6 +149,10 @@ function button_delete_language() {
 			e.preventDefault();
 
 			jQuery( this ).parent().parent().remove();
+
+            let newValues = jQuery('form').serialize();
+            if(newValues===initialValues)
+                jQuery('p.submit #submit').removeClass('enabled');
 
 			return false;
 		}
@@ -241,8 +251,7 @@ function closeSubmitMsg() {
 function submitEnable() {
     const initialValues = jQuery('form').serialize();
     let submitBtn = jQuery('p.submit #submit');
-    let inputsNotText = jQuery(':input').not(':input[type="text"]');
-    inputsNotText.change(
+    jQuery(document).on('change','input:not([type=text]), select',
         function(){
             let newValues = jQuery('form').serialize();
             if(newValues !== initialValues) {
@@ -252,7 +261,7 @@ function submitEnable() {
             }
         }
     );
-    jQuery('input[type="text"], textarea').on('input',
+    jQuery(document).on('input', 'input[type="text"], textarea',
         function(){
             let newValues = jQuery('form').serialize();
             if(newValues !== initialValues) {

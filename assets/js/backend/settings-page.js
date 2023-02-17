@@ -109,8 +109,7 @@ function closeSubmitMsg() {
 function submitEnable() {
     const initialValues = jQuery('form').serialize();
     let submitBtn = jQuery('p.submit #submit');
-    let inputsNotText = jQuery(':input').not(':input[type="text"]');
-    inputsNotText.change(
+    jQuery(document).on('change','input:not([type=text]), select',
         function(){
             let newValues = jQuery('form').serialize();
             if(newValues !== initialValues) {
@@ -120,7 +119,7 @@ function submitEnable() {
             }
         }
     );
-    jQuery('input[type="text"], textarea').on('input',
+    jQuery(document).on('input', 'input[type="text"], textarea',
         function(){
             let newValues = jQuery('form').serialize();
             if(newValues !== initialValues) {
