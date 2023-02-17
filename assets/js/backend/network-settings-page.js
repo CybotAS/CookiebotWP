@@ -22,9 +22,27 @@ jQuery( document ).ready( function ( $ ) {
         jQuery(this).addClass('hidden');
     });
 
-    jQuery(':input').change(
+    const initialValues = jQuery('form').serialize();
+    let submitBtn = jQuery('p.submit #submit');
+    let inputsNotText = jQuery(':input').not(':input[type="text"]');
+    inputsNotText.change(
         function(){
-            jQuery('p.submit #submit').addClass('enabled');
+            let newValues = jQuery('form').serialize();
+            if(newValues !== initialValues) {
+                submitBtn.addClass('enabled');
+            }else{
+                submitBtn.removeClass('enabled');
+            }
+        }
+    );
+    jQuery('input[type="text"], textarea').on('input',
+        function(){
+            let newValues = jQuery('form').serialize();
+            if(newValues !== initialValues) {
+                submitBtn.addClass('enabled');
+            }else{
+                submitBtn.removeClass('enabled');
+            }
         }
     );
 } )
