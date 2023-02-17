@@ -76,7 +76,7 @@ $header->display();
 								</p>
 								<div class="new-account-actions">
 									<a href="https://manage.cookiebot.com/en/signup/?utm_source=wordpress&utm_medium=organic&utm_campaign=banner" target="_blank" class="cb-btn cb-main-btn"><?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?></a>
-									<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress" class="cb-btn cb-link-btn"><?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?></a>
+									<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress" target="_blank" class="cb-btn cb-link-btn"><?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?></a>
 								</div>
 							</div>
 						<?php endif; ?>

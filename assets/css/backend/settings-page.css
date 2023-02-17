@@ -112,6 +112,7 @@
 
 .cb-settings__config__subtitle {
     font-size: 20px;
+    line-height: 25px;
     margin: 0;
 }
 
@@ -123,6 +124,7 @@
 
 .cb-settings__data__subtitle {
     font-size: 15px;
+    line-height: 20px;
     margin: 0 0 15px;
 }
 

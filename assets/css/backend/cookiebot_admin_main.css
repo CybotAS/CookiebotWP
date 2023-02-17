@@ -9,7 +9,7 @@
 
 #wpcontent {
     padding-left: 0;
-    font-family: Inter;
+    font-family: Inter, Arial, sans-serif;
     background-color: #ffffff;
 }
 
@@ -121,17 +121,23 @@
     text-decoration: none;
     padding: 15px;
     font-size: 15px;
+    line-height: 20px;
     font-weight: 500;
     border-radius: 7px;
     border: none;
     cursor: pointer;
 }
 
+.cb-btn {
+    box-shadow: unset;
+    outline: unset;
+}
+
 .cb-btn.hidden {
     display: none;
 }
 
-.cb-main-btn {
+.cb-main-btn, .cb-main-btn:focus {
     background-color: #1032cf;
     color: #ffffff;
 }
@@ -141,7 +147,7 @@
     color: #ffffff;
 }
 
-.cb-white-btn {
+.cb-white-btn, .cb-white-btn:focus {
     background-color: #ffffff;
     color: #141414;
 }
@@ -150,7 +156,7 @@
     color: #666666;
 }
 
-.cb-link-btn {
+.cb-link-btn, .cb-link-btn:focus {
     background-color: transparent;
     color: #1032cf;
     padding: 0;
@@ -165,7 +171,7 @@
     text-align: right;
 }
 
-.cb-success-btn {
+.cb-success-btn, .cb-success-btn:focus {
     background-color: #076646;
     color: #ffffff;
     text-align: center;

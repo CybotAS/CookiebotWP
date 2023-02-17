@@ -11,6 +11,7 @@
 
 .cb-debug__info__title {
     font-size: 22px;
+    line-height: 26px;
     font-weight: 700;
     margin: 0 0 20px;
 }
@@ -28,6 +29,7 @@
 
 .cb-debug__support__title {
     font-size: 15px;
+    line-height: 20px;
     margin: 0;
 }
 
