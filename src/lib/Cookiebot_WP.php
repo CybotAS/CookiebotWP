@@ -69,7 +69,16 @@ class Cookiebot_WP {
 		}
 	}
 
+	public static function register_session_new() {
+		if ( ! session_id() ) {
+			session_start();
+		}
+	}
+
 	public function cookiebot_init() {
+
+		add_action( 'init', array( $this, 'register_session_new' ) );
+
 		Cookiebot_Addons::instance();
 		load_textdomain(
 			'cookiebot',
@@ -94,6 +103,7 @@ class Cookiebot_WP {
 		( new WP_Rocket_Helper() )->register_hooks();
 
 		$this->set_default_options();
+		$this->delay_notice_recommendation_on_first_activation();
 		add_filter( 'plugin_action_links_cookiebot/cookiebot.php', array( $this, 'set_settings_action_link' ) );
 	}
 
@@ -169,6 +179,12 @@ class Cookiebot_WP {
 		return false;
 	}
 
+	/**
+	 * Cookiebot_WP Set default options
+	 *
+	 * @version 4.2.5
+	 * @since       4.2.5
+	 */
 	private function set_default_options() {
 		$options = array(
 			'cookiebot-nooutput-admin' => '1',
@@ -183,6 +199,20 @@ class Cookiebot_WP {
 			if ( ( get_option( $option ) || get_option( $option ) !== false ) && ! get_option( $option . '-first-run' ) ) {
 				update_option( $option . '-first-run', '1' );
 			}
+		}
+	}
+
+	/**
+	 * Cookiebot_WP Delay recommendation notice 1 day after first activation
+	 *
+	 * @version 4.2.5
+	 * @since       4.2.5
+	 */
+	private function delay_notice_recommendation_on_first_activation() {
+		// Check if recommendation notice delay option exists
+		if ( get_option( Cookiebot_Recommendation_Notice::COOKIEBOT_RECOMMENDATION_OPTION_KEY, false ) === false ) {
+			// Delay in 1 day
+			add_option( Cookiebot_Recommendation_Notice::COOKIEBOT_RECOMMENDATION_OPTION_KEY, strtotime( '+1 day' ) );
 		}
 	}
 
