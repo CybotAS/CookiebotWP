@@ -11,6 +11,14 @@ https://core.trac.wordpress.org/ticket/44043
 
 [![Build Status](https://travis-ci.com/CybotAS/CookiebotWP.svg?branch=master)](https://app.travis-ci.com/github/CybotAS/CookiebotWP)
 
+# Sonarcloud status
+
+[![Security](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=security_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Reliability](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=reliability_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=bugs&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=sqale_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=vulnerabilities&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+
 Table of contents
 =================
 
