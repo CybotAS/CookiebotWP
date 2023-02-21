@@ -136,10 +136,7 @@ function googleConsentModeUrlPassthrough() {
         jQuery(this)
           .parents('#consent-mode')
           .find('.cb-settings__config__item:has(input#gcm-url-pasthrough)')
-          .toggle(
-            jQuery(this)
-              .is(':checked')
-          )
+          .toggle()
         const input = jQuery('input#gcm-url-pasthrough');
         const label = input.parents('label.switch-checkbox')[0];
         if (!label || !label.childNodes.length)

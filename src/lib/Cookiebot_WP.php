@@ -93,7 +93,7 @@ class Cookiebot_WP {
 		( new Cookiebot_Gutenberg_Declaration_Block() )->register_hooks();
 		( new WP_Rocket_Helper() )->register_hooks();
 
-		$this->set_consent_mode_default();
+		$this->set_default_options();
 		add_filter( 'plugin_action_links_cookiebot/cookiebot.php', array( $this, 'set_settings_action_link' ) );
 	}
 
@@ -169,14 +169,20 @@ class Cookiebot_WP {
 		return false;
 	}
 
-	private function set_consent_mode_default() {
-		if ( ! get_option( 'cookiebot-gcm' ) && ! get_option( 'cookiebot-gcm-first-run' ) ) {
-			update_option( 'cookiebot-gcm', '1' );
-		}
+	private function set_default_options() {
+		$options = array(
+			'cookiebot-nooutput-admin' => '1',
+			'cookiebot-gcm'            => '1',
+		);
 
-		if ( get_option( 'cookiebot-gcm' ) && ! get_option( 'cookiebot-gcm-first-run' ) ) {
-			update_option( 'cookiebot-gcm', '1' );
-			update_option( 'cookiebot-gcm-first-run', '1' );
+		foreach ( $options as $option => $default ) {
+			if ( get_option( $option ) === false && ! get_option( $option . '-first-run' ) ) {
+				update_option( $option, $default );
+			}
+
+			if ( ( get_option( $option ) || get_option( $option ) !== false ) && ! get_option( $option . '-first-run' ) ) {
+				update_option( $option . '-first-run', '1' );
+			}
 		}
 	}
 
