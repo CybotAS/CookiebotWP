@@ -343,21 +343,35 @@ namespace cybot\cookiebot\lib {
 	 *
 	 * @return string
 	 */
-	function cookiebot_translate_placeholder( string $placeholder ) {
+	function cookiebot_translate_placeholder( $placeholder ) {
 		$translated_placeholder = array(
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Services.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Services.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for google analytics.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for google analytics.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to Social Share buttons.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to Social Share buttons.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics.', 'cookiebot' ),
+			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.', 'cookiebot' ),
 		);
 
