@@ -27,7 +27,6 @@ class Support_Page implements Settings_Page_Interface {
 	 * @throws InvalidArgumentException
 	 */
 	public function display() {
-
 		$args = array(
 			'manager_language' => Cookiebot_WP::get_manager_language(),
 		);

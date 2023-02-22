@@ -87,7 +87,7 @@ $header->display();
 									<?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?>
 								</a>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress"
-                                   target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+								   target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 									<?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?>
 								</a>
 							</div>

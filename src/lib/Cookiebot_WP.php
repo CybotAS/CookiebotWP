@@ -76,7 +76,6 @@ class Cookiebot_WP {
 	}
 
 	public function cookiebot_init() {
-
 		add_action( 'init', array( $this, 'register_session_new' ) );
 
 		Cookiebot_Addons::instance();
@@ -157,7 +156,7 @@ class Cookiebot_WP {
 	/**
 	 * @return bool
 	 */
-	public static function check_networK_auto_blocking_mode() {
+	public static function check_network_auto_blocking_mode() {
 		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode' );
 
 		return $network_setting === 'auto' ? true : false;
@@ -227,7 +226,7 @@ class Cookiebot_WP {
 	/**
 	 * @return string
 	 */
-	public static function get_manager_language(): string {
+	public static function get_manager_language() {
 		$locale          = get_locale();
 		$supported_langs = array(
 			'de_DE' => 'de',

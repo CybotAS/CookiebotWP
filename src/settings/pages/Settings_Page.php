@@ -48,7 +48,7 @@ class Settings_Page implements Settings_Page_Interface {
 			'm_default'                => $consent_api_helper->get_default_wp_consent_api_mapping(),
 			'm'                        => $consent_api_helper->get_wp_consent_api_mapping(),
 			'cookie_blocking_mode'     => Cookiebot_WP::get_cookie_blocking_mode(),
-			'network_auto'             => Cookiebot_WP::check_networK_auto_blocking_mode(),
+			'network_auto'             => Cookiebot_WP::check_network_auto_blocking_mode(),
 			'add_language_gif_url'     => asset_url( 'img/guide_add_language.gif' ),
 		);
 

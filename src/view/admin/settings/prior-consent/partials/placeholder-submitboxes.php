@@ -30,7 +30,12 @@ foreach ( $placeholders as $placeholder ) :
 				cols="5"
 				rows="5"
 				name="<?php echo esc_attr( $name ); ?>"
-			><?php esc_html_e(esc_textarea( $placeholder_content ), 'cookiebot' ); ?></textarea>
+			>
+			<?php
+			$content = esc_textarea( $placeholder_content );
+			esc_html_e( $content, 'cookiebot' );
+			?>
+			</textarea>
 			<span class="help-tip" title="<?php echo esc_attr( $placeholder_helper ); ?>"></span>
 		</p>
 	</div>

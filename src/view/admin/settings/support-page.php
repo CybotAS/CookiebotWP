@@ -60,7 +60,7 @@ $header->display();
 									echo sprintf(
 									// translators: the first placeholder string will be replaced with a html anchor open tag and the second placeholder string will be replaced by the html anchor closing tag
 										esc_html__( 'Log in to your %1$sCookiebot CMP account%2$s.', 'cookiebot' ),
-										'<a href="https://www.cookiebot.com/' . $manager_language . '/account" target="_blank" rel="noopener">',
+										'<a href="https://www.cookiebot.com/' . esc_html__( $manager_language ) . '/account" target="_blank" rel="noopener">',
 										'</a>'
 									);
 									?>
