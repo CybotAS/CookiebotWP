@@ -1,5 +1,5 @@
 jQuery( document ).ready( function ( $ ) {
-    var cookieBlockingMode = cookiebotNetworkSettings.cbm
+    let cookieBlockingMode = cookiebotNetworkSettings.cbm
     $( 'input[type=radio][name=cookiebot-cookie-blocking-mode]' ).on( 'change', function () {
         if ( this.value === 'auto' && cookieBlockingMode !== this.value ) {
             $( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 )
@@ -23,25 +23,25 @@ jQuery( document ).ready( function ( $ ) {
     });
 
     const initialValues = jQuery('form').serialize();
-    let submitBtn = jQuery('p.submit #submit');
-    jQuery(document).on('change','input:not([type=text]), select',
-        function(){
-            let newValues = jQuery('form').serialize();
-            if(newValues !== initialValues) {
-                submitBtn.addClass('enabled');
-            }else{
-                submitBtn.removeClass('enabled');
-            }
-        }
-    );
-    jQuery(document).on('input', 'input[type="text"], textarea',
-        function(){
-            let newValues = jQuery('form').serialize();
-            if(newValues !== initialValues) {
-                submitBtn.addClass('enabled');
-            }else{
-                submitBtn.removeClass('enabled');
-            }
-        }
-    );
+    const events = {
+        change: 'input:not([type=text]), select',
+        input: 'input[type="text"], textarea'
+    };
+
+    Object.entries(events).forEach(entry => {
+        const [eventName, elements] = entry;
+        jQuery(document).on(eventName,elements,{initialValues: initialValues},function(event){
+            checkValues(event.data.initialValues)
+        });
+    });
 } )
+
+function checkValues(initialValues){
+    let submitBtn = jQuery('p.submit #submit');
+    let newValues = jQuery('form').serialize();
+    if(newValues !== initialValues) {
+        submitBtn.addClass('enabled');
+    }else{
+        submitBtn.removeClass('enabled');
+    }
+}

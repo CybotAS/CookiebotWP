@@ -58,7 +58,7 @@ function resetConsentMapping() {
 }
 
 function cookie_blocking_mode() {
-    var cookieBlockingMode = cookiebot_settings.cookieBlockingMode;
+    let cookieBlockingMode = cookiebot_settings.cookieBlockingMode;
 
     jQuery( 'input[type=radio][name=cookiebot-cookie-blocking-mode]' ).on( 'change', function () {
         if ( this.value === 'auto' && cookieBlockingMode !== this.value ) {
@@ -108,27 +108,27 @@ function closeSubmitMsg() {
 
 function submitEnable() {
     const initialValues = jQuery('form').serialize();
+    const events = {
+        change: 'input:not([type=text]), select',
+        input: 'input[type="text"], textarea'
+    };
+
+    Object.entries(events).forEach(entry => {
+        const [eventName, elements] = entry;
+        jQuery(document).on(eventName,elements,{initialValues: initialValues},function(event){
+            checkValues(event.data.initialValues)
+        });
+    });
+}
+
+function checkValues(initialValues){
     let submitBtn = jQuery('p.submit #submit');
-    jQuery(document).on('change','input:not([type=text]), select',
-        function(){
-            let newValues = jQuery('form').serialize();
-            if(newValues !== initialValues) {
-                submitBtn.addClass('enabled');
-            }else{
-                submitBtn.removeClass('enabled');
-            }
-        }
-    );
-    jQuery(document).on('input', 'input[type="text"], textarea',
-        function(){
-            let newValues = jQuery('form').serialize();
-            if(newValues !== initialValues) {
-                submitBtn.addClass('enabled');
-            }else{
-                submitBtn.removeClass('enabled');
-            }
-        }
-    );
+    let newValues = jQuery('form').serialize();
+    if(newValues !== initialValues) {
+        submitBtn.addClass('enabled');
+    }else{
+        submitBtn.removeClass('enabled');
+    }
 }
 
 function googleConsentModeUrlPassthrough() {

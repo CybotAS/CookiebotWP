@@ -33,8 +33,8 @@ function placeholder_toggle() {
 		'change',
 		'.placeholder_enable',
 		function () {
-			var status = jQuery( this ).is( ':checked' );
-			var addon  = jQuery( this ).data( 'addon' );
+			const status = jQuery( this ).is( ':checked' );
+			const addon  = jQuery( this ).data( 'addon' );
 
 			if ( status ) {
 				placeholder_enable( addon );
@@ -79,11 +79,11 @@ function button_add_placeholder_language() {
 		function ( e ) {
 			e.preventDefault();
 
-			var addon = jQuery( this ).data( 'addon' );
+			const addon = jQuery( this ).data( 'addon' );
 
 			add_placeholder_language_content( addon );
 
-            let newValues = jQuery('form').serialize();
+            const newValues = jQuery('form').serialize();
             if(newValues!==initialValues)
                 jQuery('p.submit #submit').addClass('enabled');
 
@@ -100,7 +100,7 @@ function button_add_placeholder_language() {
  * @since 1.8.0
  */
 function add_placeholder_language_content( addon ) {
-	var data = jQuery( '.placeholder[data-addon="' + addon + '"] .placeholder_content:first' )[ 0 ].outerHTML;
+	const data = jQuery( '.placeholder[data-addon="' + addon + '"] .placeholder_content:first' )[ 0 ].outerHTML;
 
 	jQuery( '.placeholder[data-addon="' + addon + '"] .add_placeholder_language' ).before( data );
 
@@ -119,8 +119,8 @@ function placeholder_select_language() {
 		'change',
 		'.placeholder_select_language',
 		function () {
-			var new_value   = jQuery( this ).val();
-			var select_name = jQuery( this ).attr( 'name' );
+			const new_value   = jQuery( this ).val();
+			let select_name = jQuery( this ).attr( 'name' );
 
 			// get new name
 			select_name  = select_name.substr( 0, select_name.lastIndexOf( '[' ) );
@@ -250,25 +250,25 @@ function closeSubmitMsg() {
 
 function submitEnable() {
     const initialValues = jQuery('form').serialize();
+    const events = {
+        change: 'input:not([type=text]), select',
+        input: 'input[type="text"], textarea'
+    };
+
+    Object.entries(events).forEach(entry => {
+        const [eventName, elements] = entry;
+        jQuery(document).on(eventName,elements,{initialValues: initialValues},function(event){
+            checkValues(event.data.initialValues)
+        });
+    });
+}
+
+function checkValues(initialValues){
     let submitBtn = jQuery('p.submit #submit');
-    jQuery(document).on('change','input:not([type=text]), select',
-        function(){
-            let newValues = jQuery('form').serialize();
-            if(newValues !== initialValues) {
-                submitBtn.addClass('enabled');
-            }else{
-                submitBtn.removeClass('enabled');
-            }
-        }
-    );
-    jQuery(document).on('input', 'input[type="text"], textarea',
-        function(){
-            let newValues = jQuery('form').serialize();
-            if(newValues !== initialValues) {
-                submitBtn.addClass('enabled');
-            }else{
-                submitBtn.removeClass('enabled');
-            }
-        }
-    );
+    let newValues = jQuery('form').serialize();
+    if(newValues !== initialValues) {
+        submitBtn.addClass('enabled');
+    }else{
+        submitBtn.removeClass('enabled');
+    }
 }
