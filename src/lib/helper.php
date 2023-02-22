@@ -339,6 +339,32 @@ namespace cybot\cookiebot\lib {
 	}
 
 	/**
+	 * @param string $placeholder
+	 *
+	 * @return string
+	 */
+	function cookiebot_translate_placeholder( string $placeholder ) {
+		$translated_placeholder = array(
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Services.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Services.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for google analytics.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for google analytics.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to Social Share buttons.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to Social Share buttons.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.', 'cookiebot' ),
+		);
+
+		return $translated_placeholder[ $placeholder ];
+	}
+
+	/**
 	 * Show languages in a select field
 	 *
 	 * @param $class
