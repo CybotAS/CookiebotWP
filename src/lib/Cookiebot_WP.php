@@ -229,11 +229,11 @@ class Cookiebot_WP {
 	public static function get_manager_language() {
 		$locale          = get_locale();
 		$supported_langs = array(
-			'de_DE' => esc_html( 'de' ),
-			'da_DK' => esc_html( 'da' ),
-			'fr_FR' => esc_html( 'fr' ),
-			'it_IT' => esc_html( 'it' ),
-			'es_ES' => esc_html( 'es' ),
+			'de_DE' => 'de',
+			'da_DK' => 'da',
+			'fr_FR' => 'fr',
+			'it_IT' => 'it',
+			'es_ES' => 'es',
 		);
 
 		return array_key_exists( $locale, $supported_langs ) ? $supported_langs[ $locale ] : esc_html( 'en' );
