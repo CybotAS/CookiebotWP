@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-01-18 14:28+0100\n"
-"PO-Revision-Date: 2023-02-16 14:08+0100\n"
+"PO-Revision-Date: 2023-02-23 10:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -15,19 +15,18 @@ msgstr ""
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: cookiebot.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;"
-"esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: addons/config/Settings_Config.php:69 addons/config/Settings_Config.php:70
-#: view/admin/settings/prior-consent/page.php:24 view/admin/templates/main-tabs.php:37
+#: addons/config/Settings_Config.php:69 addons/config/Settings_Config.php:70 view/admin/settings/prior-consent/page.php:24
+#: view/admin/templates/main-tabs.php:37
 msgid "Plugins"
 msgstr "Plugins"
 
-#: addons/config/Settings_Config.php:109
-#: view/admin/settings/prior-consent/partials/placeholder-submitboxes.php:24
+#: addons/config/Settings_Config.php:109 view/admin/settings/prior-consent/partials/placeholder-submitboxes.php:24
 msgid "Remove language"
 msgstr "Eliminar idioma"
 
@@ -69,14 +68,13 @@ msgstr "Has activado el modo de bloqueo automático Cookiebot™, pero sigues us
 
 #: addons/controller/Plugin_Controller.php:69
 msgid ""
-"In some occasions this may cause client side errors. If you notice any errors please try to disable "
-"Cookiebot™ addons or contact Cookiebot™ support."
+"In some occasions this may cause client side errors. If you notice any errors please try to disable Cookiebot™ addons or contact Cookiebot™ "
+"support."
 msgstr ""
-"A veces, esto puede causar errores por parte del cliente. Si notas algún error, por favor, intenta "
-"desactivar los add-ons de Cookiebot™ o contacta con Atención al Cliente de Cookiebot™."
+"A veces, esto puede causar errores por parte del cliente. Si notas algún error, por favor, intenta desactivar los add-ons de Cookiebot™ o "
+"contacta con Atención al Cliente de Cookiebot™."
 
-#: addons/controller/addons/add_to_any/Add_To_Any.php:87
-#: addons/controller/addons/embed_autocorrect/Embed_Autocorrect.php:439
+#: addons/controller/addons/add_to_any/Add_To_Any.php:87 addons/controller/addons/embed_autocorrect/Embed_Autocorrect.php:439
 msgid "Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook."
 msgstr "Bloquea los vídeos incrustados de YouTube, Twitter, Vimeo y Facebook."
 
@@ -93,12 +91,10 @@ msgid "Google Analytics is used to track how visitor interact with website conte
 msgstr "Google Analytics se usa para seguir como el visitante interacciona con el contenido del sitio web."
 
 #: addons/controller/addons/google_analytics_plus/Google_Analytics_Plus.php:32
-msgid ""
-"Google Analytics is a simple, easy-to-use tool that helps website owners measure how users interact with "
-"website content"
+msgid "Google Analytics is a simple, easy-to-use tool that helps website owners measure how users interact with website content"
 msgstr ""
-"Google Analytics es una herramienta simple y fácil de usar que ayuda a los dueños de un sitio web a medir "
-"cómo los usuarios interactúan con el contenido de la página web."
+"Google Analytics es una herramienta simple y fácil de usar que ayuda a los dueños de un sitio web a medir cómo los usuarios interactúan con el "
+"contenido de la página web."
 
 #: addons/controller/addons/google_site_kit/Google_Site_Kit.php:33
 msgid "Blocks Google Analytics scripts"
@@ -110,8 +106,7 @@ msgstr "Widget de Facebook"
 
 #: addons/controller/addons/litespeed_cache/Litespeed_Cache.php:52
 msgid "Excludes cookiebot javascript files when the Litespeed Cache deter option is enabled."
-msgstr ""
-"Excluye los archivos javascript de Cookiebot cuando la opción defer de Litespeed Cache está habilitada."
+msgstr "Excluye los archivos javascript de Cookiebot cuando la opción defer de Litespeed Cache está habilitada."
 
 #: addons/controller/addons/official_facebook_pixel/Official_Facebook_Pixel.php:252
 msgid "Blocks Official Facebook Pixel scripts"
@@ -127,8 +122,7 @@ msgstr "Bloquea Simple Share Buttons Adder."
 
 #: addons/controller/addons/wp_google_analytics_events/Wp_Google_Analytics_Events.php:47
 msgid "The plugin allows you to fire events whenever someone interacts or views elements on your website."
-msgstr ""
-"El plugin te permite ejecutar eventos cuando alguien visualiza o interactúa con elementos en tu sitio web."
+msgstr "El plugin te permite ejecutar eventos cuando alguien visualiza o interactúa con elementos en tu sitio web."
 
 #: addons/controller/addons/wp_rocket/Wp_Rocket.php:49
 msgid "Excludes cookiebot javascript files when the WP-Rocket deter option is enabled."
@@ -139,11 +133,9 @@ msgid "Blocks cookies from WP SEOPress' Google Analytics integration."
 msgstr "Bloquea las cookies de la integración Google Analytics de WP SEOPress"
 
 #: addons/controller/addons/wpforms/Wpforms.php:61
-msgid ""
-"If the user gives correct consent, IP and Unique User ID will be saved on form submissions, otherwise not."
+msgid "If the user gives correct consent, IP and Unique User ID will be saved on form submissions, otherwise not."
 msgstr ""
-"En caso de que el usuario dé un consentimiento correcto, se almacenarán la dirección IP y el ID del usuario "
-"en formularios de envío, si no, no."
+"En caso de que el usuario dé un consentimiento correcto, se almacenarán la dirección IP y el ID del usuario en formularios de envío, si no, no."
 
 #: addons/controller/addons/wpforms/Wpforms.php:62
 msgid "Increases opt-in rate compared to WPForms \"GDPR mode\"."
@@ -1370,8 +1362,8 @@ msgstr "Cookiebot"
 msgid "Cookiebot Settings"
 msgstr "Ajustes de Cookiebot"
 
-#: settings/Network_Menu_Settings.php:44 settings/pages/Settings_Page.php:23
-#: view/admin/settings/settings-page.php:43 view/admin/templates/main-tabs.php:30
+#: settings/Network_Menu_Settings.php:44 settings/pages/Settings_Page.php:23 view/admin/settings/settings-page.php:43
+#: view/admin/templates/main-tabs.php:30
 msgid "Settings"
 msgstr "Ajustes"
 
@@ -1379,8 +1371,8 @@ msgstr "Ajustes"
 msgid "Cookiebot Support"
 msgstr "Cookiebot Soporte"
 
-#: settings/Network_Menu_Settings.php:52 settings/pages/Support_Page.php:18
-#: view/admin/settings/support-page.php:18 view/admin/templates/main-tabs.php:44
+#: settings/Network_Menu_Settings.php:52 settings/pages/Support_Page.php:18 view/admin/settings/support-page.php:18
+#: view/admin/templates/main-tabs.php:44
 msgid "Support"
 msgstr "Soporte"
 
@@ -1388,8 +1380,7 @@ msgstr "Soporte"
 msgid "Cookiebot Dashboard"
 msgstr "Escritorio de Cookiebot"
 
-#: settings/pages/Debug_Page.php:25 settings/pages/Debug_Page.php:26 view/admin/settings/debug-page.php:18
-#: view/admin/templates/main-tabs.php:51
+#: settings/pages/Debug_Page.php:25 settings/pages/Debug_Page.php:26 view/admin/settings/debug-page.php:18 view/admin/templates/main-tabs.php:51
 msgid "Debug info"
 msgstr "Información de debug"
 
@@ -1397,8 +1388,7 @@ msgstr "Información de debug"
 msgid "IAB"
 msgstr "IAB"
 
-#: settings/pages/Legislations_Page.php:13 settings/pages/Legislations_Page.php:14
-#: view/admin/settings/legislations-page.php:2
+#: settings/pages/Legislations_Page.php:13 settings/pages/Legislations_Page.php:14 view/admin/settings/legislations-page.php:2
 msgid "Legislations"
 msgstr "Legislaciones"
 
@@ -1448,8 +1438,7 @@ msgstr "Tu opinión nos importa"
 
 #: view/admin/settings/dashboard-page.php:49
 msgid "Are you happy with our WordPress plugin? Your feedback will help us make our product better for you."
-msgstr ""
-"¿Estás satisfecho con nuestro plugin de WordPress? Tu feedback nos ayuda a mejorar nuestro producto para ti."
+msgstr "¿Estás satisfecho con nuestro plugin de WordPress? Tu feedback nos ayuda a mejorar nuestro producto para ti."
 
 #: view/admin/settings/dashboard-page.php:50
 msgid "Write a review"
@@ -1517,11 +1506,11 @@ msgstr "Información de debug"
 
 #: view/admin/settings/debug-page.php:26
 msgid ""
-"The information below is for debugging purposes. If you have any issues with your Cookiebot CMP integration, "
-"this information is the best place to start."
+"The information below is for debugging purposes. If you have any issues with your Cookiebot CMP integration, this information is the best "
+"place to start."
 msgstr ""
-"La información debajo es para debuguear. Si tienes cualquier problema con tu integración de Cookiebot CMP, "
-"esta información es el mejor punto de partida."
+"La información debajo es para debuguear. Si tienes cualquier problema con tu integración de Cookiebot CMP, esta información es el mejor punto "
+"de partida."
 
 #: view/admin/settings/debug-page.php:34
 msgid "Copy debug information to clipboard"
@@ -1529,9 +1518,7 @@ msgstr "Copia la información de debug a tu portapapeles"
 
 #: view/admin/settings/debug-page.php:42
 msgid "If you have any issues with the implemenation of Cookiebot CMP, please visit our Support Center."
-msgstr ""
-"SI tienes cualquier problema con la implementación de Cookiebot CMP, por favor, visita nuestro Centro de "
-"Asistencia."
+msgstr "SI tienes cualquier problema con la implementación de Cookiebot CMP, por favor, visita nuestro Centro de Asistencia."
 
 #: view/admin/settings/debug-page.php:46
 msgid "Visit Support Center"
@@ -1545,8 +1532,7 @@ msgstr "Google Tag Manager:"
 msgid "For more details about Cookiebot CMP and Google Tag Manager."
 msgstr "Para más detalles sobre Cookiebot CMP y Google Tag Manager"
 
-#: view/admin/settings/gtm-page.php:8 view/admin/settings/settings-page.php:438
-#: view/admin/settings/settings-page.php:465
+#: view/admin/settings/gtm-page.php:8 view/admin/settings/settings-page.php:438 view/admin/settings/settings-page.php:465
 msgid "Read more"
 msgstr "Más información"
 
@@ -1592,13 +1578,11 @@ msgstr "Integración de la IAB:"
 
 #: view/admin/settings/iab-page.php:5
 msgid ""
-"If you want to use the IAB Framework TCF v2.0 within your Consent Management Platform (CMP) you can enable "
-"it on the right. Be aware that activating this could override some of the configurations you made with the "
-"default setup defined by the IAB."
+"If you want to use the IAB Framework TCF v2.0 within your Consent Management Platform (CMP) you can enable it on the right. Be aware that "
+"activating this could override some of the configurations you made with the default setup defined by the IAB."
 msgstr ""
-"Si quieres usar el Marco TCF v2.0 de la IAB en tu Plataforma de Gestión del Consentimiento (CMP), puedes "
-"activarlo a la derecha. Por favor, ten en cuenta que activar esto podría sobreescribir algunos de los "
-"ajustos que has hecho con la configuración por defecto de la IAB."
+"Si quieres usar el Marco TCF v2.0 de la IAB en tu Plataforma de Gestión del Consentimiento (CMP), puedes activarlo a la derecha. Por favor, "
+"ten en cuenta que activar esto podría sobreescribir algunos de los ajustos que has hecho con la configuración por defecto de la IAB."
 
 #: view/admin/settings/iab-page.php:7
 msgid "Read more on IAB with Cookiebot CMP here"
@@ -1617,12 +1601,10 @@ msgid "Additional configurations:"
 msgstr "Ajustes adicionales:"
 
 #: view/admin/settings/multiple-configuration/page.php:14
-msgid ""
-"You can add a second alternative banner or configuration to your website by creating a second Domain Group "
-"and specify it on a region."
+msgid "You can add a second alternative banner or configuration to your website by creating a second Domain Group and specify it on a region."
 msgstr ""
-"Puedes añadir un segundo o configuración banner allternativo a tu sitio web creando un segundo Grupo de "
-"Dominios y especificandolo en una región."
+"Puedes añadir un segundo o configuración banner allternativo a tu sitio web creando un segundo Grupo de Dominios y especificandolo en una "
+"región."
 
 #: view/admin/settings/multiple-configuration/page.php:16
 msgid "Read more about multiple configurations here"
@@ -1638,17 +1620,15 @@ msgstr "Prepara tu configuración del banner adicional:"
 
 #: view/admin/settings/multiple-configuration/page.php:38
 msgid ""
-"To enable a different configuration, create a separate DomainGroup without adding the domain to it and paste "
-"the ID below. Then select the countries in which you want to show this configuration. For example, if your "
-"main Domain Group is defined as a banner matching GDPR requirements, you might want to add another Domain "
-"Group for visitors from California. The number of additional configurations is restricted to one at the "
-"moment."
+"To enable a different configuration, create a separate DomainGroup without adding the domain to it and paste the ID below. Then select the "
+"countries in which you want to show this configuration. For example, if your main Domain Group is defined as a banner matching GDPR "
+"requirements, you might want to add another Domain Group for visitors from California. The number of additional configurations is restricted "
+"to one at the moment."
 msgstr ""
-"Para permitir una configuración diferente, crea un Grupo de Dominios separado sin añadir el dominio y pega "
-"la ID de debajo. Después, selecciona los países en los que quieras mostrar esta configuración. Por ejemplo, "
-"si tu Grupo de Dominio principal está preparado para cumplir con el RGPD, podrías estar intereado en otro "
-"Grupo de Dominios para California. El número de configuraciones adicionales está limitado a uno por el "
-"momento."
+"Para permitir una configuración diferente, crea un Grupo de Dominios separado sin añadir el dominio y pega la ID de debajo. Después, "
+"selecciona los países en los que quieras mostrar esta configuración. Por ejemplo, si tu Grupo de Dominio principal está preparado para cumplir "
+"con el RGPD, podrías estar intereado en otro Grupo de Dominios para California. El número de configuraciones adicionales está limitado a uno "
+"por el momento."
 
 #: view/admin/settings/multiple-configuration/page.php:50
 msgid "Region"
@@ -1679,12 +1659,8 @@ msgid "Network Domain Group:"
 msgstr "Grupo de dominios de red:"
 
 #: view/admin/settings/network-settings-page.php:48
-msgid ""
-"If added this will be the default Cookiebot ID for all subsites. Subsites are able to override the Cookiebot "
-"ID."
-msgstr ""
-"Si se agrega, será el ID de Cookiebot predeterminado para todos los subsitios. Los subsitios pueden anular "
-"la ID de Cookiebot."
+msgid "If added this will be the default Cookiebot ID for all subsites. Subsites are able to override the Cookiebot ID."
+msgstr "Si se agrega, será el ID de Cookiebot predeterminado para todos los subsitios. Los subsitios pueden anular la ID de Cookiebot."
 
 #: view/admin/settings/network-settings-page.php:50 view/admin/settings/settings-page.php:89
 msgid "Read more on the Domain Group ID"
@@ -1721,12 +1697,10 @@ msgstr "Los ajustes se aplicarán a todos los subsitios. Los subsitios no podrá
 
 #: view/admin/settings/network-settings-page.php:104
 msgid "Add async or defer attribute to Cookie banner script tag. Default: Choose per subsite"
-msgstr ""
-"Agrega el atributo async o defer a la etiqueta script del banner de cookies. Predeterminado: elegir por "
-"subsitio"
+msgstr "Agrega el atributo async o defer a la etiqueta script del banner de cookies. Predeterminado: elegir por subsitio"
 
-#: view/admin/settings/network-settings-page.php:117 view/admin/settings/network-settings-page.php:164
-#: view/admin/settings/settings-page.php:191 view/admin/settings/settings-page.php:368
+#: view/admin/settings/network-settings-page.php:117 view/admin/settings/network-settings-page.php:164 view/admin/settings/settings-page.php:191
+#: view/admin/settings/settings-page.php:368
 msgid "None"
 msgstr "Ninguno"
 
@@ -1740,9 +1714,7 @@ msgstr "Etiqueta script de la declaración de cookies"
 
 #: view/admin/settings/network-settings-page.php:151
 msgid "Add async or defer attribute to Cookie declaration script tag. Default: Choose per subsite"
-msgstr ""
-"Agrega el atributo async o defer a la etiqueta del script de declaración de cookies. Predeterminado: elegir "
-"por subsitio"
+msgstr "Agrega el atributo async o defer a la etiqueta del script de declaración de cookies. Predeterminado: elegir por subsitio"
 
 #: view/admin/settings/network-settings-page.php:193
 msgid "Auto-update Cookiebot™ Plugin:"
@@ -1762,26 +1734,22 @@ msgstr "Esconder el popup de cookies"
 
 #: view/admin/settings/network-settings-page.php:223 view/admin/settings/settings-page.php:218
 msgid ""
-"This checkbox will remove the cookie consent banner from your website. The declaration shortcode will still "
-"be available. If you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your "
-"Tag Manager."
+"This checkbox will remove the cookie consent banner from your website. The declaration shortcode will still be available. If you are using "
+"Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager."
 msgstr ""
-"Esta casilla eliminará el banner de consentimiento de cookies de tu sitio web. El shortcode de la "
-"declaración seguirá estando disponible. Si estás usando Google Tag Manager (o similar), tienes que añadir el "
-"script de Cookiebot™ a tu Tag Manager."
+"Esta casilla eliminará el banner de consentimiento de cookies de tu sitio web. El shortcode de la declaración seguirá estando disponible. Si "
+"estás usando Google Tag Manager (o similar), tienes que añadir el script de Cookiebot™ a tu Tag Manager."
 
 #: view/admin/settings/network-settings-page.php:238 view/admin/settings/settings-page.php:240
 msgid "Hide the cookie popup banner"
 msgstr "Esconder el banner popup de cookies"
 
-#: view/admin/settings/settings-page.php:163 view/admin/settings/settings-page.php:212
-#: view/admin/settings/settings-page.php:254 view/admin/settings/settings-page.php:323
-#: view/admin/settings/settings-page.php:404
+#: view/admin/settings/settings-page.php:163 view/admin/settings/settings-page.php:212 view/admin/settings/settings-page.php:254
+#: view/admin/settings/settings-page.php:323 view/admin/settings/settings-page.php:404
 msgid "Disabled by active setting in Network Settings"
 msgstr "Deshabilitado por configuración activa en Configuración de red"
 
-#: view/admin/settings/prior-consent/available-addons/tab-header.php:4
-#: view/admin/settings/prior-consent/jetpack-widgets/tab-header.php:14
+#: view/admin/settings/prior-consent/available-addons/tab-header.php:4 view/admin/settings/prior-consent/jetpack-widgets/tab-header.php:14
 msgid "Remember to save your changes before switching tabs"
 msgstr "Recuerda guardar los cambios antes de cambiar de pestaña"
 
@@ -1789,8 +1757,7 @@ msgstr "Recuerda guardar los cambios antes de cambiar de pestaña"
 msgid "Plugin enabled"
 msgstr "Plugin activo"
 
-#: view/admin/settings/prior-consent/available-addons/tab.php:28
-#: view/admin/settings/prior-consent/jetpack-widgets/tab.php:25
+#: view/admin/settings/prior-consent/available-addons/tab.php:28 view/admin/settings/prior-consent/jetpack-widgets/tab.php:25
 msgid "Check one or multiple cookie types:"
 msgstr "Selecciona uno o más tipos de cookies:"
 
@@ -1798,13 +1765,11 @@ msgstr "Selecciona uno o más tipos de cookies:"
 msgid "Placeholder text:"
 msgstr "Texto del marcador:"
 
-#: view/admin/settings/prior-consent/available-addons/tab.php:67
-#: view/admin/settings/prior-consent/jetpack-widgets/tab.php:53
+#: view/admin/settings/prior-consent/available-addons/tab.php:67 view/admin/settings/prior-consent/jetpack-widgets/tab.php:53
 msgid "Display a placeholder"
 msgstr "Mostrar un marcador"
 
-#: view/admin/settings/prior-consent/available-addons/tab.php:78
-#: view/admin/settings/prior-consent/jetpack-widgets/tab.php:71
+#: view/admin/settings/prior-consent/available-addons/tab.php:78 view/admin/settings/prior-consent/jetpack-widgets/tab.php:71
 msgid "+ Add language"
 msgstr "+ Añadir idioma"
 
@@ -1842,22 +1807,19 @@ msgstr "Restaurar regex por defecto"
 
 #: view/admin/settings/prior-consent/partials/info-tab-header.php:5
 msgid ""
-"These add-ons are produced by an open-source community of developers. This is done to help make it easier "
-"for WordPress users to implement ‘prior consent’ for cookies and trackers set by plugins that do not offer "
-"this as a built-in function. The add-ons are currently the best alternative to a WordPress Core framework "
-"that can signal the user’s consent state to other plugins (if and when this will be implemented is unknown) "
-"and to those plugins that do not yet offer native support for Cookiebot CMP. "
+"These add-ons are produced by an open-source community of developers. This is done to help make it easier for WordPress users to implement "
+"‘prior consent’ for cookies and trackers set by plugins that do not offer this as a built-in function. The add-ons are currently the best "
+"alternative to a WordPress Core framework that can signal the user’s consent state to other plugins (if and when this will be implemented is "
+"unknown) and to those plugins that do not yet offer native support for Cookiebot CMP. "
 msgstr ""
-"Estos add-ons son creados por una comunidad de desarroladores de código abierto. Esto se hace para facilitar "
-"a los usuarios de WordPress la implementación de un “consentimiento previo” para cookies y rastreadores "
-"instalados en plugins que no ofrecen esta función por sí mismos. Estos add-ons son actualmente la mejor "
-"alternativa a un marco Core de WordPress que podría enviar el estado del consentimiento del usuario a otros "
-"plugins, pero que todavía se desconoce cuándo se implementará, si es que se implementa; y para los plugins "
-"que no ofrecen todavía un soporte nativo para Cookiebot CMP."
+"Estos add-ons son creados por una comunidad de desarroladores de código abierto. Esto se hace para facilitar a los usuarios de WordPress la "
+"implementación de un “consentimiento previo” para cookies y rastreadores instalados en plugins que no ofrecen esta función por sí mismos. "
+"Estos add-ons son actualmente la mejor alternativa a un marco Core de WordPress que podría enviar el estado del consentimiento del usuario a "
+"otros plugins, pero que todavía se desconoce cuándo se implementará, si es que se implementa; y para los plugins que no ofrecen todavía un "
+"soporte nativo para Cookiebot CMP."
 
 #: view/admin/settings/prior-consent/partials/placeholder-submitbox-default.php:12
-#: view/admin/settings/prior-consent/partials/placeholder-submitboxes.php:18
-#: view/admin/widgets/cookiebot-declaration-widget-form.php:26
+#: view/admin/settings/prior-consent/partials/placeholder-submitboxes.php:18 view/admin/widgets/cookiebot-declaration-widget-form.php:26
 msgid "Language"
 msgstr "Idioma"
 
@@ -1866,11 +1828,8 @@ msgid "Unavailable plugins"
 msgstr "Plugins no disponibles"
 
 #: view/admin/settings/prior-consent/unavailable-addons/tab-header.php:5
-msgid ""
-"The following addons are unavailable. This is because the corresponding plugin is not installed or activated."
-msgstr ""
-"Los siguientes add-ons no están disponibles. Esto es porque el plugin correspondiente no está instalado o "
-"activado."
+msgid "The following addons are unavailable. This is because the corresponding plugin is not installed or activated."
+msgstr "Los siguientes add-ons no están disponibles. Esto es porque el plugin correspondiente no está instalado o activado."
 
 #: view/admin/settings/settings-page.php:49
 msgid "General Settings"
@@ -1894,15 +1853,13 @@ msgstr "¿Todavía no tienes una cuenta?"
 
 #: view/admin/settings/settings-page.php:74
 msgid ""
-"Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by "
-"clicking on \"Create a new account\" below. After you have signed up, you can configure your banner in the "
-"Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find "
-"your ID in the Cookiebot Manager by navigating to \"Settings\" and \"Your Scripts\"."
+"Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on \"Create a new "
+"account\" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID "
+"in the designated field below. You can find your ID in the Cookiebot Manager by navigating to \"Settings\" and \"Your Scripts\"."
 msgstr ""
-"Antes de poder empezar con Cookiebot CMP para WordPress, tienes que crear una cuenta en nuestro sitio web "
-"clicando debajo en “Crear una nueva cuenta”. Tras registrarte, puedes configurar el banner en el "
-"Administrador de Cookiebot y después poner la ID del Grupo de Dominios en el campo designado debajo. Puedes "
-"encontrar tu ID en el Administrador de Cookiebot navegando a “Ajustes” y “Tus scripts”."
+"Antes de poder empezar con Cookiebot CMP para WordPress, tienes que crear una cuenta en nuestro sitio web clicando debajo en “Crear una nueva "
+"cuenta”. Tras registrarte, puedes configurar el banner en el Administrador de Cookiebot y después poner la ID del Grupo de Dominios en el "
+"campo designado debajo. Puedes encontrar tu ID en el Administrador de Cookiebot navegando a “Ajustes” y “Tus scripts”."
 
 #: view/admin/settings/settings-page.php:85
 msgid "Connect your Domain Group:"
@@ -1910,23 +1867,20 @@ msgstr "Conecta tu Grupo de Dominios:"
 
 #: view/admin/settings/settings-page.php:87
 msgid ""
-"To connect your Domain Group, paste your Domain Group ID here. If you want to connect a second ID for other "
-"regions, you can do this under the \"Multiple Configurations\" tab."
+"To connect your Domain Group, paste your Domain Group ID here. If you want to connect a second ID for other regions, you can do this under the "
+"\"Multiple Configurations\" tab."
 msgstr ""
-"Para conectar tu Grupo de Dominios, pega tu ID de Grupo de Dominios aquí. Si quieres conectar una segunda ID "
-"para otras regiones, puedes hacerlo en la pestaña de “Configuraciones Múltiples”."
+"Para conectar tu Grupo de Dominios, pega tu ID de Grupo de Dominios aquí. Si quieres conectar una segunda ID para otras regiones, puedes "
+"hacerlo en la pestaña de “Configuraciones Múltiples”."
 
 #: view/admin/settings/settings-page.php:104
 msgid "Language:"
 msgstr "Idioma:"
 
 #: view/admin/settings/settings-page.php:106
-msgid ""
-"Select your main language here. Please make sure that the language selected has also been added in the "
-"Cookiebot™ Manager."
+msgid "Select your main language here. Please make sure that the language selected has also been added in the Cookiebot™ Manager."
 msgstr ""
-"Selecciona tu idioma principal aquí. Por favor, asegúrate de que el idioma seleccionado también ha sido "
-"añadido al Admnistrador de Cookiebot™."
+"Selecciona tu idioma principal aquí. Por favor, asegúrate de que el idioma seleccionado también ha sido añadido al Admnistrador de Cookiebot™."
 
 #: view/admin/settings/settings-page.php:108
 msgid "Read more on how to add languages"
@@ -1946,14 +1900,13 @@ msgstr "Usar el idioma de WordPress"
 
 #: view/admin/settings/settings-page.php:137
 msgid ""
-"Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies "
-"(except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode "
-"requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:"
+"Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ "
+"cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find "
+"our implementation guides below:"
 msgstr ""
-"Selecciona tu modo de bloqueo de cookies aquí. El modo de bloqueo de cookies automático bloqueará todas las "
-"cookies (excepto las “estrictamente necesarias”) hasta que el usuario haya dado su consentimiento. El modo "
-"de bloqueo de cookies manual requiere de una configuración manual de los scripts de ajustes de cookies. "
-"Puedes encontrar nuestras guías de implementación debajo:"
+"Selecciona tu modo de bloqueo de cookies aquí. El modo de bloqueo de cookies automático bloqueará todas las cookies (excepto las "
+"“estrictamente necesarias”) hasta que el usuario haya dado su consentimiento. El modo de bloqueo de cookies manual requiere de una "
+"configuración manual de los scripts de ajustes de cookies. Puedes encontrar nuestras guías de implementación debajo:"
 
 #: view/admin/settings/settings-page.php:139
 msgid "Guide to auto cookie-blocking"
@@ -2008,12 +1961,9 @@ msgid "Cookie declaration script tag:"
 msgstr "Etiqueta de script de declaración de cookies:"
 
 #: view/admin/settings/settings-page.php:349
-msgid ""
-"If you implemented the declaration on your page through our widget in WordPress, you can choose here how the "
-"script should be loaded."
+msgid "If you implemented the declaration on your page through our widget in WordPress, you can choose here how the script should be loaded."
 msgstr ""
-"Si has implementado la declaración en tu sitio web mediante nuestro widget en WordPress, puedes elegir aquí "
-"cómo se debe cargar el script."
+"Si has implementado la declaración en tu sitio web mediante nuestro widget en WordPress, puedes elegir aquí cómo se debe cargar el script."
 
 #: view/admin/settings/settings-page.php:354
 msgid "Select the cookie declaration script loading setting"
@@ -2025,20 +1975,17 @@ msgstr "Ignorar los scripts en cola del escaneo de Cookiebot CMP:"
 
 #: view/admin/settings/settings-page.php:392
 msgid ""
-"List scripts source URL (one per line) from the queue to ignore Cookiebot CMP scan. Partial source URL will "
-"also work, e.g. wp-content/plugins/woocommerce will block every WooCommerce script."
+"List scripts source URL (one per line) from the queue to ignore Cookiebot CMP scan. Partial source URL will also work, e.g. wp-content/plugins/"
+"woocommerce will block every WooCommerce script."
 msgstr ""
-"Crea una lista con los URL fuente de los scripts (uno por línea) de la cola para ignorar el escaneo de "
-"Cookiebot CMP. Los URL fuentes parciales también funcionarán, p. ej., wp-cntent/plugins/woocommerce "
-"bloqueará cualquier script de WooCommerce."
+"Crea una lista con los URL fuente de los scripts (uno por línea) de la cola para ignorar el escaneo de Cookiebot CMP. Los URL fuentes "
+"parciales también funcionarán, p. ej., wp-cntent/plugins/woocommerce bloqueará cualquier script de WooCommerce."
 
 #: view/admin/settings/settings-page.php:395
-msgid ""
-"This feature only works for scripts loaded via wp_enqueue_script. Manually added scripts must be manually "
-"edited."
+msgid "This feature only works for scripts loaded via wp_enqueue_script. Manually added scripts must be manually edited."
 msgstr ""
-"Esta característica solo funciona con los scripts caragados mediante wp_enqueue_script. Los scripts añadidos "
-"manualmente deben ser editados manualmente."
+"Esta característica solo funciona con los scripts caragados mediante wp_enqueue_script. Los scripts añadidos manualmente deben ser editados "
+"manualmente."
 
 #: view/admin/settings/settings-page.php:400
 msgid "Script source URL:"
@@ -2050,21 +1997,19 @@ msgstr "¿Qué es el Modo de Consentimiento de Google y por qué debería activa
 
 #: view/admin/settings/settings-page.php:422
 msgid ""
-"Google Consent Mode is a way for your website to measure conversions and get analytics insights while being "
-"fully GDPR-compliant when using services like Google Analytics, Google Tag Manager (GTM) and Google Ads."
+"Google Consent Mode is a way for your website to measure conversions and get analytics insights while being fully GDPR-compliant when using "
+"services like Google Analytics, Google Tag Manager (GTM) and Google Ads."
 msgstr ""
-"El Modo de Consentimiento de Google te permite medir las conversiones y obtener analíticas e información de "
-"tu sitio web al mismo tiempo que cumples con el RGPD usando servicios como Google Analytics, Google Tag "
-"Manager (GTM) y Google Ads."
+"El Modo de Consentimiento de Google te permite medir las conversiones y obtener analíticas e información de tu sitio web al mismo tiempo que "
+"cumples con el RGPD usando servicios como Google Analytics, Google Tag Manager (GTM) y Google Ads."
 
 #: view/admin/settings/settings-page.php:425
 msgid ""
-"Cookiebot consent managment platform (CMP) and Google Consent Mode integrate seamlessly to offer you plug-"
-"and-play compliance and streamlined use of all Google's services in one easy solution."
+"Cookiebot consent managment platform (CMP) and Google Consent Mode integrate seamlessly to offer you plug-and-play compliance and streamlined "
+"use of all Google's services in one easy solution."
 msgstr ""
-"Nuestra plataforma de Gestión del Consentimiento, Cookiebot CMP, y el Modo de Consentimiento de Google se "
-"integran perfectamente para ofrecerte un cumplimiento automático y un uso optimizado de los servicios de "
-"Google en una solución fácil y sencilla."
+"Nuestra plataforma de Gestión del Consentimiento, Cookiebot CMP, y el Modo de Consentimiento de Google se integran perfectamente para "
+"ofrecerte un cumplimiento automático y un uso optimizado de los servicios de Google en una solución fácil y sencilla."
 
 #: view/admin/settings/settings-page.php:427
 msgid "Read more about Cookiebot CMP and Google Consent Mode"
@@ -2076,19 +2021,15 @@ msgstr "Modo de Consentimiento de Google:"
 
 #: view/admin/settings/settings-page.php:436
 msgid "Enable Google Consent Mode with default settings on your WordPress page."
-msgstr ""
-"Permite el Modo de Consentimiento de Google con una configuración por defecto en tu página creada con "
-"WordPress."
+msgstr "Permite el Modo de Consentimiento de Google con una configuración por defecto en tu página creada con WordPress."
 
 #: view/admin/settings/settings-page.php:461
 msgid "URL passthrough:"
 msgstr "Paso de URL:"
 
 #: view/admin/settings/settings-page.php:463
-msgid ""
-"This feature will allow you to pass data between pages when not able to use cookies without/prior consent."
-msgstr ""
-"Esta función le permitirá pasar datos entre páginas cuando no pueda usar cookies sin/previo consentimiento."
+msgid "This feature will allow you to pass data between pages when not able to use cookies without/prior consent."
+msgstr "Esta función le permitirá pasar datos entre páginas cuando no pueda usar cookies sin/previo consentimiento."
 
 #: view/admin/settings/settings-page.php:476
 msgid "URL passthrough"
@@ -2100,11 +2041,11 @@ msgstr "¿Necesitas ayuda con tu configuración?"
 
 #: view/admin/settings/support-page.php:26
 msgid ""
-"In our Help Center you find all the answers to your questions. If you have additional questions, create a "
-"support request and our Support Team will help out as soon as possible."
+"In our Help Center you find all the answers to your questions. If you have additional questions, create a support request and our Support Team "
+"will help out as soon as possible."
 msgstr ""
-"En nuestro Centro de Asistencia encontrarás todas las respuestas a tus preguntas. Si tienes más preguntas, "
-"crea una petición de ayuda y nuestro Equipo de Atención al Cliente te ayudará lo más rápido posible."
+"En nuestro Centro de Asistencia encontrarás todas las respuestas a tus preguntas. Si tienes más preguntas, crea una petición de ayuda y "
+"nuestro Equipo de Atención al Cliente te ayudará lo más rápido posible."
 
 #: view/admin/settings/support-page.php:34
 msgid "Visit Cookiebot CMP Help Center"
@@ -2149,20 +2090,20 @@ msgstr "Añade la declaración de cookies a tu sitio web"
 #: view/admin/settings/support-page.php:112
 #, php-format
 msgid ""
-"Use the shortcode %1$s[cookie_declaration]%2$s to add the cookie declaration to a page or post. The cookie "
-"declaration will always show the latest version from Cookiebot CMP."
+"Use the shortcode %1$s[cookie_declaration]%2$s to add the cookie declaration to a page or post. The cookie declaration will always show the "
+"latest version from Cookiebot CMP."
 msgstr ""
-"Usa el shortcode %1$s[cookie_declaration]%2$s para añadir la declaración de cookies a una página o post. La "
-"declaración de cookies siempre se mostrará como la versión más reciente de Cookiebot CMP."
+"Usa el shortcode %1$s[cookie_declaration]%2$s para añadir la declaración de cookies a una página o post. La declaración de cookies siempre se "
+"mostrará como la versión más reciente de Cookiebot CMP."
 
 #: view/admin/settings/support-page.php:122
 #, php-format
 msgid ""
-"If you want to show the cookie declaration in a specific language, you can add the %1$s\"lang\"%2$s "
-"attribute, e.g. %3$s[cookie_declaration lang=\"de\"]%4$s."
+"If you want to show the cookie declaration in a specific language, you can add the %1$s\"lang\"%2$s attribute, e.g. %3$s[cookie_declaration "
+"lang=\"de\"]%4$s."
 msgstr ""
-"Si quieres mostrar la declaración de cookies en un idioma en particular, puedes añadir el atributo "
-"%1$s“lang”%2$s, p. ej.: %3$s[cookie_declaration lang=“es”]%4$s."
+"Si quieres mostrar la declaración de cookies en un idioma en particular, puedes añadir el atributo %1$s“lang”%2$s, p. ej.: "
+"%3$s[cookie_declaration lang=“es”]%4$s."
 
 #: view/admin/settings/support-page.php:134 view/admin/settings/support-page.php:178
 msgid "Watch video demonstration"
@@ -2174,35 +2115,28 @@ msgstr "Actualiza tus etiquetas de script"
 
 #: view/admin/settings/support-page.php:149
 msgid ""
-"To enable prior consent, apply the attribute \"data-cookieconsent\" to cookie-setting script tags on your "
-"website. Set the comma-separated value to one or more of the cookie categories \"preferences\", "
-"\"statistics\" and/or \"marketing\" in accordance with the types of cookies being set by each script. "
-"Finally, change the attribute \"type\" from \"text/javascript\" to \"text/plain\"."
+"To enable prior consent, apply the attribute \"data-cookieconsent\" to cookie-setting script tags on your website. Set the comma-separated "
+"value to one or more of the cookie categories \"preferences\", \"statistics\" and/or \"marketing\" in accordance with the types of cookies "
+"being set by each script. Finally, change the attribute \"type\" from \"text/javascript\" to \"text/plain\"."
 msgstr ""
-"Para habilitar el consentimiento previo, aplica el atributo “data-cookieconsent” a los tags de script de "
-"cookies-setting en tu sitio web. Establece el valor separado por comas a una o más de las categorías de "
-"cookies, “preferencias”, “estadísticas” y/o “marketing”, de acuerdo con los tipos de cookies establecidos "
-"por cada script. Finalmente, cambia el atributo “type” de “text/javascript” a “text/plain”."
+"Para habilitar el consentimiento previo, aplica el atributo “data-cookieconsent” a los tags de script de cookies-setting en tu sitio web. "
+"Establece el valor separado por comas a una o más de las categorías de cookies, “preferencias”, “estadísticas” y/o “marketing”, de acuerdo con "
+"los tipos de cookies establecidos por cada script. Finalmente, cambia el atributo “type” de “text/javascript” a “text/plain”."
 
 #: view/admin/settings/support-page.php:158
 #, php-format
-msgid ""
-"Example on modifying an existing Google Analytics Universal script tag can be found %1$shere in step 4%2$s."
-msgstr ""
-"Puedes encontrar un ejemplo de cómo modificar un tag de script ya existente de Google Analytics Universal "
-"%1$saquí en el paso 4%2$s."
+msgid "Example on modifying an existing Google Analytics Universal script tag can be found %1$shere in step 4%2$s."
+msgstr "Puedes encontrar un ejemplo de cómo modificar un tag de script ya existente de Google Analytics Universal %1$saquí en el paso 4%2$s."
 
 #: view/admin/settings/support-page.php:188
 msgid "Helper function to update your scripts"
 msgstr "Función de ayuda para actualizar tus scripts"
 
 #: view/admin/settings/support-page.php:193
-msgid ""
-"You can update your scripts yourself. However, Cookiebot CMP also offers a small helper function that can "
-"make the work easier."
+msgid "You can update your scripts yourself. However, Cookiebot CMP also offers a small helper function that can make the work easier."
 msgstr ""
-"Puedes actualizar tus scripts por ti mismo. Sin embargo, desde Cookiebot CMP también te ofrecemos un pequeña "
-"función de ayuda para facilitarte la vida."
+"Puedes actualizar tus scripts por ti mismo. Sin embargo, desde Cookiebot CMP también te ofrecemos un pequeña función de ayuda para facilitarte "
+"la vida."
 
 #: view/admin/settings/support-page.php:199
 msgid "Update your script tags this way:"
@@ -2243,59 +2177,59 @@ msgstr "¡Cookiebot está funcionando!"
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent]."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para habilitar el seguimiento."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para habilitar los botones de compartir en redes sociales."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para ver este elemento."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para ver este vídeo."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Services."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para habilitar los Servicios de Google."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para habilitar la herramienta de compras de Facebook."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for google analytics."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para rastrear con en Google Analytics."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para habilitar Google Analytics."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para habilitar el feed de Instagram."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para habilitar Facebook Pixel."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to Social Share buttons."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para los botones de compartir en redes sociales."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para permitir estadísticas de Matomo."
 
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information."
-msgstr ""
+msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para habilitar el guardar la información de usuario."
 
 #. Plugin Name of the plugin/theme
 msgid "Cookie banner plugin for WordPress – Cookiebot CMP by Usercentrics"
@@ -2308,8 +2242,8 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/"
-"ePrivacy and CCPA compliance for websites."
+"Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for "
+"websites."
 msgstr ""
 
 #. Author of the plugin/theme
