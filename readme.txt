@@ -264,7 +264,7 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 ## Changelog ##
 ### 4.2.6 - 2023-02-23 ###
-* Fix review recommendation trigger Props: [mikeydev](https://profiles.wordpress.org/mikeydev/)
+* Fix review recommendation trigger
 
 ### 4.2.5 - 2023-02-23 ###
 * Add translations Russian, Polish and Czech
