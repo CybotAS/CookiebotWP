@@ -92,10 +92,10 @@ class Cookiebot_Recommendation_Notice {
 			// "Never show again" is clicked
 			if ( $option === 'hide' ) {
 				throw new Exception( 'Never show again is clicked' );
-			} elseif ( $option === 'visit' && ( isset( $_SESSION['cb_notice'] ) && $_SESSION['cb_notice'] === 'hide' ) ) {
-				throw new Exception( 'Show me on next visit' );
+			} elseif ( $option === 'visit' ) {
+				throw new Exception( 'Show me after 1 day' );
 			} elseif ( is_numeric( $option ) && strtotime( 'now' ) < $option ) {
-				throw new Exception( '"Show me after 2 weeks" is clicked and 2 weeks is not passed yet' );
+				throw new Exception( 'Show me after 1 day' );
 			}
 		}
 	}
@@ -113,8 +113,7 @@ class Cookiebot_Recommendation_Notice {
 			}
 
 			if ( wp_verify_nonce( $_GET['nonce'], 'hide_recommendation_next' ) ) {
-				$_SESSION['cb_notice'] = 'hide';
-				update_option( static::COOKIEBOT_RECOMMENDATION_OPTION_KEY, 'visit' );
+				update_option( static::COOKIEBOT_RECOMMENDATION_OPTION_KEY, strtotime( '+1 day' ) );
 			}
 		}
 	}
