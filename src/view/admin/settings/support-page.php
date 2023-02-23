@@ -1,6 +1,6 @@
 <?php
 /**
- * @var string $debug_output
+ * @var string $manager_language
  */
 
 use cybot\cookiebot\settings\templates\Header;
@@ -60,7 +60,7 @@ $header->display();
 									echo sprintf(
 									// translators: the first placeholder string will be replaced with a html anchor open tag and the second placeholder string will be replaced by the html anchor closing tag
 										esc_html__( 'Log in to your %1$sCookiebot CMP account%2$s.', 'cookiebot' ),
-										'<a href="https://www.cookiebot.com/goto/account" target="_blank" rel="noopener">',
+										'<a href="https://www.cookiebot.com/' . esc_html( $manager_language ) . '/account" target="_blank" rel="noopener">',
 										'</a>'
 									);
 									?>
@@ -203,7 +203,7 @@ $header->display();
 						// translators: %1$s refers to the original script tag HTML, and %2$s refers to its replacement
 							esc_html__( '%1$s to %2$s', 'cookiebot' ),
 							'<code class="cb-faq__code">' . esc_html( '<script type="text/javascript">' ) . '</code>',
-							'<code class="cb-faq__code">' . esc_html( '<script<?php echo cookiebot_assist(\'marketing\') ?>>' ) . '</code>'
+							'<code class="cb-faq__code">' . esc_html( '<script<?php echo function_exists(\'cookiebot_assist\') ? cookiebot_assist(\'marketing\') : \' type="text/javascript"\' ?>>' ) . '</code>'
 						);
 						?>
 					</div>

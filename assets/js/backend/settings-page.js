@@ -58,7 +58,7 @@ function resetConsentMapping() {
 }
 
 function cookie_blocking_mode() {
-    var cookieBlockingMode = cookiebot_settings.cookieBlockingMode;
+    let cookieBlockingMode = cookiebot_settings.cookieBlockingMode;
 
     jQuery( 'input[type=radio][name=cookiebot-cookie-blocking-mode]' ).on( 'change', function () {
         if ( this.value === 'auto' && cookieBlockingMode !== this.value ) {
@@ -107,11 +107,28 @@ function closeSubmitMsg() {
 }
 
 function submitEnable() {
-    jQuery(':input').change(
-        function(){
-            jQuery('p.submit #submit').addClass('enabled');
-        }
-    );
+    const initialValues = jQuery('form').serialize();
+    const events = {
+        change: 'input:not([type=text]), select',
+        input: 'input[type="text"], textarea'
+    };
+
+    Object.entries(events).forEach(entry => {
+        const [eventName, elements] = entry;
+        jQuery(document).on(eventName,elements,{initialValues: initialValues},function(event){
+            checkValues(event.data.initialValues)
+        });
+    });
+}
+
+function checkValues(initialValues){
+    let submitBtn = jQuery('p.submit #submit');
+    let newValues = jQuery('form').serialize();
+    if(newValues !== initialValues) {
+        submitBtn.addClass('enabled');
+    }else{
+        submitBtn.removeClass('enabled');
+    }
 }
 
 function googleConsentModeUrlPassthrough() {
@@ -119,10 +136,7 @@ function googleConsentModeUrlPassthrough() {
         jQuery(this)
           .parents('#consent-mode')
           .find('.cb-settings__config__item:has(input#gcm-url-pasthrough)')
-          .toggle(
-            jQuery(this)
-              .is(':checked')
-          )
+          .toggle()
         const input = jQuery('input#gcm-url-pasthrough');
         const label = input.parents('label.switch-checkbox')[0];
         if (!label || !label.childNodes.length)

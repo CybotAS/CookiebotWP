@@ -36,7 +36,7 @@ class Settings_Page_Tab {
 	 * @param $label
 	 * @param $settings_fields_option_group
 	 * @param $page_name
-	 * @param bool $has_submit_button
+	 * @param bool                         $has_submit_button
 	 *
 	 * @throws InvalidArgumentException
 	 */

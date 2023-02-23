@@ -7,7 +7,7 @@ use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
 
 class Widgets {
 	public function register_hooks() {
-		//Loading widgets
+		// Loading widgets
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 		( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();
 	}

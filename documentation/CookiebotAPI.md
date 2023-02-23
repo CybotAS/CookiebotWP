@@ -90,4 +90,4 @@ else
     //The user has not accepted cookies - set strictly necessary cookies only
 }
 ```
-More details are available at https://www.cookiebot.com/goto/developer/
+More details are available at https://www.cookiebot.com/en/developer/

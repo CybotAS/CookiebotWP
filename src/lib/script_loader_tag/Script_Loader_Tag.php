@@ -15,6 +15,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 
 	/**
 	 * List of scripts to ignore cookiebot scan
+	 *
 	 * @var array
 	 */
 	private $ignore_scripts = array();

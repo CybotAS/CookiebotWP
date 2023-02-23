@@ -2,6 +2,7 @@
 /**
  * @var string $two_week_review_ignore
  * @var string $two_week_review_temp
+ * @var string $visit_review_temp
  */
 ?>
 <li>
@@ -10,18 +11,7 @@
 	   rel="noopener">
 		<?php
 		echo esc_html__(
-			'Sure! I\'d love to!',
-			'cookiebot'
-		);
-		?>
-	</a>
-</li>
-<li>
-	<span class="dashicons dashicons-smiley"></span>
-	<a href="<?php echo esc_html( $two_week_review_ignore ); ?>">
-		<?php
-		echo esc_html__(
-			'I\'ve already left a review',
+			'Ok, you deserve it',
 			'cookiebot'
 		);
 		?>
@@ -29,10 +19,10 @@
 </li>
 <li>
 	<span class="dashicons dashicons-calendar-alt"></span>
-	<a href="<?php echo esc_html( $two_week_review_temp ); ?>">
+	<a href="<?php echo esc_html( $visit_review_temp ); ?>">
 		<?php
 		echo esc_html__(
-			'Maybe Later',
+			'Nope, maybe Later',
 			'cookiebot'
 		);
 		?>
@@ -43,7 +33,7 @@
 	<a href="<?php echo esc_html( $two_week_review_ignore ); ?>">
 		<?php
 		echo esc_html__(
-			'Never show again',
+			'I already did it',
 			'cookiebot'
 		);
 		?>

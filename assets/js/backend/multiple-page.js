@@ -22,6 +22,8 @@ function showMultipleConfig() {
 }
 
 function toggleRegionSelector() {
+    const initialValues = jQuery('form').serialize();
+    let submitBtn = jQuery('p.submit #submit');
     const region_list = jQuery('.cb-region__region__list');
     jQuery('.cb-region__region__selector').on('click', function(){
         region_list.removeClass('hidden');
@@ -29,6 +31,12 @@ function toggleRegionSelector() {
 
     jQuery('.cb-region__veil').on('click', function(){
         region_list.addClass('hidden');
+        let newValues = jQuery('form').serialize();
+        if(newValues !== initialValues) {
+            submitBtn.addClass('enabled');
+        }else{
+            submitBtn.removeClass('enabled');
+        }
     });
 }
 

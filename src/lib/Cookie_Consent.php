@@ -45,24 +45,24 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 * @version 2.4.1
 	 */
 	public function scan_cookie() {
-		//default - set strictly necessary cookies
+		// default - set strictly necessary cookies
 		$this->add_state( 'necessary' );
 
 		if ( ! empty( $this->cookie ) ) {
 			switch ( $this->cookie ) {
 				case '0':
-					//The user has not accepted cookies - set strictly necessary cookies only
+					// The user has not accepted cookies - set strictly necessary cookies only
 					break;
 
 				case '-1':
-					//The user is not within a region that requires consent - all cookies are accepted
+					// The user is not within a region that requires consent - all cookies are accepted
 					$this->add_state( 'preferences' );
 					$this->add_state( 'statistics' );
 					$this->add_state( 'marketing' );
 					break;
 
 				default:
-					//Read current user consent in encoded JavaScript format
+					// Read current user consent in encoded JavaScript format
 					$valid_php_json = preg_replace(
 						'/\s*:\s*([a-zA-Z0-9_]+?)([}\[,])/',
 						':"$1"$2',
@@ -78,7 +78,7 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 						isset( $cookie_consent->preferences ) &&
 						filter_var( $cookie_consent->preferences, FILTER_VALIDATE_BOOLEAN )
 					) {
-						//Current user accepts preference cookies
+						// Current user accepts preference cookies
 						$this->add_state( 'preferences' );
 					}
 
@@ -86,7 +86,7 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 						isset( $cookie_consent->statistics ) &&
 						filter_var( $cookie_consent->statistics, FILTER_VALIDATE_BOOLEAN )
 					) {
-						//Current user accepts statistics cookies
+						// Current user accepts statistics cookies
 						$this->add_state( 'statistics' );
 					}
 
@@ -94,7 +94,7 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 						isset( $cookie_consent->marketing ) &&
 						filter_var( $cookie_consent->marketing, FILTER_VALIDATE_BOOLEAN )
 					) {
-						//Current user accepts marketing cookies
+						// Current user accepts marketing cookies
 						$this->add_state( 'marketing' );
 					}
 			}

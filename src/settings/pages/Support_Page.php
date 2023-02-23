@@ -27,6 +27,10 @@ class Support_Page implements Settings_Page_Interface {
 	 * @throws InvalidArgumentException
 	 */
 	public function display() {
+		$args = array(
+			'manager_language' => Cookiebot_WP::get_manager_language(),
+		);
+
 		$scripts = array(
 			array( 'cookiebot-support-page-js', 'js/backend/support-page.js' ),
 		);
@@ -54,6 +58,6 @@ class Support_Page implements Settings_Page_Interface {
 			);
 		}
 
-		include_view( 'admin/settings/support-page.php', array() );
+		include_view( 'admin/settings/support-page.php', $args );
 	}
 }

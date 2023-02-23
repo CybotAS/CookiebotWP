@@ -1,6 +1,6 @@
 # Cookiebot CMP WordPress Plugin
 Cookiebot Wordpress plugin is a plugin that make other plugins compatible with Cookiebot. 
-The addons hook into the original plugin and render the cookie setting tags as advised by the Cookiebot guidelines at https://www.cookiebot.com/goto/help/.
+The addons hook into the original plugin and render the cookie setting tags as advised by the Cookiebot guidelines at https://www.cookiebot.com/en/help/.
 
 Concurrently we are working with WP Core on what we believe is the real solution. A framework in WP Core that can signal the consent state to other plugins,
 so that they can handle their cookie setting code without explicit support for Cookiebot, or other cookie plugins. If and when this will be implemented is unknown.
@@ -10,6 +10,14 @@ https://core.trac.wordpress.org/ticket/44043
 # Travis CI Status 
 
 [![Build Status](https://travis-ci.com/CybotAS/CookiebotWP.svg?branch=master)](https://app.travis-ci.com/github/CybotAS/CookiebotWP)
+
+# Sonarcloud status
+
+[![Security](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=security_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Reliability](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=reliability_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=bugs&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=sqale_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=vulnerabilities&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
 
 Table of contents
 =================
@@ -96,4 +104,4 @@ Way to go!
 
 There are several ways you can get in touch with us. <br>
 We are available on GitHub and [WordPress.org](https://wordpress.org/support/plugin/cookiebot/) <br>
-You can also reach us through our helpdesk at www.cookiebot.com/goto/helpdesk/
+You can also reach us through our helpdesk at www.cookiebot.com/en/helpdesk/

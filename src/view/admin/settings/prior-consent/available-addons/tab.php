@@ -34,7 +34,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 					value="preferences"
 					name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][cookie_type][]"
 			>
-			<label class="cookiebot-addon-text">Preferences</label>
+			<label class="cookiebot-addon-text"><?php esc_html_e( 'preferences', 'cookiebot' ); ?></label>
 		</li>
 		<li>
 			<input <?php cookiebot_addons_checked_selected_helper( $addon_cookie_types, 'statistics' ); ?>
@@ -43,7 +43,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 					value="statistics"
 					name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][cookie_type][]"
 			>
-			<label class="cookiebot-addon-text">Statistics</label>
+			<label class="cookiebot-addon-text"><?php esc_html_e( 'statistics', 'cookiebot' ); ?></label>
 		</li>
 		<li>
 			<input <?php cookiebot_addons_checked_selected_helper( $addon_cookie_types, 'marketing' ); ?>
@@ -52,7 +52,7 @@ require_once ABSPATH . '/wp-admin/includes/translation-install.php';
 					value="marketing"
 					name="cookiebot_available_addons[<?php echo esc_attr( $addon_option_name ); ?>][cookie_type][]"
 			>
-			<label class="cookiebot-addon-text">Marketing</label>
+			<label class="cookiebot-addon-text"><?php esc_html_e( 'marketing', 'cookiebot' ); ?></label>
 		</li>
 	</ul>
 	<p class="cookiebot-addon-text"><?php esc_html_e( 'Placeholder text:', 'cookiebot' ); ?></p>

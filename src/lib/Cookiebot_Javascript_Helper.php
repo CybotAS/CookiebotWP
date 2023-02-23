@@ -8,14 +8,14 @@ use InvalidArgumentException;
 class Cookiebot_Javascript_Helper {
 	public function register_hooks() {
 		if ( is_admin() ) {
-			//Check if we should show cookie consent banner on admin pages
+			// Check if we should show cookie consent banner on admin pages
 			if ( ! Cookiebot_WP::cookiebot_disabled_in_admin() ) {
-				//adding cookie banner in admin area too
+				// adding cookie banner in admin area too
 				add_action( 'admin_head', array( $this, 'include_cookiebot_js' ), - 9999 );
 			}
 		}
 
-		//add JS
+		// add JS
 		add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), - 9997 );
 		add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9998 );
 		add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9999 );
@@ -34,11 +34,11 @@ class Cookiebot_Javascript_Helper {
 		$cbid = Cookiebot_WP::get_cbid();
 		if ( ! empty( $cbid ) && ! defined( 'COOKIEBOT_DISABLE_ON_PAGE' ) ) {
 			if ( is_multisite() && get_site_option( 'cookiebot-nooutput', false ) ) {
-				return ''; //Is multisite - and disabled output is checked as network setting
+				return ''; // Is multisite - and disabled output is checked as network setting
 			}
 
 			if ( get_option( 'cookiebot-nooutput', false ) ) {
-				return ''; //Do not show JS - output disabled
+				return ''; // Do not show JS - output disabled
 			}
 
 			if (

@@ -18,6 +18,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) {
 
 		/**
 		 * Cookiebot_WP Constructor.
+		 *
 		 * @deprecated
 		 * @throws RuntimeException
 		 * @since   1.0.0
@@ -79,6 +80,7 @@ if ( ! function_exists( 'cookiebot_active' ) ) {
 	/**
 	 * Helper function to check if cookiebot is active.
 	 * Useful for other plugins adding support for Cookiebot.
+	 *
 	 * @return  bool
 	 * @deprecated
 	 * @since   1.2

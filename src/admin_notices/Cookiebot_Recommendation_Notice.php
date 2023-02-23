@@ -43,11 +43,16 @@ class Cookiebot_Recommendation_Notice {
 			'hide_recommendation_for_two_weeks',
 			'nonce'
 		);
+		$visit_review_temp      = wp_nonce_url(
+			add_query_arg( array( 'cookiebot_admin_notice' => 'visit' ) ),
+			'hide_recommendation_next',
+			'nonce'
+		);
 
 		$notice = array(
-			'title'      => __( 'Leave A Review?', 'cookiebot' ),
+			'title'      => __( 'Leave A Review? ', 'cookiebot' ),
 			'msg'        => __(
-				'We hope you enjoy using WordPress Cookiebot™! Would you consider leaving us a review on WordPress.org?',
+				'Hi, you have been using our Cookiebot CMP plugin to actively collect user consent - that is awesome. Could you please do us a BIG favor and give it a 5-star rating on WordPress? To help us spread the word and enable more WP websites to easily achieve compliance with GDPR and CCPA.',
 				'cookiebot'
 			),
 			'link_html'  => get_view_html(
@@ -55,6 +60,7 @@ class Cookiebot_Recommendation_Notice {
 				array(
 					'two_week_review_ignore' => $two_week_review_ignore,
 					'two_week_review_temp'   => $two_week_review_temp,
+					'visit_review_temp'      => $visit_review_temp,
 				)
 			),
 			'later_link' => $two_week_review_temp,
@@ -83,9 +89,11 @@ class Cookiebot_Recommendation_Notice {
 		$option = get_option( static::COOKIEBOT_RECOMMENDATION_OPTION_KEY );
 
 		if ( $option !== false ) {
-			//"Never show again" is clicked
+			// "Never show again" is clicked
 			if ( $option === 'hide' ) {
 				throw new Exception( 'Never show again is clicked' );
+			} elseif ( $option === 'visit' && ( isset( $_SESSION['cb_notice'] ) && $_SESSION['cb_notice'] === 'hide' ) ) {
+				throw new Exception( 'Show me on next visit' );
 			} elseif ( is_numeric( $option ) && strtotime( 'now' ) < $option ) {
 				throw new Exception( '"Show me after 2 weeks" is clicked and 2 weeks is not passed yet' );
 			}
@@ -104,8 +112,9 @@ class Cookiebot_Recommendation_Notice {
 				update_option( static::COOKIEBOT_RECOMMENDATION_OPTION_KEY, 'hide' );
 			}
 
-			if ( wp_verify_nonce( $_GET['nonce'], 'hide_recommendation_for_two_weeks' ) ) {
-				update_option( static::COOKIEBOT_RECOMMENDATION_OPTION_KEY, strtotime( '+2 weeks' ) );
+			if ( wp_verify_nonce( $_GET['nonce'], 'hide_recommendation_next' ) ) {
+				$_SESSION['cb_notice'] = 'hide';
+				update_option( static::COOKIEBOT_RECOMMENDATION_OPTION_KEY, 'visit' );
 			}
 		}
 	}

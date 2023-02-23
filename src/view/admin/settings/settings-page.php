@@ -20,6 +20,7 @@ use cybot\cookiebot\settings\pages\Multiple_Page;
  * @var array $m_default
  * @var array $m
  * @var string $cookie_blocking_mode
+ * @var bool $network_auto
  * @var string $add_language_gif_url
  */
 
@@ -86,7 +87,7 @@ $header->display();
 									<?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?>
 								</a>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress"
-								   class="cb-btn cb-link-btn">
+								   target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 									<?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?>
 								</a>
 							</div>
@@ -188,7 +189,7 @@ $header->display();
 												type="radio"
 												name="cookiebot-cookie-blocking-mode"
 												value="auto"
-										/>
+											<?php echo $is_ms && $network_auto ? ' disabled' : ''; ?>/>
 										<?php esc_html_e( 'Automatic cookie-blocking mode', 'cookiebot' ); ?>
 									</label>
 									<label>
@@ -196,9 +197,12 @@ $header->display();
 												type="radio"
 												name="cookiebot-cookie-blocking-mode"
 												value="manual"
-										/>
+											<?php echo $is_ms && $network_auto ? ' disabled' : ''; ?>/>
 										<?php esc_html_e( 'Manual cookie-blocking mode', 'cookiebot' ); ?>
 									</label>
+									<?php if ( $is_ms && $network_auto ) { ?>
+										<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
@@ -247,6 +251,9 @@ $header->display();
 												value="defer" <?php checked( 'defer', $cv ); ?> />
 										defer
 									</label>
+									<?php if ( $is_ms && $network_auto || $is_ms && $network_scrip_tag_uc_attr !== 'custom' ) { ?>
+										<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
@@ -268,9 +275,13 @@ $header->display();
 									<label>
 										<?php
 										$disabled = false;
-										if ( $is_ms && get_site_option( 'cookiebot-nooutput' ) ) {
+										if ( $is_ms && get_site_option( 'cookiebot-nooutput' ) || $is_ms && $network_auto ) {
 											$disabled = true;
-											echo '<input type="checkbox" checked disabled />';
+											if ( ! $network_auto ) {
+												echo '<input type="checkbox" checked disabled />';
+											} else {
+												echo '<input type="checkbox" disabled />';
+											}
 										} else {
 											?>
 											<input type="checkbox" name="cookiebot-nooutput" value="1"
@@ -284,6 +295,9 @@ $header->display();
 										<?php } ?>
 										<?php esc_html_e( 'Hide the cookie popup banner', 'cookiebot' ); ?>
 									</label>
+									<?php if ( $is_ms && get_site_option( 'cookiebot-nooutput' ) || $is_ms && $network_auto ) { ?>
+										<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
@@ -353,6 +367,11 @@ $header->display();
 										<div class="switcher"></div>
 										<?php esc_html_e( 'Disable Cookiebot CMP in the WordPress Admin area', 'cookiebot' ); ?>
 									</label>
+									<?php
+									if ( $is_ms && get_site_option( 'cookiebot-nooutput-admin' ) ) {
+										?>
+										<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
@@ -438,6 +457,9 @@ $header->display();
 												value="defer" <?php checked( 'defer', $cv ); ?>/>
 										defer
 									</label>
+									<?php if ( $disabled ) { ?>
+										<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
+									<?php } ?>
 								</div>
 							</div>
 						</div>

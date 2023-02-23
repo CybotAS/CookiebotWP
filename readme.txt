@@ -1,90 +1,123 @@
-﻿# Cookiebot CMP by Usercentrics | The reliable, flexible and easy to use consent solution #
+﻿# Cookie banner plugin for WordPress – Cookiebot CMP by Usercentrics #
 * Contributors: cookiebot,phpgeekdk,aytac
-* Tags: cookie banner, cookies, GDPR, CCPA, cookie notice, dsgvo, ePrivacy, privacy compliance, cookie law, data privacy, cmp
+* Tags: cookie banner, GDPR, CCPA, WordPress cookie banner, cookie policy, ePrivacy, dsgvo, privacy compliance, cookie law, data privacy, cmp, cookies
 * Requires at least: 4.4
 * Tested up to: 6.1.1
-* Stable tag: 4.2.4
+* Stable tag: 4.2.5
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
+The Cookiebot CMP WordPress cookie banner and cookie policy help you comply with the major data protection laws (GDPR, ePrivacy, CCPA, LGPD, etc.) in a simple and fully automated way. Secure your website and get peace of mind.
+
 ## Description ##
 
-### RELIABLE, FLEXIBLE AND EASY TO USE COOKIE CONSENT SOLUTION FOR GDPR/ePR, CCPA/CPRA and IAB TCF compliance. ###
+Cookiebot Consent Management Platform (CMP) is an **easy-to-use and fully automated** WordPress cookie banner. It enables compliance with the GDPR, LGPD, CCPA and other privacy regulations, and helps **build trust with website visitors** by giving them more control over the use of their data.
 
-Cookiebot consent management platform (CMP) provides a **plug-and-play cookie consent solution** that enables compliance with the **GDPR, LGPD, CCPA and other international regulations**. It deploys industry-leading scanning technology and seamless integration with Google Consent Mode to help you **balance data privacy with data-driven business** on your domain.
+Cookiebot CMP is one of the few plugins that seamlessly integrates with **Google Tag Manager** and **Google Consent Mode** for higher quality, more compliant data. It's highly customizable and easy to implement. Cookiebot CMP uses **industry-leading scanning technology** to detect all cookies and trackers on your website, minimizing the risk of noncompliance.
 
-The Cookiebot CMP delivers:
+## Features ##
 
-- highly **customizable cookie consent banner** that enables website visitors to opt in or out of cookie categories
+**💫 Highly customizable**
 
-- industry-leading scanning technology that **automatically detects all cookies and other trackers** on your website
+Customize your WordPress cookie banner to match your UX and to enable visitors to opt in or out of individual cookie categories.
 
-- **automatically-generated cookie declaration** that can be used for your privacy policy page
+**🚀 Automated cookie scan**
 
-- full **integration with Google Consent Mode** right out of the box
+Take advantage of the regular auto-scan to detect cookies and tracking technologies on your website.
 
-- automatic cookie blocking feature that blocks all cookies and trackers until user consent has been obtained, **enabling compliance with GDPR, ePR, CCPA/CPRA** and other international regulations
+**🌟 Automated cookie policy**
 
-- easy to use widget that enables website visitors to **update their consent** at any time
+Create your cookie policy effortlessly. Publish our automatically updated cookie declaration on your privacy page.
+Your cookie policy will be specific and accurate at all times, enabling users to change or withdraw consent as required by most privacy regulations.
 
-- **secure storage of user consents** in our cloud-based environment
+**✅ Integration with Google Consent Mode**
 
-- downloadable user consent information to **comply with Data Subject Requests**
+Seamlessly activate Google Consent Mode to respect users’ privacy choices with minimal impact on your ad-based revenue stream, analytics, etc.
 
-- cookie consent banner and cookie declaration **in over 40 languages**
+[Learn more](https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode)
 
-[Find detailed information on the Cookiebot CMP functions here](https://www.cookiebot.com/en/functions/).
+**⚡ Automatic cookie blocking**
 
-**Please read our FAQ at the bottom of the page for more information.**
+Automatically block cookies and trackers until user consent is given.
 
-**How to install the Cookiebot CMP Wordpress Plugin**
+**🌎 Compliance with regulations and frameworks**
 
-[youtube https://youtube.com/watch?v=eSVFnjoMKFk]
+Our WordPress cookie banner helps you comply with the following regulations and frameworks:
 
-**NEED HELP?** [Visit our Help Center](https://support.cookiebot.com/hc/en-us)
+- GDPR (DSGVO, EU)
+- ePrivacy (EU)
+- LGPD (Brazil)
+- POPIA (South Africa)
+- CCPA and CPRA (California)
+- VCDPA (Virginia)
+- TCF 2.0 (EU)
 
-### Cookiebot Addons ####
-Add-ons are produced by an open-source community of developers. This is done to help make it easier for Wordpress users to implement ‘prior consent’ for cookies and trackers set by plugins that do not offer this as a built-in functionality.
+**🇺🇸 CCPA and CPRA compliance setup**
 
-The add-ons are currently the best alternative to a Wordpress Core framework that can signal the user’s consent state to other plugins (if and when this will be implemented is unknown) and to those plugins who do not yet offer native support for Cookiebot built into the plugin itself.
+To comply with the CCPA and CPRA, add a "Do Not Sell Or Share My Personal Information" link to the cookie policy declaration.
 
-We do not assume any responsibility for the use of these add-ons. If one of the plugins that the add-ons hook into makes a ‘breaking change’, there may be a period of time where the add-on will not work properly until it has been updated to accommodate the changes in the plugin.
+**🟠 Consent widget**
 
-If your favourite plugin isn't supported you're welcome to contribute or request on our [Github development page](https://github.com/CybotAS/CookiebotAddons).
+Enable visitors to update their consent with our easy-to-use widget.
 
+**🔒 Secure data storage**
+
+Securely store user consent obtained in our cloud-based environment.
+
+**📥 Data download option**
+
+Comply with data subject requests (DSRs) by providing an option to download user consent information as needed.
+
+**💬 Supports 40+ languages**
+
+Display the cookie banner and cookie policy to users from all over the world using any of 40+ languages available in the cookie banner’s settings.
 
 ## Installation ##
 
-To easily install the Cookiebot CMP, follow the steps below.
-
-
-1. Install the plugin on your WordPress website.
-
-2. Make sure that you have a Cookiebot CMP account. Don't have an account yet? Sign up [here](https://manage.cookiebot.com/en/signup/?utm_source=wordpress&utm_medium=organic&utm_campaign=banner).
-If your website counts less than 100 subdomains, your Cookiebot CMP account is completely free. All the other subscriptions have a free 30-day-trial period.
-
-3. Link your Cookiebot CMP account to the plugin, go to "Settings" > "General Settings" in the WordPress Dashboard, and add your Domain Group ID.
-Need help finding your Domain Group ID? [Learn here](https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it) where you can find it. Once your Domain Group ID is added in the WordPress Dashboard, the cookie consent banner will be visible on your website.
-
-4. Set the main language of your cookie consent banner
-
-5. Select your cookie-blocking mode. The [auto cookie-blocking mode](https://support.cookiebot.com/hc/en-us/articles/36000906310x0-How-does-Automatic-Cookie-Blocking-work-) will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. The [manual cookie-blocking mode](https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking) requests manual adjustments to the cookie-setting scripts.
-
-
-To find out more about the setup and customizability of the Cookiebot CMP, please visit our [Help Center](https://support.cookiebot.com/).
-
-**Recommended Videos**
-
-How to install the Cookiebot CMP Wordpress Plugin
+Watch the below video to learn how to install the Cookiebot CMP WordPress plugin. It’s very easy. Alternatively, read our [step-by-step installation guide](https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress).
 
 [youtube https://youtube.com/watch?v=eSVFnjoMKFk]
 
-Implement the Cookie Declaration
+Need assistance? Visit our [Help Center](https://support.cookiebot.com/hc/en-us) or [contact us](https://support.cookiebot.com/hc/en-us/requests/new).
 
-[youtube https://youtube.com/watch?v=OCXz2bt4H_w]
+## Support and updates ##
 
-## Google Consent Mode ##
-Google Consent Mode is enabled by default. It's an open API developed by Google that enables your website to run all Google services, such as Google Analytics, Google Tag Manager and Google Ads, based on the consent status of your end users. With Cookiebot CMP's integration with Google Consent Mode you can respect the privacy choices of end users with minimal impact on your website's ad-based revenue stream, analytics and more. [Learn more about Google Consent Mode](https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode).
+The Cookiebot CMP plugin is regularly updated and managed by our in-house Product Team to help you keep your business website compliant with relevant regulations at all times.
+
+If you have questions or need support with the cookie banner, visit our [Help Center](https://support.cookiebot.com/hc/en-us) or [contact us](https://support.cookiebot.com/hc/en-us/requests/new).
+
+## Copyright ##
+
+The Cookiebot CMP by Usercentrics is a registered trademark of Usercentrics A/S.
+
+## About Cookiebot™ and Usercentrics ##
+
+In September 2021, Cybot (primary owner of the Cookiebot CMP) and Usercentrics unified their operations to create a powerful global force in providing solutions that assist businesses in protecting their users’ personal data. Our unified company is now known as Usercentrics.
+
+Usercentrics is a global market leader in the field of consent management platforms (CMP). We enable businesses to collect, manage and document user consent on websites and apps in order to achieve full compliance with global privacy regulations (GDPR, ePrivacy, CCPA, LGPD, etc.) while facilitating high consent rates and building trust with their customers.
+
+Our consent technology is trusted by public and private organizations across all industries and company sizes, used on over 900,000 websites worldwide.
+
+[Learn more about Cookiebot CMP](https://www.cookiebot.com/en/about/)
+[Learn more about Usercentrics](https://usercentrics.com/about-us/)
+
+[![Sonarcloud](https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg)](https://www.sonarsource.com/products/sonarcloud/)
+
+[![Security](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=security_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Reliability](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=reliability_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=bugs&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=sqale_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=vulnerabilities&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+
+## Screenshots ##
+
+1. Set up the Cookiebot CMP plugin using our easy-to-navigate dashboard
+2. Automatically block cookies and trackers until user consent is given
+3. Easily set a Google Tag Manager ID on your site
+4. Activate Google Consent Mode to measure conversions and collect data
+5. Enable the IAB TCF v2.0 on your website with a single click
+6. Set up multiple configurations to enable compliance with two or more privacy regulations at once (e.g. GDPR and CCPA)
+7. Visit our extensive Help Center or contact us for assistance
 
 ## Frequently Asked Questions ##
 
@@ -100,7 +133,7 @@ You cannot choose whether you want a free plan or a premium plan, as this is det
 
 If more than 100 subpages are found during the initial website scan, you will be given a free one-month trial of Cookiebot CMP with full functionality.
 
-See all details of Cookiebot CMP [plans and pricing](https://www.cookiebot.com/goto/pricing/).
+See all details of Cookiebot CMP [plans and pricing](https://www.cookiebot.com/en/pricing/).
 
 ### What does Cookiebot count as pages? ###
 Your pricing plan is dependent on the number of subpages the Cookiebot CMP detects on your website.
@@ -176,7 +209,7 @@ Send an email to the plugin developer you want to support Cookiebot and request 
 
 The easiest way for a developer to implement Cookiebot CMP support is following to add a check where tags are outputted to the visitor. This can be done following way:
 
-$scriptTag = ”;
+$scriptTag = ‘‘;
 if(function_exists(‘cookiebot_active’) && cookiebot_active()) {
 $scriptTag = ‘<script’.cookiebot_assist(‘statistics’).’>’;
 }
@@ -191,8 +224,8 @@ The default consent banner has the strictest settings possible and is suitable f
 Be aware that Cookiebot CMP is customizable and therefore true compliance always depends on the settings that you make within the plugin and Cookiebot Manager.
 
 **Are you using the manual implementation?** Please make sure to check if you are using plugins that set cookies which require consent. If so, you have to:
-1. Ask the plugin developers if they are planning on becoming GDPR/CCPA compliant, or if they would like to integrate with Cookiebot CMP. Check out our [Github repository](https://github.com/CybotAS/CookiebotAddons), where we are developing integrations for Cookiebot CMP, until the plugin developers choose to do this themselves, or if [WP Core](https://core.trac.wordpress.org/ticket/44043) enables such functionality.
-2. Once Cookiebot CMP is installed, you can check the [cookie report](https://manage.cookiebot.com/goto/reports) to identify all cookies being set on your website. If the cookies are coming from content that you have inserted manually, you can mark up that content [as described in our manual implementation guide step 4](https://cookiebot.com/goto/manual-implementation). Embedded videos and iframes which set cookies can be marked up as explained in our [iframe cookie consent with YouTube example](https://support.cookiebot.com/hc/en-us/articles/360003790854-Iframe-cookie-consent-with-YouTube-example).
+1. Ask the plugin developers if they are planning on becoming GDPR/CCPA compliant, or if they would like to integrate with Cookiebot CMP. Check out our [Github repository](https://github.com/CybotAS/CookiebotWP), where we are developing integrations for Cookiebot CMP, until the plugin developers choose to do this themselves, or if [WP Core](https://core.trac.wordpress.org/ticket/44043) enables such functionality.
+2. Once Cookiebot CMP is installed, you can check the [cookie report](https://manage.cookiebot.com/en/reports) to identify all cookies being set on your website. If the cookies are coming from content that you have inserted manually, you can mark up that content [as described in our manual implementation guide step 4](https://www.cookiebot.com/en/manual-implementation). Embedded videos and iframes which set cookies can be marked up as explained in our [iframe cookie consent with YouTube example](https://support.cookiebot.com/hc/en-us/articles/360003790854-Iframe-cookie-consent-with-YouTube-example).
 
 Disclaimer: These statements do not constitute legal advice, but only serve to support and inform you about the Cookiebot CMP product. Please consult a qualified lawyer should you have any legal questions.
 
@@ -207,9 +240,11 @@ If you prefer the latter method, you should select ´Hide Cookie Popup´ in the 
 
 [Please see our article on how to deploy Cookiebot with GTM](https://support.cookiebot.com/hc/en-us/articles/360003793854-Google-Tag-Manager-deployment).
 
-### Can I use Cookiebot CMP with Google Consent Mode? ###
+### What is Google Consent Mode and can I use it with Cookiebot CMP? ###
+Google Consent Mode is an open API that enables your website to run all Google services, such as Google Analytics, Google Tag Manager, and Google Ads, based on the consent status of your end users. It helps you make the best use of visitors’ data and consent.
 
-Yes the Cookiebot consent management platform (CMP) and Google Consent Mode integrate seamlessly. You can find more information on the implementation of Google Consent Mode [here](https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode).
+Google Consent Mode is enabled by default in the Cookiebot CMP plugin.
+[Learn more](https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode)
 
 ### Does Cookiebot integrate with WP Consent API? ###
 Cookiebot is fully integrated with the WP Consent API. When your visitors give consent using Cookiebot CMP, the consent will automatically be sent to the [WP Consent API](https://wordpress.org/plugins/wp-consent-api/).
@@ -219,7 +254,23 @@ You can define the mapping between Cookiebot and the WP Consent API in the admin
 ### Does Cookiebot work with translation plugins? ###
 Cookiebot CMP is compatible with translation plugins when you set language to “Use WordPress Language”.
 
+### What are add-ons and can I use them with the Cookiebot CMP plugin? ###
+Add-ons are produced by an open-source community of developers. They enable you to implement opt-out for cookies and trackers set by plugins without built-in consent functionality. Add-ons signal the user's consent state to other plugins. You can use them with the Cookiebot CMP plugin.
+
+Please note that we don't take responsibility for the use of add-ons, as they are not under our control. There may be times when an add-on will not work properly until it has been updated to reflect changes in the plugin that the add-on hooks into.
+
+If your favorite plugin isn't supported, feel free to request it via our [GitHub page](https://github.com/CybotAS/CookiebotWP).
+
+
 ## Changelog ##
+### 4.2.5 - 2023-02-23 ###
+* Add translations Russian, Polish and Czech
+* Update CMP on WP admin and URL passthrough disabled by default
+* Update description readme.txt
+* Update German, French, Spanish, Italian and Portuguese translations
+* Update minor style changes
+* Fix Network settings page only on network plugin activation
+
 ### 4.2.4 - 2023-01-23 ###
 * Add review card on dashboard
 * Add settings quick access link on plugins page list
@@ -514,4 +565,4 @@ Cookiebot CMP is compatible with translation plugins when you set language to �
 
 ## Copyright and Trademarks ##
 
-Cookiebot CMP by Usercentrics is a registered trademark of Usercentrics A/S
+The Cookiebot CMP by Usercentrics is a registered trademark of Usercentrics A/S.

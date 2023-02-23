@@ -33,8 +33,8 @@ function placeholder_toggle() {
 		'change',
 		'.placeholder_enable',
 		function () {
-			var status = jQuery( this ).is( ':checked' );
-			var addon  = jQuery( this ).data( 'addon' );
+			const status = jQuery( this ).is( ':checked' );
+			const addon  = jQuery( this ).data( 'addon' );
 
 			if ( status ) {
 				placeholder_enable( addon );
@@ -73,14 +73,19 @@ function placeholder_enable( addon ) {
  * @since 1.8.0
  */
 function button_add_placeholder_language() {
+    const initialValues = jQuery('form').serialize();
 	jQuery( '.btn_add_language' ).on(
 		'click',
 		function ( e ) {
 			e.preventDefault();
 
-			var addon = jQuery( this ).data( 'addon' );
+			const addon = jQuery( this ).data( 'addon' );
 
 			add_placeholder_language_content( addon );
+
+            const newValues = jQuery('form').serialize();
+            if(newValues!==initialValues)
+                jQuery('p.submit #submit').addClass('enabled');
 
 			return false;
 		}
@@ -95,7 +100,7 @@ function button_add_placeholder_language() {
  * @since 1.8.0
  */
 function add_placeholder_language_content( addon ) {
-	var data = jQuery( '.placeholder[data-addon="' + addon + '"] .placeholder_content:first' )[ 0 ].outerHTML;
+	const data = jQuery( '.placeholder[data-addon="' + addon + '"] .placeholder_content:first' )[ 0 ].outerHTML;
 
 	jQuery( '.placeholder[data-addon="' + addon + '"] .add_placeholder_language' ).before( data );
 
@@ -114,8 +119,8 @@ function placeholder_select_language() {
 		'change',
 		'.placeholder_select_language',
 		function () {
-			var new_value   = jQuery( this ).val();
-			var select_name = jQuery( this ).attr( 'name' );
+			const new_value   = jQuery( this ).val();
+			let select_name = jQuery( this ).attr( 'name' );
 
 			// get new name
 			select_name  = select_name.substr( 0, select_name.lastIndexOf( '[' ) );
@@ -136,6 +141,7 @@ function placeholder_select_language() {
  * @since 1.8.0
  */
 function button_delete_language() {
+    const initialValues = jQuery('form').serialize();
 	jQuery( document ).on(
 		'click',
 		'.submitdelete',
@@ -143,6 +149,10 @@ function button_delete_language() {
 			e.preventDefault();
 
 			jQuery( this ).parent().parent().remove();
+
+            let newValues = jQuery('form').serialize();
+            if(newValues===initialValues)
+                jQuery('p.submit #submit').removeClass('enabled');
 
 			return false;
 		}
@@ -239,9 +249,26 @@ function closeSubmitMsg() {
 }
 
 function submitEnable() {
-	jQuery(':input').change(
-		function(){
-			jQuery('p.submit #submit').addClass('enabled');
-		}
-	);
+    const initialValues = jQuery('form').serialize();
+    const events = {
+        change: 'input:not([type=text]), select',
+        input: 'input[type="text"], textarea'
+    };
+
+    Object.entries(events).forEach(entry => {
+        const [eventName, elements] = entry;
+        jQuery(document).on(eventName,elements,{initialValues: initialValues},function(event){
+            checkValues(event.data.initialValues)
+        });
+    });
+}
+
+function checkValues(initialValues){
+    let submitBtn = jQuery('p.submit #submit');
+    let newValues = jQuery('form').serialize();
+    if(newValues !== initialValues) {
+        submitBtn.addClass('enabled');
+    }else{
+        submitBtn.removeClass('enabled');
+    }
 }
