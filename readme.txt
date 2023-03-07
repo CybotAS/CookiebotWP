@@ -101,13 +101,13 @@ Our consent technology is trusted by public and private organizations across all
 [Learn more about Cookiebot CMP](https://www.cookiebot.com/en/about/)
 [Learn more about Usercentrics](https://usercentrics.com/about-us/)
 
-[![Sonarcloud](https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg)](https://www.sonarsource.com/products/sonarcloud/)
+<img src="https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg" alt="Sonarcloud"/>
 
-[![Security](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=security_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
-[![Reliability](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=reliability_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=bugs&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
-[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=sqale_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=vulnerabilities&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+<img src="https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=security_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3" alt="Security"/>
+<img src="https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=reliability_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3" alt="Reliability"/>
+<img src="https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=bugs&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3" alt="Bugs"/>
+<img src="https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=sqale_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3" alt="Maintainability"/>
+<img src="https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=vulnerabilities&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3" alt="Vulnerabilities"/>
 
 ## Screenshots ##
 
