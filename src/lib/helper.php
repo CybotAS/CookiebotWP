@@ -375,7 +375,7 @@ namespace cybot\cookiebot\lib {
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.', 'cookiebot' ),
 		);
 
-		return $translated_placeholder[ $placeholder ];
+		return empty( $translated_placeholder[ $placeholder ] ) ? $placeholder : $translated_placeholder[ $placeholder ];
 	}
 
 	/**
