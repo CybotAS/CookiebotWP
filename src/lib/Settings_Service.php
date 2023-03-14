@@ -201,7 +201,8 @@ class Settings_Service implements Settings_Service_Interface {
 	public function get_widget_placeholders( $option_key, $widget_key ) {
 		$option = get_option( $option_key );
 
-		if ( isset( $option[ $widget_key ]['placeholder']['languages'] ) && is_array( $option[ $widget_key ]['placeholder']['languages'] ) ) {
+		if ( isset( $option[ $widget_key ]['placeholder']['languages'] ) &&
+			is_array( $option[ $widget_key ]['placeholder']['languages'] ) ) {
 			return (array) $option[ $widget_key ]['placeholder']['languages'];
 		}
 
@@ -216,7 +217,8 @@ class Settings_Service implements Settings_Service_Interface {
 	public function get_placeholders( $option_key ) {
 		$option = get_option( static::OPTION_NAME );
 
-		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) && is_array( $option[ $option_key ]['placeholder']['languages'] ) ) {
+		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) &&
+			is_array( $option[ $option_key ]['placeholder']['languages'] ) ) {
 			return (array) $option[ $option_key ]['placeholder']['languages'];
 		}
 
@@ -328,7 +330,8 @@ class Settings_Service implements Settings_Service_Interface {
 		/**
 		 * Loop every language and match current language
 		 */
-		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) && is_array( $option[ $option_key ]['placeholder']['languages'] ) ) {
+		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) &&
+			is_array( $option[ $option_key ]['placeholder']['languages'] ) ) {
 			foreach ( $option[ $option_key ]['placeholder']['languages'] as $key => $value ) {
 
 				/**
@@ -338,7 +341,9 @@ class Settings_Service implements Settings_Service_Interface {
 					$cookies_array           = explode( ', ', $cookies );
 					$translated_cookie_names = cookiebot_translate_cookie_names( $cookies_array );
 					$translated_cookie_names = implode( ', ', $translated_cookie_names );
-					$placeholder             = cookiebot_translate_placeholder( $option[ $option_key ]['placeholder']['languages'][ $key ] );
+					$placeholder             = cookiebot_translate_placeholder(
+						$option[ $option_key ]['placeholder']['languages'][ $key ]
+					);
 					return $this->placeholder_merge_tag(
 						$placeholder,
 						$translated_cookie_names,

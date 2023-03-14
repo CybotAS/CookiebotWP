@@ -19,30 +19,24 @@ class Google_Maps_Jetpack_Widget extends Base_Jetpack_Widget {
 	private $cookie_types = array();
 
 	public function load_configuration() {
-		/**
-		 * The widget is active
-		 */
-		if ( is_active_widget( false, false, 'widget_contact_info', true ) ) {
+		if (
+			// The widget is active
+			is_active_widget( false, false, 'widget_contact_info', true ) &&
+			// The widget is enabled in Prior consent
+			$this->is_widget_enabled() &&
+			// The visitor didn't check the required cookie types
+			! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() )
+		) {
+			$this->cookie_types = $this->get_widget_cookie_types();
+
 			/**
-			 * The widget is enabled in Prior consent
+			 * Replace attributes of the google maps widget iframe
 			 */
-			if ( $this->is_widget_enabled() ) {
-				/**
-				 * Cookie types are not selected
-				 */
-				if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() ) ) {
-					$this->cookie_types = $this->get_widget_cookie_types();
+			add_action( 'jetpack_contact_info_widget_start', array( $this, 'start_buffer' ) );
+			add_action( 'jetpack_contact_info_widget_end', array( $this, 'stop_buffer' ) );
 
-					/**
-					 * Replace attributes of the google maps widget iframe
-					 */
-					add_action( 'jetpack_contact_info_widget_start', array( $this, 'start_buffer' ) );
-					add_action( 'jetpack_contact_info_widget_end', array( $this, 'stop_buffer' ) );
-
-					if ( $this->is_widget_placeholder_enabled() ) {
-						add_action( 'jetpack_stats_extra', array( $this, 'cookie_consent_div' ), 10, 2 );
-					}
-				}
+			if ( $this->is_widget_placeholder_enabled() ) {
+				add_action( 'jetpack_stats_extra', array( $this, 'cookie_consent_div' ), 10, 2 );
 			}
 		}
 	}
@@ -124,15 +118,15 @@ class Google_Maps_Jetpack_Widget extends Base_Jetpack_Widget {
 	 * @param string $widget
 	 */
 	public function cookie_consent_div( $view, $widget ) {
-		if ( $widget === 'contact_info' && $view === 'widget_view' ) {
-			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
-				$classname  = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
-				$inner_html = $this->get_widget_placeholder();
-				echo '<div class="' . esc_attr( $classname ) . '">
-						  ' . esc_html( $inner_html ) . '
-						</div>';
-			}
+		if (
+			( $widget === 'contact_info' && $view === 'widget_view' ) &&
+			( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 )
+		) {
+			$classname  = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
+			$inner_html = $this->get_widget_placeholder();
+			echo '<div class="' . esc_attr( $classname ) . '">
+					  ' . esc_html( $inner_html ) . '
+					</div>';
 		}
 	}
-
 }

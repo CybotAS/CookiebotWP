@@ -21,7 +21,7 @@
 		<?php do_settings_sections( 'cookiebot-legislations' ); ?>
 
 
-		<table class="form-table" role="presentation">
+		<table class="form-table">
 			<tbody>
 			<tr>
 				<th scope="row">

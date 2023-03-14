@@ -65,13 +65,34 @@ class Network_Menu_Settings {
 	public function network_settings_save() {
 		check_admin_referer( 'cookiebot-network-settings' );
 
-		update_site_option( 'cookiebot-cbid', ! empty( $_POST['cookiebot-cbid'] ) ? $_POST['cookiebot-cbid'] : '' );
-		update_site_option( 'cookiebot-script-tag-uc-attribute', ! empty( $_POST['cookiebot-script-tag-uc-attribute'] ) ? $_POST['cookiebot-script-tag-uc-attribute'] : '' );
-		update_site_option( 'cookiebot-script-tag-cd-attribute', ! empty( $_POST['cookiebot-script-tag-cd-attribute'] ) ? $_POST['cookiebot-script-tag-cd-attribute'] : '' );
-		update_site_option( 'cookiebot-autoupdate', ! empty( $_POST['cookiebot-autoupdate'] ) ? $_POST['cookiebot-autoupdate'] : '' );
-		update_site_option( 'cookiebot-nooutput', ! empty( $_POST['cookiebot-nooutput'] ) ? $_POST['cookiebot-nooutput'] : '' );
-		update_site_option( 'cookiebot-nooutput-admin', ! empty( $_POST['cookiebot-nooutput-admin'] ) ? $_POST['cookiebot-nooutput-admin'] : '' );
-		update_site_option( 'cookiebot-cookie-blocking-mode', ! empty( $_POST['cookiebot-cookie-blocking-mode'] ) ? $_POST['cookiebot-cookie-blocking-mode'] : '' );
+		update_site_option(
+			'cookiebot-cbid',
+			! empty( $_POST['cookiebot-cbid'] ) ? $_POST['cookiebot-cbid'] : ''
+		);
+		update_site_option(
+			'cookiebot-script-tag-uc-attribute',
+			! empty( $_POST['cookiebot-script-tag-uc-attribute'] ) ? $_POST['cookiebot-script-tag-uc-attribute'] : ''
+		);
+		update_site_option(
+			'cookiebot-script-tag-cd-attribute',
+			! empty( $_POST['cookiebot-script-tag-cd-attribute'] ) ? $_POST['cookiebot-script-tag-cd-attribute'] : ''
+		);
+		update_site_option(
+			'cookiebot-autoupdate',
+			! empty( $_POST['cookiebot-autoupdate'] ) ? $_POST['cookiebot-autoupdate'] : ''
+		);
+		update_site_option(
+			'cookiebot-nooutput',
+			! empty( $_POST['cookiebot-nooutput'] ) ? $_POST['cookiebot-nooutput'] : ''
+		);
+		update_site_option(
+			'cookiebot-nooutput-admin',
+			! empty( $_POST['cookiebot-nooutput-admin'] ) ? $_POST['cookiebot-nooutput-admin'] : ''
+		);
+		update_site_option(
+			'cookiebot-cookie-blocking-mode',
+			! empty( $_POST['cookiebot-cookie-blocking-mode'] ) ? $_POST['cookiebot-cookie-blocking-mode'] : ''
+		);
 
 		wp_safe_redirect(
 			add_query_arg(

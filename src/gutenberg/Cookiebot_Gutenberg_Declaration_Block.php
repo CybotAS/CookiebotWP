@@ -21,7 +21,7 @@ class Cookiebot_Gutenberg_Declaration_Block {
 	 */
 	public function gutenberg_block_setup() {
 		if ( ! function_exists( 'register_block_type' ) ) {
-			return; //gutenberg not active
+			return; // gutenberg not active
 		}
 
 		register_block_type(
@@ -51,7 +51,7 @@ class Cookiebot_Gutenberg_Declaration_Block {
 	 * @version 3.7.1
 	 */
 	public function gutenberg_block_admin_assets() {
-		//Add Gutenberg Widget
+		// Add Gutenberg Widget
 		wp_enqueue_script(
 			'cookiebot-declaration',
 			asset_url( 'js/backend/gutenberg/cookie-declaration-gutenberg-block.js' ),

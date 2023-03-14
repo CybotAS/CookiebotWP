@@ -15,6 +15,15 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 	const SVN_URL_BASE_PATH           = 'https://raw.githubusercontent.com/facebookincubator/facebook-for-woocommerce/master/';
 	const SVN_URL_DEFAULT_SUB_PATH    = 'facebook-commerce.php';
 
+	// Events
+	const FB_VIEW_CONTENT  = 'fbq(\'ViewContent\'';
+	const FB_VIEW_CATEGORY = 'fbq(\'ViewCategory\'';
+	const FB_SEARCH        = 'fbq(\'Search\'';
+	const FB_ADD_TO_CART   = 'fbq(\'AddToCart\'';
+	const FB_INIT_CHECKOUT = 'fbq(\'InitiateCheckout\'';
+	const FB_PURCHASE      = 'fbq(\'Purchase\'';
+	const FB_TRACK         = 'fbq(\'track\',';
+
 	public function load_addon_configuration() {
 		add_filter( 'wc_facebook_pixel_script_attributes', array( $this, 'cookiebot_addon_facebook_for_woocommerce_script_attributes' ) );
 
@@ -23,7 +32,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 			'woocommerce_after_single_product',
 			2,
 			array(
-				'fbq(\'ViewContent\'' => $this->get_cookie_types(),
+				self::FB_VIEW_CONTENT => $this->get_cookie_types(),
 			),
 			false
 		);
@@ -32,7 +41,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 			'woocommerce_after_shop_loop',
 			10,
 			array(
-				'fbq(\'ViewCategory\'' => $this->get_cookie_types(),
+				self::FB_VIEW_CATEGORY => $this->get_cookie_types(),
 			),
 			false
 		);
@@ -41,7 +50,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 			'pre_get_posts',
 			10,
 			array(
-				'fbq(\'Search\'' => $this->get_cookie_types(),
+				self::FB_SEARCH => $this->get_cookie_types(),
 			),
 			false
 		);
@@ -50,7 +59,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 			'woocommerce_after_cart',
 			10,
 			array(
-				'fbq(\'AddToCart\'' => $this->get_cookie_types(),
+				self::FB_ADD_TO_CART => $this->get_cookie_types(),
 			),
 			false
 		);
@@ -59,7 +68,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 			'woocommerce_add_to_cart',
 			2,
 			array(
-				'fbq(\'AddToCart\'' => $this->get_cookie_types(),
+				self::FB_ADD_TO_CART => $this->get_cookie_types(),
 			),
 			false
 		);
@@ -68,7 +77,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 			'wc_ajax_fb_inject_add_to_cart_event',
 			2,
 			array(
-				'fbq(\'AddToCart\'' => $this->get_cookie_types(),
+				self::FB_ADD_TO_CART => $this->get_cookie_types(),
 			),
 			false
 		);
@@ -77,7 +86,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 			'woocommerce_after_checkout_form',
 			10,
 			array(
-				'fbq(\'InitiateCheckout\'' => $this->get_cookie_types(),
+				self::FB_INIT_CHECKOUT => $this->get_cookie_types(),
 			),
 			false
 		);
@@ -86,7 +95,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 			'woocommerce_thankyou',
 			2,
 			array(
-				'fbq(\'Purchase\'' => $this->get_cookie_types(),
+				self::FB_PURCHASE => $this->get_cookie_types(),
 			),
 			false
 		);
@@ -95,7 +104,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 			'woocommerce_payment_complete',
 			2,
 			array(
-				'fbq(\'Purchase\'' => $this->get_cookie_types(),
+				self::FB_PURCHASE => $this->get_cookie_types(),
 			),
 			false
 		);
@@ -104,7 +113,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 			'wp_head',
 			10,
 			array(
-				'fbq(\'track\',' => $this->get_cookie_types(),
+				self::FB_TRACK => $this->get_cookie_types(),
 			),
 			false
 		);

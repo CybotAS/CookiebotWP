@@ -137,7 +137,8 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 * Autocorrection of Vimeo and Youtube tags to make them GDPR compatible
 	 *
 	 * @since 1.1.0
-	 * @todo refactor this function, reduce duplicate code, fix the behaviour in places where variables are "probably undefined"
+	 * @todo refactor this function, reduce duplicate code,
+	 * @todo fix the behaviour in places where variables are "probably undefined"
 	 */
 	public function cookiebot_addon_embed_autocorrect_content( $content ) {
 		// Make sure Cookiebot is active and the user has enabled autocorrection
@@ -148,10 +149,13 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 			preg_match( '|<a href=\"([^\"]*)\">([^<]*)</a></p></blockquote>|', $match, $match_src );
 			$src = $match_src[1];
 
+			$script_replace = '<script type="text/plain" data-cookieconsent="' .
+				cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '">';
+
 			// Replace - and add cookie consent notice.
 			$adjusted = str_replace(
 				'<script>',
-				'<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '">',
+				$script_replace,
 				$match
 			);
 
@@ -195,10 +199,13 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 
 			$src = $match_src[1];
 
+			$script_replace = '<script type="text/plain" data-cookieconsent="' .
+				cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" ';
+
 			// Replace - and add cookie consent notice.
 			$adjusted = str_replace(
 				'<script ',
-				'<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $this->get_cookie_types() ) . '" ',
+				$script_replace,
 				$match
 			);
 
@@ -341,11 +348,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 * @throws Exception
 	 */
 	public function cookiebot_addon_embed_autocorrect_handle_video(
-		$output,
-		$atts = array(),
-		$video = '',
-		$post_id = null,
-		$library = ''
+		$output
 	) {
 		/* Find src in markup */
 		preg_match( '| src=\"([^\"]*)\"|', $output, $match );
@@ -383,11 +386,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 * Implementation of filter wp_audio_shortcode - fixing code for cookiebot.
 	 */
 	public function cookiebot_addon_embed_autocorrect_handle_audio(
-		$output,
-		$atts = array(),
-		$video = '',
-		$post_id = null,
-		$library = ''
+		$output
 	) {
 		/* Find src in markup */
 		preg_match( '| src=\"([^\"]*)\"|', $output, $match );
@@ -494,7 +493,10 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 			'default_regex'     => $this->get_default_regex(),
 		);
 
-		return get_view_html( 'admin/settings/prior-consent/other-addons/embed-autocorrect-extra-addon-options.php', $view_args );
+		return get_view_html(
+			'admin/settings/prior-consent/other-addons/embed-autocorrect-extra-addon-options.php',
+			$view_args
+		);
 	}
 
 	/**

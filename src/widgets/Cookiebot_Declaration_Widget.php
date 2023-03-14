@@ -52,6 +52,7 @@ class Cookiebot_Declaration_Widget extends WP_Widget {
 
 	/**
 	 * Display the widget
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function widget( $args, $instance ) {

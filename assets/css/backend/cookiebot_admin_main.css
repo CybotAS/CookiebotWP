@@ -126,9 +126,6 @@
     border-radius: 7px;
     border: none;
     cursor: pointer;
-}
-
-.cb-btn {
     box-shadow: unset;
     outline: unset;
 }

@@ -15,29 +15,23 @@ class Goodreads_Jetpack_Widget extends Base_Jetpack_Widget {
 	private $keywords;
 
 	public function load_configuration() {
-		/**
-		 * The widget is active
-		 */
-		if ( is_active_widget( false, false, 'wpcom-goodreads', true ) ) {
-			/**
-			 * The widget is enabled in Prior consent
-			 */
-			if ( $this->is_widget_enabled() ) {
-				/**
-				 * The visitor didn't check the required cookie types
-				 */
-				if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() ) ) {
-					if ( $this->is_widget_placeholder_enabled() ) {
-						add_action( 'jetpack_stats_extra', array( $this, 'cookie_consent_div' ), 10, 2 );
-					}
-
-					$this->transient_name = 'wpcom-goodreads';
-
-					$this->keywords = array( 'www.goodreads.com' => $this->get_widget_cookie_types() );
-					$this->block_javascript_file();
-					$this->output_manipulated();
-				}
+		if (
+			// The widget is active
+			is_active_widget( false, false, 'wpcom-goodreads', true ) &&
+			// The widget is enabled in Prior consent
+			$this->is_widget_enabled() &&
+			// The visitor didn't check the required cookie types
+			! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() )
+		) {
+			if ( $this->is_widget_placeholder_enabled() ) {
+				add_action( 'jetpack_stats_extra', array( $this, 'cookie_consent_div' ), 10, 2 );
 			}
+
+			$this->transient_name = 'wpcom-goodreads';
+
+			$this->keywords = array( 'www.goodreads.com' => $this->get_widget_cookie_types() );
+			$this->block_javascript_file();
+			$this->output_manipulated();
 		}
 	}
 
@@ -113,14 +107,15 @@ class Goodreads_Jetpack_Widget extends Base_Jetpack_Widget {
 	 * @param string $widget
 	 */
 	public function cookie_consent_div( $view, $widget ) {
-		if ( $widget === 'goodreads' && $view === 'widget_view' ) {
-			if ( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 ) {
-				$classname  = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
-				$inner_html = $this->get_widget_placeholder();
-				echo '<div class="' . esc_attr( $classname ) . '">
-						  ' . esc_html( $inner_html ) . '
-						</div>';
-			}
+		if (
+			( $widget === 'goodreads' && $view === 'widget_view' ) &&
+			( is_array( $this->get_widget_cookie_types() ) && count( $this->get_widget_cookie_types() ) > 0 )
+		) {
+			$classname  = cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() );
+			$inner_html = $this->get_widget_placeholder();
+			echo '<div class="' . esc_attr( $classname ) . '">
+					  ' . esc_html( $inner_html ) . '
+					</div>';
 		}
 	}
 
