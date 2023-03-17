@@ -106,7 +106,7 @@ trait Class_Constant_Override_Validator_Trait {
 		}
 		$value = constant( 'static::' . $required_array_constant_name );
 		if ( empty( $value ) || ! is_array( $value ) ) {
-			throw new Exception(
+			throw new InvalidArgumentException(
 				'Class constant "' .
 				$required_array_constant_name .
 				'" must be an array in ' .
@@ -116,7 +116,7 @@ trait Class_Constant_Override_Validator_Trait {
 		if ( ! empty( $allowed_item_values ) ) {
 			foreach ( $value as $item ) {
 				if ( ! in_array( $item, $allowed_item_values, true ) ) {
-					throw new Exception(
+					throw new InvalidArgumentException(
 						'Class constant "' .
 						$required_array_constant_name .
 						'" array items should be one of "' .
