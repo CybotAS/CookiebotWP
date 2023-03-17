@@ -20,12 +20,15 @@ use function cybot\cookiebot\lib\include_view;
 
 class Settings_Config {
 
+
+
 	/**
 	 * @var Settings_Service_Interface
 	 */
 	protected $settings_service;
 
 	const ADMIN_SLUG                        = 'cookiebot-addons';
+	const LANGUAGE_DROPDOWN_OPTION_REPLACE  = '%optionname%';
 	const JETPACK_DEFAULT_LANGUAGE_DROPDOWN = 'cookiebot_jetpack_addon[%optionname%][placeholder][languages][site-default]';
 	const ADDONS_DEFAULT_LANGUAGE_DROPDOWN  = 'cookiebot_available_addons[%optionname%][placeholder][languages][site-default]';
 	// Templates
@@ -382,24 +385,23 @@ class Settings_Config {
 		$site_default_languages_dropdown_html = cookiebot_addons_get_dropdown_languages(
 			'placeholder_select_language',
 			str_replace(
-				'%optionname%',
+				self::LANGUAGE_DROPDOWN_OPTION_REPLACE,
 				$widget_option_name,
 				self::JETPACK_DEFAULT_LANGUAGE_DROPDOWN
 			),
 			'site-default'
 		);
 		$widget_placeholders                  = array_map(
-			function(
+			function (
 				$language,
 				$placeholder
 			) use (
 				$widget_option_name,
-				$widget_placeholders_array,
 				$first_placeholder_language
 			) {
 				$removable               = $first_placeholder_language !== $language;
 				$option_name             = str_replace(
-					array( '%optionname%', 'site-default' ),
+					array( self::LANGUAGE_DROPDOWN_OPTION_REPLACE, 'site-default' ),
 					array( $widget_option_name, $language ),
 					self::JETPACK_DEFAULT_LANGUAGE_DROPDOWN
 				);
@@ -433,7 +435,7 @@ class Settings_Config {
 				array(
 					'site_default_languages_dropdown_html' => $site_default_languages_dropdown_html,
 					'name'                                 => str_replace(
-						'%optionname%',
+						self::LANGUAGE_DROPDOWN_OPTION_REPLACE,
 						$widget_option_name,
 						self::JETPACK_DEFAULT_LANGUAGE_DROPDOWN
 					),
@@ -459,7 +461,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function header_available_addons() {
-		include_view( self::AVAILABLE_TAB_HEADER_TEMPLATE );
+		 include_view( self::AVAILABLE_TAB_HEADER_TEMPLATE );
 	}
 
 	/**
@@ -482,7 +484,7 @@ class Settings_Config {
 		$site_default_languages_dropdown_html = cookiebot_addons_get_dropdown_languages(
 			'placeholder_select_language',
 			str_replace(
-				'%optionname%',
+				self::LANGUAGE_DROPDOWN_OPTION_REPLACE,
 				$addon::OPTION_NAME,
 				self::ADDONS_DEFAULT_LANGUAGE_DROPDOWN
 			),
@@ -494,17 +496,16 @@ class Settings_Config {
 			? $addon_placeholders_array_keys[0]
 			: null;
 		$addon_placeholders                   = array_map(
-			function(
+			function (
 				$language,
 				$placeholder
 			) use (
 				$addon,
-				$addon_placeholders_array,
 				$first_placeholder_language
 			) {
 				$removable               = $first_placeholder_language !== $language;
 				$option_name             = str_replace(
-					array( '%optionname%', 'site-default' ),
+					array( self::LANGUAGE_DROPDOWN_OPTION_REPLACE, 'site-default' ),
 					array( $addon::OPTION_NAME, $language ),
 					self::ADDONS_DEFAULT_LANGUAGE_DROPDOWN
 				);
@@ -539,7 +540,7 @@ class Settings_Config {
 				array(
 					'site_default_languages_dropdown_html' => $site_default_languages_dropdown_html,
 					'name'                                 => str_replace(
-						'%optionname%',
+						self::LANGUAGE_DROPDOWN_OPTION_REPLACE,
 						$addon::OPTION_NAME,
 						self::ADDONS_DEFAULT_LANGUAGE_DROPDOWN
 					),
@@ -647,7 +648,7 @@ class Settings_Config {
 		}
 		$active_tab = array_reduce(
 			$settings_page_tabs,
-			function( $active_tab, Settings_Page_Tab $settings_page_tab ) {
+			function ( $active_tab, Settings_Page_Tab $settings_page_tab ) {
 				if ( ! is_null( $active_tab ) ) {
 					return $active_tab;
 				}
@@ -679,7 +680,8 @@ class Settings_Config {
 	 * @throws Exception
 	 * @since 2.2.0
 	 */
-	public function post_hook_available_addons_update_option( $value ) {
+	public function post_hook_available_addons_update_option( $value )
+	{
 		if ( is_array( $value ) ) {
 			foreach ( $value as $addon_option_name => $addon_settings ) {
 				if ( isset( $addon_settings['enabled'] ) ) {
