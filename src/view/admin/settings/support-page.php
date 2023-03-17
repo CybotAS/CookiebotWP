@@ -42,9 +42,9 @@ $header->display();
 						<h2 class="cb-support__video__title"><?php esc_html_e( 'Video guide', 'cookiebot' ); ?></h2>
 						<div class="cb-main__video">
 							<iframe src="https://www.youtube.com/embed/eSVFnjoMKFk"
-                                    title="Cookiebot WordPress Installation"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
+									title="Cookiebot WordPress Installation"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allowfullscreen></iframe>
 						</div>
 					</div>
 

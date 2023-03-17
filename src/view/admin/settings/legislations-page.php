@@ -1,7 +1,7 @@
 <div class="wrap">
-    <h1><?php esc_html_e('Legislations', 'cookiebot'); ?></h1>
+	<h1><?php esc_html_e( 'Legislations', 'cookiebot' ); ?></h1>
 
-    <p>
+	<p>
 		<?php
 		echo sprintf(
 		/* translators: The first placeholder is the HTML anchor open tag, and the second placeholder is the closing tag. */
@@ -14,5 +14,5 @@
 			'</a>'
 		);
 		?>
-    </p>
+	</p>
 </div>

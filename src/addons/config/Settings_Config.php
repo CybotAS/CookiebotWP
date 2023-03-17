@@ -680,8 +680,7 @@ class Settings_Config {
 	 * @throws Exception
 	 * @since 2.2.0
 	 */
-	public function post_hook_available_addons_update_option( $value )
-	{
+	public function post_hook_available_addons_update_option( $value ) {
 		if ( is_array( $value ) ) {
 			foreach ( $value as $addon_option_name => $addon_settings ) {
 				if ( isset( $addon_settings['enabled'] ) ) {
