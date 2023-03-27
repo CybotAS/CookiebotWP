@@ -32,7 +32,7 @@ $header->display();
 							<h2 class="cb-main__card__title">
 								<?php echo esc_html__( 'I already have a Cookiebot CMP account', 'cookiebot' ); ?>
 							</h2>
-							<a href="/wp-admin/admin.php?page=<?php echo esc_html( Settings_Page::ADMIN_SLUG ); ?>"
+							<a href="<?php esc_url( admin_url( 'admin.php?page=' . Settings_Page::ADMIN_SLUG ) ); ?>"
 							   class="cb-btn cb-main-btn">
 								<?php echo esc_html__( 'Connect my existing account', 'cookiebot' ); ?>
 							</a>
