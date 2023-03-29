@@ -1426,7 +1426,7 @@ msgstr "Votre solution Cookiebot CMP pour WordPress"
 
 #: view/admin/settings/dashboard-page.php:38
 msgid "Congratulations!"
-msgstr "Fécilitations !"
+msgstr "Félicitations !"
 
 #: view/admin/settings/dashboard-page.php:39
 msgid "You have added your Domain Group ID to WordPress. You are all set!"
