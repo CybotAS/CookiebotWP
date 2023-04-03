@@ -131,7 +131,7 @@ You cannot choose whether you want a free plan or a premium plan, as this is det
 
 2. The features you need. The free plan **does not include** all features available in the premium plans. The free plan does not include customization of banner and cookies declaration, multiple languages, email reports, data export, geolocation, bulk consent, consent statistics, internal domain alias for development, test and staging.
 
-If more than 100 subpages are found during the initial website scan, you will be given a free one-month trial of Cookiebot CMP with full functionality.
+If more than 50 subpages are found during the initial website scan, you will be given a free one-month trial of Cookiebot CMP with full functionality.
 
 See all details of Cookiebot CMP [plans and pricing](https://www.cookiebot.com/en/pricing/).
 
