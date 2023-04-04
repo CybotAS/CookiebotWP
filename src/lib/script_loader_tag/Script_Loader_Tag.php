@@ -105,7 +105,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 *
 	 * @return bool True if the attributes are valid for the injection of the consent ignore attribute.
 	 */
-	private static function validate_attributes_for_consent_ignore( string $script_handle, string $tag_attributes ) {
+	private static function validate_attributes_for_consent_ignore( $script_handle, $tag_attributes ) {
 		$quoted_handle = preg_quote( $script_handle, '/' );
 
 		// Exclude any scripts not related to currently processed script handle. Only script itself and inline block
