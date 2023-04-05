@@ -21,26 +21,20 @@ class Googleplus_Badge_Jetpack_Widget extends Base_Jetpack_Widget {
 	 * Load configuration
 	 */
 	public function load_configuration() {
-		/**
-		 * The widget is active
-		 */
-		if ( is_active_widget( false, false, 'googleplus-badge', true ) ) {
-			/**
-			 * The widget is enabled in Prior consent
-			 */
-			if ( $this->is_widget_enabled() ) {
-				/**
-				 * The visitor didn't check the required cookie types
-				 */
-				if ( ! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() ) ) {
-					$this->cookie_types = $this->get_widget_cookie_types();
+		if (
+			// The widget is active
+			is_active_widget( false, false, 'googleplus-badge', true ) &&
+			// The widget is enabled in Prior consent
+			$this->is_widget_enabled() &&
+			// The visitor didn't check the required cookie types
+			! $this->cookie_consent->are_cookie_states_accepted( $this->get_widget_cookie_types() )
+		) {
+			$this->cookie_types = $this->get_widget_cookie_types();
 
-					$this->disable_javascript_file();
+			$this->disable_javascript_file();
 
-					if ( $this->is_widget_placeholder_enabled() ) {
-						add_action( 'jetpack_stats_extra', array( $this, 'display_div_message_to_go_to_consent_settings' ), 10, 2 );
-					}
-				}
+			if ( $this->is_widget_placeholder_enabled() ) {
+				add_action( 'jetpack_stats_extra', array( $this, 'display_div_message_to_go_to_consent_settings' ), 10, 2 );
 			}
 		}
 	}
@@ -63,13 +57,13 @@ class Googleplus_Badge_Jetpack_Widget extends Base_Jetpack_Widget {
 	 * @since 1.2.0
 	 */
 	public function display_div_message_to_go_to_consent_settings( $view, $widget ) {
-		if ( $widget === 'googleplus-badge' && $view === 'widget_view' ) {
-			if ( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 ) {
-				$classname  = cookiebot_addons_cookieconsent_optout( $this->cookie_types );
-				$inner_html = $this->get_widget_placeholder();
-				echo '<div class="' . esc_attr( $classname ) . '">' . esc_html( $inner_html ) . '</div>';
-			}
+		if (
+			( $widget === 'googleplus-badge' && $view === 'widget_view' ) &&
+			( is_array( $this->cookie_types ) && count( $this->cookie_types ) > 0 )
+		) {
+			$classname  = cookiebot_addons_cookieconsent_optout( $this->cookie_types );
+			$inner_html = $this->get_widget_placeholder();
+			echo '<div class="' . esc_attr( $classname ) . '">' . esc_html( $inner_html ) . '</div>';
 		}
 	}
-
 }

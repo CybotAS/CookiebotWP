@@ -27,16 +27,16 @@ $header->display();
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner <?php echo $cbid ? 'start_card' : 'account_card'; ?>">
 						<?php if ( ! $cbid ) : ?>
-						<img src="<?php echo esc_html( $cb_wp ); ?>" alt="Cookiebot for WordPress" class="cb-wp">
-						<div class="cb-main__card__content">
-							<h2 class="cb-main__card__title">
-								<?php echo esc_html__( 'I already have a Cookiebot CMP account', 'cookiebot' ); ?>
-							</h2>
-							<a href="/wp-admin/admin.php?page=<?php echo esc_html( Settings_Page::ADMIN_SLUG ); ?>"
-							   class="cb-btn cb-main-btn">
-								<?php echo esc_html__( 'Connect my existing account', 'cookiebot' ); ?>
-							</a>
-						</div>
+							<img src="<?php echo esc_html( $cb_wp ); ?>" alt="Cookiebot for WordPress" class="cb-wp">
+							<div class="cb-main__card__content">
+								<h2 class="cb-main__card__title">
+									<?php echo esc_html__( 'I already have a Cookiebot CMP account', 'cookiebot' ); ?>
+								</h2>
+								<a href="/wp-admin/admin.php?page=<?php echo esc_html( Settings_Page::ADMIN_SLUG ); ?>"
+								   class="cb-btn cb-main-btn">
+									<?php echo esc_html__( 'Connect my existing account', 'cookiebot' ); ?>
+								</a>
+							</div>
 						<?php else : ?>
 							<h2 class="cb-main__card__title">
 								<?php echo esc_html__( 'Your Cookiebot CMP for WordPress solution', 'cookiebot' ); ?>
@@ -55,20 +55,20 @@ $header->display();
 				</div>
 
 				<?php if ( $cbid ) : ?>
-				<div class="cb-main__dashboard__card">
-					<div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
-						<h3 class="cb-main__card__subtitle">
-							<?php echo esc_html__( 'Your opinion matters', 'cookiebot' ); ?>
-						</h3>
-						<p class="cb-main__review__text">
-							<?php echo esc_html__( 'Are you happy with our WordPress plugin? Your feedback will help us make our product better for you.', 'cookiebot' ); ?>
-						</p>
-						<a href="https://wordpress.org/support/plugin/cookiebot/reviews/#new-post" target="_blank"
-						   class="cb-btn cb-link-btn" rel="noopener">
-							<?php echo esc_html__( 'Write a review', 'cookiebot' ); ?>
-						</a>
+					<div class="cb-main__dashboard__card">
+						<div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
+							<h3 class="cb-main__card__subtitle">
+								<?php echo esc_html__( 'Your opinion matters', 'cookiebot' ); ?>
+							</h3>
+							<p class="cb-main__review__text">
+								<?php echo esc_html__( 'Are you happy with our WordPress plugin? Your feedback will help us make our product better for you.', 'cookiebot' ); ?>
+							</p>
+							<a href="https://wordpress.org/support/plugin/cookiebot/reviews/#new-post" target="_blank"
+							   class="cb-btn cb-link-btn" rel="noopener">
+								<?php echo esc_html__( 'Write a review', 'cookiebot' ); ?>
+							</a>
+						</div>
 					</div>
-				</div>
 				<?php endif; ?>
 
 				<div class="cb-main__dashboard__card">
@@ -104,7 +104,7 @@ $header->display();
 					<div class="cb-main__card__inner start_card">
 						<div class="cb-main__video">
 							<iframe src="https://www.youtube.com/embed/eSVFnjoMKFk"
-									title="Cookiebot WordPress Installation" frameborder="0"
+									title="Cookiebot WordPress Installation"
 									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 									allowfullscreen></iframe>
 						</div>

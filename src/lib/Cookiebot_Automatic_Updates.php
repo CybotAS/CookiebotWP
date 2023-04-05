@@ -16,29 +16,19 @@ class Cookiebot_Automatic_Updates {
 	 * @since       1.5.0
 	 */
 	public function automatic_updates( $update, $item ) {
-		// Do not update from subsite on a multisite installation
-		if ( is_multisite() && ! is_main_site() ) {
-			return $update;
-		}
-
-		// Check if we have everything we need
 		$item = (array) $item;
-		if ( ! isset( $item['new_version'] ) || ! isset( $item['slug'] ) ) {
-			return $update;
-		}
-
-		// It is not Cookiebot
-		if ( $item['slug'] !== 'cookiebot' ) {
-			return $update;
-		}
-
-		// Check if cookiebot autoupdate is disabled
-		if ( ! get_option( 'cookiebot-autoupdate', false ) ) {
-			return $update;
-		}
-
-		// Check if multisite autoupdate is disabled
-		if ( is_multisite() && ! get_site_option( 'cookiebot-autoupdate', false ) ) {
+		if (
+			// Do not update from subsite on a multisite installation
+			( is_multisite() && ! is_main_site() ) ||
+			// Check if we have everything we need
+			( ! isset( $item['new_version'] ) || ! isset( $item['slug'] ) ) ||
+			// It is not Cookiebot
+			( $item['slug'] !== 'cookiebot' ) ||
+			// Check if cookiebot autoupdate is disabled
+			! get_option( 'cookiebot-autoupdate', false ) ||
+			// Check if multisite autoupdate is disabled
+			( is_multisite() && ! get_site_option( 'cookiebot-autoupdate', false ) )
+		) {
 			return $update;
 		}
 

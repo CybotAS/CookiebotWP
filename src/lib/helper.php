@@ -13,7 +13,10 @@ namespace cybot\cookiebot\lib {
 	 */
 	function deprecation_error( $type, $deprecated_name, $alternative_name ) {
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
-		trigger_error( esc_html( $type . ' `' . $deprecated_name . '` is deprecated. Use `' . $alternative_name . '` instead.' ), E_USER_DEPRECATED );
+		trigger_error(
+			esc_html( $type . ' `' . $deprecated_name . '` is deprecated. Use `' . $alternative_name . '` instead.' ),
+			E_USER_DEPRECATED
+		);
 	}
 
 	/**
@@ -23,20 +26,17 @@ namespace cybot\cookiebot\lib {
 	 *                  False   If attributes only should be added if consent no given
 	 */
 	function cookiebot_addons_enabled_cache_plugin() {
-		if ( defined( 'WP_ROCKET_PATH' ) ) {
-			return true; // WP Rocket - We need to ensure we not cache tags without attributes
-		}
-		if ( defined( 'W3TC' ) ) {
-			return true; // W3 Total Cache
-		}
-		if ( defined( 'WPCACHEHOME' ) ) {
-			return true; // WP Super Cache
-		}
-		if ( defined( 'WPFC_WP_PLUGIN_DIR' ) ) {
-			return true; // WP Fastest Cache
-		}
-		if ( defined( 'LSCWP_CONTENT_DIR' ) ) {
-			return true; // Litespeed Cache
+		// WP Rocket - We need to ensure we not cache tags without attributes
+		if ( defined( 'WP_ROCKET_PATH' ) ||
+			// W3 Total Cache
+			defined( 'W3TC' ) ||
+			// WP Super Cache
+			defined( 'WPCACHEHOME' ) ||
+			// WP Fastest Cache
+			defined( 'WPFC_WP_PLUGIN_DIR' ) ||
+			// Litespeed Cache
+			defined( 'LSCWP_CONTENT_DIR' ) ) {
+			return true;
 		}
 
 		return false;
@@ -63,22 +63,20 @@ namespace cybot\cookiebot\lib {
 		if ( isset( $wp_filter[ $action ] ) && isset( $wp_filter[ $action ][ $priority ] ) ) {
 			$len = strlen( $method );
 			foreach ( $wp_filter[ $action ][ $priority ] as $name => $def ) {
-				if ( substr( $name, - $len ) === $method ) {
-					if ( is_array( $def['function'] ) ) {
-						if ( is_string( $def['function'][0] ) !== false ) {
-							$def_class = $def['function'][0];
-						} else {
-							$def_class = get_class( $def['function'][0] );
-						}
+				if ( substr( $name, - $len ) === $method && is_array( $def['function'] ) ) {
+					if ( is_string( $def['function'][0] ) !== false ) {
+						$def_class = $def['function'][0];
+					} else {
+						$def_class = get_class( $def['function'][0] );
+					}
 
-						if ( $def_class === $class ) {
-							if ( is_object( $wp_filter[ $action ] ) && isset( $wp_filter[ $action ]->callbacks ) ) {
-								$wp_filter[ $action ]->remove_filter( $action, $name, $priority );
-							} else {
-								unset( $wp_filter[ $action ][ $priority ][ $name ] );
-							}
-							$deleted = true;
+					if ( $def_class === $class ) {
+						if ( is_object( $wp_filter[ $action ] ) && isset( $wp_filter[ $action ]->callbacks ) ) {
+							$wp_filter[ $action ]->remove_filter( $action, $name, $priority );
+						} else {
+							unset( $wp_filter[ $action ][ $priority ][ $name ] );
 						}
+						$deleted = true;
 					}
 				}
 			}
@@ -143,7 +141,7 @@ namespace cybot\cookiebot\lib {
 						 * remove previously set data-cookieconsent attribute
 						 * remove type attribute
 						 */
-						$script_tag_open = preg_replace( '/\'/', '"', $script_tag_open );
+						$script_tag_open = str_replace( '\'', '"', $script_tag_open );
 						$script_tag_open = preg_replace( '/\sdata-cookieconsent=\".*?\"/', '', $script_tag_open );
 						$script_tag_open = preg_replace( '/\stype=\".*?\"/', '', $script_tag_open );
 
@@ -153,7 +151,7 @@ namespace cybot\cookiebot\lib {
 						 */
 						$cookie_types    = cookiebot_addons_output_cookie_types( $cookie_type );
 						$replacement     = '<script type="text/plain" data-cookieconsent="' . $cookie_types . '"';
-						$script_tag_open = preg_replace( '/<script/', $replacement, $script_tag_open );
+						$script_tag_open = str_replace( '<script', $replacement, $script_tag_open );
 
 						/**
 						 * reconstruct the script and break the foreach loop
@@ -238,16 +236,22 @@ namespace cybot\cookiebot\lib {
 	function cookiebot_translate_type_name( $type ) {
 		switch ( $type ) {
 			case 'marketing':
-				return esc_html__( 'marketing', 'cookiebot' );
+				$translated_name = esc_html__( 'marketing', 'cookiebot' );
+				break;
 			case 'statistics':
-				return esc_html__( 'statistics', 'cookiebot' );
+				$translated_name = esc_html__( 'statistics', 'cookiebot' );
+				break;
 			case 'preferences':
-				return esc_html__( 'preferences', 'cookiebot' );
+				$translated_name = esc_html__( 'preferences', 'cookiebot' );
+				break;
 			case 'necessary':
-				return esc_html__( 'necessary', 'cookiebot' );
+				$translated_name = esc_html__( 'necessary', 'cookiebot' );
+				break;
 			default:
-				return $type;
+				$translated_name = $type;
 		}
+
+		return $translated_name;
 	}
 
 	/**
@@ -292,10 +296,8 @@ namespace cybot\cookiebot\lib {
 	function cookiebot_get_language_from_setting( $only_from_setting = false ) {
 		// Get language set in setting page - if empty use WP language info
 		$lang = get_option( 'cookiebot-language' );
-		if ( ! empty( $lang ) ) {
-			if ( $lang !== '_wp' ) {
-				return $lang;
-			}
+		if ( ! empty( $lang ) && $lang !== '_wp' ) {
+			return $lang;
 		}
 
 		if ( $only_from_setting ) {
@@ -346,33 +348,75 @@ namespace cybot\cookiebot\lib {
 	function cookiebot_translate_placeholder( $placeholder ) {
 		$translated_placeholder = array(
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Services.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Services.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Services.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Services.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for google analytics.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for google analytics.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for google analytics.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for google analytics.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to Social Share buttons.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to Social Share buttons.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to Social Share buttons.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to Social Share buttons.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics.',
+				'cookiebot'
+			),
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
-			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.' => esc_html__( 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.', 'cookiebot' ),
+			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.' => esc_html__(
+				'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.',
+				'cookiebot'
+			),
 		);
 
 		return empty( $translated_placeholder[ $placeholder ] ) ? $placeholder : $translated_placeholder[ $placeholder ];

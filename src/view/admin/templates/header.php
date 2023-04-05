@@ -7,7 +7,7 @@
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 if ( ! empty( $_GET['settings-updated'] ) ) :
 	?>
-<div class="cb-submit__msg">Changes has been saved</div>
+<div class="cb-submit__msg"><?php esc_html_e( 'Changes has been saved', 'cookiebot' ); ?></div>
 <?php endif; ?>
 <div class="cb-header">
 	<div class="cb-wrapper">

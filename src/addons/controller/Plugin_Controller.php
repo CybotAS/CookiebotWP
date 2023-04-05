@@ -12,6 +12,7 @@ use function cybot\cookiebot\lib\cookiebot_active;
 
 class Plugin_Controller {
 
+
 	/**
 	 * @var Settings_Service_Interface
 	 */
@@ -32,6 +33,34 @@ class Plugin_Controller {
 			return;
 		}
 
+		/**
+		 * Add notice for the user if any addons is enabled and cookie
+		 * blocking mode is set to auto.
+		 */
+		if ( count( $this->settings_service->get_active_addons() ) > 0 &&
+			Cookiebot_WP::get_cookie_blocking_mode() === 'auto' &&
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			isset( $_GET['page'] ) &&
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			in_array( $_GET['page'], array( 'cookiebot', 'cookiebot-addons' ), true ) ) {
+			add_action(
+				'admin_notices',
+				function () {
+					echo '<div class="notice notice-warning"><p><strong>' .
+						esc_html__(
+							'You enabled Cookiebot™ auto blocking mode but still using addons',
+							'cookiebot'
+						) .
+						'</strong><br>' .
+						esc_html__(
+							'In some occasions this may cause client side errors. If you notice any errors please try to disable Cookiebot™ addons or contact Cookiebot™ support.',
+							'cookiebot'
+						) .
+						'</p></div>';
+				}
+			);
+		}
+
 		if ( Cookiebot_WP::cookiebot_disabled_in_admin() === true && is_admin() ) {
 			return;
 		}
@@ -40,7 +69,7 @@ class Plugin_Controller {
 		/** @var Base_Cookiebot_Addon $addon */
 		foreach ( $this->settings_service->get_active_addons() as $addon ) {
 			if ( ! $addon->cookie_consent->are_cookie_states_accepted( $addon->get_cookie_types() )
-				|| cookiebot_addons_enabled_cache_plugin() ) {
+			|| cookiebot_addons_enabled_cache_plugin() ) {
 				$addon->load_addon_configuration();
 				$addons_enabled_counter++;
 			}
@@ -52,27 +81,6 @@ class Plugin_Controller {
 		 * Run buffer output actions - this runs after scanning of every addons
 		 */
 		add_action( 'parse_request', array( $this, 'run_buffer_output_manipulations' ) );
-
-		/**
-		 * Add notice for the user if any addons is enabled and cookie
-		 * blocking mode is set to auto.
-		 */
-		if ( $addons_enabled_counter > 0 && Cookiebot_WP::get_cookie_blocking_mode() === 'auto' ) {
-			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			if ( isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'cookiebot', 'cookiebot-addons' ), true ) ) {
-				add_action(
-					'admin_notices',
-					function() {
-						echo '<div class="notice notice-warning">
-						<p>
-						<strong>' . esc_html__( 'You enabled Cookiebot™ auto blocking mode but still using addons', 'cookiebot' ) . '</strong><br>
-						' . esc_html__( 'In some occasions this may cause client side errors. If you notice any errors please try to disable Cookiebot™ addons or contact Cookiebot™ support.', 'cookiebot' ) . '
-						</p>
-					</div>';
-					}
-				);
-			}
-		}
 	}
 
 	/**
@@ -82,7 +90,7 @@ class Plugin_Controller {
 	 * @since 1.3.0
 	 */
 	public function run_buffer_output_manipulations() {
-		/**
+		 /**
 		 * @var $buffer_output Buffer_Output_Interface
 		 */
 		$buffer_output = $this->settings_service->container->get( 'Buffer_Output_Interface' );

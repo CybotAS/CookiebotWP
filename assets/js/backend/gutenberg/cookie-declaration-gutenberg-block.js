@@ -1,5 +1,5 @@
 ( function( blocks, element ) {
-	var el                = element.createElement,
+	let el                = element.createElement,
 		registerBlockType = blocks.registerBlockType;
 
 	registerBlockType(

@@ -1,6 +1,6 @@
 ( function ( $ ) {
 
-	var cookiebot_wpforms = {
+	let cookiebot_wpforms = {
 
 		init: function () {
 			$( document ).ready( cookiebot_wpforms.update_after_consent );

@@ -107,18 +107,14 @@ class Cookiebot_WP {
 	 * @version 3.4.1
 	 */
 	public static function can_current_user_edit_theme() {
-		if ( is_user_logged_in() ) {
-			if ( current_user_can( 'edit_themes' ) ) {
-				return true;
-			}
-
-			if ( current_user_can( 'edit_pages' ) ) {
-				return true;
-			}
-
-			if ( current_user_can( 'edit_posts' ) ) {
-				return true;
-			}
+		if ( is_user_logged_in() &&
+			(
+				current_user_can( 'edit_themes' ) ||
+				current_user_can( 'edit_pages' ) ||
+				current_user_can( 'edit_posts' )
+			)
+		) {
+			return true;
 		}
 
 		return false;
@@ -157,13 +153,13 @@ class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Check if Cookiebot is active in admin
 	 *
-	 * @version 3.1.0
+	 * @version 4.2.8
 	 * @since       3.1.0
 	 */
 	public static function cookiebot_disabled_in_admin() {
-		if ( is_multisite() && get_site_option( 'cookiebot-nooutput-admin', false ) ) {
-			return true;
-		} elseif ( get_option( 'cookiebot-nooutput-admin', false ) ) {
+		if ( ( is_network_admin() && get_site_option( 'cookiebot-nooutput-admin', false ) ) ||
+			( ! is_network_admin() && get_site_option( 'cookiebot-nooutput-admin', false ) ) ||
+			( ! is_network_admin() && get_option( 'cookiebot-nooutput-admin', false ) ) ) {
 			return true;
 		}
 

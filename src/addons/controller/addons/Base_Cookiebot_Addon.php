@@ -149,10 +149,9 @@ abstract class Base_Cookiebot_Addon {
 				$this->buffer_output
 			);
 
-			if ( $alternative_version_addon_instance->is_addon_installed() ) {
-				if ( version_compare( $alternative_version_addon_instance->get_version(), $version_string, '<=' ) ) {
-					return $alternative_version_addon_instance;
-				}
+			if ( $alternative_version_addon_instance->is_addon_installed() &&
+			version_compare( $alternative_version_addon_instance->get_version(), $version_string, '<=' ) ) {
+				return $alternative_version_addon_instance;
 			}
 		}
 		return null;
@@ -247,7 +246,10 @@ abstract class Base_Cookiebot_Addon {
 	 * @since 1.8.0
 	 */
 	final public function get_placeholder_helper() {
-		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
+		return '<p>Merge tags you can use in the placeholder text:</p>
+				<ul><li>%cookie_types - Lists required cookie types</li>
+				<li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li>
+				</ul>';
 	}
 
 	/**
