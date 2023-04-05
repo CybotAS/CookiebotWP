@@ -110,7 +110,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 
 		// Exclude any scripts not related to currently processed script handle. Only script itself and inline block
 		// before/after are supported.
-		if ( ! preg_match( "/(?:^|\s)id=['\"]$quoted_handle-js(?:-(?:after|before))?['\"]/", $tag_attributes ) ) {
+		if ( ! preg_match( "/(?:^|\s)id=['\"]$quoted_handle(?:-js-(?:after|before))?['\"]/", $tag_attributes ) ) {
 			return false;
 		}
 
