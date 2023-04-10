@@ -83,14 +83,6 @@ class Debug_Page implements Settings_Page_Interface {
 		global $wpdb;
 
 		$cookiebot_javascript_helper = new Cookiebot_Javascript_Helper();
-		$consent_api_helper          = new Consent_API_Helper();
-
-		if ( ! function_exists( 'get_plugins' ) ) {
-			include_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-
-		$plugins        = get_plugins();
-		$active_plugins = get_option( 'active_plugins' );
 
 		$debug_output = '';
 		// phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
@@ -104,15 +96,15 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= 'Cookiebot ID: ' . Cookiebot_WP::get_cbid() . "\n";
 		$debug_output .= 'Blocking mode: ' . get_option( 'cookiebot-cookie-blocking-mode' ) . "\n";
 		$debug_output .= 'Language: ' . get_option( 'cookiebot-language' ) . "\n";
-		$debug_output .= 'IAB: ' . ( get_option( 'cookiebot-iab' ) === '1' ? 'Enabled' : 'Not enabled' ) . "\n";
-		$debug_output .= 'CCPA banner for visitors from California: ' . ( get_option( 'cookiebot-ccpa' ) === '1' ? 'Enabled' : 'Not enabled' ) . "\n";
+		$debug_output .= 'IAB: ' . $this->print_option_enabled( 'cookiebot-iab' ) . "\n";
+		$debug_output .= 'CCPA banner for visitors from California: ' . $this->print_option_enabled( 'cookiebot-ccpa' ) . "\n";
 		$debug_output .= 'CCPA domain group id: ' . get_option( 'cookiebot-ccpa-domain-group-id' ) . "\n";
-		$debug_output .= 'Add async/defer to banner tag: ' . ( get_option( 'cookiebot-script-tag-uc-attribute' ) !== '' ? get_option( 'cookiebot-script-tag-uc-attribute' ) : 'None' ) . "\n";
-		$debug_output .= 'Add async/defer to declaration tag: ' . ( get_option( 'cookiebot-script-tag-cd-attribute' ) !== '' ? get_option( 'cookiebot-script-tag-cd-attribute' ) : 'None' ) . "\n";
-		$debug_output .= 'Auto update: ' . ( get_option( 'cookiebot-autoupdate' ) === '1' ? 'Enabled' : 'Not enabled' ) . "\n";
-		$debug_output .= 'Hide Cookie Popup: ' . ( get_option( 'cookiebot-nooutput' ) === '1' ? 'Yes' : 'No' ) . "\n";
-		$debug_output .= 'Disable Cookiebot in WP Admin: ' . ( get_option( 'cookiebot-nooutput-admin' ) === '1' ? 'Yes' : 'No' ) . "\n";
-		$debug_output .= 'Enable Cookiebot on front end while logged in: ' . ( get_option( 'cookiebot-output-logged-in' ) === '1' ? 'Yes' : 'No' ) . "\n";
+		$debug_output .= 'Add async/defer to banner tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-uc-attribute' ) . "\n";
+		$debug_output .= 'Add async/defer to declaration tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-cd-attribute' ) . "\n";
+		$debug_output .= 'Auto update: ' . $this->print_option_enabled( 'cookiebot-autoupdate' ) . "\n";
+		$debug_output .= 'Hide Cookie Popup: ' . $this->print_option_active( 'cookiebot-nooutput' ) . "\n";
+		$debug_output .= 'Disable Cookiebot in WP Admin: ' . $this->print_option_active( 'cookiebot-nooutput-admin' ) . "\n";
+		$debug_output .= 'Enable Cookiebot on front end while logged in: ' . $this->print_option_active( 'cookiebot-output-logged-in' ) . "\n";
 		$debug_output .= 'List of ignored javascript files: ' . $this->get_ignored_scripts() . "\n";
 		$debug_output .= 'Banner tag: ' . $cookiebot_javascript_helper->include_cookiebot_js( true ) . "\n";
 		$debug_output .= 'Declaration tag: ' . Cookiebot_Declaration_Shortcode::show_declaration() . "\n";
@@ -125,44 +117,126 @@ class Debug_Page implements Settings_Page_Interface {
 			$debug_output .= 'GCM tag: ' . $cookiebot_javascript_helper->include_google_consent_mode_js( true ) . "\n";
 		}
 
+		$debug_output .= $this->print_wp_consent_level_api_mapping();
+		$debug_output .= $this->print_activated_addons();
+		$debug_output .= $this->print_activated_plugins();
+
+		$debug_output .= "\n##### Debug Information END #####";
+
+		return $debug_output;
+	}
+
+	/**
+	 * Print the value of the option if it's not empty.
+	 *
+	 * @param string $option_name Name of the option to print.
+	 *
+	 * @return string
+	 */
+	private function print_option_if_not_empty( $option_name ) {
+		$option_value = get_option( $option_name );
+		return $option_value !== '' ? $option_value : 'None';
+	}
+
+	/**
+	 * Print "Enabled" or "Not enabled" depending on the option value. Option value should be "1" or "0".
+	 *
+	 * @param string $option_name Name of the option to check.
+	 *
+	 * @return string
+	 */
+	private function print_option_enabled( $option_name ) {
+		return $this->print_option_active( $option_name, 'Enabled', 'Not enabled' );
+	}
+
+	/**
+	 * Print "Yes" or "No" depending on the option value. Option value should be "1" or "0". If <b>$active_text</b> or
+	 * <b>$disabled_text</b> is set, it will be used instead of default values "Yes" or "No".
+	 *
+	 * @param string $option_name   Name of the option to check.
+	 * @param string $active_text   (Optional) Text to print if option is active. Default is "Yes".
+	 * @param string $disabled_text (Optional) Text to print if option is disabled. Default is "No".
+	 *
+	 * @return string
+	 */
+	private function print_option_active( $option_name, $active_text = 'Yes', $disabled_text = 'No' ) {
+		return get_option( $option_name ) === '1' ? $active_text : $disabled_text;
+	}
+
+	/**
+	 * Render debug information about WP Consent Level API mapping.
+	 *
+	 * @return string
+	 */
+	private function print_wp_consent_level_api_mapping() {
+		$output = '';
+
+		$consent_api_helper = new Consent_API_Helper();
+
 		if ( $consent_api_helper->is_wp_consent_api_active() ) {
-			$debug_output .= "\n--- WP Consent Level API Mapping ---\n";
-			$debug_output .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous' . "\n";
-			$m             = $consent_api_helper->get_wp_consent_api_mapping();
-			foreach ( $m as $k => $v ) {
-				$debug_output .= strtoupper( str_replace( ';', ', ', $k ) ) . '   =>   ';
-				$debug_output .= 'F=1, ';
-				$debug_output .= 'P=' . $v['preferences'] . ', ';
-				$debug_output .= 'M=' . $v['marketing'] . ', ';
-				$debug_output .= 'S=' . $v['statistics'] . ', ';
-				$debug_output .= 'SA=' . $v['statistics-anonymous'] . "\n";
+			$output .= "\n--- WP Consent Level API Mapping ---\n";
+			$output .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous' . "\n";
+			$map     = $consent_api_helper->get_wp_consent_api_mapping();
+			foreach ( $map as $key => $value ) {
+				$output .= strtoupper( str_replace( ';', ', ', $key ) ) . '   =>   ';
+				$output .= 'F=1, ';
+				$output .= 'P=' . $value['preferences'] . ', ';
+				$output .= 'M=' . $value['marketing'] . ', ';
+				$output .= 'S=' . $value['statistics'] . ', ';
+				$output .= 'SA=' . $value['statistics-anonymous'] . "\n";
 			}
 		}
+
+		return $output;
+	}
+
+	/**
+	 * Print information about activated cookiebot addons.
+	 *
+	 * @return string
+	 */
+	private function print_activated_addons() {
+		$output = '';
 
 		try {
 			$cookiebot_addons = new Cookiebot_Addons();
 			/** @var Settings_Service_Interface $settings_service */
 			$settings_service = $cookiebot_addons->container->get( 'Settings_Service_Interface' );
 			$addons           = $settings_service->get_active_addons();
-			$debug_output    .= "\n--- Activated Cookiebot Addons ---\n";
+			$output          .= "\n--- Activated Cookiebot Addons ---\n";
 			/** @var Base_Cookiebot_Addon $addon */
 			foreach ( $addons as $addon ) {
-				$debug_output .= $addon::ADDON_NAME . ' (' . implode( ', ', $addon->get_cookie_types() ) . ")\n";
+				$output .= $addon::ADDON_NAME . ' (' . implode( ', ', $addon->get_cookie_types() ) . ")\n";
 			}
 		} catch ( Exception $exception ) {
-			$debug_output .= PHP_EOL . '--- Cookiebot Addons could not be activated ---' . PHP_EOL;
-			$debug_output .= $exception->getMessage() . PHP_EOL;
+			$output .= PHP_EOL . '--- Cookiebot Addons could not be activated ---' . PHP_EOL;
+			$output .= $exception->getMessage() . PHP_EOL;
 		}
 
-		$debug_output .= "\n--- Activated Plugins ---\n";
-		foreach ( $active_plugins as $p ) {
-			if ( $p !== 'cookiebot/cookiebot.php' ) {
-				$debug_output .= $plugins[ $p ]['Name'] . ' (Version: ' . $plugins[ $p ]['Version'] . ")\n";
+		return $output;
+	}
+
+	/**
+	 * Print information about activated plugins
+	 *
+	 * @return string
+	 */
+	private function print_activated_plugins() {
+		if ( ! function_exists( 'get_plugins' ) ) {
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$plugins        = get_plugins();
+		$active_plugins = get_option( 'active_plugins' );
+
+		$output = "\n--- Activated Plugins ---\n";
+
+		foreach ( $active_plugins as $plugin_key ) {
+			if ( $plugin_key !== 'cookiebot/cookiebot.php' ) {
+				$output .= $plugins[ $plugin_key ]['Name'] . ' (Version: ' . $plugins[ $plugin_key ]['Version'] . ")\n";
 			}
 		}
 
-		$debug_output .= "\n##### Debug Information END #####";
-
-		return $debug_output;
+		return $output;
 	}
 }
