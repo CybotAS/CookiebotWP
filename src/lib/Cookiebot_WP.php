@@ -8,6 +8,7 @@ use cybot\cookiebot\gutenberg\Cookiebot_Gutenberg_Declaration_Block;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
 use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
+use DomainException;
 use RuntimeException;
 
 class Cookiebot_WP {
@@ -65,7 +66,7 @@ class Cookiebot_WP {
 				__( 'The Cookiebot plugin requires PHP version %s or greater.', 'cookiebot' ),
 				self::COOKIEBOT_MIN_PHP_VERSION
 			);
-			throw new RuntimeException( $message );
+			throw new DomainException( $message );
 		}
 	}
 
@@ -179,12 +180,12 @@ class Cookiebot_WP {
 		);
 
 		foreach ( $options as $option => $default ) {
-			if ( get_option( $option ) === false && ! get_option( $option . '-first-run' ) ) {
+			if ( get_option( $option ) === false && ! get_option( $option . self::OPTION_FIRST_RUN_SUFFIX ) ) {
 				update_option( $option, $default );
 			}
 
-			if ( ( get_option( $option ) || get_option( $option ) !== false ) && ! get_option( $option . '-first-run' ) ) {
-				update_option( $option . '-first-run', '1' );
+			if ( ( get_option( $option ) || get_option( $option ) !== false ) && ! get_option( $option . self::OPTION_FIRST_RUN_SUFFIX ) ) {
+				update_option( $option . self::OPTION_FIRST_RUN_SUFFIX, '1' );
 			}
 		}
 	}
@@ -226,4 +227,6 @@ class Cookiebot_WP {
 
 		return array_key_exists( $locale, $supported_langs ) ? $supported_langs[ $locale ] : esc_html( 'en' );
 	}
+
+	const OPTION_FIRST_RUN_SUFFIX = '-first-run';
 }

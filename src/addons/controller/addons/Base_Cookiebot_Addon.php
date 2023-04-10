@@ -10,6 +10,7 @@ use cybot\cookiebot\lib\traits\Class_Constant_Override_Validator_Trait;
 use cybot\cookiebot\lib\traits\Extra_Information_Trait;
 use Exception;
 use InvalidArgumentException;
+use UnexpectedValueException;
 use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 abstract class Base_Cookiebot_Addon {
@@ -320,11 +321,11 @@ abstract class Base_Cookiebot_Addon {
 		}
 
 		if ( ! is_string( $path ) || $path === '' ) {
-			throw new Exception( 'Invalid $path argument or SVN_URL_DEFAULT_SUB_PATH class constant override in ' . static::class );
+			throw new InvalidArgumentException( 'Invalid $path argument or SVN_URL_DEFAULT_SUB_PATH class constant override in ' . static::class );
 		}
 
 		if ( ! is_string( static::SVN_URL_BASE_PATH ) || static::SVN_URL_BASE_PATH === '' ) {
-			throw new Exception( 'The addon class does not correctly override the SVN_URL_BASE_PATH class constant in ' . static::class );
+			throw new UnexpectedValueException( 'The addon class does not correctly override the SVN_URL_BASE_PATH class constant in ' . static::class );
 		}
 
 		return static::SVN_URL_BASE_PATH . $path;
