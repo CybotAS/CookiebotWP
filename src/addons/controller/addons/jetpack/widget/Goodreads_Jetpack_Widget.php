@@ -66,7 +66,7 @@ class Goodreads_Jetpack_Widget extends Base_Jetpack_Widget {
 	private function output_manipulated() {
 		add_action(
 			'dynamic_sidebar_after',
-			function ( $index ) {
+			function () {
 				ob_end_flush();
 			}
 		);
