@@ -2,6 +2,7 @@
 
 namespace cybot\cookiebot\lib {
 
+	use DomainException;
 	use Exception;
 	use InvalidArgumentException;
 	use RuntimeException;
@@ -60,25 +61,26 @@ namespace cybot\cookiebot\lib {
 		global $wp_filter;
 		$deleted = false;
 
-		if ( isset( $wp_filter[ $action ] ) && isset( $wp_filter[ $action ][ $priority ] ) ) {
-			$len = strlen( $method );
-			foreach ( $wp_filter[ $action ][ $priority ] as $name => $def ) {
-				if ( substr( $name, - $len ) === $method && is_array( $def['function'] ) ) {
-					if ( is_string( $def['function'][0] ) !== false ) {
-						$def_class = $def['function'][0];
-					} else {
-						$def_class = get_class( $def['function'][0] );
-					}
+		if ( ! isset( $wp_filter[ $action ] ) || ! isset( $wp_filter[ $action ][ $priority ] ) ) {
+			return false;
+		}
 
-					if ( $def_class === $class ) {
-						if ( is_object( $wp_filter[ $action ] ) && isset( $wp_filter[ $action ]->callbacks ) ) {
-							$wp_filter[ $action ]->remove_filter( $action, $name, $priority );
-						} else {
-							unset( $wp_filter[ $action ][ $priority ][ $name ] );
-						}
-						$deleted = true;
-					}
+		foreach ( $wp_filter[ $action ][ $priority ] as $name => $def ) {
+			if ( substr( $name, -strlen( $method ) ) !== $method || ! is_array( $def['function'] ) ) {
+				continue;
+			}
+
+			$def_class = is_string( $def['function'][0] ) !== false
+				? $def['function'][0]
+				: get_class( $def['function'][0] );
+
+			if ( $def_class === $class ) {
+				if ( is_object( $wp_filter[ $action ] ) && isset( $wp_filter[ $action ]->callbacks ) ) {
+					$wp_filter[ $action ]->remove_filter( $action, $name, $priority );
+				} else {
+					unset( $wp_filter[ $action ][ $priority ][ $name ] );
 				}
+				$deleted = true;
 			}
 		}
 
@@ -150,8 +152,12 @@ namespace cybot\cookiebot\lib {
 						 * add data-cookieconsent attribute
 						 */
 						$cookie_types    = cookiebot_addons_output_cookie_types( $cookie_type );
-						$replacement     = '<script type="text/plain" data-cookieconsent="' . $cookie_types . '"';
-						$script_tag_open = str_replace( '<script', $replacement, $script_tag_open );
+
+						$script_tag_open = str_replace(
+							'<script',
+							sprintf( "<script type=\"text/plain\" data-cookieconsent=\"%s\"", $cookie_types ),
+							$script_tag_open
+						);
 
 						/**
 						 * reconstruct the script and break the foreach loop
@@ -481,7 +487,7 @@ namespace cybot\cookiebot\lib {
 		$host = $home_url['host'];
 
 		if ( empty( $host ) ) {
-			throw new Exception( 'Home url domain is not found.' );
+			throw new DomainException( 'Home url domain is not found.' );
 		}
 
 		return $host;
@@ -495,7 +501,7 @@ namespace cybot\cookiebot\lib {
 	 */
 	function cookiebot_get_local_file_contents( $file_path ) {
 		if ( ! file_exists( $file_path ) ) {
-			throw new Exception( 'File ' . $file_path . ' does not exist' );
+			throw new InvalidArgumentException( 'File ' . $file_path . ' does not exist' );
 		}
 
 		ob_start();
@@ -538,7 +544,7 @@ namespace cybot\cookiebot\lib {
 	 * @throws InvalidArgumentException
 	 */
 	function asset_path( $relative_path ) {
-		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . 'assets/' . $relative_path;
+		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path;
 		if ( ! file_exists( $absolute_path ) ) {
 			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
 		}
@@ -552,8 +558,8 @@ namespace cybot\cookiebot\lib {
 	 * @throws InvalidArgumentException
 	 */
 	function asset_url( $relative_path ) {
-		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . 'assets/' . $relative_path;
-		$url           = esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/' . $relative_path );
+		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path;
+		$url           = esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path );
 		if ( ! file_exists( $absolute_path ) || empty( $url ) ) {
 			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
 		}
@@ -607,4 +613,6 @@ namespace cybot\cookiebot\lib {
 	function cookiebot() {
 		return Cookiebot_WP::instance();
 	}
+
+	const CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR = 'assets/';
 }
