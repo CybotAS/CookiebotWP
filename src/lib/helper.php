@@ -115,7 +115,7 @@ namespace cybot\cookiebot\lib {
 		 * @version 2.0.4
 		 * @since   1.2.0
 		 */
-		$pattern = '/(<script.*?>)(.*?)(<\/script>)/is';
+		$pattern = '/(<script[^>]*+>)(.*?)(<\/script>)/is';
 
 		/**
 		 * Get all scripts and add cookieconsent if it does match with the criterion
@@ -144,18 +144,18 @@ namespace cybot\cookiebot\lib {
 						 * remove type attribute
 						 */
 						$script_tag_open = str_replace( '\'', '"', $script_tag_open );
-						$script_tag_open = preg_replace( '/\sdata-cookieconsent=\".*?\"/', '', $script_tag_open );
-						$script_tag_open = preg_replace( '/\stype=\".*?\"/', '', $script_tag_open );
+						$script_tag_open = preg_replace( '/\sdata-cookieconsent=\"[^"]*+\"/', '', $script_tag_open );
+						$script_tag_open = preg_replace( '/\stype=\"[^"]*+\"/', '', $script_tag_open );
 
 						/**
 						 * set the type attribute to text/plain to prevent javascript execution
 						 * add data-cookieconsent attribute
 						 */
-						$cookie_types    = cookiebot_addons_output_cookie_types( $cookie_type );
+						$cookie_types = cookiebot_addons_output_cookie_types( $cookie_type );
 
 						$script_tag_open = str_replace(
 							'<script',
-							sprintf( "<script type=\"text/plain\" data-cookieconsent=\"%s\"", $cookie_types ),
+							sprintf( '<script type="text/plain" data-cookieconsent="%s"', $cookie_types ),
 							$script_tag_open
 						);
 
