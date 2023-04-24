@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-01-18 14:28+0100\n"
-"PO-Revision-Date: 2023-02-23 10:12+0100\n"
+"PO-Revision-Date: 2023-04-24 18:11+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -1426,7 +1426,7 @@ msgstr "Votre solution Cookiebot CMP pour WordPress"
 
 #: view/admin/settings/dashboard-page.php:38
 msgid "Congratulations!"
-msgstr "Fécilitations !"
+msgstr "Félicitations !"
 
 #: view/admin/settings/dashboard-page.php:39
 msgid "You have added your Domain Group ID to WordPress. You are all set!"
