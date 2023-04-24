@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\lib;
 
 use Exception;
+use InvalidArgumentException;
 
 class Dependency_Container {
 
@@ -28,7 +29,7 @@ class Dependency_Container {
 	 */
 	public function set( $key, $dependency ) {
 		if ( isset( $this->dependencies[ $key ] ) ) {
-			throw new Exception( 'Dependency key ' . $key . ' already exists' );
+			throw new InvalidArgumentException( 'Dependency key ' . $key . ' already exists' );
 		}
 		$this->dependencies[ $key ] = $dependency;
 	}
@@ -41,7 +42,7 @@ class Dependency_Container {
 	 */
 	public function get( $key ) {
 		if ( ! isset( $this->dependencies[ $key ] ) ) {
-			throw new Exception( 'Dependency key ' . $key . ' does not exists' );
+			throw new InvalidArgumentException( 'Dependency key ' . $key . ' does not exists' );
 		}
 
 		return $this->dependencies[ $key ];

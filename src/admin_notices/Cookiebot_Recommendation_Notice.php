@@ -5,6 +5,7 @@ namespace cybot\cookiebot\admin_notices;
 use Exception;
 use cybot\cookiebot\lib\Cookiebot_WP;
 use InvalidArgumentException;
+use LogicException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\get_view_html;
 use function cybot\cookiebot\lib\include_view;
@@ -26,6 +27,7 @@ class Cookiebot_Recommendation_Notice {
 			$this->show_notice();
 			// phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 		} catch ( Exception $e ) {
+			// If exception has been thrown, then we don't need to show the notice.
 		}
 	}
 
@@ -91,11 +93,11 @@ class Cookiebot_Recommendation_Notice {
 		if ( $option !== false ) {
 			// "Never show again" is clicked
 			if ( $option === 'hide' ) {
-				throw new Exception( 'Never show again is clicked' );
+				throw new LogicException( 'Never show again is clicked' );
 			} elseif ( $option === 'visit' ) {
-				throw new Exception( 'Show me after 1 day' );
+				throw new LogicException( 'Show me after 1 day' );
 			} elseif ( is_numeric( $option ) && strtotime( 'now' ) < $option ) {
-				throw new Exception( 'Show me after 1 day' );
+				throw new LogicException( 'Show me after 1 day' );
 			}
 		}
 	}

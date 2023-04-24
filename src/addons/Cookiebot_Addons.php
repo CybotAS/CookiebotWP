@@ -5,6 +5,7 @@ namespace cybot\cookiebot\addons;
 use cybot\cookiebot\addons\config\Settings_Config;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\controller\Plugin_Controller;
+use cybot\cookiebot\exceptions\addons\InvalidAddonClassException;
 use cybot\cookiebot\lib\buffer\Buffer_Output;
 use cybot\cookiebot\lib\Cookie_Consent;
 use cybot\cookiebot\lib\Dependency_Container;
@@ -181,11 +182,15 @@ class Cookiebot_Addons {
 					$this->container->get( 'Buffer_Output_Interface' )
 				);
 				if ( ! is_a( $addon, Base_Cookiebot_Addon::class ) ) {
-					throw new Exception( 'Class ' . $addon_class . ' could not be instantiated' );
+					throw new InvalidAddonClassException(
+						sprintf( 'Class %s could not be instantiated', $addon_class )
+					);
 				}
 				$this->container->set( $addon_class, $addon );
 			} else {
-				throw new Exception( 'Class ' . $addon_class . ' not found' );
+				throw new InvalidAddonClassException(
+					sprintf( 'Class %s not found', $addon_class )
+				);
 			}
 		}
 	}

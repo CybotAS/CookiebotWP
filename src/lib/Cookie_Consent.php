@@ -64,10 +64,10 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 				default:
 					// Read current user consent in encoded JavaScript format
 					$valid_php_json = preg_replace(
-						'/\s*:\s*([a-zA-Z0-9_]+?)([}\[,])/',
+						'/\s*:\s*(\w+?)([}\[,])/',
 						':"$1"$2',
 						preg_replace(
-							'/([{\[,])\s*([a-zA-Z0-9_]+?):/',
+							'/([{\[,])\s*(\w+?):/',
 							'$1"$2":',
 							str_replace( "'", '"', stripslashes( $this->cookie ) )
 						)

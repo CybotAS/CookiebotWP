@@ -2,7 +2,7 @@
 
 namespace cybot\cookiebot\addons\controller\addons;
 
-use Exception;
+use cybot\cookiebot\exceptions\addons\InstallationException;
 
 abstract class Base_Cookiebot_Theme_Addon extends Base_Cookiebot_Addon {
 
@@ -36,12 +36,12 @@ abstract class Base_Cookiebot_Theme_Addon extends Base_Cookiebot_Addon {
 
 	/**
 	 * @return string
-	 * @throws Exception
+	 * @throws InstallationException
 	 */
 	final public function get_version() {
 		$theme = wp_get_theme( static::ADDON_NAME );
 		if ( ! $theme->exists() ) {
-			throw new Exception( 'Check if theme is installed before calling get_version()' );
+			throw new InstallationException( 'Check if theme is installed before calling get_version()' );
 		}
 		return $theme->get( 'Version' );
 	}
