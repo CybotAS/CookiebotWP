@@ -95,9 +95,7 @@
 					<div class="cb-region__list__container">
 					<?php foreach ( $supported_regions as $code => $region ) : ?>
 						<div class='cb-region__region__item <?php echo array_key_exists( $code, $selected_regions ) ? 'selected-region' : ''; ?>'
-							 data-region="<?php echo esc_html( $code ); ?>">
-							<?php echo esc_html( $region ); ?>
-						</div>
+							 data-region="<?php echo esc_html( $code ); ?>"><?php echo esc_html( $region ); ?></div>
 					<?php endforeach; ?>
 					</div>
 				</div>
