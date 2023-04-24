@@ -65,7 +65,7 @@ class Cookiebot_Recommendation_Notice {
 					'visit_review_temp'      => $visit_review_temp,
 				)
 			),
-			'later_link' => $two_week_review_temp,
+			'later_link' => $visit_review_temp,
 			'int'        => 14,
 		);
 
