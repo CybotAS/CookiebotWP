@@ -52,7 +52,7 @@ class Cookiebot_Recommendation_Notice {
 		);
 
 		$notice = array(
-			'title'      => __( 'Leave A Review? ', 'cookiebot' ),
+			'title'      => __( 'Leave A Review?', 'cookiebot' ),
 			'msg'        => __(
 				'Hi, you have been using our Cookiebot CMP plugin to actively collect user consent - that is awesome. Could you please do us a BIG favor and give it a 5-star rating on WordPress? To help us spread the word and enable more WP websites to easily achieve compliance with GDPR and CCPA.',
 				'cookiebot'
@@ -65,7 +65,7 @@ class Cookiebot_Recommendation_Notice {
 					'visit_review_temp'      => $visit_review_temp,
 				)
 			),
-			'later_link' => $two_week_review_temp,
+			'later_link' => $visit_review_temp,
 			'int'        => 14,
 		);
 

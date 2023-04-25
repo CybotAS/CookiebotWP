@@ -3,6 +3,16 @@
 /** @var string $lang */
 /** @var string $tag_attr */
 /** @var string $cookie_blocking_mode */
+
+$is_multi_config      = ! empty( get_option( 'cookiebot-multiple-config' ) ) ?
+	get_option( 'cookiebot-multiple-config' ) :
+	false;
+$second_banner_region = ! empty( get_option( 'cookiebot-second-banner-regions' ) ) ?
+	get_option( 'cookiebot-second-banner-regions' ) :
+	false;
+$second_banner_id     = ! empty( get_option( 'cookiebot-second-banner-id' ) ) ?
+	get_option( 'cookiebot-second-banner-id' ) :
+	false;
 ?>
 <script type="text/javascript"
 		id="Cookiebot"
@@ -12,19 +22,11 @@
 		data-framework="IAB"
 	<?php endif; ?>
 	<?php
-	if ( (bool) get_option( 'cookiebot-multiple-config' ) !== false &&
-		! empty( get_option( 'cookiebot-second-banner-regions' ) ) &&
-		! empty( get_option( 'cookiebot-second-banner-id' ) ) ) :
+	if ( (bool) $is_multi_config !== false &&
+		$second_banner_region &&
+		$second_banner_id ) :
 		?>
-		data-georegions="{'region':'
-		<?php
-		echo esc_attr( get_option( 'cookiebot-second-banner-regions' ) );
-		?>
-		','cbid':'
-		<?php
-		echo esc_attr( get_option( 'cookiebot-second-banner-id' ) );
-		?>
-		'}"
+		data-georegions="{'region':'<?php echo esc_attr( $second_banner_region ); ?>','cbid':'<?php	echo esc_attr( $second_banner_id ); ?>'}"
 	<?php endif; ?>
 	<?php if ( (bool) get_option( 'cookiebot-gtm' ) !== false ) : ?>
 		<?php if ( empty( get_option( 'cookiebot-data-layer' ) ) ) : ?>

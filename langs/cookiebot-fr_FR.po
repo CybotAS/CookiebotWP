@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-01-18 14:28+0100\n"
-"PO-Revision-Date: 2023-02-23 10:12+0100\n"
+"PO-Revision-Date: 2023-04-24 18:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -15,8 +15,7 @@ msgstr ""
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: cookiebot.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
@@ -148,6 +147,22 @@ msgstr "Laisser un avis ?"
 #: admin_notices/Cookiebot_Recommendation_Notice.php:50
 msgid "We hope you enjoy using WordPress Cookiebot! Would you consider leaving us a review on WordPress.org?"
 msgstr "Nous espérons que vous prenez plaisir à utiliser WordPress Cookiebot ! Seriez-vous disposé à nous laisser un avis sur WordPress.org ?"
+
+#: admin_notices/Cookiebot_Recommendation_Notice.php:57
+msgid "Hi, you have been using our Cookiebot CMP plugin to actively collect user consent - that is awesome. Could you please do us a BIG favor and give it a 5-star rating on WordPress? To help us spread the word and enable more WP websites to easily achieve compliance with GDPR and CCPA."
+msgstr "Bonjour, vous avez utilisé notre plugin Cookiebot CMP pour recueillir activement le consentement des utilisateurs – nous vous en remercions. Seriez-vous disposé à nous rendre un GRAND service et à lui attribuer une note de 5 étoiles sur WordPress ? Cela nous aiderait à faire connaître le plugin et permettre à davantage de sites WP de se conformer facilement au RGPD et à la CCPA."
+
+#: src/view/admin/notices/cookiebot-recommendation-notice-links.php:14
+msgid "Ok, you deserve it"
+msgstr "Bien sûr !"
+
+#: src/view/admin/notices/cookiebot-recommendation-notice-links.php:25
+msgid "Nope, maybe Later"
+msgstr "Peut-être plus tard"
+
+#: src/view/admin/notices/cookiebot-recommendation-notice-links.php:36
+msgid "I already did it"
+msgstr "C’est déjà fait"
 
 #: lib/Cookiebot_WP.php:65
 #, php-format
@@ -1426,7 +1441,7 @@ msgstr "Votre solution Cookiebot CMP pour WordPress"
 
 #: view/admin/settings/dashboard-page.php:38
 msgid "Congratulations!"
-msgstr "Fécilitations !"
+msgstr "Félicitations !"
 
 #: view/admin/settings/dashboard-page.php:39
 msgid "You have added your Domain Group ID to WordPress. You are all set!"

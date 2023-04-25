@@ -3,7 +3,7 @@
 * Tags: cookie banner, GDPR, CCPA, WordPress cookie banner, cookie policy, ePrivacy, dsgvo, privacy compliance, cookie law, data privacy, cmp, cookies
 * Requires at least: 4.4
 * Tested up to: 6.2
-* Stable tag: 4.2.8
+* Stable tag: 4.2.9
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -76,7 +76,11 @@ Display the cookie banner and cookie policy to users from all over the world usi
 
 Watch the below video to learn how to install the Cookiebot CMP WordPress plugin. It’s very easy. Alternatively, read our [step-by-step installation guide](https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress).
 
-[youtube https://youtube.com/watch?v=eSVFnjoMKFk]
+[youtube https://youtube.com/watch?v=QgB315qko-c]
+
+Cookie Declaration
+
+[youtube https://www.youtube.com/watch?v=67XUgTUy3ok]
 
 Need assistance? Visit our [Help Center](https://support.cookiebot.com/hc/en-us) or [contact us](https://support.cookiebot.com/hc/en-us/requests/new).
 
@@ -156,7 +160,7 @@ To display your cookie declaration, create a new page on your website and add th
 
 By default, the cookie declaration is displayed in the selected Cookiebot CMP language. You are able to override this setting with a “lang” attribute in the shortcode. E.g.: [cookie_declaration lang=”de”] for a German version. Remember to add all languages used in the [Cookiebot Manager](https://manage.cookiebot.com/en/login).
 
-[youtube https://www.youtube.com/watch?v=OCXz2bt4H_w]
+[youtube https://www.youtube.com/watch?v=67XUgTUy3ok]
 
 ### Cookie-checker: What cookies are in use on my site? ###
 If you are in doubt about what cookies are in use on our site, start with our free compliance test:
@@ -263,6 +267,15 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 
 ## Changelog ##
+### 4.2.9 - 2023-04-25 ###
+* Code audit
+* Update readme description
+* Update templates links URLs Props: @chesio
+* Update translations
+* Fix multiple configuration bug
+* Fix notice close link
+* Fix french typo Props: @DevKylian
+
 ### 4.2.8 - 2023-04-05 ###
 * Code audit
 * Fix for WordPress 6.2 compatibility
