@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-01-18 14:28+0100\n"
-"PO-Revision-Date: 2023-02-23 10:12+0100\n"
+"PO-Revision-Date: 2023-04-24 18:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -15,8 +15,7 @@ msgstr ""
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: cookiebot.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
-"esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
@@ -147,6 +146,22 @@ msgstr "Vuoi lasciare una recensione?"
 #: admin_notices/Cookiebot_Recommendation_Notice.php:50
 msgid "We hope you enjoy using WordPress Cookiebot! Would you consider leaving us a review on WordPress.org?"
 msgstr "Ci auguriamo che usare WordPress Cookiebot™ ti sia piaciuto! Ti andrebbe di lasciarci una recensione su Wordpress.org?"
+
+#: admin_notices/Cookiebot_Recommendation_Notice.php:57
+msgid "Hi, you have been using our Cookiebot CMP plugin to actively collect user consent - that is awesome. Could you please do us a BIG favor and give it a 5-star rating on WordPress? To help us spread the word and enable more WP websites to easily achieve compliance with GDPR and CCPA."
+msgstr "Ehi! Hai utilizzato il nostro plugin Cookiebot CMP per raccogliere attivamente il consenso dei tuoi utenti: ci fa davvero piacere e ti ringraziamo. Potresti farci un ENORME favore e dargli una valutazione a 5 stelle su WordPress? Ci aiuterebbe a spargere la voce e a far sì che sempre più siti web WP diventino conformi al GDPR e al CCPA in modo semplice e veloce."
+
+#: src/view/admin/notices/cookiebot-recommendation-notice-links.php:14
+msgid "Ok, you deserve it"
+msgstr "Ok, certamente!"
+
+#: src/view/admin/notices/cookiebot-recommendation-notice-links.php:25
+msgid "Nope, maybe Later"
+msgstr "No, forse più tardi"
+
+#: src/view/admin/notices/cookiebot-recommendation-notice-links.php:36
+msgid "I already did it"
+msgstr "Già fatto"
 
 #: lib/Cookiebot_WP.php:65
 #, php-format
