@@ -270,11 +270,11 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 ### 4.2.9 - 2023-04-25 ###
 * Code audit
 * Update readme description
-* Update templates links URLs
+* Update templates links URLs Props: @chesio
 * Update translations
 * Fix multiple configuration bug
 * Fix notice close link
-* Fix french typo
+* Fix french typo Props: @DevKylian
 
 ### 4.2.8 - 2023-04-05 ###
 * Code audit
