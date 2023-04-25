@@ -3,7 +3,7 @@
 * Tags: cookie banner, GDPR, CCPA, WordPress cookie banner, cookie policy, ePrivacy, dsgvo, privacy compliance, cookie law, data privacy, cmp, cookies
 * Requires at least: 4.4
 * Tested up to: 6.2
-* Stable tag: 4.2.8
+* Stable tag: 4.2.9
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -267,6 +267,15 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 
 ## Changelog ##
+### 4.2.9 - 2023-04-25 ###
+* Code audit
+* Update readme description
+* Update templates links URLs
+* Update translations
+* Fix multiple configuration bug
+* Fix notice close link
+* Fix french typo
+
 ### 4.2.8 - 2023-04-05 ###
 * Code audit
 * Fix for WordPress 6.2 compatibility
