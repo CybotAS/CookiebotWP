@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Wd_Google_Analytics extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\wd_google_analytics\Wd_Google_Analytics
 	 * @throws ExpectationFailedException

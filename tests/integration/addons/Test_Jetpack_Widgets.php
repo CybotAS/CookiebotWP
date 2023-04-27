@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Jetpack_Widgets extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\jetpack\widget\Facebook_Jetpack_Widget
 	 * @throws ExpectationFailedException

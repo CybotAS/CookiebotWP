@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Pixel_Caffeine extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\pixel_caffeine\Pixel_Caffeine
 	 * @throws ExpectationFailedException

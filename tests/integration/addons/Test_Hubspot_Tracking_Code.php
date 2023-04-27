@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Hubspot_Tracking_Code extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\hubspot_tracking_code\Hubspot_Tracking_Code
 	 * @throws ExpectationFailedException

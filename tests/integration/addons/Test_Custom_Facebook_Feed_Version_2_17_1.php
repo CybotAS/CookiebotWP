@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Custom_Facebook_Feed_Version_2_17_1 extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\custom_facebook_feed\Custom_Facebook_Feed_Version_2_17_1
 	 * @throws ExpectationFailedException

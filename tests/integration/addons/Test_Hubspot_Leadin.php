@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Hubspot_Leadin extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\hubspot_leadin\Hubspot_Leadin
 	 * @throws ExpectationFailedException

@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Facebook_For_Woocommerce extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\facebook_for_woocommerce\Facebook_For_Woocommerce
 	 * @throws ExpectationFailedException

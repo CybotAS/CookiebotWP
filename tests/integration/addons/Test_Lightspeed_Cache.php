@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Lightspeed_Cache extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\litespeed_cache\Litespeed_Cache
 	 * @throws ExpectationFailedException

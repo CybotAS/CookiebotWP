@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Optinmonster extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\optinmonster\Optinmonster
 	 * @throws ExpectationFailedException
