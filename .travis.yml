@@ -15,8 +15,10 @@ matrix:
   include:
     - php: 7.4
       env: PHPCS=1
+    # Version 8.2 is not available for selected version of Ubuntu
     - php: 8.2
       env: PHPUNIT_VERSION=10.1.2
+      dist: jammy
     - php: 8.1
       env: PHPUNIT_VERSION=10.1.2
     - php: 8.0
@@ -29,8 +31,10 @@ matrix:
       env: PHPUNIT_VERSION=7.5.20
     - php: 7.1
       env: PHPUNIT_VERSION=7.5.20
+    # Versions lower than 7.0 are not available for the newer versions of the Ubuntu
     - php: 7.0
       env: PHPUNIT_VERSION=6.5.14
+      dist: xenial
     - php: 5.6
       env: PHPUNIT_VERSION=5.7.27
       dist: xenial
