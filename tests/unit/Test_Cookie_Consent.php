@@ -10,9 +10,6 @@ use WP_UnitTestCase;
 class Test_Cookie_Consent extends WP_UnitTestCase {
 	const COOKIE = '{"stamp":"0boMmPgsG8gUTRvMkOLtyZ1uLvOFJobBbNb23IZO/TpY3eETvRxFfg==","necessary":"true","preferences":"true","statistics":"false","marketing":"false","ver":"1","utc":"1557479161596"}';
 
-	public function setUp() {
-	}
-
 	/**
 	 * Test Cookie Consent with valid encoded json format
 	 *
