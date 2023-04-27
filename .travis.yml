@@ -1,5 +1,5 @@
 os: linux
-dist: jammy
+dist: bionic
 
 services:
   - mysql
