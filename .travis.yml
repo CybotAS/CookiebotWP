@@ -17,10 +17,10 @@ matrix:
       env: PHPCS=1
     # Version 8.2 is not available for selected version of Ubuntu
     - php: 8.2
-      env: PHPUNIT_VERSION=10.1.2
+      env: PHPUNIT_VERSION=9.6.7
       dist: jammy
     - php: 8.1
-      env: PHPUNIT_VERSION=10.1.2
+      env: PHPUNIT_VERSION=9.6.7
     - php: 8.0
       env: PHPUNIT_VERSION=9.6.7
     - php: 7.4
