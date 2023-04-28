@@ -116,7 +116,6 @@
 
 .cb-main__success__text {
     width: 100%;
-    max-width: 420px;
     font-size: 16px;
     line-height: 24px;
 }
@@ -154,14 +153,31 @@
 
 .cb-main__card__success {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: auto 1fr;
     grid-column-gap: 15px;
     align-items: center;
     margin-top: 15px;
 }
 
 .cb-main__card__success .cb-btn.cb-success-btn {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
     margin-top: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.cb-main__card__success .cb-btn.cb-success-btn img {
+    width: 30px;
+}
+
+.cb-main__card__success .cb-main__success__text span{
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .cb-main__video {

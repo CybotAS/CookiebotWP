@@ -44,9 +44,9 @@ $header->display();
 							<div class="cb-main__card__success">
 								<div class="cb-btn cb-success-btn">
 									<img src="<?php echo esc_html( $check_icon ); ?>" alt="Check">
-									<?php echo esc_html__( 'Congratulations!', 'cookiebot' ); ?>
 								</div>
 								<p class="cb-main__success__text">
+                                    <span><?php echo esc_html__( 'Congratulations!', 'cookiebot' ); ?></span>
 									<?php echo esc_html__( 'You have added your Domain Group ID to WordPress. You are all set!', 'cookiebot' ); ?>
 								</p>
 							</div>
