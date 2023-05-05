@@ -191,6 +191,7 @@ $header->display();
 												value="auto"
 											<?php echo $is_ms && $network_auto ? ' disabled' : ''; ?>/>
 										<?php esc_html_e( 'Automatic cookie-blocking mode', 'cookiebot' ); ?>
+										<span class="recommended-tag"><?php esc_html_e( 'Recommended', 'cookiebot' ); ?></span>
 									</label>
 									<label>
 										<input <?php checked( 'manual', $cookie_blocking_mode ); ?>

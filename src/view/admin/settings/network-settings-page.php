@@ -78,6 +78,7 @@ $header->display();
 												value="auto"
 										/>
 										<?php esc_html_e( 'Automatic cookie-blocking mode', 'cookiebot' ); ?>
+										<span class="recommended-tag"><?php esc_html_e( 'Recommended', 'cookiebot' ); ?></span>
 									</label>
 									<label>
 										<input <?php checked( 'manual', $cbm ); ?>

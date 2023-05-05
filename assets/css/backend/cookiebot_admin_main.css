@@ -235,6 +235,11 @@ input[type=checkbox]:checked:before {
     mask-size: contain;
 }
 
+.cb-settings__config__data__inner label:not(.switch-checkbox) input[type="radio"],
+.cb-settings__config__data__inner label:not(.switch-checkbox) input[type="checkbox"] {
+    margin-left: -30px;
+}
+
 textarea {
     width: 100%;
     border: 2px solid #d3d3d3;
@@ -259,6 +264,7 @@ textarea {
 .switch-checkbox .switcher {
     cursor: pointer;
     width: 70px;
+    min-width: 70px;
     height: 40px;
     margin-right: 10px;
     background-color: #141414;

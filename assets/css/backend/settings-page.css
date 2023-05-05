@@ -140,6 +140,10 @@
     color: #141414;
 }
 
+.cb-settings__config__data__inner label:not(.switch-checkbox) {
+    padding-left: 30px;
+}
+
 .cb-settings__config__data__inner label.switch-checkbox {
     display: flex;
 }
@@ -148,8 +152,7 @@
     margin-top: 20px;
 }
 
-.recommended-item:after {
-    content: 'Recommended';
+.recommended-tag {
     font-size: 13px;
     background-color: #0e1848;
     color: #ffffff;
@@ -219,4 +222,14 @@
 
 .cb-prior__tab__content__item.active-item {
     display: block;
+}
+
+@media (max-width: 1414px) {
+    .recommended-tag {
+        display: block;
+        width: -webkit-fit-content;
+        width: fit-content;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
 }
