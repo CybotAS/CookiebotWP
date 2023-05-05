@@ -46,7 +46,7 @@ $header->display();
 									<img src="<?php echo esc_html( $check_icon ); ?>" alt="Check">
 								</div>
 								<p class="cb-main__success__text">
-                                    <span><?php echo esc_html__( 'Congratulations!', 'cookiebot' ); ?></span>
+									<span><?php echo esc_html__( 'Congratulations!', 'cookiebot' ); ?></span>
 									<?php echo esc_html__( 'You have added your Domain Group ID to WordPress. You are all set!', 'cookiebot' ); ?>
 								</p>
 							</div>
@@ -134,7 +134,7 @@ $header->display();
 							</div>
 							<a href="https://www.cookiebot.com/en/gdpr/" target="_blank"
 							   class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
-								<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>
+								<span><?php echo esc_html__( 'Learn More', 'cookiebot' ); ?></span>
 								<img src="<?php echo esc_html( $link_icon ); ?>"
 									 alt="<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>">
 							</a>
@@ -151,7 +151,7 @@ $header->display();
 							</div>
 							<a href="https://www.cookiebot.com/en/what-is-ccpa/" target="_blank"
 							   class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
-								<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>
+								<span><?php echo esc_html__( 'Learn More', 'cookiebot' ); ?></span>
 								<img src="<?php echo esc_html( $link_icon ); ?>"
 									 alt="<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>">
 							</a>

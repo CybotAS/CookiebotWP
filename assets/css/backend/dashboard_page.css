@@ -186,7 +186,8 @@
 
 .cb-main__legislation__item {
     display: grid;
-    grid-template-columns: 1fr 0fr 3fr 2fr;
+    grid-template-columns: auto auto 2fr 3fr;
+    grid-column-gap: 10px;
     background-color: #efefef;
     border-radius: 6px;
     padding: 20px;
@@ -196,7 +197,6 @@
 .cb-main__legislation__name {
     font-size: 16px;
     font-weight: 700;
-    margin-right: 7px;
 }
 
 .cb-main__legislation__region {
@@ -206,6 +206,17 @@
 
 .cb-link-btn.legislation-link {
     margin: 0;
+    justify-self: right;
+}
+
+.cb-link-btn.external-icon {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-column-gap: 10px;
+    align-items: center;
+}
+
+.cb-link-btn.external-icon span{
     text-align: right;
 }
 
