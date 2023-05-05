@@ -491,6 +491,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 			'regex'             => $this->get_regex(),
 			'regex_is_default'  => $this->is_regex_default(),
 			'default_regex'     => $this->get_default_regex(),
+			'info_icon'         => asset_url( 'img/icons/info.svg' ),
 		);
 
 		return get_view_html(

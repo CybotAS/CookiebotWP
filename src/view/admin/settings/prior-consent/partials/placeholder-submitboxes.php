@@ -1,6 +1,7 @@
 <?php
 /** @var  array $placeholders */
 /** @var  string $placeholder_helper */
+/** @var string $info_icon */
 foreach ( $placeholders as $placeholder ) :
 	/** @var string $name */
 	$name = $placeholder['name'];
@@ -35,7 +36,9 @@ foreach ( $placeholders as $placeholder ) :
 			echo esc_textarea( $placeholder_content );
 			?>
 			</textarea>
-			<span class="help-tip" title="<?php echo esc_attr( $placeholder_helper ); ?>"></span>
+			<span class="help-tip" title="<?php echo esc_attr( $placeholder_helper ); ?>">
+				+ <?php echo esc_html__( 'Info', 'cookiebot' ); ?>
+			</span>
 		</p>
 	</div>
 <?php endforeach; ?>

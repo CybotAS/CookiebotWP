@@ -428,6 +428,7 @@ class Settings_Config {
 				array(
 					'placeholders'       => $widget_placeholders,
 					'placeholder_helper' => $placeholder_helper,
+					'info_icon'          => asset_url( 'img/icons/info.svg' ),
 				)
 			)
 			: get_view_html(
@@ -441,6 +442,7 @@ class Settings_Config {
 					),
 					'default_placeholder'                  => $widget_default_placeholder,
 					'placeholder_helper'                   => $placeholder_helper,
+					'info_icon'                            => asset_url( 'img/icons/info.svg' ),
 				)
 			);
 
@@ -533,6 +535,7 @@ class Settings_Config {
 				array(
 					'placeholders'       => $addon_placeholders,
 					'placeholder_helper' => $placeholder_helper,
+					'info_icon'          => asset_url( 'img/icons/info.svg' ),
 				)
 			)
 			: get_view_html(
@@ -546,6 +549,7 @@ class Settings_Config {
 					),
 					'default_placeholder'                  => $addon::DEFAULT_PLACEHOLDER_CONTENT,
 					'placeholder_helper'                   => $placeholder_helper,
+					'info_icon'                            => asset_url( 'img/icons/info.svg' ),
 				)
 			);
 

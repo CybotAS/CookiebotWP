@@ -41,35 +41,17 @@ div.extra_information {
  * Help Tip
  */
 .help-tip {
-	color: #666;
-	display: inline-block;
-	font-size: 1.5em;
-	font-style: normal;
-	height: 16px;
-	line-height: 16px;
-	position: relative;
-	vertical-align: middle;
-	width: 16px
-}
-
-.help-tip::after {
-	font-family: Dashicons;
-	speak: none;
-	font-weight: 400;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-	margin: 0;
-	text-indent: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	content: "";
-	cursor: help
+    color: #ffffff;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 10px;
+    position: relative;
+    cursor: pointer;
+    background: #333333;
+    padding: 5px 6px;
+    border-radius: 5px;
 }
 
 #tiptip_holder{
