@@ -206,7 +206,7 @@ class Cookiebot_WP {
 
 	public function set_settings_action_link( $actions ) {
 		$cblinks = array(
-			'<a href="' . admin_url( 'admin.php?page=cookiebot' ) . '">' . esc_html__( 'Dashboard', 'cookiebot' ) . '</a>',
+			'<a href="' . esc_url( add_query_arg( 'page', 'cookiebot', admin_url( 'admin.php' ) ) ) . '">' . esc_html__( 'Dashboard', 'cookiebot' ) . '</a>',
 		);
 		$actions = array_merge( $actions, $cblinks );
 		return $actions;

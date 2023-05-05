@@ -112,13 +112,12 @@ class Settings_Page_Tab {
 	}
 
 	public function get_tab_href() {
-		$query = http_build_query(
-			array(
-				'page' => $this->page_name,
-				'tab'  => $this->name,
-			)
+		$query = array(
+			'page' => $this->page_name,
+			'tab'  => $this->name,
 		);
-		return admin_url( 'admin.php?' . $query );
+
+		return add_query_arg( $query, admin_url( 'admin.php' ) );
 	}
 
 	/**
