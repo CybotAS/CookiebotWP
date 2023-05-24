@@ -85,6 +85,7 @@ class Cookiebot_WP {
 			}
 			( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();
 			( new Cookiebot_Recommendation_Notice() )->register_hooks();
+			( new Cookiebot_Review() )->register_hooks();
 		}
 
 		( new Consent_API_Helper() )->register_hooks();
