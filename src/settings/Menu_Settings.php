@@ -69,5 +69,6 @@ class Menu_Settings {
 		register_setting( 'cookiebot', 'cookiebot-multiple-config' );
 		register_setting( 'cookiebot', 'cookiebot-second-banner-regions' );
 		register_setting( 'cookiebot', 'cookiebot-second-banner-id' );
+		register_setting( 'cookiebot', 'cookiebot-multiple-banners' );
 	}
 }

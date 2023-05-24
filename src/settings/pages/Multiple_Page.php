@@ -10,13 +10,30 @@ use function cybot\cookiebot\lib\include_view;
 
 class Multiple_Page implements Settings_Page_Interface {
 
-	private function selectedRegionList() {
-		$countries = Supported_Regions::get();
-		$list      = explode( ', ', esc_attr( get_option( 'cookiebot-second-banner-regions' ) ) );
-		$ccpa      = esc_attr( get_option( 'cookiebot-ccpa' ) );
+	private function getMultipleBanners() {
+		$banners = get_option( 'cookiebot-multiple-banners' );
 
-		if ( $ccpa === '1' && ! in_array( 'US-06', $list, true ) ) {
-			array_push( $list, 'US-06' );
+		if(!$banners){
+			return null;
+		}
+
+		foreach ( $banners as $banner => $data ) {
+			$format_region                = $this->selectedRegionList( $data['region'], false );
+			$banners[ $banner ]['region'] = $format_region;
+		}
+
+		return $banners;
+	}
+
+	private function selectedRegionList( $option, $second ) {
+		$countries = Supported_Regions::get();
+		$list      = explode( ', ', $option );
+
+		if ( $second ) {
+			$ccpa = esc_attr( get_option( 'cookiebot-ccpa' ) );
+			if ( $ccpa === '1' && ! in_array( 'US-06', $list, true ) ) {
+				array_push( $list, 'US-06' );
+			}
 		}
 
 		$selected = array();
@@ -58,7 +75,8 @@ class Multiple_Page implements Settings_Page_Interface {
 			'secondary_group_id' => $this->retroSecondaryId(),
 			'supported_regions'  => Supported_Regions::get(),
 			'ccpa_compatibility' => esc_attr( get_option( 'cookiebot-ccpa' ) ),
-			'selected_regions'   => $this->selectedRegionList(),
+			'selected_regions'   => $this->selectedRegionList( esc_attr( get_option( 'cookiebot-second-banner-regions' ) ), true ),
+			'multiple_banners'   => $this->getMultipleBanners(),
 		);
 
 		wp_enqueue_style(

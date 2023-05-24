@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
-"POT-Creation-Date: 2023-04-24 18:37+0200\n"
+"POT-Creation-Date: 2023-05-23 12:30+0200\n"
 "PO-Revision-Date: 2022-06-10 11:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1299,58 +1299,62 @@ msgid "United States - State of California"
 msgstr ""
 
 #: lib/Supported_Regions.php:244
-msgid "United States Minor Outlying Islands"
+msgid "United States - State of Virginia"
 msgstr ""
 
 #: lib/Supported_Regions.php:245
-msgid "Uruguay"
+msgid "United States Minor Outlying Islands"
 msgstr ""
 
 #: lib/Supported_Regions.php:246
-msgid "Uzbekistan"
+msgid "Uruguay"
 msgstr ""
 
 #: lib/Supported_Regions.php:247
-msgid "Vanuatu"
+msgid "Uzbekistan"
 msgstr ""
 
 #: lib/Supported_Regions.php:248
-msgid "Venezuela"
+msgid "Vanuatu"
 msgstr ""
 
 #: lib/Supported_Regions.php:249
-msgid "Viet Nam"
+msgid "Venezuela"
 msgstr ""
 
 #: lib/Supported_Regions.php:250
-msgid "Virgin Islands, British"
+msgid "Viet Nam"
 msgstr ""
 
 #: lib/Supported_Regions.php:251
-msgid "Virgin Islands, U.S."
+msgid "Virgin Islands, British"
 msgstr ""
 
 #: lib/Supported_Regions.php:252
-msgid "Wallis and Futuna"
+msgid "Virgin Islands, U.S."
 msgstr ""
 
 #: lib/Supported_Regions.php:253
-msgid "Western Sahara"
+msgid "Wallis and Futuna"
 msgstr ""
 
 #: lib/Supported_Regions.php:254
-msgid "Yemen"
+msgid "Western Sahara"
 msgstr ""
 
 #: lib/Supported_Regions.php:255
-msgid "Zambia"
+msgid "Yemen"
 msgstr ""
 
 #: lib/Supported_Regions.php:256
-msgid "Zimbabwe"
+msgid "Zambia"
 msgstr ""
 
 #: lib/Supported_Regions.php:257
+msgid "Zimbabwe"
+msgstr ""
+
+#: lib/Supported_Regions.php:258
 msgid "Åland Islands"
 msgstr ""
 
@@ -1653,6 +1657,10 @@ msgstr ""
 
 #: view/admin/settings/multiple-configuration/page.php:69
 msgid "Select region"
+msgstr ""
+
+#: view/admin/settings/multiple-configuration/page.php:120
+msgid "Add banner"
 msgstr ""
 
 #: view/admin/settings/network-settings-page.php:22
@@ -2124,8 +2132,7 @@ msgstr ""
 
 #: view/admin/settings/support-page.php:158
 #, php-format
-msgid ""
-"Example on modifying an existing Google Analytics Universal script tag can be found %1$shere in step 4%2$s."
+msgid "Example on modifying an existing Google Analytics Universal script tag can be found %1$shere in step 4%2$s."
 msgstr ""
 
 #: view/admin/settings/support-page.php:188
@@ -2133,9 +2140,7 @@ msgid "Helper function to update your scripts"
 msgstr ""
 
 #: view/admin/settings/support-page.php:193
-msgid ""
-"You can update your scripts yourself. However, Cookiebot CMP also offers a small helper function that can "
-"make the work easier."
+msgid "You can update your scripts yourself. However, Cookiebot CMP also offers a small helper function that can make the work easier."
 msgstr ""
 
 #: view/admin/settings/support-page.php:199
@@ -2241,9 +2246,7 @@ msgid "https://www.cookiebot.com/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid ""
-"Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/"
-"ePrivacy and CCPA compliance for websites."
+msgid "Cookiebot is a cloud-driven solution that automatically controls cookies and trackers, enabling full GDPR/ePrivacy and CCPA compliance for websites."
 msgstr ""
 
 #. Author of the plugin/theme

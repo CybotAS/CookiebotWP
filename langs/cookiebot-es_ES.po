@@ -1298,58 +1298,62 @@ msgid "United States - State of California"
 msgstr "Estados Unidos - California"
 
 #: lib/Supported_Regions.php:244
+msgid "United States - State of Virginia"
+msgstr "Estados Unidos - Virginia"
+
+#: lib/Supported_Regions.php:245
 msgid "United States Minor Outlying Islands"
 msgstr "Islas Ultramarinas Menores de Estados Unidos"
 
-#: lib/Supported_Regions.php:245
+#: lib/Supported_Regions.php:246
 msgid "Uruguay"
 msgstr "Uruguay"
 
-#: lib/Supported_Regions.php:246
+#: lib/Supported_Regions.php:247
 msgid "Uzbekistan"
 msgstr "Uzbekistán"
 
-#: lib/Supported_Regions.php:247
+#: lib/Supported_Regions.php:248
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: lib/Supported_Regions.php:248
+#: lib/Supported_Regions.php:249
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: lib/Supported_Regions.php:249
+#: lib/Supported_Regions.php:250
 msgid "Viet Nam"
 msgstr "Vietnam"
 
-#: lib/Supported_Regions.php:250
+#: lib/Supported_Regions.php:251
 msgid "Virgin Islands, British"
 msgstr "Islas Vírgenes Británicas"
 
-#: lib/Supported_Regions.php:251
+#: lib/Supported_Regions.php:252
 msgid "Virgin Islands, U.S."
 msgstr "Islas Vírgenes de los Estados Unidos"
 
-#: lib/Supported_Regions.php:252
+#: lib/Supported_Regions.php:253
 msgid "Wallis and Futuna"
 msgstr "Wallis y Futuna"
 
-#: lib/Supported_Regions.php:253
+#: lib/Supported_Regions.php:254
 msgid "Western Sahara"
 msgstr "Sahara Occidental"
 
-#: lib/Supported_Regions.php:254
+#: lib/Supported_Regions.php:255
 msgid "Yemen"
 msgstr "Yemen"
 
-#: lib/Supported_Regions.php:255
+#: lib/Supported_Regions.php:256
 msgid "Zambia"
 msgstr "Zambia"
 
-#: lib/Supported_Regions.php:256
+#: lib/Supported_Regions.php:257
 msgid "Zimbabwe"
 msgstr "Zimbabue"
 
-#: lib/Supported_Regions.php:257
+#: lib/Supported_Regions.php:258
 msgid "Åland Islands"
 msgstr "Islas Åland"
 
@@ -1656,6 +1660,10 @@ msgstr "Grupo de Dominio principal"
 #: view/admin/settings/multiple-configuration/page.php:69
 msgid "Select region"
 msgstr "Seleccionar región"
+
+#: view/admin/settings/multiple-configuration/page.php:120
+msgid "Add banner"
+msgstr "Añadir banner"
 
 #: view/admin/settings/network-settings-page.php:22
 msgid "Network Settings"
