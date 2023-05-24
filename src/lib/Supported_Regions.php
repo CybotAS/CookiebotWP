@@ -241,6 +241,7 @@ class Supported_Regions {
 			'GB'    => __( 'United Kingdom', 'cookiebot' ),
 			'US'    => __( 'United States', 'cookiebot' ),
 			'US-06' => __( 'United States - State of California', 'cookiebot' ),
+			'US-51' => __( 'United States - State of Virginia', 'cookiebot' ),
 			'UM'    => __( 'United States Minor Outlying Islands', 'cookiebot' ),
 			'UY'    => __( 'Uruguay', 'cookiebot' ),
 			'UZ'    => __( 'Uzbekistan', 'cookiebot' ),
