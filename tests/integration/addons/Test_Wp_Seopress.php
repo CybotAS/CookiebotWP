@@ -19,6 +19,6 @@ class Test_Wp_Seopress extends WP_UnitTestCase {
 		$content = Wp_Seopress::get_svn_file_content( 'inc/functions/options-google-analytics.php' );
 
 		// test the content
-		$this->assertNotFalse( strpos( $content, "add_action('wp_head', 'seopress_google_analytics_js_arguments', 929, 1);" ) );
+		$this->assertNotFalse( strpos( $content, "add_action('seopress_google_analytics_html', 'seopress_google_analytics_js', 10, 1);" ) );
 	}
 }
