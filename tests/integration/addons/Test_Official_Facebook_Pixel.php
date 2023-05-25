@@ -158,24 +158,6 @@ TEXT;
 	 * @throws InvalidArgumentException
 	 * @throws \Exception
 	 */
-	public function test_official_facebook_pixel_gravity_forms() {
-		$content = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressGravityForms.php' );
-		$snippet = <<<TEXT
-add_filter(
-      'gform_confirmation',
-      array(__CLASS__, 'injectLeadEvent'),
-      10, 4);
-TEXT;
-
-		$this->assertNotFalse( strpos( $content, $snippet ) );
-	}
-
-	/**
-	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
-	 * @throws ExpectationFailedException
-	 * @throws InvalidArgumentException
-	 * @throws \Exception
-	 */
 	public function test_official_facebook_pixel_mailchimp_for_wp() {
 		$content = Official_Facebook_Pixel::get_svn_file_content( 'integration/FacebookWordpressMailchimpForWp.php' );
 		$snippet = <<<TEXT

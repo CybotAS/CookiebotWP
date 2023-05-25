@@ -12,7 +12,7 @@ use DomainException;
 use RuntimeException;
 
 class Cookiebot_WP {
-	const COOKIEBOT_PLUGIN_VERSION  = '4.2.9';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.2.10';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -85,6 +85,7 @@ class Cookiebot_WP {
 			}
 			( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();
 			( new Cookiebot_Recommendation_Notice() )->register_hooks();
+			( new Cookiebot_Review() )->register_hooks();
 		}
 
 		( new Consent_API_Helper() )->register_hooks();
@@ -206,7 +207,7 @@ class Cookiebot_WP {
 
 	public function set_settings_action_link( $actions ) {
 		$cblinks = array(
-			'<a href="' . admin_url( 'admin.php?page=cookiebot' ) . '">' . esc_html__( 'Dashboard', 'cookiebot' ) . '</a>',
+			'<a href="' . esc_url( add_query_arg( 'page', 'cookiebot', admin_url( 'admin.php' ) ) ) . '">' . esc_html__( 'Dashboard', 'cookiebot' ) . '</a>',
 		);
 		$actions = array_merge( $actions, $cblinks );
 		return $actions;

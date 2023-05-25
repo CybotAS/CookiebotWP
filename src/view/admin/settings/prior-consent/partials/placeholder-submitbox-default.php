@@ -3,6 +3,7 @@
 /** @var string $name */
 /** @var string $default_placeholder */
 /** @var string $placeholder_helper */
+/** @var string $info_icon */
 ?>
 <div class="placeholder_content">
 	<p>
@@ -14,6 +15,8 @@
 	<p>
 		<textarea cols="80" rows="5"
 				  name="<?php echo esc_attr( $name ); ?>"><?php echo esc_textarea( $default_placeholder ); ?></textarea>
-		<span class="help-tip" title="<?php echo esc_attr( $placeholder_helper ); ?>"></span>
+		<span class="help-tip" title="<?php echo esc_attr( $placeholder_helper ); ?>">
+			+ <?php echo esc_html__( 'Info', 'cookiebot' ); ?>
+		</span>
 	</p>
 </div>

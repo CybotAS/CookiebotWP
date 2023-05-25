@@ -3,6 +3,7 @@
 /** @var $regex string */
 /** @var $regex_is_default bool */
 /** @var $default_regex string */
+/** @var $info_icon string */
 ?>
 <div class="show_advanced_options">
 	<button class="cb-btn cb-main-btn">
@@ -13,10 +14,9 @@
 		);
 		?>
 	</button>
-	<span
-			class="help-tip"
-			title="<?php echo esc_html__( 'This is for more advanced users.', 'cookiebot' ); ?>"
-	></span>
+	<span class="help-tip" title="<?php echo esc_html__( 'This is for more advanced users.', 'cookiebot' ); ?>">
+		+ <?php echo esc_html__( 'Info', 'cookiebot' ); ?>
+	</span>
 </div>
 <div class="advanced_options">
 

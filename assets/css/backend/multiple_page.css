@@ -23,7 +23,12 @@
     grid-column-gap: 15px;
     background-color: #f2f2f2;
     border-radius: 4px;
-    padding: 8px 24px;
+    padding: 8px 60px 8px 24px;
+}
+
+.cb-region__table__item.cb-region__secondary__banner {
+    grid-template-columns: 1fr 1fr auto;
+    padding: 8px 24px 8px 24px;
 }
 
 .cb-region__item__region--primary {
@@ -58,6 +63,11 @@
     position: absolute;
     top: 7px;
     right: 12px;
+}
+
+.cb-region__table__item:nth-child(2) .cb-region__region__selector,
+.cb-region__table__item:nth-child(2) .cb-region__region__selector:after{
+    display: none;
 }
 
 .selected-regions-item {
@@ -139,4 +149,9 @@
     right: 0;
     left: 0;
     z-index: 0;
+}
+
+.cb-region__remove__banner {
+    cursor: pointer;
+    align-self: center;
 }

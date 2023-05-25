@@ -32,7 +32,7 @@ $header->display();
 								<h2 class="cb-main__card__title">
 									<?php echo esc_html__( 'I already have a Cookiebot CMP account', 'cookiebot' ); ?>
 								</h2>
-								<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . Settings_Page::ADMIN_SLUG ) ); ?>"
+								<a href="<?php echo esc_url( add_query_arg( 'page', Settings_Page::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>"
 								   class="cb-btn cb-main-btn">
 									<?php echo esc_html__( 'Connect my existing account', 'cookiebot' ); ?>
 								</a>
@@ -44,9 +44,9 @@ $header->display();
 							<div class="cb-main__card__success">
 								<div class="cb-btn cb-success-btn">
 									<img src="<?php echo esc_html( $check_icon ); ?>" alt="Check">
-									<?php echo esc_html__( 'Congratulations!', 'cookiebot' ); ?>
 								</div>
 								<p class="cb-main__success__text">
+									<span><?php echo esc_html__( 'Congratulations!', 'cookiebot' ); ?></span>
 									<?php echo esc_html__( 'You have added your Domain Group ID to WordPress. You are all set!', 'cookiebot' ); ?>
 								</p>
 							</div>
@@ -81,7 +81,7 @@ $header->display();
 								<h2 class="cb-main__card__title">
 									<?php echo esc_html__( 'Create a new Cookiebot CMP account', 'cookiebot' ); ?>
 								</h2>
-								<a href="https://manage.cookiebot.com/en/signup/?utm_source=wordpress&utm_medium=organic&utm_campaign=banner"
+								<a href="https://manage.cookiebot.com/en/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
 								   target="_blank" class="cb-btn cb-white-btn" rel="noopener">
 									<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
 								</a>
@@ -134,7 +134,7 @@ $header->display();
 							</div>
 							<a href="https://www.cookiebot.com/en/gdpr/" target="_blank"
 							   class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
-								<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>
+								<span><?php echo esc_html__( 'Learn More', 'cookiebot' ); ?></span>
 								<img src="<?php echo esc_html( $link_icon ); ?>"
 									 alt="<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>">
 							</a>
@@ -151,7 +151,7 @@ $header->display();
 							</div>
 							<a href="https://www.cookiebot.com/en/what-is-ccpa/" target="_blank"
 							   class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
-								<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>
+								<span><?php echo esc_html__( 'Learn More', 'cookiebot' ); ?></span>
 								<img src="<?php echo esc_html( $link_icon ); ?>"
 									 alt="<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>">
 							</a>

@@ -99,6 +99,8 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= 'IAB: ' . $this->print_option_enabled( 'cookiebot-iab' ) . "\n";
 		$debug_output .= 'CCPA banner for visitors from California: ' . $this->print_option_enabled( 'cookiebot-ccpa' ) . "\n";
 		$debug_output .= 'CCPA domain group id: ' . get_option( 'cookiebot-ccpa-domain-group-id' ) . "\n";
+		$debug_output .= 'Secondary banner group id: ' . get_option( 'cookiebot-ccpa-domain-group-id' ) . "\n";
+		$debug_output .= 'Multiple banners: ' . get_option( 'cookiebot-multiple-banners' ) . "\n";
 		$debug_output .= 'Add async/defer to banner tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-uc-attribute' ) . "\n";
 		$debug_output .= 'Add async/defer to declaration tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-cd-attribute' ) . "\n";
 		$debug_output .= 'Auto update: ' . $this->print_option_enabled( 'cookiebot-autoupdate' ) . "\n";

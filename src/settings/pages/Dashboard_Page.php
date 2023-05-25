@@ -23,7 +23,8 @@ class Dashboard_Page implements Settings_Page_Interface {
 			array(
 				$this,
 				'display',
-			)
+			),
+			self::ICON
 		);
 
 		add_submenu_page(

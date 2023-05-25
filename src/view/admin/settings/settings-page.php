@@ -82,7 +82,7 @@ $header->display();
 								<?php esc_html_e( 'Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on "Create a new account" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find your ID in the Cookiebot Manager by navigating to "Settings" and "Your Scripts".', 'cookiebot' ); ?>
 							</p>
 							<div class="new-account-actions">
-								<a href="https://manage.cookiebot.com/en/signup/?utm_source=wordpress&utm_medium=organic&utm_campaign=banner"
+								<a href="https://manage.cookiebot.com/en/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
 								   target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 									<?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?>
 								</a>
@@ -191,6 +191,7 @@ $header->display();
 												value="auto"
 											<?php echo $is_ms && $network_auto ? ' disabled' : ''; ?>/>
 										<?php esc_html_e( 'Automatic cookie-blocking mode', 'cookiebot' ); ?>
+										<span class="recommended-tag"><?php esc_html_e( 'Recommended', 'cookiebot' ); ?></span>
 									</label>
 									<label>
 										<input <?php checked( 'manual', $cookie_blocking_mode ); ?>

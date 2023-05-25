@@ -1,0 +1,122 @@
+.cookiebot-popup-container {
+    position: fixed;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    background: rgba(0,0,0,.5);
+}
+
+.cookiebot-popup-container.cb-opened {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+#cookiebot-popup {
+    box-sizing: border-box;
+    background: #ffffff;
+    max-width: 520px;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+#cookiebot-popup *{
+    box-sizing: border-box;
+}
+
+.cb-review__header {
+    display: grid;
+    grid-template-columns: 50px 1fr 22px;
+    grid-column-gap: 5px;
+}
+
+#cb-review__close {
+    color: #424242;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 20px;
+    font-weight: 700;
+    margin-right: 0;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+#cb-review__form p {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #141414;
+}
+
+#cb-review__form > div {
+    padding: 0 20px;
+}
+
+.cb-review__form--item {
+    display: inline-block;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+#cb-review__other-description {
+    width: 100%;
+}
+
+#cb-review__form #cb-review__alert {
+    display: none;
+    padding: 15px 15px;
+    border-left: 5px solid #ffcc5f;
+    background: #f2f2f2;
+    margin: 15px 0;
+    color: #d69c20;
+    font-weight: bold;
+}
+
+#cb-review__form #cb-review__alert.show-alert {
+    display: block;
+}
+
+#cb-review__form .cb-review__actions {
+    display: grid;
+    padding: 15px;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 25px;
+}
+
+#cb-review__skip {
+    background-color: rgba(0, 0, 0, 0.16);
+    color: #333;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    text-align: center;
+}
+
+#cb-review__submit {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    background-color: #1032cf;
+    color: #ffffff;
+    text-align: center;
+}
+
+#cb-review__form .cb-review__policy {
+    font-size: 14px;
+    text-align: right;
+    margin: 5px 0;
+    padding-right: 20px;
+}
+
+#cb-review__form .cb-review__policy a {
+    color: blue;
+    text-decoration: none;
+}

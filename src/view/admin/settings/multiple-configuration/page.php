@@ -5,7 +5,11 @@
  * @var array $supported_regions
  * @var string $ccpa_compatibility
  * @var array $selected_regions
+ * @var array $multiple_banners
  */
+
+use function cybot\cookiebot\lib\include_view;
+
 ?>
 <div class="cb-settings__config__item">
 	<div class="cb-settings__config__content">
@@ -60,24 +64,38 @@
 		<div class="cb-region__table__item">
 			<div class="cb-region__item__group">
 				<input type="text" disabled
-					   placeholder="<?php echo $cbid ? esc_html( $cbid ) : '1111-1111-1111-1111'; ?>">
+					   placeholder="<?php echo $cbid ? esc_attr( $cbid ) : '1111-1111-1111-1111'; ?>">
 			</div>
 			<div class="cb-region__item__region">
 				<p class="cb-region__item__region--primary">
 					<?php esc_html_e( 'Primary domain group', 'cookiebot' ); ?>
 				</p>
+				<div class="cb-region__region__selector">
+					<div class="default-none">
+						<?php esc_html_e( 'Select region', 'cookiebot' ); ?>
+					</div>
+					<div class="selected-regions"></div>
+				</div>
+				<div class="cb-region__region__list hidden">
+					<div class="cb-region__veil"></div>
+					<div class="cb-region__list__container">
+						<?php foreach ( $supported_regions as $code => $region ) : ?>
+							<div class="cb-region__region__item"
+								 data-region="<?php echo esc_attr( $code ); ?>"><?php echo esc_attr( $region ); ?></div>
+						<?php endforeach; ?>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="cb-region__table__item">
+		<?php if ( $secondary_group_id && $selected_regions ) : ?>
+		<div class="cb-region__table__item cb-region__secondary__banner">
 			<div class="cb-region__item__group">
 				<input type="text" name="cookiebot-second-banner-id" placeholder="1111-1111-1111-1111"
-					   value="<?php echo esc_html( $secondary_group_id ); ?>">
+					   value="<?php echo esc_attr( $secondary_group_id ); ?>">
 			</div>
 			<div class="cb-region__item__region">
-				<input type="hidden" name="cookiebot-second-banner-regions" id="second-banner-regions"
-					   value="<?php echo esc_html( implode( ', ', array_keys( $selected_regions ) ) ); ?>">
-				<input type="hidden" name="cookiebot-ccpa" id="ccpa-compatibility"
-					   value="<?php echo esc_html( $ccpa_compatibility ); ?>">
+				<input type="hidden" name="cookiebot-second-banner-regions" class="second-banner-regions"
+					   value="<?php echo esc_attr( implode( ', ', array_keys( $selected_regions ) ) ); ?>">
 				<div class="cb-region__region__selector">
 					<div class="default-none <?php echo $selected_regions ? 'hidden' : ''; ?>">
 						<?php esc_html_e( 'Select region', 'cookiebot' ); ?>
@@ -95,11 +113,28 @@
 					<div class="cb-region__list__container">
 					<?php foreach ( $supported_regions as $code => $region ) : ?>
 						<div class='cb-region__region__item <?php echo array_key_exists( $code, $selected_regions ) ? 'selected-region' : ''; ?>'
-							 data-region="<?php echo esc_html( $code ); ?>"><?php echo esc_html( $region ); ?></div>
+							 data-region="<?php echo esc_attr( $code ); ?>"><?php echo esc_attr( $region ); ?></div>
 					<?php endforeach; ?>
 					</div>
 				</div>
 			</div>
+			<div class="cb-region__remove__banner dashicons dashicons-dismiss"></div>
 		</div>
+		<?php endif; ?>
+		<?php
+		if ( ! empty( $multiple_banners ) ) {
+			$multiple_args = array(
+				'banners'           => $multiple_banners,
+				'supported_regions' => $supported_regions,
+			);
+
+			include_view( 'admin/settings/multiple-configuration/extra/region-item.php', $multiple_args );
+		}
+		?>
+		<input type="hidden" name="cookiebot-ccpa" id="ccpa-compatibility"
+			   value="<?php echo esc_attr( $ccpa_compatibility ); ?>">
+	</div>
+	<div id="cb-region__add__banner" class="cb-btn cb-main-btn">
+		<?php esc_html_e( 'Add banner', 'cookiebot' ); ?>
 	</div>
 </div>

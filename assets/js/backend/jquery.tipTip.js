@@ -22,11 +22,11 @@
 (function($){
 	$.fn.tipTip = function(options) {
 		var defaults = {
-			activation: "hover",
+			activation: "click",
 			keepAlive: false,
 			maxWidth: "200px",
-			edgeOffset: 3,
-			defaultPosition: "bottom",
+			edgeOffset: 8,
+			defaultPosition: "right",
 			delay: 400,
 			fadeIn: 200,
 			fadeOut: 200,

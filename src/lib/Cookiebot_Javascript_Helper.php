@@ -19,6 +19,36 @@ class Cookiebot_Javascript_Helper {
 		( new Cookiebot_Declaration_Shortcode() )->register_hooks();
 	}
 
+	private function get_data_regions() {
+		$is_multi_config      = ! empty( get_option( 'cookiebot-multiple-config' ) ) ?
+			get_option( 'cookiebot-multiple-config' ) :
+			false;
+		$second_banner_region = ! empty( get_option( 'cookiebot-second-banner-regions' ) ) ?
+			get_option( 'cookiebot-second-banner-regions' ) :
+			false;
+		$second_banner_id     = ! empty( get_option( 'cookiebot-second-banner-id' ) ) ?
+			get_option( 'cookiebot-second-banner-id' ) :
+			false;
+
+		$extra_banners = ! empty( get_option( 'cookiebot-multiple-banners' ) ) ?
+			get_option( 'cookiebot-multiple-banners' ) :
+			false;
+
+		$regions = array();
+
+		if ( $is_multi_config !== false && $second_banner_region && $second_banner_id ) {
+			$regions[ $second_banner_id ] = $second_banner_region;
+		}
+
+		if ( $is_multi_config !== false && $extra_banners ) {
+			foreach ( $extra_banners as $data ) {
+				$regions[ $data['group'] ] = $data['region'];
+			}
+		}
+
+		return $regions;
+	}
+
 	/**
 	 * Cookiebot_WP Add Cookiebot JS to <head>
 	 *
@@ -63,6 +93,7 @@ class Cookiebot_Javascript_Helper {
 				'lang'                 => $lang,
 				'tag_attr'             => $tag_attr,
 				'cookie_blocking_mode' => Cookiebot_WP::get_cookie_blocking_mode(),
+				'data_regions'         => self::get_data_regions(),
 			);
 
 			if ( $return_html ) {
