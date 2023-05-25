@@ -7,8 +7,8 @@ use function cybot\cookiebot\lib\cookiebot_addons_remove_class_action;
 
 class Official_Facebook_Pixel extends Base_Cookiebot_Plugin_Addon {
 
-	const ADDON_NAME                  = 'Official Facebook Pixel';
-	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel.';
+	const ADDON_NAME                  = 'Official Meta Pixel';
+	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Meta Pixel.';
 	const OPTION_NAME                 = 'official_facebook_pixel';
 	const PLUGIN_FILE_PATH            = 'official-facebook-pixel/facebook-for-wordpress.php';
 	const DEFAULT_COOKIE_TYPES        = array( 'statistics', 'marketing' );
@@ -21,7 +21,6 @@ class Official_Facebook_Pixel extends Base_Cookiebot_Plugin_Addon {
 	const CONTACT_FORM_INTEGRATION_CLASS    = 'FacebookPixelPlugin\Integration\FacebookWordpressContactForm7';
 	const FORMIDABLE_FORM_INTEGRATION_CLASS = 'FacebookPixelPlugin\Integration\FacebookWordpressFormidableForm';
 	const EASY_DIGITAL_INTEGRATION_CLASS    = 'FacebookPixelPlugin\Integration\FacebookWordpressEasyDigitalDownloads';
-	const GRAVITY_FORMS_INTEGRATION_CLASS   = 'FacebookPixelPlugin\Integration\FacebookWordpressGravityForms';
 	const MAILCHIMP_INTEGRATION_CLASS       = 'FacebookPixelPlugin\Integration\FacebookWordpressMailchimpForWp';
 	const NINJA_FORMS_INTEGRATION_CLASS     = 'FacebookPixelPlugin\Integration\FacebookWordpressNinjaForms';
 	const WOOCOMMERCE_INTEGRATION_CLASS     = 'FacebookPixelPlugin\Integration\FacebookWordpressWooCommerce';
@@ -48,16 +47,6 @@ class Official_Facebook_Pixel extends Base_Cookiebot_Plugin_Addon {
 		// Caldera forms integration
 		$this->buffer_output->add_tag(
 			'caldera_forms_ajax_return',
-			10,
-			array(
-				'fbq' => $this->get_cookie_types(),
-			),
-			false
-		);
-
-		// Gravity forms integration
-		$this->buffer_output->add_tag(
-			'gform_confirmation',
 			10,
 			array(
 				'fbq' => $this->get_cookie_types(),
@@ -180,13 +169,6 @@ class Official_Facebook_Pixel extends Base_Cookiebot_Plugin_Addon {
 			11
 		);
 
-		// Gravity forms integration
-		cookiebot_addons_remove_class_action(
-			'gform_confirmation',
-			$this::GRAVITY_FORMS_INTEGRATION_CLASS,
-			'injectLeadEvent'
-		);
-
 		// Mailchimp for WP integration
 		cookiebot_addons_remove_class_action(
 			'mc4wp_form_subscribed',
@@ -262,7 +244,7 @@ class Official_Facebook_Pixel extends Base_Cookiebot_Plugin_Addon {
 	 */
 	public function get_extra_information() {
 		return array(
-			__( 'Blocks Official Facebook Pixel scripts', 'cookiebot' ),
+			__( 'Blocks Official Meta Pixel scripts', 'cookiebot' ),
 		);
 	}
 }
