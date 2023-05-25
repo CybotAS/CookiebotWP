@@ -3,7 +3,7 @@
 * Tags: cookie banner, GDPR, CCPA, WordPress cookie banner, cookie policy, ePrivacy, dsgvo, privacy compliance, cookie law, data privacy, cmp, cookies
 * Requires at least: 4.4
 * Tested up to: 6.2
-* Stable tag: 4.2.9
+* Stable tag: 4.2.10
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
