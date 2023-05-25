@@ -10,7 +10,7 @@ use function cybot\cookiebot\lib\include_view;
 
 class Multiple_Page implements Settings_Page_Interface {
 
-	private function getMultipleBanners() {
+	private function get_multiple_banners() {
 		$banners = get_option( 'cookiebot-multiple-banners' );
 
 		if ( ! $banners ) {
@@ -18,14 +18,14 @@ class Multiple_Page implements Settings_Page_Interface {
 		}
 
 		foreach ( $banners as $banner => $data ) {
-			$format_region                = $this->selectedRegionList( $data['region'], false );
+			$format_region                = $this->selected_region_list( $data['region'], false );
 			$banners[ $banner ]['region'] = $format_region;
 		}
 
 		return $banners;
 	}
 
-	private function selectedRegionList( $option, $second ) {
+	private function selected_region_list( $option, $second ) {
 		$countries = Supported_Regions::get();
 		$list      = explode( ', ', $option );
 
@@ -75,8 +75,8 @@ class Multiple_Page implements Settings_Page_Interface {
 			'secondary_group_id' => $this->retroSecondaryId(),
 			'supported_regions'  => Supported_Regions::get(),
 			'ccpa_compatibility' => esc_attr( get_option( 'cookiebot-ccpa' ) ),
-			'selected_regions'   => $this->selectedRegionList( esc_attr( get_option( 'cookiebot-second-banner-regions' ) ), true ),
-			'multiple_banners'   => $this->getMultipleBanners(),
+			'selected_regions'   => $this->selected_region_list( esc_attr( get_option( 'cookiebot-second-banner-regions' ) ), true ),
+			'multiple_banners'   => $this->get_multiple_banners(),
 		);
 
 		wp_enqueue_style(

@@ -41,7 +41,7 @@ class Cookiebot_Javascript_Helper {
 		}
 
 		if ( $is_multi_config !== false && $extra_banners ) {
-			foreach ( $extra_banners as $banner => $data ) {
+			foreach ( $extra_banners as $data ) {
 				$regions[ $data['group'] ] = $data['region'];
 			}
 		}

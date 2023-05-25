@@ -96,7 +96,7 @@ class Cookiebot_Review {
 			'is_multisite'   => is_multisite(),
 		);
 
-		$response = wp_remote_post(
+		wp_remote_post(
 			$this->api_url,
 			array(
 				'headers'     => array(

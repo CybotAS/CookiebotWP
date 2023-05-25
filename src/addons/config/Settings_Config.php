@@ -19,9 +19,6 @@ use function cybot\cookiebot\lib\get_view_html;
 use function cybot\cookiebot\lib\include_view;
 
 class Settings_Config {
-
-
-
 	/**
 	 * @var Settings_Service_Interface
 	 */
@@ -42,6 +39,8 @@ class Settings_Config {
 	const AVAILABLE_ADDONS_TAB_TEMPLATE   = 'admin/settings/prior-consent/available-addons/tab.php';
 	const UNAVAILABLE_TAB_HEADER_TEMPLATE = 'admin/settings/prior-consent/unavailable-addons/tab-header.php';
 	const UNAVAILABLE_ADDONS_TAB_TEMPLATE = 'admin/settings/prior-consent/unavailable-addons/field.php';
+	// Other
+	const INFO_ICON_ASSET_URL = 'img/icons/info.svg';
 
 	/**
 	 * Settings_Config constructor.
@@ -428,7 +427,7 @@ class Settings_Config {
 				array(
 					'placeholders'       => $widget_placeholders,
 					'placeholder_helper' => $placeholder_helper,
-					'info_icon'          => asset_url( 'img/icons/info.svg' ),
+					'info_icon'          => asset_url( self::INFO_ICON_ASSET_URL ),
 				)
 			)
 			: get_view_html(
@@ -442,7 +441,7 @@ class Settings_Config {
 					),
 					'default_placeholder'                  => $widget_default_placeholder,
 					'placeholder_helper'                   => $placeholder_helper,
-					'info_icon'                            => asset_url( 'img/icons/info.svg' ),
+					'info_icon'                            => asset_url( self::INFO_ICON_ASSET_URL ),
 				)
 			);
 
@@ -535,7 +534,7 @@ class Settings_Config {
 				array(
 					'placeholders'       => $addon_placeholders,
 					'placeholder_helper' => $placeholder_helper,
-					'info_icon'          => asset_url( 'img/icons/info.svg' ),
+					'info_icon'          => asset_url( self::INFO_ICON_ASSET_URL ),
 				)
 			)
 			: get_view_html(
@@ -549,7 +548,7 @@ class Settings_Config {
 					),
 					'default_placeholder'                  => $addon::DEFAULT_PLACEHOLDER_CONTENT,
 					'placeholder_helper'                   => $placeholder_helper,
-					'info_icon'                            => asset_url( 'img/icons/info.svg' ),
+					'info_icon'                            => asset_url( self::INFO_ICON_ASSET_URL ),
 				)
 			);
 
