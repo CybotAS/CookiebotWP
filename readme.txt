@@ -267,6 +267,25 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 
 ## Changelog ##
+### 4.2.10 ###
+Release date: May 25th 2023
+
+Cookiebot CMP version 4.2.10 is out! Now our plugin supports the Virginia Consumer Data Protection Act (VCDPA) and you can add more banners settings on Multiple configurations tab. Here is the complete list of this update:
+
+What's new
+* New option to add more banners on Multiple configurations
+* Added support for the Virginia Consumer Data Protection Act (VCDPA)
+* Feedback survey
+* Update compatibility with Official Meta Pixel Plugin
+
+Bugfixes
+* Tooltips blinking on cursor position
+
+Other
+* Change plugin admin urls argument build
+* Change medium to referral on external links
+* Minor style changes
+
 ### 4.2.9 - 2023-04-25 ###
 * Code audit
 * Update readme description
