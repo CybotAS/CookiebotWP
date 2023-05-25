@@ -100,7 +100,7 @@ class Cookiebot_Review {
 			$this->api_url,
 			array(
 				'headers'     => array(
-					'Content-Type'  => 'application/json; charset=utf-8',
+					'Content-Type' => 'application/json; charset=utf-8',
 				),
 				'method'      => 'POST',
 				'timeout'     => 45,

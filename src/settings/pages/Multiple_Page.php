@@ -13,7 +13,7 @@ class Multiple_Page implements Settings_Page_Interface {
 	private function getMultipleBanners() {
 		$banners = get_option( 'cookiebot-multiple-banners' );
 
-		if(!$banners){
+		if ( ! $banners ) {
 			return null;
 		}
 

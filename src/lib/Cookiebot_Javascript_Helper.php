@@ -19,7 +19,7 @@ class Cookiebot_Javascript_Helper {
 		( new Cookiebot_Declaration_Shortcode() )->register_hooks();
 	}
 
-	private function get_Data_Regions() {
+	private function get_data_regions() {
 		$is_multi_config      = ! empty( get_option( 'cookiebot-multiple-config' ) ) ?
 			get_option( 'cookiebot-multiple-config' ) :
 			false;
@@ -93,7 +93,7 @@ class Cookiebot_Javascript_Helper {
 				'lang'                 => $lang,
 				'tag_attr'             => $tag_attr,
 				'cookie_blocking_mode' => Cookiebot_WP::get_cookie_blocking_mode(),
-				'data_regions'         => self::get_Data_Regions(),
+				'data_regions'         => self::get_data_regions(),
 			);
 
 			if ( $return_html ) {
