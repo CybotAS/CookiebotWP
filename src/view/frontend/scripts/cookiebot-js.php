@@ -27,12 +27,8 @@
 		echo '"';
 	}
 	?>
-	<?php if ( (bool) get_option( 'cookiebot-gtm' ) !== false ) : ?>
-		<?php if ( empty( get_option( 'cookiebot-data-layer' ) ) ) : ?>
-			data-layer-name="dataLayer"
-		<?php else : ?>
-			data-layer-name="<?php echo esc_attr( get_option( 'cookiebot-data-layer' ) ); ?>"
-		<?php endif; ?>
+	<?php if ( (bool) get_option( 'cookiebot-gtm' ) !== false && ! empty( get_option( 'cookiebot-data-layer' ) ) ) : ?>
+		data-layer-name="<?php echo esc_attr( get_option( 'cookiebot-data-layer' ) ); ?>"
 	<?php endif; ?>
 	<?php if ( ! empty( $lang ) ) : ?>
 		data-culture="<?php echo esc_attr( strtoupper( $lang ) ); ?>"
