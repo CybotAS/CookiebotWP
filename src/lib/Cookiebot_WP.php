@@ -153,6 +153,25 @@ class Cookiebot_WP {
 	}
 
 	/**
+	 * @return string
+	 */
+	public static function get_cookie_categories_status() {
+		return self::get_cookie_blocking_mode() === 'auto' ? 'disabled' : '';
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function is_cookie_category_selected( $option, $category ) {
+		$categories = get_option( $option );
+		if ( ! $categories || ! is_array( $categories ) ) {
+			return false;
+		}
+
+		return in_array( $category, $categories );
+	}
+
+	/**
 	 * Cookiebot_WP Check if Cookiebot is active in admin
 	 *
 	 * @version 4.2.8

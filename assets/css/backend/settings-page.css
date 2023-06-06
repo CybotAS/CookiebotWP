@@ -144,6 +144,13 @@
     padding-left: 30px;
 }
 
+.cb-settings__config__data__inner label.cb-settings__cookie-types {
+    display: inline-block;
+    padding: 0;
+    text-transform: capitalize;
+    line-height: 32px;
+}
+
 .cb-settings__config__data__inner label.switch-checkbox {
     display: flex;
 }

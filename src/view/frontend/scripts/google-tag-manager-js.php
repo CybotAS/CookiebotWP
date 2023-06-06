@@ -1,7 +1,10 @@
 <?php
-/** @var string $data_layer */
+/**
+ * @var string $data_layer
+ * @var bool|string $consent_attribute
+ */
 ?>
-<script>
+<script<?php echo ! $consent_attribute ? '' : ' data-cookieconsent="' . esc_attr( $consent_attribute ) . '"'; ?>>
 	<?php if ( get_option( 'cookiebot-iab' ) ) : ?>
 	window ["gtag_enable_tcf_support"] = true;
 	<?php endif; ?>

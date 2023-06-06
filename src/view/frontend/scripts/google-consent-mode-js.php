@@ -1,13 +1,15 @@
 <?php
-/** @var string $data_layer */
-
-$is_url_passthrough_enabled = '1' === (string) get_option( 'cookiebot-gcm-url-passthrough', 1 );
+/**
+ * @var string $data_layer
+ * @var string $url_passthrough
+ * @var bool|string $consent_attribute
+ */
 
 ?>
-<script data-cookieconsent="ignore">
+<script<?php echo ! $consent_attribute ? '' : ' data-cookieconsent="' . esc_attr( $consent_attribute ) . '"'; ?>>
 	window.<?php echo esc_js( $data_layer ); ?> = window.<?php echo esc_js( $data_layer ); ?> || [];
 	function gtag() {
-		dataLayer.push(arguments);
+		<?php echo esc_js( $data_layer ); ?>.push(arguments);
 	}
 	gtag("consent", "default", {
 		ad_storage: "denied",
@@ -19,7 +21,7 @@ $is_url_passthrough_enabled = '1' === (string) get_option( 'cookiebot-gcm-url-pa
 	});
 	gtag("set", "ads_data_redaction", true);
 	<?php
-	if ( $is_url_passthrough_enabled ) {
+	if ( $url_passthrough ) {
 		echo /** @lang JavaScript */
 		'gtag("set", "url_passthrough", true);' . PHP_EOL;
 	}

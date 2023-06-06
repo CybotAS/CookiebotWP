@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var string $cookie_categories_disabled
+ * @var string $auto_disabled
+ * @var bool $is_preferences
+ * @var bool $is_statistics
+ * @var bool $is_marketing
+ */
+?>
 <div class="cb-settings__config__item">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Google Tag Manager:', 'cookiebot' ); ?></h3>
