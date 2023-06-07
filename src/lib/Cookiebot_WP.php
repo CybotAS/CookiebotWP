@@ -168,7 +168,7 @@ class Cookiebot_WP {
 			return false;
 		}
 
-		return in_array( $category, $categories );
+		return in_array( $category, $categories, true );
 	}
 
 	/**
