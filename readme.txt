@@ -2,7 +2,7 @@
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: cookie banner, GDPR, CCPA, WordPress cookie banner, cookie policy, ePrivacy, dsgvo, privacy compliance, cookie law, data privacy, cmp, cookies
 * Requires at least: 4.4
-* Tested up to: 6.2
+* Tested up to: 6.2.2
 * Stable tag: 4.2.10
 * Requires PHP: 5.6
 * License: GPLv2 or later
@@ -267,21 +267,38 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 
 ## Changelog ##
+### 4.2.11 ###
+Release date: June 7th 2023
+
+Cookiebot CMP version 4.2.11 is out! This release fix a incompatibility issue with Slider Revolution plugin and updates Google Tag Manager and Google Consent Mode script implementation. Here is the complete list of this update:
+
+####What's new####
+* Update GTM and GCM script implementation
+* Add exception to self-hosted audio files on Embed Autocorrect Addon
+
+####Bugfixes####
+* Incompatibility issue with Slider Revolution plugin
+* Placeholder text out of place when Jetpack addon is active
+
+####Other####
+* Change scripts loading order
+* Minor style changes
+
 ### 4.2.10 ###
 Release date: May 25th 2023
 
 Cookiebot CMP version 4.2.10 is out! Now our plugin supports the Virginia Consumer Data Protection Act (VCDPA) and you can add more banners settings on Multiple configurations tab. Here is the complete list of this update:
 
-What's new
+####What's new####
 * New option to add more banners on Multiple configurations
 * Added support for the Virginia Consumer Data Protection Act (VCDPA)
 * Feedback survey
 * Update compatibility with Official Meta Pixel Plugin
 
-Bugfixes
+####Bugfixes####
 * Tooltips blinking on cursor position
 
-Other
+####Other####
 * Change plugin admin urls argument build
 * Change medium to referral on external links
 * Minor style changes
