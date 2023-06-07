@@ -3,9 +3,9 @@
  *
  * @since 4.2.10
  */
-jQuery( document ).ready( init );
+jQuery( document ).ready( cbInit );
 
-function init() {
+function cbInit() {
     jQuery( document ).on( 'click', 'tr[data-slug="cookiebot"] .cb-deactivate-action', event => deactivateCookiebot( event ) );
     jQuery( document ).on( 'click', '#cb-review__close', event => closeSurveyPopup( event ) );
     jQuery( document ).on( 'submit', '#cb-review__form', event => submitSurveyPopup( event ) );

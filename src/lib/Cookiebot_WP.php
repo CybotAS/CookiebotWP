@@ -12,7 +12,7 @@ use DomainException;
 use RuntimeException;
 
 class Cookiebot_WP {
-	const COOKIEBOT_PLUGIN_VERSION  = '4.2.10';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.2.11';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -150,6 +150,25 @@ class Cookiebot_WP {
 		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode' );
 
 		return $network_setting === 'auto' ? true : false;
+	}
+
+	/**
+	 * @return string
+	 */
+	public static function get_cookie_categories_status() {
+		return self::get_cookie_blocking_mode() === 'auto' ? 'disabled' : '';
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function is_cookie_category_selected( $option, $category ) {
+		$categories = get_option( $option );
+		if ( ! $categories || ! is_array( $categories ) ) {
+			return false;
+		}
+
+		return in_array( $category, $categories, true );
 	}
 
 	/**

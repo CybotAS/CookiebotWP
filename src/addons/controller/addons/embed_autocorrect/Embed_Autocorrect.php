@@ -392,6 +392,12 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 		preg_match( '| src=\"([^\"]*)\"|', $output, $match );
 		$src = $match[1];
 
+		// allow same domain embeds without cookieconsent
+		$src_domain = cookiebot_addons_get_domain_from_url( $src );
+		if ( cookiebot_addons_get_home_url_domain() === $src_domain ) {
+			return $output;
+		}
+
 		/**
 		 * Generate placeholder
 		 */

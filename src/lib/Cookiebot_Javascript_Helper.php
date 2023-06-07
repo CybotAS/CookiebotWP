@@ -13,9 +13,9 @@ class Cookiebot_Javascript_Helper {
 		}
 
 		// add JS
-		add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), - 9997 );
-		add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9998 );
-		add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9999 );
+		add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), - 9999 );
+		add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9998 );
+		add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9997 );
 		( new Cookiebot_Declaration_Shortcode() )->register_hooks();
 	}
 
@@ -114,7 +114,9 @@ class Cookiebot_Javascript_Helper {
 	 * @throws InvalidArgumentException
 	 */
 	public function include_google_tag_manager_js( $return_html = false ) {
-		$option = get_option( 'cookiebot-gtm' );
+		$option            = get_option( 'cookiebot-gtm' );
+		$blocking_mode     = get_option( 'cookiebot-cookie-blocking-mode' );
+		$cookie_categories = get_option( 'cookiebot-gtm-cookies' );
 
 		if ( $option !== false && $option !== '' ) {
 			if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
@@ -124,7 +126,11 @@ class Cookiebot_Javascript_Helper {
 			}
 
 			$view_path = 'frontend/scripts/google-tag-manager-js.php';
-			$view_args = array( 'data_layer' => $data_layer );
+
+			$view_args = array(
+				'data_layer'        => $data_layer,
+				'consent_attribute' => self::get_consent_attribute( $blocking_mode, $cookie_categories ),
+			);
 			if ( $return_html ) {
 				return get_view_html( $view_path, $view_args );
 			} else {
@@ -143,7 +149,10 @@ class Cookiebot_Javascript_Helper {
 	 * @throws InvalidArgumentException
 	 */
 	public function include_google_consent_mode_js( $return_html = false ) {
-		$option = get_option( 'cookiebot-gcm' );
+		$option                     = get_option( 'cookiebot-gcm' );
+		$blocking_mode              = get_option( 'cookiebot-cookie-blocking-mode' );
+		$is_url_passthrough_enabled = '1' === (string) get_option( 'cookiebot-gcm-url-passthrough', 1 );
+		$cookie_categories          = get_option( 'cookiebot-gcm-cookies' );
 
 		if ( $option !== false && $option !== '' ) {
 			if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
@@ -153,7 +162,12 @@ class Cookiebot_Javascript_Helper {
 			}
 
 			$view_path = 'frontend/scripts/google-consent-mode-js.php';
-			$view_args = array( 'data_layer' => $data_layer );
+
+			$view_args = array(
+				'data_layer'        => $data_layer,
+				'url_passthrough'   => $is_url_passthrough_enabled,
+				'consent_attribute' => self::get_consent_attribute( $blocking_mode, $cookie_categories ),
+			);
 			if ( $return_html ) {
 				return get_view_html( $view_path, $view_args );
 			} else {
@@ -161,5 +175,19 @@ class Cookiebot_Javascript_Helper {
 			}
 		}
 		return '';
+	}
+
+	private function get_consent_attribute( $blocking_mode, $categories ) {
+		$attribute = false;
+
+		if ( $blocking_mode === 'auto' ) {
+			$attribute = 'ignore';
+		}
+
+		if ( $categories && is_array( $categories ) ) {
+			$attribute = join( ', ', $categories );
+		}
+
+		return $attribute;
 	}
 }
