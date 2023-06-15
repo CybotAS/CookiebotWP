@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Official_Facebook_Pixel extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\official_facebook_pixel\Official_Facebook_Pixel
 	 * @throws ExpectationFailedException

@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Wp_Analytify extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\wp_analytify\Wp_Analytify
 	 * @throws ExpectationFailedException

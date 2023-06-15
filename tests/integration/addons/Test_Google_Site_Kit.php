@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Google_Site_Kit extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\google_site_kit\Google_Site_Kit
 	 * @throws ExpectationFailedException

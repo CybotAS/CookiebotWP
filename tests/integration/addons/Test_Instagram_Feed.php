@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Instagram_Feed extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\instagram_feed\Instagram_Feed
 	 * @throws ExpectationFailedException

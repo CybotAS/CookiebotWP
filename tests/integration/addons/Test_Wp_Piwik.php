@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Wp_Piwik extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\wp_piwik\Wp_Piwik
 	 * @throws ExpectationFailedException

@@ -1,5 +1,5 @@
 os: linux
-dist: xenial
+dist: bionic
 
 services:
   - mysql
@@ -15,6 +15,17 @@ matrix:
   include:
     - php: 7.4
       env: PHPCS=1
+    - php: 8.2
+      env: PHPUNIT_VERSION=9.6.7
+      dist: jammy # Version 8.2 is not available in the "bionic", newer version is required.
+      addons:
+        apt:
+          packages:
+            - "libonig5" # This library is required, since Travis fails to properly install & run the PHP 8.2
+    - php: 8.1
+      env: PHPUNIT_VERSION=9.6.7
+    - php: 8.0
+      env: PHPUNIT_VERSION=9.6.7
     - php: 7.4
       env: PHPUNIT_VERSION=7.5.20
     - php: 7.3
@@ -25,8 +36,10 @@ matrix:
       env: PHPUNIT_VERSION=7.5.20
     - php: 7.0
       env: PHPUNIT_VERSION=6.5.14
+      dist: xenial # Versions 7.0 and lower not available in "bionic", older version ("xenial") required to run
     - php: 5.6
       env: PHPUNIT_VERSION=5.7.27
+      dist: xenial
 
 before_install:
   - |

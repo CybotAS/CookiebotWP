@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Addthis extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\addthis\Addthis
 	 * @throws ExpectationFailedException

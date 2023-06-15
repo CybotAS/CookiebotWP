@@ -9,9 +9,6 @@ use WP_UnitTestCase;
 
 class Test_Gadwp extends WP_UnitTestCase {
 
-	public function setUp() {
-	}
-
 	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\gadwp\Gadwp
 	 * @throws ExpectationFailedException
