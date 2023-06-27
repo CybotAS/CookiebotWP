@@ -224,11 +224,11 @@ $header->display();
 								<h3 class="cb-settings__config__subtitle">
 									<?php esc_html_e( 'Cookiebot™ script tag', 'cookiebot' ); ?>
 								</h3>
-								<p class="cb-general__info__note">
-									<?php esc_html_e( 'Depending on cookie-blocking mode', 'cookiebot' ); ?>
-								</p>
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'Add async or defer attribute to cookie declaration script tag', 'cookiebot' ); ?>
+								</p>
+								<p class="cb-general__info__note">
+									<?php esc_html_e( 'This feature is only available when using Manual Blocking', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">
@@ -266,11 +266,11 @@ $header->display();
 								<h3 class="cb-settings__config__subtitle">
 									<?php esc_html_e( 'Hide cookie popup', 'cookiebot' ); ?>
 								</h3>
-								<p class="cb-general__info__note">
-									<?php esc_html_e( 'Depending on cookie-blocking mode', 'cookiebot' ); ?>
-								</p>
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'This checkbox will remove the cookie consent banner from your website. The declaration shortcode will still be available. If you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager.', 'cookiebot' ); ?>
+								</p>
+								<p class="cb-general__info__note">
+									<?php esc_html_e( 'This feature is only available when using Manual Blocking', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">
