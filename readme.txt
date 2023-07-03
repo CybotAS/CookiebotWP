@@ -3,7 +3,7 @@
 * Tags: cookie banner, GDPR, CCPA, WordPress cookie banner, cookie policy, ePrivacy, dsgvo, privacy compliance, cookie law, data privacy, cmp, cookies
 * Requires at least: 4.4
 * Tested up to: 6.2.2
-* Stable tag: 4.2.11
+* Stable tag: 4.2.12
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -267,6 +267,18 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 
 ## Changelog ##
+### 4.2.12 ###
+Release date: July 3th 2023
+
+Cookiebot CMP version 4.2.12 is out! This release updates Google Tag Manager and Google Consent Mode script implementation. Here is the complete list of this update:
+
+####What's new####
+* Allow select cookie categories for Google Tag Manager and Google Consent Mode on manual blocking mode
+* Add new ES languages support
+
+####Other####
+* Add optional debug consent on deactivation survey
+
 ### 4.2.11 ###
 Release date: June 7th 2023
 

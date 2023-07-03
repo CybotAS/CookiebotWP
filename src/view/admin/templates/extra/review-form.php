@@ -65,6 +65,32 @@
 					<textarea id="cb-review__other-description" name="other-description" placeholder="<?php esc_html_e( 'Please specify here', 'cookiebot' ); ?>" rows="1"></textarea>
 				</div>
 			</div>
+
+			<div class="consent-item">
+				<label class="cb-review__form--item">
+					<input id="cb-review__debug-reason" type="checkbox" name="cookiebot-review-debug" value="true" data-custom-field="true">
+					<span><b>(Optional)</b>
+						<?php
+						esc_html_e(
+							' By checking this box, you agree to submit troubleshooting information
+                        and allow us to contact you regarding the problem if necessary. 
+                        ',
+							'cookiebot'
+						);
+						?>
+						<br>
+						<?php
+						esc_html_e(
+							'The information will be kept for no longer than 90 days. 
+                        You may revoke this consent at any time, e.g. by sending an email to ',
+							'cookiebot'
+						);
+						?>
+						<a href="mailto:unsubscribe@usercentrics.com">unsubscribe@usercentrics.com</a>
+					</span>
+				</label>
+			</div>
+
 			<div id="cb-review__alert"><?php esc_html_e( 'Please select one option', 'cookiebot' ); ?></div>
 
 			<div class="cb-review__actions">
