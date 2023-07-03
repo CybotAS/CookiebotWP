@@ -21,21 +21,15 @@ class Test_Caos_Host_Analyticsjs_Local extends WP_UnitTestCase {
 		$this->assertNotFalse(
 			strpos(
 				$content,
-				'add_action( \'init\', [ $this, \'insert_tracking_code\' ] );'
+				'add_action(\'init\', [$this, \'insert_tracking_code\']);
+        add_filter(\'script_loader_tag\', [$this, \'add_attributes\'], 10, 2);'
 			)
 		);
 
 		$this->assertNotFalse(
 			strpos(
 				$content,
-				'add_filter( \'script_loader_tag\', [ $this, \'add_attributes\' ], 10, 2 );'
-			)
-		);
-
-		$this->assertNotFalse(
-			strpos(
-				$content,
-				'\'render_tracking_code\' ]'
+				'\'render_tracking_code\']'
 			)
 		);
 	}

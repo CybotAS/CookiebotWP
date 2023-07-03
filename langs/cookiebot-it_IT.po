@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-01-18 14:28+0100\n"
-"PO-Revision-Date: 2023-06-23 14:06+0200\n"
+"PO-Revision-Date: 2023-04-24 18:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: cookiebot.php\n"
@@ -1591,37 +1591,6 @@ msgstr "Come trovare il nome del livello dati"
 #: view/admin/settings/gtm-page.php:52
 msgid "Name of your Data Layer"
 msgstr "Nome del tuo livello dati"
-
-#: view/admin/settings/gtm-page.php:76
-msgid "Google Tag Manager cookies"
-msgstr "Cookie di Google Tag Manager"
-
-#: view/admin/settings/gtm-page.php:78
-msgid "Select the cookie types that need to be consented for the Google Tag Manager script"
-msgstr "Seleziona le tipologie di cookie alle quali è necessario acconsentire per lo script di Google Tag Manager"
-
-#: view/admin/settings/gtm-page.php:80
-#: view/admin/settings/gcm-page.php:93
-msgid "This feature is only available when using Manual Blocking"
-msgstr "Questa funzionalità è disponibile solo quando si utilizza il blocco manuale"
-
-#: view/admin/settings/gtm-page.php:82
-#: view/admin/settings/gcm-page.php:95
-msgid "This option may affect the behaviour of your GTM Tags, as the script will run on the selected cookies consent."
-msgstr "Questa opzione può influire sul comportamento dei tuoi tag GTM, poiché lo script verrà eseguito in base al consenso ai cookie selezionati."
-
-#: view/admin/settings/gtm-page.php:84
-#: view/admin/settings/gcm-page.php:97
-msgid "Please make sure your Tags in Google Tag Manager are triggered correctly."
-msgstr "Assicurati che i tuoi tag in Google Tag Manager vengano attivati correttamente."
-
-#: view/admin/settings/gcm-page.php:89
-msgid "Google Consent Mode cookies"
-msgstr "Cookie della Modalità di consenso di Google"
-
-#: view/admin/settings/gcm-page.php:91
-msgid "Select the cookie types that need to be consented for the Google Consent Mode script"
-msgstr "Seleziona le tipologie di cookie alle quali è necessario acconsentire per lo script della Modalità di consenso di Google"
 
 #: view/admin/settings/iab-page.php:3
 msgid "IAB Integration:"

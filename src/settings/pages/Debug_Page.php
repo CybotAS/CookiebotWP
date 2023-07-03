@@ -79,7 +79,7 @@ class Debug_Page implements Settings_Page_Interface {
 	/**
 	 * @throws InvalidArgumentException
 	 */
-	public function prepare_debug_data() {
+	private function prepare_debug_data() {
 		global $wpdb;
 
 		$cookiebot_javascript_helper = new Cookiebot_Javascript_Helper();

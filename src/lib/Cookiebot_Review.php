@@ -3,7 +3,6 @@
 namespace cybot\cookiebot\lib;
 
 use WP_REST_SERVER;
-use cybot\cookiebot\settings\pages\Debug_Page;
 
 class Cookiebot_Review {
 	/**
@@ -96,11 +95,6 @@ class Cookiebot_Review {
 			'plugin_version' => Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			'is_multisite'   => is_multisite(),
 		);
-
-		if ( ! empty( $_POST['reason_debug'] ) && rest_sanitize_boolean( $_POST['reason_debug'] ) === true ) {
-			$debug_info         = new Debug_Page();
-			$data['debug_info'] = json_encode( $debug_info->prepare_debug_data() );
-		}
 
 		wp_remote_post(
 			$this->api_url,
