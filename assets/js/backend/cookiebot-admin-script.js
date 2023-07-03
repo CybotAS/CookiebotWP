@@ -9,6 +9,7 @@ function cbInit() {
     jQuery( document ).on( 'click', 'tr[data-slug="cookiebot"] .cb-deactivate-action', event => deactivateCookiebot( event ) );
     jQuery( document ).on( 'click', '#cb-review__close', event => closeSurveyPopup( event ) );
     jQuery( document ).on( 'submit', '#cb-review__form', event => submitSurveyPopup( event ) );
+    jQuery( document ).on( 'change', 'input[name="cookiebot-review-option"]', event => showOptionalConsent( event ) )
 }
 
 /**
@@ -35,6 +36,25 @@ function closeSurveyPopup(e) {
 }
 
 /**
+ * Shows optional consent.
+ */
+
+function showOptionalConsent(e) {
+    const option = e.target.value;
+    const optionalConsentBox = jQuery('.consent-item');
+    const optionalConsent = jQuery('#cb-review__debug-reason');
+
+    if(option!=='7'){
+        optionalConsentBox.removeClass('show-consent');
+        if(optionalConsent.checked){
+            optionalConsent.checked = false;
+        }
+    }else{
+        optionalConsentBox.addClass('show-consent');
+    }
+}
+
+/**
  * Popup submit
  */
 function submitSurveyPopup(e){
@@ -50,6 +70,7 @@ function submitSurveyPopup(e){
         return;
     }
     const otherReason = jQuery('#cb-review__other-description');
+    const debugReason = jQuery('#cb-review__debug-reason');
     jQuery.ajax({
         url: cb_ajax.ajax_url,
         type: 'POST',
@@ -58,6 +79,7 @@ function submitSurveyPopup(e){
             reason_id: (0 === option.length) ? null : option.val(),
             reason_text: (0 === option.length) ? 'none' : option.closest('label').text(),
             reason_info: (0 !== otherReason.length) ? otherReason.val().trim() : '',
+            reason_debug: (!debugReason) ? null : debugReason.val(),
             survey_nonce: cb_ajax.survey_nonce,
             survey_check: 'ODUwODA1'
         },

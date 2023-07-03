@@ -17,7 +17,7 @@
 #cookiebot-popup {
     box-sizing: border-box;
     background: #ffffff;
-    max-width: 520px;
+    width: 565px;
     padding: 20px;
     border-radius: 25px;
 }
@@ -118,5 +118,32 @@
 
 #cb-review__form .cb-review__policy a {
     color: blue;
+    text-decoration: none;
+}
+
+.cb-review__form--item__custom {
+    margin-bottom: 20px;
+}
+
+
+.consent-item {
+    display: none;
+}
+
+.consent-item.show-consent {
+    display: block;
+}
+
+.consent-item .cb-review__form--item {
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+.consent-item .cb-review__form--item span b{
+    color: #1032cf;
+}
+
+.consent-item .cb-review__form--item span a{
+    color: #1032cf;
     text-decoration: none;
 }
