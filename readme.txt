@@ -267,6 +267,18 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 
 ## Changelog ##
+### 4.2.12 ###
+Release date: July 3th 2023
+
+Cookiebot CMP version 4.2.12 is out! This release updates Google Tag Manager and Google Consent Mode script implementation. Here is the complete list of this update:
+
+####What's new####
+* Allow select cookie categories for Google Tag Manager and Google Consent Mode on manual blocking mode
+* Add new ES languages support
+
+####Other####
+* Add optional debug consent on deactivation survey
+
 ### 4.2.11 ###
 Release date: June 7th 2023
 
