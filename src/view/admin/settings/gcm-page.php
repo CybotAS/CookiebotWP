@@ -106,7 +106,7 @@
 							type="checkbox"
 							value="preferences"
 						<?php checked( true, $is_preferences ); ?>
-							name="cookiebot-gcm-cookies[]"<?php echo $cookie_categories_disabled; ?>>
+							name="cookiebot-gcm-cookies[]"<?php echo esc_attr( $cookie_categories_disabled ); ?>>
 					<label class="cb-settings__cookie-types"><?php esc_html_e( 'preferences', 'cookiebot' ); ?></label>
 				</li>
 				<li>
@@ -114,7 +114,7 @@
 							type="checkbox"
 							value="statistics"
 						<?php checked( true, $is_statistics ); ?>
-							name="cookiebot-gcm-cookies[]"<?php echo $cookie_categories_disabled; ?>>
+							name="cookiebot-gcm-cookies[]"<?php echo esc_attr( $cookie_categories_disabled ); ?>>
 					<label class="cb-settings__cookie-types"><?php esc_html_e( 'statistics', 'cookiebot' ); ?></label>
 				</li>
 				<li>
@@ -122,7 +122,7 @@
 							type="checkbox"
 							value="marketing"
 						<?php checked( true, $is_marketing ); ?>
-							name="cookiebot-gcm-cookies[]"<?php echo $cookie_categories_disabled; ?>>
+							name="cookiebot-gcm-cookies[]"<?php echo esc_attr( $cookie_categories_disabled ); ?>>
 					<label class="cb-settings__cookie-types"><?php esc_html_e( 'marketing', 'cookiebot' ); ?></label>
 				</li>
 			</ul>

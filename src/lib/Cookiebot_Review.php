@@ -99,7 +99,7 @@ class Cookiebot_Review {
 
 		if ( ! empty( $_POST['reason_debug'] ) && rest_sanitize_boolean( $_POST['reason_debug'] ) === true ) {
 			$debug_info         = new Debug_Page();
-			$data['debug_info'] = json_encode( $debug_info->prepare_debug_data() );
+			$data['debug_info'] = wp_json_encode( $debug_info->prepare_debug_data() );
 		}
 
 		wp_remote_post(
