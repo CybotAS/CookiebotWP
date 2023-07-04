@@ -12,7 +12,7 @@ function init() {
     activeSettingsTab();
     closeSubmitMsg();
     submitEnable();
-    googleConsentModeUrlPassthrough();
+    googleConsentModeOptions();
 }
 
 function language_toggle() {
@@ -63,19 +63,25 @@ function cookie_blocking_mode() {
     jQuery( 'input[type=radio][name=cookiebot-cookie-blocking-mode]' ).on( 'change', function () {
         if ( this.value === 'auto' && cookieBlockingMode !== this.value ) {
             jQuery( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 );
-            jQuery( '#declaration-tag, #cookie-popup').addClass('disabled__item');
-            jQuery( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true )
+            jQuery( '#declaration-tag, #cookie-popup, #gcm-cookie-categories, #gtm-cookie-categories').addClass('disabled__item');
+            jQuery( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true );
+            jQuery( '#cb-settings__gtm__cookie-types input[type=checkbox]' ).prop( 'disabled', true );
+            jQuery( '#cb-settings__gcm__cookie-types input[type=checkbox]' ).prop( 'disabled', true );
         }
         if ( this.value === 'manual' && cookieBlockingMode !== this.value ) {
             jQuery( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 1 );
-            jQuery( '#declaration-tag, #cookie-popup').removeClass('disabled__item');
-            jQuery( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', false )
+            jQuery( '#declaration-tag, #cookie-popup, #gcm-cookie-categories, #gtm-cookie-categories').removeClass('disabled__item');
+            jQuery( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', false );
+            jQuery( '#cb-settings__gtm__cookie-types input[type=checkbox]' ).prop( 'disabled', false );
+            jQuery( '#cb-settings__gcm__cookie-types input[type=checkbox]' ).prop( 'disabled', false );
         }
-        cookieBlockingMode = this.value
+        cookieBlockingMode = this.value;
     } )
     if ( cookieBlockingMode === 'auto' ) {
-        jQuery( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 )
-        jQuery( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true )
+        jQuery( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 );
+        jQuery( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true );
+        jQuery( '#cb-settings__gtm__cookie-types input[type=checkbox]' ).prop( 'disabled', true );
+        jQuery( '#cb-settings__gcm__cookie-types input[type=checkbox]' ).prop( 'disabled', true );
     }
 }
 
@@ -131,18 +137,17 @@ function checkValues(initialValues){
     }
 }
 
-function googleConsentModeUrlPassthrough() {
+function googleConsentModeOptions() {
     jQuery('input#gcm').on('change', function () {
-        jQuery(this)
-          .parents('#consent-mode')
-          .find('.cb-settings__config__item:has(input#gcm-url-pasthrough)')
-          .toggle()
-        const input = jQuery('input#gcm-url-pasthrough');
-        const label = input.parents('label.switch-checkbox')[0];
-        if (!label || !label.childNodes.length)
+        const parent = jQuery(this).parents('#consent-mode');
+        parent.find('.cb-settings__config__item:has(input#gcm-url-pasthrough)').toggle();
+        parent.find('.cb-settings__config__item:has(ul#cb-settings__gcm__cookie-types)').toggle();
+        const passthroughInput = jQuery('input#gcm-url-pasthrough');
+        const passthroughLabel = passthroughInput.parents('label.switch-checkbox')[0];
+        if (!passthroughLabel || !passthroughLabel.childNodes.length)
             return;
-        label.childNodes[label.childNodes.length - 1].textContent = 'URL passthrough' + ' ' +
-            (input.is(':checked') ? 'enabled' : 'disabled');
+        passthroughLabel.childNodes[passthroughLabel.childNodes.length - 1].textContent = 'URL passthrough' + ' ' +
+            (passthroughInput.is(':checked') ? 'enabled' : 'disabled');
     });
     jQuery('input#gcm, input#gcm-url-pasthrough').on('change', function () {
         const input = jQuery(this);
@@ -150,8 +155,8 @@ function googleConsentModeUrlPassthrough() {
         if (!label || !label.childNodes.length)
             return;
         label.childNodes[label.childNodes.length - 1].textContent = (
-          (input.attr('id') === 'gcm' ? 'Google Consent Mode' : 'URL passthrough') + ' ' +
-          (input.is(':checked') ? 'enabled' : 'disabled')
+            (input.attr('id') === 'gcm' ? 'Google Consent Mode' : 'URL passthrough') + ' ' +
+            (input.is(':checked') ? 'enabled' : 'disabled')
         );
     });
 }

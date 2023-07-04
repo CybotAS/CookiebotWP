@@ -95,14 +95,14 @@ $header->display();
 						<div class="cb-settings__config__item secondary__item" id="declaration-tag">
 							<div class="cb-settings__config__content">
 								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookiebot™ script tag', 'cookiebot' ); ?></h3>
+								<p class="cb-general__info__text">
+									<?php esc_html_e( 'Add async or defer attribute to Cookie banner script tag. Default: Choose per subsite', 'cookiebot' ); ?>
+								</p>
 								<p class="cb-general__info__note">
-									<?php esc_html_e( 'Depending on Cookie-blocking mode', 'cookiebot' ); ?>
+									<?php esc_html_e( 'This feature is only available when using Manual Blocking', 'cookiebot' ); ?>
 								</p>
 								<p class="cb-general__info__note">
 									<?php esc_html_e( 'Setting will apply for all subsites. Subsites will not be able to override.', 'cookiebot' ); ?>
-								</p>
-								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Add async or defer attribute to Cookie banner script tag. Default: Choose per subsite', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">
