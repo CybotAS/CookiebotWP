@@ -83,3 +83,49 @@
 		</div>
 	</div>
 </div>
+
+<div id="gcm-cookie-categories" class="cb-settings__config__item<?php echo esc_attr( $auto_disabled ); ?>"<?php echo ( $gcm_enabled_option === '1' ) ? '' : ' style="display: none"'; ?>>
+	<div class="cb-settings__config__content">
+		<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Google Consent Mode cookies', 'cookiebot' ); ?></h3>
+		<p class="cb-general__info__text">
+			<?php esc_html_e( 'Select the cookie types that need to be consented for the Google Consent Mode script', 'cookiebot' ); ?>
+		</p>
+		<p class="cb-general__info__note"><?php esc_html_e( 'This feature is only available when using Manual Blocking', 'cookiebot' ); ?></p>
+		<p class="cb-general__info__note">
+			<?php esc_html_e( 'This option may affect the behaviour of your GTM Tags, as the script will run on the selected cookies consent.', 'cookiebot' ); ?>
+			<br>
+			<?php esc_html_e( 'Please make sure your Tags in Google Tag Manager are triggered correctly.', 'cookiebot' ); ?>
+		</p>
+	</div>
+	<div class="cb-settings__config__data">
+		<div class="cb-settings__config__data__inner">
+			<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Check one or multiple cookie types:', 'cookiebot' ); ?></h3>
+			<ul id="cb-settings__gcm__cookie-types">
+				<li>
+					<input
+							type="checkbox"
+							value="preferences"
+						<?php checked( true, $is_preferences ); ?>
+							name="cookiebot-gcm-cookies[]"<?php echo esc_attr( $cookie_categories_disabled ); ?>>
+					<label class="cb-settings__cookie-types"><?php esc_html_e( 'preferences', 'cookiebot' ); ?></label>
+				</li>
+				<li>
+					<input
+							type="checkbox"
+							value="statistics"
+						<?php checked( true, $is_statistics ); ?>
+							name="cookiebot-gcm-cookies[]"<?php echo esc_attr( $cookie_categories_disabled ); ?>>
+					<label class="cb-settings__cookie-types"><?php esc_html_e( 'statistics', 'cookiebot' ); ?></label>
+				</li>
+				<li>
+					<input
+							type="checkbox"
+							value="marketing"
+						<?php checked( true, $is_marketing ); ?>
+							name="cookiebot-gcm-cookies[]"<?php echo esc_attr( $cookie_categories_disabled ); ?>>
+					<label class="cb-settings__cookie-types"><?php esc_html_e( 'marketing', 'cookiebot' ); ?></label>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
