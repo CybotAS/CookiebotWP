@@ -3,7 +3,7 @@
 * Tags: cookie banner, GDPR, CCPA, WordPress cookie banner, cookie policy, ePrivacy, dsgvo, privacy compliance, cookie law, data privacy, cmp, cookies
 * Requires at least: 4.4
 * Tested up to: 6.2.2
-* Stable tag: 4.2.12
+* Stable tag: 4.2.13
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -135,7 +135,7 @@ You cannot choose whether you want a free plan or a premium plan, as this is det
 
 2. The features you need. The free plan **does not include** all features available in the premium plans. The free plan does not include customization of banner and cookies declaration, multiple languages, email reports, data export, geolocation, bulk consent, consent statistics, internal domain alias for development, test and staging.
 
-If more than 50 subpages are found during the initial website scan, you will be given a free one-month trial of Cookiebot CMP with full functionality.
+If more than 50 subpages are found during the initial website scan, you will be given a 14 days free trial of Cookiebot CMP with full functionality.
 
 See all details of Cookiebot CMP [plans and pricing](https://www.cookiebot.com/en/pricing/).
 
@@ -267,6 +267,17 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 
 ## Changelog ##
+### 4.2.13 ###
+Release date: August 7th 2023
+
+Cookiebot CMP version 4.2.13 is out! This release fixes a bug on the ignored scripts feature and updates the content. Here is the complete list of this update:
+
+####Bugfixes####
+* Ignore scripts bug excluding script handlers
+
+####Other####
+* Content update
+
 ### 4.2.12 ###
 Release date: July 4th 2023
 
