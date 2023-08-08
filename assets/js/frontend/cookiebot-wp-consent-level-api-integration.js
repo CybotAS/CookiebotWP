@@ -10,7 +10,7 @@ function cookiebot_update_consent_level() {
 
   const consents = new Map([['n', 1], ['p', 1], ['s', 1], ['m', 1],]);
 
-  if (typeof Cookibot !== 'undefined') {
+  if (typeof Cookiebot !== 'undefined') {
     consents.set('p', Cookiebot.consent.preferences ? 1 : 0);
     consents.set('s', Cookiebot.consent.statistics ? 1 : 0);
     consents.set('m', Cookiebot.consent.marketing ? 1 : 0);
