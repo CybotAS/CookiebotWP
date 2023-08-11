@@ -160,10 +160,10 @@ $header->display();
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'If enabled, Cookiebot will use the current locale to set the banner and cookie declaration language.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'If enabled, Cookiebot will use the current location to set the banner and cookie declaration language.', 'cookiebot' ); ?>
 								</p>
 								<p class="cb-general__info__note">
-									<?php esc_html_e( 'Please make sure that all used languages have also been added in the Cookiebot™ Manager.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Please make sure that all languages in use have been added in the Cookiebot™ Manager.', 'cookiebot' ); ?>
 								</p>
 								<p class="cb-general__info__note"><?php esc_html_e( 'This feature disables the main language selector.', 'cookiebot' ); ?></p>
 								<p class="cb-general__info__note"><?php esc_html_e( 'If you have already set a language in the cookie declaration shortcode, this feature will not change it.', 'cookiebot' ); ?></p>
