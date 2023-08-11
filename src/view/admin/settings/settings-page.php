@@ -162,7 +162,7 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'If enabled, Cookiebot will use the current locale to set the banner and cookie declaration language.', 'cookiebot' ); ?>
 								</p>
-								<p class="cb-general__info__text">
+								<p class="cb-general__info__note">
 									<?php esc_html_e( 'Please make sure that all used languages have also been added in the Cookiebot™ Manager.', 'cookiebot' ); ?>
 								</p>
 								<p class="cb-general__info__note"><?php esc_html_e( 'This feature disables the main language selector.', 'cookiebot' ); ?></p>

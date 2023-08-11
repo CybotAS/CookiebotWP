@@ -1952,24 +1952,24 @@ msgstr "Sprache auswählen"
 #: view/admin/settings/settings-page.php:163
 msgid ""
 "If enabled, Cookiebot will use the current location to set the banner and cookie declaration language."
-msgstr ""
+msgstr "Wenn aktiviert, verwendet die Cookiebot CMP den aktuellen Standort, um die Sprache des Banners und der Cookie-Erklärung festzulegen."
 
 #: view/admin/settings/settings-page.php:166
 msgid ""
 "Please make sure that all languages in use have been added in the Cookiebot™ Manager."
-msgstr ""
+msgstr "Bitte stellen Sie sicher, dass alle verwendeten Sprachen auch im Cookiebot™ Manager hinzugefügt wurden."
 
 #: view/admin/settings/settings-page.php:168
 msgid "This feature disables the main language selector."
-msgstr ""
+msgstr "Dieses Feature deaktiviert die allgemeine Sprachauswahl."
 
 #: view/admin/settings/settings-page.php:168
 msgid "If you have already set a language in the cookie declaration shortcode, this feature will not change it."
-msgstr ""
+msgstr "Wenn Sie jedoch bereits eine Sprache im Shortcode der Cookie-Erklärung eingestellt haben, wird dieses Feature die Sprache nicht ändern."
 
 #: view/admin/settings/settings-page.php:187
 msgid "Use website location to set language"
-msgstr ""
+msgstr "Website-Standort zum Festlegen der Sprache verwenden"
 
 #: view/admin/settings/settings-page.php:114
 msgid "Default (Autodetect)"
