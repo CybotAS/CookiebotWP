@@ -7,6 +7,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Theme_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\Jetpack;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Base_Jetpack_Widget;
+use cybot\cookiebot\lib\Consent_API_Helper;
 use cybot\cookiebot\lib\Settings_Page_Tab;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\lib\Cookiebot_WP;
@@ -39,6 +40,7 @@ class Settings_Config {
 	const AVAILABLE_ADDONS_TAB_TEMPLATE   = 'admin/settings/prior-consent/available-addons/tab.php';
 	const UNAVAILABLE_TAB_HEADER_TEMPLATE = 'admin/settings/prior-consent/unavailable-addons/tab-header.php';
 	const UNAVAILABLE_ADDONS_TAB_TEMPLATE = 'admin/settings/prior-consent/unavailable-addons/field.php';
+	const CONSENT_API_TAB_TEMPLATE        = 'admin/settings/prior-consent/consent-api/tab.php';
 	// Other
 	const INFO_ICON_ASSET_URL = 'img/icons/info.svg';
 
@@ -157,6 +159,8 @@ class Settings_Config {
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			} elseif ( isset( $_GET['tab'] ) && 'jetpack' === $_GET['tab'] ) {
 				$this->register_jetpack_addon();
+			} elseif ( isset( $_GET['tab'] ) && 'consent_api' === $_GET['tab'] ) {
+				$this->register_consent_api();
 			} else {
 				$this->register_addons_info();
 			}
@@ -164,6 +168,7 @@ class Settings_Config {
 			if ( $pagenow === 'options.php' ) {
 				$this->register_jetpack_addon();
 				$this->register_available_addons();
+				$this->register_consent_api();
 			}
 		}
 	}
@@ -610,6 +615,57 @@ class Settings_Config {
 	}
 
 	/**
+	 * Adds WP Consent API Section
+	 *
+	 * @version 4.2.14
+	 * @since 4.2.14
+	 */
+	private function register_consent_api() {
+		wp_enqueue_style(
+			'cookiebot-consent-mapping-table',
+			asset_url( 'css/backend/consent_mapping_table.css' ),
+			null,
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+		);
+
+		wp_enqueue_script(
+			'cookiebot_consent_mapping_js',
+			asset_url( 'js/backend/consent-mapping.js' ),
+			array( 'jquery' ),
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+			true
+		);
+
+		add_settings_section(
+			'consent_api',
+			'',
+			array(
+				$this,
+				'consent_api_callback',
+			),
+			'cookiebot-addons'
+		);
+
+		register_setting( 'cookiebot-consent-mapping', 'cookiebot-consent-mapping' );
+	}
+
+	/**
+	 * Consent API tab callback
+	 *
+	 * @since 4.2.14
+	 */
+	public function consent_api_callback() {
+		$consent_api_helper = new Consent_API_Helper();
+		$view_args          = array(
+			'is_wp_consent_api_active' => $consent_api_helper->is_wp_consent_api_active(),
+			'm_default'                => $consent_api_helper->get_default_wp_consent_api_mapping(),
+			'm'                        => $consent_api_helper->get_wp_consent_api_mapping(),
+		);
+
+		include_view( self::CONSENT_API_TAB_TEMPLATE, $view_args );
+	}
+
+	/**
 	 * Build up settings page
 	 *
 	 * @throws InvalidArgumentException
@@ -646,6 +702,14 @@ class Settings_Config {
 				'jetpack',
 				esc_html__( 'Jetpack', 'cookiebot' ),
 				'cookiebot_jetpack_addon',
+				'cookiebot-addons'
+			);
+		}
+		if ( is_plugin_active( 'wp-consent-api/wp-consent-api.php' ) ) {
+			$settings_page_tabs[] = new Settings_Page_Tab(
+				'consent_api',
+				esc_html__( 'WP Consent API', 'cookiebot' ),
+				'cookiebot-consent-mapping',
 				'cookiebot-addons'
 			);
 		}

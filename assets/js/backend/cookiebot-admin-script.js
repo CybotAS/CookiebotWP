@@ -10,6 +10,7 @@ function cbInit() {
     jQuery( document ).on( 'click', '#cb-review__close', event => closeSurveyPopup( event ) );
     jQuery( document ).on( 'submit', '#cb-review__form', event => submitSurveyPopup( event ) );
     jQuery( document ).on( 'change', 'input[name="cookiebot-review-option"]', event => showOptionalConsent( event ) )
+    hideSubmitMessage();
 }
 
 /**
@@ -98,4 +99,13 @@ function submitSurveyPopup(e){
             }
         }
     });
+}
+
+function hideSubmitMessage(){
+    let submitMsg = jQuery('.cb-submit__msg');
+    if(submitMsg){
+        setTimeout(function(){
+            submitMsg.fadeOut();
+        },2000)
+    }
 }
