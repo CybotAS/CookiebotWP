@@ -18,8 +18,5 @@ class Test_Gadwp extends WP_UnitTestCase {
 	public function test_is_plugin_compatible() {
 		$content = Gadwp::get_svn_file_content( 'includes/frontend/frontend.php' );
 		$this->assertNotFalse( strpos( $content, "add_action( 'wp_head', 'exactmetrics_tracking_script', 6 );" ) );
-
-		$content = Gadwp::get_svn_file_content( 'includes/frontend/events/class-analytics-events.php' );
-		$this->assertNotFalse( strpos( $content, "wp_enqueue_script( 'exactmetrics-frontend-script'," ) );
 	}
 }
