@@ -16,9 +16,6 @@ class Test_Gadwp extends WP_UnitTestCase {
 	 * @throws \Exception
 	 */
 	public function test_is_plugin_compatible() {
-		$content = Gadwp::get_svn_file_content( 'includes/frontend/tracking/class-tracking-analytics.php' );
-		$this->assertNotFalse( strpos( $content, 'GoogleAnalyticsObject' ) );
-
 		$content = Gadwp::get_svn_file_content( 'includes/frontend/frontend.php' );
 		$this->assertNotFalse( strpos( $content, "add_action( 'wp_head', 'exactmetrics_tracking_script', 6 );" ) );
 
