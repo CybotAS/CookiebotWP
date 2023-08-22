@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2022-06-10 11:05+0200\n"
-"PO-Revision-Date: 2023-06-23 14:06+0200\n"
+"PO-Revision-Date: 2023-08-22 14:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1951,7 +1951,7 @@ msgstr "Sprache auswählen"
 
 #: view/admin/settings/settings-page.php:163
 msgid ""
-"If enabled, Cookiebot will use the current location to set the banner and cookie declaration language."
+"If enabled, Cookiebot™ will use the current location to set the banner and cookie declaration language."
 msgstr "Wenn aktiviert, verwendet die Cookiebot CMP den aktuellen Standort, um die Sprache des Banners und der Cookie-Erklärung festzulegen."
 
 #: view/admin/settings/settings-page.php:166

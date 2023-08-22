@@ -1940,7 +1940,7 @@ msgstr ""
 
 #: view/admin/settings/settings-page.php:163
 msgid ""
-"If enabled, Cookiebot will use the current location to set the banner and cookie declaration language."
+"If enabled, Cookiebot™ will use the current location to set the banner and cookie declaration language."
 msgstr ""
 
 #: view/admin/settings/settings-page.php:166

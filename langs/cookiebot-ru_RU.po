@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-02-15 13:52+0100\n"
-"PO-Revision-Date: 2023-06-23 14:06+0200\n"
+"PO-Revision-Date: 2023-08-22 14:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -1958,24 +1958,24 @@ msgstr "Выберите язык"
 #: view/admin/settings/settings-page.php:163
 msgid ""
 "If enabled, Cookiebot will use the current location to set the banner and cookie declaration language."
-msgstr ""
+msgstr "Если эта функция включена, Cookiebot™ будет использовать текущее местоположение для установки языка баннера и декларации cookie."
 
 #: view/admin/settings/settings-page.php:166
 msgid ""
 "Please make sure that all languages in use have been added in the Cookiebot™ Manager."
-msgstr ""
+msgstr "Убедитесь, что все используемые языки были добавлены в Cookiebot™ Manager."
 
 #: view/admin/settings/settings-page.php:168
 msgid "This feature disables the main language selector."
-msgstr ""
+msgstr "Эта функция отключает основной селектор языков."
 
 #: view/admin/settings/settings-page.php:168
 msgid "If you have already set a language in the cookie declaration shortcode, this feature will not change it."
-msgstr ""
+msgstr "Если вы уже задали язык в шорткоде декларации cookie, данная функция не изменит его."
 
 #: view/admin/settings/settings-page.php:187
 msgid "Use website location to set language"
-msgstr ""
+msgstr "Использование местоположения веб-сайта для установки языка"
 
 #: view/admin/settings/settings-page.php:114
 msgid "Default (Autodetect)"

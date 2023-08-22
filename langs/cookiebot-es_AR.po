@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-01-18 14:28+0100\n"
-"PO-Revision-Date: 2023-06-23 14:06+0200\n"
+"PO-Revision-Date: 2023-08-22 14:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_AR\n"
@@ -1945,8 +1945,8 @@ msgstr "Selecciona el idioma"
 
 #: view/admin/settings/settings-page.php:163
 msgid ""
-"If enabled, Cookiebot will use the current location to set the banner and cookie declaration language."
-msgstr "Si se activa Cookiebot usará el local (idioma) actual para configurar el idioma del banner y de la declaración de cookies."
+"If enabled, Cookiebot™ will use the current location to set the banner and cookie declaration language."
+msgstr "Si se activa, Cookiebot™ usará la ubicación actual para configurar el idioma del banner y de la declaración de cookies."
 
 #: view/admin/settings/settings-page.php:166
 msgid ""
@@ -1963,7 +1963,7 @@ msgstr "Si ya has configurado un idioma en el código corto de la declaración d
 
 #: view/admin/settings/settings-page.php:187
 msgid "Use website location to set language"
-msgstr "Usar el local del sitio web para configurar el idioma"
+msgstr "Usar la ubicación del sitio web para configurar el idioma"
 
 #: view/admin/settings/settings-page.php:114
 msgid "Default (Autodetect)"

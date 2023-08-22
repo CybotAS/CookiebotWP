@@ -160,7 +160,7 @@ $header->display();
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'If enabled, Cookiebot will use the current location to set the banner and cookie declaration language.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'If enabled, Cookiebot™ will use the current location to set the banner and cookie declaration language.', 'cookiebot' ); ?>
 								</p>
 								<p class="cb-general__info__note">
 									<?php esc_html_e( 'Please make sure that all languages in use have been added in the Cookiebot™ Manager.', 'cookiebot' ); ?>
@@ -184,7 +184,7 @@ $header->display();
 											?>
 										/>
 										<div class="switcher"></div>
-										<?php esc_html_e( 'Use website locale to set language', 'cookiebot' ); ?>
+										<?php esc_html_e( 'Use website location to set language', 'cookiebot' ); ?>
 									</label>
 								</div>
 							</div>
