@@ -47,7 +47,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 		);
 
 		$this->buffer_output->add_tag(
-			'pre_get_posts',
+			'wp_footer',
 			10,
 			array(
 				self::FB_SEARCH => $this->get_cookie_types(),
