@@ -58,6 +58,12 @@
 
 		?>
 		<table class="cb-settings__consent__mapping-table" aria-describedby="consent_level_api_settings_title">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
 			<?php
 			foreach ( $states as $state ) {
 				$key   = array();
