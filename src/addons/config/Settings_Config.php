@@ -159,6 +159,7 @@ class Settings_Config {
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			} elseif ( isset( $_GET['tab'] ) && 'jetpack' === $_GET['tab'] ) {
 				$this->register_jetpack_addon();
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			} elseif ( isset( $_GET['tab'] ) && 'consent_api' === $_GET['tab'] ) {
 				$this->register_consent_api();
 			} else {
