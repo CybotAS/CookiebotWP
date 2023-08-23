@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-01-18 14:28+0100\n"
-"PO-Revision-Date: 2023-06-23 14:06+0200\n"
+"PO-Revision-Date: 2023-08-22 14:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_UY\n"
@@ -1932,9 +1932,8 @@ msgid "Language:"
 msgstr "Idioma:"
 
 #: view/admin/settings/settings-page.php:106
-msgid "Select your main language here. Please make sure that the language selected has also been added in the Cookiebot™ Manager."
-msgstr ""
-"Selecciona tu idioma principal aquí. Por favor, asegúrate de que el idioma seleccionado también ha sido añadido al Admnistrador de Cookiebot™."
+msgid "Select your main language here."
+msgstr "Selecciona tu idioma principal aquí."
 
 #: view/admin/settings/settings-page.php:108
 msgid "Read more on how to add languages"
@@ -1943,6 +1942,28 @@ msgstr "Más información sobre cómo añadir idiomas"
 #: view/admin/settings/settings-page.php:112
 msgid "Select the language"
 msgstr "Selecciona el idioma"
+
+#: view/admin/settings/settings-page.php:163
+msgid ""
+"If enabled, Cookiebot™ will use the current location to set the banner and cookie declaration language."
+msgstr "Si se activa, Cookiebot™ usará la ubicación actual para configurar el idioma del banner y de la declaración de cookies."
+
+#: view/admin/settings/settings-page.php:166
+msgid ""
+"Please make sure that all languages in use have been added in the Cookiebot™ Manager."
+msgstr "Por favor, asegúrate de que todos los idiomas empleados hayan sido también añadidos al admin de Cookiebot™."
+
+#: view/admin/settings/settings-page.php:168
+msgid "This feature disables the main language selector."
+msgstr "Esta función desactiva el selector del idioma principal."
+
+#: view/admin/settings/settings-page.php:168
+msgid "If you have already set a language in the cookie declaration shortcode, this feature will not change it."
+msgstr "Si ya has configurado un idioma en el código corto de la declaración de cookies, esta función no lo cambiará."
+
+#: view/admin/settings/settings-page.php:187
+msgid "Use website location to set language"
+msgstr "Usar la ubicación del sitio web para configurar el idioma"
 
 #: view/admin/settings/settings-page.php:114
 msgid "Default (Autodetect)"

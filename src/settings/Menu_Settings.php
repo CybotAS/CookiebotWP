@@ -48,6 +48,7 @@ class Menu_Settings {
 	public function register_cookiebot_settings() {
 		register_setting( 'cookiebot', 'cookiebot-cbid' );
 		register_setting( 'cookiebot', 'cookiebot-language' );
+		register_setting( 'cookiebot', 'cookiebot-front-language' );
 		register_setting( 'cookiebot', 'cookiebot-nooutput' );
 		register_setting( 'cookiebot', 'cookiebot-nooutput-admin' );
 		register_setting( 'cookiebot', 'cookiebot-output-logged-in' );

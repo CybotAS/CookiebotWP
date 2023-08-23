@@ -301,7 +301,17 @@ namespace cybot\cookiebot\lib {
 	 */
 	function cookiebot_get_language_from_setting( $only_from_setting = false ) {
 		// Get language set in setting page - if empty use WP language info
-		$lang = get_option( 'cookiebot-language' );
+		$lang           = get_option( 'cookiebot-language' );
+		$front_language = get_option( 'cookiebot-front-language' );
+
+		if ( ! empty( $front_language ) ) {
+			$lang = get_locale(); // Gets language in en-US format
+			if ( ! empty( $lang ) ) {
+				list( $lang ) = explode( '_', $lang ); // Changes format from eg. en-US to en.
+			}
+			return $lang;
+		}
+
 		if ( ! empty( $lang ) && $lang !== '_wp' ) {
 			return $lang;
 		}

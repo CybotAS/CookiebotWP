@@ -76,7 +76,7 @@ Display the cookie banner and cookie policy to users from all over the world usi
 
 Watch the below video to learn how to install the Cookiebot CMP WordPress plugin. It’s very easy. Alternatively, read our [step-by-step installation guide](https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress).
 
-[youtube https://youtube.com/watch?v=QgB315qko-c]
+[youtube https://youtube.com/watch?v=ps7msVZJmbY]
 
 Cookie Declaration
 

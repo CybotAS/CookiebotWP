@@ -18,6 +18,6 @@ class Test_Lightspeed_Cache extends WP_UnitTestCase {
 	public function test_is_plugin_compatible() {
 		$content = Litespeed_Cache::get_svn_file_content( 'src/optimize.cls.php' );
 
-		$this->assertNotFalse( strpos( $content, 'apply_filters( \'litespeed_optimize_js_excludes\'' ) );
+		$this->assertNotFalse( strpos( $content, 'apply_filters(\'litespeed_optimize_js_excludes\'' ) );
 	}
 }

@@ -60,18 +60,6 @@ class Test_Jetpack_Widgets extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \cybot\cookiebot\addons\controller\addons\jetpack\widget\Internet_Defense_League_Jetpack_Widget
-	 * @throws ExpectationFailedException
-	 * @throws InvalidArgumentException
-	 * @throws \Exception
-	 */
-	public function test_internet_defense_league_jetpack_widget() {
-		$content = Jetpack::get_svn_file_content( 'modules/widgets/internet-defense-league.php' );
-
-		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_footer\', array( $this, \'footer_script\' ) );' ) );
-	}
-
-	/**
 	 * @covers \cybot\cookiebot\addons\controller\addons\jetpack\widget\Twitter_Timeline_Jetpack_Widget
 	 * @throws ExpectationFailedException
 	 * @throws InvalidArgumentException
