@@ -27,7 +27,7 @@
 		<p>
 			<?php
 			esc_html_e(
-				'WP Consent Level API and Cookiebot categorise cookies a bit different. The default settings should fit mosts needs - but if you need to change the mapping you are able to do it below.',
+				'WP Consent Level API and Cookiebot™ categorize cookies a bit differently. The default settings should fit most needs, but if you need to change the mapping you can do so below.',
 				'cookiebot'
 			);
 			?>
@@ -76,24 +76,24 @@
 
 				<tr>
 					<td>
-						<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Cookiebot categories', 'cookiebot' ); ?></h3>
+						<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Cookiebot™ cookie categories', 'cookiebot' ); ?></h3>
 						<div class="cb_consent">
 												<span class="forceconsent">
-													<?php esc_html_e( 'Necessary', 'cookiebot' ); ?>
+													<?php esc_html_e( 'necessary', 'cookiebot' ); ?>
 												</span>
 							<span class="<?php echo( $state['preferences'] ? 'consent' : 'noconsent' ); ?>">
-													<?php esc_html_e( 'Preferences', 'cookiebot' ); ?>
+													<?php esc_html_e( 'preferences', 'cookiebot' ); ?>
 												</span>
 							<span class="<?php echo( $state['statistics'] ? 'consent' : 'noconsent' ); ?>">
-													<?php esc_html_e( 'Statistics', 'cookiebot' ); ?>
+													<?php esc_html_e( 'statistics', 'cookiebot' ); ?>
 												</span>
 							<span class="<?php echo( $state['marketing'] ? 'consent' : 'noconsent' ); ?>">
-													<?php esc_html_e( 'Marketing', 'cookiebot' ); ?>
+													<?php esc_html_e( 'marketing', 'cookiebot' ); ?>
 												</span>
 						</div>
 					</td>
 					<td>
-						<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'WP Consent Level categories equivalent', 'cookiebot' ); ?></h3>
+						<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'WP Consent API cookies categories equivalent', 'cookiebot' ); ?></h3>
 						<div class="consent_mapping">
 							<label><input
 									type="checkbox"
@@ -115,7 +115,7 @@
 										echo 'disabled';
 									}
 									?>
-								> <?php esc_html_e( 'Preferences', 'cookiebot' ); ?> </label>
+								> <?php esc_html_e( 'preferences', 'cookiebot' ); ?> </label>
 							<label><input
 									type="checkbox"
 									name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][statistics]"
@@ -131,7 +131,7 @@
 										echo 'disabled';
 									}
 									?>
-								> <?php esc_html_e( 'Statistics', 'cookiebot' ); ?> </label>
+								> <?php esc_html_e( 'statistics', 'cookiebot' ); ?> </label>
 							<label><input
 									type="checkbox"
 									name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][statistics-anonymous]"
@@ -164,7 +164,7 @@
 										echo 'disabled';
 									}
 									?>
-								> <?php esc_html_e( 'Marketing', 'cookiebot' ); ?></label>
+								> <?php esc_html_e( 'marketing', 'cookiebot' ); ?></label>
 						</div>
 					</td>
 				</tr>
