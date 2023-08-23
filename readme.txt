@@ -267,6 +267,23 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 
 ## Changelog ##
+### 4.2.14 ###
+Release date: August 23th 2023
+
+Cookiebot CMP version 4.2.14 is out! This release fixes an error when using WP Rocket and Facebook for Woocommerce with Cookiebot and adds some features. Here is the complete list of this update:
+
+####What's new####
+* WP Consent API cookie category mapping new UI
+* Set banner and cookie declaration language using the webiste locale option
+
+####Bugfixes####
+* Fix fatal error when Facebook for Woocommerce addon is enabled and WP Rocket plugin is active.
+
+####Other####
+* Addons updates due to new plugins versions
+* Translation updates
+* Minor style changes
+
 ### 4.2.13 ###
 Release date: August 7th 2023
 
