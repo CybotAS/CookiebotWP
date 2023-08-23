@@ -57,7 +57,6 @@ class Menu_Settings {
 		register_setting( 'cookiebot', 'cookiebot-script-tag-uc-attribute' );
 		register_setting( 'cookiebot', 'cookiebot-script-tag-cd-attribute' );
 		register_setting( 'cookiebot', 'cookiebot-cookie-blocking-mode' );
-		register_setting( 'cookiebot', 'cookiebot-consent-mapping' );
 		register_setting( 'cookiebot', 'cookiebot-iab' );
 		register_setting( 'cookiebot', 'cookiebot-ccpa' );
 		register_setting( 'cookiebot-legislations', 'cookiebot-ccpa-domain-group-id' );

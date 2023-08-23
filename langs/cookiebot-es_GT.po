@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-01-18 14:28+0100\n"
-"PO-Revision-Date: 2023-08-22 14:06+0200\n"
+"PO-Revision-Date: 2023-08-23 11:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_GT\n"
@@ -2305,6 +2305,34 @@ msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_con
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information."
 msgstr "Por favor, acepta las cookies de [renew_consent]%cookie_types[/renew_consent] para habilitar el guardar la información de usuario."
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:21
+msgid "Consent Level API Settings"
+msgstr "Ajustes de Consent Level API"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:30
+msgid "WP Consent Level API and Cookiebot™ categorize cookies a bit differently. The default settings should fit most needs, but if you need to change the mapping you can do so below."
+msgstr "WP Consent Level API y Cookiebot™ categorizan las cookies de forma algo diferente. Los ajustes por defecto deberían cubrir las necesidades de la mayoría, pero si necesitas cambiar algún ajuste puedes hacerlo debajo."
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:79
+msgid "Cookiebot™ cookie categories"
+msgstr "Categorías de cookies en Cookiebot™"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:96
+msgid "WP Consent API cookies categories equivalent"
+msgstr "Categorías de cookies equivalentes en WP Consent API"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:102
+msgid "Functional"
+msgstr "Funcionales"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:150
+msgid "Statistics Anonymous"
+msgstr "Estadísticas Anónimas"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:180
+msgid "Reset to default mapping"
+msgstr "Restablecer los ajustes por defecto"
 
 #. Plugin Name of the plugin/theme
 msgid "Cookie banner plugin for WordPress – Cookiebot CMP by Usercentrics"

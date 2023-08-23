@@ -46,17 +46,6 @@ function advanced_settings_toggle() {
     } )
 }
 
-function resetConsentMapping() {
-    if ( confirm( 'Are you sure you want to reset to default consent mapping?' ) ) {
-        jQuery( '.consent_mapping_table input[type=checkbox]' ).each( function () {
-            if ( !this.disabled ) {
-                this.checked = ( jQuery( this ).data( 'default-value' ) === '1' )
-            }
-        } )
-    }
-    return false
-}
-
 function cookie_blocking_mode() {
     let cookieBlockingMode = cookiebot_settings.cookieBlockingMode;
 

@@ -31,7 +31,7 @@
 
 .cb-settings__tabs {
     display: grid;
-    grid-template-columns: repeat(4, minmax(180px, max-content));
+    grid-template-columns: repeat(5, minmax(180px, max-content));
     margin: 25px 0 50px;
     border-bottom: 1px solid #e1e1e1;
 }

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-02-15 13:52+0100\n"
-"PO-Revision-Date: 2023-08-22 14:06+0200\n"
+"PO-Revision-Date: 2023-08-23 11:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -2297,6 +2297,34 @@ msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies,
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies, abyste mohli ukládat informace o uživateli."
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:21
+msgid "Consent Level API Settings"
+msgstr "Nastavení Consent Level API"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:30
+msgid "WP Consent Level API and Cookiebot™ categorize cookies a bit differently. The default settings should fit most needs, but if you need to change the mapping you can do so below."
+msgstr "WP Consent Level API a Cookiebot™ kategorizují soubory cookie trochu jinak. Výchozí nastavení by mělo vyhovovat většině potřeb, ale pokud potřebujete změnit mapování, můžete tak učinit níže."
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:79
+msgid "Cookiebot™ cookie categories"
+msgstr "Kategorie cookies Cookiebot™"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:96
+msgid "WP Consent API cookies categories equivalent"
+msgstr "Ekvivalent kategorií souborů cookie WP Consent API"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:102
+msgid "Functional"
+msgstr "Funkční"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:150
+msgid "Statistics Anonymous"
+msgstr "Anonymní statistiky"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:180
+msgid "Reset to default mapping"
+msgstr "Obnovit výchozí mapování"
 
 #. Plugin Name of the plugin/theme
 msgid "Cookie banner plugin for WordPress – Cookiebot CMP by Usercentrics"

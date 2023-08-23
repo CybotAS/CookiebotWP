@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-01-18 14:28+0100\n"
-"PO-Revision-Date: 2023-08-22 14:06+0200\n"
+"PO-Revision-Date: 2023-08-23 11:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -2323,6 +2323,34 @@ msgstr "Accetta i cookie [renew_consent]%cookie_types[/renew_consent] per consen
 #: src/addons/controller/addons/:
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information."
 msgstr "Accetta i cookie [renew_consent]%cookie_types[/renew_consent] per consentire il salvataggio delle informazioni dell'utente."
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:21
+msgid "Consent Level API Settings"
+msgstr "Impostazioni API per il livello di consenso"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:30
+msgid "WP Consent Level API and Cookiebot™ categorize cookies a bit differently. The default settings should fit most needs, but if you need to change the mapping you can do so below."
+msgstr "WP Consent Level API e Cookiebot™ classificano i cookie in modo leggermente diverso. Le impostazioni predefinite dovrebbero essere adatte alla maggior parte delle esigenze, ma se hai bisogno di modificare la mappatura puoi farlo qui sotto."
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:79
+msgid "Cookiebot™ cookie categories"
+msgstr "Categorie dei cookie Cookiebot™"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:96
+msgid "WP Consent API cookies categories equivalent"
+msgstr "Equivalente alle categorie dei cookie WP Consent API"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:102
+msgid "Functional"
+msgstr "Funzionali"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:150
+msgid "Statistics Anonymous"
+msgstr "Statistici anonimi"
+
+#: src/view/admin/settings/prior-consent/consent-api/tab.php:180
+msgid "Reset to default mapping"
+msgstr "Ripristino della mappatura predefinita"
 
 #. Plugin Name of the plugin/theme
 msgid "Cookie banner plugin for WordPress – Cookiebot CMP by Usercentrics"
