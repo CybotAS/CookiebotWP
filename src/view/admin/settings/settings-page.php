@@ -126,13 +126,7 @@ $header->display();
 								<h3 class="cb-settings__config__subtitle">
 									<?php esc_html_e( 'Language:', 'cookiebot' ); ?>
 								</h3>
-								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Select your main language here. Please make sure that the language selected has also been added in the Cookiebot™ Manager.', 'cookiebot' ); ?>
-								</p>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-to-set-the-language-of-the-consent-banner-"
-								   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-									<?php esc_html_e( 'Read more on how to add languages', 'cookiebot' ); ?>
-								</a>
+								<p class="cb-general__info__text"><?php esc_html_e( 'Select your main language here.', 'cookiebot' ); ?></p>
 							</div>
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
@@ -162,6 +156,41 @@ $header->display();
 								</div>
 							</div>
 						</div>
+
+						<div class="cb-settings__config__item">
+							<div class="cb-settings__config__content">
+								<p class="cb-general__info__text">
+									<?php esc_html_e( 'If enabled, Cookiebot™ will use the current location to set the banner and cookie declaration language.', 'cookiebot' ); ?>
+								</p>
+								<p class="cb-general__info__note">
+									<?php esc_html_e( 'Please make sure that all languages in use have been added in the Cookiebot™ Manager.', 'cookiebot' ); ?>
+								</p>
+								<p class="cb-general__info__note"><?php esc_html_e( 'This feature disables the main language selector.', 'cookiebot' ); ?></p>
+								<p class="cb-general__info__note"><?php esc_html_e( 'If you have already set a language in the cookie declaration shortcode, this feature will not change it.', 'cookiebot' ); ?></p>
+								<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-to-set-the-language-of-the-consent-banner-"
+								   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+									<?php esc_html_e( 'Read more on how to add languages', 'cookiebot' ); ?>
+								</a>
+							</div>
+							<div class="cb-settings__config__data">
+								<div class="cb-settings__config__data__inner">
+									<label class="switch-checkbox" for="cookiebot-front-language">
+										<input id="cookiebot-front-language" type="checkbox" name="cookiebot-front-language" value="1"
+											<?php
+											checked(
+												1,
+												get_option( 'cookiebot-front-language', false )
+											);
+											?>
+										/>
+										<div class="switcher"></div>
+										<?php esc_html_e( 'Use website location to set language', 'cookiebot' ); ?>
+									</label>
+								</div>
+							</div>
+						</div>
+
+
 
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
