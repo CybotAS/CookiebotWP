@@ -2,7 +2,7 @@
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: cookie banner, GDPR, CCPA, WordPress cookie banner, cookie policy, ePrivacy, dsgvo, privacy compliance, cookie law, data privacy, cmp, cookies
 * Requires at least: 4.4
-* Tested up to: 6.2.2
+* Tested up to: 6.3
 * Stable tag: 4.2.13
 * Requires PHP: 5.6
 * License: GPLv2 or later
@@ -274,7 +274,8 @@ Cookiebot CMP version 4.2.14 is out! This release fixes an error when using WP R
 
 ####What's new####
 * WP Consent API cookie category mapping new UI
-* Set banner and cookie declaration language using the webiste locale option
+* Set banner and cookie declaration language using the website locale option
+* Set WordPress tested up to version to 6.3
 
 ####Bugfixes####
 * Fix fatal error when Facebook for Woocommerce addon is enabled and WP Rocket plugin is active.
