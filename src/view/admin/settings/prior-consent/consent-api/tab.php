@@ -15,7 +15,7 @@
 
 
 <?php if ( $is_wp_consent_api_active ) { ?>
-	<h3 id="consent_level_api_settings" class="cookiebot_fieldset_header">
+	<h3 id="consent_level_api_settings_title" class="cookiebot_fieldset_header">
 		<?php
 		esc_html_e(
 			'Consent Level API Settings',
@@ -57,13 +57,7 @@
 		);
 
 		?>
-		<table class="cb-settings__consent__mapping-table">
-			<thead>
-			<tr>
-				<th></th>
-				<th></th>
-			</tr>
-			</thead>
+		<table class="cb-settings__consent__mapping-table" aria-describedby="consent_level_api_settings_title">
 			<?php
 			foreach ( $states as $state ) {
 				$key   = array();
@@ -81,13 +75,13 @@
 												<span class="forceconsent">
 													<?php esc_html_e( 'necessary', 'cookiebot' ); ?>
 												</span>
-							<span class="<?php echo( $state['preferences'] ? 'consent' : 'noconsent' ); ?>">
+							<span class="<?php echo $state['preferences'] ? 'consent' : 'noconsent'; ?>">
 													<?php esc_html_e( 'preferences', 'cookiebot' ); ?>
 												</span>
-							<span class="<?php echo( $state['statistics'] ? 'consent' : 'noconsent' ); ?>">
+							<span class="<?php echo $state['statistics'] ? 'consent' : 'noconsent'; ?>">
 													<?php esc_html_e( 'statistics', 'cookiebot' ); ?>
 												</span>
-							<span class="<?php echo( $state['marketing'] ? 'consent' : 'noconsent' ); ?>">
+							<span class="<?php echo $state['marketing'] ? 'consent' : 'noconsent'; ?>">
 													<?php esc_html_e( 'marketing', 'cookiebot' ); ?>
 												</span>
 						</div>
@@ -181,7 +175,7 @@
 							'cookiebot'
 						);
 					?>
-						</button>
+					</button>
 				</td>
 			</tr>
 			</tfoot>
