@@ -94,6 +94,7 @@ class Cookiebot_Javascript_Helper {
 				'tag_attr'             => $tag_attr,
 				'cookie_blocking_mode' => Cookiebot_WP::get_cookie_blocking_mode(),
 				'data_regions'         => self::get_data_regions(),
+				'tcf'                  => self::get_tcf_attribute(),
 			);
 
 			if ( $return_html ) {
@@ -186,6 +187,22 @@ class Cookiebot_Javascript_Helper {
 
 		if ( $categories && is_array( $categories ) ) {
 			$attribute = join( ', ', $categories );
+		}
+
+		return $attribute;
+	}
+
+	public static function get_tcf_attribute() {
+		$attribute   = false;
+		$iab_enabled = ! empty( get_option( 'cookiebot-iab' ) );
+		$tcf_version = get_option( 'cookiebot-tcf-version' );
+
+		if ( $iab_enabled ) {
+			if ( empty( $tcf_version ) ) {
+				$attribute = 'IAB';
+			} else {
+				$attribute = $tcf_version;
+			}
 		}
 
 		return $attribute;

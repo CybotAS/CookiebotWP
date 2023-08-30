@@ -5,14 +5,15 @@
  * @var string $tag_attr
  * @var string $cookie_blocking_mode
  * @var array $data_regions
+ * @var string|bool $tcf
  */
 ?>
 <script type="text/javascript"
 		id="Cookiebot"
 		src="https://consent.cookiebot.com/uc.js"
 		data-cbid="<?php echo esc_attr( $cbid ); ?>"
-	<?php if ( (bool) get_option( 'cookiebot-iab' ) !== false ) : ?>
-		data-framework="IAB"
+	<?php if ( $tcf ) : ?>
+		data-framework="<?php echo esc_attr( $tcf ); ?>"
 	<?php endif; ?>
 	<?php
 	if ( $data_regions ) {

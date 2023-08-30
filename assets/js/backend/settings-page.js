@@ -13,6 +13,7 @@ function init() {
     closeSubmitMsg();
     submitEnable();
     googleConsentModeOptions();
+    tcfOptions();
 }
 
 function language_toggle() {
@@ -147,5 +148,12 @@ function googleConsentModeOptions() {
             (input.attr('id') === 'gcm' ? 'Google Consent Mode' : 'URL passthrough') + ' ' +
             (input.is(':checked') ? 'enabled' : 'disabled')
         );
+    });
+}
+
+function tcfOptions() {
+    jQuery('input#cookiebot-iab').on('change', function () {
+        const parent = jQuery(this).parents('#iab');
+        parent.find('.cb-settings__config__item:has(input.tcf-option)').toggle();
     });
 }
