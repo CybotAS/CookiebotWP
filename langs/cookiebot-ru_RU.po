@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-02-15 13:52+0100\n"
-"PO-Revision-Date: 2023-08-22 14:06+0200\n"
+"PO-Revision-Date: 2023-09-01 16:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -1631,10 +1631,10 @@ msgstr "Интеграция с IAB:"
 
 #: view/admin/settings/iab-page.php:5
 msgid ""
-"If you want to use the IAB Framework TCF v2.0 within your Consent Management Platform (CMP) you can enable it on the right. Be "
+"If you want to use the IAB Framework TCF within your Consent Management Platform (CMP) you can enable it on the right. Be "
 "aware that activating this could override some of the configurations you made with the default setup defined by the IAB."
 msgstr ""
-"Если вы хотите использовать IAB Framework TCF 2.0 в рамках Consent Management Platform (CMP), вы можете включить эту опцию "
+"Если вы хотите использовать IAB Framework TCF в рамках Consent Management Platform (CMP), вы можете включить эту опцию "
 "справа. Имейте в виду, что активация может переопределить некоторые настройки, выполненные с помощью настройки по умолчанию, "
 "заданной IAB."
 
@@ -1643,8 +1643,32 @@ msgid "Read more on IAB with Cookiebot CMP here"
 msgstr "Подробнее о IAB с Cookiebot CMP"
 
 #: view/admin/settings/iab-page.php:14
-msgid "IAB TCF v2.0 integration"
-msgstr "Интеграция с IAB TCF 2.0"
+msgid "IAB TCF integration"
+msgstr "Интеграция с IAB TCF"
+
+#: view/admin/settings/iab-page.php:32
+msgid "TCF version:"
+msgstr "версия TCF"
+
+#: view/admin/settings/iab-page.php:34
+msgid ""
+"In May 2023 The Interactive Advertising Bureau (IAB) announced the latest version of its Transparency "
+"and Consent Framework (TCF), or TCF v2.2, which must be implemented by all consent management platforms (CMPs) "
+"by November 20, 2023. We will migrate you automatically on November 20,2023, but we recommend to do it manually before. "
+"To manually switch the version before please select it on the right."
+msgstr ""
+"В мае 2023 года Бюро интерактивной рекламы (IAB) объявило о выпуске последней версии системы "
+"прозрачности и согласия (TCF) или (TCF v2.2), которая должна быть внедрена на всех платформах управления согласием (CMP) "
+"к 20 ноября 2023 года. Мы автоматически переведем вас на новую версию 20 ноября 2023 года, но рекомендуем сделать это вручную. "
+"Чтобы вручную сменить версию ранее, выберите ее справа."
+
+#: view/admin/settings/iab-page.php:40
+msgid "Select the TCF Version below"
+msgstr "Выберите версию TCF ниже"
+
+#: view/admin/settings/iab-page.php:57
+msgid "New"
+msgstr "новая версия"
 
 #: view/admin/settings/legislations-page.php:37 view/admin/settings/multiple-configuration/page.php:47
 msgid "Domain Group ID"
