@@ -18,7 +18,7 @@ interface Cookie_Consent_Interface {
 	 *
 	 * @since 1.2.0
 	 */
-	public function add_state( $state );
+	public function add_state( string $state );
 
 	/**
 	 * Returns cookiebot cookie consent state
@@ -27,7 +27,7 @@ interface Cookie_Consent_Interface {
 	 *
 	 * @since 1.2.0
 	 */
-	public function get_cookie_states();
+	public function get_cookie_states(): array;
 
 	/**
 	 * Checks if the cookie state is accepted
@@ -38,7 +38,7 @@ interface Cookie_Consent_Interface {
 	 *
 	 * @since 1.2.0
 	 */
-	public function is_cookie_state_accepted( $state );
+	public function is_cookie_state_accepted( string $state ): bool;
 
 	/**
 	 * Checks if the cookie states are accepted.
@@ -49,5 +49,5 @@ interface Cookie_Consent_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function are_cookie_states_accepted( array $states );
+	public function are_cookie_states_accepted( array $states ): bool;
 }

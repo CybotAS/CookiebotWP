@@ -366,9 +366,9 @@ class Settings_Config {
 	 * @throws InvalidArgumentException
 	 * @since 1.3.0
 	 */
-	public function jetpack_addon_callback( $args ) {
-		$widget = isset( $args['widget'] ) ? $args['widget'] : null;
-		$addon  = isset( $args['addon'] ) ? $args['addon'] : null;
+	public function jetpack_addon_callback( array $args ) {
+		$widget = $args['widget'] ?? null;
+		$addon  = $args['addon'] ?? null;
 
 		if ( ! is_a( $widget, Base_Jetpack_Widget::class ) ) {
 			throw new InvalidArgumentException();
@@ -384,9 +384,7 @@ class Settings_Config {
 		$widget_option_name                   = $widget->get_widget_option_name();
 		$widget_placeholders_array            = $widget->get_widget_placeholders();
 		$widget_placeholders_array_keys       = array_keys( $widget_placeholders_array );
-		$first_placeholder_language           = isset( $widget_placeholders_array_keys[0] )
-			? $widget_placeholders_array_keys[0]
-			: null;
+		$first_placeholder_language           = $widget_placeholders_array_keys[0] ?? null;
 		$site_default_languages_dropdown_html = cookiebot_addons_get_dropdown_languages(
 			'placeholder_select_language',
 			str_replace(
@@ -468,7 +466,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function header_available_addons() {
-		 include_view( self::AVAILABLE_TAB_HEADER_TEMPLATE );
+		include_view( self::AVAILABLE_TAB_HEADER_TEMPLATE );
 	}
 
 	/**
@@ -482,7 +480,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function available_addon_callback( $args ) {
-		$addon = isset( $args['addon'] ) ? $args['addon'] : null;
+		$addon = $args['addon'] ?? null;
 
 		if ( ! is_a( $addon, Base_Cookiebot_Addon::class ) ) {
 			throw new InvalidArgumentException();
@@ -499,9 +497,7 @@ class Settings_Config {
 		);
 		$addon_placeholders_array             = $addon->get_placeholders();
 		$addon_placeholders_array_keys        = array_keys( $addon_placeholders_array );
-		$first_placeholder_language           = isset( $addon_placeholders_array_keys[0] )
-			? $addon_placeholders_array_keys[0]
-			: null;
+		$first_placeholder_language           = $addon_placeholders_array_keys[0] ?? null;
 		$addon_placeholders                   = array_map(
 			function (
 				$language,
@@ -741,10 +737,7 @@ class Settings_Config {
 	/**
 	 * Post action hook after enabling the addon on the settings page.
 	 *
-	 * @param $old_value
 	 * @param $value
-	 * @param $option_name
-	 *
 	 * @throws Exception
 	 * @since 2.2.0
 	 */

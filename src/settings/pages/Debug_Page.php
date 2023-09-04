@@ -61,11 +61,14 @@ class Debug_Page implements Settings_Page_Interface {
 		include_view( 'admin/settings/debug-page.php', array( 'debug_output' => $debug_output ) );
 	}
 
-	private function get_ignored_scripts() {
+	/**
+	 * @return string
+	 */
+	private function get_ignored_scripts(): string {
 		$ignored_scripts = get_option( 'cookiebot-ignore-scripts' );
 
 		$ignored_scripts = array_map(
-			function( $ignore_tag ) {
+			function ( $ignore_tag ) {
 				return trim( $ignore_tag );
 			},
 			explode( PHP_EOL, $ignored_scripts )
@@ -77,9 +80,12 @@ class Debug_Page implements Settings_Page_Interface {
 	}
 
 	/**
+	 *
+	 * @return string
+	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function prepare_debug_data() {
+	public function prepare_debug_data(): string {
 		global $wpdb;
 
 		$cookiebot_javascript_helper = new Cookiebot_Javascript_Helper();
@@ -135,7 +141,7 @@ class Debug_Page implements Settings_Page_Interface {
 	 *
 	 * @return string
 	 */
-	private function print_option_if_not_empty( $option_name ) {
+	private function print_option_if_not_empty( string $option_name ): string {
 		$option_value = get_option( $option_name );
 		return $option_value !== '' ? $option_value : 'None';
 	}
@@ -147,7 +153,7 @@ class Debug_Page implements Settings_Page_Interface {
 	 *
 	 * @return string
 	 */
-	private function print_option_enabled( $option_name ) {
+	private function print_option_enabled( string $option_name ): string {
 		return $this->print_option_active( $option_name, 'Enabled', 'Not enabled' );
 	}
 
@@ -161,7 +167,7 @@ class Debug_Page implements Settings_Page_Interface {
 	 *
 	 * @return string
 	 */
-	private function print_option_active( $option_name, $active_text = 'Yes', $disabled_text = 'No' ) {
+	private function print_option_active( string $option_name, string $active_text = 'Yes', string $disabled_text = 'No' ): string {
 		return get_option( $option_name ) === '1' ? $active_text : $disabled_text;
 	}
 
@@ -170,7 +176,7 @@ class Debug_Page implements Settings_Page_Interface {
 	 *
 	 * @return string
 	 */
-	private function print_wp_consent_level_api_mapping() {
+	private function print_wp_consent_level_api_mapping(): string {
 		$output = '';
 
 		$consent_api_helper = new Consent_API_Helper();
@@ -197,7 +203,7 @@ class Debug_Page implements Settings_Page_Interface {
 	 *
 	 * @return string
 	 */
-	private function print_activated_addons() {
+	private function print_activated_addons(): string {
 		$output = '';
 
 		try {
@@ -223,7 +229,7 @@ class Debug_Page implements Settings_Page_Interface {
 	 *
 	 * @return string
 	 */
-	private function print_activated_plugins() {
+	private function print_activated_plugins(): string {
 		if ( ! function_exists( 'get_plugins' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}

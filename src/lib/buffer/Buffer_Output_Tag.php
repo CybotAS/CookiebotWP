@@ -58,11 +58,10 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 	 * @param $tag
 	 * @param $priority
 	 * @param array    $keywords
-	 * @param boolean  $use_cache
 	 *
 	 * @since 1.2.0
 	 */
-	public function __construct( $tag, $priority, $keywords = array(), $use_cache = true ) {
+	public function __construct( $tag, $priority, array $keywords = array() ) {
 		$this->tag      = $tag;
 		$this->priority = $priority;
 		$this->keywords = $keywords;
@@ -113,13 +112,13 @@ class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 	/**
 	 * Manipulate google analytic scripts to cookiebot and return it back
 	 *
-	 * @param $buffer
+	 * @param string $buffer
 	 *
 	 * @return null|string|string[]
 	 *
 	 * @since 1.1.0
 	 */
-	public function manipulate_script( $buffer ) {
+	public function manipulate_script( string $buffer ) {
 		/**
 		 * Get wp head scripts from the cache
 		 */

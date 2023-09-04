@@ -18,24 +18,24 @@ class Settings_Service implements Settings_Service_Interface {
 	/**
 	 * Settings_Service constructor.
 	 *
-	 * @param $container
+	 * @param Dependency_Container $container
 	 *
 	 * @since 1.3.0
 	 */
-	public function __construct( $container ) {
+	public function __construct( Dependency_Container $container ) {
 		$this->container = $container;
 	}
 
 	/**
 	 * Returns true if the addon is enabled in the backend
 	 *
-	 * @param $addon
+	 * @param string $addon
 	 *
 	 * @return bool
 	 *
 	 * @since 1.3.0
 	 */
-	public function is_addon_enabled( $addon ) {
+	public function is_addon_enabled( string $addon ): bool {
 		$option = get_option( static::OPTION_NAME );
 
 		return isset( $option[ $addon ]['enabled'] );
@@ -51,7 +51,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_cookie_types( $addon, $default = array() ) {
+	public function get_cookie_types( string $addon, array $default = array() ): array {
 		$option = get_option( static::OPTION_NAME );
 
 		if ( isset( $option[ $addon ]['cookie_type'] ) && is_array( $option[ $addon ]['cookie_type'] ) ) {
@@ -71,7 +71,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @since 2.4.5
 	 */
-	public function get_addon_regex( $addon, $default = '' ) {
+	public function get_addon_regex( string $addon, string $default = '' ): string {
 		$option = get_option( static::OPTION_NAME );
 
 		if ( isset( $option[ $addon ]['regex'] ) ) {
@@ -85,7 +85,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @return Generator
 	 * @throws Exception
 	 */
-	public function get_addons() {
+	public function get_addons(): Generator {
 		foreach ( $this->container->get( 'addons_list' ) as $addon ) {
 			yield $this->container->get( $addon );
 		}
@@ -99,7 +99,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_active_addons() {
+	public function get_active_addons(): array {
 		$active_addons = array();
 
 		foreach ( $this->get_addons() as $addon ) {
@@ -120,13 +120,13 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @param       $option_key
 	 * @param       $widget
-	 * @param  array      $default
+	 * @param array      $default
 	 *
 	 * @return array
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_widget_cookie_types( $option_key, $widget, $default = array() ) {
+	public function get_widget_cookie_types( $option_key, $widget, array $default = array() ): array {
 		$option = get_option( $option_key );
 
 		if ( isset( $option[ $widget ]['cookie_type'] ) && is_array( $option[ $widget ]['cookie_type'] ) ) {
@@ -144,7 +144,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @return bool
 	 */
-	public function is_widget_enabled( $option_key, $widget ) {
+	public function is_widget_enabled( $option_key, $widget ): bool {
 		$option = get_option( $option_key );
 
 		if ( isset( $option[ $widget ] ) && ! isset( $option[ $widget ]['enabled'] ) ) {
@@ -162,7 +162,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @return bool
 	 */
-	public function is_widget_placeholder_enabled( $option_key, $widget ) {
+	public function is_widget_placeholder_enabled( $option_key, $widget ): bool {
 		$option = get_option( $option_key );
 
 		if ( isset( $option[ $widget ] ) && ! isset( $option[ $widget ]['placeholder']['enabled'] ) ) {
@@ -182,7 +182,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @since 1.8.0
 	 */
-	public function widget_has_placeholder( $option_key, $widget_key ) {
+	public function widget_has_placeholder( $option_key, $widget_key ): bool {
 		$option = get_option( $option_key );
 
 		if ( isset( $option[ $widget_key ]['placeholder']['languages'] ) ) {
@@ -198,7 +198,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @return array
 	 */
-	public function get_widget_placeholders( $option_key, $widget_key ) {
+	public function get_widget_placeholders( $option_key, $widget_key ): array {
 		$option = get_option( $option_key );
 
 		if ( isset( $option[ $widget_key ]['placeholder']['languages'] ) &&
@@ -214,7 +214,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @return array
 	 */
-	public function get_placeholders( $option_key ) {
+	public function get_placeholders( $option_key ): array {
 		$option = get_option( static::OPTION_NAME );
 
 		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) &&
@@ -234,7 +234,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @since 1.8.0
 	 */
-	public function has_placeholder( $option_key ) {
+	public function has_placeholder( $option_key ): bool {
 		$option = get_option( static::OPTION_NAME );
 
 		if ( isset( $option[ $option_key ]['placeholder']['languages'] ) ) {
@@ -253,7 +253,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @since 1.8.0
 	 */
-	public function is_placeholder_enabled( $option_key ) {
+	public function is_placeholder_enabled( $option_key ): bool {
 		$option = get_option( static::OPTION_NAME );
 
 		if ( isset( $option[ $option_key ]['placeholder']['enabled'] ) ) {
@@ -269,13 +269,13 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @param $option_key
 	 * @param $default_placeholder
 	 * @param $cookies
-	 * @param  string              $src
+	 * @param string              $src
 	 *
 	 * @return bool|mixed
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_placeholder( $option_key, $default_placeholder, $cookies, $src = '' ) {
+	public function get_placeholder( $option_key, $default_placeholder, $cookies, string $src = '' ) {
 		$option = get_option( static::OPTION_NAME );
 
 		if ( isset( $option[ $option_key ]['placeholder']['enabled'] ) ) {
@@ -314,13 +314,13 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @param        $option_key
 	 * @param        $default_placeholder
 	 * @param        $cookies
-	 * @param  string              $src
+	 * @param string              $src
 	 *
 	 * @return mixed
 	 *
 	 * @since 1.9.0
 	 */
-	private function get_translated_placeholder( $option, $option_key, $default_placeholder, $cookies, $src = '' ) {
+	private function get_translated_placeholder( $option, $option_key, $default_placeholder, $cookies, string $src = '' ) {
 		$current_lang = cookiebot_get_current_site_language();
 
 		if ( $current_lang === false || $current_lang === '' ) {
@@ -411,7 +411,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @since 2.2.0
 	 */
-	public function post_hook_after_enabling_addon_on_settings_page( $addon_option_name ) {
+	public function post_hook_after_enabling_addon_on_settings_page( string $addon_option_name ) {
 		$addons = $this->get_addons();
 
 		/** @var Base_Cookiebot_Addon $addon */

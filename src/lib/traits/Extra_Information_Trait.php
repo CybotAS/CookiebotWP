@@ -10,7 +10,7 @@ trait Extra_Information_Trait {
 	 *
 	 * @return string[]
 	 */
-	public function get_extra_information() {
+	public function get_extra_information(): array {
 		return array();
 	}
 }

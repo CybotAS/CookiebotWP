@@ -118,5 +118,4 @@ class Goodreads_Jetpack_Widget extends Base_Jetpack_Widget {
 					</div>';
 		}
 	}
-
 }

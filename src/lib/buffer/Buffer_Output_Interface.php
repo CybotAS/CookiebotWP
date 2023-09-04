@@ -12,7 +12,7 @@ interface Buffer_Output_Interface {
 	 *
 	 * @since 1.2.0
 	 */
-	public function add_tag( $tag_name, $priority, $keywords = array(), $use_cache = true );
+	public function add_tag( string $tag_name, int $priority, array $keywords = array(), bool $use_cache = true );
 
 	/**
 	 * Process every tag
@@ -28,5 +28,5 @@ interface Buffer_Output_Interface {
 	 *
 	 * @since 1.2.0
 	 */
-	public function has_action();
+	public function has_action(): bool;
 }

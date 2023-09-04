@@ -27,7 +27,7 @@ class Simple_Share_Buttons_Adder extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * @return array
 	 */
-	public function get_extra_information() {
+	public function get_extra_information(): array {
 		return array(
 			__( 'Blocks Simple Share Buttons Adder.', 'cookiebot' ),
 		);

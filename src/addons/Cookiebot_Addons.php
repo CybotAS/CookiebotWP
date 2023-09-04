@@ -47,7 +47,7 @@ class Cookiebot_Addons {
 	 *
 	 * @version 2.2.0
 	 */
-	public static function instance() {
+	public static function instance(): Cookiebot_Addons {
 		if ( ! is_a( self::$instance, self::class ) ) {
 			try {
 				self::$instance = new self();

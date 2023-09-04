@@ -31,7 +31,7 @@ class Woocommerce_Google_Analytics_Pro extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * Return attributes for script tags
 	 */
-	public function cookiebot_addon_woocommerce_google_analytics_pro_script_attributes() {
+	public function cookiebot_addon_woocommerce_google_analytics_pro_script_attributes(): array {
 		$attr                       = array();
 		$attr['type']               = 'text/plain';
 		$attr['data-cookieconsent'] = implode( ',', $this->get_cookie_types() );

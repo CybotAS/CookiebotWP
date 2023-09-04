@@ -9,14 +9,14 @@ abstract class Base_Cookiebot_Theme_Addon extends Base_Cookiebot_Addon {
 	/**
 	 * @return bool
 	 */
-	final public function is_addon_installed() {
+	final public function is_addon_installed(): bool {
 		return wp_get_theme( static::ADDON_NAME )->exists();
 	}
 
 	/**
 	 * @return bool
 	 */
-	final public function is_addon_activated() {
+	final public function is_addon_activated(): bool {
 		$addon = strtolower( static::ADDON_NAME );
 
 		$addon_theme      = wp_get_theme( $addon );
@@ -38,7 +38,7 @@ abstract class Base_Cookiebot_Theme_Addon extends Base_Cookiebot_Addon {
 	 * @return string
 	 * @throws InstallationException
 	 */
-	final public function get_version() {
+	final public function get_version(): string {
 		$theme = wp_get_theme( static::ADDON_NAME );
 		if ( ! $theme->exists() ) {
 			throw new InstallationException( 'Check if theme is installed before calling get_version()' );

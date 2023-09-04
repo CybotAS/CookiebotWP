@@ -349,7 +349,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 */
 	public function cookiebot_addon_embed_autocorrect_handle_video(
 		$output
-	) {
+	): string {
 		/* Find src in markup */
 		preg_match( '| src=\"([^\"]*)\"|', $output, $match );
 		$src = $match[1];
@@ -387,7 +387,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 */
 	public function cookiebot_addon_embed_autocorrect_handle_audio(
 		$output
-	) {
+	): string {
 		/* Find src in markup */
 		preg_match( '| src=\"([^\"]*)\"|', $output, $match );
 		$src = $match[1];
@@ -427,7 +427,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 *
 	 * @return string
 	 */
-	private function generate_placeholder_with_src( $src = '' ) {
+	private function generate_placeholder_with_src( $src = '' ): string {
 		$cookie_content_notice  = '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_cookie_types() ) . '">';
 		$cookie_content_notice .= $this->get_placeholder( $src );
 		$cookie_content_notice .= '</div>';
@@ -438,7 +438,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	/**
 	 * @return array
 	 */
-	public function get_extra_information() {
+	public function get_extra_information(): array {
 		return array(
 			__(
 				'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
@@ -455,7 +455,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 *
 	 * @since 2.4.6
 	 */
-	private function get_regex() {
+	private function get_regex(): string {
 		return apply_filters(
 			'cybot_cookiebot_embed_regex',
 			$this->settings->get_addon_regex( self::OPTION_NAME, $this->get_default_regex() )
@@ -469,7 +469,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 *
 	 * @since 2.4.6
 	 */
-	private function get_default_regex() {
+	private function get_default_regex(): string {
 		return apply_filters(
 			'cybot_cookiebot_embed_default_regex',
 			'/<iframe[^>]* src=("|\').*(facebook\.com|youtu\.be|youtube\.com|youtube-nocookie\.com|player\.vimeo\.com|soundcloud\.com|spotify\.com|speakerdeck\.com|slideshare\.net|screencast\.com|reverbnation\.com|mixcloud\.com|cloudup\.com|animoto\.com|video\.WordPress\.com|embed\.ted\.com|embedly\.com|kickstarter\.com).*[^>].*>.*?<\/iframe>/mi'
@@ -483,7 +483,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 *
 	 * @since 2.4.6
 	 */
-	private function is_regex_default() {
+	private function is_regex_default(): bool {
 		return $this->get_regex() === $this->get_default_regex();
 	}
 
@@ -491,7 +491,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 * @return string
 	 * @throws InvalidArgumentException
 	 */
-	public function get_extra_addon_options_html() {
+	public function get_extra_addon_options_html(): string {
 		$view_args = array(
 			'addon_option_name' => self::OPTION_NAME,
 			'regex'             => $this->get_regex(),
@@ -513,7 +513,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	 *
 	 * @since 3.6.3
 	 */
-	public function get_default_enable_setting() {
+	public function get_default_enable_setting(): array {
 		return array(
 			'enabled'     => 1,
 			'cookie_type' => static::DEFAULT_COOKIE_TYPES,
@@ -525,7 +525,7 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 	/**
 	 * @return string
 	 */
-	public function get_version() {
+	public function get_version(): string {
 		return '0.0.1';
 	}
 }

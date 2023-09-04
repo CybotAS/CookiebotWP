@@ -19,7 +19,10 @@ class Cookiebot_Javascript_Helper {
 		( new Cookiebot_Declaration_Shortcode() )->register_hooks();
 	}
 
-	private function get_data_regions() {
+	/**
+	 * @return array
+	 */
+	private function get_data_regions(): array {
 		$is_multi_config      = ! empty( get_option( 'cookiebot-multiple-config' ) ) ?
 			get_option( 'cookiebot-multiple-config' ) :
 			false;
@@ -57,7 +60,7 @@ class Cookiebot_Javascript_Helper {
 	 * @return string
 	 * @throws InvalidArgumentException
 	 */
-	public function include_cookiebot_js( $return_html = false ) {
+	public function include_cookiebot_js( bool $return_html = false ): string {
 		$cbid = Cookiebot_WP::get_cbid();
 		if ( ! empty( $cbid ) && ! defined( 'COOKIEBOT_DISABLE_ON_PAGE' ) ) {
 			if (
@@ -113,7 +116,7 @@ class Cookiebot_Javascript_Helper {
 	 * @return string
 	 * @throws InvalidArgumentException
 	 */
-	public function include_google_tag_manager_js( $return_html = false ) {
+	public function include_google_tag_manager_js( bool $return_html = false ): string {
 		$option            = get_option( 'cookiebot-gtm' );
 		$blocking_mode     = get_option( 'cookiebot-cookie-blocking-mode' );
 		$cookie_categories = get_option( 'cookiebot-gtm-cookies' );
@@ -148,7 +151,7 @@ class Cookiebot_Javascript_Helper {
 	 * @return string
 	 * @throws InvalidArgumentException
 	 */
-	public function include_google_consent_mode_js( $return_html = false ) {
+	public function include_google_consent_mode_js( bool $return_html = false ): string {
 		$option                     = get_option( 'cookiebot-gcm' );
 		$blocking_mode              = get_option( 'cookiebot-cookie-blocking-mode' );
 		$is_url_passthrough_enabled = '1' === (string) get_option( 'cookiebot-gcm-url-passthrough', 1 );
@@ -177,6 +180,11 @@ class Cookiebot_Javascript_Helper {
 		return '';
 	}
 
+	/**
+	 * @param $blocking_mode
+	 * @param $categories
+	 * @return false|string
+	 */
 	private function get_consent_attribute( $blocking_mode, $categories ) {
 		$attribute = false;
 

@@ -39,7 +39,7 @@ class Cookiebot_Gutenberg_Declaration_Block {
 	 * @since       3.7.0
 	 * @version 3.7.0
 	 */
-	public function block_cookie_declaration() {
+	public function block_cookie_declaration(): string {
 		return Cookiebot_Declaration_Shortcode::show_declaration();
 	}
 

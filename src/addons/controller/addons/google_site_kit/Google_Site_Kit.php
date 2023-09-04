@@ -28,7 +28,7 @@ class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * @return array
 	 */
-	public function get_extra_information() {
+	public function get_extra_information(): array {
 		return array(
 			__( 'Blocks Google Analytics scripts', 'cookiebot' ),
 		);

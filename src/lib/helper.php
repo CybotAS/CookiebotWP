@@ -12,7 +12,7 @@ namespace cybot\cookiebot\lib {
 	 * @param string $deprecated_name
 	 * @param string $alternative_name
 	 */
-	function deprecation_error( $type, $deprecated_name, $alternative_name ) {
+	function deprecation_error( string $type, string $deprecated_name, string $alternative_name ) {
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
 		trigger_error(
 			esc_html( $type . ' `' . $deprecated_name . '` is deprecated. Use `' . $alternative_name . '` instead.' ),
@@ -26,7 +26,7 @@ namespace cybot\cookiebot\lib {
 	 * @return boolean  True    If attributes always should be added
 	 *                  False   If attributes only should be added if consent no given
 	 */
-	function cookiebot_addons_enabled_cache_plugin() {
+	function cookiebot_addons_enabled_cache_plugin(): bool {
 		// WP Rocket - We need to ensure we not cache tags without attributes
 		if ( defined( 'WP_ROCKET_PATH' ) ||
 			// W3 Total Cache
@@ -57,7 +57,7 @@ namespace cybot\cookiebot\lib {
 	 *
 	 * @since 1.2.0
 	 */
-	function cookiebot_addons_remove_class_action( $action, $class, $method, $priority = 10 ) {
+	function cookiebot_addons_remove_class_action( string $action, string $class, string $method, int $priority = 10 ): bool {
 		global $wp_filter;
 		$deleted = false;
 
@@ -212,7 +212,7 @@ namespace cybot\cookiebot\lib {
 	 * @since 1.3.0
 	 * @version 3.9.1
 	 */
-	function cookiebot_addons_output_cookie_types( $cookie_types ) {
+	function cookiebot_addons_output_cookie_types( $cookie_types ): string {
 		if ( is_array( $cookie_types ) && count( $cookie_types ) > 0 ) {
 			return implode(
 				', ',
@@ -239,7 +239,7 @@ namespace cybot\cookiebot\lib {
 	 *
 	 * @since 3.9.1
 	 */
-	function cookiebot_translate_type_name( $type ) {
+	function cookiebot_translate_type_name( string $type ): string {
 		switch ( $type ) {
 			case 'marketing':
 				$translated_name = esc_html__( 'marketing', 'cookiebot' );
@@ -267,7 +267,7 @@ namespace cybot\cookiebot\lib {
 	 *
 	 * @version 3.9.0
 	 */
-	function cookiebot_addons_cookieconsent_optout( $cookie_types ) {
+	function cookiebot_addons_cookieconsent_optout( $cookie_types ): string {
 		$output = '';
 
 		foreach ( $cookie_types as $cookie_type ) {
@@ -336,7 +336,7 @@ namespace cybot\cookiebot\lib {
 	 *
 	 * @return array
 	 */
-	function cookiebot_translate_cookie_names( $cookie_names ) {
+	function cookiebot_translate_cookie_names( array $cookie_names ): array {
 		$translated_cookie_names = array(
 			'preferences' => esc_html__( 'preferences', 'cookiebot' ),
 			'statistics'  => esc_html__( 'statistics', 'cookiebot' ),
@@ -361,7 +361,7 @@ namespace cybot\cookiebot\lib {
 	 *
 	 * @return string
 	 */
-	function cookiebot_translate_placeholder( $placeholder ) {
+	function cookiebot_translate_placeholder( string $placeholder ): string {
 		$translated_placeholder = array(
 			// translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 			'Please accept [renew_consent]%cookie_types[/renew_consent] cookies.' => esc_html__(
@@ -449,7 +449,7 @@ namespace cybot\cookiebot\lib {
 	 *
 	 * @since 1.8.0
 	 */
-	function cookiebot_addons_get_dropdown_languages( $class, $name, $selected ) {
+	function cookiebot_addons_get_dropdown_languages( $class, $name, $selected ): string {
 		$args     = array(
 			'name'                     => $name,
 			'selected'                 => $selected,
@@ -472,7 +472,7 @@ namespace cybot\cookiebot\lib {
 	 * @throws Exception
 	 * @since 3.11.0
 	 */
-	function cookiebot_addons_get_domain_from_url( $url ) {
+	function cookiebot_addons_get_domain_from_url( string $url ): string {
 		$parsed_url = wp_parse_url( $url );
 
 		// relative url does not have host so use home url domain
@@ -491,7 +491,7 @@ namespace cybot\cookiebot\lib {
 	 *
 	 * @since 3.11.0
 	 */
-	function cookiebot_addons_get_home_url_domain() {
+	function cookiebot_addons_get_home_url_domain(): string {
 		$home_url = wp_parse_url( home_url() );
 		/** @var $host string */
 		$host = $home_url['host'];
@@ -522,9 +522,9 @@ namespace cybot\cookiebot\lib {
 
 	/**
 	 * @param string $relative_path
-	 * @throws InvalidArgumentException
+	 * @param array  $view_args
 	 */
-	function include_view( $relative_path, array $view_args = array() ) {
+	function include_view( string $relative_path, array $view_args = array() ) {
 		if ( isset( $view_args['absolute_path'] ) ) {
 			throw new InvalidArgumentException( 'Param $view_args array should not include an "absolute_path" key' );
 		}
@@ -541,7 +541,7 @@ namespace cybot\cookiebot\lib {
 	 * @param string $relative_path
 	 * @throws InvalidArgumentException
 	 */
-	function get_view_html( $relative_path, array $view_args = array() ) {
+	function get_view_html( string $relative_path, array $view_args = array() ): string {
 		ob_start();
 		include_view( $relative_path, $view_args );
 		return (string) ob_get_clean();
@@ -553,7 +553,7 @@ namespace cybot\cookiebot\lib {
 	 * @return string
 	 * @throws InvalidArgumentException
 	 */
-	function asset_path( $relative_path ) {
+	function asset_path( string $relative_path ): string {
 		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path;
 		if ( ! file_exists( $absolute_path ) ) {
 			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
@@ -567,7 +567,7 @@ namespace cybot\cookiebot\lib {
 	 * @return string
 	 * @throws InvalidArgumentException
 	 */
-	function asset_url( $relative_path ) {
+	function asset_url( string $relative_path ): string {
 		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path;
 		$url           = esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path );
 		if ( ! file_exists( $absolute_path ) || empty( $url ) ) {
@@ -584,7 +584,7 @@ namespace cybot\cookiebot\lib {
 	 *
 	 * @return string
 	 */
-	function cookiebot_assist( $type = 'statistics' ) {
+	function cookiebot_assist( $type = 'statistics' ): string {
 		$type_array = array_filter(
 			is_array( $type ) ? $type : array( $type ),
 			function ( $type ) {
@@ -607,7 +607,7 @@ namespace cybot\cookiebot\lib {
 	 * @since   1.2
 	 * @version 2.2.2
 	 */
-	function cookiebot_active() {
+	function cookiebot_active(): bool {
 		$cbid = Cookiebot_WP::get_cbid();
 		return ! empty( $cbid );
 	}
@@ -620,7 +620,7 @@ namespace cybot\cookiebot\lib {
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 */
-	function cookiebot() {
+	function cookiebot(): Cookiebot_WP {
 		return Cookiebot_WP::instance();
 	}
 

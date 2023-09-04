@@ -108,7 +108,7 @@ class Cookiebot_WP {
 	 * @since 3.3.1
 	 * @version 3.4.1
 	 */
-	public static function can_current_user_edit_theme() {
+	public static function can_current_user_edit_theme(): bool {
 		if ( is_user_logged_in() &&
 			(
 				current_user_can( 'edit_themes' ) ||
@@ -125,7 +125,7 @@ class Cookiebot_WP {
 	/**
 	 * @return string
 	 */
-	public static function get_cbid() {
+	public static function get_cbid(): string {
 		$network_setting = (string) get_site_option( 'cookiebot-cbid', '' );
 		$setting         = (string) get_option( 'cookiebot-cbid', $network_setting );
 
@@ -135,7 +135,7 @@ class Cookiebot_WP {
 	/**
 	 * @return string
 	 */
-	public static function get_cookie_blocking_mode() {
+	public static function get_cookie_blocking_mode(): string {
 		$allowed_modes   = array( 'auto', 'manual' );
 		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
 		$setting         = (string) get_option( 'cookiebot-cookie-blocking-mode', $network_setting );
@@ -146,23 +146,25 @@ class Cookiebot_WP {
 	/**
 	 * @return bool
 	 */
-	public static function check_network_auto_blocking_mode() {
+	public static function check_network_auto_blocking_mode(): bool {
 		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode' );
 
-		return $network_setting === 'auto' ? true : false;
+		return $network_setting === 'auto';
 	}
 
 	/**
 	 * @return string
 	 */
-	public static function get_cookie_categories_status() {
+	public static function get_cookie_categories_status(): string {
 		return self::get_cookie_blocking_mode() === 'auto' ? 'disabled' : '';
 	}
 
 	/**
+	 * @param $option
+	 * @param $category
 	 * @return bool
 	 */
-	public static function is_cookie_category_selected( $option, $category ) {
+	public static function is_cookie_category_selected( $option, $category ): bool {
 		$categories = get_option( $option );
 		if ( ! $categories || ! is_array( $categories ) ) {
 			return false;
@@ -177,7 +179,7 @@ class Cookiebot_WP {
 	 * @version 4.2.8
 	 * @since       3.1.0
 	 */
-	public static function cookiebot_disabled_in_admin() {
+	public static function cookiebot_disabled_in_admin(): bool {
 		if ( ( is_network_admin() && get_site_option( 'cookiebot-nooutput-admin', false ) ) ||
 			( ! is_network_admin() && get_site_option( 'cookiebot-nooutput-admin', false ) ) ||
 			( ! is_network_admin() && get_option( 'cookiebot-nooutput-admin', false ) ) ) {
@@ -224,18 +226,22 @@ class Cookiebot_WP {
 		}
 	}
 
-	public function set_settings_action_link( $actions ) {
+	/**
+	 * @param $actions
+	 * @return array
+	 */
+	public function set_settings_action_link( array $actions ): array {
 		$cblinks = array(
 			'<a href="' . esc_url( add_query_arg( 'page', 'cookiebot', admin_url( 'admin.php' ) ) ) . '">' . esc_html__( 'Dashboard', 'cookiebot' ) . '</a>',
 		);
-		$actions = array_merge( $actions, $cblinks );
-		return $actions;
+
+		return array_merge( $actions, $cblinks );
 	}
 
 	/**
 	 * @return string
 	 */
-	public static function get_manager_language() {
+	public static function get_manager_language(): string {
 		$locale          = get_locale();
 		$supported_langs = array(
 			'de_DE' => 'de',

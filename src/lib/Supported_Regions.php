@@ -3,7 +3,7 @@ namespace cybot\cookiebot\lib;
 
 class Supported_Regions {
 
-	public static function get() {
+	public static function get(): array {
 		$regions = array(
 			'AF'    => __( 'Afghanistan', 'cookiebot' ),
 			'AL'    => __( 'Albania', 'cookiebot' ),

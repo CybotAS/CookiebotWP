@@ -49,7 +49,7 @@ class Pixel_Caffeine extends Base_Cookiebot_Plugin_Addon {
 	 *
 	 * @since 1.8.0
 	 */
-	public function get_default_placeholder() {
+	public function get_default_placeholder(): string {
 		return 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook pixel.';
 	}
 }

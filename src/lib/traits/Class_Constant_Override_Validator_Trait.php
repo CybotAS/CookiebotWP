@@ -55,7 +55,7 @@ trait Class_Constant_Override_Validator_Trait {
 	 *
 	 * @throws Exception
 	 */
-	protected function validate_required_string_class_constant( $required_string_constant_name ) {
+	protected function validate_required_string_class_constant( string $required_string_constant_name ) {
 		if ( ! is_string( $required_string_constant_name ) ) {
 			throw new InvalidArgumentException();
 		}
@@ -87,7 +87,7 @@ trait Class_Constant_Override_Validator_Trait {
 	 *
 	 * @throws Exception
 	 */
-	protected function validate_required_boolean_class_constant( $required_boolean_constant_name ) {
+	protected function validate_required_boolean_class_constant( string $required_boolean_constant_name ) {
 		if ( ! is_string( $required_boolean_constant_name ) ) {
 			throw new InvalidArgumentException();
 		}

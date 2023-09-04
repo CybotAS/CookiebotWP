@@ -128,7 +128,7 @@ class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * Return attributes for script tags
 	 */
-	public function cookiebot_addon_facebook_for_woocommerce_script_attributes() {
+	public function cookiebot_addon_facebook_for_woocommerce_script_attributes(): array {
 		$attr                       = array();
 		$attr['type']               = 'text/plain';
 		$attr['data-cookieconsent'] = implode( ',', $this->get_cookie_types() );

@@ -14,7 +14,7 @@ interface Buffer_Output_Tag_Interface {
 	 * @version 1.3.0
 	 * @since 1.1.0
 	 */
-	public function __construct( $tag, $priority, $keywords = array() );
+	public function __construct( $tag, $priority, array $keywords = array() );
 
 	/**
 	 * Start buffering
@@ -39,5 +39,5 @@ interface Buffer_Output_Tag_Interface {
 	 *
 	 * @since 1.1.0
 	 */
-	public function manipulate_script( $buffer );
+	public function manipulate_script( string $buffer );
 }

@@ -89,5 +89,4 @@ class Cookiebot_Declaration_Widget extends WP_Widget {
 		);
 		include_view( 'frontend/widgets/cookiebot-declaration-widget.php', $view_args );
 	}
-
 }

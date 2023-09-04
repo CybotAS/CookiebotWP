@@ -5,7 +5,7 @@
 			<?php esc_html_e( 'If you want to use the IAB Framework TCF v2.0 within your Consent Management Platform (CMP) you can enable it on the right. Be aware that activating this could override some of the configurations you made with the default setup defined by the IAB.', 'cookiebot' ); ?>
 		</p>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/360007652694-Cookiebot-and-the-IAB-Consent-Framework"
-		   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 			<?php esc_html_e( 'Read more on IAB with Cookiebot CMP here', 'cookiebot' ); ?>
 		</a>
 	</div>

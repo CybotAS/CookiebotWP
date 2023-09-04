@@ -30,14 +30,14 @@ class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * Exclude scripts from Litespeed cache’s defer JS option.
 	 *
-	 * @param  array $excluded_files  Array of script URLs to be excluded
+	 * @param array $excluded_files  Array of script URLs to be excluded
 	 *
 	 * @return array                    Extended array script URLs to be excluded
 	 *
 	 * @author Caspar Hübinger
 	 * @since 3.6.2
 	 */
-	public function exclude_files( $excluded_files = array() ) {
+	public function exclude_files( array $excluded_files = array() ): array {
 		$excluded_files[] = 'consent.cookiebot.com';
 
 		return $excluded_files;
@@ -46,7 +46,7 @@ class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * @return array
 	 */
-	public function get_extra_information() {
+	public function get_extra_information(): array {
 		return array(
 			__(
 				'Excludes cookiebot javascript files when the Litespeed Cache deter option is enabled.',

@@ -60,7 +60,7 @@ $header->display();
 							<ol>
 								<li>
 									<?php
-									echo sprintf(
+									printf(
 									// translators: the first placeholder string will be replaced with a html anchor open tag and the second placeholder string will be replaced by the html anchor closing tag
 										esc_html__( 'Log in to your %1$sCookiebot CMP account%2$s.', 'cookiebot' ),
 										'<a href="https://www.cookiebot.com/' . esc_html( $manager_language ) . '/account" target="_blank" rel="noopener">',
@@ -70,7 +70,7 @@ $header->display();
 								</li>
 								<li>
 									<?php
-									echo sprintf(
+									printf(
 									// translators: the placeholder strings denote the positions of <b>, </b>, <b> and </b> HTML tags
 										esc_html__( 'Go to %1$s"Settings"%2$s and setup your Cookiebot CMP', 'cookiebot' ),
 										'<b>',
@@ -80,7 +80,7 @@ $header->display();
 								</li>
 								<li>
 									<?php
-									echo sprintf(
+									printf(
 									// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
 										esc_html__( 'Go to the %1$s"Your scripts"%2$s tab', 'cookiebot' ),
 										'<b>',
@@ -91,7 +91,7 @@ $header->display();
 								<li><?php esc_html_e( 'Copy the value inside the data-cid parameter - eg.: abcdef12-3456-7890-abcd-ef1234567890', 'cookiebot' ); ?></li>
 								<li>
 									<?php
-									echo sprintf(
+									printf(
 									// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
 										esc_html__( 'Add %1$s[cookie_declaration]%2$s shortcode to a page to show the declaration', 'cookiebot' ),
 										'<b>',
@@ -110,7 +110,7 @@ $header->display();
 					<div class="cb-faq__answer">
 						<p class="cb-faq__answer__content">
 							<?php
-							echo sprintf(
+							printf(
 							// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
 								esc_html__( 'Use the shortcode %1$s[cookie_declaration]%2$s to add the cookie declaration to a page or post. The cookie declaration will always show the latest version from Cookiebot CMP.', 'cookiebot' ),
 								'<b>',
@@ -120,7 +120,7 @@ $header->display();
 						</p>
 						<p class="cb-faq__answer__content">
 							<?php
-							echo sprintf(
+							printf(
 							// translators: the placeholder strings denote the positions of <i>, </i>, <b> and </b> HTML tags
 								esc_html__( 'If you want to show the cookie declaration in a specific language, you can add the %1$s"lang"%2$s attribute, e.g. %3$s[cookie_declaration lang="de"]%4$s.', 'cookiebot' ),
 								'<i>',
@@ -156,7 +156,7 @@ $header->display();
 						</p>
 						<p class="cb-faq__answer__content">
 							<?php
-							echo sprintf(
+							printf(
 							// translators: the placeholder strings denote the positions of <i>, </i>, <b> and </b> HTML tags
 								esc_html__( 'Example on modifying an existing Google Analytics Universal script tag can be found %1$shere in step 4%2$s.', 'cookiebot' ),
 								'<a href="https://www.cookiebot.com/en/manual-implementation/" target="_blank" rel="noopener">',

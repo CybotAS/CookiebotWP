@@ -25,7 +25,12 @@ class Multiple_Page implements Settings_Page_Interface {
 		return $banners;
 	}
 
-	private function selected_region_list( $option, $second ) {
+	/**
+	 * @param $option
+	 * @param $second
+	 * @return array
+	 */
+	private function selected_region_list( $option, $second ): array {
 		$countries = Supported_Regions::get();
 		$list      = explode( ', ', $option );
 
@@ -47,7 +52,10 @@ class Multiple_Page implements Settings_Page_Interface {
 		return $selected;
 	}
 
-	private function retroSecondaryId() {
+	/**
+	 * @return string
+	 */
+	private function retro_secondary_id(): string {
 		$ccpa_group_id      = esc_attr( get_option( 'cookiebot-ccpa-domain-group-id' ) );
 		$secondary_group_id = esc_attr( get_option( 'cookiebot-second-banner-id' ) );
 
@@ -60,7 +68,11 @@ class Multiple_Page implements Settings_Page_Interface {
 		return $secondary_group_id;
 	}
 
-	public function getCountryName( $code ) {
+	/**
+	 * @param $code
+	 * @return string
+	 */
+	public function get_country_name( $code ): string {
 		$countries = Supported_Regions::get();
 
 		return $countries[ $code ];
@@ -72,7 +84,7 @@ class Multiple_Page implements Settings_Page_Interface {
 	public function display() {
 		$args = array(
 			'cbid'               => Cookiebot_WP::get_cbid(),
-			'secondary_group_id' => $this->retroSecondaryId(),
+			'secondary_group_id' => $this->retro_secondary_id(),
 			'supported_regions'  => Supported_Regions::get(),
 			'ccpa_compatibility' => esc_attr( get_option( 'cookiebot-ccpa' ) ),
 			'selected_regions'   => $this->selected_region_list( esc_attr( get_option( 'cookiebot-second-banner-regions' ) ), true ),

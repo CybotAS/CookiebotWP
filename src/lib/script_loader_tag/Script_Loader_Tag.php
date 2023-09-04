@@ -44,7 +44,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	}
 
 	public function ignore_script( $script ) {
-		array_push( $this->ignore_scripts, $script );
+		$this->ignore_scripts[] = $script;
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 *
 	 * @since 1.2.0
 	 */
-	public function cookiebot_add_consent_attribute_to_tag( $tag, $handle, $src ) {
+	public function cookiebot_add_consent_attribute_to_tag( $tag, $handle, $src ): string {
 		if ( array_key_exists( $handle, $this->tags ) && ! empty( $this->tags[ $handle ] ) ) {
 			//phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 			return '<script src="' . $src . '" type="text/plain" data-cookieconsent="' . implode( ',', $this->tags[ $handle ] ) . '"></script>';
@@ -87,7 +87,11 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 		return $tag;
 	}
 
-	private function check_ignore_script( $src ) {
+	/**
+	 * @param $src
+	 * @return bool
+	 */
+	private function check_ignore_script( $src ): bool {
 		foreach ( $this->ignore_scripts as $ignore_script ) {
 			if ( strpos( $src, $ignore_script ) !== false ) {
 				return true;
@@ -105,7 +109,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 *
 	 * @return bool True if the attributes are valid for the injection of the consent ignore attribute.
 	 */
-	private static function validate_attributes_for_consent_ignore( $script_handle, $tag_attributes ) {
+	private static function validate_attributes_for_consent_ignore( string $script_handle, string $tag_attributes ): bool {
 		$quoted_handle = preg_quote( $script_handle, '/' );
 
 		// Exclude any scripts not related to currently processed script handle. Only script itself and inline block

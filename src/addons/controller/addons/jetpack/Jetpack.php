@@ -169,7 +169,7 @@ class Jetpack extends Base_Cookiebot_Plugin_Addon {
 	 *
 	 * @since 1.5.0
 	 */
-	public function get_default_cookie_types() {
+	public function get_default_cookie_types(): array {
 		return array( 'statistics' );
 	}
 
@@ -180,7 +180,7 @@ class Jetpack extends Base_Cookiebot_Plugin_Addon {
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_widgets() {
+	public function get_widgets(): array {
 		return $this->widgets;
 	}
 }

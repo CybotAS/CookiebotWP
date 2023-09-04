@@ -20,7 +20,7 @@ class Cookiebot_Declaration_Shortcode {
 	 * @since   1.0.0
 	 * @version 2.2.0
 	 */
-	public static function show_declaration( $shortcode_attributes = array() ) {
+	public static function show_declaration( $shortcode_attributes = array() ): string {
 		$cbid = Cookiebot_WP::get_cbid();
 
 		if ( ! empty( $cbid ) ) {

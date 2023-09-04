@@ -26,7 +26,7 @@ class Cookiebot_Review {
 	 * @param array $links action links.
 	 * @return array
 	 */
-	public function plugin_action_links( $links ) {
+	public function plugin_action_links( array $links ): array {
 		if ( array_key_exists( 'deactivate', $links ) ) {
 			$links['deactivate'] = str_replace( '<a', '<a class="cb-deactivate-action"', $links['deactivate'] );
 		}

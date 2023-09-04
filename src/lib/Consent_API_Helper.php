@@ -18,7 +18,7 @@ class Consent_API_Helper {
 	 * @version 3.5.0
 	 * @since       3.5.0
 	 */
-	public function is_wp_consent_api_active() {
+	public function is_wp_consent_api_active(): bool {
 		return class_exists( 'WP_CONSENT_API' );
 	}
 
@@ -53,7 +53,7 @@ class Consent_API_Helper {
 	 * @version 3.5.0
 	 * @since   3.5.0
 	 */
-	public function get_wp_consent_api_mapping() {
+	public function get_wp_consent_api_mapping(): array {
 		$default_wp_consent_api_mapping = $this->get_default_wp_consent_api_mapping();
 		$mapping                        = get_option( 'cookiebot-consent-mapping', $default_wp_consent_api_mapping );
 
@@ -80,7 +80,7 @@ class Consent_API_Helper {
 	 * @version 3.5.0
 	 * @since   3.5.0
 	 */
-	public function get_default_wp_consent_api_mapping() {
+	public function get_default_wp_consent_api_mapping(): array {
 		return array(
 			'n=1;p=1;s=1;m=1' =>
 				array(

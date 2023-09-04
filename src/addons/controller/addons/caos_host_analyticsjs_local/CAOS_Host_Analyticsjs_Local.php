@@ -34,7 +34,7 @@ class CAOS_Host_Analyticsjs_Local extends Base_Cookiebot_Plugin_Addon {
 	 *
 	 * @since 1.3.0
 	 */
-	public function cookiebot_addon_host_analyticsjs_local_priority() {
+	public function cookiebot_addon_host_analyticsjs_local_priority(): int {
 		return ( esc_attr( get_option( 'sgal_enqueue_order' ) ) ) ? esc_attr( get_option( 'sgal_enqueue_order' ) ) : 0;
 	}
 }

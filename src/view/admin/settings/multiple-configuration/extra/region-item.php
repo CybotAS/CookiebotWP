@@ -8,11 +8,11 @@ foreach ( $banners as $banner => $data ) : ?>
 <div class="cb-region__table__item cb-region__secondary__banner" data-next-banner="<?php echo esc_attr( $banner ); ?>">
 	<div class="cb-region__item__group">
 		<input type="text" name="cookiebot-multiple-banners[<?php echo esc_attr( $banner ); ?>][group]" placeholder="1111-1111-1111-1111"
-			   value="<?php echo esc_attr( $data['group'] ); ?>">
+				value="<?php echo esc_attr( $data['group'] ); ?>">
 	</div>
 	<div class="cb-region__item__region">
 		<input type="hidden" name="cookiebot-multiple-banners[<?php echo esc_attr( $banner ); ?>][region]" class="second-banner-regions"
-			   value="<?php echo esc_attr( implode( ', ', array_keys( $data['region'] ) ) ); ?>">
+				value="<?php echo esc_attr( implode( ', ', array_keys( $data['region'] ) ) ); ?>">
 		<div class="cb-region__region__selector">
 			<div class="default-none <?php echo $data['region'] ? 'hidden' : ''; ?>">
 				<?php esc_html_e( 'Select region', 'cookiebot' ); ?>
@@ -30,7 +30,7 @@ foreach ( $banners as $banner => $data ) : ?>
 			<div class="cb-region__list__container">
 				<?php foreach ( $supported_regions as $code => $region ) : ?>
 					<div class='cb-region__region__item <?php echo array_key_exists( $code, $data['region'] ) ? 'selected-region' : ''; ?>'
-						 data-region="<?php echo esc_attr( $code ); ?>"><?php echo esc_html( $region ); ?></div>
+						data-region="<?php echo esc_attr( $code ); ?>"><?php echo esc_html( $region ); ?></div>
 				<?php endforeach; ?>
 			</div>
 		</div>

@@ -175,13 +175,13 @@ abstract class Base_Cookiebot_Addon {
 	 * This function will check following features:
 	 * - Current language
 	 *
-	 * @param $src
+	 * @param string $src
 	 *
 	 * @return bool|mixed
 	 *
 	 * @since 1.8.0
 	 */
-	final public function get_placeholder( $src = '' ) {
+	final public function get_placeholder( string $src = '' ) {
 		return $this->settings->get_placeholder(
 			static::OPTION_NAME,
 			static::DEFAULT_PLACEHOLDER_CONTENT,
@@ -197,7 +197,7 @@ abstract class Base_Cookiebot_Addon {
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_cookie_types() {
+	public function get_cookie_types(): array {
 		return $this->settings->get_cookie_types( static::OPTION_NAME, static::DEFAULT_COOKIE_TYPES );
 	}
 
@@ -217,14 +217,14 @@ abstract class Base_Cookiebot_Addon {
 	 *
 	 * @since 1.8.0
 	 */
-	final public function has_placeholder() {
+	final public function has_placeholder(): bool {
 		return $this->settings->has_placeholder( static::OPTION_NAME );
 	}
 
 	/**
 	 * @return array
 	 */
-	final public function get_placeholders() {
+	final public function get_placeholders(): array {
 		return $this->settings->get_placeholders( static::OPTION_NAME );
 	}
 
@@ -235,7 +235,7 @@ abstract class Base_Cookiebot_Addon {
 	 *
 	 * @since 1.8.0
 	 */
-	final public function is_placeholder_enabled() {
+	final public function is_placeholder_enabled(): bool {
 		return $this->settings->is_placeholder_enabled( static::OPTION_NAME );
 	}
 
@@ -246,7 +246,7 @@ abstract class Base_Cookiebot_Addon {
 	 *
 	 * @since 1.8.0
 	 */
-	final public function get_placeholder_helper() {
+	final public function get_placeholder_helper(): string {
 		return '<p>Merge tags you can use in the placeholder text:</p>
 				<ul><li>%cookie_types - Lists required cookie types</li>
 				<li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li>
@@ -256,18 +256,18 @@ abstract class Base_Cookiebot_Addon {
 	/**
 	 * @return bool
 	 */
-	abstract public function is_addon_installed();
+	abstract public function is_addon_installed(): bool;
 
 	/**
 	 * @return bool
 	 */
-	abstract public function is_addon_activated();
+	abstract public function is_addon_activated(): bool;
 
 	/**
 	 * @return string
 	 * @throws Exception
 	 */
-	abstract public function get_version();
+	abstract public function get_version(): string;
 
 	/**
 	 * Action after enabling the addon on the settings page
@@ -294,7 +294,7 @@ abstract class Base_Cookiebot_Addon {
 	 *
 	 * @since 3.6.3
 	 */
-	public function get_default_enable_setting() {
+	public function get_default_enable_setting(): array {
 		return array(
 			'enabled'     => 1,
 			'cookie_type' => static::DEFAULT_COOKIE_TYPES,
@@ -305,7 +305,7 @@ abstract class Base_Cookiebot_Addon {
 	/**
 	 * @return string
 	 */
-	public function get_extra_addon_options_html() {
+	public function get_extra_addon_options_html(): string {
 		return '';
 	}
 
@@ -315,7 +315,7 @@ abstract class Base_Cookiebot_Addon {
 	 * @return string
 	 * @throws Exception
 	 */
-	private static function get_svn_url( $path = '' ) {
+	private static function get_svn_url( string $path = '' ): string {
 		if ( ! is_string( $path ) || $path === '' ) {
 			$path = static::SVN_URL_DEFAULT_SUB_PATH;
 		}
@@ -337,7 +337,7 @@ abstract class Base_Cookiebot_Addon {
 	 * @return string
 	 * @throws Exception
 	 */
-	final public static function get_svn_file_content( $path = '' ) {
+	final public static function get_svn_file_content( string $path = '' ): string {
 		$url      = self::get_svn_url( $path );
 		$response = wp_remote_get( $url );
 		return wp_remote_retrieve_body( $response );

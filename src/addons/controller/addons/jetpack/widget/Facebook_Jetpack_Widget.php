@@ -66,10 +66,9 @@ class Facebook_Jetpack_Widget extends Base_Jetpack_Widget {
 	/**
 	 * @return array
 	 */
-	public function get_extra_information() {
+	public function get_extra_information(): array {
 		return array(
 			__( 'Facebook widget.', 'cookiebot' ),
 		);
 	}
-
 }

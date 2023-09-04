@@ -3,7 +3,7 @@ namespace cybot\cookiebot\lib;
 
 class Supported_Languages {
 
-	public static function get() {
+	public static function get(): array {
 		$supported_languages       = array();
 		$supported_languages['nb'] = __( 'Norwegian Bokmål', 'cookiebot' );
 		$supported_languages['tr'] = __( 'Turkish', 'cookiebot' );

@@ -108,7 +108,7 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 *
 	 * @since 1.2.0
 	 */
-	public function add_state( $state ) {
+	public function add_state( string $state ) {
 		if ( ! $this->is_cookie_state_accepted( $state ) ) {
 			$this->states[] = $state;
 		}
@@ -121,7 +121,7 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 *
 	 * @since 1.2.0
 	 */
-	public function get_cookie_states() {
+	public function get_cookie_states(): array {
 		if ( empty( $this->states ) ) {
 			$this->scan_cookie();
 		}
@@ -138,7 +138,7 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 *
 	 * @since 1.3.0
 	 */
-	public function are_cookie_states_accepted( array $states ) {
+	public function are_cookie_states_accepted( array $states ): bool {
 		return array_reduce(
 			$states,
 			function ( $are_cookie_states_accepted, $state ) {
@@ -159,7 +159,7 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 *
 	 * @return bool
 	 */
-	public function is_cookie_state_accepted( $state ) {
+	public function is_cookie_state_accepted( string $state ): bool {
 		return in_array( $state, $this->states, true );
 	}
 }

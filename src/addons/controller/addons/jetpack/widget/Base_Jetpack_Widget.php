@@ -111,7 +111,7 @@ abstract class Base_Jetpack_Widget {
 	 *
 	 * @since 1.8.0
 	 */
-	final public function get_widget_cookie_types() {
+	final public function get_widget_cookie_types(): array {
 		return $this->settings->get_widget_cookie_types(
 			self::ADDON_OPTION_NAME,
 			static::WIDGET_OPTION_NAME
@@ -121,7 +121,7 @@ abstract class Base_Jetpack_Widget {
 	/**
 	 * @return bool
 	 */
-	final public function is_widget_enabled() {
+	final public function is_widget_enabled(): bool {
 		return $this->settings->is_widget_enabled(
 			self::ADDON_OPTION_NAME,
 			static::WIDGET_OPTION_NAME
@@ -143,7 +143,7 @@ abstract class Base_Jetpack_Widget {
 	 *
 	 * @since 1.8.0
 	 */
-	final public function is_widget_placeholder_enabled() {
+	final public function is_widget_placeholder_enabled(): bool {
 		return $this->settings->is_widget_placeholder_enabled(
 			self::ADDON_OPTION_NAME,
 			static::WIDGET_OPTION_NAME
@@ -157,7 +157,7 @@ abstract class Base_Jetpack_Widget {
 	 *
 	 * @since 1.8.0
 	 */
-	final public function widget_has_placeholder() {
+	final public function widget_has_placeholder(): bool {
 		return $this->settings->widget_has_placeholder(
 			self::ADDON_OPTION_NAME,
 			static::WIDGET_OPTION_NAME
@@ -167,7 +167,7 @@ abstract class Base_Jetpack_Widget {
 	/**
 	 * @return array
 	 */
-	final public function get_widget_placeholders() {
+	final public function get_widget_placeholders(): array {
 		return $this->settings->get_widget_placeholders(
 			self::ADDON_OPTION_NAME,
 			static::WIDGET_OPTION_NAME
@@ -194,7 +194,7 @@ abstract class Base_Jetpack_Widget {
 	 * @return string
 	 */
 	final public function get_widget_default_placeholder() {
-		return (string) static::DEFAULT_PLACEHOLDER;
+		return static::DEFAULT_PLACEHOLDER;
 	}
 
 	/**
@@ -204,7 +204,7 @@ abstract class Base_Jetpack_Widget {
 	 *
 	 * @since 1.8.0
 	 */
-	final public function get_placeholder_helper() {
+	final public function get_placeholder_helper(): string {
 		return '<p>Merge tags you can use in the placeholder text:</p><ul><li>%cookie_types - Lists required cookie types</li><li>[renew_consent]text[/renew_consent] - link to display cookie settings in frontend</li></ul>';
 	}
 

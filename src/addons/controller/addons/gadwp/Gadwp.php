@@ -61,7 +61,7 @@ class Gadwp extends Base_Cookiebot_Plugin_Addon {
 
 		add_filter(
 			'exactmetrics_tracking_analytics_script_attributes',
-			function( $atts ) {
+			function ( $atts ) {
 				$atts['type']               = 'text/plain';
 				$atts['data-cookieconsent'] = cookiebot_addons_output_cookie_types( $this->get_cookie_types() );
 

@@ -45,7 +45,7 @@ class Settings_Page_Tab {
 		$label,
 		$settings_fields_option_group,
 		$page_name,
-		$has_submit_button = true
+		bool $has_submit_button = true
 	) {
 		if ( ! is_string( $name ) || empty( $name ) ) {
 			throw new InvalidArgumentException( 'The constructor argument "name" is a required string ' );
@@ -72,46 +72,49 @@ class Settings_Page_Tab {
 	/**
 	 * @return string
 	 */
-	public function get_name() {
+	public function get_name(): string {
 		return $this->name;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_label() {
+	public function get_label(): string {
 		return $this->label;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_settings_fields_option_group() {
+	public function get_settings_fields_option_group(): string {
 		return $this->settings_fields_option_group;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_page_name() {
+	public function get_page_name(): string {
 		return $this->page_name;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function is_active() {
+	public function is_active(): bool {
 		return $this->is_active;
 	}
 
 	/**
 	 * @param bool $is_active
 	 */
-	public function set_is_active( $is_active ) {
+	public function set_is_active( bool $is_active ) {
 		$this->is_active = $is_active;
 	}
 
-	public function get_tab_href() {
+	/**
+	 * @return string
+	 */
+	public function get_tab_href(): string {
 		$query = array(
 			'page' => $this->page_name,
 			'tab'  => $this->name,
@@ -123,15 +126,14 @@ class Settings_Page_Tab {
 	/**
 	 * @return string
 	 */
-	public function get_classes() {
+	public function get_classes(): string {
 		return $this->is_active ? 'nav-tab nav-tab-active' : 'nav-tab';
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function has_submit_button() {
+	public function has_submit_button(): bool {
 		return $this->has_submit_button;
 	}
-
 }

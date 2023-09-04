@@ -31,7 +31,7 @@ class Google_Analytics extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * @return array
 	 */
-	public function get_extra_information() {
+	public function get_extra_information(): array {
 		return array(
 			__( 'Google Analytics is used to track how visitor interact with website content.', 'cookiebot' ),
 		);

@@ -45,7 +45,7 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon {
 	 *
 	 * @since 2.1.4
 	 */
-	public function gdpr_consent_is_given() {
+	public function gdpr_consent_is_given(): bool {
 		if ( $this->cookie_consent->are_cookie_states_accepted( $this->get_cookie_types() ) ) {
 			return true;
 		}
@@ -56,7 +56,7 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * @return array
 	 */
-	public function get_extra_information() {
+	public function get_extra_information(): array {
 		return array(
 			__( 'If the user gives correct consent, IP and Unique User ID will be saved on form submissions, otherwise not.', 'cookiebot' ),
 			__( 'Increases opt-in rate compared to WPForms "GDPR mode".', 'cookiebot' ),
@@ -98,7 +98,7 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon {
 	 * @param $new_value
 	 * @param string    $option
 	 */
-	public function wpforms_set_setting( $key, $new_value, $option = 'wpforms_settings' ) {
+	public function wpforms_set_setting( $key, $new_value, string $option = 'wpforms_settings' ) {
 		if ( function_exists( 'wpforms_sanitize_key' ) ) {
 			$key          = wpforms_sanitize_key( $key );
 			$options      = get_option( $option, false );

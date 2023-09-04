@@ -81,7 +81,7 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * @return array
 	 */
-	public function get_extra_information() {
+	public function get_extra_information(): array {
 		return array(
 			__(
 				'Blocks embedded videos from Youtube, Twitter, Vimeo and Facebook.',
@@ -93,11 +93,11 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * Display a placeholder on elements with "addtoany_share_save_container" class name.
 	 *
-	 * @param  string $content
+	 * @param string $content
 	 *
 	 * @return string
 	 */
-	public function cookiebot_addon_add_to_any_content( $content ) {
+	public function cookiebot_addon_add_to_any_content( string $content ): string {
 		if ( $this->has_placeholder() && $this->is_placeholder_enabled() ) {
 			$pattern           = '/(<div[^>]*class="[^"]*addtoany_share_save_container[^"]*"[^>]*>)/';
 			$placeholder_text  = $this->get_placeholder();
