@@ -96,11 +96,11 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= 'Cookiebot ID: ' . Cookiebot_WP::get_cbid() . "\n";
 		$debug_output .= 'Blocking mode: ' . get_option( 'cookiebot-cookie-blocking-mode' ) . "\n";
 		$debug_output .= 'Language: ' . get_option( 'cookiebot-language' ) . "\n";
+		$debug_output .= 'Frontend Language: ' . $this->print_option_enabled( 'cookiebot-front-language' ) . "\n";
 		$debug_output .= 'IAB: ' . $this->print_option_enabled( 'cookiebot-iab' ) . "\n";
-		$debug_output .= 'CCPA banner for visitors from California: ' . $this->print_option_enabled( 'cookiebot-ccpa' ) . "\n";
-		$debug_output .= 'CCPA domain group id: ' . get_option( 'cookiebot-ccpa-domain-group-id' ) . "\n";
-		$debug_output .= 'Secondary banner group id: ' . get_option( 'cookiebot-ccpa-domain-group-id' ) . "\n";
-		$debug_output .= 'Multiple banners: ' . get_option( 'cookiebot-multiple-banners' ) . "\n";
+		$debug_output .= 'TCF version: ' . $this->print_tcf_version() . "\n";
+		$debug_output .= 'Multiple banners: ' . $this->print_option_enabled( 'cookiebot-multiple-config' ) . "\n";
+		$debug_output .= $this->print_multiple_configuration_banners();
 		$debug_output .= 'Add async/defer to banner tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-uc-attribute' ) . "\n";
 		$debug_output .= 'Add async/defer to declaration tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-cd-attribute' ) . "\n";
 		$debug_output .= 'Auto update: ' . $this->print_option_enabled( 'cookiebot-autoupdate' ) . "\n";
@@ -190,6 +190,37 @@ class Debug_Page implements Settings_Page_Interface {
 		}
 
 		return $output;
+	}
+
+	private function print_multiple_configuration_banners() {
+		$secondary_id      = get_option( 'cookiebot-second-banner-id' );
+		$secondary_regions = get_option( 'cookiebot-second-banner-regions' );
+		$banners           = get_option( 'cookiebot-multiple-banners' );
+		$output            = '';
+
+		if ( ! empty( $banners ) ) {
+			$counter = 1;
+			$output .= "\n--- Multiple Configuration Banners ---\n";
+			if ( ! empty( $secondary_id ) ) {
+				$output  .= '-Banner: ' . $counter . " -\n";
+				$output  .= 'Id: ' . $secondary_id . " \n";
+				$output  .= 'Regions: ' . $secondary_regions . " \n\n";
+				$counter += 1;
+			}
+			foreach ( $banners as $banner ) {
+				$output  .= '-Banner: ' . $counter . " -\n";
+				$output  .= 'Id: ' . $banner['group'] . " \n";
+				$output  .= 'Regions: ' . $banner['region'] . " \n\n";
+				$counter += 1;
+			}
+		}
+
+		return $output;
+	}
+
+	private function print_tcf_version() {
+		$version = get_option( 'cookiebot-tcf-version' );
+		return ( empty( $version ) || $version === 'IAB' ) ? '2.0' : $version;
 	}
 
 	/**
