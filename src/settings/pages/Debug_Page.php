@@ -202,16 +202,16 @@ class Debug_Page implements Settings_Page_Interface {
 			$counter = 1;
 			$output .= "\n--- Multiple Configuration Banners ---\n";
 			if ( ! empty( $secondary_id ) ) {
-				$output  .= '-Banner: ' . $counter . " -\n";
-				$output  .= 'Id: ' . $secondary_id . " \n";
-				$output  .= 'Regions: ' . $secondary_regions . " \n\n";
-				$counter ++;
+				$output .= '-Banner: ' . $counter . " -\n";
+				$output .= 'Id: ' . $secondary_id . " \n";
+				$output .= 'Regions: ' . $secondary_regions . " \n\n";
+				$counter++;
 			}
 			foreach ( $banners as $banner ) {
-				$output  .= '-Banner: ' . $counter . " -\n";
-				$output  .= 'Id: ' . $banner['group'] . " \n";
-				$output  .= 'Regions: ' . $banner['region'] . " \n\n";
-				$counter ++;
+				$output .= '-Banner: ' . $counter . " -\n";
+				$output .= 'Id: ' . $banner['group'] . " \n";
+				$output .= 'Regions: ' . $banner['region'] . " \n\n";
+				$counter++;
 			}
 		}
 
