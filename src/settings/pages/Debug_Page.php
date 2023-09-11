@@ -205,13 +205,13 @@ class Debug_Page implements Settings_Page_Interface {
 				$output  .= '-Banner: ' . $counter . " -\n";
 				$output  .= 'Id: ' . $secondary_id . " \n";
 				$output  .= 'Regions: ' . $secondary_regions . " \n\n";
-				$counter += 1;
+				$counter ++;
 			}
 			foreach ( $banners as $banner ) {
 				$output  .= '-Banner: ' . $counter . " -\n";
 				$output  .= 'Id: ' . $banner['group'] . " \n";
 				$output  .= 'Regions: ' . $banner['region'] . " \n\n";
-				$counter += 1;
+				$counter ++;
 			}
 		}
 
