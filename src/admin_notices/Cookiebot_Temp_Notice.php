@@ -89,10 +89,10 @@ class Cookiebot_Temp_Notice {
 	 * @since 2.0.5
 	 */
 	private function save_notice_link() {
-		if ( isset( $_GET['cookiebot_notice_temp'] ) && isset( $_GET['temp_nonce'] ) ) {
-			if ( wp_verify_nonce( $_GET['temp_nonce'], 'hide_temp_notice' ) ) {
+		if ( isset( $_GET['cookiebot_notice_temp'] ) &&
+			isset( $_GET['temp_nonce'] ) &&
+			wp_verify_nonce( $_GET['temp_nonce'], 'hide_temp_notice' ) ) {
 				update_option( static::COOKIEBOT_TEMP_OPTION_KEY, 'hide' );
-			}
 		}
 	}
 }
