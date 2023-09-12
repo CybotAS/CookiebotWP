@@ -23,6 +23,11 @@ class Iab_Page implements Settings_Page_Interface {
 	 * @throws InvalidArgumentException
 	 */
 	public function display() {
-		include_view( 'admin/settings/iab-page.php', array() );
+		$args = array(
+			'cookiebot_iab'         => get_option( 'cookiebot-iab' ),
+			'cookiebot_tcf_version' => empty( get_option( 'cookiebot-tcf-version' ) ) ? 'IAB' : get_option( 'cookiebot-tcf-version' ),
+		);
+
+		include_view( 'admin/settings/iab-page.php', $args );
 	}
 }

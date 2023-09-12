@@ -4,6 +4,7 @@ namespace cybot\cookiebot\lib;
 
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\admin_notices\Cookiebot_Recommendation_Notice;
+use cybot\cookiebot\admin_notices\Cookiebot_Temp_Notice;
 use cybot\cookiebot\gutenberg\Cookiebot_Gutenberg_Declaration_Block;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
@@ -12,7 +13,7 @@ use DomainException;
 use RuntimeException;
 
 class Cookiebot_WP {
-	const COOKIEBOT_PLUGIN_VERSION  = '4.2.14';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.3.0';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -85,6 +86,7 @@ class Cookiebot_WP {
 			}
 			( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();
 			( new Cookiebot_Recommendation_Notice() )->register_hooks();
+			( new Cookiebot_Temp_Notice() )->register_hooks();
 			( new Cookiebot_Review() )->register_hooks();
 		}
 
@@ -194,10 +196,11 @@ class Cookiebot_WP {
 	 * @since       4.2.5
 	 */
 	private function set_default_options() {
-		$options = array(
+		$options            = array(
 			'cookiebot-nooutput-admin' => '1',
 			'cookiebot-gcm'            => '1',
 		);
+		$temp_notice_option = get_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY );
 
 		foreach ( $options as $option => $default ) {
 			if ( get_option( $option ) === false && ! get_option( $option . self::OPTION_FIRST_RUN_SUFFIX ) ) {
@@ -206,6 +209,18 @@ class Cookiebot_WP {
 
 			if ( ( get_option( $option ) || get_option( $option ) !== false ) && ! get_option( $option . self::OPTION_FIRST_RUN_SUFFIX ) ) {
 				update_option( $option . self::OPTION_FIRST_RUN_SUFFIX, '1' );
+			}
+		}
+
+		if ( empty( $temp_notice_option ) ) {
+			if ( version_compare( phpversion(), '7.0.0' ) >= 0 ) {
+				update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'hide' );
+			} else {
+				update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'show' );
+			}
+		} else {
+			if ( $temp_notice_option !== 'hide' && version_compare( phpversion(), '7.0.0' ) >= 0 ) {
+				update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'hide' );
 			}
 		}
 	}

@@ -65,7 +65,7 @@ $header->display();
 					</div>
 					<div class="cb-settings__tabs__item <?php echo $active_tab === 'iab' ? 'active-item' : ''; ?>"
 						 data-tab="iab">
-						<?php esc_html_e( 'IAB', 'cookiebot' ); ?>
+						<?php esc_html_e( 'TCF', 'cookiebot' ); ?>
 					</div>
 					<div class="cb-settings__tabs__item <?php echo $active_tab === 'multiple-configurations' ? 'active-item' : ''; ?>"
 						 data-tab="multiple-configurations">
