@@ -218,6 +218,10 @@ class Cookiebot_WP {
 			} else {
 				update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'show' );
 			}
+		} else {
+			if ( $temp_notice_option !== 'hide' && version_compare( phpversion(), '7.0.0' ) >= 0 ) {
+				update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'hide' );
+			}
 		}
 	}
 
