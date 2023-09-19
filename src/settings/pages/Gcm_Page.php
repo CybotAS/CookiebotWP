@@ -16,7 +16,7 @@ class Gcm_Page implements Settings_Page_Interface {
 		$args = array(
 			'cookie_categories_disabled' => Cookiebot_WP::get_cookie_categories_status(),
 			'gcm_enabled_option'         => get_option( 'cookiebot-gcm' ),
-			'gcm_url_passthrough_option' => get_option( 'cookiebot-gcm-url-passthrough', 1 ),
+			'gcm_url_passthrough_option' => get_option( 'cookiebot-gcm-url-passthrough' ),
 			'auto_disabled'              => Cookiebot_WP::get_cookie_blocking_mode() === 'auto' ? ' disabled__item' : '',
 			'is_preferences'             => Cookiebot_WP::is_cookie_category_selected( self::OPTION_NAME, 'preferences' ),
 			'is_statistics'              => Cookiebot_WP::is_cookie_category_selected( self::OPTION_NAME, 'statistics' ),
