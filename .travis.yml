@@ -71,7 +71,11 @@ before_script:
       sudo sed -re 's#^(mozilla/DST_Root_CA_X3.crt)$#!\1#' -i /etc/ca-certificates.conf;
       sudo update-ca-certificates;
       export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt;
-      bash bin/install-wp-tests.sh wordpress_test root '' localhost latest &&
+      if [ "$PHPUNIT_VERSION" == "5.7.27" ]; then
+        bash bin/install-wp-tests.sh wordpress_test root '' localhost 6.2.2;
+      else
+        bash bin/install-wp-tests.sh wordpress_test root '' localhost latest;
+      fi
       wget https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar -O /tmp/phpunit &&
       chmod +x /tmp/phpunit
     fi
