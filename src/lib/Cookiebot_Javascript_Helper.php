@@ -152,7 +152,7 @@ class Cookiebot_Javascript_Helper {
 	public function include_google_consent_mode_js( $return_html = false ) {
 		$option                     = get_option( 'cookiebot-gcm' );
 		$blocking_mode              = get_option( 'cookiebot-cookie-blocking-mode' );
-		$is_url_passthrough_enabled = '1' === (string) get_option( 'cookiebot-gcm-url-passthrough', 1 );
+		$is_url_passthrough_enabled = get_option( 'cookiebot-gcm-url-passthrough' );
 		$cookie_categories          = get_option( 'cookiebot-gcm-cookies' );
 
 		if ( $option !== false && $option !== '' ) {
