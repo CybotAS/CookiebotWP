@@ -2,16 +2,14 @@
 (window => {
     window.wp_consent_type = 'optin';
     window.addEventListener('CookiebotOnConsentReady', cookiebot_update_consent_level, false);
-    window.addEventListener('load', cookiebot_on_load_consent_level, false);
+    window.addEventListener('load', set_functional_cookies, false);
 
-    function cookiebot_on_load_consent_level() {
-        if (typeof Cookiebot !== 'undefined' && Cookiebot.consented === true) {
-            cookiebot_update_consent_level();
-        }
+    function set_functional_cookies() {
+        wp_set_consent('functional', 'allow'); //always allow functional cookies
     }
 
     function cookiebot_update_consent_level() {
-        wp_set_consent('functional', 'allow'); //always allow functional cookies
+        set_functional_cookies();
 
         const consents = new Map([['n', 1], ['p', 1], ['s', 1], ['m', 1],]);
 
