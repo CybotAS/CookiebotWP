@@ -37,6 +37,7 @@ namespace cybot\cookiebot\addons {
 	use cybot\cookiebot\addons\controller\addons\wp_rocket\Wp_Rocket;
 	use cybot\cookiebot\addons\controller\addons\wp_seopress\Wp_Seopress;
 	use cybot\cookiebot\addons\controller\addons\wpforms\Wpforms;
+	use cybot\cookiebot\addons\controller\addons\wpforms_pro\Wpforms_Pro;
 
 	const PLUGIN_ADDONS = array(
 		Add_To_Any::class,
@@ -64,6 +65,7 @@ namespace cybot\cookiebot\addons {
 		Wp_Rocket::class,
 		Wp_Seopress::class,
 		Wpforms::class,
+		Wpforms_Pro::class,
 		Official_Facebook_Pixel::class,
 		Ninja_Forms::class,
 		Jetpack::class,

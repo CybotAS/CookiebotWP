@@ -7,7 +7,7 @@ use cybot\cookiebot\lib\Cookiebot_WP;
 
 class Wpforms extends Base_Cookiebot_Plugin_Addon {
 
-	const ADDON_NAME                  = 'WPForms';
+	const ADDON_NAME                  = 'WPForms Lite';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.';
 	const OPTION_NAME                 = 'wpforms';
 	const PLUGIN_FILE_PATH            = 'wpforms-lite/wpforms.php';
@@ -30,7 +30,7 @@ class Wpforms extends Base_Cookiebot_Plugin_Addon {
 	public function enqueue_script_for_adding_the_cookie_after_the_consent() {
 		wp_enqueue_script(
 			'wpforms-gdpr-cookiebot',
-			CYBOT_COOKIEBOT_PLUGIN_URL . 'addons/controller/addons/wpforms/cookie-after-consent.js',
+			CYBOT_COOKIEBOT_PLUGIN_URL . 'src/addons/controller/addons/wpforms/cookie-after-consent.js',
 			array( 'jquery' ),
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			true
