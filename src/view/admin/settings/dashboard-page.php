@@ -81,7 +81,7 @@ $header->display();
 								<h2 class="cb-main__card__title">
 									<?php echo esc_html__( 'Create a new Cookiebot CMP account', 'cookiebot' ); ?>
 								</h2>
-								<a href="https://manage.cookiebot.com/en/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
 								   target="_blank" class="cb-btn cb-white-btn" rel="noopener">
 									<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
 								</a>
