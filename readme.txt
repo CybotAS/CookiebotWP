@@ -297,6 +297,18 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
 
+### 4.3.3 ###
+Release date: November 2nd 2023
+
+Cookiebot CMP version 4.3.3 is out! This release updates the Google Consent Mode script. Here is the complete list of this update
+
+####What's new####
+* Update GCM script
+* Set WordPress tested up to version to 6.3.2
+
+####Other####
+* Update script loading order
+
 ### 4.3.2 ###
 Release date: October 26th 2023
 
