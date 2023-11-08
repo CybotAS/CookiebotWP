@@ -306,6 +306,9 @@ Cookiebot CMP version 4.3.3 is out! This release updates the Google Consent Mode
 * Update GCM script
 * Set WordPress tested up to version to 6.3.2
 
+####Bugfixes####
+* Fix setting consent type on server side WP Consent API
+
 ####Other####
 * Update script loading order
 

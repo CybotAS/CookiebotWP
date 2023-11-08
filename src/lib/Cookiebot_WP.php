@@ -51,8 +51,7 @@ class Cookiebot_WP {
 	 */
 	public function __construct() {
 		$this->throw_exception_if_php_version_is_incompatible();
-
-		add_action( 'after_setup_theme', array( $this, 'cookiebot_init' ), 5 );
+		$this->cookiebot_init();
 		register_activation_hook( __FILE__, array( new Cookiebot_Activated(), 'run' ) );
 		register_deactivation_hook( __FILE__, array( new Cookiebot_Deactivated(), 'run' ) );
 	}
@@ -218,10 +217,8 @@ class Cookiebot_WP {
 			} else {
 				update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'show' );
 			}
-		} else {
-			if ( $temp_notice_option !== 'hide' && version_compare( phpversion(), '7.0.0' ) >= 0 ) {
+		} elseif ( $temp_notice_option !== 'hide' && version_compare( phpversion(), '7.0.0' ) >= 0 ) {
 				update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'hide' );
-			}
 		}
 	}
 
