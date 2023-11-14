@@ -2,7 +2,7 @@
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: cookie banner, GDPR, CCPA, WordPress cookie banner, cookie policy, ePrivacy, dsgvo, privacy compliance, DMA, data privacy, cmp, cookies
 * Requires at least: 4.4
-* Tested up to: 6.3.2
+* Tested up to: 6.4.1
 * Stable tag: 4.3.2
 * Requires PHP: 5.6
 * License: GPLv2 or later
@@ -10,6 +10,15 @@
 Cookiebot CMP WordPress cookie banner and cookie policy generator - comply with the major data protection laws (GDPR, ePrivacy, CCPA, LGPD, etc.)
 
 ## Description ##
+
+**Exclusive Black Friday Promotion**
+
+Get 30% off Your Cookiebot CMP subscription*
+
+*This promotion is valid until November 30th, 2023 and will be applied automatically.
+The discount applies to new subscriptions only and is valid for the first 6 months of the subscription period.
+
+---
 
 Cookiebot Consent Management Platform (CMP) provides an **easy to use and fully automated** WordPress cookie banner. It enables compliance with the GDPR, DMA, LGPD, CCPA and other privacy regulations. It also helps **build trust with website visitors** by giving them more control over their personal data.
 
@@ -297,6 +306,22 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
 
+### 4.3.3 ###
+Release date: November 15th 2023
+
+Cookiebot CMP version 4.3.3 is out! This release updates content and adds some bugfixes. Here is the complete list of this update
+
+####What's new####
+* Set WordPress tested up to version to 6.4.1
+
+####Bugfixes####
+* Fix setting consent type on server side WP Consent API
+
+####Other####
+* Update script loading order
+* Adds temporal banner
+* Update readme content
+
 ### 4.3.2 ###
 Release date: October 26th 2023
 
@@ -306,7 +331,7 @@ Cookiebot CMP version 4.3.2 is out! This release updates the readme content and 
 * Addon recognition between WPForms lite and pro versions
 
 ####Bugfixes####
-* Fix while creating a cookie with deny value for WP Cosent API
+* Fix while creating a cookie with deny value for WP Consent API
 
 ####Other####
 * Update readme content
