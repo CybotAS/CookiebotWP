@@ -12,8 +12,6 @@
 		<?php echo esc_js( $data_layer ); ?>.push(arguments);
 	}
 	gtag("consent", "default", {
-        ad_user_data: "denied",
-        ad_personalization: "denied",
 		ad_storage: "denied",
 		analytics_storage: "denied",
 		functionality_storage: "denied",
