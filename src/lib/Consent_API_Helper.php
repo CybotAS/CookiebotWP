@@ -21,7 +21,7 @@ class Consent_API_Helper {
 	public static function get_consent_type( $region ) {
 		$consent_type = 'optin';
 
-		if ( in_array( $region, Supported_Regions::OPTOUT_REGIONS ) ) {
+		if ( in_array( $region, Supported_Regions::OPTOUT_REGIONS, true ) ) {
 			$consent_type = 'optout';
 		}
 
