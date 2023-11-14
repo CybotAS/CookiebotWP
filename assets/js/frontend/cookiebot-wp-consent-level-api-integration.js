@@ -1,6 +1,6 @@
 'use strict';
 (window => {
-    window.wp_consent_type = 'optin';
+    window.wp_consent_type = cookiebot_consent_type['type'];
     window.addEventListener('CookiebotOnConsentReady', cookiebot_update_consent_level, false);
     window.addEventListener('load', set_functional_cookies, false);
 

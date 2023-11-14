@@ -9,7 +9,23 @@ class Consent_API_Helper {
 		// Include integration to WP Consent Level API if available
 		if ( $this->is_wp_consent_api_active() ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'cookiebot_enqueue_consent_api_scripts' ) );
+			add_filter( 'wp_get_consent_type', array( $this, 'wp_consent_api_get_consent_type' ) );
 		}
+	}
+
+	public function wp_consent_api_get_consent_type() {
+		$region = get_option( 'cookiebot-primary-domain-region' );
+		return ! empty( $region ) ? self::get_consent_type( $region ) : 'optin';
+	}
+
+	public static function get_consent_type( $region ) {
+		$consent_type = 'optin';
+
+		if ( in_array( $region, Supported_Regions::OPTOUT_REGIONS ) ) {
+			$consent_type = 'optout';
+		}
+
+		return $consent_type;
 	}
 
 	/**
@@ -19,7 +35,7 @@ class Consent_API_Helper {
 	 * @since       3.5.0
 	 */
 	public function is_wp_consent_api_active() {
-		return class_exists( 'WP_CONSENT_API' );
+		return is_plugin_active( 'wp-consent-api/wp-consent-api.php' );
 	}
 
 	/**
@@ -42,6 +58,13 @@ class Consent_API_Helper {
 			'cookiebot-wp-consent-level-api-integration',
 			'cookiebot_category_mapping',
 			$this->get_wp_consent_api_mapping()
+		);
+		wp_localize_script(
+			'cookiebot-wp-consent-level-api-integration',
+			'cookiebot_consent_type',
+			array(
+				'type' => $this->wp_consent_api_get_consent_type(),
+			)
 		);
 	}
 
