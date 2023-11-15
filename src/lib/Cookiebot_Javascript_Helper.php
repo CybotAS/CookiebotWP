@@ -13,9 +13,9 @@ class Cookiebot_Javascript_Helper {
 		}
 
 		// add JS
-		add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), - 9999 );
-		add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9998 );
-		add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9997 );
+		add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9999 );
+		add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9998 );
+		add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), - 9997 );
 		( new Cookiebot_Declaration_Shortcode() )->register_hooks();
 	}
 

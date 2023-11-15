@@ -23,6 +23,26 @@ $header->display();
 	<div class="cb-wrapper">
 		<?php $main_tabs->display( 'dashboard' ); ?>
 		<div class="cb-main__content <?php echo $cbid ? 'sync-account' : ''; ?>">
+			<?php
+			if ( ! $cbid ) :
+				$today    = new DateTime( 'now' );
+				$end_date = new DateTime( '2023-12-01' );
+
+				if ( $today < $end_date ) :
+					?>
+					<div class="cb-main__dashboard__promo">
+						<div class="cb-main__dashboard__promo--inner">
+							<div class="cb-dashboard__promo--label">Black Friday<span>Promotion</span></div>
+							<h2 class="cb-dashboard__promo--title">Get 30% off your Cookiebot CMP subscription*</h2>
+							<a href="https://admin.cookiebot.com/signup?utm_source=wordpress&utm_medium=referral&utm_campaign=black_friday_campaign&coupon=BFRIDAYWP30" target="_blank" class="cb-btn cb-promo-btn">CLAIM YOUR DISCOUNT</a>
+							<p class="promo-condition">* This promotion is valid until November 30th, 2023 and will be applied automatically. The discount applies to new subscriptions only and is valid for the first 6 months of the subscription period.</p>
+							<div class="cb-main__dashboard__promo--logo"></div>
+						</div>
+					</div>
+					<?php
+				endif;
+			endif;
+			?>
 			<div class="cb-main__dashboard__card--container">
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner <?php echo $cbid ? 'start_card' : 'account_card'; ?>">
@@ -33,7 +53,7 @@ $header->display();
 									<?php echo esc_html__( 'I already have a Cookiebot CMP account', 'cookiebot' ); ?>
 								</h2>
 								<a href="<?php echo esc_url( add_query_arg( 'page', Settings_Page::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>"
-								   class="cb-btn cb-main-btn">
+									class="cb-btn cb-main-btn">
 									<?php echo esc_html__( 'Connect my existing account', 'cookiebot' ); ?>
 								</a>
 							</div>
@@ -64,7 +84,7 @@ $header->display();
 								<?php echo esc_html__( 'Are you happy with our WordPress plugin? Your feedback will help us make our product better for you.', 'cookiebot' ); ?>
 							</p>
 							<a href="https://wordpress.org/support/plugin/cookiebot/reviews/#new-post" target="_blank"
-							   class="cb-btn cb-link-btn" rel="noopener">
+								class="cb-btn cb-link-btn" rel="noopener">
 								<?php echo esc_html__( 'Write a review', 'cookiebot' ); ?>
 							</a>
 						</div>
@@ -81,8 +101,8 @@ $header->display();
 								<h2 class="cb-main__card__title">
 									<?php echo esc_html__( 'Create a new Cookiebot CMP account', 'cookiebot' ); ?>
 								</h2>
-								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
-								   target="_blank" class="cb-btn cb-white-btn" rel="noopener">
+								<a href="https://admin.cookiebot.com/signup?utm_source=wordpress&utm_medium=referral&utm_campaign=black_friday_campaign&coupon=BFRIDAYWP30"
+									target="_blank" class="cb-btn cb-white-btn" rel="noopener">
 									<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
 								</a>
 							</div>
@@ -91,7 +111,7 @@ $header->display();
 								<?php echo esc_html__( 'Learn more about how to optimize your Cookiebot CMP setup?', 'cookiebot' ); ?>
 							</h3>
 							<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-link-btn"
-							   rel="noopener">
+								rel="noopener">
 								<?php echo esc_html__( 'Visit Help Center', 'cookiebot' ); ?>
 							</a>
 						<?php endif; ?>
@@ -114,7 +134,7 @@ $header->display();
 								<?php echo esc_html__( 'How to get started with Cookiebot CMP', 'cookiebot' ); ?>
 							</h2>
 							<a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
-							   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+								target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 								<?php echo esc_html__( 'Learn more about Cookiebot CMP', 'cookiebot' ); ?>
 							</a>
 						</div>
@@ -133,10 +153,10 @@ $header->display();
 								<?php echo esc_html__( 'Europe', 'cookiebot' ); ?>
 							</div>
 							<a href="https://www.cookiebot.com/en/gdpr/" target="_blank"
-							   class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
+								class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
 								<span><?php echo esc_html__( 'Learn More', 'cookiebot' ); ?></span>
 								<img src="<?php echo esc_html( $link_icon ); ?>"
-									 alt="<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>">
+									alt="<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>">
 							</a>
 						</div>
 						<div class="cb-main__legislation__item">
@@ -150,14 +170,14 @@ $header->display();
 								<?php echo esc_html__( 'North America', 'cookiebot' ); ?>
 							</div>
 							<a href="https://www.cookiebot.com/en/what-is-ccpa/" target="_blank"
-							   class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
+								class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
 								<span><?php echo esc_html__( 'Learn More', 'cookiebot' ); ?></span>
 								<img src="<?php echo esc_html( $link_icon ); ?>"
-									 alt="<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>">
+									alt="<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>">
 							</a>
 						</div>
 						<a href="https://www.cookiebot.com/en/blog/" target="_blank"
-						   class="cb-btn cb-link-btn cb-right-btn" rel="noopener">
+							class="cb-btn cb-link-btn cb-right-btn" rel="noopener">
 							<?php echo esc_html__( 'See other legislations', 'cookiebot' ); ?>
 						</a>
 					</div>
