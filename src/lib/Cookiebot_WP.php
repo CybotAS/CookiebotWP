@@ -218,7 +218,7 @@ class Cookiebot_WP {
 				update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'show' );
 			}
 		} elseif ( $temp_notice_option !== 'hide' && version_compare( phpversion(), '7.0.0' ) >= 0 ) {
-				update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'hide' );
+			update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'hide' );
 		}
 	}
 
