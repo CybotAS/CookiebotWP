@@ -23,26 +23,6 @@ $header->display();
 	<div class="cb-wrapper">
 		<?php $main_tabs->display( 'dashboard' ); ?>
 		<div class="cb-main__content <?php echo $cbid ? 'sync-account' : ''; ?>">
-			<?php
-			if ( ! $cbid ) :
-				$today    = new DateTime( 'now' );
-				$end_date = new DateTime( '2023-12-01' );
-
-				if ( $today < $end_date ) :
-					?>
-					<div class="cb-main__dashboard__promo">
-						<div class="cb-main__dashboard__promo--inner">
-							<div class="cb-dashboard__promo--label">Black Friday<span>Promotion</span></div>
-							<h2 class="cb-dashboard__promo--title">Get 30% off your Cookiebot CMP subscription*</h2>
-							<a href="https://admin.cookiebot.com/signup?utm_source=wordpress&utm_medium=referral&utm_campaign=black_friday_campaign&coupon=BFRIDAYWP30" target="_blank" class="cb-btn cb-promo-btn">CLAIM YOUR DISCOUNT</a>
-							<p class="promo-condition">* This promotion is valid until November 30th, 2023 and will be applied automatically. The discount applies to new subscriptions only and is valid for the first 6 months of the subscription period.</p>
-							<div class="cb-main__dashboard__promo--logo"></div>
-						</div>
-					</div>
-					<?php
-				endif;
-			endif;
-			?>
 			<div class="cb-main__dashboard__card--container">
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner <?php echo $cbid ? 'start_card' : 'account_card'; ?>">
@@ -101,7 +81,7 @@ $header->display();
 								<h2 class="cb-main__card__title">
 									<?php echo esc_html__( 'Create a new Cookiebot CMP account', 'cookiebot' ); ?>
 								</h2>
-								<a href="https://admin.cookiebot.com/signup?utm_source=wordpress&utm_medium=referral&utm_campaign=black_friday_campaign&coupon=BFRIDAYWP30"
+								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
 									target="_blank" class="cb-btn cb-white-btn" rel="noopener">
 									<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
 								</a>
