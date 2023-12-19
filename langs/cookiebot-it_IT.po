@@ -1641,8 +1641,8 @@ msgid "Read more on IAB with Cookiebot CMP here"
 msgstr "Per saperne di più su IAB con Cookiebot CMP"
 
 #: view/admin/settings/iab-page.php:14
-msgid "IAB TCF integration"
-msgstr "Integrazione IAB TCF"
+msgid "IAB TCF V2.2 integration"
+msgstr "Integrazione IAB TCF 2.2"
 
 #: view/admin/settings/iab-page.php:32
 msgid "TCF version:"
