@@ -222,7 +222,7 @@ class Cookiebot_WP {
 			update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'hide' );
 		}
 
-		if ( ! empty( $iab_version ) && $iab_version == 'IAB' ) {
+		if ( ! empty( $iab_version ) && $iab_version === 'IAB' ) {
 			update_option( 'cookiebot-tcf-version', 'TCFv2.2' );
 		}
 	}
