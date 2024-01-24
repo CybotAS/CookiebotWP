@@ -27,7 +27,12 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 * @since 1.1.0
 	 */
 	public function __construct() {
-		add_filter( 'script_loader_tag', array( $this, 'cookiebot_add_consent_attribute_to_tag' ), 10, 3 );
+		if ( version_compare( get_bloginfo( 'version' ), '5.7.0', '>=' ) ) {
+			add_filter( 'wp_script_attributes', array( $this, 'cookiebot_add_consent_attribute_to_script_tag' ), 10, 1 );
+			add_filter( 'wp_inline_script_attributes', array( $this, 'cookiebot_add_consent_attribute_to_inline_script_tag' ), 10, 2 );
+		} else {
+			add_filter( 'script_loader_tag', array( $this, 'cookiebot_add_consent_attribute_to_tag' ), 10, 3 );
+		}
 	}
 
 	/**
@@ -77,7 +82,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 						return $tag[0];
 					}
 
-                    //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
+					//phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 					return str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag[0] );
 				},
 				$tag
@@ -87,6 +92,44 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 		return $tag;
 	}
 
+	/**
+	 * Modifies script tags to add the consent ignore attribute.
+	 *
+	 * @param array  $attributes List of the attributes for the tag.
+	 *
+	 * @return array List of the attributes for the tag.
+	 */
+	public function cookiebot_add_consent_attribute_to_script_tag( $attributes ) {
+		if ( isset( $attributes['src'] ) && $this->check_ignore_script( $attributes['src'] ) ) {
+			$attributes['data-cookieconsent'] = 'ignore';
+		}
+
+		return $attributes;
+	}
+
+	/**
+	 * Modifies inline script tags to add the consent ignore attribute.
+	 * 
+	 * @param array  $attributes List of the attributes for the tag.
+	 * @param string $javascript The script code.
+	 *
+	 * @return array List of the attributes for the tag.
+	 */
+	public function cookiebot_add_consent_attribute_to_inline_script_tag( $attributes, $javascript ) {
+		if ( isset( $attributes['id'] ) && $this->is_inline_of_ignored_script( $attributes['id'] ) ) {
+			$attributes['data-cookieconsent'] = 'ignore';
+		}
+
+		return $attributes;
+	}
+
+	/**
+	 * Check if the script is part of an ignored script.
+	 * 
+	 * @param string $src URL of the script.
+	 *
+	 * @return bool True if the script is part of an ignored script.
+	 */
 	private function check_ignore_script( $src ) {
 		foreach ( $this->ignore_scripts as $ignore_script ) {
 			if ( strpos( $src, $ignore_script ) !== false ) {
@@ -95,6 +138,38 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Check if the inline script is part of an ignored script.
+	 *
+	 * @param string $inline_script_id ID of the inline script.
+	 *
+	 * @return bool True if the inline script is part of an ignored script.
+	 */
+	private function is_inline_of_ignored_script( $inline_script_id ) {
+		$base_id = $this->extract_base_id_from_inline_id( $inline_script_id );
+	
+		$scripts = wp_scripts();
+	
+		if ( isset( $scripts->registered[ $base_id ] ) && ! empty( $scripts->registered[ $base_id ]->src ) ) {
+			$src = $scripts->registered[ $base_id ]->src;
+			return $this->check_ignore_script( $src );
+		}
+	
+		return false;
+	}	
+
+	/**
+	 * Extract the base ID from the inline script ID.
+	 *
+	 * @param string $inline_script_id ID of the inline script.
+	 *
+	 * @return string Base ID of the inline script.
+	 */
+	private function extract_base_id_from_inline_id( $inline_script_id ) {
+		// Strip suffix to get the base ID.
+		return preg_replace( '/-js-extra/', '', $inline_script_id );
 	}
 
 	/**
