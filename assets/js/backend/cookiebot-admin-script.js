@@ -11,6 +11,7 @@ function cbInit() {
     jQuery( document ).on( 'submit', '#cb-review__form', event => submitSurveyPopup( event ) );
     jQuery( document ).on( 'change', 'input[name="cookiebot-review-option"]', event => showOptionalConsent( event ) )
     hideSubmitMessage();
+    selectorListeners();
 }
 
 /**
@@ -108,4 +109,71 @@ function hideSubmitMessage(){
             submitMsg.fadeOut();
         },2000)
     }
+}
+
+function selectorListeners(){
+    openItemList();
+    closeitemList();
+    selectListItem();
+    searchListItem();
+}
+
+function openItemList() {
+    jQuery(document).on('click','.cb-settings__selector__container .cb-settings__selector-selector',function(){
+        jQuery('.cb-settings__selector-list-container').addClass('hidden');
+        jQuery(this).siblings('.cb-settings__selector-list-container').removeClass('hidden');
+    });
+}
+
+function closeitemList() {
+    jQuery(document).on('click','.cb-settings__selector__container .cb-settings__selector-veil',function(){
+        jQuery(this).parent('.cb-settings__selector-list-container').addClass('hidden');
+        jQuery(this).siblings('.cb-settings__selector-search').val('').trigger('keyup');
+        jQuery(this).siblings('.cb-settings__selector-list').scrollTop(0);
+    });
+}
+
+function selectListItem() {
+    jQuery(document).on('click','.cb-settings__selector__container .cb-settings__selector-list-item',function(){
+        const item = jQuery(this);
+        const mainParent = item.closest('.cb-settings__selector__container');
+        const itemList = item.parent('.cb-settings__selector-list');
+        const itemValue = item.data('value');
+        const itemAttr = 'cookiebot-tcf-disallowed['+itemValue+']';
+        const itemName = item.text();
+
+        if(!itemList.data('multiple')){
+            itemList.find('.selected').removeClass('selected');
+        }
+
+        item.addClass('selected');
+        mainParent.find('.cb-settings__selector-selector').text(itemName);
+        mainParent.find('.cb-settings__selector__container-input').val(itemValue).attr('name',itemAttr).trigger('change');
+        mainParent.find('.cb-settings__selector-search').val('').trigger('keyup');
+        itemList.scrollTop(0);
+
+        item.closest('.cb-settings__selector-list-container').addClass('hidden');
+    });
+}
+
+function searchListItem() {
+    jQuery(document).on('keyup','.cb-settings__selector-search',function(){
+        const searchName = jQuery(this).val().toLowerCase();
+        const itemList = jQuery(this).siblings('.search-list');
+
+        itemList.children().each(function(){
+            const item = jQuery(this);
+            if(searchName.length>0) {
+                const itemName = item.text().trim().toLowerCase();
+                if(itemName.indexOf(searchName) != -1){
+                    item.removeClass('hidden');
+                }else{
+                    item.addClass('hidden');
+                }
+            }else{
+                item.removeClass('hidden');
+            }
+        });
+
+    });
 }

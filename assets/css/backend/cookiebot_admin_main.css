@@ -336,3 +336,106 @@ textarea {
     font-family: monospace;
     font-size: 23px;
 }
+
+.cb-settings__selector__container {
+    position: relative;
+}
+
+.cb-settings__selector__container .cb-settings__selector-selector {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    color: #141414;
+    border: 2px solid #d3d3d3;
+    border-radius: 7px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 27px;
+    min-height: 30px;
+    cursor: pointer;
+}
+
+.cb-settings__selector__container .cb-settings__selector-selector:after {
+    content: url(../../img/icons/down.svg);
+    position: absolute;
+    top: 7px;
+    right: 12px;
+}
+
+.cb-settings__selector__container .cb-settings__selector-list-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 24px rgb(0 0 0 / 25%);
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 20px 16px;
+}
+
+.cb-settings__selector__container .cb-settings__selector-veil {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.cb-settings__selector__container .cb-settings__selector-search {
+    position: relative;
+    margin-bottom: 16px;
+    padding: 5px 8px;
+    z-index: 1;
+}
+
+.cb-settings__selector__container .cb-settings__selector-list {
+    display: flex;
+    flex-direction: column;
+    height: 160px;
+    overflow-y: scroll;
+}
+
+
+.cb-settings__selector__container .cb-settings__selector-list > .cb-settings__selector-list-item {
+    position: relative;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 24px;
+    padding: 10px 15px;
+    margin-bottom: 3px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.cb-settings__selector__container .cb-settings__selector-list > .cb-settings__selector-list-item:hover {
+    background-color: #f2f2f2;
+    color: #1032CF;
+}
+
+.cb-settings__selector__container .cb-settings__selector-list > .cb-settings__selector-list-item.selected{
+    background-color: #ECEFFE;
+    color: #1032CF;
+    order: -1;
+}
+
+.cb-settings__selector__container .cb-settings__selector-list > .cb-settings__selector-list-item.selected:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    background-color: #1032cf;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url(../../img/icons/check.svg);
+    mask-image: url(../../img/icons/check.svg);
+}

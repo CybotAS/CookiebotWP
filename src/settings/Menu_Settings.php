@@ -59,6 +59,13 @@ class Menu_Settings {
 		register_setting( 'cookiebot', 'cookiebot-cookie-blocking-mode' );
 		register_setting( 'cookiebot', 'cookiebot-iab' );
 		register_setting( 'cookiebot', 'cookiebot-tcf-version' );
+		register_setting( 'cookiebot', 'cookiebot-tcf-purposes' );
+		register_setting( 'cookiebot', 'cookiebot-tcf-special-purposes' );
+		register_setting( 'cookiebot', 'cookiebot-tcf-features' );
+		register_setting( 'cookiebot', 'cookiebot-tcf-special-features' );
+		register_setting( 'cookiebot', 'cookiebot-tcf-vendors' );
+		register_setting( 'cookiebot', 'cookiebot-tcf-disallowed' );
+		register_setting( 'cookiebot', 'cookiebot-tcf-ac-vendors' );
 		register_setting( 'cookiebot', 'cookiebot-ccpa' );
 		register_setting( 'cookiebot-legislations', 'cookiebot-ccpa-domain-group-id' );
 		register_setting( 'cookiebot', 'cookiebot-gtm' );

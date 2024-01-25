@@ -14,6 +14,10 @@ function init() {
     submitEnable();
     googleConsentModeOptions();
     tcfOptions();
+    onAddRestriction();
+    showRestrictionPurposes();
+    onVendorSelection();
+    removeRestriction();
 }
 
 function language_toggle() {
@@ -155,5 +159,65 @@ function tcfOptions() {
     jQuery('input#cookiebot-iab').on('change', function () {
         const parent = jQuery(this).parents('#iab');
         parent.find('.cb-settings__config__item:has(input.tcf-option)').toggle();
+    });
+}
+
+function onAddRestriction() {
+    jQuery('.restriction-vendor-add').on('click', function () {
+        const allCurrentVendors = jQuery( '.cb-settings__vendor__restrictions' ).length;
+        const baseElement = jQuery( '.cb-settings__vendor__restrictions:last' );
+        let newElement = baseElement.clone();
+        newElement.find('.vendor-selector').attr('name','');
+        newElement.find('option').removeAttr('selected');
+        newElement.find('.purpose-item').each(function(index){
+            const itemId = 'cookiebot-vendorx'+( allCurrentVendors + 1 )+'-purposes'+(index+1);
+            jQuery(this).attr('name','');
+            jQuery(this).attr('id',itemId);
+            jQuery(this).removeAttr('checked');
+            jQuery(this).parent().attr('for',itemId);
+        });
+
+        newElement.insertAfter(baseElement);
+    });
+}
+
+function showRestrictionPurposes() {
+    jQuery(document).on('click','.vendor-purposes-show', function () {
+        const parent = jQuery(this).parents('.cb-settings__vendor__restrictions');
+        parent.find('.vendor-purposes-restrictions').toggle();
+    });
+}
+
+function onVendorSelection() {
+    jQuery(document).on('change', '.cb-settings__selector__container-input', function () {
+        const vendorId = jQuery(this).val();
+        const parent = jQuery(this).parents('.cb-settings__vendor__restrictions');
+        const vendorPurposes = parent.find('.vendor-purposes-restrictions .purpose-item');
+        const fieldName = 'cookiebot-tcf-disallowed[$s]';
+        const purposeFieldName = '[purposes][]';
+
+        jQuery(this).attr('name', fieldName.replace('$s', vendorId));
+        vendorPurposes.each(function(index){
+            const purposeAttribute = fieldName.replace('$s', vendorId) + purposeFieldName;
+            const itemId = 'cookiebot-vendor' + vendorId + '-purposes' + (index+1);
+            jQuery(this).attr('name', purposeAttribute);
+            jQuery(this).attr('id', itemId);
+            jQuery(this).parent().attr('for',itemId);
+        });
+    });
+}
+
+function removeRestriction(){
+    const initialValues = jQuery('form').serialize();
+    let submitBtn = jQuery('p.submit #submit');
+    jQuery(document).on('click','.cb-settings__vendor__restrictions .remove__restriction', function(){
+        const restriction = jQuery(this).closest( '.cb-settings__vendor__restrictions' );
+        restriction.remove();
+        let newValues = jQuery('form').serialize();
+        if(newValues !== initialValues) {
+            submitBtn.addClass('enabled');
+        }else{
+            submitBtn.removeClass('enabled');
+        }
     });
 }
