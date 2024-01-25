@@ -27,12 +27,21 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 * @since 1.1.0
 	 */
 	public function __construct() {
+		add_action( 'init', array( $this, 'initialize_ignore_scripts' ) );
+
 		if ( version_compare( get_bloginfo( 'version' ), '5.7.0', '>=' ) ) {
 			add_filter( 'wp_script_attributes', array( $this, 'cookiebot_add_consent_attribute_to_script_tag' ), 10, 1 );
 			add_filter( 'wp_inline_script_attributes', array( $this, 'cookiebot_add_consent_attribute_to_inline_script_tag' ), 10, 2 );
 		} else {
 			add_filter( 'script_loader_tag', array( $this, 'cookiebot_add_consent_attribute_to_tag' ), 10, 3 );
 		}
+	}
+
+	/**
+	 * Initialize the list of scripts to ignore cookiebot scan.
+	 */
+	public function initialize_ignore_scripts() {
+		$this->ignore_scripts = apply_filters( 'cybot_cookiebot_ignore_scripts', $this->ignore_scripts );
 	}
 
 	/**
@@ -68,8 +77,6 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 			//phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 			return '<script src="' . $src . '" type="text/plain" data-cookieconsent="' . implode( ',', $this->tags[ $handle ] ) . '"></script>';
 		}
-
-		apply_filters( 'cybot_cookiebot_ignore_scripts', $this->ignore_scripts );
 
 		if ( $this->check_ignore_script( $src ) ) {
 			return preg_replace_callback(
@@ -109,7 +116,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 
 	/**
 	 * Modifies inline script tags to add the consent ignore attribute.
-	 * 
+	 *
 	 * @param array  $attributes List of the attributes for the tag.
 	 * @param string $javascript The script code.
 	 *
@@ -125,7 +132,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 
 	/**
 	 * Check if the script is part of an ignored script.
-	 * 
+	 *
 	 * @param string $src URL of the script.
 	 *
 	 * @return bool True if the script is part of an ignored script.
@@ -149,16 +156,16 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 */
 	private function is_inline_of_ignored_script( $inline_script_id ) {
 		$base_id = $this->extract_base_id_from_inline_id( $inline_script_id );
-	
+
 		$scripts = wp_scripts();
-	
+
 		if ( isset( $scripts->registered[ $base_id ] ) && ! empty( $scripts->registered[ $base_id ]->src ) ) {
 			$src = $scripts->registered[ $base_id ]->src;
 			return $this->check_ignore_script( $src );
 		}
-	
+
 		return false;
-	}	
+	}
 
 	/**
 	 * Extract the base ID from the inline script ID.
