@@ -9,7 +9,7 @@ class Iab_Page implements Settings_Page_Interface {
 
 	public $vendor_purpose_translations;
 
-	function __construct() {
+	public function __construct() {
 		$this->define_translations();
 	}
 
@@ -58,8 +58,10 @@ class Iab_Page implements Settings_Page_Interface {
 
 		return array(
 			'purposes'         => self::get_vendor_array( $response->purposes, self::IAB_PURPOSE_FIELD_NAME ),
+			//phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			'special_purposes' => self::get_vendor_array( $response->specialPurposes, self::IAB_SPECIAL_PURPOSE_FIELD_NAME ),
 			'features'         => self::get_vendor_array( $response->features, self::IAB_FEATURES_FIELD_NAME ),
+			//phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			'special_features' => self::get_vendor_array( $response->specialFeatures, self::IAB_SPECIAL_FEATURES_FIELD_NAME ),
 			'vendors'          => self::get_vendor_array( $response->vendors, self::IAB_VENDOR_FIELD_NAME ),
 		);
@@ -101,7 +103,7 @@ class Iab_Page implements Settings_Page_Interface {
 			$get_info
 		);
 
-		return $extra_vendors ?? false;
+		return $extra_vendors ?: false;
 	}
 
 	private function get_vendor_option_content( $item, $value ) {
@@ -133,7 +135,7 @@ class Iab_Page implements Settings_Page_Interface {
 			),
 		);
 
-		return $defaults[ $item ][ $value ] ?? '';
+		return $defaults[ $item ][ $value ] ?: '';
 	}
 
 	private function define_translations() {

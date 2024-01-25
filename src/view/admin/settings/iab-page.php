@@ -50,9 +50,9 @@ $iab_page = new Iab_Page();
 	<div class="cb-settings__vendor__config__item">
 		<div class="cb-settings__config__content">
 			<h3 class="cb-settings__config__subtitle">
-				<?php esc_html_e( $data['title'] ); ?>
+				<?php echo esc_html( $data['title'] ); ?>
 			</h3>
-			<p class="cb-general__info__text"><?php esc_html_e( $data['description'] ); ?></p>
+			<p class="cb-general__info__text"><?php echo esc_html( $data['description'] ); ?></p>
 		</div>
 		<div class="cb-settings__config__data">
 			<div class="cb-settings__config__data__inner">
@@ -61,15 +61,15 @@ $iab_page = new Iab_Page();
 				<?php endif; ?>
 				<div class="vendor-selected-items search-list">
 					<?php foreach ( $data['items'] as $item ) : ?>
-						<label class="switch-checkbox" for="cookiebot-<?php echo $item_attribute; ?>-<?php echo esc_attr( $item['id'] ); ?>">
+						<label class="switch-checkbox" for="cookiebot-<?php echo esc_attr( $item_attribute ); ?>-<?php echo esc_attr( $item['id'] ); ?>">
 							<input
 									type="checkbox"
-									name="cookiebot-tcf-<?php echo $item_attribute; ?>[]"
-									id="cookiebot-<?php echo $item_attribute; ?>-<?php echo esc_attr( $item['id'] ); ?>"
+									name="cookiebot-tcf-<?php echo esc_attr( $item_attribute ); ?>[]"
+									id="cookiebot-<?php echo esc_attr( $item_attribute ); ?>-<?php echo esc_attr( $item['id'] ); ?>"
 									value="<?php echo esc_attr( $item['id'] ); ?>"
-								<?php echo in_array( $item['id'], array_values( $data['selected'] ) ) ? 'checked' : ''; ?>>
+								<?php echo in_array( $item['id'], array_values( $data['selected'] ), true ) ? 'checked' : ''; ?>>
 							<div class="switcher"></div>
-							<?php esc_html_e( $iab_page->vendor_purpose_translations[ $name ][ $item['id'] ] ?? $item['name'] ); ?>
+							<?php echo esc_html( $iab_page->vendor_purpose_translations[ $name ][ $item['id'] ] ?: $item['name'] ); ?>
 						</label>
 					<?php endforeach; ?>
 				</div>
@@ -83,9 +83,9 @@ $iab_page = new Iab_Page();
 <div class="cb-settings__vendor__config__item">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
-			<?php esc_html_e( 'Google Ads Certified External Vendors' ); ?>
+			<?php esc_html_e( 'Google Ads Certified External Vendors', 'cookiebot' ); ?>
 		</h3>
-		<p class="cb-general__info__text"><?php esc_html_e( 'Select allowed external vendors' ); ?></p>
+		<p class="cb-general__info__text"><?php esc_html_e( 'Select allowed external vendors', 'cookiebot' ); ?></p>
 	</div>
 	<div class="cb-settings__config__data">
 		<div class="cb-settings__config__data__inner">
@@ -98,9 +98,9 @@ $iab_page = new Iab_Page();
 								name="cookiebot-tcf-ac-vendors[]"
 								id="cookiebot-ac-vendor<?php echo esc_attr( $item['id'] ); ?>"
 								value="<?php echo esc_attr( $item['id'] ); ?>"
-							<?php echo in_array( $item['id'], array_values( $custom_tcf_ac_vendors ) ) ? 'checked' : ''; ?>>
+							<?php echo in_array( $item['id'], array_values( $custom_tcf_ac_vendors ), true ) ? 'checked' : ''; ?>>
 						<div class="switcher"></div>
-						<?php esc_html_e( $item['name'] ); ?>
+						<?php echo esc_html( $item['name'] ); ?>
 					</label>
 				<?php endforeach; ?>
 			</div>
@@ -113,14 +113,14 @@ $iab_page = new Iab_Page();
 <div class="cb-settings__vendor__config__item">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
-			<?php esc_html_e( __( 'Vendor Restrictions', 'cookiebot' ) ); ?>
+			<?php esc_html_e( 'Vendor Restrictions', 'cookiebot' ); ?>
 		</h3>
-		<p class="cb-general__info__text"><?php esc_html_e( __( 'Select a Vendor and add its disallowed purposes' ) ); ?></p>
-		<div class="cb-btn cb-main-btn restriction-vendor-add">Add vendor</div>
+		<p class="cb-general__info__text"><?php esc_html_e( 'Select a Vendor and add its disallowed purposes', 'cookiebot' ); ?></p>
+		<div class="cb-btn cb-main-btn restriction-vendor-add"><?php esc_html_e( 'Add Vendor', 'cookiebot' ); ?></div>
 	</div>
 	<?php
 	foreach ( $custom_tcf_restrictions as $vendor => $settings ) :
-		$select_name_attr     = $vendor != 0 ? 'cookiebot-tcf-disallowed[' . $vendor . ']' : '';
+		$select_name_attr     = $vendor !== 0 ? 'cookiebot-tcf-disallowed[' . $vendor . ']' : '';
 		$vendors_list         = $vendor_data['vendors'];
 		$selector_placeholder = __( 'Select Vendor', 'cookiebot' );
 		foreach ( $vendors_list['items'] as $item ) {
@@ -140,13 +140,13 @@ $iab_page = new Iab_Page();
 						<div class="cb-settings__selector-list search-list">
 							<?php foreach ( $vendors_list['items'] as $item ) : ?>
 								<div
-										data-value="<?php esc_attr_e( $item['id'] ); ?>"
-									class="cb-settings__selector-list-item <?php echo $item['id'] === $vendor ? 'selected' : ''; ?>"><?php echo esc_html_e( $item['name'] ); ?></div>
+										data-value="<?php echo esc_attr( $item['id'] ); ?>"
+									class="cb-settings__selector-list-item <?php echo $item['id'] === $vendor ? 'selected' : ''; ?>"><?php echo esc_html( $item['name'] ); ?></div>
 							<?php endforeach; ?>
 						</div>
 					</div>
 				</div>
-				<div class="cb-btn cb-main-btn vendor-purposes-show"><?php echo __( 'Select Purposes', 'cookiebot' ); ?></div>
+				<div class="cb-btn cb-main-btn vendor-purposes-show"><?php esc_html_e( 'Select Purposes', 'cookiebot' ); ?></div>
 				<div class="remove__restriction dashicons dashicons-dismiss"></div>
 			</div>
 			<div class="vendor-purposes-restrictions hidden">
@@ -160,20 +160,20 @@ $iab_page = new Iab_Page();
 
 													<?php
 													$item_attribute = str_replace( '_', '-', $name );
-													$item_name      = $vendor != 0 ? 'cookiebot-tcf-disallowed[' . $vendor . '][purposes][]' : '';
+													$item_name      = $vendor !== 0 ? 'cookiebot-tcf-disallowed[' . $vendor . '][purposes][]' : '';
 													$item_id        = 'cookiebot-vendor' . $vendor . '-' . $item_attribute . $item['id'];
 													?>
 
 								<label class="switch-checkbox" for="<?php echo esc_html( $item_id ); ?>">
 									<input
 											type="checkbox"
-											name="<?php echo $item_name; ?>"
+											name="<?php echo esc_attr( $item_name ); ?>"
 											id="<?php echo esc_html( $item_id ); ?>"
 											class="purpose-item"
 											value="<?php echo esc_attr( $item['id'] ); ?>"
-													<?php echo in_array( $item['id'], array_values( $settings['purposes'] ) ) ? 'checked' : ''; ?>>
+													<?php echo in_array( $item['id'], array_values( $settings['purposes'] ), true ) ? 'checked' : ''; ?>>
 									<div class="switcher"></div>
-													<?php esc_html_e( $iab_page->vendor_purpose_translations[ $name ][ $item['id'] ] ?? $item['name'] ); ?>
+													<?php echo esc_html( $iab_page->vendor_purpose_translations[ $name ][ $item['id'] ] ?: $item['name'] ); ?>
 								</label>
 							<?php endforeach; ?>
 						</div>
