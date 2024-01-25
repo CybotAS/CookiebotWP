@@ -169,7 +169,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 */
 	private function extract_base_id_from_inline_id( $inline_script_id ) {
 		// Strip suffix to get the base ID.
-		return preg_replace( '/-js-extra/', '', $inline_script_id );
+		return preg_replace( '/-js-(extra|after|before)$/', '', $inline_script_id );
 	}
 
 	/**
