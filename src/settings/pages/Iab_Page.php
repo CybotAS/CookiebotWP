@@ -103,7 +103,7 @@ class Iab_Page implements Settings_Page_Interface {
 			$get_info
 		);
 
-		return $extra_vendors ?: false;
+		return $extra_vendors ? $extra_vendors : false;
 	}
 
 	private function get_vendor_option_content( $item, $value ) {
@@ -135,7 +135,16 @@ class Iab_Page implements Settings_Page_Interface {
 			),
 		);
 
-		return $defaults[ $item ][ $value ] ?: '';
+		return isset( $defaults[ $item ] ) ? $defaults[ $item ][ $value ] : array();
+	}
+
+	public function vendor_checked( $id, $selected ) {
+		return in_array( strval( $id ), array_values( $selected ), true );
+	}
+
+	public function return_translation_value( $option, $item ) {
+		$translations = $this->vendor_purpose_translations;
+		return isset( $translations[ $option ][ $item['id'] ] ) ? $translations[ $option ][ $item['id'] ] : $item['name'];
 	}
 
 	private function define_translations() {

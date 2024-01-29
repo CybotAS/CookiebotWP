@@ -67,9 +67,9 @@ $iab_page = new Iab_Page();
 									name="cookiebot-tcf-<?php echo esc_attr( $item_attribute ); ?>[]"
 									id="cookiebot-<?php echo esc_attr( $item_attribute ); ?>-<?php echo esc_attr( $item['id'] ); ?>"
 									value="<?php echo esc_attr( $item['id'] ); ?>"
-								<?php echo in_array( $item['id'], array_values( $data['selected'] ), true ) ? 'checked' : ''; ?>>
+								<?php echo $iab_page->vendor_checked( $item['id'], $data['selected'] ) ? 'checked' : ''; ?>>
 							<div class="switcher"></div>
-							<?php echo esc_html( $iab_page->vendor_purpose_translations[ $name ][ $item['id'] ] ?: $item['name'] ); ?>
+							<?php echo esc_html( $iab_page->return_translation_value( $name, $item ) ); ?>
 						</label>
 					<?php endforeach; ?>
 				</div>
@@ -98,7 +98,7 @@ $iab_page = new Iab_Page();
 								name="cookiebot-tcf-ac-vendors[]"
 								id="cookiebot-ac-vendor<?php echo esc_attr( $item['id'] ); ?>"
 								value="<?php echo esc_attr( $item['id'] ); ?>"
-							<?php echo in_array( $item['id'], array_values( $custom_tcf_ac_vendors ), true ) ? 'checked' : ''; ?>>
+						<?php echo $iab_page->vendor_checked( $item['id'], $custom_tcf_ac_vendors ) ? 'checked' : ''; ?>>
 						<div class="switcher"></div>
 						<?php echo esc_html( $item['name'] ); ?>
 					</label>
@@ -171,9 +171,10 @@ $iab_page = new Iab_Page();
 											id="<?php echo esc_html( $item_id ); ?>"
 											class="purpose-item"
 											value="<?php echo esc_attr( $item['id'] ); ?>"
-													<?php echo in_array( $item['id'], array_values( $settings['purposes'] ), true ) ? 'checked' : ''; ?>>
+													<?php echo $iab_page->vendor_checked( $item['id'], $settings['purposes'] ) ? 'checked' : ''; ?>>
+
 									<div class="switcher"></div>
-													<?php echo esc_html( $iab_page->vendor_purpose_translations[ $name ][ $item['id'] ] ?: $item['name'] ); ?>
+													<?php echo esc_html( $iab_page->return_translation_value( $name, $item ) ); ?>
 								</label>
 							<?php endforeach; ?>
 						</div>
