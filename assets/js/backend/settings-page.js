@@ -212,7 +212,22 @@ function removeRestriction(){
     let submitBtn = jQuery('p.submit #submit');
     jQuery(document).on('click','.cb-settings__vendor__restrictions .remove__restriction', function(){
         const restriction = jQuery(this).closest( '.cb-settings__vendor__restrictions' );
-        restriction.remove();
+        const allRestrictions = jQuery( '.cb-settings__vendor__restrictions' );
+        if(allRestrictions.length === 1){
+            const selector = restriction.find('.cb-settings__selector-selector');
+            console.log(selector.data('placeholder'));
+            selector.text(selector.data('placeholder'));
+            restriction.find('.cb-settings__selector__container-input').val('');
+            restriction.find('.cb-settings__selector__container-input').attr('name','');
+            restriction.find('.cb-settings__selector-list-item.selected').removeClass('selected');
+            const vendorPurposes = restriction.find('.purpose-item');
+            vendorPurposes.each(function(){
+                jQuery(this).prop( 'checked', false );
+                jQuery(this).attr( 'name', '' );
+            });
+        }else{
+            restriction.remove();
+        }
         let newValues = jQuery('form').serialize();
         if(newValues !== initialValues) {
             submitBtn.addClass('enabled');

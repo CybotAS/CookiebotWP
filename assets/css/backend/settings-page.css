@@ -235,6 +235,14 @@
     margin-bottom: 50px;
 }
 
+.cb-settings__vendor__config__item .cb-general__info__text {
+    max-width: initial;
+}
+.cb-settings__vendor__config__item .only-title {
+    margin-bottom: 24px;
+}
+
+
 .cb-vendor__setting--item {
     position: relative;
     width: 100%;

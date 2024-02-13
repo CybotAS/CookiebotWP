@@ -46,7 +46,8 @@ $iab_page = new Iab_Page();
 
 <?php if ( $vendor_data ) : ?>
 	<?php foreach ( $vendor_data as $name => $data ) : ?>
-		<?php $item_attribute = Iab_Page::get_option_attribute_name( $name ); ?>
+		<?php if ( $name !== 'vendors' ) : ?>
+			<?php $item_attribute = Iab_Page::get_option_attribute_name( $name ); ?>
 	<div class="cb-settings__vendor__config__item">
 		<div class="cb-settings__config__content">
 			<h3 class="cb-settings__config__subtitle">
@@ -56,9 +57,6 @@ $iab_page = new Iab_Page();
 		</div>
 		<div class="cb-settings__config__data">
 			<div class="cb-settings__config__data__inner">
-				<?php if ( $name === 'vendors' ) : ?>
-				<input type="text" class="cb-settings__selector-search checkbox-vendor-search" placeholder="<?php esc_html_e( 'Search', 'cookiebot' ); ?>...">
-				<?php endif; ?>
 				<div class="vendor-selected-items search-list">
 					<?php foreach ( $data['items'] as $item ) : ?>
 						<label class="switch-checkbox" for="cookiebot-<?php echo esc_attr( $item_attribute ); ?>-<?php echo esc_attr( $item['id'] ); ?>">
@@ -76,16 +74,63 @@ $iab_page = new Iab_Page();
 			</div>
 		</div>
 	</div>
+		<?php endif; ?>
 <?php endforeach ?>
+<?php endif; ?>
+
+<?php if ( $vendor_data['vendors'] || $extra_providers ) : ?>
+<div class="cb-settings__vendor__config__item">
+	<div class="cb-settings__config__content">
+		<h3 class="cb-settings__config__subtitle">
+			<?php esc_html_e( 'Sharing data with third-party vendors', 'cookiebot' ); ?>
+		</h3>
+		<p class="cb-general__info__text">
+		<?php
+			esc_html_e( 'Select vendors with whom you’ll share users’ data. We’ll include this information on the second layer of your consent banner, where users interested in more granular detail about who will access their data can view it.', 'cookiebot' );
+		?>
+			</p>
+	</div>
+</div>
+<?php endif; ?>
+
+
+<?php if ( $vendor_data['vendors'] ) : ?>
+	<?php $item_attribute = Iab_Page::get_option_attribute_name( 'vendors' ); ?>
+	<div class="cb-settings__vendor__config__item">
+		<div class="cb-settings__config__content">
+			<h3 class="cb-settings__config__subtitle only-title">
+				<?php echo esc_html( $vendor_data['vendors']['title'] ); ?>
+			</h3>
+		</div>
+		<div class="cb-settings__config__data">
+			<div class="cb-settings__config__data__inner">
+				<input type="text" class="cb-settings__selector-search checkbox-vendor-search" placeholder="<?php esc_html_e( 'Search', 'cookiebot' ); ?>...">
+
+				<div class="vendor-selected-items search-list">
+					<?php foreach ( $vendor_data['vendors']['items'] as $item ) : ?>
+						<label class="switch-checkbox" for="cookiebot-<?php echo esc_attr( $item_attribute ); ?>-<?php echo esc_attr( $item['id'] ); ?>">
+							<input
+									type="checkbox"
+									name="cookiebot-tcf-<?php echo esc_attr( $item_attribute ); ?>[]"
+									id="cookiebot-<?php echo esc_attr( $item_attribute ); ?>-<?php echo esc_attr( $item['id'] ); ?>"
+									value="<?php echo esc_attr( $item['id'] ); ?>"
+								<?php echo $iab_page->vendor_checked( $item['id'], $vendor_data['vendors']['selected'] ) ? 'checked' : ''; ?>>
+							<div class="switcher"></div>
+							<?php echo esc_html( $iab_page->return_translation_value( 'vendors', $item ) ); ?>
+						</label>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</div>
 <?php endif; ?>
 
 <?php if ( $extra_providers ) : ?>
 <div class="cb-settings__vendor__config__item">
 	<div class="cb-settings__config__content">
-		<h3 class="cb-settings__config__subtitle">
-			<?php esc_html_e( 'Google Ads Certified External Vendors', 'cookiebot' ); ?>
+		<h3 class="cb-settings__config__subtitle only-title">
+			<?php esc_html_e( 'Google Ads certified external vendors', 'cookiebot' ); ?>
 		</h3>
-		<p class="cb-general__info__text"><?php esc_html_e( 'Select allowed external vendors', 'cookiebot' ); ?></p>
 	</div>
 	<div class="cb-settings__config__data">
 		<div class="cb-settings__config__data__inner">
@@ -113,9 +158,16 @@ $iab_page = new Iab_Page();
 <div class="cb-settings__vendor__config__item">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
-			<?php esc_html_e( 'Vendor Restrictions', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Restrictions of data use purposes for vendors', 'cookiebot' ); ?>
 		</h3>
-		<p class="cb-general__info__text"><?php esc_html_e( 'Select a Vendor and add its disallowed purposes', 'cookiebot' ); ?></p>
+		<p class="cb-general__info__text">
+		<?php
+		esc_html_e(
+			'Set restrictions on data use purposes for specific vendors. Add vendors and the data use purposes that each vendor is allowed. We’ll share this information with users within your consent banner.',
+			'cookiebot'
+		);
+		?>
+			</p>
 		<div class="cb-btn cb-main-btn restriction-vendor-add"><?php esc_html_e( 'Add Vendor', 'cookiebot' ); ?></div>
 	</div>
 	<?php
@@ -133,7 +185,7 @@ $iab_page = new Iab_Page();
 			<div class="cb-settings__config__data__inner">
 				<div class="cb-settings__selector__container">
 					<input type="hidden" name="<?php echo esc_html( $select_name_attr ); ?>" class="cb-settings__selector__container-input">
-					<div class="cb-settings__selector-selector"><?php echo esc_html( $selector_placeholder ); ?></div>
+					<div class="cb-settings__selector-selector" data-placeholder="<?php esc_attr_e( 'Select Vendor', 'cookiebot' ) ?>"><?php echo esc_html( $selector_placeholder ); ?></div>
 					<div class="cb-settings__selector-list-container hidden">
 						<div class="cb-settings__selector-veil"></div>
 						<input type="text" class="cb-settings__selector-search" placeholder="<?php esc_html_e( 'Search', 'cookiebot' ); ?>...">
@@ -146,7 +198,7 @@ $iab_page = new Iab_Page();
 						</div>
 					</div>
 				</div>
-				<div class="cb-btn cb-main-btn vendor-purposes-show"><?php esc_html_e( 'Select Purposes', 'cookiebot' ); ?></div>
+				<div class="cb-btn cb-main-btn vendor-purposes-show"><?php esc_html_e( 'Set Purposes', 'cookiebot' ); ?></div>
 				<div class="remove__restriction dashicons dashicons-dismiss"></div>
 			</div>
 			<div class="vendor-purposes-restrictions hidden">

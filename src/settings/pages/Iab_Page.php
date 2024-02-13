@@ -109,28 +109,40 @@ class Iab_Page implements Settings_Page_Interface {
 	private function get_vendor_option_content( $item, $value ) {
 		$defaults = array(
 			self::IAB_PURPOSE_FIELD_NAME          => array(
-				'title'       => __( 'Purposes:', 'cookiebot' ),
-				'description' => __( 'Selected your purposes:', 'cookiebot' ),
+				'title'       => __( 'Purposes of data use', 'cookiebot' ),
+				'description' => __(
+					'Inform your users how you’ll use their data. We’ll show this on the second layer of your consent banner, where users interested in more granular detail about data processing can view it.',
+					'cookiebot'
+				),
 				'selected'    => self::get_vendor_custom_option( 'cookiebot-tcf-purposes' ),
 			),
 			self::IAB_SPECIAL_PURPOSE_FIELD_NAME  => array(
-				'title'       => __( 'Special Purposes:', 'cookiebot' ),
-				'description' => __( 'Selected your purposes:', 'cookiebot' ),
+				'title'       => __( 'Special purposes of data use', 'cookiebot' ),
+				'description' => __(
+					'Inform your users about special purposes of using their data. We’ll show this on the second layer of your consent banner.',
+					'cookiebot'
+				),
 				'selected'    => self::get_vendor_custom_option( 'cookiebot-tcf-special-purposes' ),
 			),
 			self::IAB_FEATURES_FIELD_NAME         => array(
-				'title'       => __( 'Features:', 'cookiebot' ),
-				'description' => __( 'Selected your features:', 'cookiebot' ),
+				'title'       => __( 'Features required for data processing', 'cookiebot' ),
+				'description' => __(
+					'Inform users about the features necessary for processing their personal data. We’ll list the selected features on the second layer of your consent banner.',
+					'cookiebot'
+				),
 				'selected'    => self::get_vendor_custom_option( 'cookiebot-tcf-features' ),
 			),
 			self::IAB_SPECIAL_FEATURES_FIELD_NAME => array(
-				'title'       => __( 'Special Features:', 'cookiebot' ),
-				'description' => __( 'Selected your features:', 'cookiebot' ),
+				'title'       => __( 'Special features required for data processing', 'cookiebot' ),
+				'description' => __(
+					'Inform users about any specially categorized features required for processing their personal data. We’ll list the selected features on the second layer of your consent banner, offering options for users to enable or disable them.',
+					'cookiebot'
+				),
 				'selected'    => self::get_vendor_custom_option( 'cookiebot-tcf-special-features' ),
 			),
 			self::IAB_VENDOR_FIELD_NAME           => array(
-				'title'       => __( 'Vendors:', 'cookiebot' ),
-				'description' => __( 'Selected your vendors:', 'cookiebot' ),
+				'title'       => __( 'TCF listed vendors', 'cookiebot' ),
+				'description' => false,
 				'selected'    => self::get_vendor_custom_option( 'cookiebot-tcf-vendors' ),
 			),
 		);
