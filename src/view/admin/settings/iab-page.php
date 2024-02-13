@@ -185,7 +185,7 @@ $iab_page = new Iab_Page();
 			<div class="cb-settings__config__data__inner">
 				<div class="cb-settings__selector__container">
 					<input type="hidden" name="<?php echo esc_html( $select_name_attr ); ?>" class="cb-settings__selector__container-input">
-					<div class="cb-settings__selector-selector" data-placeholder="<?php esc_attr_e( 'Select Vendor', 'cookiebot' ) ?>"><?php echo esc_html( $selector_placeholder ); ?></div>
+					<div class="cb-settings__selector-selector" data-placeholder="<?php esc_attr_e( 'Select Vendor', 'cookiebot' ); ?>"><?php echo esc_html( $selector_placeholder ); ?></div>
 					<div class="cb-settings__selector-list-container hidden">
 						<div class="cb-settings__selector-veil"></div>
 						<input type="text" class="cb-settings__selector-search" placeholder="<?php esc_html_e( 'Search', 'cookiebot' ); ?>...">
