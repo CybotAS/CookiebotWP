@@ -13,7 +13,7 @@ use DomainException;
 use RuntimeException;
 
 class Cookiebot_WP {
-	const COOKIEBOT_PLUGIN_VERSION  = '4.3.4';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.3.5';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -200,6 +200,7 @@ class Cookiebot_WP {
 			'cookiebot-gcm'            => '1',
 		);
 		$temp_notice_option = get_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY );
+		$iab_version        = get_option( 'cookiebot-tcf-version' );
 
 		foreach ( $options as $option => $default ) {
 			if ( get_option( $option ) === false && ! get_option( $option . self::OPTION_FIRST_RUN_SUFFIX ) ) {
@@ -219,6 +220,10 @@ class Cookiebot_WP {
 			}
 		} elseif ( $temp_notice_option !== 'hide' && version_compare( phpversion(), '7.0.0' ) >= 0 ) {
 			update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'hide' );
+		}
+
+		if ( ! empty( $iab_version ) && $iab_version === 'IAB' ) {
+			update_option( 'cookiebot-tcf-version', 'TCFv2.2' );
 		}
 	}
 

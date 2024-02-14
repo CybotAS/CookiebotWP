@@ -13,10 +13,17 @@ class Cookiebot_Javascript_Helper {
 		}
 
 		// add JS
-		add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9999 );
-		add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9998 );
-		add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), - 9997 );
+		if ( self::is_tcf_enabled() ) {
+			add_action( 'wp_head', array( $this, 'include_publisher_restrictions_js' ), -9999 );
+		}
+		add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9998 );
+		add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9997 );
+		add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), - 9996 );
 		( new Cookiebot_Declaration_Shortcode() )->register_hooks();
+	}
+
+	private function is_tcf_enabled() {
+		return ! empty( get_option( 'cookiebot-iab' ) );
 	}
 
 	private function get_data_regions() {
@@ -176,6 +183,57 @@ class Cookiebot_Javascript_Helper {
 			}
 		}
 		return '';
+	}
+
+	public function include_publisher_restrictions_js( $return_html = false ) {
+		$view_path = 'frontend/scripts/publisher-restrictions-js.php';
+
+		$custom_tcf_purposes         = get_option( 'cookiebot-tcf-purposes' );
+		$custom_tcf_special_purposes = get_option( 'cookiebot-tcf-special-purposes' );
+		$custom_tcf_features         = get_option( 'cookiebot-tcf-features' );
+		$custom_tcf_special_features = get_option( 'cookiebot-tcf-special-features' );
+		$custom_tcf_vendors          = get_option( 'cookiebot-tcf-vendors' );
+		$custom_tcf_ac_vendors       = get_option( 'cookiebot-tcf-ac-vendors' );
+
+		$view_args = array(
+			'allowed_purposes'          => self::get_custom_tcf_ids( $custom_tcf_purposes ),
+			'allowed_special_purposes'  => self::get_custom_tcf_ids( $custom_tcf_special_purposes ),
+			'allowed_features'          => self::get_custom_tcf_ids( $custom_tcf_features ),
+			'allowed_special_features'  => self::get_custom_tcf_ids( $custom_tcf_special_features ),
+			'allowed_vendors'           => self::get_custom_tcf_ids( $custom_tcf_vendors ),
+			'allowed_google_ac_vendors' => self::get_custom_tcf_ids( $custom_tcf_ac_vendors ),
+			'vendor_restrictions'       => self::get_custom_tcf_restrictions(),
+		);
+		if ( $return_html ) {
+			return get_view_html( $view_path, $view_args );
+		} else {
+			include_view( $view_path, $view_args );
+		}
+		return '';
+	}
+
+	private function get_custom_tcf_ids( $option ) {
+		if ( empty( $option ) ) {
+			return '';
+		}
+
+		return implode( ', ', $option );
+	}
+
+	private function get_custom_tcf_restrictions() {
+		if ( empty( get_option( 'cookiebot-tcf-disallowed' ) ) ) {
+			return '';
+		}
+
+		$custom_tcf_restrictions = get_option( 'cookiebot-tcf-disallowed' );
+
+		$attribute = array();
+
+		foreach ( $custom_tcf_restrictions as $vendor => $restrictions ) {
+			$attribute [] = '{"VendorId":' . $vendor . ',"DisallowPurposes":[' . implode( ', ', $restrictions['purposes'] ) . ']}';
+		}
+
+		return implode( ',', $attribute );
 	}
 
 	private function get_consent_attribute( $blocking_mode, $categories ) {

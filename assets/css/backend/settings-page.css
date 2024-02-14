@@ -231,6 +231,119 @@
     display: block;
 }
 
+.cb-settings__vendor__config__item {
+    margin-bottom: 50px;
+}
+
+.cb-settings__vendor__config__item .cb-general__info__text {
+    max-width: initial;
+}
+.cb-settings__vendor__config__item .only-title {
+    margin-bottom: 24px;
+}
+
+
+.cb-vendor__setting--item {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    color: #141414;
+    border: 2px solid #d3d3d3;
+    border-radius: 7px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 27px;
+    min-height: 30px;
+    cursor: pointer;
+}
+
+.checkbox-vendor-search{
+    margin-bottom: 32px;
+}
+
+.vendor-selected-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 5px;
+    grid-column-gap: 5px;
+    grid-auto-rows: minmax(30px, 1fr);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.vendor-selected-items label.switch-checkbox {
+    margin-top: 0;
+    align-items: flex-start;
+}
+
+.vendor-selected-items label.switch-checkbox.hidden {
+    display: none;
+}
+
+.vendor-selected-items .switch-checkbox .switcher {
+    width: 30px;
+    min-width: 30px;
+    height: 18px;
+}
+
+.vendor-selected-items .switch-checkbox .switcher:after {
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+}
+
+.vendor-selected-items .switch-checkbox .switcher:active:after {
+    width: 14px;
+}
+
+.vendor-selected-items .switch-checkbox input[type=checkbox]:checked + .switcher:after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+}
+
+.vendor-selected-item {
+    display: inline-block;
+    padding: 1px 5px;
+    font-size: 13px;
+    line-height: initial;
+    background: blue;
+    color: #ffffff;
+    border-radius: 15px;
+    margin-right: 4px;
+}
+
+.vendor-name-list {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.cb-settings__vendor__restrictions {
+    margin-top: 24px;
+}
+
+.cb-settings__vendor__restrictions > .cb-settings__config__data__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-column-gap: 16px;
+    align-items: center;
+}
+
+.cb-settings__vendor__restrictions .cb-main-btn {
+    margin-top: 0;
+}
+
+.vendor-purposes-restrictions > .cb-settings__config__data__inner {
+    margin-top: 16px;
+}
+
+.cb-settings__vendor__restrictions .remove__restriction {
+    cursor: pointer;
+}
+
 @media (max-width: 1414px) {
     .recommended-tag {
         display: block;
