@@ -19,6 +19,7 @@
  */
 
 use cybot\cookiebot\settings\pages\Iab_Page;
+
 $iab_page = new Iab_Page();
 ?>
 <div class="cb-settings__config__item">
@@ -86,11 +87,17 @@ $iab_page = new Iab_Page();
 	</div>
 </div>
 	<?php
+    //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo Iab_Page::get_backup_custom_option( 'cookiebot-tcf-purposes', $custom_tcf_purposes );
+	//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo Iab_Page::get_backup_custom_option( 'cookiebot-tcf-special-purposes', $custom_tcf_special_purposes );
+	//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo Iab_Page::get_backup_custom_option( 'cookiebot-tcf-features', $custom_tcf_features );
+	//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo Iab_Page::get_backup_custom_option( 'cookiebot-tcf-special-features', $custom_tcf_special_features );
+	//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo Iab_Page::get_backup_custom_option( 'cookiebot-tcf-vendors', $custom_tcf_vendors );
+	//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo Iab_Page::get_backup_custom_restrictions( $custom_tcf_restrictions );
 	?>
 <?php endif; ?>
