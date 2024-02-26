@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-02-15 13:52+0100\n"
-"PO-Revision-Date: 2024-02-12 10:17+0100\n"
+"PO-Revision-Date: 2024-02-26 13:21+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -1624,6 +1624,14 @@ msgstr ""
 #: view/admin/settings/iab-page.php:40
 msgid "Select the TCF Version below"
 msgstr "Wybierz wersję TCF"
+
+#: view/admin/settings/iab-page.php:84
+msgid "IAB vendor list is temporarily offline. Please try refreshing the page after a couple of minutes."
+msgstr "Lista dostawców IAB jest tymczasowo wyłączona. Spróbuj odświeżyć stronę za kilka minut."
+
+#: view/admin/settings/iab-page.php:86
+msgid "If you had previously saved configurations, don’t worry, they will continue to work."
+msgstr "Jeśli wcześniej zapisałeś konfiguracje, nie martw się, ponieważ będą one nadal działać."
 
 #: view/admin/settings/iab-page.php:107 view/admin/settings/iab-page.php:137 view/admin/settings/iab-page.php:191
 msgid "Search"
