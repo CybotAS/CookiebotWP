@@ -99,6 +99,7 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= 'Frontend Language: ' . $this->print_option_enabled( 'cookiebot-front-language' ) . "\n";
 		$debug_output .= 'IAB: ' . $this->print_option_enabled( 'cookiebot-iab' ) . "\n";
 		$debug_output .= 'TCF version: ' . $this->print_tcf_version() . "\n";
+		$debug_output .= 'TCF tag: ' . $cookiebot_javascript_helper->include_publisher_restrictions_js( true ) . "\n";
 		$debug_output .= 'Multiple banners: ' . $this->print_option_enabled( 'cookiebot-multiple-config' ) . "\n";
 		$debug_output .= $this->print_multiple_configuration_banners();
 		$debug_output .= 'Add async/defer to banner tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-uc-attribute' ) . "\n";

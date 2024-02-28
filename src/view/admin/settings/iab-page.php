@@ -19,6 +19,7 @@
  */
 
 use cybot\cookiebot\settings\pages\Iab_Page;
+
 $iab_page = new Iab_Page();
 ?>
 <div class="cb-settings__config__item">
@@ -75,10 +76,33 @@ $iab_page = new Iab_Page();
 		</div>
 	</div>
 		<?php endif; ?>
-<?php endforeach ?>
+<?php endforeach; ?>
+<?php else : ?>
+<div class="cb-settings__vendor__config__item vendor-list-offline">
+	<div class="cb-settings__config__content">
+		<h3 class="cb-settings__config__subtitle">
+			<?php echo esc_html_e( 'IAB vendor list is temporarily offline. Please try refreshing the page after a couple of minutes.', 'cookiebot' ); ?>
+		</h3>
+		<p class="cb-general__info__text"><?php echo esc_html_e( 'If you had previously saved configurations, don’t worry, they will continue to work.', 'cookiebot' ); ?></p>
+	</div>
+</div>
+	<?php
+    //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo Iab_Page::get_backup_custom_option( 'cookiebot-tcf-purposes', $custom_tcf_purposes );
+	//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo Iab_Page::get_backup_custom_option( 'cookiebot-tcf-special-purposes', $custom_tcf_special_purposes );
+	//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo Iab_Page::get_backup_custom_option( 'cookiebot-tcf-features', $custom_tcf_features );
+	//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo Iab_Page::get_backup_custom_option( 'cookiebot-tcf-special-features', $custom_tcf_special_features );
+	//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo Iab_Page::get_backup_custom_option( 'cookiebot-tcf-vendors', $custom_tcf_vendors );
+	//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo Iab_Page::get_backup_custom_restrictions( $custom_tcf_restrictions );
+	?>
 <?php endif; ?>
 
-<?php if ( $vendor_data['vendors'] || $extra_providers ) : ?>
+<?php if ( ( $vendor_data && $vendor_data['vendors'] ) || $extra_providers ) : ?>
 <div class="cb-settings__vendor__config__item">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
@@ -94,7 +118,7 @@ $iab_page = new Iab_Page();
 <?php endif; ?>
 
 
-<?php if ( $vendor_data['vendors'] ) : ?>
+<?php if ( $vendor_data && $vendor_data['vendors'] ) : ?>
 	<?php $item_attribute = Iab_Page::get_option_attribute_name( 'vendors' ); ?>
 	<div class="cb-settings__vendor__config__item">
 		<div class="cb-settings__config__content">

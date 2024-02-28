@@ -49,12 +49,13 @@ class Iab_Page implements Settings_Page_Interface {
 	}
 
 	public function get_vendor_list_data() {
-		$json     = wp_safe_remote_request( self::IAB_VENDOR_LIST_URL );
-		$response = json_decode( $json['body'] );
+		$json = wp_safe_remote_request( self::IAB_VENDOR_LIST_URL );
 
-		if ( ! $response ) {
+		if ( is_wp_error( $json ) ) {
 			return false;
 		}
+
+		$response = json_decode( $json['body'] );
 
 		return array(
 			'purposes'         => self::get_vendor_array( $response->purposes, self::IAB_PURPOSE_FIELD_NAME ),
@@ -246,6 +247,28 @@ class Iab_Page implements Settings_Page_Interface {
 
 	public static function get_option_attribute_name( $option_name ) {
 		return str_replace( '_', '-', $option_name );
+	}
+
+	public static function get_backup_custom_option( $option_name, $values ) {
+		$inputs = '';
+		if ( $values ) {
+			foreach ( $values as $item ) {
+				$inputs .= '<input type="hidden" name="' . $option_name . '[]" value="' . $item . '">';
+			}
+		}
+		return $inputs;
+	}
+
+	public static function get_backup_custom_restrictions( $values ) {
+		$inputs = '';
+		if ( $values ) {
+			foreach ( $values as $item => $data ) {
+				foreach ( $data['purposes'] as $purpose ) {
+					$inputs .= '<input type="hidden" name="cookiebot-tcf-disallowed[' . $item . '][purposes][]" value="' . $purpose . '">';
+				}
+			}
+		}
+		return $inputs;
 	}
 
 	const IAB_VENDOR_LIST_URL             = 'https://vendor-list.consensu.org/v3/vendor-list.json';
