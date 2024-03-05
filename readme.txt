@@ -304,7 +304,7 @@ Cookiebot CMP version 4.3.7 is out! This release adds bugfixes and small feature
 
 ####What's new####
 * Set WordPress tested up to version to 6.4.3
-* Add ignore parameter to inline scripts associated to ignored scripts
+* Add ignore parameter to inline scripts associated to ignored scripts Props: @jaakkolehtonen
 
 ####Bugfixes####
 * Fix fatal error when no purposes added to restrictions
