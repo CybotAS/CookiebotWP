@@ -76,9 +76,7 @@ class Iab_Page implements Settings_Page_Interface {
 
 		if ( ! empty( $custom_tcf_restrictions ) ) {
 			foreach ( $custom_tcf_restrictions as $vendor => $t ) {
-				if ( empty( $t['purposes'] ) ) {
-					$restrictions[ $vendor ]['purposes'] = array();
-				}
+				$restrictions[ $vendor ] = empty( $t['purposes'] ) ? array( 'purposes' => array() ) : $t;
 			}
 		} else {
 			$restrictions = array(
