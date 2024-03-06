@@ -230,7 +230,8 @@ class Cookiebot_Javascript_Helper {
 		$attribute = array();
 
 		foreach ( $custom_tcf_restrictions as $vendor => $restrictions ) {
-			$attribute [] = '{"VendorId":' . $vendor . ',"DisallowPurposes":[' . implode( ', ', $restrictions['purposes'] ) . ']}';
+			$purposes     = ! empty( $restrictions['purposes'] ) ? $restrictions['purposes'] : array();
+			$attribute [] = '{"VendorId":' . $vendor . ',"DisallowPurposes":[' . implode( ', ', $purposes ) . ']}';
 		}
 
 		return implode( ',', $attribute );

@@ -38,9 +38,7 @@ class Iab_Page implements Settings_Page_Interface {
 			'custom_tcf_special_features' => self::get_vendor_custom_option( 'cookiebot-tcf-special-features' ),
 			'custom_tcf_vendors'          => self::get_vendor_custom_option( 'cookiebot-tcf-vendors' ),
 			'custom_tcf_ac_vendors'       => self::get_vendor_custom_option( 'cookiebot-tcf-ac-vendors' ),
-			'custom_tcf_restrictions'     => ! empty( get_option( 'cookiebot-tcf-disallowed' ) ) ?
-				get_option( 'cookiebot-tcf-disallowed' ) :
-				array( '0' => array( 'purposes' => array() ) ),
+			'custom_tcf_restrictions'     => self::get_restrictions_custom_option(),
 			'vendor_data'                 => self::get_vendor_list_data(),
 			'extra_providers'             => self::get_extra_providers(),
 		);
@@ -70,6 +68,27 @@ class Iab_Page implements Settings_Page_Interface {
 
 	private function get_vendor_custom_option( $option ) {
 		return empty( get_option( $option ) ) ? array() : get_option( $option );
+	}
+
+	private function get_restrictions_custom_option() {
+		$restrictions            = array();
+		$custom_tcf_restrictions = get_option( 'cookiebot-tcf-disallowed' );
+
+		if ( ! empty( $custom_tcf_restrictions ) ) {
+			foreach ( $custom_tcf_restrictions as $vendor => $t ) {
+				if ( empty( $t['purposes'] ) ) {
+					$restrictions[ $vendor ]['purposes'] = array();
+				}
+			}
+		} else {
+			$restrictions = array(
+				'0' => array(
+					'purposes' => array(),
+				),
+			);
+		}
+
+		return $restrictions;
 	}
 
 	private function get_vendor_array( $items, $item_name ) {
