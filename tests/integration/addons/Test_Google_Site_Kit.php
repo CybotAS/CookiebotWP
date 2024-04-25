@@ -16,8 +16,8 @@ class Test_Google_Site_Kit extends WP_UnitTestCase {
 	 * @throws \Exception
 	 */
 	public function test_is_plugin_compatible() {
-		$content = Google_Site_Kit::get_svn_file_content( 'includes/Modules/Analytics/Web_Tag.php' );
+		$content = Google_Site_Kit::get_svn_file_content( 'includes/Modules/Analytics_4/Web_Tag.php' );
 
-		$this->assertNotFalse( strpos( $content, "wp_script_add_data( 'google_gtagjs', 'script_execution', 'async' );" ) );
+		$this->assertNotFalse( strpos( $content, "add_filter( 'script_loader_tag', \$filter_google_gtagjs, 10, 2 );" ) );
 	}
 }

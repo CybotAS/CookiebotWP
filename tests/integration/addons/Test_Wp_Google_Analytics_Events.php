@@ -19,9 +19,9 @@ class Test_Wp_Google_Analytics_Events extends WP_UnitTestCase {
 		$content = Wp_Google_Analytics_Events::get_svn_file_content();
 
 		$wp_head_snippet = <<<TEXT
-add_action('wp_head',
-        array('GAESnippets', 'add_snippet_to_header'),
-        0);
+add_action('wp_head', 
+                array('GAESnippets', 'add_snippet_to_header'),
+                0);
 TEXT;
 
 		$required_code_snippets = array(
