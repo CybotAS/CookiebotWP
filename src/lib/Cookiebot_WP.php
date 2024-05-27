@@ -139,7 +139,9 @@ class Cookiebot_WP {
 	public static function get_cookie_blocking_mode() {
 		$allowed_modes   = array( 'auto', 'manual' );
 		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
-		$setting         = (string) get_option( 'cookiebot-cookie-blocking-mode', $network_setting );
+		$setting         = $network_setting === 'manual' ?
+			(string) get_option( 'cookiebot-cookie-blocking-mode', $network_setting ) :
+			$network_setting;
 
 		return in_array( $setting, $allowed_modes, true ) ? $setting : 'manual';
 	}

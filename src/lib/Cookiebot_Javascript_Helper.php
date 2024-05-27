@@ -78,8 +78,8 @@ class Cookiebot_Javascript_Helper {
 					Cookiebot_WP::can_current_user_edit_theme() &&
 					$return_html === '' &&
 					(
-						get_site_option( 'cookiebot-output-logged-in' ) === false ||
-						get_site_option( 'cookiebot-output-logged-in' ) === ''
+						get_option( 'cookiebot-output-logged-in' ) === false ||
+						get_option( 'cookiebot-output-logged-in' ) === ''
 					)
 				)
 			) {
@@ -123,7 +123,7 @@ class Cookiebot_Javascript_Helper {
 	 */
 	public function include_google_tag_manager_js( $return_html = false ) {
 		$option            = get_option( 'cookiebot-gtm' );
-		$blocking_mode     = get_option( 'cookiebot-cookie-blocking-mode' );
+		$blocking_mode     = Cookiebot_WP::get_cookie_blocking_mode();
 		$cookie_categories = get_option( 'cookiebot-gtm-cookies' );
 
 		if ( $option !== false && $option !== '' ) {
@@ -158,7 +158,7 @@ class Cookiebot_Javascript_Helper {
 	 */
 	public function include_google_consent_mode_js( $return_html = false ) {
 		$option                     = get_option( 'cookiebot-gcm' );
-		$blocking_mode              = get_option( 'cookiebot-cookie-blocking-mode' );
+		$blocking_mode              = Cookiebot_WP::get_cookie_blocking_mode();
 		$is_url_passthrough_enabled = get_option( 'cookiebot-gcm-url-passthrough' );
 		$cookie_categories          = get_option( 'cookiebot-gcm-cookies' );
 

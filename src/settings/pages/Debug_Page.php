@@ -120,6 +120,10 @@ class Debug_Page implements Settings_Page_Interface {
 			$debug_output .= 'GCM tag: ' . $cookiebot_javascript_helper->include_google_consent_mode_js( true ) . "\n";
 		}
 
+		if ( is_multisite() ) {
+			$debug_output .= $this->print_multisite_network_settings();
+		}
+
 		$debug_output .= $this->print_wp_consent_level_api_mapping();
 		$debug_output .= $this->print_activated_addons();
 		$debug_output .= $this->print_activated_plugins();
@@ -136,8 +140,8 @@ class Debug_Page implements Settings_Page_Interface {
 	 *
 	 * @return string
 	 */
-	private function print_option_if_not_empty( $option_name ) {
-		$option_value = get_option( $option_name );
+	private function print_option_if_not_empty( $option_name, $is_multisite = false ) {
+		$option_value = $is_multisite ? get_site_option( $option_name ) : get_option( $option_name );
 		return $option_value !== '' ? $option_value : 'None';
 	}
 
@@ -145,11 +149,12 @@ class Debug_Page implements Settings_Page_Interface {
 	 * Print "Enabled" or "Not enabled" depending on the option value. Option value should be "1" or "0".
 	 *
 	 * @param string $option_name Name of the option to check.
+	 * @param bool   $is_multisite Is multisite option.
 	 *
 	 * @return string
 	 */
-	private function print_option_enabled( $option_name ) {
-		return $this->print_option_active( $option_name, 'Enabled', 'Not enabled' );
+	private function print_option_enabled( $option_name, $is_multisite = false ) {
+		return $this->print_option_active( $option_name, $is_multisite, 'Enabled', 'Not enabled' );
 	}
 
 	/**
@@ -157,12 +162,16 @@ class Debug_Page implements Settings_Page_Interface {
 	 * <b>$disabled_text</b> is set, it will be used instead of default values "Yes" or "No".
 	 *
 	 * @param string $option_name   Name of the option to check.
+	 * @param bool   $is_multisite Is multisite option.
 	 * @param string $active_text   (Optional) Text to print if option is active. Default is "Yes".
 	 * @param string $disabled_text (Optional) Text to print if option is disabled. Default is "No".
 	 *
 	 * @return string
 	 */
-	private function print_option_active( $option_name, $active_text = 'Yes', $disabled_text = 'No' ) {
+	private function print_option_active( $option_name, $is_multisite = false, $active_text = 'Yes', $disabled_text = 'No' ) {
+		if ( $is_multisite ) {
+			return get_site_option( $option_name ) === '1' ? $active_text : $disabled_text;
+		}
 		return get_option( $option_name ) === '1' ? $active_text : $disabled_text;
 	}
 
@@ -270,6 +279,24 @@ class Debug_Page implements Settings_Page_Interface {
 				$output .= $plugins[ $plugin_key ]['Name'] . ' (Version: ' . $plugins[ $plugin_key ]['Version'] . ")\n";
 			}
 		}
+
+		return $output;
+	}
+
+	/**
+	 * Print information about activated plugins
+	 *
+	 * @return string
+	 */
+	private function print_multisite_network_settings() {
+		$output  = "\n--- Cookiebot Multisite Information ---\n";
+		$output .= 'Cookiebot Network ID: ' . $this->print_option_if_not_empty( 'cookiebot-cbid', true ) . "\n";
+		$output .= 'Network Blocking mode: ' . get_site_option( 'cookiebot-cookie-blocking-mode' ) . "\n";
+		$output .= 'Network Add async/defer to banner tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-uc-attribute', true ) . "\n";
+		$output .= 'Network Add async/defer to declaration tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-cd-attribute', true ) . "\n";
+		$output .= 'Network Auto update: ' . $this->print_option_enabled( 'cookiebot-autoupdate', true ) . "\n";
+		$output .= 'Network Hide Cookie Popup: ' . $this->print_option_enabled( 'cookiebot-nooutput', true ) . "\n";
+		$output .= 'Network Disable Cookiebot in WP Admin: ' . $this->print_option_active( 'cookiebot-nooutput-admin', true ) . "\n";
 
 		return $output;
 	}
