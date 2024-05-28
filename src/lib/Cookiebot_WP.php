@@ -198,7 +198,6 @@ class Cookiebot_WP {
 			'cookiebot-nooutput-admin' => '1',
 			'cookiebot-gcm'            => '1',
 		);
-		// $temp_notice_option = get_option( Cookiebot_Temp_Notice::COOKIEBOT_NOTICE_OPTION_KEY );
 
 		foreach ( $options as $option => $default ) {
 			if ( get_option( $option ) === false && ! get_option( $option . self::OPTION_FIRST_RUN_SUFFIX ) ) {
