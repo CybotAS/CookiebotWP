@@ -18,6 +18,23 @@
     text-decoration: none;
 }
 
+.cookiebot-admin-notice a.cb-btn {
+    display: inline-block;
+    margin-top: 18px;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    box-shadow: unset;
+    outline: unset;
+    background-color: #1032cf;
+    color: #ffffff;
+}
+
 .cookiebot-notice-icon {
     clear: both;
     content: "";
