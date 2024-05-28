@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
-"POT-Creation-Date: 2024-02-26 13:17+0100\n"
+"POT-Creation-Date: 2024-05-28 11:40+0200\n"
 "PO-Revision-Date: 2023-09-01 16:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -134,7 +134,7 @@ msgid "Increases opt-in rate compared to WPForms \"GDPR mode\"."
 msgstr ""
 
 #: admin_notices/Cookiebot_Recommendation_Notice.php:48
-msgid "Leave A Review?"
+msgid "Share your experience"
 msgstr ""
 
 #: admin_notices/Cookiebot_Recommendation_Notice.php:50
@@ -142,19 +142,19 @@ msgid "We hope you enjoy using WordPress Cookiebot! Would you consider leaving u
 msgstr ""
 
 #: admin_notices/Cookiebot_Recommendation_Notice.php:57
-msgid "Hi, you have been using our Cookiebot CMP plugin to actively collect user consent - that is awesome. Could you please do us a BIG favor and give it a 5-star rating on WordPress? To help us spread the word and enable more WP websites to easily achieve compliance with GDPR and CCPA."
+msgid "Hi there! We are thrilled you love the Cookiebot CMP plugin. Could you do us a huge favor and leave a 5-star rating on WordPress? Your support will help us spread the word and empower more WordPress websites to meet GDPR and CCPA compliance standards effortlessly. Thank you for your support!"
 msgstr ""
 
 #: src/view/admin/notices/cookiebot-recommendation-notice-links.php:14
-msgid "Ok, you deserve it"
+msgid "Absolutely, you deserve it!"
 msgstr ""
 
 #: src/view/admin/notices/cookiebot-recommendation-notice-links.php:25
-msgid "Nope, maybe Later"
+msgid "Maybe later?"
 msgstr ""
 
 #: src/view/admin/notices/cookiebot-recommendation-notice-links.php:36
-msgid "I already did it"
+msgid "I`ve already left my feedback"
 msgstr ""
 
 #: lib/Cookiebot_WP.php:65
@@ -1628,8 +1628,8 @@ msgstr ""
 
 #: view/admin/settings/iab-page.php:34
 msgid ""
-"In May 2023 The Interactive Advertising Bureau (IAB) announced the latest version of its Transparency and Consent Framework (TCF), or TCF v2.2, which must be implemented by all consent management platforms (CMPs) by November 20, 2023. We will migrate you automatically on November "
-"20,2023, but we recommend to do it manually before. To manually switch the version before please select it on the right."
+"In May 2023 The Interactive Advertising Bureau (IAB) announced the latest version of its Transparency and Consent Framework (TCF), or TCF v2.2, which must be implemented by all consent management platforms (CMPs) by November 20, 2023. We will migrate you automatically on November 20,2023, but we "
+"recommend to do it manually before. To manually switch the version before please select it on the right."
 msgstr ""
 
 #: view/admin/settings/iab-page.php:40
@@ -1818,8 +1818,8 @@ msgstr ""
 
 #: view/admin/settings/multiple-configuration/page.php:38
 msgid ""
-"To enable a different configuration, create a separate DomainGroup without adding the domain to it and paste the ID below. Then select the countries in which you want to show this configuration. For example, if your main Domain Group is defined as a banner matching GDPR requirements, "
-"you might want to add another Domain Group for visitors from California. The number of additional configurations is restricted to one at the moment."
+"To enable a different configuration, create a separate DomainGroup without adding the domain to it and paste the ID below. Then select the countries in which you want to show this configuration. For example, if your main Domain Group is defined as a banner matching GDPR requirements, you might "
+"want to add another Domain Group for visitors from California. The number of additional configurations is restricted to one at the moment."
 msgstr ""
 
 #: view/admin/settings/multiple-configuration/page.php:50
@@ -1888,6 +1888,10 @@ msgstr ""
 
 #: view/admin/settings/network-settings-page.php:101 view/admin/settings/network-settings-page.php:148 view/admin/settings/network-settings-page.php:220 view/admin/settings/network-settings-page.php:248
 msgid "Setting will apply for all subsites. Subsites will not be able to override."
+msgstr ""
+
+#: view/admin/settings/network-settings-page.php:102
+msgid "This feature is only available when not using Auto Blocking"
 msgstr ""
 
 #: view/admin/settings/network-settings-page.php:104
@@ -1996,8 +2000,8 @@ msgstr ""
 
 #: view/admin/settings/prior-consent/partials/info-tab-header.php:5
 msgid ""
-"These add-ons are produced by an open-source community of developers. This is done to help make it easier for WordPress users to implement ‘prior consent’ for cookies and trackers set by plugins that do not offer this as a built-in function. The add-ons are currently the best "
-"alternative to a WordPress Core framework that can signal the user’s consent state to other plugins (if and when this will be implemented is unknown) and to those plugins that do not yet offer native support for Cookiebot CMP. "
+"These add-ons are produced by an open-source community of developers. This is done to help make it easier for WordPress users to implement ‘prior consent’ for cookies and trackers set by plugins that do not offer this as a built-in function. The add-ons are currently the best alternative to a "
+"WordPress Core framework that can signal the user’s consent state to other plugins (if and when this will be implemented is unknown) and to those plugins that do not yet offer native support for Cookiebot CMP. "
 msgstr ""
 
 #: view/admin/settings/prior-consent/partials/placeholder-submitbox-default.php:12 view/admin/settings/prior-consent/partials/placeholder-submitboxes.php:18 view/admin/widgets/cookiebot-declaration-widget-form.php:26
@@ -2034,8 +2038,8 @@ msgstr ""
 
 #: view/admin/settings/settings-page.php:74
 msgid ""
-"Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on \"Create a new account\" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the "
-"designated field below. You can find your ID in the Cookiebot Manager by navigating to \"Settings\" and \"Your Scripts\"."
+"Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on \"Create a new account\" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated "
+"field below. You can find your ID in the Cookiebot Manager by navigating to \"Settings\" and \"Your Scripts\"."
 msgstr ""
 
 #: view/admin/settings/settings-page.php:85
@@ -2092,8 +2096,8 @@ msgstr ""
 
 #: view/admin/settings/settings-page.php:137
 msgid ""
-"Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our "
-"implementation guides below:"
+"Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation "
+"guides below:"
 msgstr ""
 
 #: view/admin/settings/settings-page.php:139
@@ -2276,8 +2280,8 @@ msgstr ""
 
 #: view/admin/settings/support-page.php:149
 msgid ""
-"To enable prior consent, apply the attribute \"data-cookieconsent\" to cookie-setting script tags on your website. Set the comma-separated value to one or more of the cookie categories \"preferences\", \"statistics\" and/or \"marketing\" in accordance with the types of cookies being "
-"set by each script. Finally, change the attribute \"type\" from \"text/javascript\" to \"text/plain\"."
+"To enable prior consent, apply the attribute \"data-cookieconsent\" to cookie-setting script tags on your website. Set the comma-separated value to one or more of the cookie categories \"preferences\", \"statistics\" and/or \"marketing\" in accordance with the types of cookies being set by each "
+"script. Finally, change the attribute \"type\" from \"text/javascript\" to \"text/plain\"."
 msgstr ""
 
 #: view/admin/settings/support-page.php:158

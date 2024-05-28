@@ -11,7 +11,7 @@
 	   rel="noopener">
 		<?php
 		echo esc_html__(
-			'Ok, you deserve it',
+			'Absolutely, you deserve it!',
 			'cookiebot'
 		);
 		?>
@@ -22,7 +22,7 @@
 	<a href="<?php echo esc_html( $visit_review_temp ); ?>">
 		<?php
 		echo esc_html__(
-			'Nope, maybe Later',
+			'Maybe later?',
 			'cookiebot'
 		);
 		?>
@@ -33,7 +33,7 @@
 	<a href="<?php echo esc_html( $two_week_review_ignore ); ?>">
 		<?php
 		echo esc_html__(
-			'I already did it',
+			'I`ve already left my feedback',
 			'cookiebot'
 		);
 		?>

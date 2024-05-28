@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-01-18 14:28+0100\n"
-"PO-Revision-Date: 2024-02-26 13:35+0100\n"
+"PO-Revision-Date: 2024-05-28 11:43+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_DO\n"
@@ -133,28 +133,28 @@ msgid "Increases opt-in rate compared to WPForms \"GDPR mode\"."
 msgstr "Mejora la tasa de aceptación en comparación al “GDPR mode” de WPForms."
 
 #: admin_notices/Cookiebot_Recommendation_Notice.php:48
-msgid "Leave A Review?"
-msgstr "¿Una reseña?"
+msgid "Share your experience"
+msgstr "Comparte tu experiencia"
 
 #: admin_notices/Cookiebot_Recommendation_Notice.php:50
 msgid "We hope you enjoy using WordPress Cookiebot! Would you consider leaving us a review on WordPress.org?"
 msgstr "¡Esperamos que estés disfrutando de WordPress Cookiebot™! ¿Nos dejarías una reseña en WordPress.org?"
 
 #: admin_notices/Cookiebot_Recommendation_Notice.php:57
-msgid "Hi, you have been using our Cookiebot CMP plugin to actively collect user consent - that is awesome. Could you please do us a BIG favor and give it a 5-star rating on WordPress? To help us spread the word and enable more WP websites to easily achieve compliance with GDPR and CCPA."
-msgstr "Hola, has estado usando nuestro plugin de Cookiebot CMP para recopilar el consentimiento de los usuarios - eso está genial. ¿Nos podrías hacer un GRAN favor y darle una calificación de 5 estrellas en WordPress? Así, podremos correr la voz y ayudar a más sitios de WP a cumplir fácilmente con el RGPD y la CCPA."
+msgid "Hi there! We are thrilled you love the Cookiebot CMP plugin. Could you do us a huge favor and leave a 5-star rating on WordPress? Your support will help us spread the word and empower more WordPress websites to meet GDPR and CCPA compliance standards effortlessly. Thank you for your support!"
+msgstr "¡Hola! Es increíble lo que has conseguido con el plugin de Cookiebot CMP. ¿Nos podrías echar una mano y dejarnos una reseña de 5 estrellas en WordPress? Tu apoyo nos ayuadará a seguir promocionando la herramienta y permitir a más webs en WordPress a cumplir con el RGPD y la CCPA sin esfuerzo. ¡Gracias por tu apoyo!"
 
 #: src/view/admin/notices/cookiebot-recommendation-notice-links.php:14
-msgid "Ok, you deserve it"
+msgid "Absolutely, you deserve it!"
 msgstr "¡Por supuesto!"
 
 #: src/view/admin/notices/cookiebot-recommendation-notice-links.php:25
-msgid "Nope, maybe Later"
-msgstr "Quizás en otro momento"
+msgid "Maybe later?"
+msgstr "En otro momento"
 
 #: src/view/admin/notices/cookiebot-recommendation-notice-links.php:36
-msgid "I already did it"
-msgstr "¡Ya lo he hecho!"
+msgid "I`ve already left my feedback"
+msgstr "Ya he dejado mi reseña"
 
 #: lib/Cookiebot_WP.php:65
 #, php-format
@@ -1819,11 +1819,11 @@ msgstr "Prepara tu configuración del banner adicional:"
 
 #: view/admin/settings/multiple-configuration/page.php:38
 msgid ""
-"To enable a different configuration, create a separate DomainGroup without adding the domain to it and paste the ID below. Then select the countries in which you want to show this configuration. For example, if your main Domain Group is defined as a banner matching GDPR requirements, you might want to add another "
-"Domain Group for visitors from California. The number of additional configurations is restricted to one at the moment."
+"To enable a different configuration, create a separate DomainGroup without adding the domain to it and paste the ID below. Then select the countries in which you want to show this configuration. For example, if your main Domain Group is defined as a banner matching GDPR requirements, you might want to add another Domain "
+"Group for visitors from California. The number of additional configurations is restricted to one at the moment."
 msgstr ""
-"Para permitir una configuración diferente, crea un Grupo de Dominios separado sin añadir el dominio y pega la ID de debajo. Después, selecciona los países en los que quieras mostrar esta configuración. Por ejemplo, si tu Grupo de Dominio principal está preparado para cumplir con el RGPD, podrías estar intereado en "
-"otro Grupo de Dominios para California. El número de configuraciones adicionales está limitado a uno por el momento."
+"Para permitir una configuración diferente, crea un Grupo de Dominios separado sin añadir el dominio y pega la ID de debajo. Después, selecciona los países en los que quieras mostrar esta configuración. Por ejemplo, si tu Grupo de Dominio principal está preparado para cumplir con el RGPD, podrías estar intereado en otro "
+"Grupo de Dominios para California. El número de configuraciones adicionales está limitado a uno por el momento."
 
 #: view/admin/settings/multiple-configuration/page.php:50
 msgid "Region"
@@ -1892,6 +1892,10 @@ msgstr "En función del modo de bloqueo de cookies"
 #: view/admin/settings/network-settings-page.php:101 view/admin/settings/network-settings-page.php:148 view/admin/settings/network-settings-page.php:220 view/admin/settings/network-settings-page.php:248
 msgid "Setting will apply for all subsites. Subsites will not be able to override."
 msgstr "Los ajustes se aplicarán a todos los subsitios. Los subsitios no podrán cambiarlo."
+
+#: view/admin/settings/network-settings-page.php:102
+msgid "This feature is only available when not using Auto Blocking"
+msgstr "Esta función solo está disponible cuando no se utiliza el bloqueo automático"
 
 #: view/admin/settings/network-settings-page.php:104
 msgid "Add async or defer attribute to Cookie banner script tag. Default: Choose per subsite"
@@ -1999,8 +2003,8 @@ msgstr "Restaurar regex por defecto"
 
 #: view/admin/settings/prior-consent/partials/info-tab-header.php:5
 msgid ""
-"These add-ons are produced by an open-source community of developers. This is done to help make it easier for WordPress users to implement ‘prior consent’ for cookies and trackers set by plugins that do not offer this as a built-in function. The add-ons are currently the best alternative to a WordPress Core "
-"framework that can signal the user’s consent state to other plugins (if and when this will be implemented is unknown) and to those plugins that do not yet offer native support for Cookiebot CMP. "
+"These add-ons are produced by an open-source community of developers. This is done to help make it easier for WordPress users to implement ‘prior consent’ for cookies and trackers set by plugins that do not offer this as a built-in function. The add-ons are currently the best alternative to a WordPress Core framework "
+"that can signal the user’s consent state to other plugins (if and when this will be implemented is unknown) and to those plugins that do not yet offer native support for Cookiebot CMP. "
 msgstr ""
 "Estos add-ons son creados por una comunidad de desarroladores de código abierto. Esto se hace para facilitar a los usuarios de WordPress la implementación de un “consentimiento previo” para cookies y rastreadores instalados en plugins que no ofrecen esta función por sí mismos. Estos add-ons son actualmente la mejor "
 "alternativa a un marco Core de WordPress que podría enviar el estado del consentimiento del usuario a otros plugins, pero que todavía se desconoce cuándo se implementará, si es que se implementa; y para los plugins que no ofrecen todavía un soporte nativo para Cookiebot CMP."
@@ -2039,11 +2043,11 @@ msgstr "¿Todavía no tienes una cuenta?"
 
 #: view/admin/settings/settings-page.php:74
 msgid ""
-"Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on \"Create a new account\" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You "
-"can find your ID in the Cookiebot Manager by navigating to \"Settings\" and \"Your Scripts\"."
+"Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on \"Create a new account\" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find "
+"your ID in the Cookiebot Manager by navigating to \"Settings\" and \"Your Scripts\"."
 msgstr ""
-"Antes de poder empezar con Cookiebot CMP para WordPress, tienes que crear una cuenta en nuestro sitio web clicando debajo en “Crear una nueva cuenta”. Tras registrarte, puedes configurar el banner en el Administrador de Cookiebot y después poner la ID del Grupo de Dominios en el campo designado debajo. Puedes "
-"encontrar tu ID en el Administrador de Cookiebot navegando a “Ajustes” y “Tus scripts”."
+"Antes de poder empezar con Cookiebot CMP para WordPress, tienes que crear una cuenta en nuestro sitio web clicando debajo en “Crear una nueva cuenta”. Tras registrarte, puedes configurar el banner en el Administrador de Cookiebot y después poner la ID del Grupo de Dominios en el campo designado debajo. Puedes encontrar "
+"tu ID en el Administrador de Cookiebot navegando a “Ajustes” y “Tus scripts”."
 
 #: view/admin/settings/settings-page.php:85
 msgid "Connect your Domain Group:"
@@ -2100,8 +2104,8 @@ msgstr "Usar el idioma de WordPress"
 #: view/admin/settings/settings-page.php:137
 msgid "Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:"
 msgstr ""
-"Selecciona tu modo de bloqueo de cookies aquí. El modo de bloqueo de cookies automático bloqueará todas las cookies (excepto las “estrictamente necesarias”) hasta que el usuario haya dado su consentimiento. El modo de bloqueo de cookies manual requiere de una configuración manual de los scripts de ajustes de "
-"cookies. Puedes encontrar nuestras guías de implementación debajo:"
+"Selecciona tu modo de bloqueo de cookies aquí. El modo de bloqueo de cookies automático bloqueará todas las cookies (excepto las “estrictamente necesarias”) hasta que el usuario haya dado su consentimiento. El modo de bloqueo de cookies manual requiere de una configuración manual de los scripts de ajustes de cookies. "
+"Puedes encontrar nuestras guías de implementación debajo:"
 
 #: view/admin/settings/settings-page.php:139
 msgid "Guide to auto cookie-blocking"
@@ -2283,11 +2287,11 @@ msgstr "Actualiza tus etiquetas de script"
 
 #: view/admin/settings/support-page.php:149
 msgid ""
-"To enable prior consent, apply the attribute \"data-cookieconsent\" to cookie-setting script tags on your website. Set the comma-separated value to one or more of the cookie categories \"preferences\", \"statistics\" and/or \"marketing\" in accordance with the types of cookies being set by each script. Finally, "
-"change the attribute \"type\" from \"text/javascript\" to \"text/plain\"."
+"To enable prior consent, apply the attribute \"data-cookieconsent\" to cookie-setting script tags on your website. Set the comma-separated value to one or more of the cookie categories \"preferences\", \"statistics\" and/or \"marketing\" in accordance with the types of cookies being set by each script. Finally, change "
+"the attribute \"type\" from \"text/javascript\" to \"text/plain\"."
 msgstr ""
-"Para habilitar el consentimiento previo, aplica el atributo “data-cookieconsent” a los tags de script de cookies-setting en tu sitio web. Establece el valor separado por comas a una o más de las categorías de cookies, “preferencias”, “estadísticas” y/o “marketing”, de acuerdo con los tipos de cookies establecidos "
-"por cada script. Finalmente, cambia el atributo “type” de “text/javascript” a “text/plain”."
+"Para habilitar el consentimiento previo, aplica el atributo “data-cookieconsent” a los tags de script de cookies-setting en tu sitio web. Establece el valor separado por comas a una o más de las categorías de cookies, “preferencias”, “estadísticas” y/o “marketing”, de acuerdo con los tipos de cookies establecidos por "
+"cada script. Finalmente, cambia el atributo “type” de “text/javascript” a “text/plain”."
 
 #: view/admin/settings/support-page.php:158
 #, php-format

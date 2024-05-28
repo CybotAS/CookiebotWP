@@ -86,7 +86,7 @@ $header->display();
 												name="cookiebot-cookie-blocking-mode"
 												value="manual"
 										/>
-										<?php esc_html_e( 'Manual cookie-blocking mode', 'cookiebot' ); ?>
+										<?php esc_html_e( 'Choose per subsite', 'cookiebot' ); ?>
 									</label>
 								</div>
 							</div>
@@ -99,7 +99,7 @@ $header->display();
 									<?php esc_html_e( 'Add async or defer attribute to Cookie banner script tag. Default: Choose per subsite', 'cookiebot' ); ?>
 								</p>
 								<p class="cb-general__info__note">
-									<?php esc_html_e( 'This feature is only available when using Manual Blocking', 'cookiebot' ); ?>
+									<?php esc_html_e( 'This feature is only available when not using Auto Blocking', 'cookiebot' ); ?>
 								</p>
 								<p class="cb-general__info__note">
 									<?php esc_html_e( 'Setting will apply for all subsites. Subsites will not be able to override.', 'cookiebot' ); ?>
