@@ -46,7 +46,7 @@ class Cookiebot_View_Notice extends Cookiebot_Base_Notice {
 
 	public function define_translations() {
 		$this->translations = array(
-			'title' => '',
+			'title' => __( 'Your Voice Matters: Quick Product Survey', 'cookiebot' ),
 			'msg'   => __(
 				'We want to know more about you. Take our survey for a chance to win an Apple iPad Mini. Act fast, as the survey will only be open until June 9.',
 				'cookiebot'
