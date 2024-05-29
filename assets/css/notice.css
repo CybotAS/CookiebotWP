@@ -12,16 +12,33 @@
     border: none;
     margin: 0;
 }
-.cookiebot-admin-notice a {
+.cookiebot-admin-notice a:not(.cb-btn) {
     color: #1032cf;
     font-size: 16px;
     text-decoration: none;
 }
-.cookiebot-notice-logo {
+
+.cookiebot-admin-notice a.cb-btn {
+    display: inline-block;
+    margin-top: 18px;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    box-shadow: unset;
+    outline: unset;
+    background-color: #1032cf;
+    color: #ffffff;
+}
+
+.cookiebot-notice-icon {
     clear: both;
     content: "";
     display: block;
-    background-image: url("../img/icon.svg");
     background-size: 108px auto;
     background-repeat: no-repeat;
     background-position: 0 45%;
@@ -31,6 +48,15 @@
     bottom: 0;
     left: 25px;
 }
+
+.cookiebot-notice-logo {
+    background-image: url("../img/icon.svg");
+}
+
+.cookiebot-notice-review {
+    background-image: url("../img/icons/rating.png");
+}
+
 .cookiebot-admin-notice > .dashicons {
     color: #424242;
     position: absolute;

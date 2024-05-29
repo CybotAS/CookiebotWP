@@ -3,8 +3,7 @@
 namespace cybot\cookiebot\lib;
 
 use cybot\cookiebot\addons\Cookiebot_Addons;
-use cybot\cookiebot\admin_notices\Cookiebot_Recommendation_Notice;
-use cybot\cookiebot\admin_notices\Cookiebot_Temp_Notice;
+use cybot\cookiebot\admin_notices\Cookiebot_Notices;
 use cybot\cookiebot\gutenberg\Cookiebot_Gutenberg_Declaration_Block;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
@@ -13,7 +12,7 @@ use DomainException;
 use RuntimeException;
 
 class Cookiebot_WP {
-	const COOKIEBOT_PLUGIN_VERSION  = '4.3.8';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.3.9';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -84,8 +83,7 @@ class Cookiebot_WP {
 				( new Network_Menu_Settings() )->add_menu();
 			}
 			( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();
-			( new Cookiebot_Recommendation_Notice() )->register_hooks();
-			( new Cookiebot_Temp_Notice() )->register_hooks();
+			( new Cookiebot_Notices() );
 			( new Cookiebot_Review() )->register_hooks();
 		}
 
@@ -97,7 +95,6 @@ class Cookiebot_WP {
 		( new WP_Rocket_Helper() )->register_hooks();
 
 		$this->set_default_options();
-		$this->delay_notice_recommendation_on_first_activation();
 		add_filter( 'plugin_action_links_cookiebot/cookiebot.php', array( $this, 'set_settings_action_link' ) );
 	}
 
@@ -139,7 +136,9 @@ class Cookiebot_WP {
 	public static function get_cookie_blocking_mode() {
 		$allowed_modes   = array( 'auto', 'manual' );
 		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
-		$setting         = (string) get_option( 'cookiebot-cookie-blocking-mode', $network_setting );
+		$setting         = $network_setting === 'manual' ?
+			(string) get_option( 'cookiebot-cookie-blocking-mode', $network_setting ) :
+			$network_setting;
 
 		return in_array( $setting, $allowed_modes, true ) ? $setting : 'manual';
 	}
@@ -195,11 +194,10 @@ class Cookiebot_WP {
 	 * @since       4.2.5
 	 */
 	private function set_default_options() {
-		$options            = array(
+		$options = array(
 			'cookiebot-nooutput-admin' => '1',
 			'cookiebot-gcm'            => '1',
 		);
-		$temp_notice_option = get_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY );
 
 		foreach ( $options as $option => $default ) {
 			if ( get_option( $option ) === false && ! get_option( $option . self::OPTION_FIRST_RUN_SUFFIX ) ) {
@@ -211,16 +209,6 @@ class Cookiebot_WP {
 			}
 		}
 
-		if ( empty( $temp_notice_option ) ) {
-			if ( version_compare( phpversion(), '7.0.0' ) >= 0 ) {
-				update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'hide' );
-			} else {
-				update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'show' );
-			}
-		} elseif ( $temp_notice_option !== 'hide' && version_compare( phpversion(), '7.0.0' ) >= 0 ) {
-			update_option( Cookiebot_Temp_Notice::COOKIEBOT_TEMP_OPTION_KEY, 'hide' );
-		}
-
 		self::set_tcf_version();
 	}
 
@@ -228,20 +216,6 @@ class Cookiebot_WP {
 		$iab_version = get_option( 'cookiebot-tcf-version' );
 		if ( ! empty( $iab_version ) && $iab_version === 'IAB' ) {
 			update_option( 'cookiebot-tcf-version', 'TCFv2.2' );
-		}
-	}
-
-	/**
-	 * Cookiebot_WP Delay recommendation notice 1 day after first activation
-	 *
-	 * @version 4.2.5
-	 * @since       4.2.5
-	 */
-	private function delay_notice_recommendation_on_first_activation() {
-		// Check if recommendation notice delay option exists
-		if ( get_option( Cookiebot_Recommendation_Notice::COOKIEBOT_RECOMMENDATION_OPTION_KEY, false ) === false ) {
-			// Delay in 1 day
-			add_option( Cookiebot_Recommendation_Notice::COOKIEBOT_RECOMMENDATION_OPTION_KEY, strtotime( '+1 day' ) );
 		}
 	}
 

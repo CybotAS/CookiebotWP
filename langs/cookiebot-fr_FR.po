@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-01-18 14:28+0100\n"
-"PO-Revision-Date: 2024-02-26 13:25+0100\n"
+"PO-Revision-Date: 2024-05-28 11:43+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -133,28 +133,28 @@ msgid "Increases opt-in rate compared to WPForms \"GDPR mode\"."
 msgstr "Augmente le taux d’opt-in par rapport au « mode RGPD » de WPForms."
 
 #: admin_notices/Cookiebot_Recommendation_Notice.php:48
-msgid "Leave A Review?"
-msgstr "Laisser un avis ?"
+msgid "Share your experience"
+msgstr "Partagez votre expérience"
 
 #: admin_notices/Cookiebot_Recommendation_Notice.php:50
 msgid "We hope you enjoy using WordPress Cookiebot! Would you consider leaving us a review on WordPress.org?"
 msgstr "Nous espérons que vous prenez plaisir à utiliser WordPress Cookiebot ! Seriez-vous disposé à nous laisser un avis sur WordPress.org ?"
 
 #: admin_notices/Cookiebot_Recommendation_Notice.php:57
-msgid "Hi, you have been using our Cookiebot CMP plugin to actively collect user consent - that is awesome. Could you please do us a BIG favor and give it a 5-star rating on WordPress? To help us spread the word and enable more WP websites to easily achieve compliance with GDPR and CCPA."
-msgstr "Bonjour, vous avez utilisé notre plugin Cookiebot CMP pour recueillir activement le consentement des utilisateurs – nous vous en remercions. Seriez-vous disposé à nous rendre un GRAND service et à lui attribuer une note de 5 étoiles sur WordPress ? Cela nous aiderait à faire connaître le plugin et permettre à davantage de sites WP de se conformer facilement au RGPD et à la CCPA."
+msgid "Hi there! We are thrilled you love the Cookiebot CMP plugin. Could you do us a huge favor and leave a 5-star rating on WordPress? Your support will help us spread the word and empower more WordPress websites to meet GDPR and CCPA compliance standards effortlessly. Thank you for your support!"
+msgstr "Bonjour ! Tout d'abord, sachez que nous sommes ravis que le plugin Cookiebot CMP vous plaise. Pourriez-vous nous donner un petit coup de pouce en laissant une évaluation de 5 étoiles sur WordPress ? Cela nous aidera à faire connaître notre solution et permettra à davantage de sites WordPress de se conformer facilement aux normes RGPD et CCPA. Merci pour votre soutien !"
 
 #: src/view/admin/notices/cookiebot-recommendation-notice-links.php:14
-msgid "Ok, you deserve it"
-msgstr "Bien sûr !"
+msgid "Absolutely, you deserve it!"
+msgstr "Avec plaisir !"
 
 #: src/view/admin/notices/cookiebot-recommendation-notice-links.php:25
-msgid "Nope, maybe Later"
-msgstr "Peut-être plus tard"
+msgid "Maybe later?"
+msgstr "Peut-être plus tard."
 
 #: src/view/admin/notices/cookiebot-recommendation-notice-links.php:36
-msgid "I already did it"
-msgstr "C’est déjà fait"
+msgid "I`ve already left my feedback"
+msgstr "C'est déjà fait."
 
 #: lib/Cookiebot_WP.php:65
 #, php-format
@@ -1892,6 +1892,10 @@ msgstr "En fonction du mode de blocage des cookies"
 #: view/admin/settings/network-settings-page.php:101 view/admin/settings/network-settings-page.php:148 view/admin/settings/network-settings-page.php:220 view/admin/settings/network-settings-page.php:248
 msgid "Setting will apply for all subsites. Subsites will not be able to override."
 msgstr "Le paramètre s’appliquera à tous les sous-sites. Les sous-sites ne pourront pas remplacer."
+
+#: view/admin/settings/network-settings-page.php:102
+msgid "This feature is only available when not using Auto Blocking"
+msgstr "Cette fonction n'est disponible que lorsque vous n'utilisez pas le blocage automatique"
 
 #: view/admin/settings/network-settings-page.php:104
 msgid "Add async or defer attribute to Cookie banner script tag. Default: Choose per subsite"
