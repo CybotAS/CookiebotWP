@@ -1693,6 +1693,14 @@ msgstr "Weitergabe von Daten an Drittanbieter"
 msgid "Select vendors with whom you’ll share users’ data. We’ll include this information on the second layer of your consent banner, where users interested in more granular detail about who will access their data can view it."
 msgstr "Wählen Sie Anbieter aus, an die Sie die Daten Ihrer Nutzer weitergeben werden. Diese Informationen werden auf dem zweiten Layer Ihres Consent-Banners angezeigt, wo Nutzer, die sich genauer darüber informieren möchten, wer Zugriff auf ihre Daten erhält, dies nachsehen können."
 
+#: view/admin/settings/iab-page.php:134
+msgid "Select at least one vendor"
+msgstr "Wählen Sie mindestens einen Anbieter aus"
+
+#: view/admin/settings/settings-page.php:44
+msgid "Select at least one vendor on TCF tab"
+msgstr "Wählen Sie im TCF-Tab mindestens einen Anbieter aus"
+
 #: view/admin/settings/iab-page.php:132
 msgid "Google Ads certified external vendors"
 msgstr "Von Google Ads zertifizierte externe Anbieter"

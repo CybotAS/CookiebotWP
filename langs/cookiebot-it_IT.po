@@ -1693,6 +1693,14 @@ msgstr "Condivisione dei dati con fornitori terzi"
 msgid "Select vendors with whom you’ll share users’ data. We’ll include this information on the second layer of your consent banner, where users interested in more granular detail about who will access their data can view it."
 msgstr "Seleziona i fornitori con cui condividerai i dati degli utenti. Includeremo queste informazioni nel secondo livello del banner di consenso, dove gli utenti interessati a dettagli più granulari su chi accederà ai loro dati potranno consultarli."
 
+#: view/admin/settings/iab-page.php:134
+msgid "Select at least one vendor"
+msgstr "Seleziona almeno un fornitore"
+
+#: view/admin/settings/settings-page.php:44
+msgid "Select at least one vendor on TCF tab"
+msgstr "Seleziona almeno un fornitore nella scheda TCF"
+
 #: view/admin/settings/iab-page.php:132
 msgid "Google Ads certified external vendors"
 msgstr "Fornitori esterni certificati da Google Ads"
