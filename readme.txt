@@ -87,7 +87,7 @@ Ensure that you can continue serving ads to users in the European Union, Europea
 
 Watch the video to learn how to install the Cookiebot CMP WordPress plugin. It’s easy! Or read our [step-by-step installation guide](https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress).
 
-[youtube https://youtube.com/watch?v=ps7msVZJmbY]
+[youtube https://youtube.com/watch?v=zYPnFnnF_zE]
 
 Cookie Declaration
 
