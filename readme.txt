@@ -87,11 +87,7 @@ Ensure that you can continue serving ads to users in the European Union, Europea
 
 Watch the video to learn how to install the Cookiebot CMP WordPress plugin. It’s easy! Or read our [step-by-step installation guide](https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress).
 
-[youtube https://youtube.com/watch?v=ps7msVZJmbY]
-
-Cookie Declaration
-
-[youtube https://www.youtube.com/watch?v=67XUgTUy3ok]
+[youtube https://www.youtube.com/watch?v=1-lvuJa42P0]
 
 Need assistance? Visit our [Help Center](https://support.cookiebot.com/hc/en-us) or [contact us](https://support.cookiebot.com/hc/en-us/requests/new).
 
@@ -164,8 +160,6 @@ For CCPA and CPRA compliance, businesses will be able to display the required �
 To display your cookie declaration, create a new page on your website and add the shortcode to the page that’s provided by the plugin: [cookie_declaration]. Alternatively, you can incorporate it into your existing Privacy Policy.
 
 By default, the cookie declaration is displayed in the selected Cookiebot CMP language. You are able to override this setting with a “lang” attribute in the shortcode, e.g.: [cookie_declaration lang=”de”] for a German version. Remember to add all languages used in the [Cookiebot CMP Admin Interface](https://admin.cookiebot.com/login).
-
-[youtube https://www.youtube.com/watch?v=67XUgTUy3ok]
 
 ### Cookie-checker: What cookies are in use on my site? ###
 If you are in doubt about what cookies are in use on our site, start with our free compliance test:

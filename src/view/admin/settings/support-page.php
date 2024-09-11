@@ -41,7 +41,7 @@ $header->display();
 					<div class="cb-support__video__inner">
 						<h2 class="cb-support__video__title"><?php esc_html_e( 'Video guide', 'cookiebot' ); ?></h2>
 						<div class="cb-main__video">
-							<iframe src="https://www.youtube.com/embed/ps7msVZJmbY"
+							<iframe src="https://www.youtube.com/embed/1-lvuJa42P0"
 									title="Cookiebot WordPress Installation"
 									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 									allowfullscreen></iframe>
@@ -130,16 +130,6 @@ $header->display();
 							);
 							?>
 						</p>
-						<p class="cb-faq__answer__content">
-							<a href="https://www.youtube.com/watch?v=67XUgTUy3ok" target="_blank" class="cb-btn cb-main-btn" rel="noopener">
-								<?php
-								esc_html_e(
-									'Watch video demonstration',
-									'cookiebot'
-								);
-								?>
-							</a>
-						</p>
 					</div>
 				</div>
 
@@ -174,16 +164,6 @@ $header->display();
 							echo nl2br( esc_html( $output ) );
 							?>
 						</code>
-						<p class="cb-faq__answer__content">
-							<a href="https://www.youtube.com/watch?v=MeHycvV2QCQ" target="_blank" class="cb-btn cb-main-btn" rel="noopener">
-								<?php
-								esc_html_e(
-									'Watch video demonstration',
-									'cookiebot'
-								);
-								?>
-							</a>
-						</p>
 					</div>
 				</div>
 
