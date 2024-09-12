@@ -10,10 +10,14 @@ function init() {
     advanced_settings_toggle();
     cookie_blocking_mode();
     activeSettingsTab();
+    initialCheckActiveVendors();
     closeSubmitMsg();
     submitEnable();
     googleConsentModeOptions();
     tcfOptions();
+    vendorListRequire();
+    selectAllListItem();
+    deselectAllListItem();
     onAddRestriction();
     showRestrictionPurposes();
     onVendorSelection();
@@ -129,6 +133,7 @@ function checkValues(initialValues){
     }else{
         submitBtn.removeClass('enabled');
     }
+    checkActiveVendors();
 }
 
 function googleConsentModeOptions() {
@@ -159,6 +164,68 @@ function tcfOptions() {
     jQuery('input#cookiebot-iab').on('change', function () {
         const parent = jQuery(this).parents('#iab');
         parent.find('.cb-settings__config__item:has(input.tcf-option)').toggle();
+    });
+}
+
+function checkIabActive() {
+    return jQuery('input#cookiebot-iab:checked').length;
+}
+
+function initialCheckActiveVendors() {
+    if(!checkIabActive()){
+        return;
+    }
+
+    const allVendorInputChecked = jQuery('input[name^="cookiebot-tcf-vendors"]:checked').length;
+    if(!allVendorInputChecked) {
+        jQuery('.vendor-selected-items-message').removeClass('hidden');
+        jQuery('.cb-vendor-alert__msg').removeClass('hidden');
+    }
+}
+
+function checkActiveVendors() {
+    if(!checkIabActive()){
+        return;
+    }
+
+    let submitBtn = jQuery('p.submit #submit');
+    const allVendorInputChecked = jQuery('input[name^="cookiebot-tcf-vendors"]:checked').length;
+    if(!allVendorInputChecked) {
+        jQuery('.vendor-selected-items-message').removeClass('hidden');
+        jQuery('.cb-vendor-alert__msg').removeClass('hidden');
+        submitBtn.removeClass('enabled');
+    }else{
+        jQuery('.vendor-selected-items-message').addClass('hidden');
+        jQuery('.cb-vendor-alert__msg').addClass('hidden');
+        if(!submitBtn.hasClass('enabled')) {
+            submitBtn.addClass('enabled');
+        }
+    }
+}
+
+function selectAllListItem(){
+    jQuery(document).on('click','.cb-settings__selector-all',function(){
+        const itemList = jQuery(this).siblings('.search-list');
+        itemList.children().each(function(){
+            jQuery(this).find('input').prop('checked', true);
+        })
+        checkActiveVendors();
+    })
+}
+
+function deselectAllListItem(){
+    jQuery(document).on('click','.cb-settings__selector-none',function(){
+        const itemList = jQuery(this).siblings('.search-list');
+        itemList.children().each(function(){
+            jQuery(this).find('input').prop('checked', false);
+        })
+        checkActiveVendors();
+    })
+}
+
+function vendorListRequire(){
+    jQuery( document ).on('change', 'input[name^="cookiebot-tcf-vendors"]', function () {
+        checkActiveVendors();
     });
 }
 
