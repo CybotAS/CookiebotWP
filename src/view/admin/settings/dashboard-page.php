@@ -103,7 +103,7 @@ $header->display();
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner start_card">
 						<div class="cb-main__video">
-							<iframe src="https://www.youtube.com/embed/ps7msVZJmbY"
+							<iframe src="https://www.youtube.com/embed/1-lvuJa42P0"
 									title="Cookiebot WordPress Installation"
 									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 									allowfullscreen></iframe>
