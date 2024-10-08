@@ -285,6 +285,17 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
 
+### 4.3.10 ###
+Release date: October 9th 2024
+
+Cookiebot CMP version 4.3.10 is out! This release adds some improvements to the vendor selection and bugfix.
+
+####What's new####
+* Adds vendor select all and deselect all buttons for TCF and external vendors lists
+
+####Bugfixes####
+* Fix deliver of TCF version on script attribute
+
 ### 4.3.9.1 ###
 Release date: September 12th 2024
 
