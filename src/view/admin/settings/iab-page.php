@@ -258,7 +258,7 @@ $iab_page = new Iab_Page();
 									<?php endforeach; ?>
 								</div>
 							</div>
-						<?php
+						    <?php
 						endif;
 					endforeach;
 					?>
