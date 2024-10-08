@@ -214,7 +214,7 @@ class Cookiebot_WP {
 
 	private static function set_tcf_version() {
 		$iab_version = get_option( 'cookiebot-tcf-version' );
-		if ( ! empty( $iab_version ) && $iab_version === 'IAB' ) {
+		if ( empty( $iab_version ) || $iab_version === 'IAB' ) {
 			update_option( 'cookiebot-tcf-version', 'TCFv2.2' );
 		}
 	}

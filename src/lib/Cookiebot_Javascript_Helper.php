@@ -257,11 +257,7 @@ class Cookiebot_Javascript_Helper {
 		$tcf_version = get_option( 'cookiebot-tcf-version' );
 
 		if ( $iab_enabled ) {
-			if ( empty( $tcf_version ) ) {
-				$attribute = 'IAB';
-			} else {
-				$attribute = $tcf_version;
-			}
+			$attribute = $tcf_version;
 		}
 
 		return $attribute;

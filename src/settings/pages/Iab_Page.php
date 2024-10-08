@@ -31,7 +31,6 @@ class Iab_Page implements Settings_Page_Interface {
 	public function display() {
 		$args = array(
 			'cookiebot_iab'               => get_option( 'cookiebot-iab' ),
-			'cookiebot_tcf_version'       => empty( get_option( 'cookiebot-tcf-version' ) ) ? 'IAB' : get_option( 'cookiebot-tcf-version' ),
 			'custom_tcf_purposes'         => self::get_vendor_custom_option( 'cookiebot-tcf-purposes' ),
 			'custom_tcf_special_purposes' => self::get_vendor_custom_option( 'cookiebot-tcf-special-purposes' ),
 			'custom_tcf_features'         => self::get_vendor_custom_option( 'cookiebot-tcf-features' ),

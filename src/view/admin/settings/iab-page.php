@@ -1,7 +1,6 @@
 <?php
 /**
  * @var bool $cookiebot_iab
- * @var string $cookiebot_tcf_version
  * @var object $purposes
  * @var object $special_purposes
  * @var object $features
