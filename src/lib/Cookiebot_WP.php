@@ -12,7 +12,7 @@ use DomainException;
 use RuntimeException;
 
 class Cookiebot_WP {
-	const COOKIEBOT_PLUGIN_VERSION  = '4.3.9.1';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.3.10';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -214,7 +214,7 @@ class Cookiebot_WP {
 
 	private static function set_tcf_version() {
 		$iab_version = get_option( 'cookiebot-tcf-version' );
-		if ( ! empty( $iab_version ) && $iab_version === 'IAB' ) {
+		if ( empty( $iab_version ) || $iab_version === 'IAB' ) {
 			update_option( 'cookiebot-tcf-version', 'TCFv2.2' );
 		}
 	}

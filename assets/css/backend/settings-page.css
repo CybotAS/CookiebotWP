@@ -270,8 +270,49 @@
     cursor: pointer;
 }
 
-.checkbox-vendor-search{
-    margin-bottom: 32px;
+.cb-settings__config__data__inner.cb-vendor-settings {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 16px;
+}
+
+.cb-vendor-settings .checkbox-vendor-search {
+    width: auto;
+    flex: 6 1 auto;
+}
+
+.cb-vendor-settings .cb-btn.cb-settings__selector-all {
+    margin: 0;
+    flex: 0 1 auto;
+}
+
+.cb-vendor-settings .cb-btn.cb-settings__selector-none {
+    margin: 0;
+    flex: 0 1 auto;
+}
+
+.vendor-selected-items-message {
+    flex: 1 1 100%;
+    margin-top: 20px;
+}
+
+.vendor-selected-items-message span {
+    display: inline-block;
+    border-radius: 6px;
+    font-weight: 700;
+    color: #d63638;
+}
+
+.cb-vendor-alert__msg {
+    box-sizing: border-box;
+    background-color: #de8e09;
+    color: #ffffff;
+    padding: 24px 34px;
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 .vendor-selected-items {
@@ -282,6 +323,7 @@
     grid-auto-rows: minmax(30px, 1fr);
     max-height: 400px;
     overflow-y: auto;
+    margin-top: 32px;
 }
 
 .vendor-selected-items label.switch-checkbox {

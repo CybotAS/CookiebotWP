@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookiebot | GDPR/CCPA Compliant Cookie Consent and Control\n"
 "POT-Creation-Date: 2023-02-15 13:52+0100\n"
-"PO-Revision-Date: 2024-05-28 11:44+0200\n"
+"PO-Revision-Date: 2024-09-12 12:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: cookiebot.php\n"
@@ -1692,6 +1692,14 @@ msgstr "Передача данных сторонним поставщикам"
 #: view/admin/settings/iab-page.php:88
 msgid "Select vendors with whom you’ll share users’ data. We’ll include this information on the second layer of your consent banner, where users interested in more granular detail about who will access their data can view it."
 msgstr "Выберите поставщиков, которым вы будете передавать данные пользователей. Эта информация будет представлена на втором уровне баннера согласия, где пользователи, которые хотят получить более подробные сведения о том, у кого будет доступ к их данным, смогут их просмотреть."
+
+#: view/admin/settings/iab-page.php:134
+msgid "Select at least one vendor"
+msgstr "Выберите хотя бы одного поставщика"
+
+#: view/admin/settings/settings-page.php:44
+msgid "Select at least one vendor on TCF tab"
+msgstr "Выберите хотя бы одного поставщика на вкладке TCF."
 
 #: view/admin/settings/iab-page.php:132
 msgid "Google Ads certified external vendors"
