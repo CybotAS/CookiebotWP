@@ -16,29 +16,47 @@ matrix:
     - php: 7.4
       env: PHPCS=1
     - php: 8.2
-      env: PHPUNIT_VERSION=9.6.7
+      env:
+        - PHPUNIT_VERSION=9.6.7
+        - WP=latest
       dist: jammy # Version 8.2 is not available in the "bionic", newer version is required.
       addons:
         apt:
           packages:
             - "libonig5" # This library is required, since Travis fails to properly install & run the PHP 8.2
     - php: 8.1
-      env: PHPUNIT_VERSION=9.6.7
+      env:
+        - PHPUNIT_VERSION=9.6.7
+        - WP=latest
     - php: 8.0
-      env: PHPUNIT_VERSION=9.6.7
+      env:
+        - PHPUNIT_VERSION=9.6.7
+        - WP=latest
     - php: 7.4
-      env: PHPUNIT_VERSION=7.5.20
+      env:
+        - PHPUNIT_VERSION=7.5.20
+        - WP=latest
     - php: 7.3
-      env: PHPUNIT_VERSION=7.5.20
+      env:
+        - PHPUNIT_VERSION=7.5.20
+        -  WP=latest
     - php: 7.2
-      env: PHPUNIT_VERSION=7.5.20
+      env:
+        - PHPUNIT_VERSION=7.5.20
+        - WP=latest
     - php: 7.1
-      env: PHPUNIT_VERSION=7.5.20
+      env:
+        - PHPUNIT_VERSION=7.5.20
+        - WP=6.5.5
     - php: 7.0
-      env: PHPUNIT_VERSION=6.5.14
+      env:
+        - PHPUNIT_VERSION=6.5.14
+        - WP=6.5.5
       dist: xenial # Versions 7.0 and lower not available in "bionic", older version ("xenial") required to run
     - php: 5.6
-      env: PHPUNIT_VERSION=5.7.27
+      env:
+        - PHPUNIT_VERSION=5.7.27
+        - WP=6.2.2
       dist: xenial
 
 before_install:
@@ -71,11 +89,7 @@ before_script:
       sudo sed -re 's#^(mozilla/DST_Root_CA_X3.crt)$#!\1#' -i /etc/ca-certificates.conf;
       sudo update-ca-certificates;
       export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt;
-      if [ "$PHPUNIT_VERSION" == "5.7.27" ]; then
-        bash bin/install-wp-tests.sh wordpress_test root '' localhost 6.2.2;
-      else
-        bash bin/install-wp-tests.sh wordpress_test root '' localhost latest;
-      fi
+      bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP;
       wget https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar -O /tmp/phpunit &&
       chmod +x /tmp/phpunit
     fi
