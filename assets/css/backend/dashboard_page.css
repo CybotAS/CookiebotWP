@@ -1,7 +1,7 @@
 .cb-main__content {
     display: grid;
     grid-template-columns: repeat(1, minmax(100px, 1fr));
-    grid-template-rows: repeat(3, minmax(475px, auto));
+    grid-template-rows: auto auto minmax(475px, auto);
     grid-column-gap: 30px;
     grid-row-gap: 30px;
 }
@@ -42,46 +42,10 @@
     padding: 0;
 }
 
-.cb-main__card__inner.account_card {
+.cb-main__card__inner.account_card, .cb-main__card__inner.new_card  {
     position: relative;
-    background-image: url(../../img/existing-account.png);
-    background-size: cover;
-    background-position: center center;
-}
-
-.cb-main__card__inner.account_card:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgb(0,205,172);
-    background: -moz-linear-gradient(58deg, rgba(0,205,172,1) 0%, rgba(16,50,207,1) 100%);
-    background: -webkit-linear-gradient(58deg, rgba(0,205,172,1) 0%, rgba(16,50,207,1) 100%);
-    background: linear-gradient(58deg, rgba(0,205,172,1) 0%, rgba(16,50,207,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00cdac",endColorstr="#1032cf",GradientType=1);
-    z-index: 0;
-    opacity: .7;
-}
-
-.cb-main__card__inner.new_card {
-    position: relative;
-    background-image: url(../../img/new-account.png);
-    background-size: cover;
-    background-position: center center;
-}
-
-.cb-main__card__inner.new_card:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgb(16,50,207);
-    background: -moz-linear-gradient(0deg, rgba(16,50,207,1) 20%, rgba(16,50,207,0) 100%);
-    background: -webkit-linear-gradient(0deg, rgba(16,50,207,1) 20%, rgba(16,50,207,0) 100%);
-    background: linear-gradient(0deg, rgba(16,50,207,1) 20%, rgba(16,50,207,0) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1032cf",endColorstr="#1032cf",GradientType=1);
-    z-index: 0;
-    opacity: .7;
+    background-color: #00a2ff;
+    border-radius: 10px;
 }
 
 .cb-main__card__inner.start_card {
@@ -93,13 +57,39 @@
     z-index: 1;
 }
 
-.cb-main__card__title {
+.cb-main__card__inner.account_card .cb-main__card__content,
+.cb-main__card__inner.new_card .cb-main__card__content  {
+    display: grid;
+    grid-template-columns: 1fr minmax(86px, auto);
+    grid-template-rows: minmax(120px, auto) auto;
+    grid-column-gap: 25px;
+    align-items: end;
+}
+
+.cb-main__card__inner.account_card .cb-btn.cb-main-btn,
+.cb-main__card__inner.new_card .cb-btn.cb-main-btn  {
+    background-color: #000000;
     color: #ffffff;
+    grid-row: 2;
+    grid-column: span 2;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+.cb-main__card__title {
+    color: #000000;
     font-size: 30px;
     line-height: 32px;
     margin: 0;
     width: 100%;
-    max-width: 300px;
+}
+
+.cb-main__card__inner.account_card .cb-main__card__title,
+.cb-main__card__inner.new_card .cb-main__card__title  {
+    font-size: 28px;
+    line-height: 30px;
+    margin-bottom: 25px;
 }
 
 .start_card .cb-main__card__title {
@@ -222,92 +212,91 @@
 
 .cb-main__dashboard__promo {
     position: relative;
-    border-radius: 25px;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 5px 15px #ddd;
+    background-color: #000000;
 }
 
 .cb-main__dashboard__promo--inner {
-    position: relative;
-    padding: 45px 60px 30px;
-    z-index: 1;
+    display: grid;
+    grid-template-columns: .6fr .4fr;
+    grid-column-gap: 40px;
 }
 
-.cb-main__dashboard__promo:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url(../../img/extra/cb_bf_ad_crop_bg.png);
-    background-position: right center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    top: 0;
-    right: 0;
-    z-index: 0;
+.cb-main__dashboard__promo--content {
+    display: grid;
+    grid-row-gap: 60px;
+    padding: 45px 0 45px 60px;
 }
 
 .cb-dashboard__promo--label {
-    color: #051041;
-    font-size: 60px;
-    line-height: 55px;
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 17px;
     font-weight: 700;
     text-transform: uppercase;
-    width: 220px;
-}
-
-.cb-dashboard__promo--label span {
-    display: block;
-    font-size: 35px;
-    line-height: 35px;
 }
 
 .cb-dashboard__promo--title {
-    color: #1032CF;
-    font-size: 50px;
-    line-height: 65px;
+    color: #00a2ff;
+    font-size: 60px;
+    line-height: 60px;
     text-transform: uppercase;
     font-weight: 800;
-    margin: 40px 0 15px;
-    width: 100%;
-    max-width: 495px;
+    margin: 0;
 }
 
 .cb-dashboard__promo--title .highlight {
-    color: #17EFA6;
+    display: inline-block;
+    color: #ffffff;
     background: none;
 }
 
-.cb-btn.cb-promo-btn {
-    background-color: #1032CF;
-    color: #ffffff;
-    width: 100%;
-    max-width: 298px;
-    border-radius: 4px;
-    text-align: center;
-    padding: 20px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    font-size: 20px;
-}
-
 .promo-condition {
-    font-size: 13px;
-    line-height: 18px;
-    font-weight: 500;
-    color: #051041;
-    width: 100%;
-    max-width: 550px;
+    font-size: 12px;
+    line-height: 17px;
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
 }
 
-.cb-main__dashboard__promo--logo {
-    position: absolute;
-    right: 50px;
-    bottom: 40px;
-    background-image: url(../../img/extra/cb_bf_logo.svg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 170px;
-    height: 50px;
+.cb-main__dashboard__promo--banner img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left;
+}
+
+.cb-main__card__inner.new_card .cb-bf-counter {
+    background-color: #000000;
+    border-bottom-left-radius: 500px;
+    border-bottom-right-radius: 500px;
+    text-align: center;
+    padding: 6px 6px 12px;
+    width: 74px;
+    position: relative;
+    top: -25px;
+    align-self: start;
+}
+
+.cb-main__card__inner.new_card .cb-bf-counter-label {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.cb-main__card__inner.new_card .cb-bf-counter-number {
+    color: #00a2ff;
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: 700;
+}
+
+.cb-main__card__inner.new_card .cb-bf-counter-last {
+    color: #00a2ff;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: normal;
+    padding: 0 10px;
 }
