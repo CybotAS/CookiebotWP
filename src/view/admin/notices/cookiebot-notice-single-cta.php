@@ -5,8 +5,9 @@
  */
 ?>
 <li>
-	<a class="cb-btn cb-main-btn" href="<?php echo esc_url( $url ); ?>" target="_blank"
-	   rel="noopener">
+	<span class="dashicons dashicons-external"></span>
+	<a href="<?php echo esc_url( $url ); ?>" target="_blank"
+		rel="noopener">
 		<?php
 		echo esc_html( $text );
 		?>

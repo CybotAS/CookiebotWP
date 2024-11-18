@@ -57,6 +57,14 @@
     background-image: url("../img/icons/rating.png");
 }
 
+.cookiebot-notice-bf {
+    background-image: url("../img/icons/cb-bf-notice.svg");
+}
+
+.cb-bf-links a.cb-btn{
+    margin: 0;
+}
+
 .cookiebot-admin-notice > .dashicons {
     color: #424242;
     position: absolute;
