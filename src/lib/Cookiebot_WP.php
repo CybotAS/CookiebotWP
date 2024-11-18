@@ -95,7 +95,7 @@ class Cookiebot_WP {
 		( new WP_Rocket_Helper() )->register_hooks();
 
 		$this->set_default_options();
-		add_filter( 'plugin_action_links_cookiebot/cookiebot.php', array( $this, 'set_settings_action_link' ) );
+		( new Cookiebot_Admin_Links() )->register_hooks();
 	}
 
 	/**
