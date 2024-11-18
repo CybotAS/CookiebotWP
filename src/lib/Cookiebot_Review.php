@@ -37,7 +37,7 @@ class Cookiebot_Review {
 	/**
 	 * Cookiebot Add ajax url
 	 */
-	public function cookiebot_admin_script($hook) {
+	public function cookiebot_admin_script( $hook ) {
 		wp_enqueue_script(
 			'cookiebot_admin_js',
 			asset_url( 'js/backend/cookiebot-admin-script.js' ),
@@ -66,7 +66,7 @@ class Cookiebot_Review {
 			'cookiebot_logo' => asset_url( 'img/icons/shield_icon.svg' ),
 		);
 
-		if('plugins.php' === $hook){
+		if ( 'plugins.php' === $hook ) {
 			include_view( 'admin/templates/extra/review-form.php', $args );
 		}
 	}
