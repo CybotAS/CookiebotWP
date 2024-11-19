@@ -50,7 +50,7 @@ class Cookiebot_Bf_Notice extends Cookiebot_Base_Notice {
 				'cookiebot'
 			),
 			'msg'   => __(
-				'Limited offer for new users! Sign up by Nov 29, 2024, to get a 10% discount for the first 6 months.',
+				'Limited offer for new users! Sign up by Dec 2, 2024, to get a 10% discount for the first 6 months.',
 				'cookiebot'
 			),
 		);
