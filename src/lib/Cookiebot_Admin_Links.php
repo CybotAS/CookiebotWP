@@ -18,21 +18,44 @@ class Cookiebot_Admin_Links {
 
 	public function register_hooks() {
 		add_filter( 'plugin_action_links_cookiebot/cookiebot.php', array( $this, 'set_settings_action_link' ) );
+		add_action( 'admin_init', array( $this, 'handle_external_redirects' ) );
 		add_action( 'admin_menu', array( $this, 'add_extra_menu' ) );
 	}
 
-	public function add_extra_menu() {
-		global $submenu;
+	public function handle_external_redirects() {
+		if ( empty( $_GET['page'] ) ) {
+			return;
+		}
 
-		foreach ( $this->menu_links as $link ) {
-			$submenu['cookiebot'][] = array(
+		foreach ( $this->menu_links as $slug => $link ) {
+			if ( $slug === $_GET['page'] ) {
+				$link = $link['override'] && $link['condition'] ? $link['over_url'] : $link['url'];
+				wp_redirect( $link );
+				die;
+			}
+		}
+	}
+
+	public function display() {
+		return true;
+	}
+
+	public function add_extra_menu() {
+		foreach ( $this->menu_links as $slug => $link ) {
+			add_submenu_page(
+				'cookiebot',
+				$link['label'],
 				$link['override'] && $link['condition'] ?
+					// translators: %s: Link label
+					// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
 					esc_html( sprintf( __( '%s', 'cookiebot' ), $link['over_label'] ) ) :
+					// translators: %s: Link label
+					// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
 					esc_html( sprintf( __( '%s', 'cookiebot' ), $link['label'] ) ),
 				'manage_options',
-				$link['override'] && $link['condition'] ?
-					esc_url( $link['over_url'] ) :
-					esc_url( $link['url'] ),
+				$slug,
+				[$this, 'display'],
+				20
 			);
 		}
 	}
@@ -48,7 +71,6 @@ class Cookiebot_Admin_Links {
 			);
 
 			$cb_actions[ $link['index'] ] = $this->get_link_html( $item );
-
 		}
 
 		$actions = array_merge( $actions, $cb_actions );
@@ -59,7 +81,7 @@ class Cookiebot_Admin_Links {
 
 	private function add_menu_links() {
 		return array(
-			array(
+			'cookiebot_upgrade' => array(
 				'url'        => 'https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
 				'label'      => 'Upgrade a plan',
 				'override'   => true,
@@ -99,7 +121,8 @@ class Cookiebot_Admin_Links {
 		if ( $link['strong'] ) {
 			$link_html .= '<b>';
 		}
-
+		// translators: %s: Link label
+		// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
 		$link_html .= esc_html( sprintf( __( '%s', 'cookiebot' ), $link['label'] ) );
 
 		if ( $link['strong'] ) {
