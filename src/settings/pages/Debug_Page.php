@@ -5,6 +5,7 @@ namespace cybot\cookiebot\settings\pages;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\lib\Consent_API_Helper;
+use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\lib\Cookiebot_Javascript_Helper;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\lib\Cookiebot_WP;
@@ -58,7 +59,7 @@ class Debug_Page implements Settings_Page_Interface {
 
 		$debug_output = $this->prepare_debug_data();
 
-		include_view( 'admin/settings/debug-page.php', array( 'debug_output' => $debug_output ) );
+		include_view( Cookiebot_Frame::get_view_path() . 'settings/debug-page.php', array( 'debug_output' => $debug_output ) );
 	}
 
 	private function get_ignored_scripts() {

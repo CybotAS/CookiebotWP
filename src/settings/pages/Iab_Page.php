@@ -2,6 +2,7 @@
 
 namespace cybot\cookiebot\settings\pages;
 
+use cybot\cookiebot\lib\Cookiebot_Frame;
 use InvalidArgumentException;
 use function cybot\cookiebot\lib\include_view;
 
@@ -42,7 +43,7 @@ class Iab_Page implements Settings_Page_Interface {
 			'extra_providers'             => self::get_extra_providers(),
 		);
 
-		include_view( 'admin/settings/iab-page.php', $args );
+		include_view( Cookiebot_Frame::get_view_path() . 'settings/iab-page.php', $args );
 	}
 
 	public function get_vendor_list_data() {

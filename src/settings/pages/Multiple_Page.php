@@ -2,6 +2,7 @@
 
 namespace cybot\cookiebot\settings\pages;
 
+use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\lib\Supported_Regions;
 use InvalidArgumentException;
@@ -94,6 +95,6 @@ class Multiple_Page implements Settings_Page_Interface {
 			true
 		);
 
-		include_view( 'admin/settings/multiple-configuration/page.php', $args );
+		include_view( Cookiebot_Frame::get_view_path() . 'settings/multiple-configuration/page.php', $args );
 	}
 }

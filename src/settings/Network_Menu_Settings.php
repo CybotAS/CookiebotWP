@@ -2,6 +2,7 @@
 
 namespace cybot\cookiebot\settings;
 
+use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\settings\pages\Support_Page;
 use InvalidArgumentException;
@@ -138,7 +139,7 @@ class Network_Menu_Settings {
 		);
 
 		include_view(
-			'admin/settings/network-settings-page.php',
+			Cookiebot_Frame::get_view_path() . 'settings/network-settings-page.php',
 			array(
 				'cookiebot_gdpr_url' => 'https://www.cookiebot.com/' . Cookiebot_WP::get_manager_language() . '/gdpr',
 				'logo'               => CYBOT_COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
