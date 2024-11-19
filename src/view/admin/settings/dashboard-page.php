@@ -40,7 +40,7 @@ $header->display();
 							<p class="promo-condition">Enjoy a free plan for sites with up to 50 subpages. Premium plans are available for sites with 50+ subpages. Start with a 14-day trial, then enjoy a 10% discount on your selected plan for the first 6 months. After that, pricing will revert to the regular rate. This offer is available for new users who sign up between November 20 and December 2, 2024.</p>
 							</div>
 							<div class="cb-main__dashboard__promo--banner">
-								<img src="<?php echo esc_html(CYBOT_COOKIEBOT_PLUGIN_URL . '/assets/img/extra/cb_bf_banner.svg'); ?>" alt="CB BF banner">
+								<img src="<?php echo esc_html( CYBOT_COOKIEBOT_PLUGIN_URL . '/assets/img/extra/cb_bf_banner.svg' ); ?>" alt="CB BF banner">
 							</div>
 						</div>
 					</div>

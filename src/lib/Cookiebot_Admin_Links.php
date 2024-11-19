@@ -23,15 +23,17 @@ class Cookiebot_Admin_Links {
 	}
 
 	public function handle_external_redirects() {
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( empty( $_GET['page'] ) ) {
 			return;
 		}
 
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		foreach ( $this->menu_links as $slug => $link ) {
 			if ( $slug === $_GET['page'] ) {
 				$link = $link['override'] && $link['condition'] ? $link['over_url'] : $link['url'];
-				wp_redirect( $link );
-				die;
+				wp_safe_redirect( $link );
+				exit;
 			}
 		}
 	}
@@ -46,15 +48,13 @@ class Cookiebot_Admin_Links {
 				'cookiebot',
 				$link['label'],
 				$link['override'] && $link['condition'] ?
-					// translators: %s: Link label
-					// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
+					// translators: %s: Link label, phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
 					esc_html( sprintf( __( '%s', 'cookiebot' ), $link['over_label'] ) ) :
-					// translators: %s: Link label
-					// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
+					// translators: %s: Link label, phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
 					esc_html( sprintf( __( '%s', 'cookiebot' ), $link['label'] ) ),
 				'manage_options',
 				$slug,
-				[$this, 'display'],
+				array( $this, 'display' ),
 				20
 			);
 		}
