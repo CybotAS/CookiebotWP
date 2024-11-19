@@ -30,9 +30,11 @@ class Cookiebot_Admin_Links {
 
 		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		foreach ( $this->menu_links as $slug => $link ) {
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			if ( $slug === $_GET['page'] ) {
 				$link = $link['override'] && $link['condition'] ? $link['over_url'] : $link['url'];
-				wp_safe_redirect( $link );
+				//phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
+				wp_redirect( $link );
 				exit;
 			}
 		}
@@ -48,10 +50,22 @@ class Cookiebot_Admin_Links {
 				'cookiebot',
 				$link['label'],
 				$link['override'] && $link['condition'] ?
-					// translators: %s: Link label, phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
-					esc_html( sprintf( __( '%s', 'cookiebot' ), $link['over_label'] ) ) :
-					// translators: %s: Link label, phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
-					esc_html( sprintf( __( '%s', 'cookiebot' ), $link['label'] ) ),
+					esc_html(
+					// translators: %s: Link label
+						sprintf(
+						// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
+							__( '%s', 'cookiebot' ),
+							$link['over_label']
+						)
+					) :
+					esc_html(
+					// translators: %s: Link label
+						sprintf(
+						// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
+							__( '%s', 'cookiebot' ),
+							$link['label']
+						)
+					),
 				'manage_options',
 				$slug,
 				array( $this, 'display' ),
@@ -121,9 +135,15 @@ class Cookiebot_Admin_Links {
 		if ( $link['strong'] ) {
 			$link_html .= '<b>';
 		}
+
+		$link_html .= esc_html(
 		// translators: %s: Link label
-		// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
-		$link_html .= esc_html( sprintf( __( '%s', 'cookiebot' ), $link['label'] ) );
+			sprintf(
+			// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
+				__( '%s', 'cookiebot' ),
+				$link['label']
+			)
+		);
 
 		if ( $link['strong'] ) {
 			$link_html .= '</b>';
