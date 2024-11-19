@@ -3,7 +3,7 @@
 * Tags: WordPress cookie banner, GDPR, privacy compliance, cookie policy, cmp
 * Requires at least: 4.4
 * Tested up to: 6.7
-* Stable tag: 4.3.10
+* Stable tag: 4.3.11
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
