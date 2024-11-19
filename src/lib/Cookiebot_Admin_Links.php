@@ -50,22 +50,10 @@ class Cookiebot_Admin_Links {
 				'cookiebot',
 				$link['label'],
 				$link['override'] && $link['condition'] ?
-					esc_html(
-					// translators: %s: Link label
-						sprintf(
-						// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
-							__( '%s', 'cookiebot' ),
-							$link['over_label']
-						)
-					) :
-					esc_html(
-					// translators: %s: Link label
-						sprintf(
-						// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
-							__( '%s', 'cookiebot' ),
-							$link['label']
-						)
-					),
+					// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings,WordPress.WP.I18n.MissingTranslatorsComment
+					esc_html( sprintf( __( '%s', 'cookiebot' ), $link['over_label'] ) ) :
+					// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings,WordPress.WP.I18n.MissingTranslatorsComment
+					esc_html( sprintf( __( '%s', 'cookiebot' ), $link['label'] ) ),
 				'manage_options',
 				$slug,
 				array( $this, 'display' ),
@@ -136,14 +124,8 @@ class Cookiebot_Admin_Links {
 			$link_html .= '<b>';
 		}
 
-		$link_html .= esc_html(
-		// translators: %s: Link label
-			sprintf(
-			// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings
-				__( '%s', 'cookiebot' ),
-				$link['label']
-			)
-		);
+		// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings,WordPress.WP.I18n.MissingTranslatorsComment
+		$link_html .= esc_html( sprintf( __( '%s', 'cookiebot' ), $link['label'] ) );
 
 		if ( $link['strong'] ) {
 			$link_html .= '</b>';
