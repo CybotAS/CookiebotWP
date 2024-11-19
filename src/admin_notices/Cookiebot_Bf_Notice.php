@@ -29,7 +29,7 @@ class Cookiebot_Bf_Notice extends Cookiebot_Base_Notice {
 	public function __construct() {
 		parent::__construct();
 		if ( get_option( self::COOKIEBOT_NOTICE_OPTION_KEY, false ) === false ) {
-			add_option( self::COOKIEBOT_NOTICE_OPTION_KEY, strtotime('2024-11-30') );
+			add_option( self::COOKIEBOT_NOTICE_OPTION_KEY, strtotime( '2024-11-30' ) );
 		}
 	}
 
