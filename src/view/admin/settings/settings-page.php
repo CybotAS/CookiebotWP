@@ -32,7 +32,7 @@ $main_tabs = new Main_Tabs();
 $active_tab = ! empty( $_GET['tab'] ) ? $_GET['tab'] : false;
 
 $today     = new DateTime( 'now' );
-$end_date  = new DateTime( '2024-11-30' );
+$end_date  = new DateTime( '2024-12-03' );
 $remaining = $today->diff( $end_date );
 $days_left = $remaining->format( '%d' );
 

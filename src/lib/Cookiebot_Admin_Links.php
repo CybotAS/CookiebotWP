@@ -87,7 +87,7 @@ class Cookiebot_Admin_Links {
 				'override'   => true,
 				'over_url'   => 'https://admin.cookiebot.com/signup?coupon=BFRIDAYWP10&utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
 				'over_label' => 'Upgrade a plan',
-				'condition'  => empty( Cookiebot_WP::get_cbid() ) && ( strtotime( 'now' ) < strtotime( '2024-11-30' ) ),
+				'condition'  => empty( Cookiebot_WP::get_cbid() ) && ( strtotime( 'now' ) < strtotime( '2024-12-03' ) ),
 			),
 		);
 	}
@@ -109,7 +109,7 @@ class Cookiebot_Admin_Links {
 				'override'   => true,
 				'over_url'   => 'https://admin.cookiebot.com/signup?coupon=BFRIDAYWP10&utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
 				'over_label' => 'Get 10% off until 29.11',
-				'condition'  => empty( Cookiebot_WP::get_cbid() ) && ( strtotime( 'now' ) < strtotime( '2024-11-30' ) ),
+				'condition'  => empty( Cookiebot_WP::get_cbid() ) && ( strtotime( 'now' ) < strtotime( '2024-12-03' ) ),
 				'index'      => 'a',
 			),
 		);
