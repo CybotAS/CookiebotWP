@@ -14,7 +14,7 @@ class Cookiebot_Review {
 	protected $api_url = 'https://www.cookiebot.com/wp-json/cmp/v1/survey/';
 
 	public function register_hooks() {
-		add_action( 'admin_footer', array( $this, 'cookiebot_admin_script' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'cookiebot_admin_script' ), 9999 );
 		add_filter( 'plugin_action_links_cookiebot/cookiebot.php', array( $this, 'plugin_action_links' ) );
 		add_filter( 'network_admin_plugin_action_links', array( $this, 'plugin_action_links' ) );
 		add_action( 'wp_ajax_cb_submit_survey', array( $this, 'send_uninstall_survey' ) );
@@ -37,7 +37,7 @@ class Cookiebot_Review {
 	/**
 	 * Cookiebot Add ajax url
 	 */
-	public function cookiebot_admin_script() {
+	public function cookiebot_admin_script( $hook ) {
 		wp_enqueue_script(
 			'cookiebot_admin_js',
 			asset_url( 'js/backend/cookiebot-admin-script.js' ),
@@ -63,10 +63,12 @@ class Cookiebot_Review {
 		);
 
 		$args = array(
-			'cookiebot_logo' => asset_url( 'img/icon.svg' ),
+			'cookiebot_logo' => asset_url( 'img/icons/shield_icon.svg' ),
 		);
 
-		include_view( 'admin/templates/extra/review-form.php', $args );
+		if ( 'plugins.php' === $hook ) {
+			include_view( 'admin/templates/extra/review-form.php', $args );
+		}
 	}
 
 	/**

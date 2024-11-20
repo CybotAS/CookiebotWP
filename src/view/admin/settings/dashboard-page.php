@@ -17,17 +17,66 @@ use cybot\cookiebot\settings\pages\Settings_Page;
 $header    = new Header();
 $main_tabs = new Main_Tabs();
 
+$today     = new DateTime( 'now' );
+$end_date  = new DateTime( '2024-12-03' );
+$remaining = $today->diff( $end_date );
+$days_left = $remaining->format( '%d' );
+
 $header->display();
 ?>
 <div class="cb-body">
 	<div class="cb-wrapper">
 		<?php $main_tabs->display( 'dashboard' ); ?>
 		<div class="cb-main__content <?php echo $cbid ? 'sync-account' : ''; ?>">
+			<?php
+			if ( ! $cbid ) :
+				if ( $today < $end_date ) :
+					?>
+					<div class="cb-main__dashboard__promo">
+						<div class="cb-main__dashboard__promo--inner">
+							<div class="cb-main__dashboard__promo--content">
+							<div class="cb-dashboard__promo--label"><div class="icon"></div>Black Friday Deal</div>
+							<h2 class="cb-dashboard__promo--title">Get <div class="highlight">10% off</div> for 6 months</h2>
+							<p class="promo-condition">Enjoy a free plan for sites with up to 50 subpages. Premium plans are available for sites with 50+ subpages. Start with a 14-day trial, then enjoy a 10% discount on your selected plan for the first 6 months. After that, pricing will revert to the regular rate. This offer is available for new users who sign up between November 20 and December 2, 2024.</p>
+							</div>
+							<div class="cb-main__dashboard__promo--banner">
+								<img src="<?php echo esc_html( CYBOT_COOKIEBOT_PLUGIN_URL . '/assets/img/extra/cb_bf_banner.svg' ); ?>" alt="CB BF banner">
+							</div>
+						</div>
+					</div>
+					<?php
+				endif;
+			endif;
+			?>
 			<div class="cb-main__dashboard__card--container">
-				<div class="cb-main__dashboard__card">
-					<div class="cb-main__card__inner <?php echo $cbid ? 'start_card' : 'account_card'; ?>">
-						<?php if ( ! $cbid ) : ?>
-							<img src="<?php echo esc_html( $cb_wp ); ?>" alt="Cookiebot for WordPress" class="cb-wp">
+				<?php if ( ! $cbid ) : ?>
+					<div class="cb-main__dashboard__card">
+						<div class="cb-main__card__inner new_card">
+							<div class="cb-main__card__content">
+								<h2 class="cb-main__card__title">
+									<?php echo esc_html__( 'Create a new Cookiebot CMP account', 'cookiebot' ); ?>
+								</h2>
+								<?php if ( $today < $end_date ) : ?>
+								<div class="cb-bf-counter">
+									<div class="cb-bf-counter-label">-10%</div>
+									<div class="cb-bf-counter-number"><?php echo esc_html( $days_left ); ?></div>
+									<div class="cb-bf-counter-last"><?php echo $days_left === '1' ? esc_html( 'day' ) : esc_html( 'days' ); ?> to go</div>
+								</div>
+									<a href="https://admin.cookiebot.com/signup?coupon=BFRIDAYWP10&utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+										target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+										<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
+									</a>
+								<?php else : ?>
+								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+									target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+									<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
+								</a>
+								<?php endif; ?>
+							</div>
+						</div>
+					</div>
+					<div class="cb-main__dashboard__card">
+						<div class="cb-main__card__inner account_card">
 							<div class="cb-main__card__content">
 								<h2 class="cb-main__card__title">
 									<?php echo esc_html__( 'I already have a Cookiebot CMP account', 'cookiebot' ); ?>
@@ -37,26 +86,28 @@ $header->display();
 									<?php echo esc_html__( 'Connect my existing account', 'cookiebot' ); ?>
 								</a>
 							</div>
-						<?php else : ?>
-							<h2 class="cb-main__card__title">
-								<?php echo esc_html__( 'Your Cookiebot CMP for WordPress solution', 'cookiebot' ); ?>
-							</h2>
-							<div class="cb-main__card__success">
-								<div class="cb-btn cb-success-btn">
-									<img src="<?php echo esc_html( $check_icon ); ?>" alt="Check">
-								</div>
-								<p class="cb-main__success__text">
-									<span><?php echo esc_html__( 'Congratulations!', 'cookiebot' ); ?></span>
-									<?php echo esc_html__( 'You have added your Domain Group ID to WordPress. You are all set!', 'cookiebot' ); ?>
-								</p>
-							</div>
-						<?php endif; ?>
+						</div>
 					</div>
-				</div>
-
-				<?php if ( $cbid ) : ?>
+				<?php else : ?>
 					<div class="cb-main__dashboard__card">
-						<div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
+						<div class="cb-main__card__inner start_card">
+								<h2 class="cb-main__card__title">
+									<?php echo esc_html__( 'Your Cookiebot CMP for WordPress solution', 'cookiebot' ); ?>
+								</h2>
+								<div class="cb-main__card__success">
+									<div class="cb-btn cb-success-btn">
+										<img src="<?php echo esc_html( $check_icon ); ?>" alt="Check">
+									</div>
+									<p class="cb-main__success__text">
+										<span><?php echo esc_html__( 'Congratulations!', 'cookiebot' ); ?></span>
+										<?php echo esc_html__( 'You have added your Domain Group ID to WordPress. You are all set!', 'cookiebot' ); ?>
+									</p>
+								</div>
+						</div>
+					</div>
+
+					<div class="cb-main__dashboard__card">
+						<div class="cb-main__card__inner start_card">
 							<h3 class="cb-main__card__subtitle">
 								<?php echo esc_html__( 'Your opinion matters', 'cookiebot' ); ?>
 							</h3>
@@ -69,24 +120,9 @@ $header->display();
 							</a>
 						</div>
 					</div>
-				<?php endif; ?>
 
-				<div class="cb-main__dashboard__card">
-					<div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
-						<?php if ( ! $cbid ) : ?>
-							<div class="cb-main__card__content">
-								<p class="cb-main__card__label">
-									<?php echo esc_html__( 'Get started', 'cookiebot' ); ?>
-								</p>
-								<h2 class="cb-main__card__title">
-									<?php echo esc_html__( 'Create a new Cookiebot CMP account', 'cookiebot' ); ?>
-								</h2>
-								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
-									target="_blank" class="cb-btn cb-white-btn" rel="noopener">
-									<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
-								</a>
-							</div>
-						<?php else : ?>
+					<div class="cb-main__dashboard__card">
+						<div class="cb-main__card__inner start_card">
 							<h3 class="cb-main__card__subtitle">
 								<?php echo esc_html__( 'Learn more about how to optimize your Cookiebot CMP setup?', 'cookiebot' ); ?>
 							</h3>
@@ -94,9 +130,9 @@ $header->display();
 								rel="noopener">
 								<?php echo esc_html__( 'Visit Help Center', 'cookiebot' ); ?>
 							</a>
-						<?php endif; ?>
+						</div>
 					</div>
-				</div>
+				<?php endif; ?>
 			</div>
 
 			<div class="cb-main__dashboard__card--container">

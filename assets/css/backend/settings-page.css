@@ -103,6 +103,7 @@
 .cb-settings__config__item {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-column-gap: 24px;
     margin-bottom: 50px;
 }
 
@@ -405,4 +406,79 @@
         margin-top: 5px;
         margin-bottom: 10px;
     }
+}
+
+.cb-general__new__account--double {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 24px;
+    margin-top: -26px;
+    margin-bottom: 50px;
+}
+
+.cb-general__new__account--double .cb-main__card__inner.new_card {
+    display: grid;
+    align-self: stretch;
+    position: relative;
+    padding: 25px;
+    overflow: hidden;
+    background-color: #00C6FB;
+    color: #141414;
+    border-radius: 10px;
+}
+
+.cb-main__card__inner.new_card .cb-main__card__content {
+    display: grid;
+    grid-template-columns: 1fr minmax(86px, auto);
+    grid-template-rows: minmax(120px, auto) auto;
+    grid-column-gap: 25px;
+    align-items: end;
+}
+
+.cb-main__card__inner.new_card .cb-main__card__title  {
+    font-size: 28px;
+    line-height: 30px;
+    margin-bottom: 25px;
+}
+
+.cb-main__card__inner.new_card .cb-btn.cb-main-btn  {
+    background-color: #000000;
+    color: #ffffff;
+    grid-row: 2;
+    grid-column: span 2;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+.cb-main__card__inner.new_card .cb-bf-counter {
+    background-color: #000000;
+    border-bottom-left-radius: 500px;
+    border-bottom-right-radius: 500px;
+    text-align: center;
+    padding: 6px 6px 12px;
+    width: 74px;
+    position: relative;
+    top: -25px;
+    align-self: start;
+}
+
+.cb-main__card__inner.new_card .cb-bf-counter-label {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.cb-main__card__inner.new_card .cb-bf-counter-number {
+    color: #00a2ff;
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: 700;
+}
+
+.cb-main__card__inner.new_card .cb-bf-counter-last {
+    color: #00a2ff;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: normal;
+    padding: 0 10px;
 }

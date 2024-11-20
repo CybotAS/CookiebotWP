@@ -30,5 +30,6 @@ class Cookiebot_Notices {
 	const PLUGIN_NOTICES = array(
 		Cookiebot_Recommendation_Notice::class,
 		Cookiebot_Temp_Notice::class,
+		Cookiebot_Bf_Notice::class,
 	);
 }

@@ -31,6 +31,11 @@ $main_tabs = new Main_Tabs();
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $active_tab = ! empty( $_GET['tab'] ) ? $_GET['tab'] : false;
 
+$today     = new DateTime( 'now' );
+$end_date  = new DateTime( '2024-12-03' );
+$remaining = $today->diff( $end_date );
+$days_left = $remaining->format( '%d' );
+
 $header->display();
 ?>
 
@@ -49,51 +54,87 @@ $header->display();
 
 				<div class="cb-settings__tabs">
 					<div class="cb-settings__tabs__item <?php echo ! $active_tab || $active_tab === 'general-settings' ? 'active-item' : ''; ?>"
-						 data-tab="general-settings">
+						data-tab="general-settings">
 						<?php esc_html_e( 'General Settings', 'cookiebot' ); ?>
 					</div>
 					<div class="cb-settings__tabs__item <?php echo $active_tab === 'additional-settings' ? 'active-item' : ''; ?>"
-						 data-tab="additional-settings">
+						data-tab="additional-settings">
 						<?php esc_html_e( 'Additional Settings', 'cookiebot' ); ?>
 					</div>
 					<div class="cb-settings__tabs__item <?php echo $active_tab === 'tag-manager' ? 'active-item' : ''; ?>"
-						 data-tab="tag-manager">
+						data-tab="tag-manager">
 						<?php esc_html_e( 'Google Tag Manager', 'cookiebot' ); ?>
 					</div>
 					<div class="cb-settings__tabs__item <?php echo $active_tab === 'consent-mode' ? 'active-item' : ''; ?>"
-						 data-tab="consent-mode">
+						data-tab="consent-mode">
 						<?php esc_html_e( 'Google Consent Mode', 'cookiebot' ); ?>
 					</div>
 					<div class="cb-settings__tabs__item <?php echo $active_tab === 'iab' ? 'active-item' : ''; ?>"
-						 data-tab="iab">
+						data-tab="iab">
 						<?php esc_html_e( 'TCF', 'cookiebot' ); ?>
 					</div>
 					<div class="cb-settings__tabs__item <?php echo $active_tab === 'multiple-configurations' ? 'active-item' : ''; ?>"
-						 data-tab="multiple-configurations">
+						data-tab="multiple-configurations">
 						<?php esc_html_e( 'Multiple Configurations', 'cookiebot' ); ?>
 					</div>
 				</div>
 
 				<div class="cb-settings__tabs__content">
 					<div class="cb-settings__tabs__content--item <?php echo ! $active_tab || $active_tab === 'general-settings' ? 'active-item' : ''; ?>"
-						 id="general-settings">
+						id="general-settings">
 						<?php if ( ! $cbid ) : ?>
 						<div class="cb-general__new__account">
 							<h2 class="cb-general__info__title"><?php esc_html_e( 'Do you not have an account yet?', 'cookiebot' ); ?></h2>
 							<p class="cb-general__info__text">
 								<?php esc_html_e( 'Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on "Create a new account" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find your ID in the Cookiebot Manager by navigating to "Settings" and "Your Scripts".', 'cookiebot' ); ?>
 							</p>
+							<?php if ( $today >= $end_date ) : ?>
 							<div class="new-account-actions">
 								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
-								   target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+									target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 									<?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?>
 								</a>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress"
-								   target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+									target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 									<?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?>
 								</a>
 							</div>
+							<?php endif; ?>
 						</div>
+
+							<?php if ( $today < $end_date ) : ?>
+							<div class="cb-general__new__account--double">
+								<div class="cb-main__card__inner new_card">
+									<div class="cb-main__card__content">
+										<h2 class="cb-main__card__title">
+											<?php echo esc_html__( 'Create a new Cookiebot CMP account', 'cookiebot' ); ?>
+										</h2>
+										<div class="cb-bf-counter">
+											<div class="cb-bf-counter-label">-10%</div>
+											<div class="cb-bf-counter-number"><?php echo esc_html( $days_left ); ?></div>
+											<div class="cb-bf-counter-last"><?php echo $days_left === '1' ? esc_html( 'day' ) : esc_html( 'days' ); ?> to go</div>
+										</div>
+										<a href="https://admin.cookiebot.com/signup?coupon=BFRIDAYWP10&utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+											target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+											<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
+										</a>
+									</div>
+								</div>
+
+								<div class="cb-main__card__inner new_card">
+									<div class="cb-main__card__content">
+										<h2 class="cb-main__card__title">
+											<?php esc_html_e( 'Need help with your configuration?', 'cookiebot' ); ?>
+										</h2>
+
+										<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress"
+											target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+											<?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?>
+										</a>
+									</div>
+								</div>
+							</div>
+						<?php endif; ?>
 						<?php endif; ?>
 
 						<div class="cb-settings__config__item">
@@ -105,7 +146,7 @@ $header->display();
 									<?php esc_html_e( 'To connect your Domain Group, paste your Domain Group ID here. If you want to connect a second ID for other regions, you can do this under the "Multiple Configurations" tab.', 'cookiebot' ); ?>
 								</p>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
-								   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 									<?php esc_html_e( 'Read more on the Domain Group ID', 'cookiebot' ); ?>
 								</a>
 							</div>
@@ -169,7 +210,7 @@ $header->display();
 								<p class="cb-general__info__note"><?php esc_html_e( 'This feature disables the main language selector.', 'cookiebot' ); ?></p>
 								<p class="cb-general__info__note"><?php esc_html_e( 'If you have already set a language in the cookie declaration shortcode, this feature will not change it.', 'cookiebot' ); ?></p>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-to-set-the-language-of-the-consent-banner-"
-								   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 									<?php esc_html_e( 'Read more on how to add languages', 'cookiebot' ); ?>
 								</a>
 							</div>
@@ -202,11 +243,11 @@ $header->display();
 									<?php esc_html_e( 'Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:', 'cookiebot' ); ?>
 								</p>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360009074960-Automatic-cookie-blocking"
-								   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 									<?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?>
 								</a>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking"
-								   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 									<?php esc_html_e( 'Guide to manual cookie-blocking', 'cookiebot' ); ?>
 								</a>
 							</div>
@@ -338,7 +379,7 @@ $header->display();
 					</div>
 
 					<div class="cb-settings__tabs__content--item <?php echo $active_tab === 'additional-settings' ? 'active-item' : ''; ?>"
-						 id="additional-settings">
+						id="additional-settings">
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
 								<h3 class="cb-settings__config__subtitle">
@@ -386,7 +427,7 @@ $header->display();
 										} else {
 											?>
 											<input id="cookiebot-nooutput-admin" type="checkbox"
-												   name="cookiebot-nooutput-admin" value="1"
+													name="cookiebot-nooutput-admin" value="1"
 												<?php
 												checked(
 													1,
@@ -429,7 +470,7 @@ $header->display();
 										} else {
 											?>
 											<input id="cookiebot-output-logged-in" type="checkbox"
-												   name="cookiebot-output-logged-in" value="1"
+													name="cookiebot-output-logged-in" value="1"
 												<?php
 												checked(
 													1,
@@ -527,25 +568,25 @@ $header->display();
 					</div>
 
 					<div class="cb-settings__tabs__content--item <?php echo $active_tab === 'tag-manager' ? 'active-item' : ''; ?>"
-						 id="tag-manager">
+						id="tag-manager">
 						<?php $gtm_settings = new Gtm_Page(); ?>
 						<?php $gtm_settings->display(); ?>
 					</div>
 
 					<div class="cb-settings__tabs__content--item <?php echo $active_tab === 'consent-mode' ? 'active-item' : ''; ?>"
-						 id="consent-mode">
+						id="consent-mode">
 						<?php $gcm_settings = new Gcm_Page(); ?>
 						<?php $gcm_settings->display(); ?>
 					</div>
 
 					<div class="cb-settings__tabs__content--item <?php echo $active_tab === 'iab' ? 'active-item' : ''; ?>"
-						 id="iab">
+						id="iab">
 						<?php $iab_settings = new Iab_Page(); ?>
 						<?php $iab_settings->display(); ?>
 					</div>
 
 					<div class="cb-settings__tabs__content--item <?php echo $active_tab === 'multiple-configurations' ? 'active-item' : ''; ?>"
-						 id="multiple-configurations">
+						id="multiple-configurations">
 						<?php $multiple_settings = new Multiple_Page(); ?>
 						<?php $multiple_settings->display(); ?>
 					</div>
