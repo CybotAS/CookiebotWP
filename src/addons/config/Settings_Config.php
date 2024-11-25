@@ -8,6 +8,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Theme_Addon;
 use cybot\cookiebot\addons\controller\addons\jetpack\Jetpack;
 use cybot\cookiebot\addons\controller\addons\jetpack\widget\Base_Jetpack_Widget;
 use cybot\cookiebot\lib\Consent_API_Helper;
+use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\lib\Settings_Page_Tab;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\lib\Cookiebot_WP;
@@ -30,17 +31,17 @@ class Settings_Config {
 	const JETPACK_DEFAULT_LANGUAGE_DROPDOWN = 'cookiebot_jetpack_addon[%optionname%][placeholder][languages][site-default]';
 	const ADDONS_DEFAULT_LANGUAGE_DROPDOWN  = 'cookiebot_available_addons[%optionname%][placeholder][languages][site-default]';
 	// Templates
-	const INFO_HEADER_TEMPLATE            = 'admin/settings/prior-consent/partials/info-tab-header.php';
-	const EXTRA_INFO_TEMPLATE             = 'admin/settings/prior-consent/partials/extra-information.php';
-	const JETPACK_TAB_HEADER_TEMPLATE     = 'admin/settings/prior-consent/jetpack-widgets/tab-header.php';
-	const JETPACK_WIDGET_TAB_TEMPLATE     = 'admin/settings/prior-consent/jetpack-widgets/tab.php';
-	const PLACEHOLDER_TEMPLATE            = 'admin/settings/prior-consent/partials/placeholder-submitboxes.php';
-	const DEFAULT_PLACEHOLDER_TEMPLATE    = 'admin/settings/prior-consent/partials/placeholder-submitbox-default.php';
-	const AVAILABLE_TAB_HEADER_TEMPLATE   = 'admin/settings/prior-consent/available-addons/tab-header.php';
-	const AVAILABLE_ADDONS_TAB_TEMPLATE   = 'admin/settings/prior-consent/available-addons/tab.php';
-	const UNAVAILABLE_TAB_HEADER_TEMPLATE = 'admin/settings/prior-consent/unavailable-addons/tab-header.php';
-	const UNAVAILABLE_ADDONS_TAB_TEMPLATE = 'admin/settings/prior-consent/unavailable-addons/field.php';
-	const CONSENT_API_TAB_TEMPLATE        = 'admin/settings/prior-consent/consent-api/tab.php';
+	const INFO_HEADER_TEMPLATE            = 'admin/common/prior-consent/partials/info-tab-header.php';
+	const EXTRA_INFO_TEMPLATE             = 'admin/common/prior-consent/partials/extra-information.php';
+	const JETPACK_TAB_HEADER_TEMPLATE     = 'admin/common/prior-consent/jetpack-widgets/tab-header.php';
+	const JETPACK_WIDGET_TAB_TEMPLATE     = 'admin/common/prior-consent/jetpack-widgets/tab.php';
+	const PLACEHOLDER_TEMPLATE            = 'admin/common/prior-consent/partials/placeholder-submitboxes.php';
+	const DEFAULT_PLACEHOLDER_TEMPLATE    = 'admin/common/prior-consent/partials/placeholder-submitbox-default.php';
+	const AVAILABLE_TAB_HEADER_TEMPLATE   = 'admin/common/prior-consent/available-addons/tab-header.php';
+	const AVAILABLE_ADDONS_TAB_TEMPLATE   = 'admin/common/prior-consent/available-addons/tab.php';
+	const UNAVAILABLE_TAB_HEADER_TEMPLATE = 'admin/common/prior-consent/unavailable-addons/tab-header.php';
+	const UNAVAILABLE_ADDONS_TAB_TEMPLATE = 'admin/common/prior-consent/unavailable-addons/field.php';
+	const CONSENT_API_TAB_TEMPLATE        = 'admin/common/prior-consent/consent-api/tab.php';
 	// Other
 	const INFO_ICON_ASSET_URL = 'img/icons/info.svg';
 
@@ -81,18 +82,20 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function add_submenu() {
-		add_submenu_page(
-			'cookiebot',
-			esc_html__( 'Plugins', 'cookiebot' ),
-			esc_html__( 'Plugins', 'cookiebot' ),
-			'manage_options',
-			'cookiebot-addons',
-			array(
-				$this,
-				'setting_page',
-			),
-			2
-		);
+		if ( Cookiebot_Frame::is_cb_frame_type() === true ) {
+			add_submenu_page(
+				'cookiebot',
+				esc_html__( 'Plugins', 'cookiebot' ),
+				esc_html__( 'Plugins', 'cookiebot' ),
+				'manage_options',
+				'cookiebot-addons',
+				array(
+					$this,
+					'setting_page',
+				),
+				2
+			);
+		}
 	}
 
 	/**
@@ -468,7 +471,7 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function header_available_addons() {
-		 include_view( self::AVAILABLE_TAB_HEADER_TEMPLATE );
+		include_view( self::AVAILABLE_TAB_HEADER_TEMPLATE );
 	}
 
 	/**
@@ -735,7 +738,7 @@ class Settings_Config {
 			'settings_page_tabs' => $settings_page_tabs,
 			'active_tab'         => $active_tab,
 		);
-		include_view( 'admin/settings/prior-consent/page.php', $view_args );
+		include_view( 'admin/common/prior-consent/page.php', $view_args );
 	}
 
 	/**
