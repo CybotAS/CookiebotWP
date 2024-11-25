@@ -66,7 +66,7 @@ class Cookiebot_Review {
 			'cookiebot_logo' => asset_url( 'img/icon.svg' ),
 		);
 
-		include_view( 'admin/templates/extra/review-form.php', $args );
+		include_view( 'admin/common/templates/extra/review-form.php', $args );
 	}
 
 	/**
