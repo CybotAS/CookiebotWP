@@ -20,7 +20,7 @@
 		<?php esc_html_e( 'Cookiebot consent managment platform (CMP) and Google Consent Mode integrate seamlessly to offer you plug-and-play compliance and streamlined use of all Google\'s services in one easy solution.', 'cookiebot' ); ?>
 	</p>
 	<a class="cb-btn cb-link-btn" target="_blank" rel="noopener"
-	   href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode">
+		href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode">
 		<?php esc_html_e( 'Read more about Cookiebot CMP and Google Consent Mode', 'cookiebot' ); ?>
 	</a>
 </div>
@@ -34,7 +34,7 @@
 			<?php esc_html_e( 'Enable Google Consent Mode with default settings on your WordPress page.', 'cookiebot' ); ?>
 		</p>
 		<a class="cb-btn cb-link-btn" target="_blank" rel="noopener"
-		   href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode">
+			href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode">
 			<?php esc_html_e( 'Read more', 'cookiebot' ); ?>
 		</a>
 	</div>
@@ -64,7 +64,7 @@
 			<?php esc_html_e( 'This feature will allow you to pass data between pages when not able to use cookies without/prior consent.', 'cookiebot' ); ?>
 		</p>
 		<a class="cb-btn cb-link-btn" target="_blank" rel="noopener"
-		   href="https://developers.google.com/tag-platform/devguides/consent#passing_ad_click_client_id_and_session_id_information_in_urls">
+			href="https://developers.google.com/tag-platform/devguides/consent#passing_ad_click_client_id_and_session_id_information_in_urls">
 			<?php esc_html_e( 'Read more', 'cookiebot' ); ?>
 		</a>
 	</div>

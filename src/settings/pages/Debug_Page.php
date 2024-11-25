@@ -21,15 +21,17 @@ class Debug_Page implements Settings_Page_Interface {
 	const ADMIN_SLUG = 'cookiebot_debug';
 
 	public function menu() {
-		add_submenu_page(
-			'cookiebot',
-			__( 'Debug info', 'cookiebot' ),
-			__( 'Debug info', 'cookiebot' ),
-			'manage_options',
-			self::ADMIN_SLUG,
-			array( $this, 'display' ),
-			25
-		);
+		if ( Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) {
+			add_submenu_page(
+				'cookiebot',
+				__( 'Debug info', 'cookiebot' ),
+				__( 'Debug info', 'cookiebot' ),
+				'manage_options',
+				self::ADMIN_SLUG,
+				array( $this, 'display' ),
+				25
+			);
+		}
 	}
 
 	/**
@@ -59,14 +61,14 @@ class Debug_Page implements Settings_Page_Interface {
 
 		$debug_output = $this->prepare_debug_data();
 
-		include_view( Cookiebot_Frame::get_view_path() . 'settings/debug-page.php', array( 'debug_output' => $debug_output ) );
+		include_view( Cookiebot_Frame::get_view_path() . 'debug-page.php', array( 'debug_output' => $debug_output ) );
 	}
 
 	private function get_ignored_scripts() {
 		$ignored_scripts = get_option( 'cookiebot-ignore-scripts' );
 
 		$ignored_scripts = array_map(
-			function( $ignore_tag ) {
+			function ( $ignore_tag ) {
 				return trim( $ignore_tag );
 			},
 			explode( PHP_EOL, $ignored_scripts )
@@ -216,13 +218,13 @@ class Debug_Page implements Settings_Page_Interface {
 				$output .= '-Banner: ' . $counter . " -\n";
 				$output .= 'Id: ' . $secondary_id . " \n";
 				$output .= 'Regions: ' . $secondary_regions . " \n\n";
-				$counter++;
+				++$counter;
 			}
 			foreach ( $banners as $banner ) {
 				$output .= '-Banner: ' . $counter . " -\n";
 				$output .= 'Id: ' . $banner['group'] . " \n";
 				$output .= 'Regions: ' . $banner['region'] . " \n\n";
-				$counter++;
+				++$counter;
 			}
 		}
 

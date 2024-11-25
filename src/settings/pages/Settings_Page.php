@@ -90,6 +90,6 @@ class Settings_Page implements Settings_Page_Interface {
 			array( 'cookieBlockingMode' => $args['cookie_blocking_mode'] )
 		);
 
-		include_view( Cookiebot_Frame::get_view_path() . 'settings/settings-page.php', $args );
+		include_view( Cookiebot_Frame::get_view_path() . 'settings-page.php', $args );
 	}
 }

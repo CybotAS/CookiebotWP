@@ -16,6 +16,6 @@ class Main_Tabs {
 			'active_tab' => $active,
 		);
 
-		include_view( 'admin/templates/main-tabs.php', $args );
+		include_view( 'admin/common/templates/main-tabs.php', $args );
 	}
 }

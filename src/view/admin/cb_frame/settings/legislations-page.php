@@ -3,7 +3,7 @@
 
 	<p>
 		<?php
-		echo sprintf(
+		printf(
 		/* translators: The first placeholder is the HTML anchor open tag, and the second placeholder is the closing tag. */
 			esc_html__(
 				'For more details about Cookiebot\'s CCPA Legislation integration, see %1$sarticle about cookiebot and the CCPA compliance%2$s',

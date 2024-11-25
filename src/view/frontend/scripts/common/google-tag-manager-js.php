@@ -1,11 +1,13 @@
 <?php
 /**
+ * @var string $gtm_id
  * @var string $data_layer
  * @var bool|string $consent_attribute
+ * @var bool $iab
  */
 ?>
 <script<?php echo ! $consent_attribute ? '' : ' data-cookieconsent="' . esc_attr( $consent_attribute ) . '"'; ?>>
-	<?php if ( get_option( 'cookiebot-iab' ) ) : ?>
+	<?php if ( $iab ) : ?>
 	window ["gtag_enable_tcf_support"] = true;
 	<?php endif; ?>
 	(function (w, d, s, l, i) {
@@ -17,6 +19,6 @@
 		document,
 		'script',
 		'<?php echo esc_js( $data_layer ); ?>',
-		'<?php echo esc_js( get_option( 'cookiebot-gtm-id' ) ); ?>'
+		'<?php echo esc_js( $gtm_id ); ?>'
 	);
 </script>

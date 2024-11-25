@@ -58,7 +58,7 @@ class Support_Page implements Settings_Page_Interface {
 				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 			);
 		}
-		
-		include_view( Cookiebot_Frame::get_view_path() . 'settings/support-page.php', $args );
+
+		include_view( Cookiebot_Frame::get_view_path() . 'support-page.php', $args );
 	}
 }

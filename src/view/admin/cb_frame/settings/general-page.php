@@ -27,7 +27,7 @@
 			<?php esc_html_e( 'To connect your Domain Group, paste your Domain Group ID here. If you want to connect a second ID for other regions, you can do this under the "Multiple Configurations" tab.', 'cookiebot' ); ?>
 		</p>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
-		   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 			<?php esc_html_e( 'Read more on the Domain Group ID', 'cookiebot' ); ?>
 		</a>
 	</div>
@@ -91,7 +91,7 @@
 		<p class="cb-general__info__note"><?php esc_html_e( 'This feature disables the main language selector.', 'cookiebot' ); ?></p>
 		<p class="cb-general__info__note"><?php esc_html_e( 'If you have already set a language in the cookie declaration shortcode, this feature will not change it.', 'cookiebot' ); ?></p>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/360003793394-How-to-set-the-language-of-the-consent-banner-"
-		   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 			<?php esc_html_e( 'Read more on how to add languages', 'cookiebot' ); ?>
 		</a>
 	</div>
@@ -124,11 +124,11 @@
 			<?php esc_html_e( 'Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:', 'cookiebot' ); ?>
 		</p>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/360009074960-Automatic-cookie-blocking"
-		   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 			<?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?>
 		</a>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking"
-		   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 			<?php esc_html_e( 'Guide to manual cookie-blocking', 'cookiebot' ); ?>
 		</a>
 	</div>

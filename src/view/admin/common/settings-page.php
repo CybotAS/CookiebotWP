@@ -37,7 +37,7 @@ $header->display();
 
 				<div class="cb-settings__tabs__content">
 					<div class="cb-settings__tabs__content--item active-item"
-						 id="general-settings">
+						id="general-settings">
 						<div class="cb-general__new__account">
 							<h2 class="cb-general__info__title"><?php esc_html_e( 'Do you not have an account yet?', 'cookiebot' ); ?></h2>
 							<p class="cb-general__info__text">
@@ -45,11 +45,11 @@ $header->display();
 							</p>
 							<div class="new-account-actions">
 								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
-								   target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+									target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 									<?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?>
 								</a>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress"
-								   target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+									target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 									<?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?>
 								</a>
 							</div>
@@ -64,7 +64,7 @@ $header->display();
 									<?php esc_html_e( 'To connect your Domain Group, paste your Domain Group ID here. If you want to connect a second ID for other regions, you can do this under the "Multiple Configurations" tab.', 'cookiebot' ); ?>
 								</p>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
-								   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 									<?php esc_html_e( 'Read more on the Domain Group ID', 'cookiebot' ); ?>
 								</a>
 							</div>

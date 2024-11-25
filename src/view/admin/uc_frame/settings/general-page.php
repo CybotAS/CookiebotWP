@@ -1,21 +1,11 @@
 <?php
 /**
  * @var string $cbid
- * @var bool $cbid_frame
  * @var bool $is_ms
  * @var string $network_cbid
  * @var string $network_scrip_tag_uc_attr
- * @var string $network_scrip_tag_cd_attr
- * @var string $cookiebot_gdpr_url
- * @var string $cookiebot_logo
- * @var array $supported_languages
- * @var string $current_lang
- * @var bool $is_wp_consent_api_active
- * @var array $m_default
- * @var array $m
  * @var string $cookie_blocking_mode
  * @var bool $network_auto
- * @var string $add_language_gif_url
  */
 ?>
 <div class="cb-settings__config__item">
@@ -27,7 +17,7 @@
 			<?php esc_html_e( 'To connect your Domain Group, paste your Domain Group ID here. If you want to connect a second ID for other regions, you can do this under the "Multiple Configurations" tab.', 'cookiebot' ); ?>
 		</p>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
-		   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 			<?php esc_html_e( 'Read more on the Domain Group ID', 'cookiebot' ); ?>
 		</a>
 	</div>
@@ -53,11 +43,11 @@
 			<?php esc_html_e( 'Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:', 'cookiebot' ); ?>
 		</p>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/360009074960-Automatic-cookie-blocking"
-		   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 			<?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?>
 		</a>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking"
-		   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 			<?php esc_html_e( 'Guide to manual cookie-blocking', 'cookiebot' ); ?>
 		</a>
 	</div>

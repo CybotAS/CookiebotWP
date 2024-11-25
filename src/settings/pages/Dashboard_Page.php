@@ -68,6 +68,6 @@ class Dashboard_Page implements Settings_Page_Interface {
 			);
 		}
 
-		include_view( Cookiebot_Frame::get_view_path() . 'settings/dashboard-page.php', $args );
+		include_view( Cookiebot_Frame::get_view_path() . 'dashboard-page.php', $args );
 	}
 }

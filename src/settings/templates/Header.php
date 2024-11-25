@@ -30,6 +30,6 @@ class Header {
 			);
 		}
 
-		include_view( 'admin/templates/header.php', $args );
+		include_view( 'admin/common/templates/header.php', $args );
 	}
 }

@@ -1,4 +1,6 @@
 <?php
+
+use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\settings\pages\Dashboard_Page;
 use cybot\cookiebot\settings\pages\Settings_Page;
 use cybot\cookiebot\addons\config\Settings_Config;
@@ -30,7 +32,7 @@ $isnw = is_network_admin();
 			<span><?php esc_html_e( 'Settings', 'cookiebot' ); ?></span>
 		</a>
 	</div>
-	<?php if ( ! $isnw ) : ?>
+	<?php if ( ! $isnw && Cookiebot_Frame::is_cb_frame_type() === true ) : ?>
 		<div class="cb-main__tabs_item <?php echo $active_tab === 'addons' ? 'active-item' : ''; ?>">
 			<a href="<?php echo esc_url( add_query_arg( 'page', Settings_Config::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>" class="cb-main__tabs__link">
 				<div class="cb-main__tabs__icon plugins-icon"></div>
@@ -48,7 +50,7 @@ $isnw = is_network_admin();
 			<span><?php esc_html_e( 'Support', 'cookiebot' ); ?></span>
 		</a>
 	</div>
-	<?php if ( ! $isnw ) : ?>
+	<?php if ( ! $isnw && Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) : ?>
 		<div class="cb-main__tabs_item <?php echo $active_tab === 'debug' ? 'active-item' : ''; ?>">
 			<a href="<?php echo esc_url( add_query_arg( 'page', Debug_Page::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>" class="cb-main__tabs__link">
 				<div class="cb-main__tabs__icon debug-icon"></div>

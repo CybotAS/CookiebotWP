@@ -18,7 +18,7 @@ use function cybot\cookiebot\lib\include_view;
 			<?php esc_html_e( 'You can add a second alternative banner or configuration to your website by creating a second Domain Group and specify it on a region.', 'cookiebot' ); ?>
 		</p>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/360010932419-Multiple-banners-on-the-same-website-example-CCPA-GDPR-"
-		   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 			<?php esc_html_e( 'Read more about multiple configurations here', 'cookiebot' ); ?>
 		</a>
 	</div>
@@ -64,7 +64,7 @@ use function cybot\cookiebot\lib\include_view;
 		<div class="cb-region__table__item">
 			<div class="cb-region__item__group">
 				<input type="text" disabled
-					   placeholder="<?php echo $cbid ? esc_attr( $cbid ) : '1111-1111-1111-1111'; ?>">
+						placeholder="<?php echo $cbid ? esc_attr( $cbid ) : '1111-1111-1111-1111'; ?>">
 			</div>
 			<div class="cb-region__item__region">
 				<p class="cb-region__item__region--primary">
@@ -81,7 +81,7 @@ use function cybot\cookiebot\lib\include_view;
 					<div class="cb-region__list__container">
 						<?php foreach ( $supported_regions as $code => $region ) : ?>
 							<div class="cb-region__region__item"
-								 data-region="<?php echo esc_attr( $code ); ?>"><?php echo esc_attr( $region ); ?></div>
+								data-region="<?php echo esc_attr( $code ); ?>"><?php echo esc_attr( $region ); ?></div>
 						<?php endforeach; ?>
 					</div>
 				</div>
@@ -91,11 +91,11 @@ use function cybot\cookiebot\lib\include_view;
 		<div class="cb-region__table__item cb-region__secondary__banner">
 			<div class="cb-region__item__group">
 				<input type="text" name="cookiebot-second-banner-id" placeholder="1111-1111-1111-1111"
-					   value="<?php echo esc_attr( $secondary_group_id ); ?>">
+						value="<?php echo esc_attr( $secondary_group_id ); ?>">
 			</div>
 			<div class="cb-region__item__region">
 				<input type="hidden" name="cookiebot-second-banner-regions" class="second-banner-regions"
-					   value="<?php echo esc_attr( implode( ', ', array_keys( $selected_regions ) ) ); ?>">
+						value="<?php echo esc_attr( implode( ', ', array_keys( $selected_regions ) ) ); ?>">
 				<div class="cb-region__region__selector">
 					<div class="default-none <?php echo $selected_regions ? 'hidden' : ''; ?>">
 						<?php esc_html_e( 'Select region', 'cookiebot' ); ?>
@@ -113,7 +113,7 @@ use function cybot\cookiebot\lib\include_view;
 					<div class="cb-region__list__container">
 					<?php foreach ( $supported_regions as $code => $region ) : ?>
 						<div class='cb-region__region__item <?php echo array_key_exists( $code, $selected_regions ) ? 'selected-region' : ''; ?>'
-							 data-region="<?php echo esc_attr( $code ); ?>"><?php echo esc_attr( $region ); ?></div>
+							data-region="<?php echo esc_attr( $code ); ?>"><?php echo esc_attr( $region ); ?></div>
 					<?php endforeach; ?>
 					</div>
 				</div>
@@ -128,11 +128,11 @@ use function cybot\cookiebot\lib\include_view;
 				'supported_regions' => $supported_regions,
 			);
 
-			include_view( 'admin/settings/multiple-configuration/extra/region-item.php', $multiple_args );
+			include_view( 'admin/cb_frame/settings/multiple-configuration/extra/region-item.php', $multiple_args );
 		}
 		?>
 		<input type="hidden" name="cookiebot-ccpa" id="ccpa-compatibility"
-			   value="<?php echo esc_attr( $ccpa_compatibility ); ?>">
+				value="<?php echo esc_attr( $ccpa_compatibility ); ?>">
 	</div>
 	<div id="cb-region__add__banner" class="cb-btn cb-main-btn">
 		<?php esc_html_e( 'Add banner', 'cookiebot' ); ?>
