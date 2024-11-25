@@ -36,8 +36,17 @@ class Cookiebot_Javascript_Helper {
 				add_action( 'admin_head', array( $this, 'include_uc_cmp_js' ), - 9999 );
 			}
 
+			add_action( 'wp_head', array( $this, 'include_uc_auto_js' ), - 9997 );
 			add_action( 'wp_head', array( $this, 'include_uc_cmp_js' ), - 9996 );
 		}
+	}
+
+	public function include_uc_auto_js() {
+		if ( Cookiebot_WP::get_cookie_blocking_mode() === 'auto' ) {
+			$view_path = 'frontend/scripts/uc_frame/uc-auto-js.php';
+			include_view( $view_path );
+		}
+		return '';
 	}
 
 	public function include_uc_cmp_js( $return_html = false ) {
