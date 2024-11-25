@@ -7,19 +7,73 @@ use InvalidArgumentException;
 
 class Cookiebot_Javascript_Helper {
 	public function register_hooks() {
-		if ( is_admin() && ! Cookiebot_WP::cookiebot_disabled_in_admin() ) {
-			// adding cookie banner in admin area too
-			add_action( 'admin_head', array( $this, 'include_cookiebot_js' ), - 9999 );
-		}
+		self::get_hooks_by_frame();
+	}
 
-		// add JS
-		if ( self::is_tcf_enabled() ) {
-			add_action( 'wp_head', array( $this, 'include_publisher_restrictions_js' ), -9999 );
-		}
+	private function get_hooks_by_frame() {
+		$frame          = Cookiebot_Frame::is_cb_frame_type();
+		$admin_disabled = is_admin() && ! Cookiebot_WP::cookiebot_disabled_in_admin();
 		add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9998 );
 		add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9997 );
-		add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), - 9996 );
-		( new Cookiebot_Declaration_Shortcode() )->register_hooks();
+
+		if ( $frame === true ) {
+			if ( $admin_disabled ) {
+				// adding cookie banner in admin area too
+				add_action( 'admin_head', array( $this, 'include_cookiebot_js' ), - 9999 );
+			}
+
+			// add JS
+			if ( self::is_tcf_enabled() ) {
+				add_action( 'wp_head', array( $this, 'include_publisher_restrictions_js' ), -9999 );
+			}
+			add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), - 9996 );
+			( new Cookiebot_Declaration_Shortcode() )->register_hooks();
+		}
+
+		if ( $frame === false ) {
+			if ( $admin_disabled ) {
+				// adding cookie banner in admin area too
+				add_action( 'admin_head', array( $this, 'include_uc_cmp_js' ), - 9999 );
+			}
+
+			add_action( 'wp_head', array( $this, 'include_uc_cmp_js' ), - 9996 );
+		}
+	}
+
+	public function include_uc_cmp_js( $return_html = false ) {
+		$cbid = Cookiebot_WP::get_cbid();
+
+		if ( ! empty( $cbid ) && ! defined( 'COOKIEBOT_DISABLE_ON_PAGE' ) ) {
+			if (
+				// Is multisite - and disabled output is checked as network setting
+				( is_multisite() && get_site_option( 'cookiebot-nooutput', false ) ) ||
+				// Do not show JS - output disabled
+				get_option( 'cookiebot-nooutput', false ) ||
+				// Do not show js if logged in output is disabled
+				(
+					Cookiebot_WP::can_current_user_edit_theme() &&
+					$return_html === '' &&
+					(
+						get_option( 'cookiebot-output-logged-in' ) === false ||
+						get_option( 'cookiebot-output-logged-in' ) === ''
+					)
+				)
+			) {
+				return '';
+			}
+
+			$view_path = 'frontend/scripts/uc_frame/uc-cmp-js.php';
+			$view_args = array(
+				'cbid' => $cbid,
+			);
+
+			if ( $return_html ) {
+				return get_view_html( $view_path, $view_args );
+			} else {
+				include_view( $view_path, $view_args );
+			}
+		}
+		return '';
 	}
 
 	private function is_tcf_enabled() {
@@ -94,7 +148,7 @@ class Cookiebot_Javascript_Helper {
 				$tag_attr = get_site_option( 'cookiebot-script-tag-uc-attribute' );
 			}
 
-			$view_path = 'frontend/scripts/cookiebot-js.php';
+			$view_path = 'frontend/scripts/cb_frame/cookiebot-js.php';
 			$view_args = array(
 				'cbid'                 => $cbid,
 				'lang'                 => $lang,
@@ -122,23 +176,28 @@ class Cookiebot_Javascript_Helper {
 	 * @throws InvalidArgumentException
 	 */
 	public function include_google_tag_manager_js( $return_html = false ) {
-		$option            = get_option( 'cookiebot-gtm' );
-		$blocking_mode     = Cookiebot_WP::get_cookie_blocking_mode();
-		$cookie_categories = get_option( 'cookiebot-gtm-cookies' );
+		$option        = get_option( 'cookiebot-gtm' );
+		$blocking_mode = Cookiebot_WP::get_cookie_blocking_mode();
 
 		if ( $option !== false && $option !== '' ) {
-			if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
-				$data_layer = 'dataLayer';
-			} else {
-				$data_layer = get_option( 'cookiebot-data-layer' );
-			}
+			$cookiebot_gtm_id  = get_option( 'cookiebot-gtm-id' );
+			$data_layer        = empty( get_option( 'cookiebot-data-layer' ) ) ? 'dataLayer' : get_option( 'cookiebot-data-layer' );
+			$iab               = Cookiebot_Frame::is_cb_frame_type() === true && ! empty( get_option( 'cookiebot-iab' ) ) ?
+				get_option( 'cookiebot-iab' ) :
+				false;
+			$cookie_categories = get_option( 'cookiebot-gtm-cookies' );
 
-			$view_path = 'frontend/scripts/google-tag-manager-js.php';
+			$view_path = 'frontend/scripts/common/google-tag-manager-js.php';
 
 			$view_args = array(
+				'gtm_id'            => $cookiebot_gtm_id,
 				'data_layer'        => $data_layer,
-				'consent_attribute' => self::get_consent_attribute( $blocking_mode, $cookie_categories ),
+				'consent_attribute' => Cookiebot_Frame::is_cb_frame_type() === true ?
+					self::get_consent_attribute( $blocking_mode, $cookie_categories ) :
+					false,
+				'iab'               => $iab,
 			);
+
 			if ( $return_html ) {
 				return get_view_html( $view_path, $view_args );
 			} else {
@@ -157,24 +216,24 @@ class Cookiebot_Javascript_Helper {
 	 * @throws InvalidArgumentException
 	 */
 	public function include_google_consent_mode_js( $return_html = false ) {
-		$option                     = get_option( 'cookiebot-gcm' );
-		$blocking_mode              = Cookiebot_WP::get_cookie_blocking_mode();
-		$is_url_passthrough_enabled = get_option( 'cookiebot-gcm-url-passthrough' );
-		$cookie_categories          = get_option( 'cookiebot-gcm-cookies' );
+		$option        = get_option( 'cookiebot-gcm' );
+		$blocking_mode = Cookiebot_WP::get_cookie_blocking_mode();
 
 		if ( $option !== false && $option !== '' ) {
-			if ( empty( get_option( 'cookiebot-data-layer' ) ) ) {
-				$data_layer = 'dataLayer';
-			} else {
-				$data_layer = get_option( 'cookiebot-data-layer' );
-			}
+			$data_layer                 = empty( get_option( 'cookiebot-data-layer' ) ) ? 'dataLayer' : get_option( 'cookiebot-data-layer' );
+			$is_url_passthrough_enabled = Cookiebot_Frame::is_cb_frame_type() === true && ! empty( get_option( 'cookiebot-gcm-url-passthrough' ) ) ?
+				get_option( 'cookiebot-gcm-url-passthrough' ) :
+				false;
+			$cookie_categories          = get_option( 'cookiebot-gcm-cookies' );
 
-			$view_path = 'frontend/scripts/google-consent-mode-js.php';
+			$view_path = 'frontend/scripts/common/google-consent-mode-js.php';
 
 			$view_args = array(
 				'data_layer'        => $data_layer,
 				'url_passthrough'   => $is_url_passthrough_enabled,
-				'consent_attribute' => self::get_consent_attribute( $blocking_mode, $cookie_categories ),
+				'consent_attribute' => Cookiebot_Frame::is_cb_frame_type() === true ?
+					self::get_consent_attribute( $blocking_mode, $cookie_categories ) :
+					false,
 			);
 			if ( $return_html ) {
 				return get_view_html( $view_path, $view_args );
@@ -186,7 +245,7 @@ class Cookiebot_Javascript_Helper {
 	}
 
 	public function include_publisher_restrictions_js( $return_html = false ) {
-		$view_path = 'frontend/scripts/publisher-restrictions-js.php';
+		$view_path = 'frontend/scripts/cb_frame/publisher-restrictions-js.php';
 
 		$custom_tcf_purposes         = get_option( 'cookiebot-tcf-purposes' );
 		$custom_tcf_special_purposes = get_option( 'cookiebot-tcf-special-purposes' );
