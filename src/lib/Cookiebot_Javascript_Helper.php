@@ -13,8 +13,6 @@ class Cookiebot_Javascript_Helper {
 	private function get_hooks_by_frame() {
 		$frame          = Cookiebot_Frame::is_cb_frame_type();
 		$admin_disabled = is_admin() && ! Cookiebot_WP::cookiebot_disabled_in_admin();
-		add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9998 );
-		add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9997 );
 
 		if ( $frame === true ) {
 			if ( $admin_disabled ) {
@@ -26,6 +24,8 @@ class Cookiebot_Javascript_Helper {
 			if ( self::is_tcf_enabled() ) {
 				add_action( 'wp_head', array( $this, 'include_publisher_restrictions_js' ), -9999 );
 			}
+			add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9998 );
+			add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9997 );
 			add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), - 9996 );
 			( new Cookiebot_Declaration_Shortcode() )->register_hooks();
 		}
@@ -36,17 +36,10 @@ class Cookiebot_Javascript_Helper {
 				add_action( 'admin_head', array( $this, 'include_uc_cmp_js' ), - 9999 );
 			}
 
-			add_action( 'wp_head', array( $this, 'include_uc_auto_js' ), - 9997 );
-			add_action( 'wp_head', array( $this, 'include_uc_cmp_js' ), - 9996 );
+			add_action( 'wp_head', array( $this, 'include_uc_cmp_js' ), - 9998 );
+			add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9997 );
+			add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9996 );
 		}
-	}
-
-	public function include_uc_auto_js() {
-		if ( Cookiebot_WP::get_cookie_blocking_mode() === 'auto' ) {
-			$view_path = 'frontend/scripts/uc_frame/uc-auto-js.php';
-			include_view( $view_path );
-		}
-		return '';
 	}
 
 	public function include_uc_cmp_js( $return_html = false ) {
@@ -76,6 +69,10 @@ class Cookiebot_Javascript_Helper {
 				'cbid' => $cbid,
 				'ruleset_id' => ! empty( get_option( 'cookiebot-ruleset-id' ) ) ?
 					get_option( 'cookiebot-ruleset-id' ) : 'settings',
+				'source' => get_option( 'cookiebot-ruleset-id' ) === 'ruleset' ?
+					'https://app.usercentrics.eu/browser-ui/latest/loader.js' :
+					'https://web.cmp.usercentrics.eu/ui/loader.js',
+				'auto' => Cookiebot_WP::get_cookie_blocking_mode() === 'auto'
 			);
 
 			if ( $return_html ) {
