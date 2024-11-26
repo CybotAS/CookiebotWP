@@ -12,20 +12,20 @@
 <div class="cb-settings__config__item">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
-			<?php esc_html_e( 'Connect your Domain Group:', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Connect your account:', 'cookiebot' ); ?>
 		</h3>
 		<p class="cb-general__info__text">
-			<?php esc_html_e( 'To connect your Domain Group, paste your Domain Group ID here. If you want to connect a second ID for other regions, you can do this under the "Multiple Configurations" tab.', 'cookiebot' ); ?>
+			<?php esc_html_e( 'To connect your account, paste your settings ID here. If you want to connect a geolocation ruleset for other regions, you can add your ruleset id', 'cookiebot' ); ?>
 		</p>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
 			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-			<?php esc_html_e( 'Read more on the Domain Group ID', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Read more on the settings ID', 'cookiebot' ); ?>
 		</a>
 	</div>
 	<div class="cb-settings__config__data">
 		<div class="cb-settings__config__data__inner">
 			<h3 class="cb-settings__data__subtitle">
-				<?php esc_html_e( 'Add your Domain Group ID', 'cookiebot' ); ?>
+				<?php esc_html_e( 'Add your ID', 'cookiebot' ); ?>
 			</h3>
 			<div class="cookiebot-cbid-container">
 				<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>

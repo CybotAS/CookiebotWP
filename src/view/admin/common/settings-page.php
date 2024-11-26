@@ -30,9 +30,8 @@ $header->display();
 			<form method="post" action="options.php">
 				<?php settings_fields( 'cookiebot' ); ?>
 				<?php do_settings_sections( 'cookiebot' ); ?>
-				<div class="cb-vendor-alert__msg hidden"><?php esc_html_e( 'Select at least one vendor on TCF tab', 'cookiebot' ); ?></div>
 				<div class="cb-settings__header">
-					<h1 class="cb-main__page_title"><?php esc_html_e( 'Settings', 'cookiebot' ); ?></h1>
+					<h1 class="cb-main__page_title"><?php esc_html_e( 'Initial Settings', 'cookiebot' ); ?></h1>
 					<?php submit_button(); ?>
 				</div>
 
@@ -42,7 +41,7 @@ $header->display();
 						<div class="cb-general__new__account">
 							<h2 class="cb-general__info__title"><?php esc_html_e( 'Do you not have an account yet?', 'cookiebot' ); ?></h2>
 							<p class="cb-general__info__text">
-								<?php esc_html_e( 'Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on "Create a new account" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find your ID in the Cookiebot Manager by navigating to "Settings" and "Your Scripts".', 'cookiebot' ); ?>
+								<?php esc_html_e( 'Demo content on creating a new account.', 'cookiebot' ); ?>
 							</p>
 							<div class="new-account-actions">
 								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
@@ -59,20 +58,20 @@ $header->display();
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
 								<h3 class="cb-settings__config__subtitle">
-									<?php esc_html_e( 'Connect your Domain Group:', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Connect your ID:', 'cookiebot' ); ?>
 								</h3>
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'To connect your Domain Group, paste your Domain Group ID here. If you want to connect a second ID for other regions, you can do this under the "Multiple Configurations" tab.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'To connect your account, paste your settings ID here. If you want to connect a geolocation ID for other regions, you can add the ruleset ID.', 'cookiebot' ); ?>
 								</p>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
 									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-									<?php esc_html_e( 'Read more on the Domain Group ID', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Read more on the settings ID', 'cookiebot' ); ?>
 								</a>
 							</div>
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
 									<h3 class="cb-settings__data__subtitle">
-										<?php esc_html_e( 'Add your Domain Group ID', 'cookiebot' ); ?>
+										<?php esc_html_e( 'Add your ID', 'cookiebot' ); ?>
 									</h3>
 									<div class="cookiebot-cbid-container">
 										<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
