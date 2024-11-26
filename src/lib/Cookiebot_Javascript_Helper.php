@@ -74,6 +74,8 @@ class Cookiebot_Javascript_Helper {
 			$view_path = 'frontend/scripts/uc_frame/uc-cmp-js.php';
 			$view_args = array(
 				'cbid' => $cbid,
+				'ruleset_id' => ! empty( get_option( 'cookiebot-ruleset-id' ) ) ?
+					get_option( 'cookiebot-ruleset-id' ) : 'settings',
 			);
 
 			if ( $return_html ) {
