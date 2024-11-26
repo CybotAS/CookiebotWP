@@ -11,6 +11,7 @@ use cybot\cookiebot\settings\pages\Multiple_Page;
  * @var string $cbid
  * @var bool $is_ms
  * @var string $network_cbid
+ * @var string $ruleset_id
  */
 
 $header    = new Header();
@@ -73,10 +74,31 @@ $header->display();
 									<h3 class="cb-settings__data__subtitle">
 										<?php esc_html_e( 'Add your Domain Group ID', 'cookiebot' ); ?>
 									</h3>
-									<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
-										type="text" name="cookiebot-cbid"
-										value="<?php echo esc_attr( $cbid ); ?>"
-									/>
+									<div class="cookiebot-cbid-container">
+										<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
+											type="text" id="cookiebot-cbid" name="cookiebot-cbid"
+											value="<?php echo esc_attr( $cbid ); ?>"/>
+										<div class="cookiebot-cbid-check <?php echo $cbid ? 'check-pass' : ''; ?>"></div>
+									</div>
+								</div>
+								<div id="cookiebot-ruleset-id-selector" class="cb-settings__config__data__inner">
+									<h3 class="cb-settings__data__subtitle">
+										<?php esc_html_e( 'Settings or Ruleset', 'cookiebot' ); ?>
+									</h3>
+									<label class="recommended-item">
+										<input <?php checked( 'settings', $ruleset_id ); ?>
+												type="radio"
+												name="cookiebot-ruleset-id"
+												value="settings"/>
+										<?php esc_html_e( 'Settings ID', 'cookiebot' ); ?>
+									</label>
+									<label>
+										<input <?php checked( 'ruleset', $ruleset_id ); ?>
+												type="radio"
+												name="cookiebot-ruleset-id"
+												value="ruleset"/>
+										<?php esc_html_e( 'Ruleset ID', 'cookiebot' ); ?>
+									</label>
 								</div>
 							</div>
 						</div>

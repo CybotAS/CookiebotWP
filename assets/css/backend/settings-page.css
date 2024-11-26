@@ -132,6 +132,37 @@
     margin: 0 0 15px;
 }
 
+.cookiebot-cbid-container {
+    position: relative;
+}
+
+.cookiebot-cbid-check {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    transform: translateY(-50%);
+}
+
+.cookiebot-cbid-check.check-progress {
+    background-image: url(../../img/icons/loader.svg);
+
+}
+
+.cookiebot-cbid-check.check-pass {
+    background-color: #076646;
+    background-image: url(../../img/icons/check.svg);
+    border-radius: 50%;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#cookiebot-ruleset-id-selector {
+    display: none;
+}
+
 #show_add_language_guide {
     display: block;
 }

@@ -16,6 +16,7 @@ class General_Page implements Settings_Page_Interface {
 
 		$args = array(
 			'cbid'                     => Cookiebot_WP::get_cbid(),
+			'ruleset_id'               => ! empty( get_option( 'cookiebot-ruleset-id' ) ) ? get_option( 'cookiebot-ruleset-id' ) : 'settings',
 			'is_ms'                    => false,
 			'cookiebot_gdpr_url'       => 'https://www.cookiebot.com/' . Cookiebot_WP::get_manager_language() . '/gdpr',
 			'cookiebot_logo'           => CYBOT_COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',

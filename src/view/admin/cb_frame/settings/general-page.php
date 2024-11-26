@@ -36,10 +36,12 @@
 			<h3 class="cb-settings__data__subtitle">
 				<?php esc_html_e( 'Add your Domain Group ID', 'cookiebot' ); ?>
 			</h3>
-			<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
-				type="text" name="cookiebot-cbid"
-				value="<?php echo esc_attr( $cbid ); ?>"
-			/>
+			<div class="cookiebot-cbid-container">
+				<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
+					type="text" name="cookiebot-cbid"
+					value="<?php echo esc_attr( $cbid ); ?>"/>
+				<div class="cookiebot-cbid-check <?php echo $cbid ? 'check-pass' : ''; ?>"></div>
+			</div>
 		</div>
 	</div>
 </div>

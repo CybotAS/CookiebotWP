@@ -6,6 +6,8 @@
 jQuery( document ).ready( init );
 
 function init() {
+    ruleset_id();
+    show_ruleset_selector();
     language_toggle();
     advanced_settings_toggle();
     cookie_blocking_mode();
@@ -22,6 +24,43 @@ function init() {
     showRestrictionPurposes();
     onVendorSelection();
     removeRestriction();
+}
+
+function ruleset_id(){
+    let fieldTimer;
+    let fieldInterval = 5000;
+
+    jQuery( '#cookiebot-cbid' ).on('keyup', function () {
+        clearTimeout(fieldTimer);
+        jQuery( '.cookiebot-cbid-check' ).removeClass('check-pass');
+        jQuery( '.cookiebot-cbid-check' ).addClass('check-progress');
+        fieldTimer = setTimeout(show_ruleset_selector, fieldInterval);
+    });
+
+    jQuery( '#cookiebot-cbid' ).on('keydown', function () {
+        clearTimeout(fieldTimer);
+    });
+}
+
+function show_ruleset_selector() {
+    let cbFrameReg = new RegExp("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
+    jQuery( '.cookiebot-cbid-check' ).removeClass('check-progress');
+
+    if(!jQuery( '#cookiebot-cbid' ).val()){
+        jQuery( '.cookiebot-cbid-check' ).removeClass('check-pass');
+        jQuery('#cookiebot-ruleset-id-selector').hide();
+        return;
+    }
+
+    if(!cbFrameReg.test(jQuery( '#cookiebot-cbid' ).val())){
+        jQuery('#cookiebot-ruleset-id-selector').show();
+    }else{
+        jQuery('#cookiebot-ruleset-id-selector').hide();
+    }
+
+    if(!jQuery( '.cookiebot-cbid-check' ).hasClass('check-pass')){
+        jQuery( '.cookiebot-cbid-check' ).addClass('check-pass');
+    }
 }
 
 function language_toggle() {
