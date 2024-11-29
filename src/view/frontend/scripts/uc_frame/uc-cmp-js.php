@@ -6,6 +6,9 @@
  * @var string $auto
  */
 ?>
+<?php if( $auto ) : ?>
+    <script src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"></script>
+<?php endif; ?>
 <script	id="usercentrics-cmp"
     data-usercentrics="Usercentrics Consent Management Platform"
 	data-<?php echo esc_html( $ruleset_id )?>-id="<?php echo esc_attr( $cbid ); ?>"
@@ -13,6 +16,3 @@
     type="text/javascript"
     async
 ></script>
-<?php if( $auto ) : ?>
-    <script src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"></script>
-<?php endif; ?>
