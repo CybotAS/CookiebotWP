@@ -40,7 +40,7 @@ class Settings_Page implements Settings_Page_Interface {
 		$args = array(
 			'cbid'                     => Cookiebot_WP::get_cbid(),
 			'is_ms'                    => false,
-			'cookiebot_gdpr_url'       => 'https://www.cookiebot.com/' . Cookiebot_WP::get_manager_language() . '/gdpr',
+			'cookiebot_gdpr_url'       => 'https://www.cookiebot.com/' . Cookiebot_WP::get_manager_language() . '/gdpr/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
 			'cookiebot_logo'           => CYBOT_COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
 			'supported_languages'      => Supported_Languages::get(),
 			'current_lang'             => cookiebot_get_language_from_setting( true ),

@@ -13,7 +13,7 @@
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'For more details about Cookiebot CMP and Google Tag Manager.', 'cookiebot' ); ?>
 		</p>
-		<a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/"
+		<a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
 		   class="cb-btn cb-link-btn" target="_blank" rel="noopener">
 			&nbsp;<?php esc_html_e( 'Read more', 'cookiebot' ); ?>
 		</a>

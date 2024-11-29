@@ -168,7 +168,7 @@ $header->display();
 							<div class="cb-main__legislation__region">
 								<?php echo esc_html__( 'Europe', 'cookiebot' ); ?>
 							</div>
-							<a href="https://www.cookiebot.com/en/gdpr/" target="_blank"
+							<a href="https://www.cookiebot.com/en/gdpr/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner" target="_blank"
 								class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
 								<span><?php echo esc_html__( 'Learn More', 'cookiebot' ); ?></span>
 								<img src="<?php echo esc_html( $link_icon ); ?>"
@@ -185,14 +185,14 @@ $header->display();
 							<div class="cb-main__legislation__region">
 								<?php echo esc_html__( 'North America', 'cookiebot' ); ?>
 							</div>
-							<a href="https://www.cookiebot.com/en/what-is-ccpa/" target="_blank"
+							<a href="https://www.cookiebot.com/en/what-is-ccpa/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner" target="_blank"
 								class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
 								<span><?php echo esc_html__( 'Learn More', 'cookiebot' ); ?></span>
 								<img src="<?php echo esc_html( $link_icon ); ?>"
 									alt="<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>">
 							</a>
 						</div>
-						<a href="https://www.cookiebot.com/en/blog/" target="_blank"
+						<a href="https://www.cookiebot.com/en/blog/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner" target="_blank"
 							class="cb-btn cb-link-btn cb-right-btn" rel="noopener">
 							<?php echo esc_html__( 'See other legislations', 'cookiebot' ); ?>
 						</a>

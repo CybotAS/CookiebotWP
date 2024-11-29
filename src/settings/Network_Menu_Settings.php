@@ -140,7 +140,7 @@ class Network_Menu_Settings {
 		include_view(
 			'admin/settings/network-settings-page.php',
 			array(
-				'cookiebot_gdpr_url' => 'https://www.cookiebot.com/' . Cookiebot_WP::get_manager_language() . '/gdpr',
+				'cookiebot_gdpr_url' => 'https://www.cookiebot.com/' . Cookiebot_WP::get_manager_language() . '/gdpr/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
 				'logo'               => CYBOT_COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
 				'cbm'                => $cbm,
 			)
