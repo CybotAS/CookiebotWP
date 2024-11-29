@@ -285,6 +285,19 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
 
+### 4.3.12 ###
+Release date: December 2nd 2024
+
+Cookiebot CMP version 4.3.12 is out! This release adds a bugfix and some minor content updates.
+
+####Bugfixes####
+* Fix notice appearing on textdomain early load
+
+####Other####
+* Adds implementation parameter to Cookiebot script
+* Set WordPress tested up to version to 6.7.1
+* Minor content updates
+
 ### 4.3.11 ###
 Release date: November 20th 2024
 
