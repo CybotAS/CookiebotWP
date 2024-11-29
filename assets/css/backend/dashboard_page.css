@@ -1,7 +1,7 @@
 .cb-main__content {
     display: grid;
     grid-template-columns: repeat(1, minmax(100px, 1fr));
-    grid-template-rows: auto auto minmax(475px, auto);
+    grid-template-rows: repeat(3, minmax(100px, 1fr));
     grid-column-gap: 30px;
     grid-row-gap: 30px;
 }
@@ -42,10 +42,46 @@
     padding: 0;
 }
 
-.cb-main__card__inner.account_card, .cb-main__card__inner.new_card  {
+.cb-main__card__inner.account_card {
     position: relative;
-    background-color: #00a2ff;
-    border-radius: 10px;
+    background-image: url(../../img/existing-account.png);
+    background-size: cover;
+    background-position: center center;
+}
+
+.cb-main__card__inner.account_card:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(0,205,172);
+    background: -moz-linear-gradient(58deg, rgba(0,205,172,1) 0%, rgba(16,50,207,1) 100%);
+    background: -webkit-linear-gradient(58deg, rgba(0,205,172,1) 0%, rgba(16,50,207,1) 100%);
+    background: linear-gradient(58deg, rgba(0,205,172,1) 0%, rgba(16,50,207,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00cdac",endColorstr="#1032cf",GradientType=1);
+    z-index: 0;
+    opacity: .7;
+}
+
+.cb-main__card__inner.new_card {
+    position: relative;
+    background-image: url(../../img/new-account.png);
+    background-size: cover;
+    background-position: center center;
+}
+
+.cb-main__card__inner.new_card:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(16,50,207);
+    background: -moz-linear-gradient(0deg, rgba(16,50,207,1) 20%, rgba(16,50,207,0) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(16,50,207,1) 20%, rgba(16,50,207,0) 100%);
+    background: linear-gradient(0deg, rgba(16,50,207,1) 20%, rgba(16,50,207,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1032cf",endColorstr="#1032cf",GradientType=1);
+    z-index: 0;
+    opacity: .7;
 }
 
 .cb-main__card__inner.start_card {
@@ -57,39 +93,13 @@
     z-index: 1;
 }
 
-.cb-main__card__inner.account_card .cb-main__card__content,
-.cb-main__card__inner.new_card .cb-main__card__content  {
-    display: grid;
-    grid-template-columns: 1fr minmax(86px, auto);
-    grid-template-rows: minmax(120px, auto) auto;
-    grid-column-gap: 25px;
-    align-items: end;
-}
-
-.cb-main__card__inner.account_card .cb-btn.cb-main-btn,
-.cb-main__card__inner.new_card .cb-btn.cb-main-btn  {
-    background-color: #000000;
-    color: #ffffff;
-    grid-row: 2;
-    grid-column: span 2;
-    text-align: center;
-    text-transform: uppercase;
-    margin-top: 0;
-}
-
 .cb-main__card__title {
-    color: #000000;
+    color: #ffffff;
     font-size: 30px;
     line-height: 32px;
     margin: 0;
     width: 100%;
-}
-
-.cb-main__card__inner.account_card .cb-main__card__title,
-.cb-main__card__inner.new_card .cb-main__card__title  {
-    font-size: 28px;
-    line-height: 30px;
-    margin-bottom: 25px;
+    max-width: 300px;
 }
 
 .start_card .cb-main__card__title {
@@ -212,91 +222,90 @@
 
 .cb-main__dashboard__promo {
     position: relative;
-    border-radius: 10px;
+    border-radius: 25px;
     overflow: hidden;
-    box-shadow: 0px 5px 15px #ddd;
-    background-color: #000000;
 }
 
 .cb-main__dashboard__promo--inner {
-    display: grid;
-    grid-template-columns: .6fr .4fr;
-    grid-column-gap: 40px;
+    position: relative;
+    padding: 50px 65px 20px;
+    background: rgb(10,20,62);
+    background: -moz-linear-gradient(90deg, rgba(10,20,62,1) 50%, rgba(10,20,62,0.5046393557422969) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(10,20,62,1) 50%, rgba(10,20,62,0.5046393557422969) 100%);
+    background: linear-gradient(90deg, rgba(10,20,62,1) 50%, rgba(10,20,62,0.5046393557422969) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0a143e",endColorstr="#0a143e",GradientType=1);
+    z-index: 1;
+    height: 100%;
 }
 
-.cb-main__dashboard__promo--content {
-    display: grid;
-    grid-row-gap: 60px;
-    padding: 45px 0 45px 60px;
+.cb-main__dashboard__promo:before {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-position: -40px center;
+    background-size: auto 100%;
+    top: 0;
+    right: 0;
+    z-index: 0;
 }
 
 .cb-dashboard__promo--label {
-    color: #ffffff;
+    color: #F4C20E;
     font-size: 15px;
-    line-height: 17px;
+    line-height: 24px;
     font-weight: 700;
-    text-transform: uppercase;
+    display: grid;
+    grid-template-columns: 0fr 1fr;
+}
+
+.time-icon {
+    margin-right: 8px;
+    width: 25px;
+    height: 25px;
+    transition: background-color .25s ease;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url(../../img/icons/clock.svg);
+    mask-image: url(../../img/icons/clock.svg);
+    background-color: #F4C20E;
 }
 
 .cb-dashboard__promo--title {
-    color: #00a2ff;
-    font-size: 60px;
+    color: #FFFFFF;
+    font-size: 58px;
     line-height: 60px;
     text-transform: uppercase;
-    font-weight: 800;
-    margin: 0;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 790px;
 }
 
 .cb-dashboard__promo--title .highlight {
-    display: inline-block;
-    color: #ffffff;
+    color: #17EFA6;
     background: none;
 }
 
-.promo-condition {
-    font-size: 12px;
-    line-height: 17px;
-    font-weight: 400;
-    color: #ffffff;
-    margin: 0;
-}
-
-.cb-main__dashboard__promo--banner img {
-    display: inline-block;
+.cb-btn.cb-promo-btn {
+    background-color: #17EFA6;
+    color: #141414;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: left;
-}
-
-.cb-main__card__inner.new_card .cb-bf-counter {
-    background-color: #000000;
-    border-bottom-left-radius: 500px;
-    border-bottom-right-radius: 500px;
+    max-width: 298px;
+    box-shadow: 0px 4px 52px rgb(23 239 166 / 40%);
+    border-radius: 4px;
     text-align: center;
-    padding: 6px 6px 12px;
-    width: 74px;
-    position: relative;
-    top: -25px;
-    align-self: start;
+    padding: 20px;
 }
 
-.cb-main__card__inner.new_card .cb-bf-counter-label {
+.promo-condition {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 500;
     color: #ffffff;
-    font-weight: 700;
-}
-
-.cb-main__card__inner.new_card .cb-bf-counter-number {
-    color: #00a2ff;
-    font-size: 50px;
-    line-height: 50px;
-    font-weight: 700;
-}
-
-.cb-main__card__inner.new_card .cb-bf-counter-last {
-    color: #00a2ff;
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: normal;
-    padding: 0 10px;
+    width: 100%;
+    max-width: 550px;
 }
