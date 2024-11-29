@@ -88,7 +88,7 @@ $header->display();
 							<p class="cb-general__info__text">
 								<?php esc_html_e( 'Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on "Create a new account" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find your ID in the Cookiebot Manager by navigating to "Settings" and "Your Scripts".', 'cookiebot' ); ?>
 							</p>
-							<?php if ( $today >= $end_date ) : ?>
+							<?php if ( $today >= $end_date || ! empty( get_option( 'cookiebot-cbid-first-run' ) ) ) : ?>
 							<div class="new-account-actions">
 								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
 									target="_blank" class="cb-btn cb-main-btn" rel="noopener">
@@ -102,7 +102,7 @@ $header->display();
 							<?php endif; ?>
 						</div>
 
-							<?php if ( $today < $end_date ) : ?>
+							<?php if ( $today < $end_date && empty( get_option( 'cookiebot-cbid-first-run' ) ) ) : ?>
 							<div class="cb-general__new__account--double">
 								<div class="cb-main__card__inner new_card">
 									<div class="cb-main__card__content">
@@ -159,6 +159,7 @@ $header->display();
 											type="text" name="cookiebot-cbid"
 											value="<?php echo esc_attr( $cbid ); ?>"
 									/>
+									<input type="hidden" name="cookiebot-cbid-first-run" value="1">
 								</div>
 							</div>
 						</div>

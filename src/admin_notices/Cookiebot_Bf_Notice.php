@@ -2,6 +2,7 @@
 
 namespace cybot\cookiebot\admin_notices;
 
+use cybot\cookiebot\lib\Cookiebot_WP;
 use function cybot\cookiebot\lib\get_view_html;
 
 class Cookiebot_Bf_Notice extends Cookiebot_Base_Notice {
@@ -41,6 +42,10 @@ class Cookiebot_Bf_Notice extends Cookiebot_Base_Notice {
 				'text' => __( 'Sign up now', 'cookiebot' ),
 			)
 		);
+	}
+
+	public function define_conditions() {
+		$this->hide_condition = ! empty( get_option( 'cookiebot-cbid-first-run' ) );
 	}
 
 	public function define_translations() {

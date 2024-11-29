@@ -39,7 +39,7 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'To use Cookiebot for WordPress you need to visit our website and sign-up. After you have signed up, you can configure your banner and then place the Cookiebot Domain Group ID below. Navigate to Settings and to "Your Scripts" to find your ID.', 'cookiebot' ); ?>
 								</p>
-								<?php if ( $today >= $end_date ) : ?>
+								<?php if ( $today >= $end_date || ! empty( get_option( 'cookiebot-cbid-first-run' ) ) ) : ?>
 								<div class="new-account-actions">
 									<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner" target="_blank" rel="noopener" class="cb-btn cb-main-btn"><?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?></a>
 									<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress" target="_blank" rel="noopener" class="cb-btn cb-link-btn"><?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?></a>
@@ -47,7 +47,7 @@ $header->display();
 								<?php endif; ?>
 							</div>
 
-							<?php if ( $today < $end_date ) : ?>
+							<?php if ( $today < $end_date && empty( get_option( 'cookiebot-cbid-first-run' ) ) ) : ?>
 								<div class="cb-general__new__account--double">
 									<div class="cb-main__card__inner new_card">
 										<div class="cb-main__card__content">

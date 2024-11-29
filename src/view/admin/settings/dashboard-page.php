@@ -30,7 +30,7 @@ $header->display();
 		<div class="cb-main__content <?php echo $cbid ? 'sync-account' : ''; ?>">
 			<?php
 			if ( ! $cbid ) :
-				if ( $today < $end_date ) :
+				if ( $today < $end_date && empty( get_option( 'cookiebot-cbid-first-run' ) ) ) :
 					?>
 					<div class="cb-main__dashboard__promo">
 						<div class="cb-main__dashboard__promo--inner">
@@ -56,7 +56,7 @@ $header->display();
 								<h2 class="cb-main__card__title">
 									<?php echo esc_html__( 'Create a new Cookiebot CMP account', 'cookiebot' ); ?>
 								</h2>
-								<?php if ( $today < $end_date ) : ?>
+								<?php if ( $today < $end_date && empty( get_option( 'cookiebot-cbid-first-run' ) ) ) : ?>
 								<div class="cb-bf-counter">
 									<div class="cb-bf-counter-label">-10%</div>
 									<div class="cb-bf-counter-number"><?php echo esc_html( $days_left ); ?></div>
