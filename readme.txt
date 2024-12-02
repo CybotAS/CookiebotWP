@@ -2,8 +2,8 @@
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: WordPress cookie banner, GDPR, privacy compliance, cookie policy, cmp
 * Requires at least: 4.4
-* Tested up to: 6.7
-* Stable tag: 4.3.11
+* Tested up to: 6.7.1
+* Stable tag: 4.3.12
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -109,8 +109,8 @@ Usercentrics is a global market leader in the field of consent management and pr
 
 Our consent technology is trusted by public and private organizations in over 180 countries, in use on over 1.4 million websites.
 
-[Learn more about Cookiebot CMP](https://www.cookiebot.com/en/about/)
-[Learn more about Usercentrics](https://usercentrics.com/about-us/)
+[Learn more about Cookiebot CMP](https://www.cookiebot.com/en/about/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner)
+[Learn more about Usercentrics](https://usercentrics.com/about-us/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner)
 
 ## Screenshots ##
 
@@ -129,13 +129,13 @@ Cookiebot CMP WordPress Plugin is a freemium plugin, much like Jetpack and Monst
 
 Whether the free plan is sufficient or you need a premium plan depends on two things:
 
-1. The size of your website, i.e. the number of subpages on your website, which determines whether you are eligible for the Free Plan. For websites up to 50 subpages, you have the choice between the Free Plan and Premium Lite. [Get a quote](https://www.cookiebot.com/) to see which plan your site needs.
+1. The size of your website, i.e. the number of subpages on your website, which determines whether you are eligible for the Free Plan. For websites up to 50 subpages, you have the choice between the Free Plan and Premium Lite. [Get a quote](https://www.cookiebot.com/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner) to see which plan your site needs.
 
 2. The features you need. The free plan **does not include** all features available in the premium plans. The free plan does not include customization of banner and cookies declaration, multiple languages, email reports, data export, geolocation, bulk consent, consent statistics, internal domain alias for development, test and staging. However, our Premium Lite package is available for only €7/month for all domains with fewer than 50 subpages, including all premium features mentioned above.
 
 When you sign up for Cookiebot CMP, you will automatically be enrolled in our free 14-day trial for one domain. During the trial, you will have access to all premium features of the Cookiebot CMP.
 
-See all details of Cookiebot CMP [plans and pricing](https://www.cookiebot.com/en/pricing/).
+See all details of Cookiebot CMP [plans and pricing](https://www.cookiebot.com/en/pricing/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner).
 
 ### My WordPress website has less than 50 subpages, why should I upgrade to Premium Lite? ###
 The Premium Lite package comes with great features that enhance your cookie consent solution. Upgrading to Premium Lite after your 14-day free trial enables you to build user trust and provide an advanced, personalized user experience. Apply  custom branding and geotargeting to your banner, among other features. It also gives you more control over your WordPress website’s privacy compliance with the automated monthly and daily scan reports.
@@ -164,7 +164,7 @@ By default, the cookie declaration is displayed in the selected Cookiebot CMP la
 ### Cookie-checker: What cookies are in use on my site? ###
 If you are in doubt about what cookies are in use on our site, start with our free compliance test:
 
-**[Test my site](https://www.cookiebot.com/)**
+**[Test my site](https://www.cookiebot.com/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner)**
 
 The test scans up to five pages of your website and sends you a complete report of the cookies and online trackers in use on these pages, including information on their provenance, purpose, and whether or not their use is compliant with EU regulations.
 
@@ -202,7 +202,7 @@ If your business has a website, you must know and disclose to consumers, at or b
 
 If your website is visited by consumers under the age of 16, or you collect sensitive personal information, you are required by the CCPA and CPRA to first obtain their opt in (or consent from a parent or guardian for children). This can be done through Cookiebot CMP’s CCPA opt-in banner.
 
-Click [here](https://www.cookiebot.com/en/what-is-ccpa/) to find all the details about the CCPA and CPRA and how to achieve compliance.
+Click [here](https://www.cookiebot.com/en/what-is-ccpa/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner) to find all the details about the CCPA and CPRA and how to achieve compliance.
 
 ### How do I make other plugins support Cookiebot™? ###
 
@@ -222,13 +222,13 @@ The developer of the plugin can see more details on our [Github repository](http
 ### Can my website become compliant once I install Cookiebot CMP? ###
 If you use our plugin version 3.0 or later and choose the automatic implementation, Cookiebot™ enables compliance with the prior consent requirement of the GDPR, the ePrivacy Directive (ePD) and similar privacy regulations for protection of user data around the world. Cookiebot CMP also enables compliance with the CCPA and CPRA through the implementation of the “Do Not Sell Or Share My Personal Information” link on a website’s cookie declaration, as well as the opt-in banner required if your website targets visitors under the age of 16 or processes sensitive personal information.
 
-The default consent banner has the strictest settings possible and is suitable for obtaining consent under both the GDPR and the ePD. Make sure to adapt the consent banner design and content to fit your website. Check out our [GDPR checklist](https://support.cookiebot.com/hc/en-us/sections/360000917513-Ready-for-25-May-2018-GDPR-enforcement-date-A-Cookiebot-checklist-) if you have website visitors from the EU. If you are using server-side cookies, please check the [Server-side usage guide](https://www.cookiebot.com/en/developer/).
+The default consent banner has the strictest settings possible and is suitable for obtaining consent under both the GDPR and the ePD. Make sure to adapt the consent banner design and content to fit your website. Check out our [GDPR checklist](https://support.cookiebot.com/hc/en-us/sections/360000917513-Ready-for-25-May-2018-GDPR-enforcement-date-A-Cookiebot-checklist-) if you have website visitors from the EU. If you are using server-side cookies, please check the [Server-side usage guide](https://www.cookiebot.com/en/developer/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner).
 
 Be aware that Cookiebot CMP is customizable, and therefore true compliance always depends on the settings that you make within the plugin and Cookiebot CMP Admin Interface.
 
 **Are you using the manual implementation?** Please make sure to check if you are using plugins that set cookies that require consent. If so, you have to:
 1. Ask the plugin developers if they are planning on becoming GDPR/CCPA compliant, or if they would like to integrate with Cookiebot CMP. Check out our [Github repository](https://github.com/CybotAS/CookiebotWP), where we are developing integrations for Cookiebot CMP, until the plugin developers choose to do this themselves, or if [WP Core](https://core.trac.wordpress.org/ticket/44043) enables such functionality.
-2. Once Cookiebot CMP is installed, you can check the cookie report to identify all cookies being set on your website. If the cookies are coming from content that you have inserted manually, you can mark up that content [as described in step 4 in our manual implementation guide](https://www.cookiebot.com/en/manual-implementation). Embedded videos and iframes which that set cookies can be marked up as explained in our [iframe cookie consent with YouTube example](https://support.cookiebot.com/hc/en-us/articles/360003790854-Iframe-cookie-consent-with-YouTube-example).
+2. Once Cookiebot CMP is installed, you can check the cookie report to identify all cookies being set on your website. If the cookies are coming from content that you have inserted manually, you can mark up that content [as described in step 4 in our manual implementation guide](https://www.cookiebot.com/en/manual-implementation/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner). Embedded videos and iframes which that set cookies can be marked up as explained in our [iframe cookie consent with YouTube example](https://support.cookiebot.com/hc/en-us/articles/360003790854-Iframe-cookie-consent-with-YouTube-example).
 
 Disclaimer: These statements do not constitute legal advice, but only serve to support and inform you about the Cookiebot CMP product. Please consult a qualified lawyer should you have any legal questions.
 
@@ -250,7 +250,7 @@ Google Consent Mode is enabled by default in the Cookiebot CMP plugin.
 [Learn more](https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode)
 
 ### What is the Digital Markets Act (DMA)? ###
-The Digital Markets Act (DMA) is a regulatory framework introduced by the European Commission to regulate digital markets and address challenges to data privacy and the dominance of online tech giants. The law aims to ensure fair competition, enhance consumer protection, and promote innovation in the digital ecosystem. The DMA will have a significant impact on how large online platforms and the smaller third parties that use their services handle user consent and data. [Learn more](https://www.cookiebot.com/en/digital-markets-act-dma/).
+The Digital Markets Act (DMA) is a regulatory framework introduced by the European Commission to regulate digital markets and address challenges to data privacy and the dominance of online tech giants. The law aims to ensure fair competition, enhance consumer protection, and promote innovation in the digital ecosystem. The DMA will have a significant impact on how large online platforms and the smaller third parties that use their services handle user consent and data. [Learn more](https://www.cookiebot.com/en/digital-markets-act-dma/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner).
 
 ### Who does the Digital Markets Act apply to? ###
 The DMA applies to companies that operate large online platforms meeting specific criteria, such as having a significant impact on digital markets, acting as intermediaries between businesses and users, and enjoying a durable position of market power with significant influence over innovation. The DMA has designated these companies as “gatekeepers”. These platforms will be subject to enhanced regulatory obligations and scrutiny under the DMA. The DMA’s requirements protect online users in the European Union, European Economic Area, and the UK. The DMA does not apply outside of these areas, even though the currently designated gatekeeper companies are headquartered in the USA and China.
@@ -284,6 +284,19 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
+
+### 4.3.12 ###
+Release date: December 2nd 2024
+
+Cookiebot CMP version 4.3.12 is out! This release adds a bugfix and some minor content updates.
+
+####Bugfixes####
+* Fix notice appearing on textdomain early load
+
+####Other####
+* Adds implementation parameter to Cookiebot script
+* Set WordPress tested up to version to 6.7.1
+* Minor content updates
 
 ### 4.3.11 ###
 Release date: November 20th 2024

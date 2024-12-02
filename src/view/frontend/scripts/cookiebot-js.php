@@ -11,6 +11,7 @@
 <script type="text/javascript"
 		id="Cookiebot"
 		src="https://consent.cookiebot.com/uc.js"
+		data-implementation="wp"
 		data-cbid="<?php echo esc_attr( $cbid ); ?>"
 	<?php if ( $tcf ) : ?>
 		data-framework="<?php echo esc_attr( $tcf ); ?>"

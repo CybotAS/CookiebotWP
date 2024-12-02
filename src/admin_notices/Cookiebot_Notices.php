@@ -14,14 +14,17 @@ class Cookiebot_Notices {
 
 	public function __construct() {
 		$this->load_notices();
-		$this->build_notices();
+	}
+
+	public function register_hooks() {
+		add_action( 'init', array( $this, 'build_notices' ) );
 	}
 
 	protected function load_notices() {
 		$this->notices_list = self::PLUGIN_NOTICES;
 	}
 
-	private function build_notices() {
+	public function build_notices() {
 		foreach ( $this->notices_list as $notice_class ) {
 			( new $notice_class() )->register_hooks();
 		}
@@ -30,6 +33,5 @@ class Cookiebot_Notices {
 	const PLUGIN_NOTICES = array(
 		Cookiebot_Recommendation_Notice::class,
 		Cookiebot_Temp_Notice::class,
-		Cookiebot_Bf_Notice::class,
 	);
 }

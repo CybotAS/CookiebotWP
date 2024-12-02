@@ -84,12 +84,10 @@ class Cookiebot_Admin_Links {
 	private function add_menu_links() {
 		return array(
 			'cookiebot_upgrade' => array(
-				'url'        => 'https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
-				'label'      => 'Upgrade a plan',
-				'override'   => true,
-				'over_url'   => 'https://admin.cookiebot.com/signup?coupon=BFRIDAYWP10&utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
-				'over_label' => 'Upgrade a plan',
-				'condition'  => empty( Cookiebot_WP::get_cbid() ) && ( strtotime( 'now' ) < strtotime( '2024-12-03' ) ),
+				'url'       => 'https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
+				'label'     => 'Upgrade a plan',
+				'override'  => false,
+				'condition' => false,
 			),
 		);
 	}
@@ -105,14 +103,12 @@ class Cookiebot_Admin_Links {
 				'index'     => 'dashboard',
 			),
 			array(
-				'url'        => 'https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
-				'label'      => 'Upgrade your plan',
-				'strong'     => true,
-				'override'   => true,
-				'over_url'   => 'https://admin.cookiebot.com/signup?coupon=BFRIDAYWP10&utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
-				'over_label' => 'Get 10% off until 02.12',
-				'condition'  => empty( Cookiebot_WP::get_cbid() ) && ( strtotime( 'now' ) < strtotime( '2024-12-03' ) ),
-				'index'      => 'a',
+				'url'       => 'https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
+				'label'     => 'Upgrade your plan',
+				'strong'    => true,
+				'override'  => false,
+				'condition' => false,
+				'index'     => 'a',
 			),
 		);
 	}

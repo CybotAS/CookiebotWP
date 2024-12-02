@@ -31,11 +31,6 @@ $main_tabs = new Main_Tabs();
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $active_tab = ! empty( $_GET['tab'] ) ? $_GET['tab'] : false;
 
-$today     = new DateTime( 'now' );
-$end_date  = new DateTime( '2024-12-03' );
-$remaining = $today->diff( $end_date );
-$days_left = $remaining->format( '%d' );
-
 $header->display();
 ?>
 
@@ -83,58 +78,22 @@ $header->display();
 					<div class="cb-settings__tabs__content--item <?php echo ! $active_tab || $active_tab === 'general-settings' ? 'active-item' : ''; ?>"
 						id="general-settings">
 						<?php if ( ! $cbid ) : ?>
-						<div class="cb-general__new__account">
-							<h2 class="cb-general__info__title"><?php esc_html_e( 'Do you not have an account yet?', 'cookiebot' ); ?></h2>
-							<p class="cb-general__info__text">
-								<?php esc_html_e( 'Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on "Create a new account" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find your ID in the Cookiebot Manager by navigating to "Settings" and "Your Scripts".', 'cookiebot' ); ?>
-							</p>
-							<?php if ( $today >= $end_date ) : ?>
-							<div class="new-account-actions">
-								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
-									target="_blank" class="cb-btn cb-main-btn" rel="noopener">
-									<?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?>
-								</a>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress"
-									target="_blank" class="cb-btn cb-main-btn" rel="noopener">
-									<?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?>
-								</a>
-							</div>
-							<?php endif; ?>
-						</div>
-
-							<?php if ( $today < $end_date ) : ?>
-							<div class="cb-general__new__account--double">
-								<div class="cb-main__card__inner new_card">
-									<div class="cb-main__card__content">
-										<h2 class="cb-main__card__title">
-											<?php echo esc_html__( 'Create a new Cookiebot CMP account', 'cookiebot' ); ?>
-										</h2>
-										<div class="cb-bf-counter">
-											<div class="cb-bf-counter-label">-10%</div>
-											<div class="cb-bf-counter-number"><?php echo esc_html( $days_left ); ?></div>
-											<div class="cb-bf-counter-last"><?php echo $days_left === '1' ? esc_html( 'day' ) : esc_html( 'days' ); ?> to go</div>
-										</div>
-										<a href="https://admin.cookiebot.com/signup?coupon=BFRIDAYWP10&utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
-											target="_blank" class="cb-btn cb-main-btn" rel="noopener">
-											<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
-										</a>
-									</div>
-								</div>
-
-								<div class="cb-main__card__inner new_card">
-									<div class="cb-main__card__content">
-										<h2 class="cb-main__card__title">
-											<?php esc_html_e( 'Need help with your configuration?', 'cookiebot' ); ?>
-										</h2>
-
-										<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress"
-											target="_blank" class="cb-btn cb-main-btn" rel="noopener">
-											<?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?>
-										</a>
-									</div>
+							<div class="cb-general__new__account">
+								<h2 class="cb-general__info__title"><?php esc_html_e( 'Do you not have an account yet?', 'cookiebot' ); ?></h2>
+								<p class="cb-general__info__text">
+									<?php esc_html_e( 'Before you can get started with Cookiebot CMP for WordPress, you need to create an account on our website by clicking on "Create a new account" below. After you have signed up, you can configure your banner in the Cookiebot Manager and then place the Cookiebot Domain Group ID in the designated field below. You can find your ID in the Cookiebot Manager by navigating to "Settings" and "Your Scripts".', 'cookiebot' ); ?>
+								</p>
+								<div class="new-account-actions">
+									<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+										target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+										<?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?>
+									</a>
+									<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress"
+										target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+										<?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?>
+									</a>
 								</div>
 							</div>
-						<?php endif; ?>
 						<?php endif; ?>
 
 						<div class="cb-settings__config__item">
