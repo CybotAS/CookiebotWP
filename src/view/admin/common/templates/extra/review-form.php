@@ -97,7 +97,7 @@
 				<a id="cb-review__skip" href="#">Skip and Deactivate</a>
 				<input type="submit" id="cb-review__submit" value="Submit and Deactivate">
 			</div>
-			<p class="cb-review__policy">See our <a href="https://www.cookiebot.com/en/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a></p>
+			<p class="cb-review__policy">See our <a href="https://www.cookiebot.com/en/privacy-policy/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner" target="_blank" rel="noopener">Privacy Policy</a></p>
 			<input type="hidden" name="cookiebot-review-send" value="Cookiebot_Review_Send">
 		</form>
 	</div>

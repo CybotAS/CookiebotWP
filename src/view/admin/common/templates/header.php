@@ -11,7 +11,7 @@ if ( ! empty( $_GET['settings-updated'] ) ) :
 <?php endif; ?>
 <div class="cb-header">
 	<div class="cb-wrapper">
-		<a href="https://www.cookiebot.com">
+		<a href="https://www.cookiebot.com/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner">
 			<img
 				src="<?php echo esc_url( $cookiebot_logo ); ?>"
 				alt="Cookiebot logo">

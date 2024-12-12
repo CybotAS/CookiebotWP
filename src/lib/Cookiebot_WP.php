@@ -72,11 +72,7 @@ class Cookiebot_WP {
 
 	public function cookiebot_init() {
 		Cookiebot_Addons::instance();
-		load_textdomain(
-			'cookiebot',
-			CYBOT_COOKIEBOT_PLUGIN_DIR . 'langs/cookiebot-' . get_locale() . '.mo'
-		);
-		load_plugin_textdomain( 'cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs' );
+		add_action( 'init', array( $this, 'cookiebot_load_textdomain' ) );
 
 		if ( is_admin() ) {
 			( new Menu_Settings() )->add_menu();
@@ -84,7 +80,7 @@ class Cookiebot_WP {
 				( new Network_Menu_Settings() )->add_menu();
 			}
 			( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();
-			( new Cookiebot_Notices() );
+			( new Cookiebot_Notices() )->register_hooks();
 			( new Cookiebot_Review() )->register_hooks();
 		}
 
@@ -97,7 +93,7 @@ class Cookiebot_WP {
 		( new WP_Rocket_Helper() )->register_hooks();
 
 		$this->set_default_options();
-		add_filter( 'plugin_action_links_cookiebot/cookiebot.php', array( $this, 'set_settings_action_link' ) );
+		( new Cookiebot_Admin_Links() )->register_hooks();
 	}
 
 	/**
@@ -120,6 +116,19 @@ class Cookiebot_WP {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Loads translations textdomain
+	 *
+	 * @return void
+	 */
+	public function cookiebot_load_textdomain() {
+		load_textdomain(
+			'cookiebot',
+			CYBOT_COOKIEBOT_PLUGIN_DIR . 'langs/cookiebot-' . get_locale() . '.mo'
+		);
+		load_plugin_textdomain( 'cookiebot', false, dirname( plugin_basename( __FILE__ ) ) . '/langs' );
 	}
 
 	/**

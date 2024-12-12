@@ -16,10 +16,12 @@ class Cookiebot_Base_Notice {
 	const COOKIEBOT_NOTICE_TIMES        = array();
 	const COOKIEBOT_NOTICE_TIMES_REVERT = false;
 
-	public $translations = array();
+	public $translations   = array();
+	public $hide_condition = false;
 
 	public function __construct() {
 		$this->define_translations();
+		$this->define_conditions();
 	}
 
 	public function register_hooks() {
@@ -37,6 +39,16 @@ class Cookiebot_Base_Notice {
 			'title' => '',
 			'msg'   => '',
 		);
+	}
+
+	/**
+	 * Set special conditions if needed
+	 *
+	 * @version 4.4.0
+	 * @since 4.4.0
+	 */
+	public function define_conditions() {
+		$this->hide_condition = false;
 	}
 
 	/**
@@ -72,6 +84,9 @@ class Cookiebot_Base_Notice {
 		$option = get_option( static::COOKIEBOT_NOTICE_OPTION_KEY );
 
 		if ( $option !== false ) {
+			if ( $this->hide_condition !== false ) {
+				throw new LogicException( 'Hidden' );
+			}
 			// "Never show again" is clicked
 			if ( array_key_exists( $option, static::COOKIEBOT_NOTICE_TIMES ) ) {
 				throw new LogicException( static::COOKIEBOT_NOTICE_TIMES[ $option ]['msg'] );

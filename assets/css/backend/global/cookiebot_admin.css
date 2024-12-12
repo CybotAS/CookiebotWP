@@ -6,6 +6,7 @@
     top: 0;
     right: 0;
     background: rgba(0,0,0,.5);
+    z-index: 9999;
 }
 
 .cookiebot-popup-container.cb-opened {
@@ -24,6 +25,11 @@
 
 #cookiebot-popup *{
     box-sizing: border-box;
+}
+
+#cookiebot-popup .cb-review__logo img {
+    width: 100%;
+    height: auto;
 }
 
 .cb-review__header {

@@ -1,7 +1,7 @@
 .cb-main__content {
     display: grid;
     grid-template-columns: repeat(1, minmax(100px, 1fr));
-    grid-template-rows: repeat(3, minmax(475px, auto));
+    grid-template-rows: repeat(3, minmax(100px, 1fr));
     grid-column-gap: 30px;
     grid-row-gap: 30px;
 }
@@ -224,53 +224,65 @@
     position: relative;
     border-radius: 25px;
     overflow: hidden;
-    box-shadow: 0px 5px 15px #ddd;
 }
 
 .cb-main__dashboard__promo--inner {
     position: relative;
-    padding: 45px 60px 30px;
+    padding: 50px 65px 20px;
+    background: rgb(10,20,62);
+    background: -moz-linear-gradient(90deg, rgba(10,20,62,1) 50%, rgba(10,20,62,0.5046393557422969) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(10,20,62,1) 50%, rgba(10,20,62,0.5046393557422969) 100%);
+    background: linear-gradient(90deg, rgba(10,20,62,1) 50%, rgba(10,20,62,0.5046393557422969) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0a143e",endColorstr="#0a143e",GradientType=1);
     z-index: 1;
+    height: 100%;
 }
 
 .cb-main__dashboard__promo:before {
     content: '';
     position: absolute;
-    width: 100%;
+    width: 50%;
     height: 100%;
-    background-image: url(../../img/extra/cb_bf_ad_crop_bg.png);
-    background-position: right center;
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-position: -40px center;
+    background-size: auto 100%;
     top: 0;
     right: 0;
     z-index: 0;
 }
 
 .cb-dashboard__promo--label {
-    color: #051041;
-    font-size: 60px;
-    line-height: 55px;
+    color: #F4C20E;
+    font-size: 15px;
+    line-height: 24px;
     font-weight: 700;
-    text-transform: uppercase;
-    width: 220px;
+    display: grid;
+    grid-template-columns: 0fr 1fr;
 }
 
-.cb-dashboard__promo--label span {
-    display: block;
-    font-size: 35px;
-    line-height: 35px;
+.time-icon {
+    margin-right: 8px;
+    width: 25px;
+    height: 25px;
+    transition: background-color .25s ease;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url(../../img/icons/clock.svg);
+    mask-image: url(../../img/icons/clock.svg);
+    background-color: #F4C20E;
 }
 
 .cb-dashboard__promo--title {
-    color: #1032CF;
-    font-size: 50px;
-    line-height: 65px;
+    color: #FFFFFF;
+    font-size: 58px;
+    line-height: 60px;
     text-transform: uppercase;
-    font-weight: 800;
-    margin: 40px 0 15px;
+    margin: 10px 0;
     width: 100%;
-    max-width: 495px;
+    max-width: 790px;
 }
 
 .cb-dashboard__promo--title .highlight {
@@ -279,35 +291,21 @@
 }
 
 .cb-btn.cb-promo-btn {
-    background-color: #1032CF;
-    color: #ffffff;
+    background-color: #17EFA6;
+    color: #141414;
     width: 100%;
     max-width: 298px;
+    box-shadow: 0px 4px 52px rgb(23 239 166 / 40%);
     border-radius: 4px;
     text-align: center;
     padding: 20px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    font-size: 20px;
 }
 
 .promo-condition {
     font-size: 13px;
     line-height: 18px;
     font-weight: 500;
-    color: #051041;
+    color: #ffffff;
     width: 100%;
     max-width: 550px;
-}
-
-.cb-main__dashboard__promo--logo {
-    position: absolute;
-    right: 50px;
-    bottom: 40px;
-    background-image: url(../../img/extra/cb_bf_logo.svg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 170px;
-    height: 50px;
 }
