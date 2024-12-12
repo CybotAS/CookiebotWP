@@ -38,7 +38,7 @@ class Settings_Service implements Settings_Service_Interface {
 	public function is_addon_enabled( $addon ) {
 		$option = get_option( static::OPTION_NAME );
 
-		return isset( $option[ $addon ]['enabled'] );
+		return Cookiebot_Frame::is_cb_frame_type() === true ? isset( $option[ $addon ]['enabled'] ) : false;
 	}
 
 	/**

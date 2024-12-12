@@ -82,7 +82,6 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function add_submenu() {
-		if ( Cookiebot_Frame::is_cb_frame_type() === true ) {
 			add_submenu_page(
 				'cookiebot',
 				esc_html__( 'Plugins', 'cookiebot' ),
@@ -95,7 +94,6 @@ class Settings_Config {
 				),
 				2
 			);
-		}
 	}
 
 	/**
@@ -698,17 +696,24 @@ class Settings_Config {
 		);
 		$settings_page_tabs     = array(
 			$addons_info_tab,
-			$available_addons_tab,
-			$unavailable_addons_tab,
 		);
-		if ( is_plugin_active( Jetpack::PLUGIN_FILE_PATH ) ) {
-			$settings_page_tabs[] = new Settings_Page_Tab(
-				'jetpack',
-				esc_html__( 'Jetpack', 'cookiebot' ),
-				'cookiebot_jetpack_addon',
-				'cookiebot-addons'
+
+		if ( Cookiebot_Frame::is_cb_frame_type() === true ) {
+			$settings_cb_page_tabs = array(
+				$available_addons_tab,
+				$unavailable_addons_tab,
 			);
+			if ( is_plugin_active( Jetpack::PLUGIN_FILE_PATH ) ) {
+				$settings_cb_page_tabs[] = new Settings_Page_Tab(
+					'jetpack',
+					esc_html__( 'Jetpack', 'cookiebot' ),
+					'cookiebot_jetpack_addon',
+					'cookiebot-addons'
+				);
+			}
+			$settings_page_tabs = array_merge( $settings_page_tabs, $settings_cb_page_tabs );
 		}
+
 		if ( is_plugin_active( 'wp-consent-api/wp-consent-api.php' ) ) {
 			$settings_page_tabs[] = new Settings_Page_Tab(
 				'consent_api',

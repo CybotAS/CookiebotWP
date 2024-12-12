@@ -46,9 +46,10 @@ class Consent_API_Helper {
 	 * @version 3.5.0
 	 */
 	public function cookiebot_enqueue_consent_api_scripts() {
+		$is_cb_frame = Cookiebot_Frame::is_cb_frame_type() !== 'empty' && Cookiebot_Frame::is_cb_frame_type() === true;
 		wp_register_script(
 			'cookiebot-wp-consent-level-api-integration',
-			asset_url( 'js/frontend/cookiebot-wp-consent-level-api-integration.js' ),
+			$is_cb_frame ? asset_url( self::CB_FRAME_SCRIPT_PATH ) : asset_url( self::UC_FRAME_SCRIPT_PATH ),
 			null,
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			false
@@ -59,13 +60,15 @@ class Consent_API_Helper {
 			'cookiebot_category_mapping',
 			$this->get_wp_consent_api_mapping()
 		);
-		wp_localize_script(
-			'cookiebot-wp-consent-level-api-integration',
-			'cookiebot_consent_type',
-			array(
-				'type' => $this->wp_consent_api_get_consent_type(),
-			)
-		);
+		if ( $is_cb_frame ) {
+			wp_localize_script(
+				'cookiebot-wp-consent-level-api-integration',
+				'cookiebot_consent_type',
+				array(
+					'type' => $this->wp_consent_api_get_consent_type(),
+				)
+			);
+		}
 	}
 
 	/**
@@ -163,4 +166,7 @@ class Consent_API_Helper {
 				),
 		);
 	}
+
+	const CB_FRAME_SCRIPT_PATH = 'js/frontend/cb_frame/cookiebot-wp-consent-level-api-integration.js';
+	const UC_FRAME_SCRIPT_PATH = 'js/frontend/uc_frame/uc-wp-consent-level-api-integration.js';
 }
