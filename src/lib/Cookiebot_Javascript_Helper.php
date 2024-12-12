@@ -66,13 +66,11 @@ class Cookiebot_Javascript_Helper {
 
 			$view_path = 'frontend/scripts/uc_frame/uc-cmp-js.php';
 			$view_args = array(
-				'cbid' => $cbid,
-				'ruleset_id' => ! empty( get_option( 'cookiebot-ruleset-id' ) ) ?
+				'cbid'        => $cbid,
+				'ruleset_id'  => ! empty( get_option( 'cookiebot-ruleset-id' ) ) ?
 					get_option( 'cookiebot-ruleset-id' ) : 'settings',
-				'source' => get_option( 'cookiebot-ruleset-id' ) === 'ruleset' ?
-					'https://app.usercentrics.eu/browser-ui/latest/loader.js' :
-					'https://web.cmp.usercentrics.eu/ui/loader.js',
-				'auto' => Cookiebot_WP::get_cookie_blocking_mode() === 'auto'
+				'iab_enabled' => ! empty( get_option( 'cookiebot-iab' ) ),
+				'auto'        => Cookiebot_WP::get_cookie_blocking_mode() === 'auto',
 			);
 
 			if ( $return_html ) {
