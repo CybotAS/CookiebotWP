@@ -7,6 +7,7 @@ use cybot\cookiebot\admin_notices\Cookiebot_Notices;
 use cybot\cookiebot\gutenberg\Cookiebot_Gutenberg_Declaration_Block;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
+use cybot\cookiebot\shortcode\Cookiebot_Embedding_Shortcode;
 use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
 use DomainException;
 use RuntimeException;
@@ -89,6 +90,7 @@ class Cookiebot_WP {
 
 		( new Consent_API_Helper() )->register_hooks();
 		( new Cookiebot_Javascript_Helper() )->register_hooks();
+		( new Cookiebot_Embedding_Shortcode() )->register_hooks();
 		( new Cookiebot_Automatic_Updates() )->register_hooks();
 		( new Widgets() )->register_hooks();
 		( new Cookiebot_Gutenberg_Declaration_Block() )->register_hooks();
