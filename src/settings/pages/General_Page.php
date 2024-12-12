@@ -28,6 +28,7 @@ class General_Page implements Settings_Page_Interface {
 			'cookie_blocking_mode'     => Cookiebot_WP::get_cookie_blocking_mode(),
 			'network_auto'             => Cookiebot_WP::check_network_auto_blocking_mode(),
 			'add_language_gif_url'     => asset_url( 'img/guide_add_language.gif' ),
+			'cookiebot_iab'            => get_option( 'cookiebot-iab' ),
 		);
 
 		/* Check if multisite */

@@ -4,12 +4,29 @@
  * @var bool $is_ms
  * @var string $network_cbid
  * @var string $ruleset_id
+ * @var bool $cookiebot_iab
  * @var string $network_scrip_tag_uc_attr
  * @var string $cookie_blocking_mode
  * @var bool $network_auto
  */
 ?>
-<div class="cb-settings__config__item">
+<div class="cb-cbid-alert__msg hidden">
+	<h3 class="cb-settings__config__subtitle">
+		<?php esc_html_e( 'Are you sure?', 'cookiebot' ); ?>
+	</h3>
+	<p class="cb-general__info__text">
+		<?php esc_html_e( 'You will need to add a new ID before updating other settings', 'cookiebot' ); ?>
+	</p>
+	<div class="new-account-actions">
+		<div id="cookiebot-cbid-cancel" class="cb-btn cb-white-btn">
+			<?php esc_html_e( 'Cancel', 'cookiebot' ); ?>
+		</div>
+		<div id="cookiebot-cbid-reset" class="cb-btn cb-main-btn">
+			<?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?>
+		</div>
+	</div>
+</div>
+<div class="cb-settings__config__item cb-settings__config__cbid">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
 			<?php esc_html_e( 'Connect your account:', 'cookiebot' ); ?>
@@ -28,10 +45,13 @@
 				<?php esc_html_e( 'Add your ID', 'cookiebot' ); ?>
 			</h3>
 			<div class="cookiebot-cbid-container">
+				<div class="cookiebot-cbid-input">
 				<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
-					type="text" id="cookiebot-cbid" name="cookiebot-cbid"
+					type="text" id="cookiebot-cbid" class="cbid-active" name="cookiebot-cbid"
 					value="<?php echo esc_attr( $cbid ); ?>"/>
-				<div class="cookiebot-cbid-check <?php echo $cbid ? 'check-pass' : ''; ?>"></div>
+				<div class="cookiebot-cbid-check"></div>
+				</div>
+				<div id="cookiebot-cbid-reset-dialog" class="cb-btn cb-main-btn"><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
 			</div>
 		</div>
 		<div id="cookiebot-ruleset-id-selector" class="cb-settings__config__data__inner">
@@ -51,6 +71,27 @@
 						name="cookiebot-ruleset-id"
 						value="ruleset"/>
 				<?php esc_html_e( 'Ruleset ID', 'cookiebot' ); ?>
+			</label>
+		</div>
+	</div>
+</div>
+
+<div class="cb-settings__config__item">
+	<div class="cb-settings__config__content">
+		<h3 class="cb-settings__config__subtitle">
+			<?php esc_html_e( 'TCF enabled on Usercentrics admin:', 'cookiebot' ); ?>
+		</h3>
+		<p class="cb-general__info__text">
+			<?php esc_html_e( 'Enable this if the option is also enabled on Usercentrics admin dashboard', 'cookiebot' ); ?>
+		</p>
+	</div>
+	<div class="cb-settings__config__data">
+		<div class="cb-settings__config__data__inner">
+			<label class="switch-checkbox" for="cookiebot-iab">
+				<input type="checkbox" name="cookiebot-iab" id="cookiebot-iab" value="1"
+					<?php checked( 1, $cookiebot_iab ); ?>>
+				<div class="switcher"></div>
+				<?php esc_html_e( 'IAB TCF integration enabled', 'cookiebot' ); ?>
 			</label>
 		</div>
 	</div>

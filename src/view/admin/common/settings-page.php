@@ -1,11 +1,7 @@
 <?php
 use cybot\cookiebot\settings\templates\Header;
+use cybot\cookiebot\settings\templates\Legacy_Settings;
 use cybot\cookiebot\settings\templates\Main_Tabs;
-
-use cybot\cookiebot\settings\pages\Gtm_Page;
-use cybot\cookiebot\settings\pages\Gcm_Page;
-use cybot\cookiebot\settings\pages\Iab_Page;
-use cybot\cookiebot\settings\pages\Multiple_Page;
 
 /**
  * @var string $cbid
@@ -32,7 +28,6 @@ $header->display();
 				<?php do_settings_sections( 'cookiebot' ); ?>
 				<div class="cb-settings__header">
 					<h1 class="cb-main__page_title"><?php esc_html_e( 'Initial Settings', 'cookiebot' ); ?></h1>
-					<?php submit_button(); ?>
 				</div>
 
 				<div class="cb-settings__tabs__content">
@@ -74,10 +69,13 @@ $header->display();
 										<?php esc_html_e( 'Add your ID', 'cookiebot' ); ?>
 									</h3>
 									<div class="cookiebot-cbid-container">
+										<div class="cookiebot-cbid-input">
 										<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
-											type="text" id="cookiebot-cbid" name="cookiebot-cbid"
+											type="text" id="cookiebot-cbid" class="initial-cbid-setup" name="cookiebot-cbid"
 											value="<?php echo esc_attr( $cbid ); ?>"/>
 										<div class="cookiebot-cbid-check <?php echo $cbid ? 'check-pass' : ''; ?>"></div>
+									</div>
+									<?php submit_button( esc_html( 'Connect account', 'cookiebot' ), 'disabled' ); ?>
 									</div>
 								</div>
 								<div id="cookiebot-ruleset-id-selector" class="cb-settings__config__data__inner">
@@ -103,6 +101,10 @@ $header->display();
 						</div>
 					</div>
 				</div>
+				<?php
+				$legacy_settings = new Legacy_Settings();
+				$legacy_settings->display();
+				?>
 			</form>
 		</div>
 	</div>

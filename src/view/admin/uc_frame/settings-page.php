@@ -7,8 +7,7 @@ use cybot\cookiebot\settings\templates\Main_Tabs;
 use cybot\cookiebot\settings\pages\General_Page;
 use cybot\cookiebot\settings\pages\Gtm_Page;
 use cybot\cookiebot\settings\pages\Gcm_Page;
-use cybot\cookiebot\settings\pages\Iab_Page;
-use cybot\cookiebot\settings\pages\Multiple_Page;
+use cybot\cookiebot\settings\pages\Embeddings_Page;
 
 /**
  * @var string $cbid
@@ -44,7 +43,6 @@ $header->display();
 			<form method="post" action="options.php">
 				<?php settings_fields( 'cookiebot' ); ?>
 				<?php do_settings_sections( 'cookiebot' ); ?>
-				<div class="cb-vendor-alert__msg hidden"><?php esc_html_e( 'Select at least one vendor on TCF tab', 'cookiebot' ); ?></div>
 				<div class="cb-settings__header">
 					<h1 class="cb-main__page_title"><?php esc_html_e( 'UC Settings', 'cookiebot' ); ?></h1>
 					<?php submit_button(); ?>
@@ -66,6 +64,10 @@ $header->display();
 					<div class="cb-settings__tabs__item <?php echo $active_tab === 'consent-mode' ? 'active-item' : ''; ?>"
 						data-tab="consent-mode">
 						<?php esc_html_e( 'Google Consent Mode', 'cookiebot' ); ?>
+					</div>
+					<div class="cb-settings__tabs__item <?php echo $active_tab === 'embeddings' ? 'active-item' : ''; ?>"
+						data-tab="embeddings">
+						<?php esc_html_e( 'Embeddings', 'cookiebot' ); ?>
 					</div>
 				</div>
 
@@ -92,6 +94,11 @@ $header->display();
 						id="consent-mode">
 						<?php $gcm_settings = new Gcm_Page(); ?>
 						<?php $gcm_settings->display(); ?>
+					</div>
+					<div class="cb-settings__tabs__content--item <?php echo $active_tab === 'embeddings' ? 'active-item' : ''; ?>"
+						id="embeddings">
+						<?php $embedding_settings = new Embeddings_Page(); ?>
+						<?php $embedding_settings->display(); ?>
 					</div>
 				</div>
 			</form>
