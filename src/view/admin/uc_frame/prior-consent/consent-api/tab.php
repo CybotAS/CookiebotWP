@@ -8,8 +8,6 @@
 use cybot\cookiebot\addons\config\Settings_Config;
 
 ?>
-<pre><?php print_r( $m ); ?></pre>
-<pre><?php print_r( $m_default ); ?></pre>
 <div class="cb-addons__tab__header">
 	<div class="cb-addons__header__column--inner">
 		<div class="cb-addons__header__column submit-column">
