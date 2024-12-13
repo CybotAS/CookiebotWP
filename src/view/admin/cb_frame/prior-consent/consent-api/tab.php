@@ -174,14 +174,14 @@
 			<tfoot>
 			<tr>
 				<td>
-					<button class="cb-btn cb-main-btn" onclick="return resetConsentMapping();">
+                    <div id="cb-consent-api-reset-defaults" class="cb-btn cb-main-btn">
 					<?php
 						esc_html_e(
 							'Reset to default mapping',
 							'cookiebot'
 						);
 					?>
-					</button>
+					</div>
 				</td>
 			</tr>
 			</tfoot>
