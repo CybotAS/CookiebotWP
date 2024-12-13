@@ -650,7 +650,7 @@ class Settings_Config {
 		);
 
 		register_setting( 'cookiebot-consent-mapping', 'cookiebot-consent-mapping' );
-		register_setting( 'cookiebot-uc-consent-mapping', 'cookiebot-consent-mapping' );
+		register_setting( 'cookiebot-uc-consent-mapping', 'cookiebot-uc-consent-mapping' );
 	}
 
 	public static function get_wp_consent_values( $uc_category, $mapping ) {
@@ -745,7 +745,7 @@ class Settings_Config {
 			$settings_page_tabs[] = new Settings_Page_Tab(
 				'consent_api',
 				esc_html__( 'WP Consent API', 'cookiebot' ),
-				'cookiebot-consent-mapping',
+				Cookiebot_Frame::is_cb_frame_type() === false ? 'cookiebot-uc-consent-mapping' : 'cookiebot-consent-mapping',
 				'cookiebot-addons'
 			);
 		}
