@@ -81,17 +81,22 @@ class Consent_API_Helper {
 	 */
 	public function get_wp_consent_api_mapping() {
 		$default_wp_consent_api_mapping = $this->get_default_wp_consent_api_mapping();
-		$mapping                        = get_option( 'cookiebot-consent-mapping', $default_wp_consent_api_mapping );
 
-		$mapping = ( '' === $mapping ) ? $default_wp_consent_api_mapping : $mapping;
+		if ( Cookiebot_Frame::is_cb_frame_type() === false ) {
+			$mapping = get_option( 'cookiebot-uc-consent-mapping', $default_wp_consent_api_mapping );
+		} else {
+			$mapping = get_option( 'cookiebot-consent-mapping', $default_wp_consent_api_mapping );
 
-		foreach ( $default_wp_consent_api_mapping as $k => $v ) {
-			if ( ! isset( $mapping[ $k ] ) ) {
-				$mapping[ $k ] = $v;
-			} else {
-				foreach ( $v as $vck => $vcv ) {
-					if ( ! isset( $mapping[ $k ][ $vck ] ) ) {
-						$mapping[ $k ][ $vck ] = $vcv;
+			$mapping = ( '' === $mapping ) ? $default_wp_consent_api_mapping : $mapping;
+
+			foreach ( $default_wp_consent_api_mapping as $k => $v ) {
+				if ( ! isset( $mapping[ $k ] ) ) {
+					$mapping[ $k ] = $v;
+				} else {
+					foreach ( $v as $vck => $vcv ) {
+						if ( ! isset( $mapping[ $k ][ $vck ] ) ) {
+							$mapping[ $k ][ $vck ] = $vcv;
+						}
 					}
 				}
 			}
@@ -107,64 +112,71 @@ class Consent_API_Helper {
 	 * @since   3.5.0
 	 */
 	public function get_default_wp_consent_api_mapping() {
-		return array(
-			'n=1;p=1;s=1;m=1' =>
-				array(
-					'preferences'          => 1,
-					'statistics'           => 1,
-					'statistics-anonymous' => 0,
-					'marketing'            => 1,
-				),
-			'n=1;p=1;s=1;m=0' =>
-				array(
-					'preferences'          => 1,
-					'statistics'           => 1,
-					'statistics-anonymous' => 1,
-					'marketing'            => 0,
-				),
-			'n=1;p=1;s=0;m=1' =>
-				array(
-					'preferences'          => 1,
-					'statistics'           => 0,
-					'statistics-anonymous' => 0,
-					'marketing'            => 1,
-				),
-			'n=1;p=1;s=0;m=0' =>
-				array(
-					'preferences'          => 1,
-					'statistics'           => 0,
-					'statistics-anonymous' => 0,
-					'marketing'            => 0,
-				),
-			'n=1;p=0;s=1;m=1' =>
-				array(
-					'preferences'          => 0,
-					'statistics'           => 1,
-					'statistics-anonymous' => 0,
-					'marketing'            => 1,
-				),
-			'n=1;p=0;s=1;m=0' =>
-				array(
-					'preferences'          => 0,
-					'statistics'           => 1,
-					'statistics-anonymous' => 0,
-					'marketing'            => 0,
-				),
-			'n=1;p=0;s=0;m=1' =>
-				array(
-					'preferences'          => 0,
-					'statistics'           => 0,
-					'statistics-anonymous' => 0,
-					'marketing'            => 1,
-				),
-			'n=1;p=0;s=0;m=0' =>
-				array(
-					'preferences'          => 0,
-					'statistics'           => 0,
-					'statistics-anonymous' => 0,
-					'marketing'            => 0,
-				),
-		);
+		if ( Cookiebot_Frame::is_cb_frame_type() === false ) {
+			return array(
+				'functional' => 'preferences',
+				'marketing'  => 'marketing',
+			);
+		} else {
+			return array(
+				'n=1;p=1;s=1;m=1' =>
+					array(
+						'preferences'          => 1,
+						'statistics'           => 1,
+						'statistics-anonymous' => 0,
+						'marketing'            => 1,
+					),
+				'n=1;p=1;s=1;m=0' =>
+					array(
+						'preferences'          => 1,
+						'statistics'           => 1,
+						'statistics-anonymous' => 1,
+						'marketing'            => 0,
+					),
+				'n=1;p=1;s=0;m=1' =>
+					array(
+						'preferences'          => 1,
+						'statistics'           => 0,
+						'statistics-anonymous' => 0,
+						'marketing'            => 1,
+					),
+				'n=1;p=1;s=0;m=0' =>
+					array(
+						'preferences'          => 1,
+						'statistics'           => 0,
+						'statistics-anonymous' => 0,
+						'marketing'            => 0,
+					),
+				'n=1;p=0;s=1;m=1' =>
+					array(
+						'preferences'          => 0,
+						'statistics'           => 1,
+						'statistics-anonymous' => 0,
+						'marketing'            => 1,
+					),
+				'n=1;p=0;s=1;m=0' =>
+					array(
+						'preferences'          => 0,
+						'statistics'           => 1,
+						'statistics-anonymous' => 0,
+						'marketing'            => 0,
+					),
+				'n=1;p=0;s=0;m=1' =>
+					array(
+						'preferences'          => 0,
+						'statistics'           => 0,
+						'statistics-anonymous' => 0,
+						'marketing'            => 1,
+					),
+				'n=1;p=0;s=0;m=0' =>
+					array(
+						'preferences'          => 0,
+						'statistics'           => 0,
+						'statistics-anonymous' => 0,
+						'marketing'            => 0,
+					),
+			);
+		}
 	}
 
 	const CB_FRAME_SCRIPT_PATH = 'js/frontend/cb_frame/cookiebot-wp-consent-level-api-integration.js';

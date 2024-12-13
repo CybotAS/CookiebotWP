@@ -41,7 +41,8 @@ class Settings_Config {
 	const AVAILABLE_ADDONS_TAB_TEMPLATE   = 'admin/common/prior-consent/available-addons/tab.php';
 	const UNAVAILABLE_TAB_HEADER_TEMPLATE = 'admin/common/prior-consent/unavailable-addons/tab-header.php';
 	const UNAVAILABLE_ADDONS_TAB_TEMPLATE = 'admin/common/prior-consent/unavailable-addons/field.php';
-	const CONSENT_API_TAB_TEMPLATE        = 'admin/common/prior-consent/consent-api/tab.php';
+	const CB_CONSENT_API_TAB_TEMPLATE     = 'admin/cb_frame/prior-consent/consent-api/tab.php';
+	const UC_CONSENT_API_TAB_TEMPLATE     = 'admin/uc_frame/prior-consent/consent-api/tab.php';
 	// Other
 	const INFO_ICON_ASSET_URL = 'img/icons/info.svg';
 
@@ -649,6 +650,28 @@ class Settings_Config {
 		);
 
 		register_setting( 'cookiebot-consent-mapping', 'cookiebot-consent-mapping' );
+		register_setting( 'cookiebot-uc-consent-mapping', 'cookiebot-consent-mapping' );
+	}
+
+	public static function get_wp_consent_values( $uc_category, $mapping ) {
+		$wp_consent_categories = array(
+			'preferences',
+			'statistics',
+			'statistics-anonymous',
+			'marketing',
+		);
+
+		$html = '';
+		foreach ( $wp_consent_categories as $category ) {
+			$option_string = '<option value="' . $category . '"';
+			if ( $mapping[ $uc_category ] === $category ) {
+				$option_string .= ' selected';
+			}
+			$option_string .= '>' . esc_html( sprintf( __( '%s', 'cookiebot' ), $category ) ) . '</option>';
+			$html          .= $option_string;
+		}
+
+		return $html;
 	}
 
 	/**
@@ -664,7 +687,11 @@ class Settings_Config {
 			'm'                        => $consent_api_helper->get_wp_consent_api_mapping(),
 		);
 
-		include_view( self::CONSENT_API_TAB_TEMPLATE, $view_args );
+		if ( Cookiebot_Frame::is_cb_frame_type() === false ) {
+			include_view( self::UC_CONSENT_API_TAB_TEMPLATE, $view_args );
+		} else {
+			include_view( self::CB_CONSENT_API_TAB_TEMPLATE, $view_args );
+		}
 	}
 
 	/**
