@@ -32,7 +32,7 @@ $isnw = is_network_admin();
 			<span><?php esc_html_e( 'Settings', 'cookiebot' ); ?></span>
 		</a>
 	</div>
-	<?php if ( Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) : ?>
+	<?php if ( !$isnw && Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) : ?>
 		<div class="cb-main__tabs_item <?php echo $active_tab === 'addons' ? 'active-item' : ''; ?>">
 			<a href="<?php echo esc_url( add_query_arg( 'page', Settings_Config::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>" class="cb-main__tabs__link">
 				<div class="cb-main__tabs__icon plugins-icon"></div>

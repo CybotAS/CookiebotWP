@@ -144,6 +144,13 @@ class Cookiebot_WP {
 	/**
 	 * @return string
 	 */
+	public static function get_network_cbid() {
+		return get_site_option( 'cookiebot-cbid', '' );
+	}
+
+	/**
+	 * @return string
+	 */
 	public static function get_cookie_blocking_mode() {
 		$allowed_modes   = array( 'auto', 'manual' );
 		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );

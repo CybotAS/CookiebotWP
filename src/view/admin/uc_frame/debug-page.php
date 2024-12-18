@@ -19,11 +19,11 @@ $header->display();
 
 			<div class="cb-debug__content">
 				<div class="cb-debug__info__card">
-					<h2 class="cb-debug__info__title"><?php esc_html_e( 'Debug information', 'cookiebot' ); ?></h2>
+					<h2 class="cb-debug__info__title"><?php esc_html_e( 'Debug your plugin', 'cookiebot' ); ?></h2>
 					<p  class="cb-debug__info__text">
 						<?php
 						esc_html_e(
-							'The information below is for debugging purposes. If you have any issues with your Cookiebot CMP integration, this information is the best place to start.',
+							'If you encounter any issues with your Usercentrics Cookiebot WordPress Plugin, provide the information below to help us assist you. Visit our Support Center and send us a copy of what is displayed in the window below.',
 							'cookiebot'
 						);
 						?>
@@ -39,7 +39,6 @@ $header->display();
 				</div>
 				<div class="cb-debug__support__card">
 					<div class="cb-debug__support__inner">
-						<h2 class="cb-debug__support__title"><?php esc_html_e( 'If you have any issues with the implemenation of Cookiebot CMP, please visit our Support Center.', 'cookiebot' ); ?></h2>
 						<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 							<?php
 							esc_html_e(

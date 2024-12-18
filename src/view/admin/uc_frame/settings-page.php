@@ -44,11 +44,11 @@ $header->display();
 				<?php settings_fields( 'cookiebot' ); ?>
 				<?php do_settings_sections( 'cookiebot' ); ?>
 				<div class="cb-settings__header">
-					<h1 class="cb-main__page_title"><?php esc_html_e( 'UC Settings', 'cookiebot' ); ?></h1>
-					<?php submit_button(); ?>
+					<h1 class="cb-main__page_title"><?php esc_html_e( 'Settings', 'cookiebot' ); ?></h1>
+					<?php submit_button(__('Save changes', 'cookiebot')); ?>
 				</div>
 
-				<div class="cb-settings__tabs">
+				<div class="cb-settings__tabs cb-settings__tabs--uc">
 					<div class="cb-settings__tabs__item <?php echo ! $active_tab || $active_tab === 'general-settings' ? 'active-item' : ''; ?>"
 						data-tab="general-settings">
 						<?php esc_html_e( 'General Settings', 'cookiebot' ); ?>
@@ -67,7 +67,7 @@ $header->display();
 					</div>
 					<div class="cb-settings__tabs__item <?php echo $active_tab === 'embeddings' ? 'active-item' : ''; ?>"
 						data-tab="embeddings">
-						<?php esc_html_e( 'Embeddings', 'cookiebot' ); ?>
+						<?php esc_html_e( 'Privacy Policy Sync', 'cookiebot' ); ?>
 					</div>
 				</div>
 

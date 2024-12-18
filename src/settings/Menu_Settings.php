@@ -47,6 +47,7 @@ class Menu_Settings {
 	 */
 	public function register_cookiebot_settings() {
 		register_setting( 'cookiebot', 'cookiebot-cbid' );
+		register_setting( 'cookiebot', 'cookiebot-cbid-override' );
 		register_setting( 'cookiebot', 'cookiebot-ruleset-id' );
 		register_setting( 'cookiebot', 'cookiebot-cbid-first-run' );
 		register_setting( 'cookiebot', 'cookiebot-language' );

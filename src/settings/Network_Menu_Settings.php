@@ -139,11 +139,12 @@ class Network_Menu_Settings {
 		);
 
 		include_view(
-			Cookiebot_Frame::get_view_path() . 'network-settings-page.php',
+			Cookiebot_Frame::get_view_path(true) . 'network-settings-page.php',
 			array(
 				'cookiebot_gdpr_url' => 'https://www.cookiebot.com/' . Cookiebot_WP::get_manager_language() . '/gdpr/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
 				'logo'               => CYBOT_COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
 				'cbm'                => $cbm,
+				'ruleset_id'         => ! empty( get_site_option( 'cookiebot-ruleset-id' ) ) ? get_site_option( 'cookiebot-ruleset-id' ) : 'settings',
 			)
 		);
 	}

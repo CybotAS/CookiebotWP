@@ -11,32 +11,25 @@
 ?>
 <div class="cb-general__consent__mode">
 	<h2 class="cb-general__info__title">
-		<?php esc_html_e( 'What is Google Consent Mode and why should you enable it?', 'cookiebot' ); ?>
+		<?php esc_html_e( 'Integration with Google Consent Mode', 'cookiebot' ); ?>
 	</h2>
 	<p class="cb-general__info__text">
-		<?php esc_html_e( 'Google Consent Mode is a way for your website to measure conversions and get analytics insights while being fully GDPR-compliant when using services like Google Analytics, Google Tag Manager (GTM) and Google Ads.', 'cookiebot' ); ?>
-	</p>
-	<p class="cb-general__info__text">
-		<?php esc_html_e( 'Cookiebot consent managment platform (CMP) and Google Consent Mode integrate seamlessly to offer you plug-and-play compliance and streamlined use of all Google\'s services in one easy solution.', 'cookiebot' ); ?>
+		<?php esc_html_e( 'The Usercentrics Cookiebot WordPress Plugin and Google Consent Mode integrate seamlessly, providing plug-and-play privacy compliance and effortless use of all Google services in one solution.', 'cookiebot' ); ?>
 	</p>
 	<a class="cb-btn cb-link-btn" target="_blank" rel="noopener"
 		href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode">
-		<?php esc_html_e( 'Read more about Cookiebot CMP and Google Consent Mode', 'cookiebot' ); ?>
+		<?php esc_html_e( 'Learn more', 'cookiebot' ); ?>
 	</a>
 </div>
 
 <div class="cb-settings__config__item">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
-			<?php esc_html_e( 'Google Consent Mode:', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Google Consent Mode', 'cookiebot' ); ?>
 		</h3>
 		<p class="cb-general__info__text">
-			<?php esc_html_e( 'Enable Google Consent Mode with default settings on your WordPress page.', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Enable Google Consent Mode integration within your Usercentrics Cookiebot WordPress Plugin.', 'cookiebot' ); ?>
 		</p>
-		<a class="cb-btn cb-link-btn" target="_blank" rel="noopener"
-			href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode">
-			<?php esc_html_e( 'Read more', 'cookiebot' ); ?>
-		</a>
 	</div>
 	<div class="cb-settings__config__data">
 		<div class="cb-settings__config__data__inner">

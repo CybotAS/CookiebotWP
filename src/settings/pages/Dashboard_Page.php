@@ -28,18 +28,20 @@ class Dashboard_Page implements Settings_Page_Interface {
 			self::ICON
 		);
 
-		add_submenu_page(
-			'cookiebot',
-			__( 'Cookiebot Dashboard', 'cookiebot' ),
-			__( 'Dashboard', 'cookiebot' ),
-			'manage_options',
-			self::ADMIN_SLUG,
-			array(
-				$this,
-				'display',
-			),
-			1
-		);
+		if( Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) {
+			add_submenu_page(
+				'cookiebot',
+				__('Cookiebot Dashboard', 'cookiebot'),
+				__('Dashboard', 'cookiebot'),
+				'manage_options',
+				self::ADMIN_SLUG,
+				array(
+					$this,
+					'display',
+				),
+				1
+			);
+		}
 	}
 
 	/**

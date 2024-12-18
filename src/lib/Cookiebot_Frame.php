@@ -2,8 +2,8 @@
 namespace cybot\cookiebot\lib;
 
 class Cookiebot_Frame {
-	public static function is_cb_frame_type(){
-		$cbid = Cookiebot_WP::get_cbid();
+	public static function is_cb_frame_type($multisite = false){
+		$cbid = $multisite ? Cookiebot_WP::get_network_cbid() : Cookiebot_WP::get_cbid();
 		if (empty($cbid)){
 			return 'empty';
 		}elseif (preg_match(Cookiebot_Frame::CB_FRAME_REGEX, $cbid)) {
@@ -13,10 +13,10 @@ class Cookiebot_Frame {
 		}
 	}
 
-	public static function get_view_path($is_common = false){
-		if(Cookiebot_Frame::is_cb_frame_type() === 'empty' || $is_common){
+	public static function get_view_path($multisite = false, $is_common = false){
+		if(Cookiebot_Frame::is_cb_frame_type($multisite) === 'empty' || $is_common){
 			return 'admin/common/';
-		}elseif (Cookiebot_Frame::is_cb_frame_type() === true){
+		}elseif (Cookiebot_Frame::is_cb_frame_type($multisite) === true){
 			return 'admin/cb_frame/';
 		}else{
 			return 'admin/uc_frame/';

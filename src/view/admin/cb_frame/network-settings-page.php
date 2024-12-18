@@ -28,22 +28,26 @@ $header->display();
 
 				<div class="cb-settings__tabs__content">
 					<div class="cb-settings__tabs__content--item active-item">
-						<?php if ( ! esc_attr( get_site_option( 'cookiebot-cbid', '' ) ) ) : ?>
-							<div class="cb-general__new__account">
-								<h2 class="cb-general__info__title"><?php esc_html_e( 'Do you not have an account yet?', 'cookiebot' ); ?></h2>
-								<p class="cb-general__info__text">
-									<?php esc_html_e( 'To use Cookiebot for WordPress you need to visit our website and sign-up. After you have signed up, you can configure your banner and then place the Cookiebot Domain Group ID below. Navigate to Settings and to "Your Scripts" to find your ID.', 'cookiebot' ); ?>
-								</p>
-								<div class="new-account-actions">
-									<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner" target="_blank" rel="noopener" class="cb-btn cb-main-btn"><?php esc_html_e( 'Create a new Account', 'cookiebot' ); ?></a>
-									<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress" target="_blank" rel="noopener" class="cb-btn cb-link-btn"><?php esc_html_e( 'Get help with connecting your account', 'cookiebot' ); ?></a>
-								</div>
-							</div>
-						<?php endif; ?>
+                        <div class="cb-cbid-alert__msg hidden">
+                            <h3 class="cb-settings__config__subtitle">
+								<?php esc_html_e( 'Are you sure?', 'cookiebot' ); ?>
+                            </h3>
+                            <p class="cb-general__info__text">
+								<?php esc_html_e( 'You will need to add a new ID before updating other network settings. If any subsite is using its own account disconnecting this account won’t affect it.', 'cookiebot' ); ?>
+                            </p>
+                            <div class="new-account-actions">
+                                <div id="cookiebot-cbid-cancel" class="cb-btn cb-white-btn">
+									<?php esc_html_e( 'Cancel', 'cookiebot' ); ?>
+                                </div>
+                                <div id="cookiebot-cbid-reset" class="cb-btn cb-main-btn">
+									<?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?>
+                                </div>
+                            </div>
+                        </div>
 
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
-								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Network Domain Group:', 'cookiebot' ); ?></h3>
+								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Network Domain Group ID', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'If added this will be the default Cookiebot ID for all subsites. Subsites are able to override the Cookiebot ID.', 'cookiebot' ); ?>
 								</p>
@@ -52,32 +56,35 @@ $header->display();
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
 									<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Add your Domain Group ID', 'cookiebot' ); ?></h3>
-									<input
-											type="text"
-											name="cookiebot-cbid"
-											value="<?php echo esc_attr( get_site_option( 'cookiebot-cbid', '' ) ); ?>"
-									/>
+                                    <div class="cookiebot-cbid-container">
+                                        <div class="cookiebot-cbid-input">
+                                            <input type="text" id="cookiebot-cbid" class="cbid-active" name="cookiebot-cbid"
+                                                   value="<?php echo esc_attr( get_site_option( 'cookiebot-cbid', '' ) ); ?>"/>
+                                            <div class="cookiebot-cbid-check"></div>
+                                        </div>
+                                        <div id="cookiebot-cbid-reset-dialog" class="cb-btn cb-main-btn"><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
+                                    </div>
 								</div>
 							</div>
 						</div>
 
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
-								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookie-blocking mode', 'cookiebot' ); ?></h3>
+								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookie-blocking', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
-									<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Select the Cookie-blocking mode', 'cookiebot' ); ?></h3>
+									<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Select cookie-blocking mode', 'cookiebot' ); ?></h3>
 									<label class="recommended-item">
 										<input <?php checked( 'auto', $cbm ); ?>
 												type="radio"
 												name="cookiebot-cookie-blocking-mode"
 												value="auto"
 										/>
-										<?php esc_html_e( 'Automatic cookie-blocking mode', 'cookiebot' ); ?>
+										<?php esc_html_e( 'Automatic', 'cookiebot' ); ?>
 										<span class="recommended-tag"><?php esc_html_e( 'Recommended', 'cookiebot' ); ?></span>
 									</label>
 									<label>
@@ -191,9 +198,9 @@ $header->display();
 
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
-								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Auto-update Cookiebot™ Plugin:', 'cookiebot' ); ?></h3>
+								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Automatic updates', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Automatically update your Cookiebot™ plugin when new releases becomes available.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Enable automatic updates whenever we release a new version of the plugin.', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">
@@ -208,7 +215,7 @@ $header->display();
 											?>
 										/>
 										<div class="switcher"></div>
-										<?php esc_html_e( 'Automatically update Cookiebot Plugin', 'cookiebot' ); ?>
+										<?php esc_html_e( 'Automatically update to new version', 'cookiebot' ); ?>
 									</label>
 								</div>
 							</div>
@@ -221,7 +228,7 @@ $header->display();
 									<?php esc_html_e( 'Setting will apply for all subsites. Subsites will not be able to override.', 'cookiebot' ); ?>
 								</p>
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'This checkbox will remove the cookie consent banner from your website. The declaration shortcode will still be available. If you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'This will remove the cookie consent banner from your website. The cookie declaration shortcode will still be available if you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager.', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">
@@ -237,34 +244,6 @@ $header->display();
 										/>
 										<div class="switcher"></div>
 										<?php esc_html_e( 'Hide the cookie popup banner', 'cookiebot' ); ?>
-									</label>
-								</div>
-							</div>
-						</div>
-
-						<div class="cb-settings__config__item">
-							<div class="cb-settings__config__content">
-								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookiebot CMP in WP Admin:', 'cookiebot' ); ?></h3>
-								<p class="cb-general__info__note">
-									<?php esc_html_e( 'Setting will apply for all subsites. Subsites will not be able to override.', 'cookiebot' ); ?>
-								</p>
-								<p class="cb-general__info__text">
-									<?php esc_html_e( 'This checkbox will disable Cookiebot to act within the WordPress Admin area', 'cookiebot' ); ?>
-								</p>
-							</div>
-							<div class="cb-settings__config__data">
-								<div class="cb-settings__config__data__inner">
-									<label class="switch-checkbox" for="cookiebot-nooutput-admin">
-										<input id="cookiebot-nooutput-admin" type="checkbox" name="cookiebot-nooutput-admin" value="1"
-											<?php
-											checked(
-												1,
-												get_site_option( 'cookiebot-nooutput-admin' )
-											);
-											?>
-										/>
-										<div class="switcher"></div>
-										<?php esc_html_e( 'Disable Cookiebot CMP in the WordPress Admin area', 'cookiebot' ); ?>
 									</label>
 								</div>
 							</div>
