@@ -44,26 +44,31 @@ use function cybot\cookiebot\lib\include_view;
 			</h3>
 			<div class="cookiebot-cbid-container">
 				<div class="cookiebot-cbid-input">
-				<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
+					<input <?php echo ( $is_ms ) ?
+						' placeholder="' . esc_attr( $network_cbid ) . '" data-network="' . esc_attr( $network_cbid ) . '"' :
+						''; ?>
 					type="text" id="cookiebot-cbid" class="cbid-active" name="cookiebot-cbid"
 					value="<?php echo esc_attr( $cbid ); ?>"/>
 				<div class="cookiebot-cbid-check"></div>
 				</div>
-				<div id="cookiebot-cbid-reset-dialog" class="cb-btn cb-main-btn"><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
+				<div id="cookiebot-cbid-reset-dialog"
+					 class="cb-btn cb-main-btn <?php if (!empty($network_cbid) && !$network_cbid_override ){echo 'hidden';} ?>"><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
 				<?php if ( $is_ms ) : ?>
-                    <div id="cookiebot-cbid-network-dialog" class="cb-btn cb-white-btn"><?php esc_html_e( 'Using network account', 'cookiebot' ); ?></div>
-					<?php submit_button( esc_html( 'Connect account', 'cookiebot' ), 'disabled' ); ?>
+					<div id="cookiebot-cbid-network-dialog"
+						 class="cb-btn cb-white-btn <?php if (!empty($network_cbid) && $network_cbid_override ){echo 'hidden';} ?>"><?php esc_html_e( 'Using network account', 'cookiebot' ); ?></div>
+					<?php submit_button( esc_html( 'Connect account', 'cookiebot' ), 'hidden' ); ?>
 				<?php endif; ?>
 			</div>
 			<?php if (!empty($network_cbid)) : ?>
-                <div id="cb-network-id-override">
-                    <label class="switch-checkbox" for="cookiebot-cbid-override">
-                        <input type="checkbox" name="cookiebot-cbid-override" id="cookiebot-cbid-override" value="1"
+				<div id="cb-network-id-override">
+					<label class="switch-checkbox" for="cookiebot-cbid-override">
+						<input class="<?php if (!$network_cbid_override ){echo 'cb-no-network';} ?>"
+							   type="checkbox" name="cookiebot-cbid-override" id="cookiebot-cbid-override" value="1"
 							<?php checked( 1, $network_cbid_override ); ?>>
-                        <div class="switcher"></div>
+						<div class="switcher"></div>
 						<?php esc_html_e( 'Do not use Network Settings Account ID', 'cookiebot' ); ?>
-                    </label>
-                </div>
+					</label>
+				</div>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -148,18 +153,18 @@ use function cybot\cookiebot\lib\include_view;
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'Choose the type of your cookie-blocking mode. Select automatic to automatically block all cookies except those strictly necessary to use before user gives consent. Manual mode lets you adjust your cookie settings within your website’s HTML.', 'cookiebot' ); ?>
 		</p>
-        <div>
-            <a href="https://support.cookiebot.com/hc/en-us/articles/360009074960-Automatic-cookie-blocking"
-                target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-                <?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?>
-            </a>
-        </div>
-        <div>
-            <a href="https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking"
-                target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-                <?php esc_html_e( 'Guide to manual cookie-blocking', 'cookiebot' ); ?>
-            </a>
-        </div>
+		<div>
+			<a href="https://support.cookiebot.com/hc/en-us/articles/360009074960-Automatic-cookie-blocking"
+				target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+				<?php esc_html_e( 'Guide to auto cookie-blocking', 'cookiebot' ); ?>
+			</a>
+		</div>
+		<div>
+			<a href="https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-cookie-blocking"
+				target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+				<?php esc_html_e( 'Guide to manual cookie-blocking', 'cookiebot' ); ?>
+			</a>
+		</div>
 	</div>
 	<div class="cb-settings__config__data">
 		<div class="cb-settings__config__data__inner">
@@ -247,9 +252,9 @@ $auto_disabled = $cookie_blocking_mode === 'auto' ? ' disabled__item' : '';
 		<h3 class="cb-settings__config__subtitle">
 			<?php esc_html_e( 'Hide cookie popup', 'cookiebot' ); ?>
 		</h3>
-        <p class="cb-general__info__note">
+		<p class="cb-general__info__note">
 			<?php esc_html_e( 'This feature is only available when using Manual Blocking', 'cookiebot' ); ?>
-        </p>
+		</p>
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'This will remove the cookie consent banner from your website. The cookie declaration shortcode will still be available if you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager.', 'cookiebot' ); ?>
 		</p>

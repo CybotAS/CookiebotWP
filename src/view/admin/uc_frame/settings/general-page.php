@@ -36,61 +36,63 @@ use function cybot\cookiebot\lib\include_view;
 			</h3>
 			<div class="cookiebot-cbid-container">
 				<div class="cookiebot-cbid-input">
-				<input <?php echo ( $is_ms ) ? ' placeholder="' . esc_attr( $network_cbid ) . '"' : ''; ?>
+					<input <?php echo ( $is_ms ) ?
+					' placeholder="' . esc_attr( $network_cbid ) . '" data-network="' . esc_attr( $network_cbid ) . '"' :
+					''; ?>
 					type="text" id="cookiebot-cbid" class="cbid-active" name="cookiebot-cbid"
 					value="<?php echo esc_attr( $cbid ); ?>"/>
 				<div class="cookiebot-cbid-check"></div>
 				</div>
 				<div id="cookiebot-cbid-reset-dialog"
-                     class="cb-btn cb-main-btn <?php if (!empty($network_cbid) && !$network_cbid_override ){echo 'hidden';} ?>"><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
+					 class="cb-btn cb-main-btn <?php if (!empty($network_cbid) && !$network_cbid_override ){echo 'hidden';} ?>"><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
 				<?php if ( $is_ms ) : ?>
-                    <div id="cookiebot-cbid-network-dialog"
-                         class="cb-btn cb-white-btn <?php if (!empty($network_cbid) && $network_cbid_override ){echo 'hidden';} ?>"><?php esc_html_e( 'Using network account', 'cookiebot' ); ?></div>
-                    <?php submit_button( esc_html( 'Connect account', 'cookiebot' ), 'hidden' ); ?>
+					<div id="cookiebot-cbid-network-dialog"
+						 class="cb-btn cb-white-btn <?php if (!empty($network_cbid) && $network_cbid_override ){echo 'hidden';} ?>"><?php esc_html_e( 'Using network account', 'cookiebot' ); ?></div>
+					<?php submit_button( esc_html( 'Connect account', 'cookiebot' ), 'hidden' ); ?>
 				<?php endif; ?>
 			</div>
-            <?php if (!empty($network_cbid)) : ?>
-            <div id="cb-network-id-override">
-                <label class="switch-checkbox" for="cookiebot-cbid-override">
-                    <input class="<?php if (!$network_cbid_override ){echo 'test';} ?>"
-                            type="checkbox" name="cookiebot-cbid-override" id="cookiebot-cbid-override" value="1"
+			<?php if (!empty($network_cbid)) : ?>
+			<div id="cb-network-id-override">
+				<label class="switch-checkbox" for="cookiebot-cbid-override">
+					<input class="<?php if (!$network_cbid_override ){echo 'cb-no-network';} ?>"
+							type="checkbox" name="cookiebot-cbid-override" id="cookiebot-cbid-override" value="1"
 						<?php checked( 1, $network_cbid_override ); ?>>
-                    <div class="switcher"></div>
+					<div class="switcher"></div>
 					<?php esc_html_e( 'Do not use Network Settings Account ID', 'cookiebot' ); ?>
-                </label>
-            </div>
-            <?php endif; ?>
+				</label>
+			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
 
 <div id="cookiebot-ruleset-id-selector" class="cb-settings__config__item hidden">
-    <div class="cb-settings__config__content">
-        <p class="cb-general__info__text">
+	<div class="cb-settings__config__content">
+		<p class="cb-general__info__text">
 			<?php esc_html_e( 'Let us know if your account is set for compliance with a single privacy law (e.g. GDPR) or multiple laws (e.g. GDPR and CCPA) based on user’s location. The default is a single privacy law, so this is likely your setting unless modified.', 'cookiebot' ); ?>
-        </p>
-    </div>
-    <div class="cb-settings__config__data">
-        <div class="cb-settings__config__data__inner">
-            <h3 class="cb-settings__data__subtitle">
+		</p>
+	</div>
+	<div class="cb-settings__config__data">
+		<div class="cb-settings__config__data__inner">
+			<h3 class="cb-settings__data__subtitle">
 				<?php esc_html_e( 'Your current account setup:', 'cookiebot' ); ?>
-            </h3>
-            <label class="recommended-item">
-                <input <?php checked( 'settings', $ruleset_id ); ?>
-                        type="radio"
-                        name="cookiebot-ruleset-id"
-                        value="settings"/>
+			</h3>
+			<label class="recommended-item">
+				<input <?php checked( 'settings', $ruleset_id ); ?>
+						type="radio"
+						name="cookiebot-ruleset-id"
+						value="settings"/>
 				<?php esc_html_e( 'Compliance with one privacy law', 'cookiebot' ); ?>
-            </label>
-            <label>
-                <input <?php checked( 'ruleset', $ruleset_id ); ?>
-                        type="radio"
-                        name="cookiebot-ruleset-id"
-                        value="ruleset"/>
+			</label>
+			<label>
+				<input <?php checked( 'ruleset', $ruleset_id ); ?>
+						type="radio"
+						name="cookiebot-ruleset-id"
+						value="ruleset"/>
 				<?php esc_html_e( 'Compliance with multiple privacy laws (geolocation)', 'cookiebot' ); ?>
-            </label>
-        </div>
-    </div>
+			</label>
+		</div>
+	</div>
 </div>
 
 <div class="cb-settings__config__item">
@@ -171,9 +173,9 @@ $auto_disabled = $cookie_blocking_mode === 'auto' ? ' disabled__item' : '';
 		<h3 class="cb-settings__config__subtitle">
 			<?php esc_html_e( 'Hide cookie popup', 'cookiebot' ); ?>
 		</h3>
-        <p class="cb-general__info__note">
+		<p class="cb-general__info__note">
 			<?php esc_html_e( 'This feature is only available when using Manual Blocking', 'cookiebot' ); ?>
-        </p>
+		</p>
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'This will remove the cookie consent banner from your website. The cookie declaration shortcode will still be available if you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager.', 'cookiebot' ); ?>
 		</p>

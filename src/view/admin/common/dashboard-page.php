@@ -22,7 +22,7 @@ $header->display();
 <div class="cb-body">
 	<div class="cb-wrapper">
 		<?php $main_tabs->display( 'dashboard' ); ?>
-		<div class="cb-main__content <?php echo $cbid ? 'sync-account' : ''; ?>">
+		<div class="cb-main__content <?php echo $cbid ? 'sync-account' : 'no-account'; ?>">
 			<div class="cb-main__dashboard__card--container">
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner account_card">
@@ -56,20 +56,24 @@ $header->display();
 				</div>
 			</div>
 
+            <div class="cb-main__dashboard__card--container-full">
+                <div class="cb-main__dashboard__card">
+                    <div class="cb-main__card__inner start_card">
+                        <div class="cb-main__card--content">
+                            <h2 class="cb-main__card__title">
+								<?php echo esc_html__( 'How to get started', 'cookiebot' ); ?>
+                            </h2>
+                            <a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
+                               target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+								<?php echo esc_html__( 'Learn more about your CMP', 'cookiebot' ); ?>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 			<div class="cb-main__dashboard__card--container">
 				<div class="cb-main__dashboard__card">
-					<div class="cb-main__card__inner start_card">
-						<div class="cb-main__card--content">
-							<p class="cb-main__card__label"><?php echo esc_html__( 'Video guide', 'cookiebot' ); ?></p>
-							<h2 class="cb-main__card__title">
-								<?php echo esc_html__( 'How to get started', 'cookiebot' ); ?>
-							</h2>
-							<a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
-								target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-								<?php echo esc_html__( 'Learn more about your CMP', 'cookiebot' ); ?>
-							</a>
-						</div>
-					</div>
 				</div>
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner legislations_card">

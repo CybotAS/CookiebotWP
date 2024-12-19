@@ -56,23 +56,25 @@ $header->display();
 							</a>
 						</div>
 					</div>
+
+                    <div class="cb-main__dashboard__card">
+                        <div class="cb-main__card__inner start_card">
+                            <div class="cb-main__card--content">
+                                <h3 class="cb-main__card__subtitle">
+									<?php echo esc_html__( 'How to set up Usercentrics Cookiebot WordPress Plugin', 'cookiebot' ); ?>
+                                </h3>
+                                <a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
+                                   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+									<?php echo esc_html__( 'Learn more', 'cookiebot' ); ?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 				<?php endif; ?>
 			</div>
 
 			<div class="cb-main__dashboard__card--container">
 				<div class="cb-main__dashboard__card">
-					<div class="cb-main__card__inner start_card">
-						<div class="cb-main__card--content">
-							<p class="cb-main__card__label"><?php echo esc_html__( 'Video guide', 'cookiebot' ); ?></p>
-							<h2 class="cb-main__card__title">
-								<?php echo esc_html__( 'How to set up Usercentrics Cookiebot WordPress Plugin', 'cookiebot' ); ?>
-							</h2>
-							<a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
-								target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-								<?php echo esc_html__( 'Learn more', 'cookiebot' ); ?>
-							</a>
-						</div>
-					</div>
 				</div>
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner legislations_card">
