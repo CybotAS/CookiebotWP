@@ -26,51 +26,51 @@ $header->display();
 			<div class="cb-main__dashboard__card--container">
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner account_card">
-                        <div class="cb-main__card__content">
-                            <h2 class="cb-main__card__title">
-                                <?php echo esc_html__( 'I already have an account', 'cookiebot' ); ?>
-                            </h2>
-                            <a href="<?php echo esc_url( add_query_arg( 'page', Settings_Page::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>"
-                                class="cb-btn cb-main-btn">
-                                <?php echo esc_html__( 'Connect my account', 'cookiebot' ); ?>
-                            </a>
-                        </div>
+						<div class="cb-main__card__content">
+							<h2 class="cb-main__card__title">
+								<?php echo esc_html__( 'I already have an account', 'cookiebot' ); ?>
+							</h2>
+							<a href="<?php echo esc_url( add_query_arg( 'page', Settings_Page::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>"
+								class="cb-btn cb-main-btn">
+								<?php echo esc_html__( 'Connect my account', 'cookiebot' ); ?>
+							</a>
+						</div>
 					</div>
 				</div>
 
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
-                        <div class="cb-main__card__content">
-                            <p class="cb-main__card__label">
-                                <?php echo esc_html__( 'Get started', 'cookiebot' ); ?>
-                            </p>
-                            <h2 class="cb-main__card__title">
-                                <?php echo esc_html__( 'New to our solutions? Create your account. ', 'cookiebot' ); ?>
-                            </h2>
-                            <a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
-                                target="_blank" class="cb-btn cb-white-btn" rel="noopener">
-                                <?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
-                            </a>
-                        </div>
+						<div class="cb-main__card__content">
+							<p class="cb-main__card__label">
+								<?php echo esc_html__( 'Get started', 'cookiebot' ); ?>
+							</p>
+							<h2 class="cb-main__card__title">
+								<?php echo esc_html__( 'New to our solutions? Create your account. ', 'cookiebot' ); ?>
+							</h2>
+							<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+								target="_blank" class="cb-btn cb-white-btn" rel="noopener">
+								<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
 
-            <div class="cb-main__dashboard__card--container-full">
-                <div class="cb-main__dashboard__card">
-                    <div class="cb-main__card__inner start_card">
-                        <div class="cb-main__card--content">
-                            <h2 class="cb-main__card__title">
+			<div class="cb-main__dashboard__card--container-full">
+				<div class="cb-main__dashboard__card">
+					<div class="cb-main__card__inner start_card">
+						<div class="cb-main__card--content">
+							<h2 class="cb-main__card__title">
 								<?php echo esc_html__( 'How to get started', 'cookiebot' ); ?>
-                            </h2>
-                            <a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
-                               target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+							</h2>
+							<a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
+								target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 								<?php echo esc_html__( 'Learn more about your CMP', 'cookiebot' ); ?>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<div class="cb-main__dashboard__card--container">
 				<div class="cb-main__dashboard__card">

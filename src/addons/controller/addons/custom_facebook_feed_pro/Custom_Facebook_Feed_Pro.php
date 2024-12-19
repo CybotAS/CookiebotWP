@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Custom_Facebook_Feed_Pro extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'Custom Facebook Feed Pro';
 	const OPTION_NAME                 = 'custom_facebook_feed_pro';
 	const PLUGIN_FILE_PATH            = 'custom-facebook-feed-pro/custom-facebook-feed.php';

@@ -26,18 +26,18 @@ $header->display();
 			<div class="cb-main__dashboard__card--container">
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner <?php echo $cbid ? 'start_card' : 'account_card'; ?>">
-                        <h2 class="cb-main__card__title">
-                            <?php echo esc_html__( 'Welcome to Usercentrics Cookiebot WordPress Plugin', 'cookiebot' ); ?>
-                        </h2>
-                        <div class="cb-main__card__success">
-                            <div class="cb-btn cb-success-btn">
-                                <img src="<?php echo esc_html( $check_icon ); ?>" alt="Check">
+						<h2 class="cb-main__card__title">
+							<?php echo esc_html__( 'Welcome to Usercentrics Cookiebot WordPress Plugin', 'cookiebot' ); ?>
+						</h2>
+						<div class="cb-main__card__success">
+							<div class="cb-btn cb-success-btn">
+								<img src="<?php echo esc_html( $check_icon ); ?>" alt="Check">
 								<?php echo esc_html__( 'Account added', 'cookiebot' ); ?>
-                            </div>
-                            <p class="cb-main__success__text">
-                                <?php echo esc_html__( 'You’ve added your account ID to your Usercentrics Cookiebot WordPress Plugin.', 'cookiebot' ); ?>
-                            </p>
-                        </div>
+							</div>
+							<p class="cb-main__success__text">
+								<?php echo esc_html__( 'You’ve added your account ID to your Usercentrics Cookiebot WordPress Plugin.', 'cookiebot' ); ?>
+							</p>
+						</div>
 					</div>
 				</div>
 
@@ -57,19 +57,19 @@ $header->display();
 						</div>
 					</div>
 
-                    <div class="cb-main__dashboard__card">
-                        <div class="cb-main__card__inner start_card">
-                            <div class="cb-main__card--content">
-                                <h3 class="cb-main__card__subtitle">
+					<div class="cb-main__dashboard__card">
+						<div class="cb-main__card__inner start_card">
+							<div class="cb-main__card--content">
+								<h3 class="cb-main__card__subtitle">
 									<?php echo esc_html__( 'How to set up Usercentrics Cookiebot WordPress Plugin', 'cookiebot' ); ?>
-                                </h3>
-                                <a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
-                                   target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+								</h3>
+								<a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
+									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 									<?php echo esc_html__( 'Learn more', 'cookiebot' ); ?>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+								</a>
+							</div>
+						</div>
+					</div>
 				<?php endif; ?>
 			</div>
 

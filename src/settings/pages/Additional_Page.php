@@ -10,6 +10,7 @@ use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
 use function cybot\cookiebot\lib\include_view;
 
 class Additional_Page implements Settings_Page_Interface {
+
 	public function display() {
 		$args = $args = array(
 			'is_ms'                     => is_multisite(),

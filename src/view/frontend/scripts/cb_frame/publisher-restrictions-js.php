@@ -19,8 +19,8 @@
 				"AllowedSpecialPurposes": [<?php echo esc_js( $allowed_special_purposes ); ?>],
 				"AllowedFeatures": [<?php echo esc_js( $allowed_features ); ?>],
 				"AllowedSpecialFeatures": [<?php echo esc_js( $allowed_special_features ); ?>],
-				<?php //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-				"VendorRestrictions": [<?php echo $vendor_restrictions; ?>]
+	<?php //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	"VendorRestrictions": [<?php echo $vendor_restrictions; ?>]
 			}
 		}
 	}

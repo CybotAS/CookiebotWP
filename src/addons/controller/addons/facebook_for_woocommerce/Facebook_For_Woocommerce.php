@@ -7,6 +7,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_remove_class_action;
 
 class Facebook_For_Woocommerce extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'Facebook For WooCommerce';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature.';
 	const OPTION_NAME                 = 'facebook_for_woocommerce';

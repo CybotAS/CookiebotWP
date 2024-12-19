@@ -6,28 +6,29 @@ use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
 use InvalidArgumentException;
 
 class Cookiebot_Javascript_Helper {
+
 	public function register_hooks() {
 		self::get_hooks_by_frame();
 	}
 
 	private function get_hooks_by_frame() {
-		$frame          = Cookiebot_Frame::is_cb_frame_type();
+		$frame = Cookiebot_Frame::is_cb_frame_type();
 
 		if ( $frame === true ) {
 			// add JS
 			if ( self::is_tcf_enabled() ) {
 				add_action( 'wp_head', array( $this, 'include_publisher_restrictions_js' ), -9999 );
 			}
-			add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9998 );
-			add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9997 );
-			add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), - 9996 );
+			add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), -9998 );
+			add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), -9997 );
+			add_action( 'wp_head', array( $this, 'include_cookiebot_js' ), -9996 );
 			( new Cookiebot_Declaration_Shortcode() )->register_hooks();
 		}
 
 		if ( $frame === false ) {
-			add_action( 'wp_head', array( $this, 'include_uc_cmp_js' ), - 9998 );
-			add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), - 9997 );
-			add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), - 9996 );
+			add_action( 'wp_head', array( $this, 'include_uc_cmp_js' ), -9998 );
+			add_action( 'wp_head', array( $this, 'include_google_consent_mode_js' ), -9997 );
+			add_action( 'wp_head', array( $this, 'include_google_tag_manager_js' ), -9996 );
 		}
 	}
 
@@ -39,7 +40,7 @@ class Cookiebot_Javascript_Helper {
 				// Is multisite - and disabled output is checked as network setting
 				( is_multisite() && get_site_option( 'cookiebot-nooutput', false ) ) ||
 				// Do not show JS - output disabled
-				( get_option( 'cookiebot-nooutput', false ) && !$return_html ) ||
+				( get_option( 'cookiebot-nooutput', false ) && ! $return_html ) ||
 				// Do not show js if logged in output is disabled
 				(
 					Cookiebot_WP::can_current_user_edit_theme() &&

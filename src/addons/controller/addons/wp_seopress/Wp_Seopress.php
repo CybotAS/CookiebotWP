@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Wp_Seopress extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME               = 'WP SEOPress';
 	const OPTION_NAME              = 'wp_seopress';
 	const PLUGIN_FILE_PATH         = 'wp-seopress/seopress.php';

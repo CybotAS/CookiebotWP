@@ -62,13 +62,16 @@
 				</label>
 
 				<div class="cb-review__form--item__custom">
-					<textarea id="cb-review__other-description" name="other-description" placeholder="<?php esc_html_e( 'Please specify here', 'cookiebot' ); ?>" rows="1"></textarea>
+					<textarea id="cb-review__other-description" name="other-description"
+								placeholder="<?php esc_html_e( 'Please specify here', 'cookiebot' ); ?>"
+								rows="1"></textarea>
 				</div>
 			</div>
 
 			<div class="consent-item">
 				<label class="cb-review__form--item">
-					<input id="cb-review__debug-reason" type="checkbox" name="cookiebot-review-debug" value="true" data-custom-field="true">
+					<input id="cb-review__debug-reason" type="checkbox" name="cookiebot-review-debug" value="true"
+							data-custom-field="true">
 					<span><b>(Optional)</b>
 						<?php
 						esc_html_e(
@@ -97,7 +100,9 @@
 				<a id="cb-review__skip" href="#">Skip and Deactivate</a>
 				<input type="submit" id="cb-review__submit" value="Submit and Deactivate">
 			</div>
-			<p class="cb-review__policy">See our <a href="https://www.cookiebot.com/en/privacy-policy/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner" target="_blank" rel="noopener">Privacy Policy</a></p>
+			<p class="cb-review__policy">See our <a
+						href="https://www.cookiebot.com/en/privacy-policy/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+						target="_blank" rel="noopener">Privacy Policy</a></p>
 			<input type="hidden" name="cookiebot-review-send" value="Cookiebot_Review_Send">
 		</form>
 	</div>

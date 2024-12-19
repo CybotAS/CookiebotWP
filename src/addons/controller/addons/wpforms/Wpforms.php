@@ -7,6 +7,7 @@ use cybot\cookiebot\lib\Cookiebot_WP;
 
 class Wpforms extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'WPForms Lite';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information.';
 	const OPTION_NAME                 = 'wpforms';

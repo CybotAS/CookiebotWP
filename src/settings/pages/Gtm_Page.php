@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use function cybot\cookiebot\lib\include_view;
 
 class Gtm_Page implements Settings_Page_Interface {
+
 	const OPTION_NAME = 'cookiebot-gtm-cookies';
 
 	/**

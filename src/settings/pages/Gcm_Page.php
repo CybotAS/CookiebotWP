@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use function cybot\cookiebot\lib\include_view;
 
 class Gcm_Page implements Settings_Page_Interface {
+
 	const OPTION_NAME = 'cookiebot-gcm-cookies';
 
 	/**

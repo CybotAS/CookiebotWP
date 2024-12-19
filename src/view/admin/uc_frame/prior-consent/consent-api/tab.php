@@ -35,79 +35,82 @@ use cybot\cookiebot\addons\config\Settings_Config;
 			);
 			?>
 		</p>
-		<table class="cb-settings__consent__mapping-table uc-consent-table" aria-describedby="consent_level_api_settings_title">
+		<table class="cb-settings__consent__mapping-table uc-consent-table"
+				aria-describedby="consent_level_api_settings_title">
 			<thead>
-				<tr>
-					<th></th>
-					<th></th>
-				</tr>
+			<tr>
+				<th></th>
+				<th></th>
+			</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td class="cb-settings__data__head">
-						<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Usercentrics Cookiebot cookie categories', 'cookiebot' ); ?></h3>
-					</td>
-					<td class="cb-settings__data__head">
-						<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'WP Consent API cookies categories equivalent', 'cookiebot' ); ?></h3>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="cb_consent">
+			<tr>
+				<td class="cb-settings__data__head">
+					<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Usercentrics Cookiebot cookie categories', 'cookiebot' ); ?></h3>
+				</td>
+				<td class="cb-settings__data__head">
+					<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'WP Consent API cookies categories equivalent', 'cookiebot' ); ?></h3>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="cb_consent">
 							<span class="uc_categories">
 								<?php esc_html_e( 'essential', 'cookiebot' ); ?>
 							</span>
-						</div>
-					</td>
-					<td>
-						<div class="consent_mapping">
-							<input type="text" disabled value="Functional">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="cb_consent">
+					</div>
+				</td>
+				<td>
+					<div class="consent_mapping">
+						<input type="text" disabled value="Functional">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="cb_consent">
 							<span class="uc_categories">
 								<?php esc_html_e( 'functional', 'cookiebot' ); ?>
 							</span>
-						</div>
-					</td>
-					<td>
-						<div class="consent_mapping">
-							<select class="cb-category-selectors" name="cookiebot-uc-consent-mapping[functional]" id="cookiebot-uc-consent-mapping-functional" data-default="preferences">
-								<?php echo Settings_Config::get_wp_consent_values( 'functional', $m ); ?>
-							</select>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="cb_consent">
+					</div>
+				</td>
+				<td>
+					<div class="consent_mapping">
+						<select class="cb-category-selectors" name="cookiebot-uc-consent-mapping[functional]"
+								id="cookiebot-uc-consent-mapping-functional" data-default="preferences">
+							<?php echo Settings_Config::get_wp_consent_values( 'functional', $m ); ?>
+						</select>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="cb_consent">
 							<span class="uc_categories">
 								<?php esc_html_e( 'marketing', 'cookiebot' ); ?>
 							</span>
-						</div>
-					</td>
-					<td>
-						<div class="consent_mapping">
-							<select class="cb-category-selectors" name="cookiebot-uc-consent-mapping[marketing]" id="cookiebot-uc-consent-mapping-marketing" data-default="marketing">
-								<?php echo Settings_Config::get_wp_consent_values( 'marketing', $m ); ?>
-							</select>
-						</div>
-					</td>
-				</tr>
+					</div>
+				</td>
+				<td>
+					<div class="consent_mapping">
+						<select class="cb-category-selectors" name="cookiebot-uc-consent-mapping[marketing]"
+								id="cookiebot-uc-consent-mapping-marketing" data-default="marketing">
+							<?php echo Settings_Config::get_wp_consent_values( 'marketing', $m ); ?>
+						</select>
+					</div>
+				</td>
+			</tr>
 			</tbody>
 			<tfoot>
 			<tr>
 				<td>
 					<div id="cb-consent-api-reset-defaults" class="cb-btn cb-main-btn uc-consent">
-					<?php
+						<?php
 						esc_html_e(
 							'Reset to default categories',
 							'cookiebot'
 						);
-					?>
+						?>
 					</div>
 				</td>
 			</tr>

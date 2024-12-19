@@ -1,4 +1,5 @@
 <?php
+
 namespace cybot\cookiebot\gutenberg;
 
 use cybot\cookiebot\lib\Cookiebot_WP;
@@ -7,6 +8,7 @@ use InvalidArgumentException;
 use function cybot\cookiebot\lib\asset_url;
 
 class Cookiebot_Gutenberg_Declaration_Block {
+
 
 	public function register_hooks() {
 		add_action( 'init', array( $this, 'gutenberg_block_setup' ) );

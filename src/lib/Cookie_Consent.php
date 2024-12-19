@@ -4,6 +4,7 @@ namespace cybot\cookiebot\lib;
 
 class Cookie_Consent implements Cookie_Consent_Interface {
 
+
 	/**
 	 * Array of cookiebot consent states
 	 *

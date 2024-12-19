@@ -8,6 +8,7 @@ use function cybot\cookiebot\lib\include_view;
 
 class Main_Tabs {
 
+
 	/**
 	 * @throws InvalidArgumentException
 	 */

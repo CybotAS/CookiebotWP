@@ -12,6 +12,7 @@ use cybot\cookiebot\settings\pages\Support_Page;
 
 class Menu_Settings {
 
+
 	const MENU = array(
 		Dashboard_Page::class,
 		Settings_Page::class,

@@ -13,6 +13,7 @@ use function cybot\cookiebot\lib\cookiebot_active;
 class Plugin_Controller {
 
 
+
 	/**
 	 * @var Settings_Service_Interface
 	 */
@@ -69,9 +70,9 @@ class Plugin_Controller {
 		/** @var Base_Cookiebot_Addon $addon */
 		foreach ( $this->settings_service->get_active_addons() as $addon ) {
 			if ( ! $addon->cookie_consent->are_cookie_states_accepted( $addon->get_cookie_types() )
-			|| cookiebot_addons_enabled_cache_plugin() ) {
+				|| cookiebot_addons_enabled_cache_plugin() ) {
 				$addon->load_addon_configuration();
-				$addons_enabled_counter++;
+				++$addons_enabled_counter;
 			}
 		}
 
@@ -90,7 +91,7 @@ class Plugin_Controller {
 	 * @since 1.3.0
 	 */
 	public function run_buffer_output_manipulations() {
-		 /**
+		/**
 		 * @var $buffer_output Buffer_Output_Interface
 		 */
 		$buffer_output = $this->settings_service->container->get( 'Buffer_Output_Interface' );

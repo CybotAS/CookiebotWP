@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\admin_notices;
 
 class Cookiebot_Temp_Notice extends Cookiebot_Base_Notice {
+
 	const COOKIEBOT_NOTICE_OPTION_KEY    = 'cookiebot_notice_temp';
 	const COOKIEBOT_NOTICE_TEMPLATE_PATH = 'admin/notices/cookiebot-base-notice.php';
 

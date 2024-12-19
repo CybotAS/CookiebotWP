@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\lib;
 
 class Cookiebot_Admin_Links {
+
 	/**
 	 * Extra admin links
 	 *

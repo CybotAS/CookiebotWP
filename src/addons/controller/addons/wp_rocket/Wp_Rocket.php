@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Wp_Rocket extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME              = 'WP Rocket';
 	const OPTION_NAME             = 'wp_rocket';
 	const PLUGIN_FILE_PATH        = 'wp-rocket/wp-rocket.php';
@@ -27,7 +28,7 @@ class Wp_Rocket extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * Exclude scripts from WP Rocket’s defer JS option.
 	 *
-	 * @param  array $excluded_files  Array of script URLs to be excluded
+	 * @param array $excluded_files Array of script URLs to be excluded
 	 *
 	 * @return array                    Extended array script URLs to be excluded
 	 *

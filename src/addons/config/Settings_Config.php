@@ -21,6 +21,7 @@ use function cybot\cookiebot\lib\get_view_html;
 use function cybot\cookiebot\lib\include_view;
 
 class Settings_Config {
+
 	/**
 	 * @var Settings_Service_Interface
 	 */
@@ -83,11 +84,11 @@ class Settings_Config {
 	 * @since 1.3.0
 	 */
 	public function add_submenu() {
-		if( Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) {
+		if ( Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) {
 			add_submenu_page(
 				'cookiebot',
-				esc_html__('Plugins', 'cookiebot'),
-				esc_html__('Plugins', 'cookiebot'),
+				esc_html__( 'Plugins', 'cookiebot' ),
+				esc_html__( 'Plugins', 'cookiebot' ),
 				'manage_options',
 				'cookiebot-addons',
 				array(

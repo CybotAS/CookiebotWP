@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Google_Site_Kit extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'Google Site Kit';
 	const OPTION_NAME                 = 'google_site_kit';
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing', 'statistics' );

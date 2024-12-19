@@ -45,7 +45,7 @@ $header->display();
 				<?php do_settings_sections( 'cookiebot' ); ?>
 				<div class="cb-settings__header">
 					<h1 class="cb-main__page_title"><?php esc_html_e( 'Settings', 'cookiebot' ); ?></h1>
-					<?php submit_button(__('Save changes', 'cookiebot')); ?>
+					<?php submit_button( __( 'Save changes', 'cookiebot' ) ); ?>
 				</div>
 
 				<div class="cb-settings__tabs cb-settings__tabs--uc">

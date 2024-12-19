@@ -26,10 +26,10 @@ use function cybot\cookiebot\lib\include_view;
 		<div class="cb-settings__config__data__inner">
 			<label class="switch-checkbox" for="multiple-config">
 				<input
-					type="checkbox"
-					name="cookiebot-multiple-config"
-					id="multiple-config"
-					value="1" <?php checked( 1, get_option( 'cookiebot-multiple-config' ) ); ?>>
+						type="checkbox"
+						name="cookiebot-multiple-config"
+						id="multiple-config"
+						value="1" <?php checked( 1, get_option( 'cookiebot-multiple-config' ) ); ?>>
 				<div class="switcher"></div>
 				<?php esc_html_e( 'Multiple configurations', 'cookiebot' ); ?>
 			</label>
@@ -88,38 +88,38 @@ use function cybot\cookiebot\lib\include_view;
 			</div>
 		</div>
 		<?php if ( $secondary_group_id && $selected_regions ) : ?>
-		<div class="cb-region__table__item cb-region__secondary__banner">
-			<div class="cb-region__item__group">
-				<input type="text" name="cookiebot-second-banner-id" placeholder="1111-1111-1111-1111"
-						value="<?php echo esc_attr( $secondary_group_id ); ?>">
-			</div>
-			<div class="cb-region__item__region">
-				<input type="hidden" name="cookiebot-second-banner-regions" class="second-banner-regions"
-						value="<?php echo esc_attr( implode( ', ', array_keys( $selected_regions ) ) ); ?>">
-				<div class="cb-region__region__selector">
-					<div class="default-none <?php echo $selected_regions ? 'hidden' : ''; ?>">
-						<?php esc_html_e( 'Select region', 'cookiebot' ); ?>
+			<div class="cb-region__table__item cb-region__secondary__banner">
+				<div class="cb-region__item__group">
+					<input type="text" name="cookiebot-second-banner-id" placeholder="1111-1111-1111-1111"
+							value="<?php echo esc_attr( $secondary_group_id ); ?>">
+				</div>
+				<div class="cb-region__item__region">
+					<input type="hidden" name="cookiebot-second-banner-regions" class="second-banner-regions"
+							value="<?php echo esc_attr( implode( ', ', array_keys( $selected_regions ) ) ); ?>">
+					<div class="cb-region__region__selector">
+						<div class="default-none <?php echo $selected_regions ? 'hidden' : ''; ?>">
+							<?php esc_html_e( 'Select region', 'cookiebot' ); ?>
+						</div>
+						<div class="selected-regions">
+							<?php foreach ( $selected_regions as $code => $region ) : ?>
+								<div id="<?php echo esc_html( $code ); ?>" class="selected-regions-item">
+									<?php echo esc_html( $region ); ?>
+								</div>
+							<?php endforeach; ?>
+						</div>
 					</div>
-					<div class="selected-regions">
-						<?php foreach ( $selected_regions as $code => $region ) : ?>
-							<div id="<?php echo esc_html( $code ); ?>" class="selected-regions-item">
-								<?php echo esc_html( $region ); ?>
-							</div>
-						<?php endforeach; ?>
+					<div class="cb-region__region__list hidden">
+						<div class="cb-region__veil"></div>
+						<div class="cb-region__list__container">
+							<?php foreach ( $supported_regions as $code => $region ) : ?>
+								<div class='cb-region__region__item <?php echo array_key_exists( $code, $selected_regions ) ? 'selected-region' : ''; ?>'
+									data-region="<?php echo esc_attr( $code ); ?>"><?php echo esc_attr( $region ); ?></div>
+							<?php endforeach; ?>
+						</div>
 					</div>
 				</div>
-				<div class="cb-region__region__list hidden">
-					<div class="cb-region__veil"></div>
-					<div class="cb-region__list__container">
-					<?php foreach ( $supported_regions as $code => $region ) : ?>
-						<div class='cb-region__region__item <?php echo array_key_exists( $code, $selected_regions ) ? 'selected-region' : ''; ?>'
-							data-region="<?php echo esc_attr( $code ); ?>"><?php echo esc_attr( $region ); ?></div>
-					<?php endforeach; ?>
-					</div>
-				</div>
+				<div class="cb-region__remove__banner dashicons dashicons-dismiss"></div>
 			</div>
-			<div class="cb-region__remove__banner dashicons dashicons-dismiss"></div>
-		</div>
 		<?php endif; ?>
 		<?php
 		if ( ! empty( $multiple_banners ) ) {

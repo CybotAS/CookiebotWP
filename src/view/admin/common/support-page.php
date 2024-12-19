@@ -21,7 +21,7 @@ $header->display();
 			<div class="cb-support__content">
 				<div class="cb-support__info__card">
 					<h2 class="cb-support__info__title"><?php esc_html_e( 'Need help?', 'cookiebot' ); ?></h2>
-					<p  class="cb-support__info__text">
+					<p class="cb-support__info__text">
 						<?php
 						esc_html_e(
 							'Visit our Support Center to find answers to your questions or get help with configuration. If you need further assistance, use the Contact Support button in the top navigation to create a support request. We’ll respond as soon as possible.',
@@ -29,7 +29,8 @@ $header->display();
 						);
 						?>
 					</p>
-					<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+					<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn"
+						rel="noopener">
 						<?php
 						esc_html_e(
 							'Go to Support Center',

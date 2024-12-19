@@ -22,8 +22,12 @@
 use function cybot\cookiebot\lib\include_view;
 
 ?>
-<?php include_view( 'admin/common/templates/extra/cbid-disconnect-alert.php' );?>
-<?php if (!empty($network_cbid)) { include_view( 'admin/common/templates/extra/subsite-disconnect-alert.php' ); }?>
+<?php include_view( 'admin/common/templates/extra/cbid-disconnect-alert.php' ); ?>
+<?php
+if ( ! empty( $network_cbid ) ) {
+	include_view( 'admin/common/templates/extra/subsite-disconnect-alert.php' );
+}
+?>
 <div class="cb-settings__config__item cb-settings__config__cbid">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
@@ -44,26 +48,47 @@ use function cybot\cookiebot\lib\include_view;
 			</h3>
 			<div class="cookiebot-cbid-container">
 				<div class="cookiebot-cbid-input">
-					<input <?php echo ( $is_ms ) ?
-						' placeholder="' . esc_attr( $network_cbid ) . '" data-network="' . esc_attr( $network_cbid ) . '"' :
-						''; ?>
-					type="text" id="cookiebot-cbid" class="cbid-active" name="cookiebot-cbid"
-					value="<?php echo esc_attr( $cbid ); ?>"/>
-				<div class="cookiebot-cbid-check"></div>
+					<input
+						<?php
+						echo ( $is_ms ) ?
+							' placeholder="' . esc_attr( $network_cbid ) . '" data-network="' . esc_attr( $network_cbid ) . '"' :
+							'';
+						?>
+							type="text" id="cookiebot-cbid" class="cbid-active" name="cookiebot-cbid"
+							value="<?php echo esc_attr( $cbid ); ?>"/>
+					<div class="cookiebot-cbid-check"></div>
 				</div>
 				<div id="cookiebot-cbid-reset-dialog"
-					 class="cb-btn cb-main-btn <?php if (!empty($network_cbid) && !$network_cbid_override ){echo 'hidden';} ?>"><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
+					class="cb-btn cb-main-btn
+					<?php
+					if ( ! empty( $network_cbid ) && ! $network_cbid_override ) {
+						echo 'hidden';
+					}
+					?>
+					"><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
 				<?php if ( $is_ms ) : ?>
 					<div id="cookiebot-cbid-network-dialog"
-						 class="cb-btn cb-white-btn <?php if (!empty($network_cbid) && $network_cbid_override ){echo 'hidden';} ?>"><?php esc_html_e( 'Using network account', 'cookiebot' ); ?></div>
+						class="cb-btn cb-white-btn
+						<?php
+						if ( ! empty( $network_cbid ) && $network_cbid_override ) {
+							echo 'hidden';
+						}
+						?>
+						"><?php esc_html_e( 'Using network account', 'cookiebot' ); ?></div>
 					<?php submit_button( esc_html( 'Connect account', 'cookiebot' ), 'hidden' ); ?>
 				<?php endif; ?>
 			</div>
-			<?php if (!empty($network_cbid)) : ?>
+			<?php if ( ! empty( $network_cbid ) ) : ?>
 				<div id="cb-network-id-override">
 					<label class="switch-checkbox" for="cookiebot-cbid-override">
-						<input class="<?php if (!$network_cbid_override ){echo 'cb-no-network';} ?>"
-							   type="checkbox" name="cookiebot-cbid-override" id="cookiebot-cbid-override" value="1"
+						<input class="
+						<?php
+						if ( ! $network_cbid_override ) {
+							echo 'cb-no-network';
+						}
+						?>
+						"
+								type="checkbox" name="cookiebot-cbid-override" id="cookiebot-cbid-override" value="1"
 							<?php checked( 1, $network_cbid_override ); ?>>
 						<div class="switcher"></div>
 						<?php esc_html_e( 'Do not use Network Settings Account ID', 'cookiebot' ); ?>
@@ -144,7 +169,6 @@ use function cybot\cookiebot\lib\include_view;
 </div>
 
 
-
 <div class="cb-settings__config__item">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
@@ -173,18 +197,18 @@ use function cybot\cookiebot\lib\include_view;
 			</h3>
 			<label class="recommended-item">
 				<input <?php checked( 'auto', $cookie_blocking_mode ); ?>
-					type="radio"
-					name="cookiebot-cookie-blocking-mode"
-					value="auto"
+						type="radio"
+						name="cookiebot-cookie-blocking-mode"
+						value="auto"
 					<?php echo $is_ms && $network_auto ? ' disabled' : ''; ?>/>
 				<?php esc_html_e( 'Automatic', 'cookiebot' ); ?>
 				<span class="recommended-tag"><?php esc_html_e( 'Recommended', 'cookiebot' ); ?></span>
 			</label>
 			<label>
 				<input <?php checked( 'manual', $cookie_blocking_mode ); ?>
-					type="radio"
-					name="cookiebot-cookie-blocking-mode"
-					value="manual"
+						type="radio"
+						name="cookiebot-cookie-blocking-mode"
+						value="manual"
 					<?php echo $is_ms && $network_auto ? ' disabled' : ''; ?>/>
 				<?php esc_html_e( 'Manual', 'cookiebot' ); ?>
 			</label>
@@ -221,23 +245,23 @@ $auto_disabled = $cookie_blocking_mode === 'auto' ? ' disabled__item' : '';
 		<div class="cb-settings__config__data__inner">
 			<label>
 				<input
-					type="radio"
-					name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-					value="" <?php checked( '', $cv ); ?> />
+						type="radio"
+						name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+						value="" <?php checked( '', $cv ); ?> />
 				<?php esc_html_e( 'None', 'cookiebot' ); ?>
 			</label>
 			<label>
 				<input
-					type="radio"
-					name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-					value="async" <?php checked( 'async', $cv ); ?> />
+						type="radio"
+						name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+						value="async" <?php checked( 'async', $cv ); ?> />
 				async
 			</label>
 			<label>
 				<input
-					type="radio"
-					name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-					value="defer" <?php checked( 'defer', $cv ); ?> />
+						type="radio"
+						name="cookiebot-script-tag-uc-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+						value="defer" <?php checked( 'defer', $cv ); ?> />
 				defer
 			</label>
 			<?php if ( $is_ms && $network_auto || $is_ms && $network_scrip_tag_uc_attr !== 'custom' ) { ?>

@@ -10,6 +10,7 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) {
 	 */
 	final class Cookiebot_WP extends cybot\cookiebot\lib\Cookiebot_WP {
 
+
 		/**
 		 * @var Cookiebot_WP The single instance of the class
 		 * @since 1.0.0
@@ -19,8 +20,8 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) {
 		/**
 		 * Cookiebot_WP Constructor.
 		 *
-		 * @deprecated
 		 * @throws RuntimeException
+		 * @deprecated
 		 * @since   1.0.0
 		 * @access  public
 		 * @version 2.1.4
@@ -39,9 +40,9 @@ if ( ! class_exists( 'Cookiebot_WP' ) ) {
 		 *
 		 * Ensures only one instance of Cookiebot_WP is loaded or can be loaded.
 		 *
-		 * @deprecated
 		 * @return Cookiebot_WP - Main instance
 		 * @throws RuntimeException
+		 * @deprecated
 		 * @version 1.0.0
 		 * @since   1.0.0
 		 * @static

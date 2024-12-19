@@ -8,6 +8,7 @@ use function cybot\cookiebot\lib\include_view;
 
 class Iab_Page implements Settings_Page_Interface {
 
+
 	public $vendor_purpose_translations;
 
 	public function __construct() {

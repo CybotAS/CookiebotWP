@@ -1,7 +1,9 @@
 <?php
+
 namespace cybot\cookiebot\lib;
 
 class Supported_Languages {
+
 
 	public static function get() {
 		$supported_languages       = array();

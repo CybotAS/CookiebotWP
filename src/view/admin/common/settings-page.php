@@ -1,4 +1,5 @@
 <?php
+
 use cybot\cookiebot\settings\templates\Header;
 use cybot\cookiebot\settings\templates\Legacy_Settings;
 use cybot\cookiebot\settings\templates\Main_Tabs;
@@ -66,44 +67,45 @@ $header->display();
 									</h3>
 									<div class="cookiebot-cbid-container">
 										<div class="cookiebot-cbid-input">
-										<input placeholder="XxxXXXxx"
-											type="text" id="cookiebot-cbid" class="initial-cbid-setup" name="cookiebot-cbid"
-											value="<?php echo esc_attr( $cbid ); ?>"/>
-										<div class="cookiebot-cbid-check <?php echo $cbid ? 'check-pass' : ''; ?>"></div>
-									</div>
-									<?php submit_button( esc_html( 'Connect account', 'cookiebot' ), 'disabled' ); ?>
+											<input placeholder="XxxXXXxx"
+													type="text" id="cookiebot-cbid" class="initial-cbid-setup"
+													name="cookiebot-cbid"
+													value="<?php echo esc_attr( $cbid ); ?>"/>
+											<div class="cookiebot-cbid-check <?php echo $cbid ? 'check-pass' : ''; ?>"></div>
+										</div>
+										<?php submit_button( esc_html( 'Connect account', 'cookiebot' ), 'disabled' ); ?>
 									</div>
 								</div>
 							</div>
 						</div>
-                        <div id="cookiebot-ruleset-id-selector" class="cb-settings__config__item hidden">
-                            <div class="cb-settings__config__content">
-                                <p class="cb-general__info__text">
+						<div id="cookiebot-ruleset-id-selector" class="cb-settings__config__item hidden">
+							<div class="cb-settings__config__content">
+								<p class="cb-general__info__text">
 									<?php esc_html_e( 'Let us know if your account is set for compliance with a single privacy law (e.g. GDPR) or multiple laws (e.g. GDPR and CCPA) based on user’s location. The default is a single privacy law, so this is likely your setting unless modified.', 'cookiebot' ); ?>
-                                </p>
-                            </div>
-                            <div class="cb-settings__config__data">
-                                <div class="cb-settings__config__data__inner">
-                                    <h3 class="cb-settings__data__subtitle">
+								</p>
+							</div>
+							<div class="cb-settings__config__data">
+								<div class="cb-settings__config__data__inner">
+									<h3 class="cb-settings__data__subtitle">
 										<?php esc_html_e( 'Your current account setup:', 'cookiebot' ); ?>
-                                    </h3>
-                                    <label class="recommended-item">
-                                        <input <?php checked( 'settings', $ruleset_id ); ?>
-                                                type="radio"
-                                                name="cookiebot-ruleset-id"
-                                                value="settings"/>
+									</h3>
+									<label class="recommended-item">
+										<input <?php checked( 'settings', $ruleset_id ); ?>
+												type="radio"
+												name="cookiebot-ruleset-id"
+												value="settings"/>
 										<?php esc_html_e( 'Compliance with one privacy law', 'cookiebot' ); ?>
-                                    </label>
-                                    <label>
-                                        <input <?php checked( 'ruleset', $ruleset_id ); ?>
-                                                type="radio"
-                                                name="cookiebot-ruleset-id"
-                                                value="ruleset"/>
+									</label>
+									<label>
+										<input <?php checked( 'ruleset', $ruleset_id ); ?>
+												type="radio"
+												name="cookiebot-ruleset-id"
+												value="ruleset"/>
 										<?php esc_html_e( 'Compliance with multiple privacy laws (geolocation)', 'cookiebot' ); ?>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+									</label>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<?php

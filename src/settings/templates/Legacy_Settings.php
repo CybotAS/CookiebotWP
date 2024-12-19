@@ -8,6 +8,7 @@ use function cybot\cookiebot\lib\include_view;
 
 class Legacy_Settings {
 
+
 	private $options = array(
 		'cookiebot-ruleset-id',
 		'cookiebot-language',

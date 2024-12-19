@@ -15,6 +15,7 @@ use function cybot\cookiebot\lib\get_view_html;
 
 class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 
+
 	const ADDON_NAME                  = 'Embed autocorrect';
 	const OPTION_NAME                 = 'embed_autocorrect';
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing', 'statistics' );

@@ -59,7 +59,8 @@ $iab_page = new Iab_Page();
 					<div class="cb-settings__config__data__inner">
 						<div class="vendor-selected-items search-list">
 							<?php foreach ( $data['items'] as $item ) : ?>
-								<label class="switch-checkbox" for="cookiebot-<?php echo esc_attr( $item_attribute ); ?>-<?php echo esc_attr( $item['id'] ); ?>">
+								<label class="switch-checkbox"
+										for="cookiebot-<?php echo esc_attr( $item_attribute ); ?>-<?php echo esc_attr( $item['id'] ); ?>">
 									<input
 											type="checkbox"
 											name="cookiebot-tcf-<?php echo esc_attr( $item_attribute ); ?>[]"
@@ -127,13 +128,16 @@ $iab_page = new Iab_Page();
 		</div>
 		<div class="cb-settings__config__data">
 			<div class="cb-settings__config__data__inner cb-vendor-settings">
-				<input type="text" class="cb-settings__selector-search checkbox-vendor-search" placeholder="<?php esc_html_e( 'Search', 'cookiebot' ); ?>...">
+				<input type="text" class="cb-settings__selector-search checkbox-vendor-search"
+						placeholder="<?php esc_html_e( 'Search', 'cookiebot' ); ?>...">
 				<div class="cb-settings__selector-all cb-btn cb-main-btn"><?php esc_html_e( 'Select All', 'cookiebot' ); ?></div>
 				<div class="cb-settings__selector-none cb-btn cb-white-btn"><?php esc_html_e( 'Deselect All', 'cookiebot' ); ?></div>
-				<div class="vendor-selected-items-message hidden"><span><?php esc_html_e( 'Select at least one vendor', 'cookiebot' ); ?></span></div>
+				<div class="vendor-selected-items-message hidden">
+					<span><?php esc_html_e( 'Select at least one vendor', 'cookiebot' ); ?></span></div>
 				<div class="vendor-selected-items search-list">
 					<?php foreach ( $vendor_data['vendors']['items'] as $item ) : ?>
-						<label class="switch-checkbox" for="cookiebot-<?php echo esc_attr( $item_attribute ); ?>-<?php echo esc_attr( $item['id'] ); ?>">
+						<label class="switch-checkbox"
+								for="cookiebot-<?php echo esc_attr( $item_attribute ); ?>-<?php echo esc_attr( $item['id'] ); ?>">
 							<input
 									type="checkbox"
 									name="cookiebot-tcf-<?php echo esc_attr( $item_attribute ); ?>[]"
@@ -159,7 +163,8 @@ $iab_page = new Iab_Page();
 		</div>
 		<div class="cb-settings__config__data">
 			<div class="cb-settings__config__data__inner cb-vendor-settings">
-				<input type="text" class="cb-settings__selector-search checkbox-vendor-search" placeholder="<?php esc_html_e( 'Search', 'cookiebot' ); ?>...">
+				<input type="text" class="cb-settings__selector-search checkbox-vendor-search"
+						placeholder="<?php esc_html_e( 'Search', 'cookiebot' ); ?>...">
 				<div class="cb-settings__selector-all cb-btn cb-main-btn"><?php esc_html_e( 'Select All', 'cookiebot' ); ?></div>
 				<div class="cb-settings__selector-none cb-btn cb-white-btn"><?php esc_html_e( 'Deselect All', 'cookiebot' ); ?></div>
 				<div class="vendor-selected-items search-list">
@@ -211,11 +216,14 @@ $iab_page = new Iab_Page();
 			<div class="cb-settings__config__data cb-settings__vendor__restrictions">
 				<div class="cb-settings__config__data__inner">
 					<div class="cb-settings__selector__container">
-						<input type="hidden" name="<?php echo esc_html( $select_name_attr ); ?>" class="cb-settings__selector__container-input">
-						<div class="cb-settings__selector-selector" data-placeholder="<?php esc_attr_e( 'Select Vendor', 'cookiebot' ); ?>"><?php echo esc_html( $selector_placeholder ); ?></div>
+						<input type="hidden" name="<?php echo esc_html( $select_name_attr ); ?>"
+								class="cb-settings__selector__container-input">
+						<div class="cb-settings__selector-selector"
+							data-placeholder="<?php esc_attr_e( 'Select Vendor', 'cookiebot' ); ?>"><?php echo esc_html( $selector_placeholder ); ?></div>
 						<div class="cb-settings__selector-list-container hidden">
 							<div class="cb-settings__selector-veil"></div>
-							<input type="text" class="cb-settings__selector-search" placeholder="<?php esc_html_e( 'Search', 'cookiebot' ); ?>...">
+							<input type="text" class="cb-settings__selector-search"
+									placeholder="<?php esc_html_e( 'Search', 'cookiebot' ); ?>...">
 							<div class="cb-settings__selector-list search-list">
 								<?php foreach ( $vendors_list['items'] as $item ) : ?>
 									<div

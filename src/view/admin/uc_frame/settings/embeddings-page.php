@@ -6,7 +6,8 @@
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'Use our pre-defined, automatically generated embeddings to help you keep your Privacy Policy page in sync with your consent banner settings. This feature saves you time by automatically updating legally required information, so you don’t need to manually copy data into your Privacy Policy page. Once you’re done setting the options below, simply copy the code and paste it into your Privacy Policy page.', 'cookiebot' ); ?>
 		</p>
-		<input type="text" id="embedding-shortcode" value="<?php echo esc_attr( '[uc_embedding class="gdpr" show-toggle="false" type="all"]' ); ?>">
+		<input type="text" id="embedding-shortcode"
+				value="<?php echo esc_attr( '[uc_embedding class="gdpr" show-toggle="false" type="all"]' ); ?>">
 		<div class="cb-btn cb-main-btn" onclick="copyEmbedShortcode();">
 			<?php
 			esc_html_e(
@@ -48,9 +49,11 @@
 		<div class="cb-settings__config__data__inner">
 			<select name="cookiebot-embedding-type" id="cookiebot-embedding-type">
 				<option class="gdpr" value="all"><?php esc_html_e( 'Services (Default)', 'cookiebot' ); ?></option>
-				<option class="gdpr" value="category"><?php esc_html_e( 'Categories and services', 'cookiebot' ); ?></option>
+				<option class="gdpr"
+						value="category"><?php esc_html_e( 'Categories and services', 'cookiebot' ); ?></option>
 				<option class="gdpr" value="category-only"><?php esc_html_e( 'Categories only', 'cookiebot' ); ?></option>
-				<option class="gdpr" value="service-specific"><?php esc_html_e( 'Single service', 'cookiebot' ); ?></option>
+				<option class="gdpr"
+						value="service-specific"><?php esc_html_e( 'Single service', 'cookiebot' ); ?></option>
 				<option class="tcf hide-option" value="purposes"><?php esc_html_e( 'Purposes', 'cookiebot' ); ?></option>
 				<option class="tcf hide-option" value="vendors"><?php esc_html_e( 'Vendors', 'cookiebot' ); ?></option>
 			</select>

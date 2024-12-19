@@ -21,7 +21,7 @@ $header->display();
 			<div class="cb-support__content">
 				<div class="cb-support__info__card">
 					<h2 class="cb-support__info__title"><?php esc_html_e( 'Need help with your configuration?', 'cookiebot' ); ?></h2>
-					<p  class="cb-support__info__text">
+					<p class="cb-support__info__text">
 						<?php
 						esc_html_e(
 							'In our Help Center you find all the answers to your questions. If you have additional questions, create a support request and our Support Team will help out as soon as possible.',
@@ -29,7 +29,8 @@ $header->display();
 						);
 						?>
 					</p>
-					<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+					<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn"
+						rel="noopener">
 						<?php
 						esc_html_e(
 							'Visit Cookiebot CMP Help Center',
@@ -55,63 +56,65 @@ $header->display();
 			<div class="cb-faqs">
 				<h2 class="cb-support__info__title">FAQ:</h2>
 				<div class="cb-faq__container cb-faq--opened">
-					<h3 class="cb-faq__question"><?php esc_html_e( 'How to find my Cookiebot™ ID', 'cookiebot' ); ?><span class="cb-faq__toggle"></span></h3>
+					<h3 class="cb-faq__question"><?php esc_html_e( 'How to find my Cookiebot™ ID', 'cookiebot' ); ?><span
+								class="cb-faq__toggle"></span></h3>
 					<div class="cb-faq__answer">
 						<p class="cb-faq__answer__content">
-							<ol>
-								<li>
-									<?php
-									echo sprintf(
-									// translators: the first placeholder string will be replaced with a html anchor open tag and the second placeholder string will be replaced by the html anchor closing tag
-										esc_html__( 'Log in to your %1$sCookiebot CMP account%2$s.', 'cookiebot' ),
-										'<a href="https://www.cookiebot.com/' . esc_html( $manager_language ) . '/account/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner" target="_blank" rel="noopener">',
-										'</a>'
-									);
-									?>
-								</li>
-								<li>
-									<?php
-									echo sprintf(
-									// translators: the placeholder strings denote the positions of <b>, </b>, <b> and </b> HTML tags
-										esc_html__( 'Go to %1$s"Settings"%2$s and setup your Cookiebot CMP', 'cookiebot' ),
-										'<b>',
-										'</b>'
-									);
-									?>
-								</li>
-								<li>
-									<?php
-									echo sprintf(
-									// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
-										esc_html__( 'Go to the %1$s"Your scripts"%2$s tab', 'cookiebot' ),
-										'<b>',
-										'</b>'
-									);
-									?>
-								</li>
-								<li><?php esc_html_e( 'Copy the value inside the data-cid parameter - eg.: abcdef12-3456-7890-abcd-ef1234567890', 'cookiebot' ); ?></li>
-								<li>
-									<?php
-									echo sprintf(
-									// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
-										esc_html__( 'Add %1$s[cookie_declaration]%2$s shortcode to a page to show the declaration', 'cookiebot' ),
-										'<b>',
-										'</b>'
-									);
-									?>
-								</li>
-								<li><?php esc_html_e( 'Remember to change your scripts as described below', 'cookiebot' ); ?></li>
-							</ol>
+						<ol>
+							<li>
+								<?php
+								printf(
+								// translators: the first placeholder string will be replaced with a html anchor open tag and the second placeholder string will be replaced by the html anchor closing tag
+									esc_html__( 'Log in to your %1$sCookiebot CMP account%2$s.', 'cookiebot' ),
+									'<a href="https://www.cookiebot.com/' . esc_html( $manager_language ) . '/account/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner" target="_blank" rel="noopener">',
+									'</a>'
+								);
+								?>
+							</li>
+							<li>
+								<?php
+								printf(
+								// translators: the placeholder strings denote the positions of <b>, </b>, <b> and </b> HTML tags
+									esc_html__( 'Go to %1$s"Settings"%2$s and setup your Cookiebot CMP', 'cookiebot' ),
+									'<b>',
+									'</b>'
+								);
+								?>
+							</li>
+							<li>
+								<?php
+								printf(
+								// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
+									esc_html__( 'Go to the %1$s"Your scripts"%2$s tab', 'cookiebot' ),
+									'<b>',
+									'</b>'
+								);
+								?>
+							</li>
+							<li><?php esc_html_e( 'Copy the value inside the data-cid parameter - eg.: abcdef12-3456-7890-abcd-ef1234567890', 'cookiebot' ); ?></li>
+							<li>
+								<?php
+								printf(
+								// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
+									esc_html__( 'Add %1$s[cookie_declaration]%2$s shortcode to a page to show the declaration', 'cookiebot' ),
+									'<b>',
+									'</b>'
+								);
+								?>
+							</li>
+							<li><?php esc_html_e( 'Remember to change your scripts as described below', 'cookiebot' ); ?></li>
+						</ol>
 						</p>
 					</div>
 				</div>
 
 				<div class="cb-faq__container">
-					<h3 class="cb-faq__question"><?php esc_html_e( 'Add the Cookie Declaration to your website', 'cookiebot' ); ?><span class="cb-faq__toggle"></span></h3>
+					<h3 class="cb-faq__question"><?php esc_html_e( 'Add the Cookie Declaration to your website', 'cookiebot' ); ?>
+						<span class="cb-faq__toggle"></span></h3>
 					<div class="cb-faq__answer">
 						<p class="cb-faq__answer__content">
 							<?php
-							echo sprintf(
+							printf(
 							// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
 								esc_html__( 'Use the shortcode %1$s[cookie_declaration]%2$s to add the cookie declaration to a page or post. The cookie declaration will always show the latest version from Cookiebot CMP.', 'cookiebot' ),
 								'<b>',
@@ -121,7 +124,7 @@ $header->display();
 						</p>
 						<p class="cb-faq__answer__content">
 							<?php
-							echo sprintf(
+							printf(
 							// translators: the placeholder strings denote the positions of <i>, </i>, <b> and </b> HTML tags
 								esc_html__( 'If you want to show the cookie declaration in a specific language, you can add the %1$s"lang"%2$s attribute, e.g. %3$s[cookie_declaration lang="de"]%4$s.', 'cookiebot' ),
 								'<i>',
@@ -135,7 +138,8 @@ $header->display();
 				</div>
 
 				<div class="cb-faq__container">
-					<h3 class="cb-faq__question"><?php esc_html_e( 'Update your script tags', 'cookiebot' ); ?><span class="cb-faq__toggle"></span></h3>
+					<h3 class="cb-faq__question"><?php esc_html_e( 'Update your script tags', 'cookiebot' ); ?><span
+								class="cb-faq__toggle"></span></h3>
 					<div class="cb-faq__answer">
 						<p class="cb-faq__answer__content">
 							<?php
@@ -147,7 +151,7 @@ $header->display();
 						</p>
 						<p class="cb-faq__answer__content">
 							<?php
-							echo sprintf(
+							printf(
 							// translators: the placeholder strings denote the positions of <i>, </i>, <b> and </b> HTML tags
 								esc_html__( 'Example on modifying an existing Google Analytics Universal script tag can be found %1$shere in step 4%2$s.', 'cookiebot' ),
 								'<a href="https://www.cookiebot.com/en/manual-implementation/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner" target="_blank" rel="noopener">',
@@ -169,7 +173,8 @@ $header->display();
 				</div>
 
 				<div class="cb-faq__container">
-					<h3 class="cb-faq__question"><?php esc_html_e( 'Helper function to update your scripts', 'cookiebot' ); ?><span class="cb-faq__toggle"></span></h3>
+					<h3 class="cb-faq__question"><?php esc_html_e( 'Helper function to update your scripts', 'cookiebot' ); ?>
+						<span class="cb-faq__toggle"></span></h3>
 					<div class="cb-faq__answer">
 						<p class="cb-faq__answer__content">
 							<?php

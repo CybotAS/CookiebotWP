@@ -1,7 +1,9 @@
 <?php
+
 namespace cybot\cookiebot\lib;
 
 class Cookiebot_Automatic_Updates {
+
 
 	public function register_hooks() {
 		if ( is_admin() || ( defined( 'DOING_CRON' ) && DOING_CRON ) ) {

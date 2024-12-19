@@ -5,6 +5,7 @@ namespace cybot\cookiebot\lib;
 use InvalidArgumentException;
 
 class Consent_API_Helper {
+
 	public function register_hooks() {
 		// Include integration to WP Consent Level API if available
 		if ( $this->is_wp_consent_api_active() ) {

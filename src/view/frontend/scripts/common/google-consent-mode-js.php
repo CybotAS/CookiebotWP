@@ -8,9 +8,12 @@
 ?>
 <script<?php echo ! $consent_attribute ? '' : ' data-cookieconsent="' . esc_attr( $consent_attribute ) . '"'; ?>>
 	window.<?php echo esc_js( $data_layer ); ?> = window.<?php echo esc_js( $data_layer ); ?> || [];
+
 	function gtag() {
-		<?php echo esc_js( $data_layer ); ?>.push(arguments);
+		<?php echo esc_js( $data_layer ); ?>.
+		push(arguments);
 	}
+
 	gtag("consent", "default", {
 		ad_user_data: "denied",
 		ad_personalization: "denied",
@@ -25,7 +28,7 @@
 	<?php
 	if ( $url_passthrough ) {
 		echo /** @lang JavaScript */
-		'gtag("set", "url_passthrough", true);' . PHP_EOL;
+			'gtag("set", "url_passthrough", true);' . PHP_EOL;
 	}
 	?>
 </script>

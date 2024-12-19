@@ -1,10 +1,12 @@
 <?php
+
 namespace cybot\cookiebot\shortcode;
 
 use InvalidArgumentException;
 use function cybot\cookiebot\lib\get_view_html;
 
 class Cookiebot_Embedding_Shortcode {
+
 
 	public function register_hooks() {
 		add_shortcode( 'uc_embedding', array( static::class, 'show_declaration' ) );

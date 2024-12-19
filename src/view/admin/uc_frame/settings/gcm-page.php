@@ -35,10 +35,10 @@
 		<div class="cb-settings__config__data__inner">
 			<label class="switch-checkbox" for="gcm">
 				<input
-					type="checkbox"
-					name="cookiebot-gcm"
-					id="gcm"
-					value="1" <?php checked( 1, $gcm_enabled_option ); ?>>
+						type="checkbox"
+						name="cookiebot-gcm"
+						id="gcm"
+						value="1" <?php checked( 1, $gcm_enabled_option ); ?>>
 				<div class="switcher"></div>
 				<?php esc_html_e( 'Google Consent Mode', 'cookiebot' ); ?>
 				<?php echo ( $gcm_enabled_option === '1' ) ? 'enabled' : 'disabled'; ?>

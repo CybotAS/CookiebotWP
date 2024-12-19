@@ -10,6 +10,7 @@ use function cybot\cookiebot\lib\include_view;
 
 class Support_Page implements Settings_Page_Interface {
 
+
 	const ADMIN_SLUG = 'cookiebot_support';
 
 	public function menu() {

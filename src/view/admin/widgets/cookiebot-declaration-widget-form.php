@@ -32,10 +32,10 @@
 	>
 		<option value=""><?php echo esc_html__( '- Default -', 'cookiebot' ); ?></option>
 		<?php foreach ( $supported_languages as $supported_language_code => $supported_language ) : ?>
-			<option 
+			<option
 					value="<?php echo esc_attr( $supported_language_code ); ?>"
 					id="<?php echo esc_attr( $supported_language_code ); ?>"
-					<?php echo selected( $lang, $supported_language_code, false ); ?>
+				<?php echo selected( $lang, $supported_language_code, false ); ?>
 			>
 				<?php echo esc_html( $supported_language ); ?>
 			</option>

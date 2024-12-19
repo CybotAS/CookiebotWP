@@ -5,6 +5,7 @@
 /** @var array $addon_cookie_types */
 /** @var bool $addon_placeholder_is_enabled */
 /** @var string $placeholders_html */
+
 /** @var string $addon_extra_options_html */
 
 use function cybot\cookiebot\lib\cookiebot_addons_checked_selected_helper;

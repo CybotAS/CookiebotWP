@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Wp_Mautic extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'Mautic';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';
 	const OPTION_NAME                 = 'mautic';
@@ -21,22 +22,22 @@ class Wp_Mautic extends Base_Cookiebot_Plugin_Addon {
 	 * @since 1.5.0
 	 */
 	public function load_addon_configuration() {
-			$this->buffer_output->add_tag(
-				'wp_head',
-				10,
-				array(
-					'MauticTrackingObject' => $this->get_cookie_types(),
-				),
-				false
-			);
-			$this->buffer_output->add_tag(
-				'wp_footer',
-				10,
-				array(
-					'MauticTrackingObject' => $this->get_cookie_types(),
-				),
-				false
-			);
+		$this->buffer_output->add_tag(
+			'wp_head',
+			10,
+			array(
+				'MauticTrackingObject' => $this->get_cookie_types(),
+			),
+			false
+		);
+		$this->buffer_output->add_tag(
+			'wp_footer',
+			10,
+			array(
+				'MauticTrackingObject' => $this->get_cookie_types(),
+			),
+			false
+		);
 
 		// Remove noscript tracking
 		if ( has_action( 'wp_footer', 'wpmautic_inject_noscript' ) ) {

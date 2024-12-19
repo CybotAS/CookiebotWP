@@ -11,6 +11,7 @@ use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
 use function cybot\cookiebot\lib\include_view;
 
 class General_Page implements Settings_Page_Interface {
+
 	public function display() {
 		$consent_api_helper = new Consent_API_Helper();
 
@@ -35,7 +36,7 @@ class General_Page implements Settings_Page_Interface {
 		if ( is_multisite() ) {
 			// Receive settings from multisite - this might change the way we render the form
 			$args['network_cbid']              = get_site_option( 'cookiebot-cbid', '' );
-			$args['network_cbid_override']     = !empty( get_option( 'cookiebot-cbid-override' ) || ( !empty( $args['network_cbid'] ) && $args['network_cbid'] !== $args['cbid'] ) );
+			$args['network_cbid_override']     = ! empty( get_option( 'cookiebot-cbid-override' ) || ( ! empty( $args['network_cbid'] ) && $args['network_cbid'] !== $args['cbid'] ) );
 			$args['network_scrip_tag_uc_attr'] = get_site_option( 'cookiebot-script-tag-uc-attribute', 'custom' );
 			$args['network_scrip_tag_cd_attr'] = get_site_option( 'cookiebot-script-tag-cd-attribute', 'custom' );
 			$args['is_ms']                     = true;

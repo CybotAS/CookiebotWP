@@ -9,6 +9,7 @@ use function cybot\cookiebot\lib\include_view;
 
 class Header {
 
+
 	/**
 	 * @throws InvalidArgumentException
 	 */

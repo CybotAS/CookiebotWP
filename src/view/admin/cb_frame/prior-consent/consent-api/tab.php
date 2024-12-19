@@ -59,10 +59,10 @@
 		?>
 		<table class="cb-settings__consent__mapping-table" aria-describedby="consent_level_api_settings_title">
 			<thead>
-				<tr>
-					<th></th>
-					<th></th>
-				</tr>
+			<tr>
+				<th></th>
+				<th></th>
+			</tr>
 			</thead>
 			<?php
 			foreach ( $states as $state ) {
@@ -96,15 +96,15 @@
 						<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'WP Consent API cookies categories equivalent', 'cookiebot' ); ?></h3>
 						<div class="consent_mapping">
 							<label><input
-									type="checkbox"
-									name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][functional]"
-									data-default-value="1" value="1" checked disabled
+										type="checkbox"
+										name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][functional]"
+										data-default-value="1" value="1" checked disabled
 								> <?php esc_html_e( 'Functional', 'cookiebot' ); ?> </label>
 							<label><input
-									type="checkbox"
-									name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][preferences]"
-									data-default-value="<?php echo esc_attr( $m_default[ $key ]['preferences'] ); ?>"
-									value="1"
+										type="checkbox"
+										name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][preferences]"
+										data-default-value="<?php echo esc_attr( $m_default[ $key ]['preferences'] ); ?>"
+										value="1"
 									<?php
 									if ( ! empty( $m[ $key ]['preferences'] ) ) {
 										echo 'checked';
@@ -117,10 +117,10 @@
 									?>
 								> <?php esc_html_e( 'preferences', 'cookiebot' ); ?> </label>
 							<label><input
-									type="checkbox"
-									name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][statistics]"
-									data-default-value="<?php echo esc_attr( $m_default[ $key ]['statistics'] ); ?>"
-									value="1"
+										type="checkbox"
+										name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][statistics]"
+										data-default-value="<?php echo esc_attr( $m_default[ $key ]['statistics'] ); ?>"
+										value="1"
 									<?php
 									if ( ! empty( $m[ $key ]['statistics'] ) ) {
 										echo 'checked';
@@ -133,10 +133,10 @@
 									?>
 								> <?php esc_html_e( 'statistics', 'cookiebot' ); ?> </label>
 							<label><input
-									type="checkbox"
-									name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][statistics-anonymous]"
-									data-default-value="<?php echo esc_attr( $m_default[ $key ]['statistics-anonymous'] ); ?>"
-									value="1"
+										type="checkbox"
+										name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][statistics-anonymous]"
+										data-default-value="<?php echo esc_attr( $m_default[ $key ]['statistics-anonymous'] ); ?>"
+										value="1"
 									<?php
 									if ( ! empty( $m[ $key ]['statistics-anonymous'] ) ) {
 										echo 'checked';
@@ -150,10 +150,10 @@
 								> <?php esc_html_e( 'Statistics Anonymous', 'cookiebot' ); ?>
 							</label>
 							<label><input
-									type="checkbox"
-									name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][marketing]"
-									data-default-value="<?php echo esc_attr( $m_default[ $key ]['marketing'] ); ?>"
-									value="1"
+										type="checkbox"
+										name="cookiebot-consent-mapping[<?php echo esc_attr( $key ); ?>][marketing]"
+										data-default-value="<?php echo esc_attr( $m_default[ $key ]['marketing'] ); ?>"
+										value="1"
 									<?php
 									if ( ! empty( $m[ $key ]['marketing'] ) ) {
 										echo 'checked';
@@ -174,13 +174,13 @@
 			<tfoot>
 			<tr>
 				<td>
-                    <div id="cb-consent-api-reset-defaults" class="cb-btn cb-main-btn">
-					<?php
+					<div id="cb-consent-api-reset-defaults" class="cb-btn cb-main-btn">
+						<?php
 						esc_html_e(
 							'Reset to default mapping',
 							'cookiebot'
 						);
-					?>
+						?>
 					</div>
 				</td>
 			</tr>

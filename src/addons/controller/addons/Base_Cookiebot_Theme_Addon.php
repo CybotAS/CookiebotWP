@@ -6,6 +6,7 @@ use cybot\cookiebot\exceptions\addons\InstallationException;
 
 abstract class Base_Cookiebot_Theme_Addon extends Base_Cookiebot_Addon {
 
+
 	/**
 	 * @return bool
 	 */

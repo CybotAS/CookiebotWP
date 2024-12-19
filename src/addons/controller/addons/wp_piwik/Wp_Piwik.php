@@ -8,6 +8,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Wp_Piwik extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'WP Piwik';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics.';
 	const OPTION_NAME                 = 'wp_piwik';

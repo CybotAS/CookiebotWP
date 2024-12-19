@@ -20,7 +20,7 @@ $header->display();
 			<div class="cb-debug__content">
 				<div class="cb-debug__info__card">
 					<h2 class="cb-debug__info__title"><?php esc_html_e( 'Debug information', 'cookiebot' ); ?></h2>
-					<p  class="cb-debug__info__text">
+					<p class="cb-debug__info__text">
 						<?php
 						esc_html_e(
 							'The information below is for debugging purposes. If you have any issues with your Cookiebot CMP integration, this information is the best place to start.',
@@ -40,7 +40,8 @@ $header->display();
 				<div class="cb-debug__support__card">
 					<div class="cb-debug__support__inner">
 						<h2 class="cb-debug__support__title"><?php esc_html_e( 'If you have any issues with the implemenation of Cookiebot CMP, please visit our Support Center.', 'cookiebot' ); ?></h2>
-						<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn" rel="noopener">
+						<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn"
+							rel="noopener">
 							<?php
 							esc_html_e(
 								'Visit Support Center',

@@ -1,6 +1,8 @@
 <?php
+
 use cybot\cookiebot\settings\templates\Header;
 use cybot\cookiebot\settings\templates\Main_Tabs;
+
 /**
  * @var string $logo
  * @var string $cookiebot_gdpr_url
@@ -28,22 +30,22 @@ $header->display();
 
 				<div class="cb-settings__tabs__content">
 					<div class="cb-settings__tabs__content--item active-item">
-                        <div class="cb-cbid-alert__msg hidden">
-                            <h3 class="cb-settings__config__subtitle">
+						<div class="cb-cbid-alert__msg hidden">
+							<h3 class="cb-settings__config__subtitle">
 								<?php esc_html_e( 'Are you sure?', 'cookiebot' ); ?>
-                            </h3>
-                            <p class="cb-general__info__text">
+							</h3>
+							<p class="cb-general__info__text">
 								<?php esc_html_e( 'You will need to add a new ID before updating other network settings. If any subsite is using its own account disconnecting this account won’t affect it.', 'cookiebot' ); ?>
-                            </p>
-                            <div class="new-account-actions">
-                                <div id="cookiebot-cbid-cancel" class="cb-btn cb-white-btn">
+							</p>
+							<div class="new-account-actions">
+								<div id="cookiebot-cbid-cancel" class="cb-btn cb-white-btn">
 									<?php esc_html_e( 'Cancel', 'cookiebot' ); ?>
-                                </div>
-                                <div id="cookiebot-cbid-reset" class="cb-btn cb-main-btn">
+								</div>
+								<div id="cookiebot-cbid-reset" class="cb-btn cb-main-btn">
 									<?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?>
-                                </div>
-                            </div>
-                        </div>
+								</div>
+							</div>
+						</div>
 
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
@@ -51,19 +53,23 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'If added this will be the default Cookiebot ID for all subsites. Subsites are able to override the Cookiebot ID.', 'cookiebot' ); ?>
 								</p>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it" target="_blank" rel="noopener" class="cb-btn cb-link-btn"><?php esc_html_e( 'Read more on the Domain Group ID', 'cookiebot' ); ?></a>
+								<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
+									target="_blank" rel="noopener"
+									class="cb-btn cb-link-btn"><?php esc_html_e( 'Read more on the Domain Group ID', 'cookiebot' ); ?></a>
 							</div>
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
 									<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Add your Domain Group ID', 'cookiebot' ); ?></h3>
-                                    <div class="cookiebot-cbid-container">
-                                        <div class="cookiebot-cbid-input">
-                                            <input type="text" id="cookiebot-cbid" class="cbid-active" name="cookiebot-cbid"
-                                                   value="<?php echo esc_attr( get_site_option( 'cookiebot-cbid', '' ) ); ?>"/>
-                                            <div class="cookiebot-cbid-check"></div>
-                                        </div>
-                                        <div id="cookiebot-cbid-reset-dialog" class="cb-btn cb-main-btn"><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
-                                    </div>
+									<div class="cookiebot-cbid-container">
+										<div class="cookiebot-cbid-input">
+											<input type="text" id="cookiebot-cbid" class="cbid-active"
+													name="cookiebot-cbid"
+													value="<?php echo esc_attr( get_site_option( 'cookiebot-cbid', '' ) ); ?>"/>
+											<div class="cookiebot-cbid-check"></div>
+										</div>
+										<div id="cookiebot-cbid-reset-dialog"
+											class="cb-btn cb-main-btn"><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -206,7 +212,8 @@ $header->display();
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
 									<label class="switch-checkbox" for="cookiebot-autoupdate">
-										<input id="cookiebot-autoupdate" type="checkbox" name="cookiebot-autoupdate" value="1"
+										<input id="cookiebot-autoupdate" type="checkbox" name="cookiebot-autoupdate"
+												value="1"
 											<?php
 											checked(
 												1,
@@ -234,7 +241,8 @@ $header->display();
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
 									<label class="switch-checkbox" for="cookiebot-nooutput">
-										<input id="cookiebot-nooutput" type="checkbox" name="cookiebot-nooutput" value="1"
+										<input id="cookiebot-nooutput" type="checkbox" name="cookiebot-nooutput"
+												value="1"
 											<?php
 											checked(
 												1,

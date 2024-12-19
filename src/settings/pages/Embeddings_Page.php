@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use function cybot\cookiebot\lib\include_view;
 
 class Embeddings_Page implements Settings_Page_Interface {
+
 	/**
 	 * @throws InvalidArgumentException
 	 */

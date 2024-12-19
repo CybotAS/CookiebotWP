@@ -10,6 +10,7 @@ use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
 
 class Cookiebot_Base_Notice {
+
 	const COOKIEBOT_NOTICE_OPTION_KEY    = '';
 	const COOKIEBOT_NOTICE_TEMPLATE_PATH = '';
 
@@ -120,9 +121,9 @@ class Cookiebot_Base_Notice {
 	/**
 	 * Include notice on page
 	 *
-	 * @version 4.3.9
-	 * @since 4.3.9
 	 * @throws InvalidArgumentException
+	 * @since 4.3.9
+	 * @version 4.3.9
 	 */
 	private function show_notice() {
 		include_view(

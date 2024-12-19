@@ -93,23 +93,23 @@
 			?>
 			<label>
 				<input
-					type="radio"
-					name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-					value="" <?php checked( '', $cv ); ?>/>
+						type="radio"
+						name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+						value="" <?php checked( '', $cv ); ?>/>
 				<?php esc_html_e( 'None', 'cookiebot' ); ?>
 			</label>
 			<label>
 				<input
-					type="radio"
-					name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-					value="async" <?php checked( 'async', $cv ); ?>/>
+						type="radio"
+						name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+						value="async" <?php checked( 'async', $cv ); ?>/>
 				async
 			</label>
 			<label>
 				<input
-					type="radio"
-					name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
-					value="defer" <?php checked( 'defer', $cv ); ?>/>
+						type="radio"
+						name="cookiebot-script-tag-cd-attribute"<?php echo ( $disabled ) ? ' disabled' : ''; ?>
+						value="defer" <?php checked( 'defer', $cv ); ?>/>
 				defer
 			</label>
 			<?php if ( $disabled ) { ?>
@@ -137,10 +137,10 @@
 				<?php esc_html_e( 'Script source URL:', 'cookiebot' ); ?>
 			</h3>
 			<textarea
-				name="cookiebot-ignore-scripts"
-				rows="4"
-				cols="50"
-				placeholder="<?php esc_attr_e( 'Add script source URL, one per line', 'cookiebot' ); ?>"
+					name="cookiebot-ignore-scripts"
+					rows="4"
+					cols="50"
+					placeholder="<?php esc_attr_e( 'Add script source URL, one per line', 'cookiebot' ); ?>"
 			><?php echo esc_html( get_option( 'cookiebot-ignore-scripts', false ) ); ?></textarea>
 		</div>
 	</div>

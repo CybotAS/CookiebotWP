@@ -5,6 +5,7 @@ namespace cybot\cookiebot\addons\controller\addons\google_analytics_plus;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Google_Analytics_Plus extends Base_Cookiebot_Plugin_Addon {
+
 	const ADDON_NAME           = 'Google Analytics +';
 	const OPTION_NAME          = 'google_analytics_plus';
 	const PLUGIN_FILE_PATH     = 'google-analytics-async/google-analytics-async.php';

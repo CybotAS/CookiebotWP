@@ -6,6 +6,7 @@ use WP_REST_SERVER;
 use cybot\cookiebot\settings\pages\Debug_Page;
 
 class Cookiebot_Review {
+
 	/**
 	 * Handler url.
 	 *

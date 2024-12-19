@@ -28,9 +28,9 @@ foreach ( $placeholders as $placeholder ) :
 		</p>
 		<p>
 			<textarea class="placeholder_textarea"
-				cols="5"
-				rows="5"
-				name="<?php echo esc_attr( $name ); ?>"
+						cols="5"
+						rows="5"
+						name="<?php echo esc_attr( $name ); ?>"
 			>
 			<?php
 			echo esc_textarea( $placeholder_content );

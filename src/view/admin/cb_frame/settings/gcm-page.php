@@ -42,10 +42,10 @@
 		<div class="cb-settings__config__data__inner">
 			<label class="switch-checkbox" for="gcm">
 				<input
-					type="checkbox"
-					name="cookiebot-gcm"
-					id="gcm"
-					value="1" <?php checked( 1, $gcm_enabled_option ); ?>>
+						type="checkbox"
+						name="cookiebot-gcm"
+						id="gcm"
+						value="1" <?php checked( 1, $gcm_enabled_option ); ?>>
 				<div class="switcher"></div>
 				<?php esc_html_e( 'Google Consent Mode', 'cookiebot' ); ?>
 				<?php echo ( $gcm_enabled_option === '1' ) ? 'enabled' : 'disabled'; ?>
@@ -72,10 +72,10 @@
 		<div class="cb-settings__config__data__inner">
 			<label class="switch-checkbox" for="gcm-url-pasthrough">
 				<input
-					type="checkbox"
-					name="cookiebot-gcm-url-passthrough"
-					id="gcm-url-pasthrough"
-					value="1" <?php checked( 1, $gcm_url_passthrough_option ); ?>>
+						type="checkbox"
+						name="cookiebot-gcm-url-passthrough"
+						id="gcm-url-pasthrough"
+						value="1" <?php checked( 1, $gcm_url_passthrough_option ); ?>>
 				<div class="switcher"></div>
 				<?php esc_html_e( 'URL passthrough', 'cookiebot' ); ?>
 				<?php echo ( $gcm_url_passthrough_option === '1' ) ? 'enabled' : 'disabled'; ?>
@@ -84,7 +84,8 @@
 	</div>
 </div>
 
-<div id="gcm-cookie-categories" class="cb-settings__config__item<?php echo esc_attr( $auto_disabled ); ?>"<?php echo ( $gcm_enabled_option === '1' ) ? '' : ' style="display: none"'; ?>>
+<div id="gcm-cookie-categories"
+	class="cb-settings__config__item<?php echo esc_attr( $auto_disabled ); ?>"<?php echo ( $gcm_enabled_option === '1' ) ? '' : ' style="display: none"'; ?>>
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Google Consent Mode cookies', 'cookiebot' ); ?></h3>
 		<p class="cb-general__info__text">

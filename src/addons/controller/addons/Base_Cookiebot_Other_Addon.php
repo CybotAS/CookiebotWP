@@ -4,6 +4,7 @@ namespace cybot\cookiebot\addons\controller\addons;
 
 abstract class Base_Cookiebot_Other_Addon extends Base_Cookiebot_Addon {
 
+
 	/**
 	 * @return bool
 	 */

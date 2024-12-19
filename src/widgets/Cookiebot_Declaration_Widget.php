@@ -10,6 +10,7 @@ use function cybot\cookiebot\lib\include_view;
 
 class Cookiebot_Declaration_Widget extends WP_Widget {
 
+
 	// Main constructor
 	public function __construct() {
 		parent::__construct(
@@ -89,5 +90,4 @@ class Cookiebot_Declaration_Widget extends WP_Widget {
 		);
 		include_view( 'frontend/widgets/cookiebot-declaration-widget.php', $view_args );
 	}
-
 }

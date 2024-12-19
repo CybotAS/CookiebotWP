@@ -11,6 +11,7 @@ use function cybot\cookiebot\lib\include_view;
 
 class Multiple_Page implements Settings_Page_Interface {
 
+
 	private function get_multiple_banners() {
 		$banners = get_option( 'cookiebot-multiple-banners' );
 

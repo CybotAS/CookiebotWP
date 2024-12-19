@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Hubspot_Leadin extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'HubSpot - Free Marketing Plugin for WordPress';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';
 	const OPTION_NAME                 = 'hubspot_leadin';
