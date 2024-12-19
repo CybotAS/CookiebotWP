@@ -670,6 +670,7 @@ class Settings_Config {
 			if ( $mapping[ $uc_category ] === $category ) {
 				$option_string .= ' selected';
 			}
+			// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings,WordPress.WP.I18n.MissingTranslatorsComment
 			$option_string .= '>' . esc_html( sprintf( __( '%s', 'cookiebot' ), $category ) ) . '</option>';
 			$html          .= $option_string;
 		}
