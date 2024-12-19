@@ -72,6 +72,10 @@ class Network_Menu_Settings {
 			! empty( $_POST['cookiebot-cbid'] ) ? $_POST['cookiebot-cbid'] : ''
 		);
 		update_site_option(
+			'cookiebot-ruleset-id',
+			! empty( $_POST['cookiebot-ruleset-id'] ) ? $_POST['cookiebot-ruleset-id'] : ''
+		);
+		update_site_option(
 			'cookiebot-script-tag-uc-attribute',
 			! empty( $_POST['cookiebot-script-tag-uc-attribute'] ) ? $_POST['cookiebot-script-tag-uc-attribute'] : ''
 		);

@@ -37,6 +37,7 @@ class General_Page implements Settings_Page_Interface {
 			// Receive settings from multisite - this might change the way we render the form
 			$args['network_cbid']              = get_site_option( 'cookiebot-cbid', '' );
 			$args['network_cbid_override']     = ! empty( get_option( 'cookiebot-cbid-override' ) || ( ! empty( $args['network_cbid'] ) && $args['network_cbid'] !== $args['cbid'] ) );
+			$args['ruleset_id']                = empty( get_option( 'cookiebot-ruleset-id' ) ) ? get_site_option( 'cookiebot-ruleset-id' ) : $args['ruleset_id'];
 			$args['network_scrip_tag_uc_attr'] = get_site_option( 'cookiebot-script-tag-uc-attribute', 'custom' );
 			$args['network_scrip_tag_cd_attr'] = get_site_option( 'cookiebot-script-tag-cd-attribute', 'custom' );
 			$args['is_ms']                     = true;
