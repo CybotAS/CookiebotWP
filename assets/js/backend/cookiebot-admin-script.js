@@ -22,8 +22,162 @@ function deactivateCookiebot( e ) {
 
     let deactivationLink = e.target.href;
 
+    populatePopup();
     jQuery( '#cb-review__skip' ).attr( 'href', deactivationLink );
-    jQuery( '.cookiebot-popup-container' ).addClass( 'cb-opened' );
+    jQuery( '#cookiebot-review-popup-container' ).addClass( 'cb-opened cb-filled' );
+}
+
+function populatePopup(){
+    if(jQuery( '#cookiebot-review-popup-container' ).hasClass( 'cb-filled' )){
+        return;
+    }
+
+    let popupFormContainer = document.createElement('div');
+    const header = renderPopupHeader();
+    const form = renderPopupForm();
+    popupFormContainer.setAttribute('id','cookiebot-popup');
+    popupFormContainer.appendChild(header);
+    popupFormContainer.appendChild(form);
+
+    jQuery('#cookiebot-review-popup-container').append(popupFormContainer);
+}
+
+function renderPopupHeader() {
+    let popupHeader = document.createElement('div');
+    let headerLogoContainer = document.createElement('div');
+    let headerLogo = document.createElement('img');
+    let headerTitle = document.createElement('h2');
+    let headerClose = document.createElement('div');
+    popupHeader.classList.add('cb-review__header');
+    headerLogoContainer.classList.add('cb-review__logo');
+    headerLogo.setAttribute('src', cb_survey.logo);
+    headerLogo.setAttribute('alt', 'Usercentrics Cookiebot');
+    headerTitle.setAttribute('id', 'cb-review__title');
+    headerTitle.innerHTML = cb_survey.popup_header_title;
+    headerClose.setAttribute('id', 'cb-review__close');
+    headerClose.classList.add('dashicons','dashicons-dismiss');
+    popupHeader.appendChild(headerLogoContainer).appendChild(headerLogo);
+    popupHeader.appendChild(headerTitle);
+    popupHeader.appendChild(headerClose);
+    return popupHeader;
+}
+
+function renderPopupForm(){
+    let popupForm = document.createElement('form');
+    popupForm.setAttribute('id', 'cb-review__form');
+    popupForm.setAttribute('method',  'POST');
+    let firstMsg = document.createElement('p');
+    firstMsg.innerText = cb_survey.first_msg;
+    const labelContainer = renderFormLabels();
+    const consentLabel = renderConsentLabel();
+    const consentActions = renderPopupActions();
+    popupForm.appendChild(firstMsg);
+    popupForm.appendChild(labelContainer);
+    popupForm.appendChild(consentLabel);
+    popupForm.appendChild(consentActions);
+    return popupForm
+}
+
+function renderFormLabels(){
+    let labelsContainer = document.createElement('div');
+    let options = cb_survey.options;
+    options.forEach((option)=>{
+        let labelContainer = document.createElement('div');
+        let labelChild = document.createElement('label');
+        let labelInput = document.createElement('input');
+        labelChild.classList.add('cb-review__form--item');
+        labelInput.setAttribute('type', 'radio');
+        labelInput.setAttribute('name', 'cookiebot-review-option');
+        labelInput.setAttribute('value', option.value);
+        let labelText = document.createElement('span');
+        labelText.innerText = option.text;
+        labelChild.appendChild(labelInput);
+        labelChild.appendChild(labelText);
+        labelContainer.appendChild(labelChild);
+
+        if(option.value === '7'){
+            let extraContainer = document.createElement('div');
+            let extraText = document.createElement('textarea');
+            extraContainer.classList.add('cb-review__form--item__custom');
+            extraText.setAttribute('id','cb-review__other-description');
+            extraText.setAttribute('name','other-description');
+            extraText.setAttribute('placeholder',option.extra);
+            extraText.setAttribute('row','1');
+            labelContainer.appendChild(extraContainer).appendChild(extraText);
+        }
+        labelsContainer.appendChild(labelContainer);
+    })
+    return labelsContainer;
+}
+
+function renderConsentLabel(){
+    let labelContainer = document.createElement('div');
+    labelContainer.classList.add('consent-item');
+    let consentLabel = document.createElement('label');
+    consentLabel.classList.add('cb-review__form--item');
+    let consentInput = document.createElement('input');
+    consentInput.setAttribute('id','cb-review__debug-reason');
+    consentInput.setAttribute('type','checkbox');
+    consentInput.setAttribute('name','cookiebot-review-debug');
+    consentInput.setAttribute('value','true');
+    consentInput.setAttribute('data-custom-field','true');
+    let consentDescription = document.createElement('span');
+    let consentOpt = document.createElement('b');
+    consentOpt.innerText = cb_survey.consent.optional;
+    let consentLink = document.createElement('a');
+    consentLink.setAttribute('href', 'mailto:unsubscribe@usercentrics.com');
+    consentLink.innerText = 'unsubscribe@usercentrics.com';
+    consentDescription.appendChild(consentOpt);
+    let firstText = document.createElement('span');
+    firstText.innerText = cb_survey.consent.first;
+    consentDescription.appendChild(firstText);
+    consentDescription.appendChild(document.createElement('br'));
+    let secondText = document.createElement('span');
+    secondText.innerText = cb_survey.consent.second;
+    consentDescription.appendChild(secondText);
+    consentDescription.appendChild(consentLink);
+    consentLabel.appendChild(consentInput);
+    consentLabel.appendChild(consentDescription);
+    labelContainer.appendChild(consentLabel);
+    return labelContainer;
+}
+
+function renderPopupActions(){
+    let reviewContainer = document.createElement('div');
+    let reviewAlert = document.createElement('div');
+    reviewAlert.setAttribute('id','cb-review__alert');
+    reviewAlert.innerText = cb_survey.alert;
+    let reviewActionContainer = document.createElement('div');
+    reviewActionContainer.classList.add('cb-review__actions');
+    let skipCta = document.createElement('a');
+    skipCta.setAttribute('id','cb-review__skip');
+    skipCta.setAttribute('href','#');
+    skipCta.innerText = cb_survey.actions.skip;
+    let submitCta = document.createElement('input');
+    submitCta.setAttribute('type', 'submit');
+    submitCta.setAttribute('id', 'cb-review__submit');
+    submitCta.setAttribute('value', cb_survey.actions.submit);
+    let reviewPolicy = document.createElement('p');
+    reviewPolicy.classList.add('cb-review__policy');
+    reviewPolicy.innerText = 'See our ';
+    let policyLink = document.createElement('a');
+    policyLink.setAttribute('href', 'https://www.cookiebot.com/en/privacy-policy/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner');
+    policyLink.setAttribute('target', '_blank');
+    policyLink.setAttribute('rel', 'noopener');
+    policyLink.innerText = 'Privacy Policy';
+    reviewPolicy.appendChild(policyLink);
+    let reviewInput = document.createElement('input');
+    reviewInput.setAttribute('type','hidden');
+    reviewInput.setAttribute('name','cookiebot-review-send');
+    reviewInput.setAttribute('value','Cookiebot_Review_Send');
+    reviewActionContainer.appendChild(skipCta);
+    reviewActionContainer.appendChild(submitCta);
+
+    reviewContainer.appendChild(reviewAlert);
+    reviewContainer.appendChild(reviewActionContainer);
+    reviewContainer.appendChild(reviewPolicy);
+    reviewContainer.appendChild(reviewInput);
+    return reviewContainer;
 }
 
 /**
@@ -82,7 +236,7 @@ function submitSurveyPopup(e){
             reason_text: (0 === option.length) ? 'none' : option.closest('label').text(),
             reason_info: (0 !== otherReason.length) ? otherReason.val().trim() : '',
             reason_debug: (!debugReason) ? null : debugReason.val(),
-            survey_nonce: cb_ajax.survey_nonce,
+            survey_nonce: cb_survey.survey_nonce,
             survey_check: 'ODUwODA1'
         },
         beforeSend: function() {
@@ -174,6 +328,5 @@ function searchListItem() {
                 item.removeClass('hidden');
             }
         });
-
     });
 }
