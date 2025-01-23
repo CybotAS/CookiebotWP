@@ -1624,6 +1624,7 @@ msgstr "Настройки Cookiebot"
 #: src/view/admin/common/settings-page.php:30
 #: src/view/admin/common/templates/main-tabs.php:32
 #: src/view/admin/uc_frame/settings-page.php:47
+#: src/view/admin/cb_frame/settings-page.php:50
 msgid "Settings"
 msgstr "Настройки"
 
@@ -2208,10 +2209,6 @@ msgstr "Сброс на сопоставление по умолчанию"
 #: src/view/admin/cb_frame/settings-page.php:48
 msgid "Select at least one vendor on TCF tab"
 msgstr "Выберите хотя бы одного поставщика на вкладке TCF."
-
-#: src/view/admin/cb_frame/settings-page.php:50
-msgid "CB Settings"
-msgstr ""
 
 #: src/view/admin/cb_frame/settings-page.php:57
 #: src/view/admin/uc_frame/settings-page.php:54

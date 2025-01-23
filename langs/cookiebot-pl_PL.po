@@ -4,7 +4,7 @@ msgstr ""
 "Control\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cookiebot\n"
 "POT-Creation-Date: 2024-12-18T18:13:49+00:00\n"
-"PO-Revision-Date: 2024-12-19 14:15+0100\n"
+"PO-Revision-Date: 2025-01-22 17:23+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -81,7 +81,7 @@ msgstr "Motyw nie jest aktywowany."
 #: src/lib/Cookiebot_Admin_Links.php:54 src/lib/Cookiebot_Admin_Links.php:56
 #: src/lib/Cookiebot_Admin_Links.php:124
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: src/addons/config/Settings_Config.php:708
 #: src/view/admin/common/prior-consent/other-addons/embed-autocorrect-extra-addon-options.php:18
@@ -104,7 +104,7 @@ msgstr "Jetpack"
 
 #: src/addons/config/Settings_Config.php:749
 msgid "WP Consent API"
-msgstr ""
+msgstr "Interfejs API WP Consent"
 
 #: src/addons/controller/addons/add_to_any/Add_To_Any.php:86
 #: src/addons/controller/addons/embed_autocorrect/Embed_Autocorrect.php:443
@@ -153,7 +153,7 @@ msgstr ""
 
 #: src/addons/controller/addons/official_facebook_pixel/Official_Facebook_Pixel.php:247
 msgid "Blocks Official Meta Pixel scripts"
-msgstr ""
+msgstr "Blokuje oficjalne skrypty Meta Pixel"
 
 #: src/addons/controller/addons/optinmonster/Optinmonster.php:32
 msgid ""
@@ -237,15 +237,18 @@ msgid ""
 "still runs on this version we recommend upgrading so you can continue "
 "enjoying the features Cookiebot CMP offers."
 msgstr ""
+"Wtyczka Cookiebot CMP wkrótce nie będzie już obsługiwać PHP 5. Jeśli Twoja "
+"strona internetowa nadal działa w tej wersji, zalecamy aktualizację, aby "
+"nadal móc korzystać z funkcji oferowanych przez Cookiebot CMP."
 
 #: src/lib/Cookiebot_Review.php:82
 msgid "Sorry you are not allowed to do this."
-msgstr ""
+msgstr "Przepraszamy, nie możesz tego zrobić."
 
 #: src/lib/Cookiebot_Review.php:85
 #: src/view/admin/common/templates/extra/review-form.php:94
 msgid "Please select one option"
-msgstr ""
+msgstr "Wybierz jedną opcję"
 
 #. translators: The placeholder is for the COOKIEBOT_MIN_PHP_VERSION constant
 #: src/lib/Cookiebot_WP.php:66
@@ -1538,15 +1541,15 @@ msgstr "Stany Zjednoczone — stan Kalifornia"
 
 #: src/lib/Supported_Regions.php:243
 msgid "United States - State of Colorado"
-msgstr ""
+msgstr "Stany Zjednoczone — stan Kolorado"
 
 #: src/lib/Supported_Regions.php:244
 msgid "United States - State of Connecticut"
-msgstr ""
+msgstr "Stany Zjednoczone — stan Connecticut"
 
 #: src/lib/Supported_Regions.php:245
 msgid "United States - State of Utah"
-msgstr ""
+msgstr "Stany Zjednoczone — stan Utah"
 
 #: src/lib/Supported_Regions.php:246
 msgid "United States - State of Virginia"
@@ -1623,6 +1626,7 @@ msgstr "Ustawienia Cookiebot"
 #: src/view/admin/common/settings-page.php:30
 #: src/view/admin/common/templates/main-tabs.php:32
 #: src/view/admin/uc_frame/settings-page.php:47
+#: src/view/admin/cb_frame/settings-page.php:50
 msgid "Settings"
 msgstr "Ustawienia"
 
@@ -1805,7 +1809,7 @@ msgstr ""
 
 #: src/shortcode/Cookiebot_Embedding_Shortcode.php:28
 msgid "Please add a service ID into the shortcode \"service\" parameter."
-msgstr ""
+msgstr "Dodaj identyfikator usługi do parametru krótkiego kodu „usługa”."
 
 #: src/view/admin/cb_frame/dashboard-page.php:33
 msgid "I already have a Cookiebot CMP account"
@@ -1822,7 +1826,7 @@ msgstr "Twoje rozwiązanie Cookiebot CMP dla WordPress"
 #: src/view/admin/cb_frame/dashboard-page.php:47
 #: src/view/admin/uc_frame/dashboard-page.php:35
 msgid "Account added"
-msgstr ""
+msgstr "Dodano konto"
 
 #: src/view/admin/cb_frame/dashboard-page.php:50
 msgid "Congratulations!"
@@ -1974,7 +1978,7 @@ msgstr "Ustawienia sieciowe"
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:3
 #: src/view/admin/uc_frame/network-settings-page.php:34
 msgid "Are you sure?"
-msgstr ""
+msgstr "Na pewno?"
 
 #: src/view/admin/cb_frame/network-settings-page.php:36
 #: src/view/admin/uc_frame/network-settings-page.php:37
@@ -1982,13 +1986,16 @@ msgid ""
 "You will need to add a new ID before updating other network settings. If any "
 "subsite is using its own account disconnecting this account won’t affect it."
 msgstr ""
+"Przed aktualizacją innych ustawień sieciowych konieczne będzie dodanie "
+"nowego identyfikatora. Jeśli jakakolwiek podstrona korzysta z własnego "
+"konta, odłączenie tego konta nie będzie miało na nią wpływu."
 
 #: src/view/admin/cb_frame/network-settings-page.php:40
 #: src/view/admin/common/templates/extra/cbid-disconnect-alert.php:10
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:10
 #: src/view/admin/uc_frame/network-settings-page.php:41
 msgid "Cancel"
-msgstr ""
+msgstr "Anuluj"
 
 #: src/view/admin/cb_frame/network-settings-page.php:43
 #: src/view/admin/cb_frame/network-settings-page.php:65
@@ -1998,11 +2005,11 @@ msgstr ""
 #: src/view/admin/uc_frame/network-settings-page.php:75
 #: src/view/admin/uc_frame/settings/general-page.php:45
 msgid "Disconnect account"
-msgstr ""
+msgstr "Rozłącz konto"
 
 #: src/view/admin/cb_frame/network-settings-page.php:50
 msgid "Network Domain Group ID"
-msgstr ""
+msgstr "Identyfikator grupy domenowej sieci"
 
 #: src/view/admin/cb_frame/network-settings-page.php:52
 msgid ""
@@ -2027,7 +2034,7 @@ msgstr "Dodawanie identyfikatora grupy domenowej"
 #: src/view/admin/uc_frame/network-settings-page.php:111
 #: src/view/admin/uc_frame/settings/general-page.php:120
 msgid "Cookie-blocking"
-msgstr ""
+msgstr "Blokowanie plików cookie"
 
 #: src/view/admin/cb_frame/network-settings-page.php:75
 msgid ""
@@ -2049,21 +2056,21 @@ msgstr ""
 #: src/view/admin/uc_frame/network-settings-page.php:118
 #: src/view/admin/uc_frame/settings/general-page.php:133
 msgid "Select cookie-blocking mode"
-msgstr ""
+msgstr "Wybierz tryb blokowania plików cookie"
 
 #: src/view/admin/cb_frame/network-settings-page.php:87
 #: src/view/admin/cb_frame/settings/general-page.php:175
 #: src/view/admin/uc_frame/network-settings-page.php:125
 #: src/view/admin/uc_frame/settings/general-page.php:141
 msgid "Automatic"
-msgstr ""
+msgstr "Automatyczny"
 
 #: src/view/admin/cb_frame/network-settings-page.php:88
 #: src/view/admin/cb_frame/settings/general-page.php:176
 #: src/view/admin/uc_frame/network-settings-page.php:126
 #: src/view/admin/uc_frame/settings/general-page.php:142
 msgid "Recommended"
-msgstr ""
+msgstr "Zalecane"
 
 #: src/view/admin/cb_frame/network-settings-page.php:96
 #: src/view/admin/cb_frame/network-settings-page.php:146
@@ -2125,7 +2132,7 @@ msgstr ""
 #: src/view/admin/uc_frame/network-settings-page.php:142
 #: src/view/admin/uc_frame/settings/additional-page.php:10
 msgid "Automatic updates"
-msgstr ""
+msgstr "Automatyczne aktualizacje"
 
 #: src/view/admin/cb_frame/network-settings-page.php:203
 #: src/view/admin/cb_frame/settings/additional-page.php:13
@@ -2134,13 +2141,15 @@ msgstr ""
 msgid ""
 "Enable automatic updates whenever we release a new version of the plugin."
 msgstr ""
+"Włącz automatyczne aktualizacje za każdym razem, gdy wydajemy nową wersję "
+"wtyczki."
 
 #: src/view/admin/cb_frame/network-settings-page.php:218
 #: src/view/admin/cb_frame/settings/additional-page.php:28
 #: src/view/admin/uc_frame/network-settings-page.php:159
 #: src/view/admin/uc_frame/settings/additional-page.php:28
 msgid "Automatically update to new version"
-msgstr ""
+msgstr "Automatycznie aktualizuj do nowej wersji"
 
 #: src/view/admin/cb_frame/network-settings-page.php:226
 #: src/view/admin/cb_frame/settings/general-page.php:248
@@ -2158,6 +2167,10 @@ msgid ""
 "declaration shortcode will still be available if you are using Google Tag "
 "Manager (or equal), you need to add the Cookiebot script in your Tag Manager."
 msgstr ""
+"Usunie to baner zgody na używanie plików cookie z Twojej strony "
+"internetowej. Skrót deklaracji plików cookie będzie nadal dostępny, jeśli "
+"korzystasz z Menedżera tagów Google (lub podobnego), musisz dodać skrypt "
+"Cookiebot do Menedżera tagów."
 
 #: src/view/admin/cb_frame/network-settings-page.php:246
 #: src/view/admin/cb_frame/settings/general-page.php:280
@@ -2212,10 +2225,6 @@ msgstr "Wróć do ustawień początkowych"
 msgid "Select at least one vendor on TCF tab"
 msgstr "Wybierz co najmniej jednego dostawcę na karcie TCF"
 
-#: src/view/admin/cb_frame/settings-page.php:50
-msgid "CB Settings"
-msgstr ""
-
 #: src/view/admin/cb_frame/settings-page.php:57
 #: src/view/admin/uc_frame/settings-page.php:54
 msgid "General Settings"
@@ -2245,7 +2254,7 @@ msgstr "Tryb uzyskiwania zgody Google"
 #: src/view/admin/cb_frame/settings-page.php:73
 #: src/view/admin/uc_frame/settings/embeddings-page.php:33
 msgid "TCF"
-msgstr ""
+msgstr "TCF"
 
 #: src/view/admin/cb_frame/settings-page.php:77
 msgid "Multiple Configurations"
@@ -2254,7 +2263,7 @@ msgstr "Wiele konfiguracji"
 #: src/view/admin/cb_frame/settings/additional-page.php:37
 #: src/view/admin/uc_frame/settings/additional-page.php:37
 msgid "Show the banner while logged in"
-msgstr ""
+msgstr "Wyświetl baner po zalogowaniu"
 
 #: src/view/admin/cb_frame/settings/additional-page.php:40
 #: src/view/admin/uc_frame/settings/additional-page.php:40
@@ -2262,11 +2271,13 @@ msgid ""
 "You can choose to display the consent banner on your website while you’re "
 "logged in and changing settings or customizing your banner."
 msgstr ""
+"Możesz wybrać wyświetlanie banera zgody na swojej stronie internetowej po "
+"zalogowaniu i zmianie ustawień lub dostosowaniu banera."
 
 #: src/view/admin/cb_frame/settings/additional-page.php:66
 #: src/view/admin/uc_frame/settings/additional-page.php:66
 msgid "Show banner on website when logged in"
-msgstr ""
+msgstr "Wyświetl baner na stronie internetowej po zalogowaniu"
 
 #: src/view/admin/cb_frame/settings/additional-page.php:75
 msgid "Cookie declaration script tag:"
@@ -2323,7 +2334,7 @@ msgstr "Źródłowy adres URL skryptu:"
 
 #: src/view/admin/cb_frame/settings/additional-page.php:143
 msgid "Add script source URL, one per line"
-msgstr ""
+msgstr "Dodaj adres URL źródła skryptu, jeden w wierszu"
 
 #: src/view/admin/cb_frame/settings/gcm-page.php:14
 msgid "What is Google Consent Mode and why should you enable it?"
@@ -2431,7 +2442,7 @@ msgstr "Zaznacz jeden lub wiele typów plików cookie:"
 
 #: src/view/admin/cb_frame/settings/general-page.php:30
 msgid "Connect your Domain Group"
-msgstr ""
+msgstr "Połącz swoją grupę domenową"
 
 #: src/view/admin/cb_frame/settings/general-page.php:33
 msgid ""
@@ -2446,12 +2457,12 @@ msgstr ""
 #: src/view/admin/cb_frame/settings/general-page.php:54
 #: src/view/admin/uc_frame/settings/general-page.php:48
 msgid "Using network account"
-msgstr ""
+msgstr "Korzystanie z konta sieciowego"
 
 #: src/view/admin/cb_frame/settings/general-page.php:64
 #: src/view/admin/uc_frame/settings/general-page.php:59
 msgid "Do not use Network Settings Account ID"
-msgstr ""
+msgstr "Nie używaj identyfikatora konta ustawień sieciowych"
 
 #: src/view/admin/cb_frame/settings/general-page.php:75
 msgid "Language:"
@@ -2518,6 +2529,11 @@ msgid ""
 "before user gives consent. Manual mode lets you adjust your cookie settings "
 "within your website’s HTML."
 msgstr ""
+"Wybierz typ trybu blokowania plików cookie. Wybierz automatycznie, aby "
+"automatycznie blokować wszystkie pliki cookie z wyjątkiem tych, które są "
+"absolutnie niezbędne do użycia, zanim użytkownik wyrazi zgodę. Tryb ręczny "
+"umożliwia dostosowanie ustawień plików cookie w kodzie HTML strony "
+"internetowej."
 
 #: src/view/admin/cb_frame/settings/general-page.php:154
 msgid "Guide to auto cookie-blocking"
@@ -2530,7 +2546,7 @@ msgstr "Przewodnik po ręcznym blokowaniu plików cookie"
 #: src/view/admin/cb_frame/settings/general-page.php:184
 #: src/view/admin/uc_frame/settings/general-page.php:150
 msgid "Manual"
-msgstr ""
+msgstr "Ręcznie"
 
 #: src/view/admin/cb_frame/settings/general-page.php:209
 msgid "Add async or defer attribute to cookie declaration script tag"
@@ -2664,12 +2680,12 @@ msgstr "Szukaj"
 #: src/view/admin/cb_frame/settings/iab-page.php:131
 #: src/view/admin/cb_frame/settings/iab-page.php:163
 msgid "Select All"
-msgstr ""
+msgstr "Zaznacz wszystko"
 
 #: src/view/admin/cb_frame/settings/iab-page.php:132
 #: src/view/admin/cb_frame/settings/iab-page.php:164
 msgid "Deselect All"
-msgstr ""
+msgstr "Odznacz wszystkie"
 
 #: src/view/admin/cb_frame/settings/iab-page.php:133
 msgid "Select at least one vendor"
@@ -2905,25 +2921,25 @@ msgstr "%1$s do %2$s"
 
 #: src/view/admin/common/dashboard-page.php:31
 msgid "I already have an account"
-msgstr ""
+msgstr "Mam już konto"
 
 #: src/view/admin/common/dashboard-page.php:35
 msgid "Connect my account"
-msgstr ""
+msgstr "Połącz moje konto"
 
 #: src/view/admin/common/dashboard-page.php:48
 #: src/view/admin/common/network-settings-page.php:33
 #: src/view/admin/common/settings-page.php:37
 msgid "New to our solutions? Create your account. "
-msgstr ""
+msgstr "Nie masz doświadczenia z naszymi rozwiązaniami? Utwórz konto."
 
 #: src/view/admin/common/dashboard-page.php:65
 msgid "How to get started"
-msgstr ""
+msgstr "Jak zacząć"
 
 #: src/view/admin/common/dashboard-page.php:69
 msgid "Learn more about your CMP"
-msgstr ""
+msgstr "Dowiedz się więcej o swoim CMP"
 
 #: src/view/admin/common/network-settings-page.php:35
 #: src/view/admin/common/settings-page.php:39
@@ -2931,23 +2947,26 @@ msgid ""
 "If you’re new to our solutions, create an account first to obtain your "
 "account ID."
 msgstr ""
+"Jeśli dopiero zaczynasz korzystać z naszych rozwiązań, najpierw utwórz "
+"konto, aby uzyskać identyfikator konta."
 
 #: src/view/admin/common/network-settings-page.php:40
 #: src/view/admin/common/settings-page.php:44
 msgid "Create your account"
-msgstr ""
+msgstr "Utwórz konto"
 
 #: src/view/admin/common/network-settings-page.php:49
 #: src/view/admin/common/settings-page.php:52
 #: src/view/admin/uc_frame/network-settings-page.php:51
 msgid "Connect your account"
-msgstr ""
+msgstr "Połącz swoje konto"
 
 #: src/view/admin/common/network-settings-page.php:52
 #: src/view/admin/common/settings-page.php:55
 #: src/view/admin/uc_frame/network-settings-page.php:54
 msgid "Enter your account ID to quickly link your account with the plugin."
 msgstr ""
+"Wprowadź identyfikator konta, aby szybko połączyć swoje konto z wtyczką."
 
 #: src/view/admin/common/network-settings-page.php:55
 #: src/view/admin/uc_frame/network-settings-page.php:57
@@ -2955,20 +2974,22 @@ msgid ""
 "If added this will be the default account for all subsites. Subsites are "
 "able to override this and use their own account."
 msgstr ""
+"Po dodaniu będzie to domyślne konto dla wszystkich podstron. Podstrony mogą "
+"to zmienić i używać własnego konta."
 
 #: src/view/admin/common/network-settings-page.php:59
 #: src/view/admin/common/settings-page.php:59
 #: src/view/admin/uc_frame/network-settings-page.php:61
 #: src/view/admin/uc_frame/settings/general-page.php:29
 msgid "Where to find account ID"
-msgstr ""
+msgstr "Gdzie znaleźć identyfikator konta"
 
 #: src/view/admin/common/network-settings-page.php:65
 #: src/view/admin/common/settings-page.php:65
 #: src/view/admin/uc_frame/network-settings-page.php:67
 #: src/view/admin/uc_frame/settings/general-page.php:35
 msgid "Your account ID"
-msgstr ""
+msgstr "Identyfikator konta"
 
 #: src/view/admin/common/network-settings-page.php:82
 #: src/view/admin/common/settings-page.php:82
@@ -2980,20 +3001,25 @@ msgid ""
 "The default is a single privacy law, so this is likely your setting unless "
 "modified."
 msgstr ""
+"Poinformuj nas, czy Twoje konto jest ustawione na zgodność z jednym prawem "
+"dotyczącym prywatności (np. RODO), czy z wieloma prawami (np. RODO i CCPA) w "
+"oparciu o lokalizację użytkownika. Domyślnie jest to jedno prawo dotyczące "
+"prywatności, więc prawdopodobnie jest to Twoje ustawienie, chyba że zostanie "
+"zmodyfikowane."
 
 #: src/view/admin/common/network-settings-page.php:88
 #: src/view/admin/common/settings-page.php:88
 #: src/view/admin/uc_frame/network-settings-page.php:89
 #: src/view/admin/uc_frame/settings/general-page.php:76
 msgid "Your current account setup:"
-msgstr ""
+msgstr "Bieżąca konfiguracja konta:"
 
 #: src/view/admin/common/network-settings-page.php:95
 #: src/view/admin/common/settings-page.php:95
 #: src/view/admin/uc_frame/network-settings-page.php:96
 #: src/view/admin/uc_frame/settings/general-page.php:83
 msgid "Compliance with one privacy law"
-msgstr ""
+msgstr "Zgodność z jednym prawem ochrony prywatności"
 
 #: src/view/admin/common/network-settings-page.php:102
 #: src/view/admin/common/settings-page.php:102
@@ -3001,6 +3027,8 @@ msgstr ""
 #: src/view/admin/uc_frame/settings/general-page.php:90
 msgid "Compliance with multiple privacy laws (geolocation)"
 msgstr ""
+"Zgodność z wieloma przepisami dotyczącymi ochrony prywatności "
+"(geolokalizacja)"
 
 #: src/view/admin/common/prior-consent/available-addons/tab.php:25
 msgid "Plugin enabled"
@@ -3057,7 +3085,7 @@ msgstr "Przywróć domyślne wartości regex"
 
 #: src/view/admin/common/prior-consent/partials/info-tab-header.php:4
 msgid "Information"
-msgstr ""
+msgstr "Informacje"
 
 #: src/view/admin/common/prior-consent/partials/info-tab-header.php:5
 msgid ""
@@ -3066,6 +3094,10 @@ msgid ""
 "They’re designed to help you ensure ‘prior consent’ even for plugins that "
 "don’t include this feature."
 msgstr ""
+"Te dodatki zostały stworzone przez dedykowaną społeczność open-source, aby "
+"ułatwić zarządzanie zgodą na pliki cookie i pliki śledzące w witrynie "
+"WordPress. Zostały one zaprojektowane, aby pomóc w zapewnieniu „uprzedniej "
+"zgody” nawet w przypadku wtyczek, które nie zawierają tej funkcji."
 
 #: src/view/admin/common/prior-consent/partials/info-tab-header.php:6
 msgid ""
@@ -3074,6 +3106,10 @@ msgid ""
 "functionality, these tools are here to support you and work seamlessly with "
 "Usercentrics solution."
 msgstr ""
+"Obecnie dodatki te są najlepszym sposobem na sygnalizowanie zgody "
+"użytkownika innym wtyczkom. Chociaż nie wiemy, czy i kiedy WordPress Core "
+"doda tę funkcjonalność, narzędzia te są tutaj, aby Cię wspierać i płynnie "
+"współpracować z rozwiązaniem Usercentrics."
 
 #: src/view/admin/common/prior-consent/partials/placeholder-submitbox-default.php:10
 #: src/view/admin/common/prior-consent/partials/placeholder-submitboxes.php:19
@@ -3096,7 +3132,7 @@ msgstr ""
 #: src/view/admin/common/support-page.php:23
 #: src/view/admin/uc_frame/support-page.php:23
 msgid "Need help?"
-msgstr ""
+msgstr "Potrzebujesz pomocy?"
 
 #: src/view/admin/common/support-page.php:26
 #: src/view/admin/uc_frame/support-page.php:26
@@ -3106,55 +3142,63 @@ msgid ""
 "button in the top navigation to create a support request. We’ll respond as "
 "soon as possible."
 msgstr ""
+"Odwiedź nasze Centrum pomocy technicznej, aby znaleźć odpowiedzi na pytania "
+"lub uzyskać pomoc w konfiguracji. Jeśli potrzebujesz dalszej pomocy, użyj "
+"przycisku Skontaktuj się z pomocą techniczną w górnej nawigacji, aby "
+"utworzyć zgłoszenie do pomocy technicznej. Odpowiemy tak szybko, jak to "
+"możliwe."
 
 #: src/view/admin/common/support-page.php:34
 #: src/view/admin/uc_frame/support-page.php:34
 msgid "Go to Support Center"
-msgstr ""
+msgstr "Przejdź do Centrum pomocy technicznej"
 
 #: src/view/admin/common/templates/extra/cbid-disconnect-alert.php:6
 msgid "You will need to add a new ID before updating other settings"
 msgstr ""
+"Przed aktualizacją innych ustawień konieczne będzie dodanie nowego "
+"identyfikatora."
 
 #: src/view/admin/common/templates/extra/review-form.php:10
 msgid "Cookiebot CMP Deactivation"
-msgstr ""
+msgstr "Dezaktywacja Cookiebot CMP"
 
 #: src/view/admin/common/templates/extra/review-form.php:14
 msgid "We are sad to lose you. Take a moment to help us improve?"
 msgstr ""
+"Przykro nam, że Cię tracimy. Poświęcisz chwilę, aby pomóc nam się poprawić?"
 
 #: src/view/admin/common/templates/extra/review-form.php:19
 msgid "The installation is too complicated"
-msgstr ""
+msgstr "Instalacja jest zbyt skomplikowana"
 
 #: src/view/admin/common/templates/extra/review-form.php:26
 msgid "I found a plugin that better serves my needs"
-msgstr ""
+msgstr "Znalazłem(-am) wtyczkę, która lepiej spełnia moje potrzeby"
 
 #: src/view/admin/common/templates/extra/review-form.php:33
 msgid "Missing features / did not meet my expectations"
-msgstr ""
+msgstr "Brakujące funkcje / nie spełnia moich oczekiwań"
 
 #: src/view/admin/common/templates/extra/review-form.php:40
 msgid "I need more customization options"
-msgstr ""
+msgstr "Potrzebuję więcej opcji personalizacji"
 
 #: src/view/admin/common/templates/extra/review-form.php:47
 msgid "The premium plan is too expensive"
-msgstr ""
+msgstr "Plan premium jest zbyt drogi"
 
 #: src/view/admin/common/templates/extra/review-form.php:54
 msgid "I’m only deactivating the plugin temporarily"
-msgstr ""
+msgstr "Dezaktywuję wtyczkę tylko tymczasowo."
 
 #: src/view/admin/common/templates/extra/review-form.php:61
 msgid "Other"
-msgstr ""
+msgstr "Inne"
 
 #: src/view/admin/common/templates/extra/review-form.php:65
 msgid "Please specify here"
-msgstr ""
+msgstr "Opisz tutaj"
 
 #: src/view/admin/common/templates/extra/review-form.php:74
 msgid ""
@@ -3163,6 +3207,11 @@ msgid ""
 "necessary. \n"
 "                        "
 msgstr ""
+" Zaznaczając to pole, wyrażasz zgodę na przesłanie informacji o "
+"rozwiązywaniu problemów i zezwalasz \n"
+"                        nam na skontaktowanie się z Tobą w sprawie problemu, "
+"jeśli zajdzie taka potrzeba. \n"
+"                        "
 
 #: src/view/admin/common/templates/extra/review-form.php:83
 msgid ""
@@ -3170,20 +3219,26 @@ msgid ""
 "                        You may revoke this consent at any time, e.g. by "
 "sending an email to "
 msgstr ""
+"Informacje te będą przechowywane przez okres nie dłuższy niż 90 dni. \n"
+"                         Zgodę można wycofać w dowolnym momencie, np. "
+"wysyłając wiadomość e-mail na adres "
 
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:6
 msgid ""
 "If there is a network account ID connected it will be used for this subsite, "
 "if not you will need to add a new ID before updating other settings"
 msgstr ""
+"Jeśli istnieje podłączony identyfikator konta sieciowego, będzie on używany "
+"dla tej podstrony, jeśli nie, konieczne będzie dodanie nowego identyfikatora "
+"przed aktualizacją innych ustawień"
 
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:13
 msgid "Disconnect subsite account"
-msgstr ""
+msgstr "Rozłącz konto podstrony"
 
 #: src/view/admin/common/templates/header.php:10
 msgid "Changes has been saved"
-msgstr ""
+msgstr "Zmiany zostały zapisane"
 
 #: src/view/admin/notices/cookiebot-recommendation-notice-links.php:13
 msgid "Absolutely, you deserve it!"
@@ -3199,41 +3254,44 @@ msgstr "Już wystawiłem/-am ocenę"
 
 #: src/view/admin/uc_frame/dashboard-page.php:30
 msgid "Welcome to Usercentrics Cookiebot WordPress Plugin"
-msgstr ""
+msgstr "Witamy we wtyczce Usercentrics Cookiebot WordPress"
 
 #: src/view/admin/uc_frame/dashboard-page.php:38
 msgid ""
 "You’ve added your account ID to your Usercentrics Cookiebot WordPress Plugin."
 msgstr ""
+"Dodano identyfikator konta do wtyczki Usercentrics Cookiebot WordPress."
 
 #: src/view/admin/uc_frame/dashboard-page.php:51
 msgid ""
 "Are you happy with Usercentrics Cookiebot WordPress Plugin? Your feedback "
 "helps us improve it."
 msgstr ""
+"Czy podoba Ci się wtyczka Usercentrics Cookiebot WordPress? Twoja opinia "
+"pomoże nam ją ulepszyć."
 
 #: src/view/admin/uc_frame/dashboard-page.php:55
 msgid "Share feedback"
-msgstr ""
+msgstr "Podziel się opinią"
 
 #: src/view/admin/uc_frame/dashboard-page.php:68
 msgid "How to set up Usercentrics Cookiebot WordPress Plugin"
-msgstr ""
+msgstr "Jak skonfigurować wtyczkę Usercentrics Cookiebot WordPress?"
 
 #: src/view/admin/uc_frame/dashboard-page.php:72
 #: src/view/admin/uc_frame/settings/gcm-page.php:21
 #: src/view/admin/uc_frame/settings/general-page.php:127
 #: src/view/admin/uc_frame/settings/gtm-page.php:18
 msgid "Learn more"
-msgstr ""
+msgstr "Dowiedz się więcej"
 
 #: src/view/admin/uc_frame/dashboard-page.php:115
 msgid "Visit our blog to learn about other legislations"
-msgstr ""
+msgstr "Odwiedź nasz blog, aby dowiedzieć się o innych przepisach"
 
 #: src/view/admin/uc_frame/debug-page.php:22
 msgid "Debug your plugin"
-msgstr ""
+msgstr "Debugowanie wtyczki"
 
 #: src/view/admin/uc_frame/debug-page.php:25
 msgid ""
@@ -3241,10 +3299,14 @@ msgid ""
 "Plugin, provide the information below to help us assist you. Visit our "
 "Support Center and send us a copy of what is displayed in the window below."
 msgstr ""
+"Jeśli napotkasz jakiekolwiek problemy z wtyczką Usercentrics Cookiebot "
+"WordPress, podaj poniższe informacje, abyśmy mogli Ci pomóc. Odwiedź nasze "
+"Centrum pomocy technicznej i wyślij nam kopię tego, co jest wyświetlane w "
+"poniższym oknie."
 
 #: src/view/admin/uc_frame/prior-consent/consent-api/tab.php:23
 msgid "WP Consent API Settings"
-msgstr ""
+msgstr "Ustawienia interfejsu API WP Consent"
 
 #: src/view/admin/uc_frame/prior-consent/consent-api/tab.php:32
 msgid ""
@@ -3252,31 +3314,35 @@ msgid ""
 "cookies a bit differently. The default settings should fit most needs, but "
 "if you need to change the mapping you can do so below."
 msgstr ""
+"Interfejs API WP Consent i wtyczka Usercentrics Cookiebot WordPress "
+"kategoryzują pliki cookie nieco inaczej. Domyślne ustawienia powinny pasować "
+"do większości potrzeb, ale jeśli chcesz zmienić mapowanie, możesz to zrobić "
+"poniżej."
 
 #: src/view/admin/uc_frame/prior-consent/consent-api/tab.php:48
 msgid "Usercentrics Cookiebot cookie categories"
-msgstr ""
+msgstr "Kategorie plików cookie Cookiebot Usercentracs"
 
 #: src/view/admin/uc_frame/prior-consent/consent-api/tab.php:58
 msgid "essential"
-msgstr ""
+msgstr "niezbędne"
 
 #: src/view/admin/uc_frame/prior-consent/consent-api/tab.php:72
 msgid "functional"
-msgstr ""
+msgstr "funkcjonalny"
 
 #: src/view/admin/uc_frame/prior-consent/consent-api/tab.php:106
 msgid "Reset to default categories"
-msgstr ""
+msgstr "Przywróć domyślne kategorie"
 
 #: src/view/admin/uc_frame/settings-page.php:48
 msgid "Save changes"
-msgstr ""
+msgstr "Zapisz zmiany"
 
 #: src/view/admin/uc_frame/settings-page.php:70
 #: src/view/admin/uc_frame/settings/embeddings-page.php:4
 msgid "Privacy Policy Sync"
-msgstr ""
+msgstr "Synchronizacja polityki prywatności"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:7
 msgid ""
@@ -3287,24 +3353,32 @@ msgid ""
 "Policy page. Once you’re done setting the options below, simply copy the "
 "code and paste it into your Privacy Policy page."
 msgstr ""
+"Skorzystaj z naszych wstępnie zdefiniowanych, automatycznie generowanych "
+"osadzeń, aby zsynchronizować stronę Polityki prywatności z ustawieniami "
+"banerów zgody. Ta funkcja pozwala zaoszczędzić czas, automatycznie "
+"aktualizując wymagane prawem informacje, dzięki czemu nie trzeba ręcznie "
+"kopiować danych na stronę Polityki prywatności. Po ustawieniu poniższych "
+"opcji wystarczy skopiować kod i wkleić go na stronę Polityki prywatności."
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:12
 msgid "Copy shortcode"
-msgstr ""
+msgstr "Kopiuj skrót"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:23
 msgid "Sync options for privacy legislations"
-msgstr ""
+msgstr "Opcje synchronizacji dla przepisów ochrony prywatności"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:26
 msgid ""
 "Select the legislation you want to automatically sync with your Privacy "
 "Policy page."
 msgstr ""
+"Wybierz przepisy, które chcesz automatycznie zsynchronizować ze stroną "
+"Polityki prywatności."
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:41
 msgid "Sync options for data processing services (DPS) "
-msgstr ""
+msgstr "Opcje synchronizacji dla usług przetwarzania danych (DPS)"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:44
 msgid ""
@@ -3313,60 +3387,66 @@ msgid ""
 "both categories and services. Choose based on the level of detail you want "
 "to display."
 msgstr ""
+"Określ, co ma być zawarte na stronie Polityki prywatności: Tylko kategorie "
+"DPS, kategorie z ich usługami, pojedyncza usługa lub szczegółowe informacje "
+"zarówno o kategoriach, jak i usługach. Wybierz na podstawie poziomu "
+"szczegółowości, który chcesz wyświetlić."
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:50
 msgid "Services (Default)"
-msgstr ""
+msgstr "Usługi (domyślnie)"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:51
 msgid "Categories and services"
-msgstr ""
+msgstr "Kategorie i usługi"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:52
 msgid "Categories only"
-msgstr ""
+msgstr "Tylko kategorie"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:53
 msgid "Single service"
-msgstr ""
+msgstr "Pojedyncza usługa"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:54
 msgid "Purposes"
-msgstr ""
+msgstr "Cele"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:55
 msgid "Vendors"
-msgstr ""
+msgstr "Dostawcy"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:63
 msgid "Single Service ID"
-msgstr ""
+msgstr "Identyfikator pojedynczej usługi"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:66
 msgid "Add the service ID that you want to display."
-msgstr ""
+msgstr "Dodaj identyfikator usługi, który chcesz wyświetlić."
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:69
 msgid "This feature is required."
-msgstr ""
+msgstr "Ta funkcja jest wymagana."
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:81
 msgid "Privacy toggles"
-msgstr ""
+msgstr "Ustawienia prywatności"
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:84
 msgid ""
 "Define whether you want the privacy toggles to be enabled and displayed on "
 "your Privacy Policy page."
 msgstr ""
+"Określ, czy chcesz, aby przełączniki prywatności były włączone i wyświetlane "
+"na stronie Polityka prywatności."
 
 #: src/view/admin/uc_frame/settings/embeddings-page.php:92
 msgid "Enable privacy toggles"
-msgstr ""
+msgstr "Włącz przełączniki prywatności"
 
 #: src/view/admin/uc_frame/settings/gcm-page.php:14
 msgid "Integration with Google Consent Mode"
-msgstr ""
+msgstr "Integracja z Trybem uzyskiwania zgody Google"
 
 #: src/view/admin/uc_frame/settings/gcm-page.php:17
 msgid ""
@@ -3374,58 +3454,72 @@ msgid ""
 "integrate seamlessly, providing plug-and-play privacy compliance and "
 "effortless use of all Google services in one solution."
 msgstr ""
+"Wtyczka Usercentrics Cookiebot WordPress i tryb uzyskiwania zgody Google "
+"integrują się płynnie, zapewniając zgodność z zasadami prywatności i łatwe "
+"korzystanie ze wszystkich usług Google w jednym rozwiązaniu."
 
 #: src/view/admin/uc_frame/settings/gcm-page.php:31
 msgid ""
 "Enable Google Consent Mode integration within your Usercentrics Cookiebot "
 "WordPress Plugin."
 msgstr ""
+"Włącz integrację z trybem uzyskiwania zgody Google w swojej wtyczce "
+"Usercentrics Cookiebot WordPress."
 
 #: src/view/admin/uc_frame/settings/general-page.php:22
 msgid "Account ID"
-msgstr ""
+msgstr "Identyfikator konta"
 
 #: src/view/admin/uc_frame/settings/general-page.php:25
 msgid ""
 "To disconnect your account, enter your account ID into the field and confirm "
 "with the button."
 msgstr ""
+"Aby odłączyć konto, wprowadź identyfikator konta w polu i potwierdź "
+"przyciskiem."
 
 #: src/view/admin/uc_frame/settings/general-page.php:99
 msgid "TCF integration"
-msgstr ""
+msgstr "Integracja TCF"
 
 #: src/view/admin/uc_frame/settings/general-page.php:102
 msgid "Enable the integration with the latest version of IAB TCF."
-msgstr ""
+msgstr "Włącz integrację z najnowszą wersją IAB TCF."
 
 #: src/view/admin/uc_frame/settings/general-page.php:111
 msgid "IAB TCF integration"
-msgstr ""
+msgstr "Integracja z IAB TCF"
 
 #: src/view/admin/uc_frame/settings/gtm-page.php:14
 msgid ""
 "Enable Google Tag Manager integration to streamline tracking tags with your "
 "Usercentrics Cookiebot WordPress Plugin."
 msgstr ""
+"Włącz integrację z Menedżerem tagów Google, aby usprawnić śledzenie tagów za "
+"pomocą wtyczki Usercentrics Cookiebot WordPress."
 
 #: src/view/admin/uc_frame/settings/gtm-page.php:37
 msgid "Enter your Google Tag Manager ID for seamless integration."
 msgstr ""
+"Wprowadź swój identyfikator Menedżera tagów Google, aby zapewnić płynną "
+"integrację."
 
 #: src/view/admin/uc_frame/settings/gtm-page.php:48
 msgid "GTM-XXXXXXX"
-msgstr ""
+msgstr "GTM-XXXXXXX"
 
 #: src/view/admin/uc_frame/settings/gtm-page.php:56
 msgid "Data layer name (only if changed)"
-msgstr ""
+msgstr "Nazwa warstwy danych (tylko jeśli została zmieniona)"
 
 #: src/view/admin/uc_frame/settings/gtm-page.php:58
 msgid ""
 "The default name for the data layer in Google Tag Manager is ‘dataLayer’. If "
 "you renamed it, enter the new name. Otherwise, leave this field empty."
 msgstr ""
+"Domyślna nazwa warstwy danych w Menedżerze tagów Google to „dataLayer”. "
+"Jeśli nazwa została zmieniona, wprowadź nową nazwę. W przeciwnym razie "
+"pozostaw to pole puste."
 
 #: src/view/admin/widgets/cookiebot-declaration-widget-form.php:14
 msgid "Title"
