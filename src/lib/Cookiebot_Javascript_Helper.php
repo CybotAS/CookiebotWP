@@ -138,7 +138,13 @@ class Cookiebot_Javascript_Helper {
 			$view_args = array(
 				'data_layer'        => $data_layer,
 				'consent_attribute' => self::get_consent_attribute( $blocking_mode, $cookie_categories ),
+				'script_type'       => 'text/javascript',
 			);
+
+			if ( $blocking_mode !== 'auto' && ( ! empty( $cookie_categories ) && is_array( $cookie_categories ) ) ) {
+				$view_args['script_type'] = 'text/plain';
+			}
+
 			if ( $return_html ) {
 				return get_view_html( $view_path, $view_args );
 			} else {
@@ -175,7 +181,13 @@ class Cookiebot_Javascript_Helper {
 				'data_layer'        => $data_layer,
 				'url_passthrough'   => $is_url_passthrough_enabled,
 				'consent_attribute' => self::get_consent_attribute( $blocking_mode, $cookie_categories ),
+				'script_type'       => 'text/javascript',
 			);
+
+			if ( $blocking_mode !== 'auto' && ( ! empty( $cookie_categories ) && is_array( $cookie_categories ) ) ) {
+				$view_args['script_type'] = 'text/plain';
+			}
+
 			if ( $return_html ) {
 				return get_view_html( $view_path, $view_args );
 			} else {
@@ -238,13 +250,9 @@ class Cookiebot_Javascript_Helper {
 	}
 
 	private function get_consent_attribute( $blocking_mode, $categories ) {
-		$attribute = false;
+		$attribute = 'ignore';
 
-		if ( $blocking_mode === 'auto' ) {
-			$attribute = 'ignore';
-		}
-
-		if ( $categories && is_array( $categories ) ) {
+		if ( $blocking_mode !== 'auto' && ( $categories && is_array( $categories ) ) ) {
 			$attribute = join( ', ', $categories );
 		}
 

@@ -3,10 +3,11 @@
  * @var string $data_layer
  * @var string $url_passthrough
  * @var bool|string $consent_attribute
+ * @var string $script_type
  */
 
 ?>
-<script<?php echo ! $consent_attribute ? '' : ' data-cookieconsent="' . esc_attr( $consent_attribute ) . '"'; ?>>
+<script type="<?php echo esc_attr( $script_type ); ?>"<?php echo ! $consent_attribute ? '' : ' data-cookieconsent="' . esc_attr( $consent_attribute ) . '"'; ?>>
 	window.<?php echo esc_js( $data_layer ); ?> = window.<?php echo esc_js( $data_layer ); ?> || [];
 	function gtag() {
 		<?php echo esc_js( $data_layer ); ?>.push(arguments);
