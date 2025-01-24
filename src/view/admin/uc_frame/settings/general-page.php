@@ -23,20 +23,20 @@ if ( ! empty( $network_cbid ) ) {
 <div class="cb-settings__config__item cb-settings__config__cbid">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
-			<?php esc_html_e( 'Account ID', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Settings ID', 'cookiebot' ); ?>
 		</h3>
 		<p class="cb-general__info__text">
-			<?php esc_html_e( 'To disconnect your account, enter your account ID into the field and confirm with the button.', 'cookiebot' ); ?>
+			<?php esc_html_e( 'To disconnect your account, enter your settings ID into the field and confirm with the button.', 'cookiebot' ); ?>
 		</p>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
 			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-			<?php esc_html_e( 'Where to find account ID', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Where to find settings ID', 'cookiebot' ); ?>
 		</a>
 	</div>
 	<div class="cb-settings__config__data">
 		<div class="cb-settings__config__data__inner">
 			<h3 class="cb-settings__data__subtitle">
-				<?php esc_html_e( 'Your account ID', 'cookiebot' ); ?>
+				<?php esc_html_e( 'Your settings ID', 'cookiebot' ); ?>
 			</h3>
 			<div class="cookiebot-cbid-container">
 				<div class="cookiebot-cbid-input">
@@ -83,7 +83,7 @@ if ( ! empty( $network_cbid ) ) {
 								type="checkbox" name="cookiebot-cbid-override" id="cookiebot-cbid-override" value="1"
 							<?php checked( 1, $network_cbid_override ); ?>>
 						<div class="switcher"></div>
-						<?php esc_html_e( 'Do not use Network Settings Account ID', 'cookiebot' ); ?>
+						<?php esc_html_e( 'Do not use Network Settings ID', 'cookiebot' ); ?>
 					</label>
 				</div>
 			<?php endif; ?>

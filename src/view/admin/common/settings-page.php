@@ -37,7 +37,7 @@ $header->display();
 						<div class="cb-general__new__account">
 							<h2 class="cb-general__info__title"><?php esc_html_e( 'New to our solutions? Create your account. ', 'cookiebot' ); ?></h2>
 							<p class="cb-general__info__text">
-								<?php esc_html_e( 'If you’re new to our solutions, create an account first to obtain your account ID.', 'cookiebot' ); ?>
+								<?php esc_html_e( 'If you’re new to our solutions, create an account first to obtain your settings ID.', 'cookiebot' ); ?>
 							</p>
 							<div class="new-account-actions">
 								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
@@ -53,17 +53,17 @@ $header->display();
 									<?php esc_html_e( 'Connect your account', 'cookiebot' ); ?>
 								</h3>
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Enter your account ID to quickly link your account with the plugin.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Enter your settings ID to quickly link your account with the plugin.', 'cookiebot' ); ?>
 								</p>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
 									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-									<?php esc_html_e( 'Where to find account ID', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Where to find settings ID', 'cookiebot' ); ?>
 								</a>
 							</div>
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
 									<h3 class="cb-settings__data__subtitle">
-										<?php esc_html_e( 'Your account ID', 'cookiebot' ); ?>
+										<?php esc_html_e( 'Your settings ID', 'cookiebot' ); ?>
 									</h3>
 									<div class="cookiebot-cbid-container">
 										<div class="cookiebot-cbid-input">

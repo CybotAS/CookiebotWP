@@ -35,7 +35,7 @@ $header->display();
 								<?php echo esc_html__( 'Account added', 'cookiebot' ); ?>
 							</div>
 							<p class="cb-main__success__text">
-								<?php echo esc_html__( 'You’ve added your account ID to your Usercentrics Cookiebot WordPress Plugin.', 'cookiebot' ); ?>
+								<?php echo esc_html__( 'You’ve added your settings ID to your Usercentrics Cookiebot WordPress Plugin.', 'cookiebot' ); ?>
 							</p>
 						</div>
 					</div>

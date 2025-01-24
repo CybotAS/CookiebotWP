@@ -2200,7 +2200,7 @@ msgstr ""
 
 #: src/view/admin/cb_frame/settings/general-page.php:64
 #: src/view/admin/uc_frame/settings/general-page.php:59
-msgid "Do not use Network Settings Account ID"
+msgid "Do not use Network Settings ID"
 msgstr ""
 
 #: src/view/admin/cb_frame/settings/general-page.php:75
@@ -2559,7 +2559,7 @@ msgstr ""
 
 #: src/view/admin/common/network-settings-page.php:35
 #: src/view/admin/common/settings-page.php:39
-msgid "If you’re new to our solutions, create an account first to obtain your account ID."
+msgid "If you’re new to our solutions, create an account first to obtain your settings ID."
 msgstr ""
 
 #: src/view/admin/common/network-settings-page.php:40
@@ -2576,7 +2576,7 @@ msgstr ""
 #: src/view/admin/common/network-settings-page.php:52
 #: src/view/admin/common/settings-page.php:55
 #: src/view/admin/uc_frame/network-settings-page.php:54
-msgid "Enter your account ID to quickly link your account with the plugin."
+msgid "Enter your settings ID to quickly link your account with the plugin."
 msgstr ""
 
 #: src/view/admin/common/network-settings-page.php:55
@@ -2588,14 +2588,14 @@ msgstr ""
 #: src/view/admin/common/settings-page.php:59
 #: src/view/admin/uc_frame/network-settings-page.php:61
 #: src/view/admin/uc_frame/settings/general-page.php:29
-msgid "Where to find account ID"
+msgid "Where to find settings ID"
 msgstr ""
 
 #: src/view/admin/common/network-settings-page.php:65
 #: src/view/admin/common/settings-page.php:65
 #: src/view/admin/uc_frame/network-settings-page.php:67
 #: src/view/admin/uc_frame/settings/general-page.php:35
-msgid "Your account ID"
+msgid "Your settings ID"
 msgstr ""
 
 #: src/view/admin/common/network-settings-page.php:82
@@ -2775,7 +2775,7 @@ msgid ""
 msgstr ""
 
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:6
-msgid "If there is a network account ID connected it will be used for this subsite, if not you will need to add a new ID before updating other settings"
+msgid "If there is a network settings ID connected it will be used for this subsite, if not you will need to add a new ID before updating other settings"
 msgstr ""
 
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:13
@@ -2803,7 +2803,7 @@ msgid "Welcome to Usercentrics Cookiebot WordPress Plugin"
 msgstr ""
 
 #: src/view/admin/uc_frame/dashboard-page.php:38
-msgid "You’ve added your account ID to your Usercentrics Cookiebot WordPress Plugin."
+msgid "You’ve added your settings ID to your Usercentrics Cookiebot WordPress Plugin."
 msgstr ""
 
 #: src/view/admin/uc_frame/dashboard-page.php:51
@@ -2955,11 +2955,11 @@ msgid "Enable Google Consent Mode integration within your Usercentrics Cookiebot
 msgstr ""
 
 #: src/view/admin/uc_frame/settings/general-page.php:22
-msgid "Account ID"
+msgid "Settings ID"
 msgstr ""
 
 #: src/view/admin/uc_frame/settings/general-page.php:25
-msgid "To disconnect your account, enter your account ID into the field and confirm with the button."
+msgid "To disconnect your account, enter your settings ID into the field and confirm with the button."
 msgstr ""
 
 #: src/view/admin/uc_frame/settings/general-page.php:99

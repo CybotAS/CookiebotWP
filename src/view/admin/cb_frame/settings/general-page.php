@@ -91,7 +91,7 @@ if ( ! empty( $network_cbid ) ) {
 								type="checkbox" name="cookiebot-cbid-override" id="cookiebot-cbid-override" value="1"
 							<?php checked( 1, $network_cbid_override ); ?>>
 						<div class="switcher"></div>
-						<?php esc_html_e( 'Do not use Network Settings Account ID', 'cookiebot' ); ?>
+						<?php esc_html_e( 'Do not use Network Settings ID', 'cookiebot' ); ?>
 					</label>
 				</div>
 			<?php endif; ?>

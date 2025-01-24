@@ -3,7 +3,7 @@
 		<?php esc_html_e( 'Are you sure?', 'cookiebot' ); ?>
 	</h3>
 	<p class="cb-general__info__text">
-		<?php esc_html_e( 'If there is a network account ID connected it will be used for this subsite, if not you will need to add a new ID before updating other settings', 'cookiebot' ); ?>
+		<?php esc_html_e( 'If there is a network settings ID connected it will be used for this subsite, if not you will need to add a new ID before updating other settings', 'cookiebot' ); ?>
 	</p>
 	<div class="new-account-actions">
 		<div id="cookiebot-subsite-cbid-cancel" class="cb-btn cb-white-btn">
