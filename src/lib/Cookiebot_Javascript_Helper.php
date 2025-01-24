@@ -192,7 +192,13 @@ class Cookiebot_Javascript_Helper {
 					self::get_consent_attribute( $blocking_mode, $cookie_categories ) :
 					false,
 				'iab'               => $iab,
+				'script_type'       => 'text/javascript',
 			);
+
+
+			if ( $blocking_mode !== 'auto' && ( ! empty( $cookie_categories ) && is_array( $cookie_categories ) ) ) {
+				$view_args['script_type'] = 'text/plain';
+			}
 
 			if ( $return_html ) {
 				return get_view_html( $view_path, $view_args );
@@ -230,7 +236,13 @@ class Cookiebot_Javascript_Helper {
 				'consent_attribute' => Cookiebot_Frame::is_cb_frame_type() === true ?
 					self::get_consent_attribute( $blocking_mode, $cookie_categories ) :
 					false,
+				'script_type'       => 'text/javascript',
 			);
+
+			if ( $blocking_mode !== 'auto' && ( ! empty( $cookie_categories ) && is_array( $cookie_categories ) ) ) {
+				$view_args['script_type'] = 'text/plain';
+			}
+
 			if ( $return_html ) {
 				return get_view_html( $view_path, $view_args );
 			} else {
