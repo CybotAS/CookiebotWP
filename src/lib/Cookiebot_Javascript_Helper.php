@@ -174,11 +174,12 @@ class Cookiebot_Javascript_Helper {
 	public function include_google_tag_manager_js( $return_html = false ) {
 		$option        = get_option( 'cookiebot-gtm' );
 		$blocking_mode = Cookiebot_WP::get_cookie_blocking_mode();
+		$cb_frame      = Cookiebot_Frame::is_cb_frame_type();
 
 		if ( $option !== false && $option !== '' ) {
 			$cookiebot_gtm_id  = get_option( 'cookiebot-gtm-id' );
 			$data_layer        = empty( get_option( 'cookiebot-data-layer' ) ) ? 'dataLayer' : get_option( 'cookiebot-data-layer' );
-			$iab               = Cookiebot_Frame::is_cb_frame_type() === true && ! empty( get_option( 'cookiebot-iab' ) ) ?
+			$iab               = $cb_frame === true && ! empty( get_option( 'cookiebot-iab' ) ) ?
 				get_option( 'cookiebot-iab' ) :
 				false;
 			$cookie_categories = get_option( 'cookiebot-gtm-cookies' );
@@ -188,15 +189,14 @@ class Cookiebot_Javascript_Helper {
 			$view_args = array(
 				'gtm_id'            => $cookiebot_gtm_id,
 				'data_layer'        => $data_layer,
-				'consent_attribute' => Cookiebot_Frame::is_cb_frame_type() === true ?
+				'consent_attribute' => $cb_frame === true ?
 					self::get_consent_attribute( $blocking_mode, $cookie_categories ) :
 					false,
 				'iab'               => $iab,
 				'script_type'       => 'text/javascript',
 			);
 
-
-			if ( $blocking_mode !== 'auto' && ( ! empty( $cookie_categories ) && is_array( $cookie_categories ) ) ) {
+			if ( $cb_frame === true && $blocking_mode !== 'auto' && ! empty( $cookie_categories ) && is_array( $cookie_categories ) ) {
 				$view_args['script_type'] = 'text/plain';
 			}
 
@@ -220,10 +220,11 @@ class Cookiebot_Javascript_Helper {
 	public function include_google_consent_mode_js( $return_html = false ) {
 		$option        = get_option( 'cookiebot-gcm' );
 		$blocking_mode = Cookiebot_WP::get_cookie_blocking_mode();
+		$cb_frame      = Cookiebot_Frame::is_cb_frame_type();
 
 		if ( $option !== false && $option !== '' ) {
 			$data_layer                 = empty( get_option( 'cookiebot-data-layer' ) ) ? 'dataLayer' : get_option( 'cookiebot-data-layer' );
-			$is_url_passthrough_enabled = Cookiebot_Frame::is_cb_frame_type() === true && ! empty( get_option( 'cookiebot-gcm-url-passthrough' ) ) ?
+			$is_url_passthrough_enabled = $cb_frame === true && ! empty( get_option( 'cookiebot-gcm-url-passthrough' ) ) ?
 				get_option( 'cookiebot-gcm-url-passthrough' ) :
 				false;
 			$cookie_categories          = get_option( 'cookiebot-gcm-cookies' );
@@ -233,13 +234,13 @@ class Cookiebot_Javascript_Helper {
 			$view_args = array(
 				'data_layer'        => $data_layer,
 				'url_passthrough'   => $is_url_passthrough_enabled,
-				'consent_attribute' => Cookiebot_Frame::is_cb_frame_type() === true ?
+				'consent_attribute' => $cb_frame === true ?
 					self::get_consent_attribute( $blocking_mode, $cookie_categories ) :
 					false,
 				'script_type'       => 'text/javascript',
 			);
 
-			if ( $blocking_mode !== 'auto' && ( ! empty( $cookie_categories ) && is_array( $cookie_categories ) ) ) {
+			if ( $cb_frame === true && $blocking_mode !== 'auto' && ! empty( $cookie_categories ) && is_array( $cookie_categories ) ) {
 				$view_args['script_type'] = 'text/plain';
 			}
 
