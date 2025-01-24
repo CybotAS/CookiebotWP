@@ -3202,28 +3202,25 @@ msgstr "Altro"
 msgid "Please specify here"
 msgstr "Specifica qui"
 
-#: src/view/admin/common/templates/extra/review-form.php:74
-msgid ""
-" By checking this box, you agree to submit troubleshooting information\n"
-"                        and allow us to contact you regarding the problem if "
-"necessary. \n"
-"                        "
-msgstr ""
-" Selezionando questa casella, l’utente accetta di inviare le informazioni\n"
-"                        per la risoluzione del problema ed acconsente ad "
-"essere contattato a questo scopo, se necessario. \n"
-"                        "
+#: src/lib/Cookiebot_Review.php:105
+msgid "(Optional)"
+msgstr "(Opzionale)"
 
-#: src/view/admin/common/templates/extra/review-form.php:83
-msgid ""
-"The information will be kept for no longer than 90 days. \n"
-"                        You may revoke this consent at any time, e.g. by "
-"sending an email to "
-msgstr ""
-"Le informazioni saranno conservate per un periodo non superiore a 90 "
-"giorni. \n"
-"                        È possibile revocare il consenso in qualsiasi "
-"momento, ad esempio inviando un’e-mail a "
+#: src/lib/Cookiebot_Review.php:106
+msgid " By checking this box, you agree to submit troubleshooting information and allow us to contact you regarding the problem if necessary."
+msgstr " Selezionando questa casella, l’utente accetta di inviare le informazioni per la risoluzione del problema ed acconsente ad essere contattato a questo scopo, se necessario."
+
+#: src/lib/Cookiebot_Review.php:110
+msgid "The information will be kept for no longer than 90 days. You may revoke this consent at any time, e.g. by sending an email to "
+msgstr "Le informazioni saranno conservate per un periodo non superiore a 90 giorni. È possibile revocare il consenso in qualsiasi momento, ad esempio inviando un’e-mail a "
+
+#: src/lib/Cookiebot_Review.php:117
+msgid "Skip and Deactivate"
+msgstr "Salta e disattiva"
+
+#: src/lib/Cookiebot_Review.php:118
+msgid "Submit and Deactivate"
+msgstr "Invia e disattiva"
 
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:6
 msgid ""

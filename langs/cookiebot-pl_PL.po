@@ -3200,28 +3200,25 @@ msgstr "Inne"
 msgid "Please specify here"
 msgstr "Opisz tutaj"
 
-#: src/view/admin/common/templates/extra/review-form.php:74
-msgid ""
-" By checking this box, you agree to submit troubleshooting information\n"
-"                        and allow us to contact you regarding the problem if "
-"necessary. \n"
-"                        "
-msgstr ""
-" Zaznaczając to pole, wyrażasz zgodę na przesłanie informacji o "
-"rozwiązywaniu problemów i zezwalasz \n"
-"                        nam na skontaktowanie się z Tobą w sprawie problemu, "
-"jeśli zajdzie taka potrzeba. \n"
-"                        "
+#: src/lib/Cookiebot_Review.php:105
+msgid "(Optional)"
+msgstr "(Opcjonalnie)"
 
-#: src/view/admin/common/templates/extra/review-form.php:83
-msgid ""
-"The information will be kept for no longer than 90 days. \n"
-"                        You may revoke this consent at any time, e.g. by "
-"sending an email to "
-msgstr ""
-"Informacje te będą przechowywane przez okres nie dłuższy niż 90 dni. \n"
-"                         Zgodę można wycofać w dowolnym momencie, np. "
-"wysyłając wiadomość e-mail na adres "
+#: src/lib/Cookiebot_Review.php:106
+msgid " By checking this box, you agree to submit troubleshooting information and allow us to contact you regarding the problem if necessary."
+msgstr " Zaznaczając to pole, wyrażasz zgodę na przesłanie informacji o rozwiązywaniu problemów i zezwalasz nam na skontaktowanie się z Tobą w sprawie problemu, jeśli zajdzie taka potrzeba."
+
+#: src/lib/Cookiebot_Review.php:110
+msgid "The information will be kept for no longer than 90 days. You may revoke this consent at any time, e.g. by sending an email to "
+msgstr "Informacje te będą przechowywane przez okres nie dłuższy niż 90 dni. Zgodę można wycofać w dowolnym momencie, np. wysyłając wiadomość e-mail na adres "
+
+#: src/lib/Cookiebot_Review.php:117
+msgid "Skip and Deactivate"
+msgstr "Pomiń i dezaktywuj"
+
+#: src/lib/Cookiebot_Review.php:118
+msgid "Submit and Deactivate"
+msgstr "Prześlij i dezaktywuj"
 
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:6
 msgid ""

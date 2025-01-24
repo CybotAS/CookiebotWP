@@ -3208,28 +3208,25 @@ msgstr "Sonstiges"
 msgid "Please specify here"
 msgstr "Bitte hier angeben"
 
-#: src/view/admin/common/templates/extra/review-form.php:74
-msgid ""
-" By checking this box, you agree to submit troubleshooting information\n"
-"                        and allow us to contact you regarding the problem if "
-"necessary. \n"
-"                        "
-msgstr ""
-" Wenn Sie dieses Kästchen ankreuzen, erklären Sie sich damit einverstanden, "
-"uns Informationen zur Fehlerbehebung zu übermitteln und erlauben uns,\n"
-"                         Sie bei Bedarf zu kontaktieren, um das Problem zu "
-"lösen. \n"
-"                        "
+#: src/lib/Cookiebot_Review.php:105
+msgid "(Optional)"
+msgstr "(Optional)"
 
-#: src/view/admin/common/templates/extra/review-form.php:83
-msgid ""
-"The information will be kept for no longer than 90 days. \n"
-"                        You may revoke this consent at any time, e.g. by "
-"sending an email to "
-msgstr ""
-"Die Informationen werden nicht länger als 90 Tage gespeichert. \n"
-"                        Sie können diese Einwilligung jederzeit widerrufen, "
-"z. B. durch eine E-Mail an "
+#: src/lib/Cookiebot_Review.php:106
+msgid " By checking this box, you agree to submit troubleshooting information and allow us to contact you regarding the problem if necessary."
+msgstr " Wenn Sie dieses Kästchen ankreuzen, erklären Sie sich damit einverstanden, uns Informationen zur Fehlerbehebung zu übermitteln und erlauben uns, Sie bei Bedarf zu kontaktieren, um das Problem zu lösen."
+
+#: src/lib/Cookiebot_Review.php:110
+msgid "The information will be kept for no longer than 90 days. You may revoke this consent at any time, e.g. by sending an email to "
+msgstr "Die Informationen werden nicht länger als 90 Tage gespeichert. Sie können diese Einwilligung jederzeit widerrufen, z. B. durch eine E-Mail an "
+
+#: src/lib/Cookiebot_Review.php:117
+msgid "Skip and Deactivate"
+msgstr "Überspringen und Deaktivieren"
+
+#: src/lib/Cookiebot_Review.php:118
+msgid "Submit and Deactivate"
+msgstr "Einreichen und Deaktivieren"
 
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:6
 msgid ""

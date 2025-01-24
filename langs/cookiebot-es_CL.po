@@ -3191,28 +3191,25 @@ msgstr "Otros"
 msgid "Please specify here"
 msgstr "Especifica más, por favor"
 
-#: src/view/admin/common/templates/extra/review-form.php:74
-msgid ""
-" By checking this box, you agree to submit troubleshooting information\n"
-"                        and allow us to contact you regarding the problem if "
-"necessary. \n"
-"                        "
-msgstr ""
-" Al marcar esta casilla, aceptas enviar información sobre la resolución de "
-"problemas\n"
-"                        y nos permites ponernos en contacto contigo en "
-"relación con este asunto si fuera necesario. \n"
-"                        "
+#: src/lib/Cookiebot_Review.php:105
+msgid "(Optional)"
+msgstr "(Opcional)"
 
-#: src/view/admin/common/templates/extra/review-form.php:83
-msgid ""
-"The information will be kept for no longer than 90 days. \n"
-"                        You may revoke this consent at any time, e.g. by "
-"sending an email to "
-msgstr ""
-"La información no se conservará más de 90 días. \n"
-"                        Puedes revocar este consentimiento en cualquier "
-"momento, por ejemplo, enviando un correo electrónico a "
+#: src/lib/Cookiebot_Review.php:106
+msgid " By checking this box, you agree to submit troubleshooting information and allow us to contact you regarding the problem if necessary."
+msgstr " Al marcar esta casilla, aceptas enviar información sobre la resolución de problemas y nos permites ponernos en contacto contigo en relación con este asunto si fuera necesario."
+
+#: src/lib/Cookiebot_Review.php:110
+msgid "The information will be kept for no longer than 90 days. You may revoke this consent at any time, e.g. by sending an email to "
+msgstr "La información no se conservará más de 90 días. Puedes revocar este consentimiento en cualquier momento, por ejemplo, enviando un correo electrónico a "
+
+#: src/lib/Cookiebot_Review.php:117
+msgid "Skip and Deactivate"
+msgstr "Saltar y Desactivar"
+
+#: src/lib/Cookiebot_Review.php:118
+msgid "Submit and Deactivate"
+msgstr "Enviar y Desactivar"
 
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:6
 msgid ""

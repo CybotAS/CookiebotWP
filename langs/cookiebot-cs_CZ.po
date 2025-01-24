@@ -3178,28 +3178,25 @@ msgstr "Jiné"
 msgid "Please specify here"
 msgstr "Uveďte zde"
 
-#: src/view/admin/common/templates/extra/review-form.php:74
-msgid ""
-" By checking this box, you agree to submit troubleshooting information\n"
-"                        and allow us to contact you regarding the problem if "
-"necessary. \n"
-"                        "
-msgstr ""
-" Zaškrtnutím tohoto políčka souhlasíte s odesláním informací o odstraňování "
-"problému a umožníte nám,\n"
-"                         abychom vás v případě potřeby ohledně odstranění "
-"problému kontaktovali.\n"
-"                        "
+#: src/lib/Cookiebot_Review.php:105
+msgid "(Optional)"
+msgstr "(volitelně)"
 
-#: src/view/admin/common/templates/extra/review-form.php:83
-msgid ""
-"The information will be kept for no longer than 90 days. \n"
-"                        You may revoke this consent at any time, e.g. by "
-"sending an email to "
-msgstr ""
-"Informace budou uchovávány po dobu maximálně 90 dnů. \n"
-"                        Tento souhlas můžete kdykoli odvolat, např. zasláním "
-"e-mailu na adresu "
+#: src/lib/Cookiebot_Review.php:106
+msgid " By checking this box, you agree to submit troubleshooting information and allow us to contact you regarding the problem if necessary."
+msgstr " Zaškrtnutím tohoto políčka souhlasíte s odesláním informací o odstraňování problému a umožníte nám, abychom vás v případě potřeby ohledně odstranění problému kontaktovali."
+
+#: src/lib/Cookiebot_Review.php:110
+msgid "The information will be kept for no longer than 90 days. You may revoke this consent at any time, e.g. by sending an email to "
+msgstr "Informace budou uchovávány po dobu maximálně 90 dnů. Tento souhlas můžete kdykoli odvolat, např. zasláním e-mailu na adresu "
+
+#: src/lib/Cookiebot_Review.php:117
+msgid "Skip and Deactivate"
+msgstr "Přeskočit a deaktivovat"
+
+#: src/lib/Cookiebot_Review.php:118
+msgid "Submit and Deactivate"
+msgstr "Odeslání a deaktivace"
 
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:6
 msgid ""

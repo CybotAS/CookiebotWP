@@ -3198,28 +3198,25 @@ msgstr "Outro"
 msgid "Please specify here"
 msgstr "Especifique aqui"
 
-#: src/view/admin/common/templates/extra/review-form.php:74
-msgid ""
-" By checking this box, you agree to submit troubleshooting information\n"
-"                        and allow us to contact you regarding the problem if "
-"necessary. \n"
-"                        "
-msgstr ""
-" Ao assinalar esta caixa, concorda em enviar informações de resolução de "
-"problemas\n"
-"                         e permitir-nos entrar em contacto consigo "
-"relativamente ao problema, se necessário. \n"
-"                        "
+#: src/lib/Cookiebot_Review.php:105
+msgid "(Optional)"
+msgstr "(Opcional)"
 
-#: src/view/admin/common/templates/extra/review-form.php:83
-msgid ""
-"The information will be kept for no longer than 90 days. \n"
-"                        You may revoke this consent at any time, e.g. by "
-"sending an email to "
-msgstr ""
-"As informações não serão mantidas por mais de 90 dias. \n"
-"                        Pode revogar este consentimento a qualquer momento, "
-"por exemplo, enviando um e-mail para "
+#: src/lib/Cookiebot_Review.php:106
+msgid " By checking this box, you agree to submit troubleshooting information and allow us to contact you regarding the problem if necessary."
+msgstr " Ao assinalar esta caixa, concorda em enviar informações de resolução de problemas e permitir-nos entrar em contacto consigo relativamente ao problema, se necessário."
+
+#: src/lib/Cookiebot_Review.php:110
+msgid "The information will be kept for no longer than 90 days. You may revoke this consent at any time, e.g. by sending an email to "
+msgstr "As informações não serão mantidas por mais de 90 dias. Pode revogar este consentimento a qualquer momento, por exemplo, enviando um e-mail para "
+
+#: src/lib/Cookiebot_Review.php:117
+msgid "Skip and Deactivate"
+msgstr "Saltar e desativar"
+
+#: src/lib/Cookiebot_Review.php:118
+msgid "Submit and Deactivate"
+msgstr "Enviar e desativar"
 
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:6
 msgid ""
