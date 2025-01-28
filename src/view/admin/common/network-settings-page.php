@@ -37,7 +37,7 @@ $header->display();
 									<?php esc_html_e( 'If you’re new to our solutions, create an account first to obtain your settings ID.', 'cookiebot' ); ?>
 								</p>
 								<div class="new-account-actions">
-									<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+									<a href="https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
 										target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 										<?php esc_html_e( 'Create your account', 'cookiebot' ); ?>
 									</a>
@@ -56,7 +56,7 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'If added this will be the default account for all subsites. Subsites are able to override this and use their own account.', 'cookiebot' ); ?>
 								</p>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
+								<a href="https://support.usercentrics.com/hc/en-us/articles/18097606499100-What-is-a-Settings-ID-and-where-can-I-find-it"
 									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 									<?php esc_html_e( 'Where to find settings ID', 'cookiebot' ); ?>
 								</a>

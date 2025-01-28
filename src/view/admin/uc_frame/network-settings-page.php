@@ -58,7 +58,7 @@ $header->display();
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'If added this will be the default account for all subsites. Subsites are able to override this and use their own account.', 'cookiebot' ); ?>
 								</p>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
+								<a href="https://support.usercentrics.com/hc/en-us/articles/18097606499100-What-is-a-Settings-ID-and-where-can-I-find-it"
 									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 									<?php esc_html_e( 'Where to find settings ID', 'cookiebot' ); ?>
 								</a>

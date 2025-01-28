@@ -47,7 +47,7 @@ $header->display();
 							<h2 class="cb-main__card__title">
 								<?php echo esc_html__( 'New to our solutions? Create your account. ', 'cookiebot' ); ?>
 							</h2>
-							<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+							<a href="https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
 								target="_blank" class="cb-btn cb-white-btn" rel="noopener">
 								<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
 							</a>
@@ -63,7 +63,7 @@ $header->display();
 							<h2 class="cb-main__card__title">
 								<?php echo esc_html__( 'How to get started', 'cookiebot' ); ?>
 							</h2>
-							<a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
+							<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress"
 								target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 								<?php echo esc_html__( 'Learn more about your CMP', 'cookiebot' ); ?>
 							</a>
@@ -87,7 +87,7 @@ $header->display();
 							<div class="cb-main__legislation__region">
 								<?php echo esc_html__( 'Europe', 'cookiebot' ); ?>
 							</div>
-							<a href="https://www.cookiebot.com/en/gdpr/" target="_blank"
+							<a href="https://support.cookiebot.com/hc/en-us/articles/360010952259-Using-Cookiebot-CMP-for-CCPA-CPRA-compliance" target="_blank"
 								class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
 								<span><?php echo esc_html__( 'Learn More', 'cookiebot' ); ?></span>
 								<img src="<?php echo esc_html( $link_icon ); ?>"
@@ -104,14 +104,14 @@ $header->display();
 							<div class="cb-main__legislation__region">
 								<?php echo esc_html__( 'North America', 'cookiebot' ); ?>
 							</div>
-							<a href="https://www.cookiebot.com/en/what-is-ccpa/" target="_blank"
+							<a href="https://support.cookiebot.com/hc/en-us/articles/360010952259-Using-Cookiebot-CMP-for-CCPA-CPRA-compliance" target="_blank"
 								class="cb-btn cb-link-btn external-icon legislation-link" rel="noopener">
 								<span><?php echo esc_html__( 'Learn More', 'cookiebot' ); ?></span>
 								<img src="<?php echo esc_html( $link_icon ); ?>"
 									alt="<?php echo esc_html__( 'Learn More', 'cookiebot' ); ?>">
 							</a>
 						</div>
-						<a href="https://www.cookiebot.com/en/blog/" target="_blank"
+						<a href="https://support.cookiebot.com/hc/en-us/categories/360000349934-Regulations" target="_blank"
 							class="cb-btn cb-link-btn cb-right-btn" rel="noopener">
 							<?php echo esc_html__( 'See other legislations', 'cookiebot' ); ?>
 						</a>

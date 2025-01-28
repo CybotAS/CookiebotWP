@@ -13,7 +13,7 @@
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'Enable Google Tag Manager integration to streamline tracking tags with your Usercentrics Cookiebot WordPress Plugin.', 'cookiebot' ); ?>
 		</p>
-		<a href="https://www.cookiebot.com/en/google-tag-manager-and-gdpr-compliance-with-cookiebot/"
+		<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174#3"
 			class="cb-btn cb-link-btn" target="_blank" rel="noopener">
 			&nbsp;<?php esc_html_e( 'Learn more', 'cookiebot' ); ?>
 		</a>

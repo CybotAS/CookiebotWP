@@ -34,7 +34,7 @@
 			<?php esc_html_e( 'Enable Google Consent Mode with default settings on your WordPress page.', 'cookiebot' ); ?>
 		</p>
 		<a class="cb-btn cb-link-btn" target="_blank" rel="noopener"
-			href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Cookiebot-and-Google-Consent-Mode">
+			href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Implementing-Google-consent-mode#h_01J03HKJ8K2WPB1HJZQQ5BDMQQ">
 			<?php esc_html_e( 'Read more', 'cookiebot' ); ?>
 		</a>
 	</div>

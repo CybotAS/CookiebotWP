@@ -28,7 +28,7 @@ if ( ! empty( $network_cbid ) ) {
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'To disconnect your account, enter your settings ID into the field and confirm with the button.', 'cookiebot' ); ?>
 		</p>
-		<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
+		<a href="https://support.usercentrics.com/hc/en-us/articles/18097606499100-What-is-a-Settings-ID-and-where-can-I-find-it"
 			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 			<?php esc_html_e( 'Where to find settings ID', 'cookiebot' ); ?>
 		</a>
@@ -149,7 +149,7 @@ if ( ! empty( $network_cbid ) ) {
 		<p class="cb-general__info__text">
 			<?php esc_html_e( 'Choose the type of your cookie-blocking mode. Select automatic to automatically block all cookies except those strictly necessary to use before user gives consent. Manual mode lets you adjust your cookie settings within your website’s HTML.', 'cookiebot' ); ?>
 		</p>
-		<a href="https://support.cookiebot.com/hc/en-us/articles/360009074960-Automatic-cookie-blocking"
+		<a href="https://support.usercentrics.com/hc/en-us/articles/17332104757148-Automatic-Data-Processing-Service-blocking"
 			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 			<?php esc_html_e( 'Learn more', 'cookiebot' ); ?>
 		</a>
