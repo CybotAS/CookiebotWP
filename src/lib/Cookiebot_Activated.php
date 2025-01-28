@@ -1,4 +1,5 @@
 <?php
+
 namespace cybot\cookiebot\lib;
 
 use cybot\cookiebot\addons\Cookiebot_Addons;
@@ -6,6 +7,7 @@ use cybot\cookiebot\admin_notices\Cookiebot_Recommendation_Notice;
 use Exception;
 
 class Cookiebot_Activated {
+
 
 	/**
 	 * @throws Exception

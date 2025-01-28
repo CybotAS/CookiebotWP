@@ -51,6 +51,10 @@
     border-bottom: 1px solid #e1e1e1;
 }
 
+.cb-settings__tabs.cb-settings__tabs--uc {
+    grid-template-columns: repeat(5, 1fr);
+}
+
 .cb-settings__tabs__item {
     display: grid;
     padding: 15px 10px;
@@ -80,6 +84,10 @@
     border-radius: 15px;
     padding: 40px;
     margin-bottom: 50px;
+}
+
+.cb-general__new__account {
+    margin-top: 50px;
 }
 
 .cb-general__info__title {
@@ -127,6 +135,146 @@
     font-size: 15px;
     line-height: 20px;
     margin: 0 0 15px;
+}
+
+.cookiebot-cbid-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.cookiebot-cbid-input {
+    position: relative;
+}
+
+.cookiebot-cbid-container p.submit {
+    margin: 0;
+    padding: 0;
+}
+
+.cookiebot-cbid-container p.submit #submit {
+    background-color: #1032cf;
+    color: #ffffff;
+    margin-top: 0;
+    font-size: 15px;
+    line-height: 2;
+    padding: 8px 15px;
+    font-weight: 500;
+    border-radius: 7px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.cookiebot-cbid-container p.submit #submit.disabled {
+    background: gray;
+    pointer-events: none;
+}
+
+.cookiebot-cbid-input #cookiebot-cbid
+{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cookiebot-cbid-input #cookiebot-cbid.cbid-active
+{
+    pointer-events: none;
+    background: rgba(255, 255, 255, .5);
+    color: rgba(44, 51, 56, .5);
+}
+
+.cookiebot-cbid-input #cookiebot-cbid.check-progress
+{
+    padding-right: 55px;
+}
+
+.cookiebot-cbid-check {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    transform: translateY(-50%);
+}
+
+.cookiebot-cbid-check.check-progress {
+    background-image: url(../../img/icons/loader.svg);
+
+}
+
+.cookiebot-cbid-check.check-pass {
+    background-color: #076646;
+    background-image: url(../../img/icons/check.svg);
+    border-radius: 50%;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#cookiebot-cbid-reset-dialog {
+    margin-top: 0;
+    line-height: 2;
+    padding: 8px 15px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor: pointer;
+}
+
+#cookiebot-cbid-reset-dialog.disabled, #cookiebot-cbid-network-dialog {
+    background-color: #e1e1e1;
+    color: #666;
+    margin-top: 0;
+    pointer-events: none;
+}
+
+#cb-network-id-override {
+    margin-top: 24px;
+}
+
+#cookiebot-ruleset-id-selector.hidden {
+    display: none;
+}
+
+.cb-settings__config__head-section {
+    margin-bottom: 50px;
+}
+
+#embedding-shortcode {
+    display: inline-block;
+    width: 100%;
+    border: 2px solid #d3d3d3;
+    border-radius: 7px;
+    padding: 16px;
+    max-width: initial;
+    box-shadow: none;
+    background: #ffffff;
+    color: #242424;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+input#cookiebot-embedding {
+    width: 100%;
+    border: 2px solid #d3d3d3;
+    border-radius: 7px;
+    padding: 8px 15px;
+    max-width: initial;
+}
+
+select#cookiebot-embedding, select#cookiebot-embedding-type {
+    width: 100%;
+    border: 2px solid #d3d3d3;
+    border-radius: 7px;
+    padding: 8px 15px;
+    max-width: initial;
+}
+
+#cookiebot-embedding-type option.hide-option,
+#cookiebot-embedding-single-service-container.hide-container,
+#cookiebot-tcf-toggle-container.hide-container
+{
+    display:none;
 }
 
 #show_add_language_guide {
@@ -182,6 +330,7 @@
 }
 
 .disabled__item {
+    display: none;
     filter: grayscale(1);
     opacity: .5;
     pointer-events: none;
@@ -304,16 +453,24 @@
     color: #d63638;
 }
 
-.cb-vendor-alert__msg {
+.cb-vendor-alert__msg, .cb-cbid-alert__msg, .cb-cbid-subsite-alert__msg {
     box-sizing: border-box;
-    background-color: #de8e09;
-    color: #ffffff;
     padding: 24px 34px;
     font-size: 15px;
     line-height: 24px;
     font-weight: 600;
     border-radius: 8px;
     margin-bottom: 20px;
+}
+
+.cb-vendor-alert__msg {
+    background-color: #de8e09;
+    color: #ffffff;
+}
+
+.cb-cbid-alert__msg, .cb-cbid-subsite-alert__msg {
+    background-color: #fdedd3;
+    border: 4px solid #de8e09;
 }
 
 .vendor-selected-items {

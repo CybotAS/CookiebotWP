@@ -25,6 +25,7 @@
 }
 
 .cb-body {
+    min-height: 80vh;
     padding: 50px 25px 0;
 }
 

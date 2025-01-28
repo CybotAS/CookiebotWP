@@ -27,6 +27,10 @@
     box-sizing: border-box;
 }
 
+#cookiebot-popup label span {
+    font-size: 15px;
+}
+
 #cookiebot-popup .cb-review__logo img {
     width: 100%;
     height: auto;

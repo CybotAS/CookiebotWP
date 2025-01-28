@@ -4,6 +4,7 @@ namespace cybot\cookiebot\lib\buffer;
 
 class Buffer_Output implements Buffer_Output_Interface {
 
+
 	/**
 	 * Hook tag names
 	 *
@@ -17,7 +18,7 @@ class Buffer_Output implements Buffer_Output_Interface {
 	 * @param $tag_name         string      Hook name
 	 * @param $priority         integer     Hook priority
 	 * @param array                                      $keywords array         List of words to search for in the script
-	 * @param boolean                                    $use_cache            Use Cache
+	 * @param boolean                                    $use_cache Use Cache
 	 *
 	 * @since 1.2.0
 	 */

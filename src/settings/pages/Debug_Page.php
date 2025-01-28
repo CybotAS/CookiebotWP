@@ -5,6 +5,7 @@ namespace cybot\cookiebot\settings\pages;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Addon;
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use cybot\cookiebot\lib\Consent_API_Helper;
+use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\lib\Cookiebot_Javascript_Helper;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\lib\Cookiebot_WP;
@@ -17,18 +18,21 @@ use Exception;
 
 class Debug_Page implements Settings_Page_Interface {
 
+
 	const ADMIN_SLUG = 'cookiebot_debug';
 
 	public function menu() {
-		add_submenu_page(
-			'cookiebot',
-			__( 'Debug info', 'cookiebot' ),
-			__( 'Debug info', 'cookiebot' ),
-			'manage_options',
-			self::ADMIN_SLUG,
-			array( $this, 'display' ),
-			25
-		);
+		if ( Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) {
+			add_submenu_page(
+				'cookiebot',
+				__( 'Debug info', 'cookiebot' ),
+				__( 'Debug info', 'cookiebot' ),
+				'manage_options',
+				self::ADMIN_SLUG,
+				array( $this, 'display' ),
+				25
+			);
+		}
 	}
 
 	/**
@@ -58,14 +62,14 @@ class Debug_Page implements Settings_Page_Interface {
 
 		$debug_output = $this->prepare_debug_data();
 
-		include_view( 'admin/settings/debug-page.php', array( 'debug_output' => $debug_output ) );
+		include_view( Cookiebot_Frame::get_view_path() . 'debug-page.php', array( 'debug_output' => $debug_output ) );
 	}
 
 	private function get_ignored_scripts() {
 		$ignored_scripts = get_option( 'cookiebot-ignore-scripts' );
 
 		$ignored_scripts = array_map(
-			function( $ignore_tag ) {
+			function ( $ignore_tag ) {
 				return trim( $ignore_tag );
 			},
 			explode( PHP_EOL, $ignored_scripts )
@@ -93,24 +97,31 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= 'MySQL Version: ' . $wpdb->db_version() . "\n";
 		$debug_output .= "\n--- Cookiebot Information ---\n";
 		$debug_output .= 'Plugin Version: ' . Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION . "\n";
-		$debug_output .= 'Cookiebot ID: ' . Cookiebot_WP::get_cbid() . "\n";
+		$debug_output .= 'Settings ID: ' . Cookiebot_WP::get_cbid() . "\n";
 		$debug_output .= 'Blocking mode: ' . get_option( 'cookiebot-cookie-blocking-mode' ) . "\n";
-		$debug_output .= 'Language: ' . get_option( 'cookiebot-language' ) . "\n";
-		$debug_output .= 'Frontend Language: ' . $this->print_option_enabled( 'cookiebot-front-language' ) . "\n";
+		if ( Cookiebot_Frame::is_cb_frame_type() !== false ) {
+			$debug_output .= 'Language: ' . get_option( 'cookiebot-language' ) . "\n";
+			$debug_output .= 'Frontend Language: ' . $this->print_option_enabled( 'cookiebot-front-language' ) . "\n";
+		}
 		$debug_output .= 'IAB: ' . $this->print_option_enabled( 'cookiebot-iab' ) . "\n";
-		$debug_output .= 'TCF version: ' . $this->print_tcf_version() . "\n";
-		$debug_output .= 'TCF tag: ' . $cookiebot_javascript_helper->include_publisher_restrictions_js( true ) . "\n";
-		$debug_output .= 'Multiple banners: ' . $this->print_option_enabled( 'cookiebot-multiple-config' ) . "\n";
-		$debug_output .= $this->print_multiple_configuration_banners();
-		$debug_output .= 'Add async/defer to banner tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-uc-attribute' ) . "\n";
-		$debug_output .= 'Add async/defer to declaration tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-cd-attribute' ) . "\n";
+		if ( Cookiebot_Frame::is_cb_frame_type() !== false ) {
+			$debug_output .= 'TCF version: ' . $this->print_tcf_version() . "\n";
+			$debug_output .= 'TCF tag: ' . $cookiebot_javascript_helper->include_publisher_restrictions_js( true ) . "\n";
+			$debug_output .= 'Multiple banners: ' . $this->print_option_enabled( 'cookiebot-multiple-config' ) . "\n";
+			$debug_output .= $this->print_multiple_configuration_banners();
+			$debug_output .= 'Add async/defer to banner tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-uc-attribute' ) . "\n";
+			$debug_output .= 'Add async/defer to declaration tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-cd-attribute' ) . "\n";
+		}
 		$debug_output .= 'Auto update: ' . $this->print_option_enabled( 'cookiebot-autoupdate' ) . "\n";
 		$debug_output .= 'Hide Cookie Popup: ' . $this->print_option_active( 'cookiebot-nooutput' ) . "\n";
-		$debug_output .= 'Disable Cookiebot in WP Admin: ' . $this->print_option_active( 'cookiebot-nooutput-admin' ) . "\n";
 		$debug_output .= 'Enable Cookiebot on front end while logged in: ' . $this->print_option_active( 'cookiebot-output-logged-in' ) . "\n";
-		$debug_output .= 'List of ignored javascript files: ' . $this->get_ignored_scripts() . "\n";
-		$debug_output .= 'Banner tag: ' . $cookiebot_javascript_helper->include_cookiebot_js( true ) . "\n";
-		$debug_output .= 'Declaration tag: ' . Cookiebot_Declaration_Shortcode::show_declaration() . "\n";
+		if ( Cookiebot_Frame::is_cb_frame_type() !== false ) {
+			$debug_output .= 'List of ignored javascript files: ' . $this->get_ignored_scripts() . "\n";
+			$debug_output .= 'Banner tag: ' . "\n" . $cookiebot_javascript_helper->include_cookiebot_js( true ) . "\n";
+			$debug_output .= 'Declaration tag: ' . Cookiebot_Declaration_Shortcode::show_declaration() . "\n";
+		} else {
+			$debug_output .= 'Banner tag: ' . "\n" . $cookiebot_javascript_helper->include_uc_cmp_js( true ) . "\n";
+		}
 
 		if ( get_option( 'cookiebot-gtm' ) !== false ) {
 			$debug_output .= 'GTM tag: ' . $cookiebot_javascript_helper->include_google_tag_manager_js( true ) . "\n";
@@ -161,9 +172,9 @@ class Debug_Page implements Settings_Page_Interface {
 	 * Print "Yes" or "No" depending on the option value. Option value should be "1" or "0". If <b>$active_text</b> or
 	 * <b>$disabled_text</b> is set, it will be used instead of default values "Yes" or "No".
 	 *
-	 * @param string $option_name   Name of the option to check.
+	 * @param string $option_name Name of the option to check.
 	 * @param bool   $is_multisite Is multisite option.
-	 * @param string $active_text   (Optional) Text to print if option is active. Default is "Yes".
+	 * @param string $active_text (Optional) Text to print if option is active. Default is "Yes".
 	 * @param string $disabled_text (Optional) Text to print if option is disabled. Default is "No".
 	 *
 	 * @return string
@@ -186,16 +197,22 @@ class Debug_Page implements Settings_Page_Interface {
 		$consent_api_helper = new Consent_API_Helper();
 
 		if ( $consent_api_helper->is_wp_consent_api_active() ) {
-			$output .= "\n--- WP Consent Level API Mapping ---\n";
-			$output .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous' . "\n";
+			$output .= "\n--- WP Consent API Mapping ---\n";
 			$map     = $consent_api_helper->get_wp_consent_api_mapping();
-			foreach ( $map as $key => $value ) {
-				$output .= strtoupper( str_replace( ';', ', ', $key ) ) . '   =>   ';
-				$output .= 'F=1, ';
-				$output .= 'P=' . $value['preferences'] . ', ';
-				$output .= 'M=' . $value['marketing'] . ', ';
-				$output .= 'S=' . $value['statistics'] . ', ';
-				$output .= 'SA=' . $value['statistics-anonymous'] . "\n";
+			if ( Cookiebot_Frame::is_cb_frame_type() !== false ) {
+				$output .= 'F = Functional, N = Necessary, P = Preferences, M = Marketing, S = Statistics, SA = Statistics Anonymous' . "\n";
+				foreach ( $map as $key => $value ) {
+					$output .= strtoupper( str_replace( ';', ', ', $key ) ) . '   =>   ';
+					$output .= 'F=1, ';
+					$output .= 'P=' . $value['preferences'] . ', ';
+					$output .= 'M=' . $value['marketing'] . ', ';
+					$output .= 'S=' . $value['statistics'] . ', ';
+					$output .= 'SA=' . $value['statistics-anonymous'] . "\n";
+				}
+			} else {
+				foreach ( $map as $key => $value ) {
+					$output .= $key . ' => ' . $value . "\n";
+				}
 			}
 		}
 
@@ -215,13 +232,13 @@ class Debug_Page implements Settings_Page_Interface {
 				$output .= '-Banner: ' . $counter . " -\n";
 				$output .= 'Id: ' . $secondary_id . " \n";
 				$output .= 'Regions: ' . $secondary_regions . " \n\n";
-				$counter++;
+				++$counter;
 			}
 			foreach ( $banners as $banner ) {
 				$output .= '-Banner: ' . $counter . " -\n";
 				$output .= 'Id: ' . $banner['group'] . " \n";
 				$output .= 'Regions: ' . $banner['region'] . " \n\n";
-				$counter++;
+				++$counter;
 			}
 		}
 
@@ -240,6 +257,10 @@ class Debug_Page implements Settings_Page_Interface {
 	 */
 	private function print_activated_addons() {
 		$output = '';
+
+		if ( Cookiebot_Frame::is_cb_frame_type() === false ) {
+			return $output;
+		}
 
 		try {
 			$cookiebot_addons = new Cookiebot_Addons();

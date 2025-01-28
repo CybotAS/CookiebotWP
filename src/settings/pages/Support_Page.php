@@ -2,12 +2,14 @@
 
 namespace cybot\cookiebot\settings\pages;
 
+use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\lib\Cookiebot_WP;
 use InvalidArgumentException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
 
 class Support_Page implements Settings_Page_Interface {
+
 
 	const ADMIN_SLUG = 'cookiebot_support';
 
@@ -58,6 +60,6 @@ class Support_Page implements Settings_Page_Interface {
 			);
 		}
 
-		include_view( 'admin/settings/support-page.php', $args );
+		include_view( Cookiebot_Frame::get_view_path() . 'support-page.php', $args );
 	}
 }

@@ -7,6 +7,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 class Google_Maps_Jetpack_Widget extends Base_Jetpack_Widget {
 
+
 	const LABEL               = 'Google Maps';
 	const WIDGET_OPTION_NAME  = 'google_maps';
 	const DEFAULT_PLACEHOLDER = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable google maps.';

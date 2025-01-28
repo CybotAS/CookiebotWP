@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Woocommerce_Google_Analytics_Pro extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'WooCommerce Google Analytics Pro';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';
 	const OPTION_NAME                 = 'woocommerce_google_analytics_pro';

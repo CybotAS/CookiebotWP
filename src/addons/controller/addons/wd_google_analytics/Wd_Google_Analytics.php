@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Wd_Google_Analytics extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'WD google analytics';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking.';
 	const OPTION_NAME                 = 'wd_google_analytics';

@@ -5,6 +5,7 @@ namespace cybot\cookiebot\addons\controller\addons\jetpack\widget;
 use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 
 class Facebook_Jetpack_Widget extends Base_Jetpack_Widget {
+
 	const LABEL               = 'Facebook';
 	const WIDGET_OPTION_NAME  = 'facebook';
 	const DEFAULT_PLACEHOLDER = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to see facebook widget.';
@@ -71,5 +72,4 @@ class Facebook_Jetpack_Widget extends Base_Jetpack_Widget {
 			__( 'Facebook widget.', 'cookiebot' ),
 		);
 	}
-
 }

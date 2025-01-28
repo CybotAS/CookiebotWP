@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Addthis extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'WordPress Share Buttons Plugin – AddThis';
 	const OPTION_NAME                 = 'addthis';
 	const DEFAULT_COOKIE_TYPES        = array( 'marketing', 'statistics' );

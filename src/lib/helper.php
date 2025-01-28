@@ -307,7 +307,7 @@ namespace cybot\cookiebot\lib {
 		if ( ! empty( $front_language ) ) {
 			$lang = get_locale(); // Gets language in en-US format
 			if ( ! empty( $lang ) ) {
-				list( $lang ) = explode( '_', $lang ); // Changes format from eg. en-US to en.
+				list($lang) = explode( '_', $lang ); // Changes format from eg. en-US to en.
 			}
 			return $lang;
 		}
@@ -324,7 +324,7 @@ namespace cybot\cookiebot\lib {
 		if ( $lang === '_wp' ) {
 			$lang = get_bloginfo( 'language' ); // Gets language in en-US format
 			if ( ! empty( $lang ) ) {
-				list( $lang ) = explode( '-', $lang ); // Changes format from eg. en-US to en.
+				list($lang) = explode( '-', $lang ); // Changes format from eg. en-US to en.
 			}
 		}
 
@@ -480,7 +480,7 @@ namespace cybot\cookiebot\lib {
 
 		$url_parts = explode( '.', $host );
 
-		$url_parts = array_slice( $url_parts, - 2 );
+		$url_parts = array_slice( $url_parts, -2 );
 
 		return implode( '.', $url_parts );
 	}
@@ -580,7 +580,7 @@ namespace cybot\cookiebot\lib {
 	/**
 	 * Helper function to update your scripts
 	 *
-	 * @param  string|string[] $type
+	 * @param string|string[] $type
 	 *
 	 * @return string
 	 */

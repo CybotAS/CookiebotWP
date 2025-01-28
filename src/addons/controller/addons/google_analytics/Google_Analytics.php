@@ -5,6 +5,7 @@ namespace cybot\cookiebot\addons\controller\addons\google_analytics;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Google_Analytics extends Base_Cookiebot_Plugin_Addon {
+
 	const ADDON_NAME                  = 'Google Analytics'; // @TODO is this even the correct name for this plugin?
 	const OPTION_NAME                 = 'google_analytics';
 	const PLUGIN_FILE_PATH            = 'googleanalytics/googleanalytics.php';

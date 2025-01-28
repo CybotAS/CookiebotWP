@@ -5,6 +5,7 @@ namespace cybot\cookiebot\admin_notices;
 use function cybot\cookiebot\lib\get_view_html;
 
 class Cookiebot_Recommendation_Notice extends Cookiebot_Base_Notice {
+
 	const COOKIEBOT_NOTICE_OPTION_KEY         = 'cookiebot_notice_recommend';
 	const COOKIEBOT_NOTICE_TEMPLATE_PATH      = 'admin/notices/cookiebot-recommendation-notice.php';
 	const COOKIEBOT_NOTICE_LINK_TEMPLATE_PATH = 'admin/notices/cookiebot-recommendation-notice-links.php';

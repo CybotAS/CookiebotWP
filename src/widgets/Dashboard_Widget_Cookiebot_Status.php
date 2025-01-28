@@ -1,9 +1,11 @@
 <?php
+
 namespace cybot\cookiebot\widgets;
 
 use cybot\cookiebot\lib\Cookiebot_WP;
 
 class Dashboard_Widget_Cookiebot_Status {
+
 
 	public function register_hooks() {
 		if ( is_admin() ) {

@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Cookiebot_Addons {
 
+
 	/**
 	 * @var Dependency_Container
 	 */

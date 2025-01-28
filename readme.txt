@@ -3,7 +3,7 @@
 * Tags: WordPress cookie banner, GDPR, privacy compliance, cookie policy, cmp
 * Requires at least: 4.4
 * Tested up to: 6.7.1
-* Stable tag: 4.3.12
+* Stable tag: 4.4.0
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -284,6 +284,18 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
+
+### 4.4.0 ###
+Release date: January 28th 2025
+
+Cookiebot CMP version 4.4.0 is out! This release adds a new navigability and some bugfixes.
+
+####What's new####
+* New navigability for legacy and new users
+
+####Bugfixes####
+* Fix content showing on options page before loading
+* Fix GTM GCM script type on manual blocking
 
 ### 4.3.12 ###
 Release date: December 2nd 2024

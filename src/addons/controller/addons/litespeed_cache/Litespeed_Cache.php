@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'Litespeed Cache';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'This is not used.';
 	const OPTION_NAME                 = 'litespeed_cache';
@@ -30,7 +31,7 @@ class Litespeed_Cache extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * Exclude scripts from Litespeed cache’s defer JS option.
 	 *
-	 * @param  array $excluded_files  Array of script URLs to be excluded
+	 * @param array $excluded_files Array of script URLs to be excluded
 	 *
 	 * @return array                    Extended array script URLs to be excluded
 	 *

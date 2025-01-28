@@ -7,6 +7,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 
 class Gadwp extends Base_Cookiebot_Plugin_Addon {
+
 	const ADDON_NAME                  = 'Google Analytics Dashboard for WP by ExactMetrics';
 	const OPTION_NAME                 = 'gadwp';
 	const PLUGIN_FILE_PATH            = 'google-analytics-dashboard-for-wp/gadwp.php';
@@ -61,7 +62,7 @@ class Gadwp extends Base_Cookiebot_Plugin_Addon {
 
 		add_filter(
 			'exactmetrics_tracking_analytics_script_attributes',
-			function( $atts ) {
+			function ( $atts ) {
 				$atts['type']               = 'text/plain';
 				$atts['data-cookieconsent'] = cookiebot_addons_output_cookie_types( $this->get_cookie_types() );
 

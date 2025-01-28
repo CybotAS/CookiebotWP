@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class CAOS_Host_Analyticsjs_Local_Version_1_97 extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'Complete Analytics Optimization Suite (CAOS) 1.97';
 	const OPTION_NAME                 = 'caos_host_analyticsjs_local';
 	const DEFAULT_COOKIE_TYPES        = array( 'statistics' );

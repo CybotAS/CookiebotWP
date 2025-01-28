@@ -1,10 +1,12 @@
 <?php
+
 namespace cybot\cookiebot\lib;
 
 use cybot\cookiebot\addons\Cookiebot_Addons;
 use Exception;
 
 class Cookiebot_Deactivated {
+
 
 	/**
 	 * @throws Exception

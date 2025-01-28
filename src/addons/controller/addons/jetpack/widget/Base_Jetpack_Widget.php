@@ -13,6 +13,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 abstract class Base_Jetpack_Widget {
 
+
 	use Class_Constant_Override_Validator_Trait;
 	use Extra_Information_Trait;
 
@@ -214,5 +215,6 @@ abstract class Base_Jetpack_Widget {
 	 * @param string $view
 	 * @param string $widget
 	 */
-	public function cookie_consent_div( $view, $widget ) {}
+	public function cookie_consent_div( $view, $widget ) {
+	}
 }

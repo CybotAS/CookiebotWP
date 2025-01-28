@@ -6,6 +6,7 @@ use WP_REST_SERVER;
 use cybot\cookiebot\settings\pages\Debug_Page;
 
 class Cookiebot_Review {
+
 	/**
 	 * Handler url.
 	 *
@@ -57,17 +58,70 @@ class Cookiebot_Review {
 			'cookiebot_admin_js',
 			'cb_ajax',
 			array(
-				'ajax_url'     => admin_url( 'admin-ajax.php' ),
-				'survey_nonce' => wp_create_nonce( 'cookiebot_survey_nonce' ),
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
 			)
 		);
 
-		$args = array(
-			'cookiebot_logo' => asset_url( 'img/icons/shield_icon.svg' ),
+		wp_localize_script(
+			'cookiebot_admin_js',
+			'cb_survey',
+			array(
+				'survey_nonce'       => wp_create_nonce( 'cookiebot_survey_nonce' ),
+				'logo'               => asset_url( 'img/icons/shield_icon.svg' ),
+				'popup_header_title' => __( 'Cookiebot CMP Deactivation', 'cookiebot' ),
+				'first_msg'          => __( 'We are sad to lose you. Take a moment to help us improve?', 'cookiebot' ),
+				'options'            => array(
+					array(
+						'text'  => __( 'The installation is too complicated', 'cookiebot' ),
+						'value' => '1',
+					),
+					array(
+						'text'  => __( 'I found a plugin that better serves my needs', 'cookiebot' ),
+						'value' => '2',
+					),
+					array(
+						'text'  => __( 'Missing features / did not meet my expectations', 'cookiebot' ),
+						'value' => '3',
+					),
+					array(
+						'text'  => __( 'I need more customization options', 'cookiebot' ),
+						'value' => '4',
+					),
+					array(
+						'text'  => __( 'The premium plan is too expensive', 'cookiebot' ),
+						'value' => '5',
+					),
+					array(
+						'text'  => __( 'I’m only deactivating the plugin temporarily', 'cookiebot' ),
+						'value' => '6',
+					),
+					array(
+						'text'  => __( 'Other', 'cookiebot' ),
+						'value' => '7',
+						'extra' => __( 'Please specify here', 'cookiebot' ),
+					),
+				),
+				'consent'            => array(
+					'optional' => __( '(Optional)', 'cookiebot' ),
+					'first'    => __(
+						' By checking this box, you agree to submit troubleshooting information and allow us to contact you regarding the problem if necessary.',
+						'cookiebot'
+					),
+					'second'   => __(
+						'The information will be kept for no longer than 90 days. You may revoke this consent at any time, e.g. by sending an email to ',
+						'cookiebot'
+					),
+				),
+				'alert'              => __( 'Please select one option', 'cookiebot' ),
+				'actions'            => array(
+					'skip'   => __( 'Skip and Deactivate', 'cookiebot' ),
+					'submit' => __( 'Submit and Deactivate', 'cookiebot' ),
+				),
+			)
 		);
 
 		if ( 'plugins.php' === $hook ) {
-			include_view( 'admin/templates/extra/review-form.php', $args );
+			include_view( 'admin/common/templates/extra/review-form.php' );
 		}
 	}
 

@@ -11,6 +11,7 @@ use Exception;
 
 abstract class Base_Cookiebot_Plugin_Addon extends Base_Cookiebot_Addon {
 
+
 	const PLUGIN_FILE_PATH = '';
 
 	/**

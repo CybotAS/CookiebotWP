@@ -7,12 +7,14 @@ use cybot\cookiebot\admin_notices\Cookiebot_Notices;
 use cybot\cookiebot\gutenberg\Cookiebot_Gutenberg_Declaration_Block;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
+use cybot\cookiebot\shortcode\Cookiebot_Embedding_Shortcode;
 use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
 use DomainException;
 use RuntimeException;
 
 class Cookiebot_WP {
-	const COOKIEBOT_PLUGIN_VERSION  = '4.3.12';
+
+	const COOKIEBOT_PLUGIN_VERSION  = '4.4.0';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -85,6 +87,7 @@ class Cookiebot_WP {
 
 		( new Consent_API_Helper() )->register_hooks();
 		( new Cookiebot_Javascript_Helper() )->register_hooks();
+		( new Cookiebot_Embedding_Shortcode() )->register_hooks();
 		( new Cookiebot_Automatic_Updates() )->register_hooks();
 		( new Widgets() )->register_hooks();
 		( new Cookiebot_Gutenberg_Declaration_Block() )->register_hooks();
@@ -137,6 +140,13 @@ class Cookiebot_WP {
 		$setting         = (string) get_option( 'cookiebot-cbid', $network_setting );
 
 		return empty( $setting ) ? $network_setting : $setting;
+	}
+
+	/**
+	 * @return string
+	 */
+	public static function get_network_cbid() {
+		return get_site_option( 'cookiebot-cbid', '' );
 	}
 
 	/**

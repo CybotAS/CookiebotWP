@@ -6,6 +6,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 
 class Googleplus_Badge_Jetpack_Widget extends Base_Jetpack_Widget {
 
+
 	const LABEL               = 'Google Plus Badge';
 	const WIDGET_OPTION_NAME  = 'googleplus_badge';
 	const DEFAULT_PLACEHOLDER = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable google plus badge.';

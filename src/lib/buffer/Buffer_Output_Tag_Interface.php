@@ -4,6 +4,7 @@ namespace cybot\cookiebot\lib\buffer;
 
 interface Buffer_Output_Tag_Interface {
 
+
 	/**
 	 * Buffer_Output_Tag_Interface constructor.
 	 *

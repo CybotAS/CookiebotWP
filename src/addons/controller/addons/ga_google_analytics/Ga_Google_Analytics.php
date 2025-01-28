@@ -5,6 +5,7 @@ namespace cybot\cookiebot\addons\controller\addons\ga_google_analytics;
 use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Plugin_Addon;
 
 class Ga_Google_Analytics extends Base_Cookiebot_Plugin_Addon {
+
 	const ADDON_NAME                  = 'GA Google Analytics';
 	const OPTION_NAME                 = 'ga_google_analytics';
 	const PLUGIN_FILE_PATH            = 'ga-google-analytics/ga-google-analytics.php';

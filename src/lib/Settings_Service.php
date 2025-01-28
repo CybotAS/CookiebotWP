@@ -8,6 +8,7 @@ use Generator;
 
 class Settings_Service implements Settings_Service_Interface {
 
+
 	/**
 	 * @var Dependency_Container
 	 */
@@ -38,7 +39,7 @@ class Settings_Service implements Settings_Service_Interface {
 	public function is_addon_enabled( $addon ) {
 		$option = get_option( static::OPTION_NAME );
 
-		return isset( $option[ $addon ]['enabled'] );
+		return Cookiebot_Frame::is_cb_frame_type() === true ? isset( $option[ $addon ]['enabled'] ) : false;
 	}
 
 	/**
@@ -120,7 +121,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @param       $option_key
 	 * @param       $widget
-	 * @param  array      $default
+	 * @param array      $default
 	 *
 	 * @return array
 	 *
@@ -269,7 +270,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @param $option_key
 	 * @param $default_placeholder
 	 * @param $cookies
-	 * @param  string              $src
+	 * @param string              $src
 	 *
 	 * @return bool|mixed
 	 *
@@ -314,7 +315,7 @@ class Settings_Service implements Settings_Service_Interface {
 	 * @param        $option_key
 	 * @param        $default_placeholder
 	 * @param        $cookies
-	 * @param  string              $src
+	 * @param string              $src
 	 *
 	 * @return mixed
 	 *

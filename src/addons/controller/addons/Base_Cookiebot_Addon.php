@@ -15,6 +15,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_output_cookie_types;
 
 abstract class Base_Cookiebot_Addon {
 
+
 	use Class_Constant_Override_Validator_Trait;
 	use Extra_Information_Trait;
 
@@ -151,7 +152,7 @@ abstract class Base_Cookiebot_Addon {
 			);
 
 			if ( $alternative_version_addon_instance->is_addon_installed() &&
-			version_compare( $alternative_version_addon_instance->get_version(), $version_string, '<=' ) ) {
+				version_compare( $alternative_version_addon_instance->get_version(), $version_string, '<=' ) ) {
 				return $alternative_version_addon_instance;
 			}
 		}

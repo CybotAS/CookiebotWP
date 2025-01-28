@@ -4,6 +4,7 @@ namespace cybot\cookiebot\lib\script_loader_tag;
 
 interface Script_Loader_Tag_Interface {
 
+
 	/**
 	 * @param $tag
 	 * @param $type

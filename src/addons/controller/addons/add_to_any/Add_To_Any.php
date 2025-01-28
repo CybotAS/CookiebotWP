@@ -7,6 +7,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 
 class Add_To_Any extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'addToAny Share Buttons';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons.';
 	const OPTION_NAME                 = 'add_to_any';
@@ -93,7 +94,7 @@ class Add_To_Any extends Base_Cookiebot_Plugin_Addon {
 	/**
 	 * Display a placeholder on elements with "addtoany_share_save_container" class name.
 	 *
-	 * @param  string $content
+	 * @param string $content
 	 *
 	 * @return string
 	 */

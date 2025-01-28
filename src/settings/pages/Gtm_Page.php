@@ -2,11 +2,13 @@
 
 namespace cybot\cookiebot\settings\pages;
 
+use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\lib\Cookiebot_WP;
 use InvalidArgumentException;
 use function cybot\cookiebot\lib\include_view;
 
 class Gtm_Page implements Settings_Page_Interface {
+
 	const OPTION_NAME = 'cookiebot-gtm-cookies';
 
 	/**
@@ -21,6 +23,6 @@ class Gtm_Page implements Settings_Page_Interface {
 			'is_marketing'               => Cookiebot_WP::is_cookie_category_selected( self::OPTION_NAME, 'marketing' ),
 		);
 
-		include_view( 'admin/settings/gtm-page.php', $args );
+		include_view( Cookiebot_Frame::get_view_path() . 'settings/gtm-page.php', $args );
 	}
 }

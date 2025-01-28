@@ -12,6 +12,7 @@ use Generator;
  */
 interface Settings_Service_Interface {
 
+
 	/**
 	 * Settings_Service constructor.
 	 *

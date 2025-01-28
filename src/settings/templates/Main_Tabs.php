@@ -8,6 +8,7 @@ use function cybot\cookiebot\lib\include_view;
 
 class Main_Tabs {
 
+
 	/**
 	 * @throws InvalidArgumentException
 	 */
@@ -16,6 +17,6 @@ class Main_Tabs {
 			'active_tab' => $active,
 		);
 
-		include_view( 'admin/templates/main-tabs.php', $args );
+		include_view( 'admin/common/templates/main-tabs.php', $args );
 	}
 }

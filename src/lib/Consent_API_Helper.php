@@ -5,6 +5,7 @@ namespace cybot\cookiebot\lib;
 use InvalidArgumentException;
 
 class Consent_API_Helper {
+
 	public function register_hooks() {
 		// Include integration to WP Consent Level API if available
 		if ( $this->is_wp_consent_api_active() ) {
@@ -46,9 +47,10 @@ class Consent_API_Helper {
 	 * @version 3.5.0
 	 */
 	public function cookiebot_enqueue_consent_api_scripts() {
+		$is_cb_frame = Cookiebot_Frame::is_cb_frame_type() !== 'empty' && Cookiebot_Frame::is_cb_frame_type() === true;
 		wp_register_script(
 			'cookiebot-wp-consent-level-api-integration',
-			asset_url( 'js/frontend/cookiebot-wp-consent-level-api-integration.js' ),
+			$is_cb_frame ? asset_url( self::CB_FRAME_SCRIPT_PATH ) : asset_url( self::UC_FRAME_SCRIPT_PATH ),
 			null,
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			false
@@ -59,13 +61,15 @@ class Consent_API_Helper {
 			'cookiebot_category_mapping',
 			$this->get_wp_consent_api_mapping()
 		);
-		wp_localize_script(
-			'cookiebot-wp-consent-level-api-integration',
-			'cookiebot_consent_type',
-			array(
-				'type' => $this->wp_consent_api_get_consent_type(),
-			)
-		);
+		if ( $is_cb_frame ) {
+			wp_localize_script(
+				'cookiebot-wp-consent-level-api-integration',
+				'cookiebot_consent_type',
+				array(
+					'type' => $this->wp_consent_api_get_consent_type(),
+				)
+			);
+		}
 	}
 
 	/**
@@ -78,7 +82,21 @@ class Consent_API_Helper {
 	 */
 	public function get_wp_consent_api_mapping() {
 		$default_wp_consent_api_mapping = $this->get_default_wp_consent_api_mapping();
-		$mapping                        = get_option( 'cookiebot-consent-mapping', $default_wp_consent_api_mapping );
+
+		if ( Cookiebot_Frame::is_cb_frame_type() === false ) {
+			$mapping = get_option( 'cookiebot-uc-consent-mapping', $default_wp_consent_api_mapping );
+		} else {
+			$mapping = $this->get_cb_mapping( $default_wp_consent_api_mapping );
+		}
+
+		return $mapping;
+	}
+
+	/**
+	 * Return CB Frame WP Consent API mapping
+	 */
+	private function get_cb_mapping( $default_wp_consent_api_mapping ) {
+		$mapping = get_option( 'cookiebot-consent-mapping', $default_wp_consent_api_mapping );
 
 		$mapping = ( '' === $mapping ) ? $default_wp_consent_api_mapping : $mapping;
 
@@ -104,63 +122,73 @@ class Consent_API_Helper {
 	 * @since   3.5.0
 	 */
 	public function get_default_wp_consent_api_mapping() {
-		return array(
-			'n=1;p=1;s=1;m=1' =>
-				array(
-					'preferences'          => 1,
-					'statistics'           => 1,
-					'statistics-anonymous' => 0,
-					'marketing'            => 1,
-				),
-			'n=1;p=1;s=1;m=0' =>
-				array(
-					'preferences'          => 1,
-					'statistics'           => 1,
-					'statistics-anonymous' => 1,
-					'marketing'            => 0,
-				),
-			'n=1;p=1;s=0;m=1' =>
-				array(
-					'preferences'          => 1,
-					'statistics'           => 0,
-					'statistics-anonymous' => 0,
-					'marketing'            => 1,
-				),
-			'n=1;p=1;s=0;m=0' =>
-				array(
-					'preferences'          => 1,
-					'statistics'           => 0,
-					'statistics-anonymous' => 0,
-					'marketing'            => 0,
-				),
-			'n=1;p=0;s=1;m=1' =>
-				array(
-					'preferences'          => 0,
-					'statistics'           => 1,
-					'statistics-anonymous' => 0,
-					'marketing'            => 1,
-				),
-			'n=1;p=0;s=1;m=0' =>
-				array(
-					'preferences'          => 0,
-					'statistics'           => 1,
-					'statistics-anonymous' => 0,
-					'marketing'            => 0,
-				),
-			'n=1;p=0;s=0;m=1' =>
-				array(
-					'preferences'          => 0,
-					'statistics'           => 0,
-					'statistics-anonymous' => 0,
-					'marketing'            => 1,
-				),
-			'n=1;p=0;s=0;m=0' =>
-				array(
-					'preferences'          => 0,
-					'statistics'           => 0,
-					'statistics-anonymous' => 0,
-					'marketing'            => 0,
-				),
-		);
+		if ( Cookiebot_Frame::is_cb_frame_type() === false ) {
+			return array(
+				'functional' => 'preferences',
+				'marketing'  => 'marketing',
+			);
+		} else {
+			return array(
+				'n=1;p=1;s=1;m=1' =>
+					array(
+						'preferences'          => 1,
+						'statistics'           => 1,
+						'statistics-anonymous' => 0,
+						'marketing'            => 1,
+					),
+				'n=1;p=1;s=1;m=0' =>
+					array(
+						'preferences'          => 1,
+						'statistics'           => 1,
+						'statistics-anonymous' => 1,
+						'marketing'            => 0,
+					),
+				'n=1;p=1;s=0;m=1' =>
+					array(
+						'preferences'          => 1,
+						'statistics'           => 0,
+						'statistics-anonymous' => 0,
+						'marketing'            => 1,
+					),
+				'n=1;p=1;s=0;m=0' =>
+					array(
+						'preferences'          => 1,
+						'statistics'           => 0,
+						'statistics-anonymous' => 0,
+						'marketing'            => 0,
+					),
+				'n=1;p=0;s=1;m=1' =>
+					array(
+						'preferences'          => 0,
+						'statistics'           => 1,
+						'statistics-anonymous' => 0,
+						'marketing'            => 1,
+					),
+				'n=1;p=0;s=1;m=0' =>
+					array(
+						'preferences'          => 0,
+						'statistics'           => 1,
+						'statistics-anonymous' => 0,
+						'marketing'            => 0,
+					),
+				'n=1;p=0;s=0;m=1' =>
+					array(
+						'preferences'          => 0,
+						'statistics'           => 0,
+						'statistics-anonymous' => 0,
+						'marketing'            => 1,
+					),
+				'n=1;p=0;s=0;m=0' =>
+					array(
+						'preferences'          => 0,
+						'statistics'           => 0,
+						'statistics-anonymous' => 0,
+						'marketing'            => 0,
+					),
+			);
+		}
 	}
+
+	const CB_FRAME_SCRIPT_PATH = 'js/frontend/cb_frame/cookiebot-wp-consent-level-api-integration.js';
+	const UC_FRAME_SCRIPT_PATH = 'js/frontend/uc_frame/uc-wp-consent-level-api-integration.js';
 }

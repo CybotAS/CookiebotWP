@@ -1,4 +1,5 @@
 <?php
+
 namespace cybot\cookiebot\shortcode;
 
 use cybot\cookiebot\lib\Cookiebot_WP;
@@ -7,6 +8,7 @@ use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
 use function cybot\cookiebot\lib\get_view_html;
 
 class Cookiebot_Declaration_Shortcode {
+
 
 	public function register_hooks() {
 		add_shortcode( 'cookie_declaration', array( static::class, 'show_declaration' ) );

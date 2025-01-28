@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 class Cookiebot_Notices {
+
 	/**
 	 * @var array
 	 */

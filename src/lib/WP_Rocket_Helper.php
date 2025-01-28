@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\lib;
 
 class WP_Rocket_Helper {
+
 	public function register_hooks() {
 		// Add filter if WP rocket is enabled
 		if ( defined( 'WP_ROCKET_VERSION' ) ) {

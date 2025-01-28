@@ -6,6 +6,7 @@ use InvalidArgumentException;
 
 class Settings_Page_Tab {
 
+
 	/**
 	 * @var string
 	 */
@@ -133,5 +134,4 @@ class Settings_Page_Tab {
 	public function has_submit_button() {
 		return $this->has_submit_button;
 	}
-
 }

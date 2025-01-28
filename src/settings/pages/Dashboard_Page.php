@@ -2,12 +2,14 @@
 
 namespace cybot\cookiebot\settings\pages;
 
+use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\lib\Cookiebot_WP;
 use InvalidArgumentException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
 
 class Dashboard_Page implements Settings_Page_Interface {
+
 
 
 	const ICON = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzY0ODFfMzE4MTUpIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01Ljg2MTYgNS44MDUyVjE5LjgxMTRDNS44NjE2IDI3LjUzNjMgMTIuMjAzOSAzMy44MTc2IDIwLjAwMzkgMzMuODE3NkMyNy44MDM4IDMzLjgxNzYgMzQuMTQ2MiAyNy41MzYzIDM0LjE0NjIgMTkuODExNFY1LjgwNTJINS44NjE2Wk0yMCAzOS42MjI4QzguOTc2MzggMzkuNjIwNyAwIDMwLjczNzEgMCAxOS44MTE0VjBINDBWMTkuODExNEM0MCAzMC43Mjk0IDMxLjAzMTQgMzkuNjIwNyAyMCAzOS42MjI4Wk0yMi42ODk0IDI2Ljk0ODZMMjIuNjg4OCAyNi45NDk5SDE1LjkyTDE1LjkzMTIgMjYuOTI2Nkw5Ljk4OTIxIDE2LjU4MjFIMTYuNzY1N0wxOS4wMTA2IDIwLjQ5MDJMMjMuNzEyMiAxMC42NjMxSDMwLjQ4ODhMMjIuNzAzNSAyNi45MTkyTDIyLjcyMDQgMjYuOTQ4NkgyMi42ODk0WiIgZmlsbD0iYmxhY2siLz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF82NDgxXzMxODE1Ij4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo=';
@@ -27,18 +29,20 @@ class Dashboard_Page implements Settings_Page_Interface {
 			self::ICON
 		);
 
-		add_submenu_page(
-			'cookiebot',
-			__( 'Cookiebot Dashboard', 'cookiebot' ),
-			__( 'Dashboard', 'cookiebot' ),
-			'manage_options',
-			self::ADMIN_SLUG,
-			array(
-				$this,
-				'display',
-			),
-			1
-		);
+		if ( Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) {
+			add_submenu_page(
+				'cookiebot',
+				__( 'Cookiebot Dashboard', 'cookiebot' ),
+				__( 'Dashboard', 'cookiebot' ),
+				'manage_options',
+				self::ADMIN_SLUG,
+				array(
+					$this,
+					'display',
+				),
+				1
+			);
+		}
 	}
 
 	/**
@@ -67,6 +71,6 @@ class Dashboard_Page implements Settings_Page_Interface {
 			);
 		}
 
-		include_view( 'admin/settings/dashboard-page.php', $args );
+		include_view( Cookiebot_Frame::get_view_path() . 'dashboard-page.php', $args );
 	}
 }

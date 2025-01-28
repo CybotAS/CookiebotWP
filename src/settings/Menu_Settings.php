@@ -12,6 +12,7 @@ use cybot\cookiebot\settings\pages\Support_Page;
 
 class Menu_Settings {
 
+
 	const MENU = array(
 		Dashboard_Page::class,
 		Settings_Page::class,
@@ -47,6 +48,8 @@ class Menu_Settings {
 	 */
 	public function register_cookiebot_settings() {
 		register_setting( 'cookiebot', 'cookiebot-cbid' );
+		register_setting( 'cookiebot', 'cookiebot-cbid-override' );
+		register_setting( 'cookiebot', 'cookiebot-ruleset-id' );
 		register_setting( 'cookiebot', 'cookiebot-cbid-first-run' );
 		register_setting( 'cookiebot', 'cookiebot-language' );
 		register_setting( 'cookiebot', 'cookiebot-front-language' );

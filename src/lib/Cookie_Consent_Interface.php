@@ -4,6 +4,7 @@ namespace cybot\cookiebot\lib;
 
 interface Cookie_Consent_Interface {
 
+
 	/**
 	 * Scans cookiebot consent cookie and fills in $states with accepted consents.
 	 *

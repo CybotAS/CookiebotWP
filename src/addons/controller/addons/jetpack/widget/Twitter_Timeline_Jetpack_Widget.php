@@ -6,6 +6,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_cookieconsent_optout;
 
 class Twitter_Timeline_Jetpack_Widget extends Base_Jetpack_Widget {
 
+
 	const LABEL               = 'Twitter timeline';
 	const WIDGET_OPTION_NAME  = 'twitter_timeline';
 	const DEFAULT_PLACEHOLDER = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this twitterline.';

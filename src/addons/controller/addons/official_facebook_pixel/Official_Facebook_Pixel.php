@@ -7,6 +7,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_remove_class_action;
 
 class Official_Facebook_Pixel extends Base_Cookiebot_Plugin_Addon {
 
+
 	const ADDON_NAME                  = 'Official Meta Pixel';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Meta Pixel.';
 	const OPTION_NAME                 = 'official_facebook_pixel';

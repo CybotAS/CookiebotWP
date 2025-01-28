@@ -6,6 +6,7 @@ use function cybot\cookiebot\lib\cookiebot_addons_manipulate_script;
 
 class Buffer_Output_Tag implements Buffer_Output_Tag_Interface {
 
+
 	/**
 	 * Hook priority
 	 *

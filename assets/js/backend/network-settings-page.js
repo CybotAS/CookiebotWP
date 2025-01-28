@@ -34,7 +34,72 @@ jQuery( document ).ready( function ( $ ) {
             checkValues(event.data.initialValues)
         });
     });
+
+    ruleset_id();
+    remove_account();
 } )
+
+function check_id_frame(){
+    const cbFrameReg = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
+    return cbFrameReg.test(jQuery( '#cookiebot-cbid' ).val())
+}
+
+function ruleset_id(){
+    const cbidField = jQuery( '#cookiebot-cbid' );
+    const cbidCheck = jQuery( '.cookiebot-cbid-check' );
+    let fieldTimer;
+    let fieldInterval = 3000;
+
+    cbidField.on('keyup', function () {
+        clearTimeout(fieldTimer);
+        cbidField.addClass('check-progress');
+        cbidCheck.removeClass('check-pass').addClass('check-progress');
+        fieldTimer = setTimeout(show_ruleset_selector, fieldInterval);
+    });
+
+    cbidField.on('keydown', function () {
+        clearTimeout(fieldTimer);
+    });
+}
+function show_ruleset_selector() {
+    const cbidField = jQuery( '#cookiebot-cbid' );
+    const cbidCheck = jQuery( '.cookiebot-cbid-check' );
+    const cbidRulesetSelector = jQuery('#cookiebot-ruleset-id-selector');
+    const cbidSubmit = jQuery('.cookiebot-cbid-container p.submit #submit');
+
+    cbidCheck.removeClass('check-progress');
+    cbidField.removeClass('check-progress');
+
+    if(!cbidField.val()){
+        cbidCheck.removeClass('check-pass');
+        cbidRulesetSelector.addClass('hidden');
+        cbidSubmit.addClass('disabled');
+        return;
+    }
+
+    !check_id_frame() ? cbidRulesetSelector.removeClass('hidden') : cbidRulesetSelector.addClass('hidden');
+
+    cbidSubmit.removeClass('disabled');
+}
+
+function remove_account(){
+    const removeCta = jQuery('#cookiebot-cbid-reset-dialog');
+    const cbidAlert = jQuery('.cb-cbid-alert__msg');
+    const confirmCta = jQuery('#cookiebot-cbid-reset');
+    const cancelCta = jQuery('#cookiebot-cbid-cancel');
+    removeCta.on('click', function(){
+        cbidAlert.removeClass('hidden');
+        removeCta.addClass('disabled');
+    });
+    confirmCta.on('click', function(){
+        jQuery('#cookiebot-cbid').val('').removeClass('cbid-active');
+        jQuery('.cb-settings__header p.submit #submit').click();
+    });
+    cancelCta.on('click', function(){
+        cbidAlert.addClass('hidden');
+        removeCta.removeClass('disabled');
+    });
+}
 
 function checkValues(initialValues){
     let submitBtn = jQuery('p.submit #submit');

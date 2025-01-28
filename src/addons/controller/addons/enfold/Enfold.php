@@ -6,6 +6,7 @@ use cybot\cookiebot\addons\controller\addons\Base_Cookiebot_Theme_Addon;
 
 class Enfold extends Base_Cookiebot_Theme_Addon {
 
+
 	const ADDON_NAME                  = 'Enfold';
 	const OPTION_NAME                 = 'enfold';
 	const DEFAULT_PLACEHOLDER_CONTENT = 'Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Services.';

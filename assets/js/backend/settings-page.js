@@ -6,6 +6,10 @@
 jQuery( document ).ready( init );
 
 function init() {
+    ruleset_id();
+    show_ruleset_selector();
+    remove_account();
+    network_id_override();
     language_toggle();
     advanced_settings_toggle();
     cookie_blocking_mode();
@@ -22,6 +26,50 @@ function init() {
     showRestrictionPurposes();
     onVendorSelection();
     removeRestriction();
+    generate_shortcode();
+}
+
+function ruleset_id(){
+    const cbidField = jQuery( '#cookiebot-cbid' );
+    const cbidCheck = jQuery( '.cookiebot-cbid-check' );
+    let fieldTimer;
+    let fieldInterval = 3000;
+
+    cbidField.on('keyup', function () {
+        clearTimeout(fieldTimer);
+        cbidField.addClass('check-progress');
+        cbidCheck.removeClass('check-pass').addClass('check-progress');
+        fieldTimer = setTimeout(show_ruleset_selector, fieldInterval);
+    });
+
+    cbidField.on('keydown', function () {
+        clearTimeout(fieldTimer);
+    });
+}
+
+function show_ruleset_selector() {
+    const cbidField = jQuery( '#cookiebot-cbid' );
+    const cbidCheck = jQuery( '.cookiebot-cbid-check' );
+    const cbidRulesetSelector = jQuery('#cookiebot-ruleset-id-selector');
+
+    cbidCheck.removeClass('check-progress');
+    cbidField.removeClass('check-progress');
+
+    if(!cbidField.val()){
+        cbidCheck.removeClass('check-pass');
+        cbidRulesetSelector.addClass('hidden');
+        jQuery('.cookiebot-cbid-container p.submit #submit').addClass('disabled');
+        return;
+    }
+
+    !check_id_frame() ? cbidRulesetSelector.removeClass('hidden') : cbidRulesetSelector.addClass('hidden');
+
+    jQuery('.cookiebot-cbid-container p.submit #submit').removeClass('disabled');
+}
+
+function check_id_frame(){
+    const cbFrameReg = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
+    return cbFrameReg.test(jQuery( '#cookiebot-cbid' ).val())
 }
 
 function language_toggle() {
@@ -62,6 +110,7 @@ function cookie_blocking_mode() {
         if ( this.value === 'auto' && cookieBlockingMode !== this.value ) {
             jQuery( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 0.4 );
             jQuery( '#declaration-tag, #cookie-popup, #gcm-cookie-categories, #gtm-cookie-categories').addClass('disabled__item');
+            if(jQuery( '#gcm-cookie-categories').is(':visible')){ jQuery( '#gcm-cookie-categories').hide() };
             jQuery( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', true );
             jQuery( '#cb-settings__gtm__cookie-types input[type=checkbox]' ).prop( 'disabled', true );
             jQuery( '#cb-settings__gcm__cookie-types input[type=checkbox]' ).prop( 'disabled', true );
@@ -69,6 +118,7 @@ function cookie_blocking_mode() {
         if ( this.value === 'manual' && cookieBlockingMode !== this.value ) {
             jQuery( '#cookiebot-setting-async, #cookiebot-setting-hide-popup' ).css( 'opacity', 1 );
             jQuery( '#declaration-tag, #cookie-popup, #gcm-cookie-categories, #gtm-cookie-categories').removeClass('disabled__item');
+            if(!jQuery( '#gcm-cookie-categories').is(':visible') && jQuery('input#gcm').is(':checked')){ jQuery( '#gcm-cookie-categories').show() };
             jQuery( 'input[type=radio][name=cookiebot-script-tag-uc-attribute], input[name=cookiebot-nooutput]' ).prop( 'disabled', false );
             jQuery( '#cb-settings__gtm__cookie-types input[type=checkbox]' ).prop( 'disabled', false );
             jQuery( '#cb-settings__gcm__cookie-types input[type=checkbox]' ).prop( 'disabled', false );
@@ -111,7 +161,7 @@ function closeSubmitMsg() {
 }
 
 function submitEnable() {
-    const initialValues = jQuery('form').serialize();
+    const initialValues = jQuery('input[name!=_wp_http_referer]','form').serialize();
     const events = {
         change: 'input:not([type=text]), select',
         input: 'input[type="text"], textarea'
@@ -126,8 +176,8 @@ function submitEnable() {
 }
 
 function checkValues(initialValues){
-    let submitBtn = jQuery('p.submit #submit');
-    let newValues = jQuery('form').serialize();
+    let submitBtn = jQuery('.cb-settings__header p.submit #submit');
+    let newValues = jQuery('input[name!=_wp_http_referer]','form').serialize();
     if(newValues !== initialValues) {
         submitBtn.addClass('enabled');
     }else{
@@ -140,7 +190,12 @@ function googleConsentModeOptions() {
     jQuery('input#gcm').on('change', function () {
         const parent = jQuery(this).parents('#consent-mode');
         parent.find('.cb-settings__config__item:has(input#gcm-url-pasthrough)').toggle();
-        parent.find('.cb-settings__config__item:has(ul#cb-settings__gcm__cookie-types)').toggle();
+        const gcmCookiesCategoriesContainer = parent.find('.cb-settings__config__item:has(ul#cb-settings__gcm__cookie-types)');
+        if(!gcmCookiesCategoriesContainer.hasClass('disabled__item')){
+            gcmCookiesCategoriesContainer.is(':visible') ? gcmCookiesCategoriesContainer.hide() : gcmCookiesCategoriesContainer.show();
+        }else{
+            gcmCookiesCategoriesContainer.hide();
+        }
         const passthroughInput = jQuery('input#gcm-url-pasthrough');
         const passthroughLabel = passthroughInput.parents('label.switch-checkbox')[0];
         if (!passthroughLabel || !passthroughLabel.childNodes.length)
@@ -177,7 +232,7 @@ function initialCheckActiveVendors() {
     }
 
     const allVendorInputChecked = jQuery('input[name^="cookiebot-tcf-vendors"]:checked').length;
-    if(!allVendorInputChecked) {
+    if(!allVendorInputChecked && check_id_frame()) {
         jQuery('.vendor-selected-items-message').removeClass('hidden');
         jQuery('.cb-vendor-alert__msg').removeClass('hidden');
     }
@@ -188,7 +243,11 @@ function checkActiveVendors() {
         return;
     }
 
-    let submitBtn = jQuery('p.submit #submit');
+    if(!check_id_frame()) {
+        return;
+    }
+
+    let submitBtn = jQuery('.cb-settings__header p.submit #submit');
     const allVendorInputChecked = jQuery('input[name^="cookiebot-tcf-vendors"]:checked').length;
     if(!allVendorInputChecked) {
         jQuery('.vendor-selected-items-message').removeClass('hidden');
@@ -275,14 +334,13 @@ function onVendorSelection() {
 }
 
 function removeRestriction(){
-    const initialValues = jQuery('form').serialize();
-    let submitBtn = jQuery('p.submit #submit');
+    const initialValues = jQuery('input[name!=_wp_http_referer]','form').serialize();
+    let submitBtn = jQuery('.cb-settings__header p.submit #submit');
     jQuery(document).on('click','.cb-settings__vendor__restrictions .remove__restriction', function(){
         const restriction = jQuery(this).closest( '.cb-settings__vendor__restrictions' );
         const allRestrictions = jQuery( '.cb-settings__vendor__restrictions' );
         if(allRestrictions.length === 1){
             const selector = restriction.find('.cb-settings__selector-selector');
-            console.log(selector.data('placeholder'));
             selector.text(selector.data('placeholder'));
             restriction.find('.cb-settings__selector__container-input').val('');
             restriction.find('.cb-settings__selector__container-input').attr('name','');
@@ -295,11 +353,129 @@ function removeRestriction(){
         }else{
             restriction.remove();
         }
-        let newValues = jQuery('form').serialize();
+        let newValues = jQuery('input[name!=_wp_http_referer]','form').serialize();
         if(newValues !== initialValues) {
             submitBtn.addClass('enabled');
         }else{
             submitBtn.removeClass('enabled');
         }
     });
+}
+
+function generate_shortcode(){
+    jQuery('#cookiebot-embedding').on('change', function(){
+        const typeOptions = jQuery('#cookiebot-embedding-type option');
+        const className = jQuery(this).val();
+        typeOptions.each(function(){
+            if(jQuery(this).hasClass(className)){
+                jQuery(this).removeClass('hide-option');
+            }else{
+                jQuery(this).addClass('hide-option');
+            }
+        });
+        jQuery('#cookiebot-embedding-type option:not(.hide-option)').each(function(index){
+            if(index>0)
+                return;
+            jQuery(this).prop('selected', true);
+        });
+    });
+
+    jQuery('#cookiebot-embedding-type').on('change', function(){
+        const typeName = jQuery(this).val();
+        if(typeName==='service-specific'){
+            jQuery( '#cookiebot-embedding-single-service-container' ).removeClass('hide-container');
+        }else{
+            jQuery( '#cookiebot-embedding-single-service-container' ).addClass('hide-container');
+            jQuery( '#cookiebot-embedding-single-service' ).val('');
+        }
+    });
+
+    const embedInputs = jQuery('#cookiebot-tcf-toggle, #cookiebot-embedding, #cookiebot-embedding-type, #cookiebot-embedding-single-service');
+    embedInputs.each(function (){
+        jQuery(this).on('change keyup', function(){
+            let shortcode = '[uc_embedding';
+            const className = jQuery('#cookiebot-embedding').val();
+            const toggleEnabled = jQuery('#cookiebot-tcf-toggle');
+            const typeName = jQuery('#cookiebot-embedding-type').val();
+            const serviceName = jQuery('#cookiebot-embedding-single-service').val();
+
+
+            switch (className) {
+                case 'tcf' : shortcode += ' class="tcf"'; break;
+                default : shortcode += ' class="gdpr"';
+            }
+            switch (toggleEnabled.is(':checked')) {
+                case true : shortcode += ' show-toggle="true"'; break;
+                default : shortcode += ' show-toggle="false"';
+            }
+            switch (typeName) {
+                case 'category' : shortcode += ' type="category"'; break;
+                case 'category-only' : shortcode += ' type="category-only"'; break;
+                case 'service-specific' : shortcode += ' type="service-specific"'; break;
+                case 'purposes' : shortcode += ' type="purposes"'; break;
+                case 'vendors' : shortcode += ' type="vendors"'; break;
+                default : shortcode += ' type="all"';
+            }
+            if(serviceName.length > 0){
+                shortcode += ' service="' + serviceName + '"';
+            }
+            shortcode += ']';
+            jQuery('#embedding-shortcode').attr('value',shortcode);
+        });
+    });
+}
+
+function remove_account(){
+    const removeCta = jQuery('#cookiebot-cbid-reset-dialog');
+    const cbidAlert = jQuery('.cb-cbid-alert__msg');
+    const cbidOverrideAlert = jQuery('.cb-cbid-subsite-alert__msg');
+    const confirmCta = jQuery('#cookiebot-cbid-reset, #cookiebot-subsite-cbid-reset');
+    const cancelCta = jQuery('#cookiebot-cbid-cancel, #cookiebot-subsite-cbid-cancel');
+    removeCta.on('click', function(){
+        if(cbidOverrideAlert.length !== 0){
+            cbidOverrideAlert.removeClass('hidden');
+        }else{
+            cbidAlert.removeClass('hidden');
+        }
+        removeCta.addClass('disabled');
+    });
+    confirmCta.on('click', function(){
+        jQuery('#cookiebot-cbid').val('').removeClass('cbid-active');
+        jQuery('#cookiebot-cbid-override').prop('checked',false);
+        jQuery('.cb-settings__header p.submit #submit').click();
+    });
+    cancelCta.on('click', function(){
+        cbidAlert.addClass('hidden');
+        cbidOverrideAlert.addClass('hidden');
+        jQuery('#cookiebot-cbid-override').prop('checked',true);
+        removeCta.removeClass('disabled');
+    });
+}
+
+function network_id_override() {
+    const overrideCheck = jQuery('#cookiebot-cbid-override');
+    overrideCheck.on('change', function(){
+        jQuery('.cb-settings__header p.submit #submit').addClass('disabled');
+        if(overrideCheck.is(':checked') && overrideCheck.hasClass('cb-no-network')){
+            jQuery('#cookiebot-cbid-network-dialog').addClass('hidden');
+            jQuery('.cookiebot-cbid-container p.submit #submit').addClass('disabled').removeClass('hidden');
+            jQuery('.cookiebot-cbid-container #cookiebot-cbid').removeClass('cbid-active').attr('placeholder', '').val('');
+        }
+        if(!overrideCheck.is(':checked')){
+            if(!overrideCheck.hasClass('cb-no-network')){
+                jQuery('.cb-cbid-subsite-alert__msg').removeClass('hidden');
+            }else{
+                jQuery('#cookiebot-cbid-network-dialog').removeClass('hidden');
+                jQuery('.cookiebot-cbid-container p.submit #submit').addClass('hidden');
+                jQuery('.cookiebot-cbid-container #cookiebot-cbid').addClass('cbid-active').val('').attr('placeholder', jQuery('.cookiebot-cbid-container #cookiebot-cbid').attr('data-network'));
+            }
+        }
+    });
+}
+
+function copyEmbedShortcode() {
+    const t = document.getElementById( 'embedding-shortcode' )
+    t.select()
+    t.setSelectionRange( 0, 99999 )
+    document.execCommand( 'copy' )
 }
