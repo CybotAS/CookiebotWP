@@ -6,10 +6,14 @@
  * @var string $auto
  */
 ?>
-<?php if ( $iab_enabled ) : ?>
+<?php
+if ( $iab_enabled ) :
+	// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript ?>
 	<script src="https://web.cmp.usercentrics.eu/tcf/stub.js"></script>
 <?php endif; ?>
-<?php if ( $auto ) : ?>
+<?php
+if ( $auto ) :
+	// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript ?>
 	<script src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"></script>
 <?php endif; ?>
 <script id="usercentrics-cmp"

@@ -74,7 +74,7 @@ $header->display();
 													value="<?php echo esc_attr( get_site_option( 'cookiebot-cbid', '' ) ); ?>"/>
 											<div class="cookiebot-cbid-check <?php echo get_site_option( 'cookiebot-cbid' ) ? 'check-pass' : ''; ?>"></div>
 										</div>
-										<?php submit_button( esc_html( 'Connect account', 'cookiebot' ), 'disabled' ); ?>
+										<?php submit_button( esc_html__( 'Connect account', 'cookiebot' ), 'disabled' ); ?>
 									</div>
 								</div>
 							</div>

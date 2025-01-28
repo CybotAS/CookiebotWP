@@ -12,7 +12,7 @@ use function cybot\cookiebot\lib\include_view;
 class Additional_Page implements Settings_Page_Interface {
 
 	public function display() {
-		$args = $args = array(
+		$args = array(
 			'is_ms'                     => is_multisite(),
 			'network_scrip_tag_cd_attr' => get_site_option( 'cookiebot-script-tag-cd-attribute', 'custom' ),
 

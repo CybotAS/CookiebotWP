@@ -67,7 +67,7 @@ if ( ! empty( $network_cbid ) ) {
 						}
 						?>
 						"><?php esc_html_e( 'Using network account', 'cookiebot' ); ?></div>
-					<?php submit_button( esc_html( 'Connect account', 'cookiebot' ), 'hidden' ); ?>
+					<?php submit_button( esc_html__( 'Connect account', 'cookiebot' ), 'hidden' ); ?>
 				<?php endif; ?>
 			</div>
 			<?php if ( ! empty( $network_cbid ) ) : ?>

@@ -2,7 +2,6 @@
 
 namespace cybot\cookiebot\settings\templates;
 
-use cybot\cookiebot\lib\Cookiebot_WP;
 use InvalidArgumentException;
 use function cybot\cookiebot\lib\include_view;
 
@@ -60,7 +59,6 @@ class Legacy_Settings {
 		foreach ( $this->options as $option ) {
 			$option_value = get_option( $option );
 			if ( ! empty( $option_value ) ) {
-				// $option_value = is_array($option_value) ? straserialize($option_value) : $option_value;
 				$options[ $option ] = $option_value;
 			}
 		}
