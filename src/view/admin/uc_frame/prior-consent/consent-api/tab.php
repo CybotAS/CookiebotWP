@@ -78,7 +78,17 @@ use cybot\cookiebot\addons\config\Settings_Config;
 					<div class="consent_mapping">
 						<select class="cb-category-selectors" name="cookiebot-uc-consent-mapping[functional]"
 								id="cookiebot-uc-consent-mapping-functional" data-default="preferences">
-							<?php echo esc_html( Settings_Config::get_wp_consent_values( 'functional', $m ) ); ?>
+							<?php
+							echo wp_kses(
+								Settings_Config::get_wp_consent_values( 'functional', $m ),
+								array(
+									'option' => array(
+										'selected' => true,
+										'value'    => array(),
+									),
+								)
+							);
+							?>
 						</select>
 					</div>
 				</td>
@@ -95,7 +105,17 @@ use cybot\cookiebot\addons\config\Settings_Config;
 					<div class="consent_mapping">
 						<select class="cb-category-selectors" name="cookiebot-uc-consent-mapping[marketing]"
 								id="cookiebot-uc-consent-mapping-marketing" data-default="marketing">
-							<?php echo esc_html( Settings_Config::get_wp_consent_values( 'marketing', $m ) ); ?>
+							<?php
+							echo wp_kses(
+								Settings_Config::get_wp_consent_values( 'marketing', $m ),
+								array(
+									'option' => array(
+										'selected' => true,
+										'value'    => array(),
+									),
+								)
+							);
+							?>
 						</select>
 					</div>
 				</td>

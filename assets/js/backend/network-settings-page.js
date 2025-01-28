@@ -40,7 +40,7 @@ jQuery( document ).ready( function ( $ ) {
 } )
 
 function check_id_frame(){
-    let cbFrameReg = new RegExp("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
+    const cbFrameReg = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
     return cbFrameReg.test(jQuery( '#cookiebot-cbid' ).val())
 }
 

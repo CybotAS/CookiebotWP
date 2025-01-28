@@ -86,18 +86,27 @@ class Consent_API_Helper {
 		if ( Cookiebot_Frame::is_cb_frame_type() === false ) {
 			$mapping = get_option( 'cookiebot-uc-consent-mapping', $default_wp_consent_api_mapping );
 		} else {
-			$mapping = get_option( 'cookiebot-consent-mapping', $default_wp_consent_api_mapping );
+			$mapping = $this->get_cb_mapping( $default_wp_consent_api_mapping );
+		}
 
-			$mapping = ( '' === $mapping ) ? $default_wp_consent_api_mapping : $mapping;
+		return $mapping;
+	}
 
-			foreach ( $default_wp_consent_api_mapping as $k => $v ) {
-				if ( ! isset( $mapping[ $k ] ) ) {
-					$mapping[ $k ] = $v;
-				} else {
-					foreach ( $v as $vck => $vcv ) {
-						if ( ! isset( $mapping[ $k ][ $vck ] ) ) {
-							$mapping[ $k ][ $vck ] = $vcv;
-						}
+	/**
+	 * Return CB Frame WP Consent API mapping
+	 */
+	private function get_cb_mapping( $default_wp_consent_api_mapping ) {
+		$mapping = get_option( 'cookiebot-consent-mapping', $default_wp_consent_api_mapping );
+
+		$mapping = ( '' === $mapping ) ? $default_wp_consent_api_mapping : $mapping;
+
+		foreach ( $default_wp_consent_api_mapping as $k => $v ) {
+			if ( ! isset( $mapping[ $k ] ) ) {
+				$mapping[ $k ] = $v;
+			} else {
+				foreach ( $v as $vck => $vcv ) {
+					if ( ! isset( $mapping[ $k ][ $vck ] ) ) {
+						$mapping[ $k ][ $vck ] = $vcv;
 					}
 				}
 			}

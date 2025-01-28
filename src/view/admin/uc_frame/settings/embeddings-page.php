@@ -8,7 +8,7 @@
 		</p>
 		<input type="text" id="embedding-shortcode"
 				value="<?php echo esc_attr( '[uc_embedding class="gdpr" show-toggle="false" type="all"]' ); ?>">
-		<div class="cb-btn cb-main-btn" onclick="copyEmbedShortcode();">
+		<div class="cb-btn cb-main-btn" onclick="copyEmbedShortcode();" role="button">
 			<?php
 			esc_html_e(
 				'Copy shortcode',
