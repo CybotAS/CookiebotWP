@@ -2575,6 +2575,9 @@ msgstr ""
 
 #: src/view/admin/common/network-settings-page.php:52
 #: src/view/admin/common/settings-page.php:55
+msgid "Enter the ID of your account to quickly connect it with the plugin."
+msgstr ""
+
 #: src/view/admin/uc_frame/network-settings-page.php:54
 msgid "Enter your settings ID to quickly link your account with the plugin."
 msgstr ""
@@ -2584,15 +2587,26 @@ msgstr ""
 msgid "If added this will be the default account for all subsites. Subsites are able to override this and use their own account."
 msgstr ""
 
-#: src/view/admin/common/network-settings-page.php:59
-#: src/view/admin/common/settings-page.php:59
 #: src/view/admin/uc_frame/network-settings-page.php:61
 #: src/view/admin/uc_frame/settings/general-page.php:29
 msgid "Where to find settings ID"
 msgstr ""
 
+#: src/view/admin/common/network-settings-page.php:63
+#: src/view/admin/common/settings-page.php:63
+msgid "How to find your Usercentrics Settings ID"
+msgstr ""
+
+#: src/view/admin/common/network-settings-page.php:70
+#: src/view/admin/common/settings-page.php:70
+msgid "How to find your Cookiebot CMP Domain Group ID"
+msgstr ""
+
 #: src/view/admin/common/network-settings-page.php:65
 #: src/view/admin/common/settings-page.php:65
+msgid "Settings ID or Domain Group ID"
+msgstr ""
+
 #: src/view/admin/uc_frame/network-settings-page.php:67
 #: src/view/admin/uc_frame/settings/general-page.php:35
 msgid "Your settings ID"

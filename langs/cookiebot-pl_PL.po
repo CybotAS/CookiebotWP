@@ -2963,10 +2963,12 @@ msgstr "Połącz swoje konto"
 
 #: src/view/admin/common/network-settings-page.php:52
 #: src/view/admin/common/settings-page.php:55
+msgid "Enter the ID of your account to quickly connect it with the plugin."
+msgstr "Wprowadź ID swojego konta, aby szybko połączyć je z wtyczką."
+
 #: src/view/admin/uc_frame/network-settings-page.php:54
 msgid "Enter your settings ID to quickly link your account with the plugin."
-msgstr ""
-"Wprowadź identyfikator konta, aby szybko połączyć swoje konto z wtyczką."
+msgstr "Wprowadź identyfikator konta, aby szybko połączyć swoje konto z wtyczką."
 
 #: src/view/admin/common/network-settings-page.php:55
 #: src/view/admin/uc_frame/network-settings-page.php:57
@@ -2977,15 +2979,26 @@ msgstr ""
 "Po dodaniu będzie to domyślne konto dla wszystkich podstron. Podstrony mogą "
 "to zmienić i używać własnego konta."
 
-#: src/view/admin/common/network-settings-page.php:59
-#: src/view/admin/common/settings-page.php:59
 #: src/view/admin/uc_frame/network-settings-page.php:61
 #: src/view/admin/uc_frame/settings/general-page.php:29
 msgid "Where to find settings ID"
 msgstr "Gdzie znaleźć identyfikator konta"
 
+#: src/view/admin/common/network-settings-page.php:63
+#: src/view/admin/common/settings-page.php:63
+msgid "How to find your Usercentrics Settings ID"
+msgstr "Jak znaleźć swoje ID ustawień Usercentrics"
+
+#: src/view/admin/common/network-settings-page.php:70
+#: src/view/admin/common/settings-page.php:70
+msgid "How to find your Cookiebot CMP Domain Group ID"
+msgstr "Jak znaleźć swoje ID grupy domen CMP Cookiebot"
+
 #: src/view/admin/common/network-settings-page.php:65
 #: src/view/admin/common/settings-page.php:65
+msgid "Settings ID or Domain Group ID"
+msgstr "ID ustawień lub ID grupy domen"
+
 #: src/view/admin/uc_frame/network-settings-page.php:67
 #: src/view/admin/uc_frame/settings/general-page.php:35
 msgid "Your settings ID"
