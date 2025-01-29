@@ -37,7 +37,7 @@ $header->display();
 									<?php esc_html_e( 'If you’re new to our solutions, create an account first to obtain your settings ID.', 'cookiebot' ); ?>
 								</p>
 								<div class="new-account-actions">
-									<a href="https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+									<a href="https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended&utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
 										target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 										<?php esc_html_e( 'Create your account', 'cookiebot' ); ?>
 									</a>

@@ -134,5 +134,5 @@ class Cookiebot_Admin_Links {
 	}
 
 	const CB_FRAME_UPGRADE_URL = 'https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner';
-	const UC_FRAME_UPGRADE_URL = 'https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner';
+	const UC_FRAME_UPGRADE_URL = 'https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended&utm_source=wordpress&utm_medium=referral&utm_campaign=banner';
 }

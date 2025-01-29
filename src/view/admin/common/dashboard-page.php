@@ -47,7 +47,7 @@ $header->display();
 							<h2 class="cb-main__card__title">
 								<?php echo esc_html__( 'New to our solutions? Create your account. ', 'cookiebot' ); ?>
 							</h2>
-							<a href="https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+							<a href="https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended&utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
 								target="_blank" class="cb-btn cb-white-btn" rel="noopener">
 								<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
 							</a>
