@@ -2962,10 +2962,12 @@ msgstr "Conectar tu cuenta"
 
 #: src/view/admin/common/network-settings-page.php:52
 #: src/view/admin/common/settings-page.php:55
+msgid "Enter the ID of your account to quickly connect it with the plugin."
+msgstr "Introduce el ID de tu cuenta para conectarla rápidamente con el plugin."
+
 #: src/view/admin/uc_frame/network-settings-page.php:54
 msgid "Enter your settings ID to quickly link your account with the plugin."
-msgstr ""
-"Introduce tu ID de cuenta para vincular rápidamente tu cuenta con el plugin."
+msgstr "Introduce tu ID de cuenta para vincular rápidamente tu cuenta con el plugin."
 
 #: src/view/admin/common/network-settings-page.php:55
 #: src/view/admin/uc_frame/network-settings-page.php:57
@@ -2983,8 +2985,21 @@ msgstr ""
 msgid "Where to find settings ID"
 msgstr "Dónde encontrar el ID de cuenta"
 
+#: src/view/admin/common/network-settings-page.php:63
+#: src/view/admin/common/settings-page.php:63
+msgid "How to find your Usercentrics Settings ID"
+msgstr "Cómo encontrar tu ID de configuración de Usercentrics"
+
+#: src/view/admin/common/network-settings-page.php:70
+#: src/view/admin/common/settings-page.php:70
+msgid "How to find your Cookiebot CMP Domain Group ID"
+msgstr "Cómo encontrar tu ID de grupo de dominio CMP de Cookiebot"
+
 #: src/view/admin/common/network-settings-page.php:65
 #: src/view/admin/common/settings-page.php:65
+msgid "Settings ID or Domain Group ID"
+msgstr "ID de configuración o ID de grupo de dominio"
+
 #: src/view/admin/uc_frame/network-settings-page.php:67
 #: src/view/admin/uc_frame/settings/general-page.php:35
 msgid "Your settings ID"

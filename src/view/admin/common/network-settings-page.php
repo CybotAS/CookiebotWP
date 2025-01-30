@@ -37,7 +37,7 @@ $header->display();
 									<?php esc_html_e( 'If you’re new to our solutions, create an account first to obtain your settings ID.', 'cookiebot' ); ?>
 								</p>
 								<div class="new-account-actions">
-									<a href="https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+									<a href="https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended&utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
 										target="_blank" class="cb-btn cb-main-btn" rel="noopener">
 										<?php esc_html_e( 'Create your account', 'cookiebot' ); ?>
 									</a>
@@ -51,20 +51,28 @@ $header->display();
 									<?php esc_html_e( 'Connect your account', 'cookiebot' ); ?>
 								</h3>
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Enter your settings ID to quickly link your account with the plugin.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Enter the ID of your account to quickly connect it with the plugin.', 'cookiebot' ); ?>
 								</p>
 								<p class="cb-general__info__text">
 									<?php esc_html_e( 'If added this will be the default account for all subsites. Subsites are able to override this and use their own account.', 'cookiebot' ); ?>
 								</p>
-								<a href="https://support.usercentrics.com/hc/en-us/articles/18097606499100-What-is-a-Settings-ID-and-where-can-I-find-it"
-									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-									<?php esc_html_e( 'Where to find settings ID', 'cookiebot' ); ?>
-								</a>
+								<div class="cb-general__info__text">
+									<a href="https://support.usercentrics.com/hc/en-us/articles/18097606499100-What-is-a-Settings-ID-and-where-can-I-find-it"
+										target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+										<?php esc_html_e( 'How to find your Usercentrics Settings ID', 'cookiebot' ); ?>
+									</a>
+								</div>
+								<div class="cb-general__info__text">
+									<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
+										target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+										<?php esc_html_e( 'How to find your Cookiebot CMP Domain Group ID', 'cookiebot' ); ?>
+									</a>
+								</div>
 							</div>
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
 									<h3 class="cb-settings__data__subtitle">
-										<?php esc_html_e( 'Your settings ID', 'cookiebot' ); ?>
+										<?php esc_html_e( 'Settings ID or Domain Group ID', 'cookiebot' ); ?>
 									</h3>
 									<div class="cookiebot-cbid-container">
 										<div class="cookiebot-cbid-input">
