@@ -3,6 +3,7 @@
 namespace cybot\cookiebot\lib;
 
 use WP_REST_SERVER;
+use function current_user_can;
 use cybot\cookiebot\settings\pages\Debug_Page;
 
 class Cookiebot_Review {
@@ -132,7 +133,7 @@ class Cookiebot_Review {
 	 */
 	public function send_uninstall_survey() {
 		global $wpdb;
-		if ( ! check_ajax_referer( 'cookiebot_survey_nonce', 'survey_nonce', false ) ) {
+		if ( ! check_ajax_referer( 'cookiebot_survey_nonce', 'survey_nonce', false ) || ! current_user_can( 'deactivate_plugins' ) ) {
 			wp_send_json_error( esc_html__( 'Sorry you are not allowed to do this.', 'cookiebot' ), 401 );
 		}
 		if ( ! isset( $_POST['reason_id'] ) ) {
