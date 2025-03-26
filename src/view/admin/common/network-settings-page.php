@@ -30,21 +30,6 @@ $header->display();
 
 				<div class="cb-settings__tabs__content">
 					<div class="cb-settings__tabs__content--item active-item">
-						<?php if ( ! esc_attr( get_site_option( 'cookiebot-cbid', '' ) ) ) : ?>
-							<div class="cb-general__new__account">
-								<h2 class="cb-general__info__title"><?php esc_html_e( 'New to our solutions? Create your account. ', 'cookiebot' ); ?></h2>
-								<p class="cb-general__info__text">
-									<?php esc_html_e( 'If you’re new to our solutions, create an account first to obtain your settings ID.', 'cookiebot' ); ?>
-								</p>
-								<div class="new-account-actions">
-									<a href="https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended&utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
-										target="_blank" class="cb-btn cb-main-btn" rel="noopener">
-										<?php esc_html_e( 'Create your account', 'cookiebot' ); ?>
-									</a>
-								</div>
-							</div>
-						<?php endif; ?>
-
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
 								<h3 class="cb-settings__config__subtitle">

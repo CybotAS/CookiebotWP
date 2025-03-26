@@ -21,6 +21,22 @@ $header->display();
 ?>
 
 <div class="cb-body">
+	<!-- Banner container for proper alignment -->
+	<div class="banner-container">
+		<div class="header-top-banners banner-live-banner" id="banner-live-notice">
+			<div class="banner-content">
+				<div>
+					<p>
+						<?php echo esc_html__( 'Looks like you\'re already set up on our website. Just paste your configuration ID below to get started.', 'cookiebot' ); ?>
+					</p>
+				</div>
+			</div>
+			<button class="banner-close-btn" aria-label="Close banner" id="banner-close-btn">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+	</div>
+
 	<div class="cb-wrapper">
 		<?php $main_tabs->display( 'settings' ); ?>
 		<div class="cb-main__content">
@@ -31,22 +47,11 @@ $header->display();
 					<h1 class="cb-main__page_title"><?php esc_html_e( 'Settings', 'cookiebot' ); ?></h1>
 				</div>
 
-				<div class="cb-settings__tabs__content">
-					<div class="cb-settings__tabs__content--item active-item"
-						id="general-settings">
-						<div class="cb-general__new__account">
-							<h2 class="cb-general__info__title"><?php esc_html_e( 'New to our solutions? Create your account. ', 'cookiebot' ); ?></h2>
-							<p class="cb-general__info__text">
-								<?php esc_html_e( 'If you’re new to our solutions, create an account first to obtain your settings ID.', 'cookiebot' ); ?>
-							</p>
-							<div class="new-account-actions">
-								<a href="https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended&utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
-									target="_blank" class="cb-btn cb-main-btn" rel="noopener">
-									<?php esc_html_e( 'Create your account', 'cookiebot' ); ?>
-								</a>
-							</div>
-						</div>
+				<div class="cb-settings__tabs">
+				</div>
 
+				<div class="cb-settings__tabs__content">
+					<div class="cb-settings__tabs__content--item active-item" id="general-settings">
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
 								<h3 class="cb-settings__config__subtitle">
@@ -58,13 +63,13 @@ $header->display();
 
 								<div class="cb-general__info__text">
 									<a href="https://support.usercentrics.com/hc/en-us/articles/18097606499100-What-is-a-Settings-ID-and-where-can-I-find-it"
-									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+										target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 										<?php esc_html_e( 'How to find your Usercentrics Settings ID', 'cookiebot' ); ?>
 									</a>
 								</div>
 								<div class="cb-general__info__text">
 									<a href="https://support.cookiebot.com/hc/en-us/articles/4405643234194-Your-CBID-or-Domain-group-ID-and-where-to-find-it"
-									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+										target="_blank" class="cb-btn cb-link-btn" rel="noopener">
 										<?php esc_html_e( 'How to find your Cookiebot CMP Domain Group ID', 'cookiebot' ); ?>
 									</a>
 								</div>
@@ -77,9 +82,9 @@ $header->display();
 									<div class="cookiebot-cbid-container">
 										<div class="cookiebot-cbid-input">
 											<input placeholder="XxxXXXxx"
-													type="text" id="cookiebot-cbid" class="initial-cbid-setup"
-													name="cookiebot-cbid"
-													value="<?php echo esc_attr( $cbid ); ?>"/>
+												type="text" id="cookiebot-cbid" class="initial-cbid-setup"
+												name="cookiebot-cbid"
+												value="<?php echo esc_attr( $cbid ); ?>"/>
 											<div class="cookiebot-cbid-check <?php echo $cbid ? 'check-pass' : ''; ?>"></div>
 										</div>
 										<?php submit_button( esc_html__( 'Connect account', 'cookiebot' ), 'disabled' ); ?>
@@ -90,7 +95,7 @@ $header->display();
 						<div id="cookiebot-ruleset-id-selector" class="cb-settings__config__item hidden">
 							<div class="cb-settings__config__content">
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Let us know if your account is set for compliance with a single privacy law (e.g. GDPR) or multiple laws (e.g. GDPR and CCPA) based on user’s location. The default is a single privacy law, so this is likely your setting unless modified.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Let us know if your account is set for compliance with a single privacy law (e.g. GDPR) or multiple laws (e.g. GDPR and CCPA) based on user\'s location. The default is a single privacy law, so this is likely your setting unless modified.', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">
@@ -100,16 +105,16 @@ $header->display();
 									</h3>
 									<label class="recommended-item">
 										<input <?php checked( 'settings', $ruleset_id ); ?>
-												type="radio"
-												name="cookiebot-ruleset-id"
-												value="settings"/>
+											type="radio"
+											name="cookiebot-ruleset-id"
+											value="settings"/>
 										<?php esc_html_e( 'Compliance with one privacy law', 'cookiebot' ); ?>
 									</label>
 									<label>
 										<input <?php checked( 'ruleset', $ruleset_id ); ?>
-												type="radio"
-												name="cookiebot-ruleset-id"
-												value="ruleset"/>
+											type="radio"
+											name="cookiebot-ruleset-id"
+											value="ruleset"/>
 										<?php esc_html_e( 'Compliance with multiple privacy laws (geolocation)', 'cookiebot' ); ?>
 									</label>
 								</div>

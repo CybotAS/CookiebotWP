@@ -624,5 +624,41 @@ namespace cybot\cookiebot\lib {
 		return Cookiebot_WP::instance();
 	}
 
+	function cookiebot_is_trial_expired() {
+		$user_data = get_option( 'cookiebot-user-data' );
+
+		if ( ! isset( $user_data['subscriptions']['active'] ) ) {
+			return false;
+		}
+
+		$active_subscription = $user_data['subscriptions']['active'];
+
+		if ( ! isset( $active_subscription['trial_start_date'] ) || ! isset( $active_subscription['trial_end_date'] ) ) {
+			return false;
+		}
+
+		$trial_end    = new \DateTime( $active_subscription['trial_end_date'] );
+		$current_date = new \DateTime( gmdate( 'Y-m-d' ) );
+
+		return $current_date > $trial_end;
+	}
+
+	function cookiebot_is_upgraded() {
+		$user_data = get_option( 'cookiebot-user-data' );
+
+		if ( ! isset( $user_data['subscriptions']['active'] ) ) {
+			return false;
+		}
+
+		$active_subscription = $user_data['subscriptions']['active'];
+		$price_plan          = isset( $active_subscription['price_plan'] ) ? $active_subscription['price_plan'] : '';
+
+		if ( ! isset( $price_plan ) || empty( $price_plan ) ) {
+			return false;
+		}
+
+		return $price_plan !== 'Free' && $price_plan !== 'Premium trial';
+	}
+
 	const CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR = 'assets/';
 }

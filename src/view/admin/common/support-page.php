@@ -29,7 +29,7 @@ $header->display();
 						);
 						?>
 					</p>
-					<a href="https://support.usercentrics.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn"
+					<a href="https://usercentricsforwordpress.zendesk.com/hc/en-us/sections/19194997558428-FAQ" target="_blank" class="cb-btn cb-main-btn"
 						rel="noopener">
 						<?php
 						esc_html_e(
