@@ -20,6 +20,7 @@ if ( ! defined( 'CYBOT_COOKIEBOT_VERSION' ) ) {
 
 class Cookiebot_WP {
 
+
 	public static function debug_log( $message ) {
 		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 			// phpcs:ignore
@@ -27,7 +28,7 @@ class Cookiebot_WP {
 		}
 	}
 
-	const COOKIEBOT_PLUGIN_VERSION  = '4.4.1';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.4.2';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
