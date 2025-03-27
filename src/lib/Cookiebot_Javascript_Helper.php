@@ -88,6 +88,7 @@ class Cookiebot_Javascript_Helper {
 
 	private function debug_log( $message ) {
 		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			// phpcs:ignore
 			error_log( '[Cookiebot] ' . $message );
 		}
 	}

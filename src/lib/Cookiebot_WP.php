@@ -1,5 +1,6 @@
 <?php
 
+
 namespace cybot\cookiebot\lib;
 
 use cybot\cookiebot\addons\Cookiebot_Addons;
@@ -18,6 +19,13 @@ if ( ! defined( 'CYBOT_COOKIEBOT_VERSION' ) ) {
 }
 
 class Cookiebot_WP {
+
+	public static function debug_log( $message ) {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			// phpcs:ignore
+			error_log( '[Cookiebot] ' . $message );
+		}
+	}
 
 	const COOKIEBOT_PLUGIN_VERSION  = '4.4.1';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
@@ -221,20 +229,18 @@ class Cookiebot_WP {
 	 */
 	public static function get_subscription_type() {
 		$raw_data = get_option( 'cookiebot-user-data', '' );
-		error_log( 'Raw user data: ' . print_r( $raw_data, true ) );
 
 		if ( empty( $raw_data ) ) {
-			error_log( 'Raw data is empty, returning Free' );
+			self::debug_log_wp( 'Raw data is empty, returning Free' );
 			return 'Free';
 		}
 
 		// Use the data directly if it's already an array
 		$data = is_array( $raw_data ) ? $raw_data : json_decode( $raw_data, true );
-		error_log( 'Processed data: ' . print_r( $data, true ) );
 
 		// Check if we have the new subscription structure
 		if ( ! isset( $data['subscriptions']['active'] ) ) {
-			error_log( 'No active subscription found, returning Free' );
+			self::debug_log_wp( 'No active subscription found, returning Free' );
 			return 'Free';
 		}
 
@@ -242,13 +248,13 @@ class Cookiebot_WP {
 		$status       = isset( $subscription['subscription_status'] ) ? $subscription['subscription_status'] : '';
 		$price_plan   = isset( $subscription['price_plan'] ) ? $subscription['price_plan'] : 'free';
 
-		error_log( 'Subscription details:' );
-		error_log( 'Status: ' . $status );
-		error_log( 'Price Plan: ' . $price_plan );
+		self::debug_log( 'Subscription details:' );
+		self::debug_log( 'Status: ' . $status );
+		self::debug_log( 'Price Plan: ' . $price_plan );
 
 		// Check for trial status first
 		if ( in_array( $status, array( 'trial_will_be_billed', 'trial_missing_payment' ), true ) ) {
-			error_log( 'Trial status detected, returning Premium trial' );
+			self::debug_log( 'Trial status detected, returning Premium trial' );
 			return 'Premium trial';
 		}
 
@@ -264,11 +270,11 @@ class Cookiebot_WP {
 			);
 
 			$result = isset( $plan_mapping[ $price_plan ] ) ? $plan_mapping[ $price_plan ] : ucfirst( $price_plan );
-			error_log( 'Active subscription, returning: ' . $result );
+			self::debug_log( 'Active subscription, returning: ' . $result );
 			return $result;
 		}
 
-		error_log( 'No conditions met, returning Free' );
+		self::debug_log( 'No conditions met, returning Free' );
 		return 'Free';
 	}
 
@@ -490,40 +496,39 @@ class Cookiebot_WP {
 	 */
 	public static function get_banner_script() {
 		$cbid = self::get_cbid();
-		error_log( '=== get_banner_script: Starting ===' );
-		error_log( 'CBID: ' . $cbid );
+		self::debug_log( '=== get_banner_script: Starting ===' );
+		self::debug_log( 'CBID: ' . $cbid );
 
 		// Basic validation checks
 		if ( empty( $cbid ) || defined( 'COOKIEBOT_DISABLE_ON_PAGE' ) ) {
-			error_log( 'get_banner_script: Basic validation failed - CBID empty or disabled' );
+			self::debug_log( 'get_banner_script: Basic validation failed - CBID empty or disabled' );
 			return '';
 		}
 
 		// Banner enabled check
 		$banner_enabled = get_option( 'cookiebot-banner-enabled', '1' );
-		error_log( 'Banner enabled setting: ' . $banner_enabled );
+		self::debug_log( 'Banner enabled setting: ' . $banner_enabled );
 		if ( $banner_enabled === '0' ) {
-			error_log( 'get_banner_script: Banner disabled in settings' );
+			self::debug_log( 'get_banner_script: Banner disabled in settings' );
 			return '';
 		}
 
 		// User verification and trial checks
 		$user_data = get_option( 'cookiebot-user-data', array() );
-		error_log( 'User data: ' . print_r( $user_data, true ) );
 
 		if ( ! empty( $user_data ) ) {
 			// Check unverified user trial
 			if ( isset( $user_data['email_verification_status'] ) &&
 				$user_data['email_verification_status'] === 'unverified' &&
 				isset( $user_data['trial_start_date'] ) ) {
-				error_log( 'Checking unverified user trial...' );
-				error_log( 'Trial start date: ' . $user_data['trial_start_date'] );
+				self::debug_log( 'Checking unverified user trial...' );
+				self::debug_log( 'Trial start date: ' . $user_data['trial_start_date'] );
 				$trial_start = \DateTime::createFromFormat( 'd-m-Y H:i:s', str_replace( ' T', ' ', $user_data['trial_start_date'] ) );
 				$trial_end   = clone $trial_start;
 				$trial_end   = $trial_end->modify( '+14 days' );
-				error_log( 'Trial end date: ' . $trial_end->format( 'Y-m-d H:i:s' ) );
+				self::debug_log( 'Trial end date: ' . $trial_end->format( 'Y-m-d H:i:s' ) );
 				if ( $trial_start && new \DateTime() > $trial_end ) {
-					error_log( 'get_banner_script: Unverified user trial expired' );
+					self::debug_log( 'get_banner_script: Unverified user trial expired' );
 					return '';
 				}
 			}
@@ -532,11 +537,11 @@ class Cookiebot_WP {
 			if ( isset( $user_data['subscription_status'] ) &&
 				$user_data['subscription_status'] === 'in_trial_non_billable' &&
 				isset( $user_data['trial_end_date'] ) ) {
-				error_log( 'Checking trial status...' );
-				error_log( 'Trial end date: ' . $user_data['trial_end_date'] );
+				self::debug_log( 'Checking trial status...' );
+				self::debug_log( 'Trial end date: ' . $user_data['trial_end_date'] );
 				$trial_end = \DateTime::createFromFormat( 'd-m-Y H:i:s', str_replace( ' T', ' ', $user_data['trial_end_date'] ) );
 				if ( $trial_end && new \DateTime() > $trial_end ) {
-					error_log( 'get_banner_script: Trial period ended' );
+					self::debug_log( 'get_banner_script: Trial period ended' );
 					return '';
 				}
 			}
@@ -549,21 +554,21 @@ class Cookiebot_WP {
 		$can_edit_theme   = self::can_current_user_edit_theme();
 		$output_logged_in = get_option( 'cookiebot-output-logged-in' );
 
-		error_log( 'Output conditions:' );
-		error_log( 'Is multisite: ' . ( $is_multisite ? 'yes' : 'no' ) );
-		error_log( 'Network nooutput: ' . ( $network_nooutput ? 'yes' : 'no' ) );
-		error_log( 'Site nooutput: ' . ( $site_nooutput ? 'yes' : 'no' ) );
-		error_log( 'Can edit theme: ' . ( $can_edit_theme ? 'yes' : 'no' ) );
-		error_log( 'Output logged in: ' . ( $output_logged_in ? 'yes' : 'no' ) );
+		self::debug_log( 'Output conditions:' );
+		self::debug_log( 'Is multisite: ' . ( $is_multisite ? 'yes' : 'no' ) );
+		self::debug_log( 'Network nooutput: ' . ( $network_nooutput ? 'yes' : 'no' ) );
+		self::debug_log( 'Site nooutput: ' . ( $site_nooutput ? 'yes' : 'no' ) );
+		self::debug_log( 'Can edit theme: ' . ( $can_edit_theme ? 'yes' : 'no' ) );
+		self::debug_log( 'Output logged in: ' . ( $output_logged_in ? 'yes' : 'no' ) );
 
 		if ( $is_multisite && $network_nooutput ||
 			$site_nooutput ||
 			( $can_edit_theme && ! $output_logged_in ) ) {
-			error_log( 'get_banner_script: Output conditions not met' );
+			self::debug_log( 'get_banner_script: Output conditions not met' );
 			return '';
 		}
 
-		error_log( 'get_banner_script: Generating dynamic script' );
+		self::debug_log( 'get_banner_script: Generating dynamic script' );
 
 		// Build the script HTML
 		$script_html = '';
@@ -571,7 +576,7 @@ class Cookiebot_WP {
 		// Add TCF stub if IAB is enabled
 		$iab_enabled = ! empty( get_option( 'cookiebot-iab' ) );
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-		error_log( 'IAB enabled: ' . ( $iab_enabled ? 'yes' : 'no' ) );
+		self::debug_log( 'IAB enabled: ' . ( $iab_enabled ? 'yes' : 'no' ) );
 		if ( $iab_enabled ) {
 			// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 			$script_html .= sprintf(
@@ -583,7 +588,7 @@ class Cookiebot_WP {
 		// Add autoblocker if auto mode is enabled
 		$blocking_mode = self::get_cookie_blocking_mode();
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-		error_log( 'Blocking mode: ' . $blocking_mode );
+		self::debug_log( 'Blocking mode: ' . $blocking_mode );
 		if ( $blocking_mode === 'auto' ) {
 			// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 			$script_html .= sprintf(
@@ -601,7 +606,7 @@ class Cookiebot_WP {
 			esc_url( 'https://web.cmp.usercentrics.eu/ui/loader.js' )
 		);
 
-		error_log( 'Final script HTML: ' . $script_html );
+		self::debug_log( 'Final script HTML: ' . $script_html );
 		return $script_html;
 	}
 }

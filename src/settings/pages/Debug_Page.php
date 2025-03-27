@@ -98,8 +98,6 @@ class Debug_Page implements Settings_Page_Interface {
 		$debug_output .= "\n--- Cookiebot Information ---\n";
 		$debug_output .= 'Plugin Version: ' . Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION . "\n";
 		$debug_output .= 'Settings ID: ' . Cookiebot_WP::get_cbid() . "\n";
-		$debug_output .= 'Auth Token: ' . Cookiebot_WP::get_auth_token() . "\n";
-		$debug_output .= 'User data: ' . print_r( Cookiebot_WP::get_user_data(), true ) . "\n";
 		$debug_output .= 'Blocking mode: ' . get_option( 'cookiebot-cookie-blocking-mode' ) . "\n";
 		if ( Cookiebot_Frame::is_cb_frame_type() !== false ) {
 			$debug_output .= 'Language: ' . get_option( 'cookiebot-language' ) . "\n";
