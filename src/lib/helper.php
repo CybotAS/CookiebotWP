@@ -637,6 +637,10 @@ namespace cybot\cookiebot\lib {
 			return false;
 		}
 
+		if ( $active_subscription['subscription_status'] === 'active_auto_renew' || $active_subscription['subscription_status'] === 'active_no_renew' ) {
+			return true;
+		}
+
 		$trial_end    = new \DateTime( $active_subscription['trial_end_date'] );
 		$current_date = new \DateTime( gmdate( 'Y-m-d' ) );
 
