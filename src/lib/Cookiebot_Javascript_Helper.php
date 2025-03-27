@@ -8,8 +8,10 @@ use InvalidArgumentException;
 class Cookiebot_Javascript_Helper {
 
 	public function register_hooks() {
+		// Simplified hooks registration
 		self::get_hooks_by_frame();
 	}
+
 
 	private function get_hooks_by_frame() {
 		$frame = Cookiebot_Frame::is_cb_frame_type();
@@ -32,42 +34,106 @@ class Cookiebot_Javascript_Helper {
 		}
 	}
 
+	private function should_show_banner() {
+		// Simplified banner display check
+		$banner_enabled = get_option( 'cookiebot-banner-enabled', '1' );
+		$user_data      = get_option( 'cookiebot-user-data', array() );
+
+		if ( $banner_enabled === '0' ) {
+			return false;
+		}
+
+		if ( empty( $user_data ) ) {
+			return true;
+		}
+
+		// Check verification and trial status in one pass
+		if ( isset( $user_data['email_verification_status'] ) &&
+			$user_data['email_verification_status'] === 'unverified' ) {
+
+			// Check trial expiration
+			$trial_start = $this->parse_date( isset( $user_data['trial_start_date'] ) ? $user_data['trial_start_date'] : '' );
+			if ( $trial_start ) {
+				$fourteen_days_later = clone $trial_start;
+				$fourteen_days_later->modify( '+14 days' );
+
+				if ( new \DateTime() > $fourteen_days_later ) {
+					return false;
+				}
+			}
+		}
+
+		// Check trial status
+		if ( isset( $user_data['subscription_status'] ) &&
+			$user_data['subscription_status'] === 'in_trial_non_billable' ) {
+			$trial_end = $this->parse_date( isset( $user_data['trial_end_date'] ) ? $user_data['trial_end_date'] : '' );
+			if ( $trial_end && new \DateTime() > $trial_end ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	// Helper function for date parsing
+	private function parse_date( $date_string ) {
+		if ( empty( $date_string ) ) {
+			return false;
+		}
+
+		$date_string = str_replace( ' T', ' ', $date_string );
+		$date        = \DateTime::createFromFormat( 'd-m-Y H:i:s', $date_string );
+		return $date ? $date : false;
+	}
+
+	private function debug_log( $message ) {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			// phpcs:ignore
+			error_log( '[Cookiebot] ' . $message );
+		}
+	}
+
 	public function include_uc_cmp_js( $return_html = false ) {
 		$cbid = Cookiebot_WP::get_cbid();
-
 		if ( ! empty( $cbid ) && ! defined( 'COOKIEBOT_DISABLE_ON_PAGE' ) ) {
+			$this->debug_log( 'CBID exists and COOKIEBOT_DISABLE_ON_PAGE is not defined' );
+
+			// Add verification check
+			if ( ! $this->should_show_banner() ) {
+				$this->debug_log( 'Banner should not be shown - returning empty' );
+				return '';
+			}
+			$this->debug_log( 'Banner should be shown' );
+
 			if (
 				// Is multisite - and disabled output is checked as network setting
 				( is_multisite() && get_site_option( 'cookiebot-nooutput', false ) ) ||
 				// Do not show JS - output disabled
-				( get_option( 'cookiebot-nooutput', false ) && ! $return_html ) ||
-				// Do not show js if logged in output is disabled
-				(
-					Cookiebot_WP::can_current_user_edit_theme() &&
-					$return_html === '' &&
-					(
-						get_option( 'cookiebot-output-logged-in' ) === false ||
-						get_option( 'cookiebot-output-logged-in' ) === ''
-					)
-				)
+				( get_option( 'cookiebot-nooutput', false ) && ! $return_html )
 			) {
 				return '';
 			}
 
-			$view_path = 'frontend/scripts/uc_frame/uc-cmp-js.php';
-			$view_args = array(
-				'cbid'        => $cbid,
-				'ruleset_id'  => ! empty( get_option( 'cookiebot-ruleset-id' ) ) ?
-					get_option( 'cookiebot-ruleset-id' ) : 'settings',
-				'iab_enabled' => ! empty( get_option( 'cookiebot-iab' ) ),
-				'auto'        => Cookiebot_WP::get_cookie_blocking_mode() === 'auto',
-			);
+			// Get the banner script
+			$banner_script = Cookiebot_WP::get_banner_script();
+
+			if ( empty( $banner_script ) ) {
+				$this->debug_log( 'Failed to generate banner script - returning empty' );
+				return '';
+			}
+
+			$this->debug_log( 'Final script to be injected: ' . substr( $banner_script, 0, 100 ) . '...' );
 
 			if ( $return_html ) {
-				return get_view_html( $view_path, $view_args );
+				$this->debug_log( 'Returning HTML' );
+				return wp_kses_post( $banner_script );
 			} else {
-				include_view( $view_path, $view_args );
+				$this->debug_log( 'Echoing HTML' );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Script HTML is generated internally and is safe
+				echo $banner_script;
 			}
+		} else {
+			$this->debug_log( 'CBID is empty or COOKIEBOT_DISABLE_ON_PAGE is defined' );
 		}
 		return '';
 	}
@@ -117,6 +183,11 @@ class Cookiebot_Javascript_Helper {
 	public function include_cookiebot_js( $return_html = false ) {
 		$cbid = Cookiebot_WP::get_cbid();
 		if ( ! empty( $cbid ) && ! defined( 'COOKIEBOT_DISABLE_ON_PAGE' ) ) {
+			// Add verification check
+			if ( ! $this->should_show_banner() ) {
+				return '';
+			}
+
 			if (
 				// Is multisite - and disabled output is checked as network setting
 				( is_multisite() && get_site_option( 'cookiebot-nooutput', false ) ) ||

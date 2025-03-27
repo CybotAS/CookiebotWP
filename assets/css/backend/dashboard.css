@@ -1,0 +1,885 @@
+.cb-wrapper {
+    padding: 0;
+    margin-left: 1rem;
+    width: 100%;
+}
+
+.welcome-title {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+    padding: 0 1.5rem;
+}
+
+/* Banner Container Meeting cb-wrapper */
+.banner-container {
+    max-width: 1366px;
+    width: 100%;
+    margin: -1.5rem auto 1.5rem;
+}
+
+.header-top-banners {
+    display: flex;
+    background-position: center;
+    border-radius: 0.5rem;
+    align-items: center; 
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.header-top-banners.trial-expired-banner {
+    background-color: #FDECCF;
+    justify-content: space-between;
+}
+
+.header-top-banners.connected-banner {
+    background-color: rgba(245, 245, 247, 1);
+}
+
+.header-top-banners.banner-live-banner {
+    background-color: #076646;
+}
+
+.header-top-banners.banner-live-banner h3 {
+    color: #fff;
+}
+
+.header-top-banners.banner-live-banner p {
+    color: #fff;
+    text-wrap: nowrap;
+}
+
+.header-top-banners img {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.header-top-banners .banner-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    flex: 1;
+}
+
+.header-top-banners h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1D2327;
+    line-height: 1.3;
+}
+
+.header-top-banners p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: #4B5563;
+    max-width: 90%;
+}
+
+.header-top-banners .upgrade-expired-trial {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 1.5rem 2rem;
+}
+
+.upgrade-expired-trial h3 {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1D2327;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.upgrade-chevron {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+    line-height: 1;
+    display: inline-block;
+    transform: translateY(1px);
+}
+
+.dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dashboard-grid-row {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Box Containers */
+.gray-box {
+    background: #F2f2f2;
+    border-radius: 1rem;
+    padding: 2rem;
+    flex: 1.5;
+}
+
+.gray-box-overview {
+    background: #F2f2f2;
+    border-radius: 1rem;
+    padding: 2rem;
+    height: fit-content;
+    flex: 1;
+}
+
+/* Steps Container */
+.steps-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Step Box */
+.step-box {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 0.6rem;
+}
+
+.step-box:last-child {
+    margin-bottom: 0;
+}
+
+/* Step Row */
+.step-row {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1rem;
+}
+
+.step-icon {
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.done-status {
+    color: #0c8257;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.empty-circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #D1D5DB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-circle::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background-color: #D1D5DB;
+    border-radius: 50%;
+}
+
+.circle-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #D1D5DB;
+    border-radius: 50%;
+}
+
+.checkmark-image {
+    width: 24px;
+    height: 24px;
+}
+
+.checkmark-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #0c8257;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-content h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1D2327;
+    line-height: 10px;
+}
+
+.step-status {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.in-progress-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #FEF3C7;
+    color: #92400E;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.in-progress-status img {
+    width: 16px;
+    height: 16px;
+}
+
+.clock-icon {
+    margin-right: 0.25rem;
+}
+
+.expand-icon {
+    cursor: pointer;
+}
+
+.expand-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.lightning-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: #EEF2FF;
+    border-radius: 4px;
+}
+
+/* Banner Preview */
+.banner-preview-container {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.step-description {
+    color: #141414;
+    margin-bottom: 1rem;
+    font-size: 0.9375rem;
+}
+
+.banner-images {
+    display: flex;
+    align-items: flex-start;
+    height: 12rem;
+    margin-bottom: 1rem;
+    margin-left: -0.6rem;
+}
+
+.banner-image {
+    display: block;
+    height: 100%;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.activate-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    margin-top: 1rem;
+}
+
+/* Upgrade Section */
+.upgrade-details {
+    padding: 0px 24px 24px 24px;
+}
+
+.subscription-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.upgrade-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+    gap: 8px;
+}
+
+.upgrade-header h3 {
+    font-size: 15px;
+    line-height: 24px;
+    width: 236px;
+    color: #111827;
+    margin: 0;
+    text-wrap: nowrap;
+    font-weight: 600;
+}
+
+.plan-name {
+    color: #1032CF;
+    font-weight: 600;
+}
+
+.manage-features-link p {
+    font-size: 15px;
+    line-height: 24px;
+    width: 282px;
+    color: #111827;
+    margin: 0;
+    text-decoration: underline;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.billing-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.billing-date p {
+    font-size: 15px;
+    line-height: 24px;
+    color: #111827;
+    margin: 0;
+    font-weight: 600;
+}
+
+.calendar-icon, .celebration-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.manage-subscription .cb-btn {
+    width: 187px;
+    height: 50px;
+    border-radius: 4px;
+    padding: 16px 12px;
+    text-wrap: nowrap;
+}
+
+.manage-subscription .cb-btn:hover {
+    background-color: #2563EB;
+}
+
+.divider {
+    height: 1px;
+    background-color: #E5E7EB;
+    margin: 0 0 24px;
+}
+
+.upgrade-intro {
+    color: #6B7280;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.upgrade-features {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+}
+
+.upgrade-features li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    font-size: 1rem;
+    color: #1D2327;
+}
+
+.upgrade-features li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #0047FF;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.ready-text {
+    margin-bottom: 1.5rem;
+    color: #6B7280;
+    font-size: 1rem;
+}
+
+.upgrade-container {
+    margin-top: 1rem;
+}
+
+.cb-btn.cb-primary-btn {
+    background: #1032CF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.cb-btn.cb-primary-btn.cb-get-started-btn {
+    width: 200px;
+    height: 48px;
+}
+
+#upgrade-now-button {
+    padding: 0.75rem 1.5rem;
+}
+
+.banner-arrow {
+    width: 8rem;
+    margin-top: -2.3rem;
+    margin-left: 0.5rem;
+}
+
+.uc-logo {
+    margin-right: 0.5rem;
+}
+
+/* Typography */
+.header-section {
+    margin-bottom: 1.5rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.header-section-no-margin {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.header-section h1 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    font-weight: 600;
+    color: #1D2327;
+    margin: 0;
+    padding: 0;
+}
+
+.subtitle {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-top: 1rem;
+    padding: 0;
+    color: #6B7280;
+}
+
+.note-icon {
+    border: none;
+    margin-left: 0.1rem;
+    margin-right: 0.4rem;
+    vertical-align: text-top;
+}
+
+.note-text {
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+    margin-top: 1rem;
+    padding: 0;
+    color: #6B7280;
+}
+
+.note-link {
+    color: #0047FF;
+    font-size: 0.75rem;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.dashboard-link {
+    color: #0047FF;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.free-badge {
+    border: 1px solid #0047FF;
+    border-radius: 1rem;
+    color: #0047FF;
+    padding: 0.25rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.banner-control-header h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    color: #1D2327;
+    margin: 0 0 0.5rem;
+}
+
+/* Banner Options */
+.banner-options {
+    display: grid;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    position: relative;
+    z-index: 1;
+    gap: 0;
+}
+
+.option-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+}
+
+.option-divider {
+    height: 2px;
+    background-color: #E5E7EB;
+    width: 100%;
+}
+
+.option-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1D2327;
+}
+
+.option-label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.option-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legal-framework {
+    border: 0.25px solid rgba(84, 113, 242, 1);
+    border-radius: 4px;    
+}
+
+/* Toggle Switch styles */
+.toggle-switch {
+    position: relative;
+    width: 2.75rem;
+    height: 1.5rem;
+}
+
+.toggle-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-label {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #E5E7EB;
+    transition: .3s;
+    border-radius: 34px;
+    width: 2.75rem;
+    height: 1.5rem;
+}
+
+.toggle-label:before {
+    position: absolute;
+    content: "";
+    height: 1.25rem;
+    width: 1.25rem;
+    left: 0.125rem;
+    bottom: 0.125rem;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+.toggle-input:checked+.toggle-label {
+    background-color: #1032CF;
+}
+
+.toggle-input:checked+.toggle-label:before {
+    transform: translateX(1.25rem);
+}
+
+/* Status Badge styles */
+.status-badge.active {
+    background: #00694A;
+    color: white;
+    width: 2.75rem;
+    text-align: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.status-badge.inactive {
+    background: rgba(159, 24, 24, 1);
+    color: white;
+    width: 2.75rem;
+    text-align: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.legal-framework-badge {
+    background: #E8EEF9;
+    color: #0047FF;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Banner Actions */
+.banner-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.customize-banner-btn {
+    background-color: #1032CF;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.configure-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #1A1A1A;
+    font-size: 0.875rem;
+}
+
+.configure-link svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Banner controls tooltips */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 350px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    margin-left: -168px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.scan-details {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.scan-message {
+    color: #1D2327;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 1rem 0;
+    padding: 0;
+}
+
+.step-box .divider {
+    height: 3px;
+    background-color: #F3F4F6;
+    margin: 0 0 1.5rem;
+}
+
+.step-box:not(:last-child) {
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.scan-details .divider {
+    height: 3px;
+    background-color: #F3F4F6;
+    margin: 0 0 1.5rem;
+}
+
+.upgrade-details .divider {
+    height: 3px;
+    background-color: #F3F4F6;
+    margin: 0 0 1.5rem;
+}
+
+.option-divider {
+    height: 2px;
+    background-color: #E5E7EB;
+    width: 100%;
+}
+
+.cb-btn.cb-primary-btn:hover {
+    background-color: #0039CC; 
+    transition: background-color 0.2s ease;
+}
+
+.scan-details, .upgrade-details {
+    transition: max-height 0.3s ease;
+}
+
+.cb-btn:focus, .expand-icon:focus {
+    outline: 2px solid #0047FF;
+    outline-offset: 2px;
+}
+
+
+.expand-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow-icon {
+    transition: transform 0.3s ease;
+}
+
+.expand-toggle[aria-expanded="true"] .arrow-icon {
+    transform: rotate(180deg);
+}
+
+.scan-details {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.scan-details .divider {
+    height: 2px;
+    background-color: #F3F4F6;
+    margin: 0 0 1.5rem;
+}
+
+.scan-message {
+    color: #1D2327;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Banner Live Link */
+.banner-live-link {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: all 0.2s ease;
+}
+
+.banner-live-link:hover {
+    color: #fff;
+    opacity: 0.9;
+    text-decoration: underline;
+}
+
+/* Banner Close Button */
+.banner-close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    line-height: 1;
+    padding: 0 20px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.banner-close-btn:hover {
+    opacity: 1;
+}
+
+.banner-close-btn span {
+    font-weight: lighter;
+    font-size: 28px;
+}
+
+/* Hide banner when closed */
+.header-top-banners.hidden {
+    display: none;
+}
+
+.failed-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #F2AAAA;
+    color: #9F1818;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.failed-status svg {
+    width: 16px;
+    height: 16px;
+}

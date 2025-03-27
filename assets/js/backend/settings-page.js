@@ -479,3 +479,9 @@ function copyEmbedShortcode() {
     t.setSelectionRange( 0, 99999 )
     document.execCommand( 'copy' )
 }
+
+// Event Listeners
+document.getElementById('banner-close-btn')?.addEventListener('click', async () => {
+    const banner = document.getElementById('banner-live-notice')
+    if (banner) banner.remove();
+});

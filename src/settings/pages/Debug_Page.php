@@ -113,6 +113,7 @@ class Debug_Page implements Settings_Page_Interface {
 			$debug_output .= 'Add async/defer to declaration tag: ' . $this->print_option_if_not_empty( 'cookiebot-script-tag-cd-attribute' ) . "\n";
 		}
 		$debug_output .= 'Auto update: ' . $this->print_option_enabled( 'cookiebot-autoupdate' ) . "\n";
+		$debug_output .= 'Show banner on site: ' . $this->print_option_active( 'cookiebot-banner-enabled' ) . "\n";
 		$debug_output .= 'Hide Cookie Popup: ' . $this->print_option_active( 'cookiebot-nooutput' ) . "\n";
 		$debug_output .= 'Enable Cookiebot on front end while logged in: ' . $this->print_option_active( 'cookiebot-output-logged-in' ) . "\n";
 		if ( Cookiebot_Frame::is_cb_frame_type() !== false ) {
@@ -127,7 +128,7 @@ class Debug_Page implements Settings_Page_Interface {
 			$debug_output .= 'GTM tag: ' . $cookiebot_javascript_helper->include_google_tag_manager_js( true ) . "\n";
 		}
 
-		if ( get_option( 'cookiebot-gcm' ) !== false ) {
+		if ( get_option( 'cookiebot-gcm' ) === '1' ) {
 			$debug_output .= 'GCM tag: ' . $cookiebot_javascript_helper->include_google_consent_mode_js( true ) . "\n";
 		}
 

@@ -639,3 +639,105 @@ select#cookiebot-embedding, select#cookiebot-embedding-type {
     line-height: normal;
     padding: 0 10px;
 }
+
+/* Banner Container Meeting cb-wrapper */
+.banner-container {
+    max-width: 1366px;
+    width: 100%;
+    margin: -1.5rem auto 1.5rem;
+}
+
+.header-top-banners {
+    display: flex;
+    background-position: center;
+    border-radius: 0.5rem;
+    align-items: center; 
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.header-top-banners.trial-expired-banner {
+    background-color: #FDECCF;
+    justify-content: space-between;
+}
+
+.header-top-banners.connected-banner {
+    background-color: rgba(245, 245, 247, 1);
+}
+
+.header-top-banners.banner-live-banner {
+    background-color: #F5F5F7;
+}
+
+.header-top-banners.banner-live-banner h3 {
+    color: black;
+}
+
+.header-top-banners.banner-live-banner p {
+    color: black;
+    text-wrap: nowrap;
+}
+
+.header-top-banners img {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.header-top-banners .banner-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    flex: 1;
+}
+
+.header-top-banners h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1D2327;
+    line-height: 1.3;
+}
+
+.header-top-banners p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: #4B5563;
+    max-width: 90%;
+}
+
+.header-top-banners .upgrade-expired-trial {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 1.5rem 2rem;
+}
+
+
+/* Banner Close Button */
+.banner-close-btn {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 24px;
+    line-height: 1;
+    padding: 0 20px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.banner-close-btn:hover {
+    opacity: 1;
+}
+
+.banner-close-btn span {
+    font-weight: lighter;
+    font-size: 28px;
+}

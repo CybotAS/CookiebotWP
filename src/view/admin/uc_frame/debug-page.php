@@ -36,6 +36,24 @@ $header->display();
 						);
 						?>
 					</button>
+					<!-- <div>
+						<button class="cb-btn" onclick="clearConfigData();">
+							<?php
+							esc_html_e(
+								'Clear config data',
+								'cookiebot'
+							);
+							?>
+						</button>
+						<button class="cb-btn" onclick="clearConfigDataKeepCbid();">
+							<?php
+							esc_html_e(
+								'Clear config data (but keep Settings ID)',
+								'cookiebot'
+							);
+							?>
+						</button>
+					</div> -->
 				</div>
 				<div class="cb-debug__support__card">
 					<div class="cb-debug__support__inner">
