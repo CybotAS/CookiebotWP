@@ -50,8 +50,8 @@ async function checkScanStatus(scanId) {
             return;
         }
 
-           // Store both scan ID and status
-           await fetch(cookiebot_account.ajax_url, {
+        // Store both scan ID and status
+        await fetch(cookiebot_account.ajax_url, {
             method: 'POST',
             body: createFormData('cookiebot_store_scan_details', {
                 scan_id: scanId,
@@ -74,6 +74,40 @@ async function checkScanStatus(scanId) {
         }
     } catch (error) {
         console.log('Error checking scan status:', error);
+    }
+}
+
+const checkUserData = async () => {
+    try {
+        const userData = await fetch(`${API_BASE_URL}/accounts`, {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${authToken}`,
+            }
+        }).then(r => r.json()).then(data => data[0]);
+
+        if (!userData) throw new Error('No user data received');
+
+        // Add onboarding flag to user data
+        const userDataWithFlag = {
+            ...userData,
+            onboarded_via_signup: true
+        };
+        console.log('update user data', userDataWithFlag);
+        userResponseData = await fetch(cookiebot_account.ajax_url, {
+            method: 'POST',
+            body: createFormData('cookiebot_post_user_data', {
+                data: JSON.stringify(userDataWithFlag)
+            }),
+            credentials: 'same-origin'
+        }).then(r => r.json());
+
+        if (!userResponseData.success) {
+            throw new Error('Failed to store user data');
+        }
+    } catch (error) {
+        console.error('Failed to fetch user data:', error);
+        return;
     }
 }
 
@@ -154,19 +188,19 @@ document.addEventListener('DOMContentLoaded', async () => {
                         body: createFormData('cookiebot_process_auth_code', { code: ucApiCode }),
                         credentials: 'same-origin'
                     });
-    
+
                     authToken = await fetch(cookiebot_account.ajax_url, {
                         method: 'POST',
                         body: createFormData('cookiebot_get_auth_token'),
                         credentials: 'same-origin'
                     }).then(r => r.json()).then(data => data.data);
-    
+
                     console.log('user already exists just attaching new auth token', authToken);
                     if (!response.ok) throw new Error(`Auth failed: ${response.status}`);
                     const newUrl = new URL(window.location.href);
                     newUrl.searchParams.delete('uc_api_code');
                     newUrl.searchParams.delete('is_new_user');
-                    window.location.href = newUrl;  
+                    window.location.href = newUrl;
                     return;
                 } catch (error) {
                     console.error('Failed to process authentication:', error);
@@ -174,7 +208,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
 
-        
+
             if (isNewUser === 'false' && !cookiebot_account.has_user_data) {
                 const settingsUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot_settings';
                 window.location.href = settingsUrl;
@@ -229,6 +263,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (cookiebot_account.has_user_data && isAuthenticatedCondition) {
             // Check scan status before returning
             await checkScanStatus(cbid);
+            await checkUserData();
             return;
         }
 
@@ -339,38 +374,35 @@ document.addEventListener('DOMContentLoaded', async () => {
             credentials: 'same-origin'
         }).then(r => r.json());
 
-        if (!userResponseData.success || !userResponseData.data) {
-            try {
-                const userData = await fetch(`${API_BASE_URL}/accounts`, {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Authorization': `Bearer ${authToken}`,
-                    }
-                }).then(r => r.json()).then(data => data[0]);
-
-                if (!userData) throw new Error('No user data received');
-
-                // Add onboarding flag to user data
-                const userDataWithFlag = {
-                    ...userData,
-                    onboarded_via_signup: true
-                };
-
-                userResponseData = await fetch(cookiebot_account.ajax_url, {
-                    method: 'POST',
-                    body: createFormData('cookiebot_post_user_data', { 
-                        data: JSON.stringify(userDataWithFlag) 
-                    }),
-                    credentials: 'same-origin'
-                }).then(r => r.json());
-
-                if (!userResponseData.success) {
-                    throw new Error('Failed to store user data');
+        try {
+            const userData = await fetch(`${API_BASE_URL}/accounts`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${authToken}`,
                 }
-            } catch (error) {
-                console.error('Failed to fetch user data:', error);
-                return;
+            }).then(r => r.json()).then(data => data[0]);
+
+            if (!userData) throw new Error('No user data received');
+
+            // Add onboarding flag to user data
+            const userDataWithFlag = {
+                ...userData,
+                onboarded_via_signup: true
+            };
+            userResponseData = await fetch(cookiebot_account.ajax_url, {
+                method: 'POST',
+                body: createFormData('cookiebot_post_user_data', {
+                    data: JSON.stringify(userDataWithFlag)
+                }),
+                credentials: 'same-origin'
+            }).then(r => r.json());
+
+            if (!userResponseData.success) {
+                throw new Error('Failed to store user data');
             }
+        } catch (error) {
+            console.error('Failed to fetch user data:', error);
+            return;
         }
 
         if (userResponseData.data) {
