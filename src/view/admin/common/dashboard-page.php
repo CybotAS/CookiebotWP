@@ -39,11 +39,7 @@ $header->display();
 					</div>
 				</div>
 				<div class="upgrade-expired-trial">
-					<?php if ( isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ) : ?>
-					<a href="https://account.usercentrics.eu/subscription/<?php echo esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ); ?>/manage" target="_blank" style="text-decoration: none; color: inherit;">
-					<?php else : ?>
-					<a href="https://account.usercentrics.eu/subscription/manage" target="_blank" style="text-decoration: none; color: inherit;">
-					<?php endif; ?>
+					<a href="https://account.usercentrics.eu/subscription/<?php echo isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ? esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) . '/' : ''; ?>manage" target="_blank" style="text-decoration: none; color: inherit;">
 						<h3><?php echo esc_html__( 'Upgrade now', 'cookiebot' ); ?> <span class="upgrade-chevron">&rsaquo;</span></h3>
 					</a>
 				</div>
@@ -348,7 +344,7 @@ $header->display();
 										<p class="ready-text">Ready to take your consent experience to the next level?</p>
 
 										<div class="upgrade-container">
-											<button id="upgrade-now-button" class="cb-btn cb-primary-btn" onclick="window.open('https://account.usercentrics.eu/subscription/<?php echo isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ? esc_attr( $template_args['user_data']['subscriptions'][0]['subscription_id'] ) . '/' : ''; ?>manage', '_blank')">
+											<button id="upgrade-now-button" class="cb-btn cb-primary-btn" onclick="window.open('https://account.usercentrics.eu/subscription/<?php echo isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ? esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) . '/' : ''; ?>manage', '_blank')">
 												<?php echo esc_html__( 'Upgrade now', 'cookiebot' ); ?>
 											</button>
 										</div>

@@ -87,7 +87,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 			'preview_link'          => Cookiebot_WP::get_preview_link(),
 			'subscription'          => $subscription,
 			'legal_framework'       => $legal_framework,
-			'customize_banner_link' => 'https://admin.usercentrics.eu/#/v3/appearance/layout?settingsId=3KpF0k3NKsoLgT',
+			'customize_banner_link' => 'https://admin.usercentrics.eu/#/v3/appearance/layout?settingsId=' . $cbid,
 			'cookiebot_admin_link'  => 'https://admin.cookiebot.com',
 			'uc_admin_link'         => 'https://admin.usercentrics.eu',
 			'configure_banner_link' => 'https://support.usercentrics.com/hc/en-us/articles/18225055002908-WordPress-Plugin-FAQ',

@@ -1,5 +1,5 @@
 // const API_BASE_URL = 'https://api.ea.dev.usercentrics.cloud/v1';
-const API_BASE_URL = 'https://api.ea.prod.usercentrics.cloud';
+const API_BASE_URL = 'https://api.ea.prod.usercentrics.cloud/v1';
 let authToken = '';
 
 // Helper function to create FormData for AJAX calls
@@ -33,16 +33,6 @@ async function checkScanStatus(scanId) {
 
         const data = await response.json();
 
-        // Store both scan ID and status
-        await fetch(cookiebot_account.ajax_url, {
-            method: 'POST',
-            body: createFormData('cookiebot_store_scan_details', {
-                scan_id: scanId,
-                scan_status: 'IN_PROGRESS'
-            }),
-            credentials: 'same-origin'
-        });
-
         // If scan is still in progress and we don't have an interval set, start one
         scanCheckInterval = setInterval(() => checkScanStatus(scanId), 180000);
 
@@ -59,6 +49,16 @@ async function checkScanStatus(scanId) {
             scanCheckInterval = null;
             return;
         }
+
+           // Store both scan ID and status
+           await fetch(cookiebot_account.ajax_url, {
+            method: 'POST',
+            body: createFormData('cookiebot_store_scan_details', {
+                scan_id: scanId,
+                scan_status: 'IN_PROGRESS'
+            }),
+            credentials: 'same-origin'
+        });
 
         if (!response.ok) {
             clearInterval(scanCheckInterval);
@@ -146,7 +146,35 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (ucApiCode) {
 
             const isNewUser = urlParams.get('is_new_user');
-            
+
+            if (cookiebot_account.has_cbid) {
+                try {
+                    const response = await fetch(cookiebot_account.ajax_url, {
+                        method: 'POST',
+                        body: createFormData('cookiebot_process_auth_code', { code: ucApiCode }),
+                        credentials: 'same-origin'
+                    });
+    
+                    authToken = await fetch(cookiebot_account.ajax_url, {
+                        method: 'POST',
+                        body: createFormData('cookiebot_get_auth_token'),
+                        credentials: 'same-origin'
+                    }).then(r => r.json()).then(data => data.data);
+    
+                    console.log('user already exists just attaching new auth token', authToken);
+                    if (!response.ok) throw new Error(`Auth failed: ${response.status}`);
+                    const newUrl = new URL(window.location.href);
+                    newUrl.searchParams.delete('uc_api_code');
+                    newUrl.searchParams.delete('is_new_user');
+                    window.location.href = newUrl;  
+                    return;
+                } catch (error) {
+                    console.error('Failed to process authentication:', error);
+                    return;
+                }
+            }
+
+        
             if (isNewUser === 'false' && !cookiebot_account.has_user_data) {
                 const settingsUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot_settings';
                 window.location.href = settingsUrl;

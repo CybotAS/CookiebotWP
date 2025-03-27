@@ -19,7 +19,7 @@ $user_data     = Cookiebot_WP::get_user_data();
 $show_settings = $active_tab === 'settings' || empty( $user_data ) && ! empty( $cbid );
 $show_plugins  = ( ! $isnw && Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) || empty( $user_data );
 $show_debug    = ( ! $isnw && Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) || empty( $user_data );
-$feedback_url  = 'https://wordpress.org/support/plugin/cookiebot/reviews/#new-post';
+$feedback_url  = 'https://form.typeform.com/to/n6ZlunZP';
 
 ?>
 <div class="cb-main__tabs">

@@ -188,7 +188,7 @@ class Account_Service {
 		// Use POST request with code as query parameter
 		// $api_url = 'https://api.ea.dev.usercentrics.cloud/v1/auth/auth0/exchange?code=' . urlencode( $code );
 		// phpcs:ignore
-		$api_url = 'https://api.ea.prod.usercentrics.cloud/auth/auth0/exchange?code=' . urlencode( $code );
+		$api_url = 'https://api.ea.prod.usercentrics.cloud/v1/auth/auth0/exchange?code=' . urlencode( $code );
 
 		$response = wp_remote_post(
 			$api_url,

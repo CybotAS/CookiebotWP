@@ -50,7 +50,7 @@ $header->display();
 							<p class="cb-main__review__text">
 								<?php echo esc_html__( 'Are you happy with Usercentrics Cookiebot WordPress Plugin? Your feedback helps us improve it.', 'cookiebot' ); ?>
 							</p>
-							<a href="https://wordpress.org/support/plugin/cookiebot/reviews/#new-post" target="_blank"
+							<a href="https://form.typeform.com/to/n6ZlunZP" target="_blank"
 								class="cb-btn cb-link-btn" rel="noopener">
 								<?php echo esc_html__( 'Share feedback', 'cookiebot' ); ?>
 							</a>

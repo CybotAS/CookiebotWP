@@ -27,7 +27,7 @@ class Cookiebot_WP {
 		}
 	}
 
-	const COOKIEBOT_PLUGIN_VERSION  = '4.4.2';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.4.1';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -231,7 +231,7 @@ class Cookiebot_WP {
 		$raw_data = get_option( 'cookiebot-user-data', '' );
 
 		if ( empty( $raw_data ) ) {
-			self::debug_log_wp( 'Raw data is empty, returning Free' );
+			self::debug_log( 'Raw data is empty, returning Free' );
 			return 'Free';
 		}
 
@@ -240,7 +240,7 @@ class Cookiebot_WP {
 
 		// Check if we have the new subscription structure
 		if ( ! isset( $data['subscriptions']['active'] ) ) {
-			self::debug_log_wp( 'No active subscription found, returning Free' );
+			self::debug_log( 'No active subscription found, returning Free' );
 			return 'Free';
 		}
 

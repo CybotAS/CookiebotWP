@@ -3,7 +3,7 @@
 * Tags: WordPress cookie banner, GDPR, privacy compliance, cookie policy, cmp
 * Requires at least: 4.4
 * Tested up to: 6.7.1
-* Stable tag: 4.4.1
+* Stable tag: 4.4.2
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -284,6 +284,26 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
+
+### 4.5.0 ###
+Release date: March 27th 2025
+
+Cookiebot CMP version 4.5.0 is out! This release has some new features.
+
+####What's new####
+
+* New onboarding experience: set up a fully functional GDPR-compliant cookie banner in just a few steps
+* Automatic website scan: detects cookies and data processing services on your site right after account creation
+* Auto-blocking enabled by default: services are automatically blocked until valid consent is obtained — no manual setup required
+* Instant compliance: achieve GDPR compliance just by creating an account
+
+### 4.4.2 ###
+Release date: March 5th 2025
+
+Cookiebot CMP version 4.4.2 is out! This release adds a bugfix.
+
+####Bugfixes####
+* Fix security issue - improve authorization check on survey submission Props: [Peter Thaleikis](https://peterthaleikis.com/)
 
 ### 4.4.1 ###
 Release date: January 30th 2025

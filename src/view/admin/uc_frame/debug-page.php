@@ -36,7 +36,7 @@ $header->display();
 						);
 						?>
 					</button>
-					<div>
+					<!-- <div>
 						<button class="cb-btn" onclick="clearConfigData();">
 							<?php
 							esc_html_e(
@@ -53,7 +53,7 @@ $header->display();
 							);
 							?>
 						</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="cb-debug__support__card">
 					<div class="cb-debug__support__inner">
