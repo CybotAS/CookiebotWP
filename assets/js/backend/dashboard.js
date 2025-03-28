@@ -6,7 +6,6 @@ jQuery(document).ready(function($) {
             console.error(`Toggle element not found: ${toggleId}`);
             return;
         }
-        console.log(`Initializing toggle: ${toggleId}`);
 
         toggle.addEventListener('click', async function(event) {
             const isEnabled = this.checked;
@@ -58,8 +57,6 @@ jQuery(document).ready(function($) {
         });
     }
 
-    // Initialize toggles
-    console.log('Initializing toggles...');
     handleToggle('cookiebot-banner-enabled', 'cookiebot_set_banner_enabled', '1');
     handleToggle('cookiebot-gcm', 'cookiebot_set_gcm_enabled', '1');
 
