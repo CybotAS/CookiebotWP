@@ -1,10 +1,9 @@
 <?php
 
+use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\settings\templates\Header;
 use cybot\cookiebot\settings\templates\Main_Tabs;
 use cybot\cookiebot\settings\pages\Settings_Page;
-use function cybot\cookiebot\lib\cookiebot_is_trial_expired;
-use function cybot\cookiebot\lib\cookiebot_is_upgraded;
 
 /**
  * @var array $template_args Array containing all template variables
@@ -23,8 +22,9 @@ $header->display();
 	<div class="banner-container">
 		<!-- Trial expiration notice -->
 		<?php
-		$trial_expired = cookiebot_is_trial_expired();
-		$upgraded      = cookiebot_is_upgraded();
+		$trial_expired = Cookiebot_WP::is_trial_expired();
+		$upgraded      = Cookiebot_WP::has_upgraded();
+
 		if ( $trial_expired && ! $upgraded ) :
 			?>
 			<div class="header-top-banners trial-expired-banner">
@@ -34,13 +34,13 @@ $header->display();
 					<div>
 						<h3><?php echo esc_html__( 'Your premium trial is over', 'cookiebot' ); ?></h3>
 						<p>
-							<?php echo esc_html__( 'Your trial has ended, and advanced features are now disabled. You can still use your banner on the Free plan with a 1,000-session limit. Upgrade to Premium for a higher limit and full access to premium features.', 'cookiebot' ); ?>
+							<?php echo esc_html__( 'Reactive your banner to regain full access to your account and display the cookie banner on your website.', 'cookiebot' ); ?>
 						</p>
 					</div>
 				</div>
 				<div class="upgrade-expired-trial">
 					<a href="https://account.usercentrics.eu/subscription/<?php echo isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ? esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) . '/' : ''; ?>manage" target="_blank" style="text-decoration: none; color: inherit;">
-						<h3><?php echo esc_html__( 'Upgrade now', 'cookiebot' ); ?> <span class="upgrade-chevron">&rsaquo;</span></h3>
+						<h3><?php echo esc_html__( 'Reactivate banner', 'cookiebot' ); ?> <span class="upgrade-chevron">&rsaquo;</span></h3>
 					</a>
 				</div>
 			</div>
@@ -274,8 +274,7 @@ $header->display();
 								<div class="step-row">
 									<div class="step-icon">
 										<?php
-										$subscription_type = $template_args['subscription'];
-										$is_upgraded       = $subscription_type !== 'Free' && $subscription_type !== 'Premium trial';
+										$is_upgraded = Cookiebot_WP::has_upgraded();
 										if ( $is_upgraded ) :
 											?>
 											<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/check-mark.svg' ); ?>" alt="Checkmark">
@@ -390,6 +389,35 @@ $header->display();
 									</div>
 								</div>
 							</div>
+
+							<div class="option-divider"></div>
+
+							<!-- Auto blocking mode option -->
+							<div class="option-group">
+								<div class="option-label-wrapper">
+									<span class="option-label"><?php echo esc_html__( 'Auto blocking mode', 'cookiebot' ); ?></span>
+									<div class="tooltip">
+										<span class="tooltiptext">When active, automatically blocks data-processing services from loading without user consent, without requiring manual tagging of your scripts. Uses your scan results to prevent data collection without consent.</span>
+										<img class="img" src="<?php echo esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/info.svg' ); ?>" />
+									</div>
+								</div>
+								<div class="option-controls">
+									<div class="toggle-switch">
+										<input type="checkbox" id="cookiebot-uc-auto-blocking-mode" class="toggle-input"
+											value="1"
+											<?php
+											checked( 1, $template_args['auto_blocking_mode'] === '1' );
+											?>
+											 />
+										<label for="cookiebot-uc-auto-blocking-mode" class="toggle-label"></label>
+									</div>
+									<div class="label-wrapper status-badge <?php echo ! empty( $template_args['cbid'] ) && $template_args['auto_blocking_mode'] === '1' ? 'active' : ' inactive'; ?>" id="cookiebot-uc-auto-blocking-mode-badge">
+										<div class="label-2">
+												<?php echo ! empty( $template_args['cbid'] ) && $template_args['auto_blocking_mode'] === '1' ? esc_html__( 'Active', 'cookiebot' ) : esc_html__( 'Inactive', 'cookiebot' ); ?>
+										</div>
+									</div>
+								</div>
+							</div>
 	
 							<div class="option-divider"></div>
 	
@@ -399,7 +427,7 @@ $header->display();
 									<span class="option-label"><?php echo esc_html__( 'Google Consent Mode', 'cookiebot' ); ?></span>
 	
 									<div class="tooltip">
-										<span class="tooltiptext">Enable Google Consent Mode integration within your Usercentrics Cookiebot WordPress Plugin.</span>
+										<span class="tooltiptext">Enable Google Consent Mode to continue running remarketing campaigns and tracking conversions in Google Ads and Google Analytics. Required if you have visitors from the European Economic Area (EEA).</span>
 										<img class="img" src="<?php echo esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/info.svg' ); ?>" />
 									</div>
 	

@@ -13,6 +13,7 @@ class Cookiebot_Deactivated {
 	 */
 	public function run() {
 		$this->run_addons_deactivation_hooks();
+		$this->disable_banner();
 	}
 
 	/**
@@ -21,5 +22,9 @@ class Cookiebot_Deactivated {
 	private function run_addons_deactivation_hooks() {
 		$cookiebot_addons = Cookiebot_Addons::instance();
 		$cookiebot_addons->cookiebot_deactivated();
+	}
+
+	private function disable_banner() {
+		update_option( 'cookiebot-banner-enabled', '0' );
 	}
 }

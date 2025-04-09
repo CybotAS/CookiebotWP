@@ -56,17 +56,8 @@ if ( ! empty( $network_cbid ) ) {
 					if ( ! empty( $network_cbid ) && ! $network_cbid_override ) {
 						echo 'hidden';
 					}
-					if ( \cybot\cookiebot\lib\Cookiebot_WP::was_onboarded_via_signup() ) {
-						echo ' disabled';
-					}
 					?>
-					"
-					<?php
-					if ( \cybot\cookiebot\lib\Cookiebot_WP::was_onboarded_via_signup() ) {
-						echo ' style="opacity: 0.5; cursor: not-allowed;"';
-					}
-					?>
-					><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
+					"><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></div>
 				<?php if ( $is_ms ) : ?>
 					<div id="cookiebot-cbid-network-dialog"
 						class="cb-btn cb-white-btn

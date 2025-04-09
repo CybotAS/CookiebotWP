@@ -22,6 +22,7 @@ class Legacy_Settings {
 		'cookiebot-cookie-blocking-mode',
 		'cookiebot-iab',
 		'cookiebot-tcf-version',
+		'cookiebot-banner-enabled',
 		'cookiebot-tcf-purposes',
 		'cookiebot-tcf-special-purposes',
 		'cookiebot-tcf-features',

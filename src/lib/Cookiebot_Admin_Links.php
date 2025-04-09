@@ -85,8 +85,8 @@ class Cookiebot_Admin_Links {
 	private function add_menu_links() {
 		return array(
 			'cookiebot_upgrade' => array(
-				'url'       => Cookiebot_Frame::is_cb_frame_type() === true ? self::CB_FRAME_UPGRADE_URL : self::UC_FRAME_UPGRADE_URL,
-				'label'     => 'Upgrade a plan',
+				'url'       => add_query_arg( 'page', 'cookiebot', admin_url( 'admin.php' ) ),
+				'label'     => 'Get Started',
 				'override'  => false,
 				'condition' => false,
 			),
@@ -97,19 +97,11 @@ class Cookiebot_Admin_Links {
 		return array(
 			array(
 				'url'       => add_query_arg( 'page', 'cookiebot', admin_url( 'admin.php' ) ),
-				'label'     => 'Dashboard',
+				'label'     => 'Get Started',
 				'strong'    => false,
 				'override'  => false,
 				'condition' => false,
 				'index'     => 'dashboard',
-			),
-			array(
-				'url'       => Cookiebot_Frame::is_cb_frame_type() === true ? self::CB_FRAME_UPGRADE_URL : self::UC_FRAME_UPGRADE_URL,
-				'label'     => 'Upgrade your plan',
-				'strong'    => true,
-				'override'  => false,
-				'condition' => false,
-				'index'     => 'a',
 			),
 		);
 	}
@@ -132,7 +124,4 @@ class Cookiebot_Admin_Links {
 
 		return $link_html;
 	}
-
-	const CB_FRAME_UPGRADE_URL = 'https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner';
-	const UC_FRAME_UPGRADE_URL = 'https://account.usercentrics.eu/?trial=standard&uc_subscription_type=web&pricing_plan=FreeExtended&utm_source=wordpress&utm_medium=referral&utm_campaign=banner';
 }

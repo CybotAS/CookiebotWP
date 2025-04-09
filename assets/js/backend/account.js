@@ -1,4 +1,3 @@
-// const API_BASE_URL = 'https://api.ea.dev.usercentrics.cloud/v1';
 const API_BASE_URL = 'https://api.ea.prod.usercentrics.cloud/v1';
 let authToken = '';
 
@@ -16,11 +15,7 @@ const createFormData = (action, data = {}) => {
 };
 
 // Function to check scan status
-let scanCheckInterval = null;
-
 async function checkScanStatus(scanId) {
-    console.log('Checking scan status for scanId:', scanId);
-
     try {
         const response = await fetch(`${API_BASE_URL}/scan/${scanId}`, {
             method: 'GET',
@@ -33,9 +28,6 @@ async function checkScanStatus(scanId) {
 
         const data = await response.json();
 
-        // If scan is still in progress and we don't have an interval set, start one
-        scanCheckInterval = setInterval(() => checkScanStatus(scanId), 180000);
-
         if (data.status === 'DONE') {
             await fetch(cookiebot_account.ajax_url, {
                 method: 'POST',
@@ -45,8 +37,6 @@ async function checkScanStatus(scanId) {
                 }),
                 credentials: 'same-origin'
             });
-            clearInterval(scanCheckInterval);
-            scanCheckInterval = null;
             return;
         }
 
@@ -61,8 +51,6 @@ async function checkScanStatus(scanId) {
         });
 
         if (!response.ok) {
-            clearInterval(scanCheckInterval);
-            scanCheckInterval = null;
             await fetch(cookiebot_account.ajax_url, {
                 method: 'POST',
                 body: createFormData('cookiebot_store_scan_details', {
@@ -73,13 +61,13 @@ async function checkScanStatus(scanId) {
             });
         }
     } catch (error) {
-        console.log('Error checking scan status:', error);
+        console.error('Error checking scan status:', error);
     }
 }
 
 const checkUserData = async () => {
     try {
-        const userData = await fetch(`${API_BASE_URL}/accounts`, {
+        let userData = await fetch(`${API_BASE_URL}/accounts`, {
             headers: {
                 'Accept': 'application/json',
                 'Authorization': `Bearer ${authToken}`,
@@ -88,16 +76,11 @@ const checkUserData = async () => {
 
         if (!userData) throw new Error('No user data received');
 
-        // Add onboarding flag to user data
-        const userDataWithFlag = {
-            ...userData,
-            onboarded_via_signup: true
-        };
-        console.log('update user data', userDataWithFlag);
+        // Store user data
         userResponseData = await fetch(cookiebot_account.ajax_url, {
             method: 'POST',
             body: createFormData('cookiebot_post_user_data', {
-                data: JSON.stringify(userDataWithFlag)
+                data: JSON.stringify(userData)
             }),
             credentials: 'same-origin'
         }).then(r => r.json());
@@ -105,6 +88,8 @@ const checkUserData = async () => {
         if (!userResponseData.success) {
             throw new Error('Failed to store user data');
         }
+
+        return userResponseData;
     } catch (error) {
         console.error('Failed to fetch user data:', error);
         return;
@@ -119,6 +104,16 @@ const isAuthenticated = async () => {
                 'Authorization': `Bearer ${authToken}`
             }
         });
+        if (response.status === 401 && cookiebot_account.has_user_data) {
+            await fetch(cookiebot_account.ajax_url, {
+                method: 'POST',
+                body: createFormData('cookiebot_delete_auth_token'),
+                credentials: 'same-origin'
+            });
+            if (!window.prevent_default) {
+                window.location.reload();
+            }
+        }
         return response.status !== 401;
     } catch (error) {
         console.error('Failed to check authentication:', error);
@@ -163,10 +158,9 @@ async function fetchConfigurationDetails(configId) {
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const ucApiCode = urlParams.get('uc_api_code');
-
+    console.log('cookiebot_account.was_onboarded', cookiebot_account.was_onboarded);
     // For existing users, no account registration workflow is needed 
-    if (cookiebot_account.has_cbid && !cookiebot_account.has_user_data) {
-        console.log('Existing user');
+    if (cookiebot_account.has_cbid && !cookiebot_account.has_user_data && !cookiebot_account.was_onboarded) {
         return;
     }
 
@@ -195,7 +189,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                         credentials: 'same-origin'
                     }).then(r => r.json()).then(data => data.data);
 
-                    console.log('user already exists just attaching new auth token', authToken);
                     if (!response.ok) throw new Error(`Auth failed: ${response.status}`);
                     const newUrl = new URL(window.location.href);
                     newUrl.searchParams.delete('uc_api_code');
@@ -210,6 +203,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
             if (isNewUser === 'false' && !cookiebot_account.has_user_data) {
+                await fetch(cookiebot_account.ajax_url, {
+                    method: 'POST',
+                    body: createFormData('cookiebot_process_auth_code', { code: ucApiCode }),
+                    credentials: 'same-origin'
+                });
                 const settingsUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot_settings';
                 window.location.href = settingsUrl;
                 return;
@@ -267,12 +265,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        if (!isAuthenticatedCondition && cookiebot_account.has_user_data) {
-            console.log('user data exists and is not authenticated');
-            const callbackUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot';
-            window.location.href = `${API_BASE_URL}/auth/auth0/authorize?origin=wordpress_plugin&callback_domain=${encodeURIComponent(callbackUrl)}`;
-
-        }
+        // if (!isAuthenticatedCondition && cookiebot_account.has_user_data) {
+        //     const callbackUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot';
+        //     window.location.href = `${API_BASE_URL}/auth/auth0/authorize?origin=wordpress_plugin&callback_domain=${encodeURIComponent(callbackUrl)}`;
+        // }
 
         if (!cbid) {
             try {
@@ -288,8 +284,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                         'Authorization': `Bearer ${authToken}`
                     },
                     body: JSON.stringify({
-                        configuration_name: "My CMP Configuration",
-                        data_controller: "Usercentrics Unipessoal, LDA",
+                        configuration_name: "",
+                        data_controller: "",
                         legal_framework_template: "gdpr",
                         domains: [formattedDomain]
                     })
@@ -324,7 +320,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (!scanResponse.ok) throw new Error(`Scan initiation failed: ${scanResponse.status}`);
 
                 const scanData = await scanResponse.json();
-                console.log('Scan response:', scanData); // Add logging to debug
 
                 // Check for scan ID in different possible response structures
                 const scanId = scanData?.scan?.scan_id || scanData?.scan_id || scanData?.id;
@@ -353,6 +348,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
         } else {
+            console.log('cai no else', cbid);
             // If we already have a CBID, check if there's an ongoing scan
             const scanDetails = await fetch(cookiebot_account.ajax_url, {
                 method: 'POST',
@@ -365,6 +361,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             // And fetch configuration details 
             await fetchConfigurationDetails(cbid);
+            console.log('cbid indo para o checkUserData', cbid);
+            await checkUserData();
         }
 
         // Check and fetch user data if needed
@@ -375,7 +373,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }).then(r => r.json());
 
         try {
-            const userData = await fetch(`${API_BASE_URL}/accounts`, {
+            let userData = await fetch(`${API_BASE_URL}/accounts`, {
                 headers: {
                     'Accept': 'application/json',
                     'Authorization': `Bearer ${authToken}`,
@@ -384,15 +382,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (!userData) throw new Error('No user data received');
 
-            // Add onboarding flag to user data
-            const userDataWithFlag = {
-                ...userData,
-                onboarded_via_signup: true
-            };
+            // Store user data
             userResponseData = await fetch(cookiebot_account.ajax_url, {
                 method: 'POST',
                 body: createFormData('cookiebot_post_user_data', {
-                    data: JSON.stringify(userDataWithFlag)
+                    data: JSON.stringify(userData)
                 }),
                 credentials: 'same-origin'
             }).then(r => r.json());
@@ -400,6 +394,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (!userResponseData.success) {
                 throw new Error('Failed to store user data');
             }
+
+            // Store onboarding status separately
+            await fetch(cookiebot_account.ajax_url, {
+                method: 'POST',
+                body: createFormData('cookiebot_store_onboarding_status', {
+                    onboarded: true
+                }),
+                credentials: 'same-origin'
+            });
+
         } catch (error) {
             console.error('Failed to fetch user data:', error);
             return;
@@ -435,7 +439,6 @@ document.getElementById('banner-close-btn')?.addEventListener('click', async () 
 document.getElementById('get-started-button')?.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
-
         // If multisite is enabled the url might include also the directory for the site
         // e.g.: http://domain/site1/wp-admin/admin.php?page=cookiebot
         const callbackUrl = window.location.href.substring(0, window.location.href.indexOf('/wp-admin')) + '/wp-admin/admin.php?page=cookiebot';

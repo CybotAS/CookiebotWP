@@ -97,11 +97,11 @@
 }
 
 .upgrade-chevron {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-left: 0.5rem;
     line-height: 1;
     display: inline-block;
-    transform: translateY(1px);
+    /* transform: translateY(1px); */
 }
 
 .dashboard-grid {
@@ -569,6 +569,17 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.option-group .option-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.option-group .tooltip {
+    margin-left: 0px;
+    margin-bottom: -3.5px;
 }
 
 .option-controls {
