@@ -28,6 +28,19 @@ class Menu_Settings {
 
 		// Register settings
 		add_action( 'admin_init', array( $this, 'register_cookiebot_settings' ) );
+		add_action( 'register_setting', array( $this, 'set_blocking_mode_to_auto' ), 10, 3 );
+	}
+
+	public function set_blocking_mode_to_auto( $option_group, $option_name, $args ) {
+		if ( $option_name === 'cookiebot-cbid' ) {
+			$cbid = get_option( 'cookiebot-cbid' );
+			// If the account was disconnected (empty CBID) set blocking mode to 'auto' and 'Hide cookie popup' to false.
+			// Later, if the account is re-connected, the banner will be visible by default.
+			if ( empty( $cbid ) ) {
+				update_site_option( 'cookiebot-nooutput', '' );
+				update_site_option( 'cookiebot-cookie-blocking-mode', 'auto' );
+			}
+		}
 	}
 
 	public function load_menu() {
@@ -55,7 +68,7 @@ class Menu_Settings {
 		register_setting( 'cookiebot', 'cookiebot-front-language' );
 		register_setting( 'cookiebot', 'cookiebot-nooutput' );
 		register_setting( 'cookiebot', 'cookiebot-nooutput-admin' );
-		register_setting( 'cookiebot', 'cookiebot-output-logged-in' );
+		register_setting( 'cookiebot', 'cookiebot-banner-enabled' );
 		register_setting( 'cookiebot', 'cookiebot-ignore-scripts' );
 		register_setting( 'cookiebot', 'cookiebot-autoupdate' );
 		register_setting( 'cookiebot', 'cookiebot-script-tag-uc-attribute' );

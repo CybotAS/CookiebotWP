@@ -39,6 +39,7 @@ class Account_Service {
 		add_action( 'wp_ajax_cookiebot_get_auth_token', array( $this, 'ajax_get_auth_token' ) );
 		add_action( 'wp_ajax_cookiebot_set_gcm_enabled', array( $this, 'ajax_set_gcm_enabled' ) );
 		add_action( 'wp_ajax_cookiebot_set_banner_enabled', array( $this, 'ajax_set_banner_enabled' ) );
+		add_action( 'wp_ajax_cookiebot_set_auto_blocking_mode', array( $this, 'ajax_set_auto_blocking_mode' ) );
 		add_action( 'wp_ajax_cookiebot_process_auth_code', array( $this, 'ajax_process_auth_code' ) );
 		add_action( 'wp_ajax_cookiebot_dismiss_banner', array( $this, 'ajax_dismiss_banner' ) );
 		add_action( 'wp_ajax_cookiebot_post_user_data', array( $this, 'ajax_post_user_data' ) );
@@ -47,6 +48,8 @@ class Account_Service {
 		add_action( 'wp_ajax_cookiebot_store_configuration', array( $this, 'ajax_store_configuration' ) );
 		add_action( 'wp_ajax_cookiebot_clear_config_data', array( $this, 'ajax_clear_config_data' ) );
 		add_action( 'wp_ajax_cookiebot_clear_config_data_keep_cbid', array( $this, 'ajax_clear_config_data_keep_cbid' ) );
+		add_action( 'wp_ajax_cookiebot_delete_auth_token', array( $this, 'ajax_delete_auth_token' ) );
+		add_action( 'wp_ajax_cookiebot_store_onboarding_status', array( $this, 'ajax_store_onboarding_status' ) );
 	}
 
 	public function cookiebot_admin_script( $hook ) {
@@ -54,23 +57,51 @@ class Account_Service {
 			return;
 		}
 
-		wp_enqueue_script(
-			'cookiebot-account-js',
-			CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account.js',
-			array(),
-			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
-			true
-		);
+		$is_authenticated = ! empty( Cookiebot_WP::get_auth_token() );
+		$cbid             = Cookiebot_WP::get_cbid();
+		$user_data        = Cookiebot_WP::get_user_data();
+		$was_onboarded    = Cookiebot_WP::was_onboarded_via_signup();
 
-		wp_localize_script(
-			'cookiebot-account-js',
-			'cookiebot_account',
-			array(
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( 'cookiebot-account' ),
-				'debug'    => true,
-			)
-		);
+		if ( ! $is_authenticated && ! empty( $cbid ) && ! empty( $user_data ) && ! empty( $was_onboarded ) ) {
+			wp_enqueue_script(
+				'cookiebot-account-static-js',
+				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account-static.js',
+				array( 'jquery' ),
+				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+				true
+			);
+
+			wp_localize_script(
+				'cookiebot-account-static-js',
+				'cookiebot_account',
+				array(
+					'ajax_url'          => admin_url( 'admin-ajax.php' ),
+					'nonce'             => wp_create_nonce( 'cookiebot-account' ),
+					'has_user_data'     => ! empty( $user_data ),
+					'has_cbid'          => ! empty( $cbid ),
+					'debug'             => defined( 'WP_DEBUG' ) && WP_DEBUG,
+					'auth_expired_flow' => true,
+				)
+			);
+		} else {
+			wp_enqueue_script(
+				'cookiebot-account-js',
+				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account.js',
+				array(),
+				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+				true
+			);
+
+			wp_localize_script(
+				'cookiebot-account-js',
+				'cookiebot_account',
+				array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'nonce'    => wp_create_nonce( 'cookiebot-account' ),
+					'debug'    => true,
+				)
+			);
+		}
 	}
 
 	public function ajax_store_cbid() {
@@ -104,9 +135,6 @@ class Account_Service {
 		}
 
 		$data = json_decode( $raw_data, true );
-
-		// Add onboarding flag
-		$data['onboarded_via_signup'] = true;
 		update_option( 'cookiebot-user-data', $data );
 
 		wp_send_json_success( array( 'message' => 'User data stored successfully' ) );
@@ -137,6 +165,24 @@ class Account_Service {
 
 		// Save option value
 		update_option( 'cookiebot-banner-enabled', $value );
+		wp_send_json_success();
+	}
+
+	public function ajax_set_auto_blocking_mode() {
+		if ( ! check_ajax_referer( 'cookiebot-account', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( 'Unauthorized', 401 );
+			return;
+		}
+
+		$value = isset( $_POST['value'] ) ? trim( $_POST['value'] ) : '';
+
+		// Save option value
+		update_option( 'cookiebot-uc-auto-blocking-mode', $value );
+		wp_send_json_success();
+	}
+
+	public function ajax_delete_auth_token() {
+		delete_option( 'cookiebot-auth-token' );
 		wp_send_json_success();
 	}
 
@@ -186,7 +232,6 @@ class Account_Service {
 		}
 
 		// Use POST request with code as query parameter
-		// $api_url = 'https://api.ea.dev.usercentrics.cloud/v1/auth/auth0/exchange?code=' . urlencode( $code );
 		// phpcs:ignore
 		$api_url = 'https://api.ea.prod.usercentrics.cloud/v1/auth/auth0/exchange?code=' . urlencode( $code );
 
@@ -307,5 +352,17 @@ class Account_Service {
 		delete_option( 'cookiebot-banner-enabled' );
 		delete_option( 'cookiebot_banner_live_dismissed' );
 		wp_send_json_success();
+	}
+
+	public function ajax_store_onboarding_status() {
+		if ( ! check_ajax_referer( 'cookiebot-account', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( 'Unauthorized', 401 );
+			return;
+		}
+
+		$onboarded = isset( $_POST['onboarded'] ) ? (bool) $_POST['onboarded'] : false;
+		update_option( 'cookiebot-uc-onboarded-via-signup', $onboarded );
+
+		wp_send_json_success( array( 'message' => 'Onboarding status stored successfully' ) );
 	}
 }

@@ -15,8 +15,6 @@ jQuery(document).ready(function($) {
                 console.error(`Badge element not found: ${badgeId}`);
             }
             
-            console.log(`Toggle ${toggleId} clicked. New state:`, isEnabled);
-            
             try {
                 const response = await $.ajax({
                     url: cookiebot_account.ajax_url,
@@ -28,8 +26,6 @@ jQuery(document).ready(function($) {
                     }
                 });
 
-                console.log(`Toggle ${toggleId} response:`, response);
-
                 if (!response.success) {
                     throw new Error(response.data || `Failed to update ${toggleId} status`);
                 }
@@ -38,12 +34,8 @@ jQuery(document).ready(function($) {
                 if (badge) {
                     badge.className = `label-wrapper status-badge ${isEnabled ? 'active' : 'inactive'}`;
                     badge.querySelector('.label-2').textContent = isEnabled ? 'Active' : 'Inactive';
-                    console.log(`Updated badge for ${toggleId}. New state:`, isEnabled ? 'active' : 'inactive');
                 }
 
-                if (cookiebot_account.debug) {
-                    console.log(`${toggleId} toggle response:`, response);
-                }
             } catch (error) {
                 console.error(`Failed to toggle ${toggleId}:`, error);
                 this.checked = !isEnabled;
@@ -51,13 +43,13 @@ jQuery(document).ready(function($) {
                 if (badge) {
                     badge.className = `label-wrapper status-badge ${!isEnabled ? 'active' : 'inactive'}`;
                     badge.querySelector('.label-2').textContent = !isEnabled ? 'Active' : 'Inactive';
-                    console.log(`Reverted badge for ${toggleId}. State:`, !isEnabled ? 'active' : 'inactive');
                 }
             }
         });
     }
 
     handleToggle('cookiebot-banner-enabled', 'cookiebot_set_banner_enabled', '1');
+    handleToggle('cookiebot-uc-auto-blocking-mode', 'cookiebot_set_auto_blocking_mode', '1');
     handleToggle('cookiebot-gcm', 'cookiebot_set_gcm_enabled', '1');
 
     // Handle expand/collapse

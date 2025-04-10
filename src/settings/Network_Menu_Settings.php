@@ -97,7 +97,7 @@ class Network_Menu_Settings {
 		);
 		update_site_option(
 			'cookiebot-cookie-blocking-mode',
-			! empty( $_POST['cookiebot-cookie-blocking-mode'] ) ? $_POST['cookiebot-cookie-blocking-mode'] : ''
+			! empty( $_POST['cookiebot-cookie-blocking-mode'] ) ? $_POST['cookiebot-cookie-blocking-mode'] : 'auto'
 		);
 
 		wp_safe_redirect(
@@ -120,7 +120,7 @@ class Network_Menu_Settings {
 	 * @version 2.2.0
 	 */
 	public function display() {
-		$cbm = get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
+		$cbm = get_site_option( 'cookiebot-cookie-blocking-mode', 'auto' );
 
 		wp_enqueue_script(
 			'cookiebot-network-settings-page-js',

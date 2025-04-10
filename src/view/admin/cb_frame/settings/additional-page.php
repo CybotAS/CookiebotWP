@@ -34,28 +34,28 @@
 <div class="cb-settings__config__item">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
-			<?php esc_html_e( 'Show the banner while logged in', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Show banner on site', 'cookiebot' ); ?>
 		</h3>
 		<p class="cb-general__info__text">
-			<?php esc_html_e( 'You can choose to display the consent banner on your website while you’re logged in and changing settings or customizing your banner.', 'cookiebot' ); ?>
+			<?php esc_html_e( 'You can choose to display or hide the consent banner on your website.', 'cookiebot' ); ?>
 		</p>
 	</div>
 	<div class="cb-settings__config__data">
 		<div class="cb-settings__config__data__inner">
-			<label class="switch-checkbox" for="cookiebot-output-logged-in">
+			<label class="switch-checkbox" for="cookiebot-banner-enabled">
 				<?php
 				$disabled = false;
-				if ( $is_ms && get_site_option( 'cookiebot-output-logged-in' ) ) {
+				if ( $is_ms && get_site_option( 'cookiebot-banner-enabled' ) ) {
 					echo '<input type="checkbox" checked disabled />';
 					$disabled = true;
 				} else {
 					?>
-					<input id="cookiebot-output-logged-in" type="checkbox"
-							name="cookiebot-output-logged-in" value="1"
+					<input id="cookiebot-banner-enabled" type="checkbox"
+							name="cookiebot-banner-enabled" value="1"
 						<?php
 						checked(
 							1,
-							get_option( 'cookiebot-output-logged-in', false )
+							get_option( 'cookiebot-banner-enabled', false )
 						);
 						?>
 					/>
@@ -63,7 +63,7 @@
 				}
 				?>
 				<div class="switcher"></div>
-				<?php esc_html_e( 'Show banner on website when logged in', 'cookiebot' ); ?>
+				<?php esc_html_e( 'Show banner on site', 'cookiebot' ); ?>
 			</label>
 		</div>
 	</div>

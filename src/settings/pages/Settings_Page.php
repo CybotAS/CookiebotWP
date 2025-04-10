@@ -19,18 +19,20 @@ class Settings_Page implements Settings_Page_Interface {
 	const ADMIN_SLUG = 'cookiebot_settings';
 
 	public function menu() {
-		add_submenu_page(
-			'cookiebot',
-			__( 'Cookiebot Settings', 'cookiebot' ),
-			__( 'Settings', 'cookiebot' ),
-			'manage_options',
-			self::ADMIN_SLUG,
-			array(
-				$this,
-				'display',
-			),
-			2
-		);
+		if ( ! Cookiebot_WP::get_user_data() ) {
+			add_submenu_page(
+				'cookiebot',
+				__( 'Cookiebot Settings', 'cookiebot' ),
+				__( 'Settings', 'cookiebot' ),
+				'manage_options',
+				self::ADMIN_SLUG,
+				array(
+					$this,
+					'display',
+				),
+				2
+			);
+		}
 	}
 
 	/**

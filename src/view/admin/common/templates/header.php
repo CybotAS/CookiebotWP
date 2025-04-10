@@ -6,8 +6,25 @@
  * @var int $days_left
  */
 
+use cybot\cookiebot\settings\pages\Settings_Page;
+use cybot\cookiebot\settings\pages\Support_Page;
+use cybot\cookiebot\settings\pages\Debug_Page;
+use cybot\cookiebot\settings\pages\Plugins_Page;
 use cybot\cookiebot\lib\Cookiebot_WP;
-use function cybot\cookiebot\lib\cookiebot_is_trial_expired;
+use cybot\cookiebot\settings\templates\Main_Tabs;
+
+/**
+ * @var array $template_args Array containing all template variables
+ */
+
+$main_tabs = new Main_Tabs();
+
+$cbid             = Cookiebot_WP::get_cbid();
+$user_data        = Cookiebot_WP::get_user_data();
+$trial_expired    = Cookiebot_WP::is_trial_expired();
+$upgraded         = Cookiebot_WP::has_upgraded();
+$days_left        = Cookiebot_WP::get_trial_days_left();
+$is_authenticated = ! empty( Cookiebot_WP::get_auth_token() );
 
 ?>
 <?php
@@ -17,11 +34,8 @@ if ( ! empty( $_GET['settings-updated'] ) ) :
 	<div class="cb-submit__msg"><?php esc_html_e( 'Changes has been saved', 'cookiebot' ); ?></div>
 <?php endif; ?>
 <?php
-$cbid          = Cookiebot_WP::get_cbid();
-$user_data     = Cookiebot_WP::get_user_data();
-$trial_expired = cookiebot_is_trial_expired();
 
-if ( ! $trial_expired && ! empty( $user_data ) ) :
+if ( Cookiebot_WP::is_in_trial() && ! $trial_expired && $is_authenticated ) :
 	?>
 	<div class="trial-banner">
 		<div class="trial-info">

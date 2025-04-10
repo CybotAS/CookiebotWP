@@ -20,7 +20,6 @@ if ( ! defined( 'CYBOT_COOKIEBOT_VERSION' ) ) {
 
 class Cookiebot_WP {
 
-
 	public static function debug_log( $message ) {
 		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 			// phpcs:ignore
@@ -28,7 +27,7 @@ class Cookiebot_WP {
 		}
 	}
 
-	const COOKIEBOT_PLUGIN_VERSION  = '4.5.2';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.5.3';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -69,8 +68,8 @@ class Cookiebot_WP {
 	public function __construct() {
 		$this->throw_exception_if_php_version_is_incompatible();
 		$this->cookiebot_init();
-		register_activation_hook( __FILE__, array( new Cookiebot_Activated(), 'run' ) );
-		register_deactivation_hook( __FILE__, array( new Cookiebot_Deactivated(), 'run' ) );
+		register_activation_hook( CYBOT_COOKIEBOT_PLUGIN_DIR . 'cookiebot.php', array( new Cookiebot_Activated(), 'run' ) );
+		register_deactivation_hook( CYBOT_COOKIEBOT_PLUGIN_DIR . 'cookiebot.php', array( new Cookiebot_Deactivated(), 'run' ) );
 
 		// Initialize services
 		$this->account_service = new Account_Service();
@@ -177,8 +176,7 @@ class Cookiebot_WP {
 	 * @return bool
 	 */
 	public static function was_onboarded_via_signup() {
-		$user_data = self::get_user_data();
-		return ! empty( $user_data ) && isset( $user_data['onboarded_via_signup'] ) && $user_data['onboarded_via_signup'] === true;
+		return (bool) get_option( 'cookiebot-uc-onboarded-via-signup', false );
 	}
 
 	public static function get_scan_status() {
@@ -201,6 +199,15 @@ class Cookiebot_WP {
 		if ( $enabled === 'default' ) {
 			$enabled = '1';
 			update_option( 'cookiebot-banner-enabled', $enabled );
+		}
+		return $enabled;
+	}
+
+	public static function get_auto_blocking_mode() {
+		$enabled = get_option( 'cookiebot-uc-auto-blocking-mode', 'default' );
+		if ( $enabled === 'default' ) {
+			$enabled = '1';
+			update_option( 'cookiebot-uc-auto-blocking-mode', $enabled );
 		}
 		return $enabled;
 	}
@@ -292,12 +299,12 @@ class Cookiebot_WP {
 	 */
 	public static function get_cookie_blocking_mode() {
 		$allowed_modes   = array( 'auto', 'manual' );
-		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
+		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode', 'auto' );
 		$setting         = $network_setting === 'manual' ?
 			(string) get_option( 'cookiebot-cookie-blocking-mode', $network_setting ) :
 			$network_setting;
 
-		return in_array( $setting, $allowed_modes, true ) ? $setting : 'manual';
+		return in_array( $setting, $allowed_modes, true ) ? $setting : 'auto';
 	}
 
 	/**
@@ -354,6 +361,7 @@ class Cookiebot_WP {
 		$options = array(
 			'cookiebot-nooutput-admin' => '1',
 			'cookiebot-gcm'            => '1',
+			'cookiebot-banner-enabled' => '1',
 		);
 
 		foreach ( $options as $option => $default ) {
@@ -509,66 +517,20 @@ class Cookiebot_WP {
 		// Banner enabled check
 		$banner_enabled = get_option( 'cookiebot-banner-enabled', '1' );
 		self::debug_log( 'Banner enabled setting: ' . $banner_enabled );
-		if ( $banner_enabled === '0' ) {
+		if ( $banner_enabled !== '1' ) {
 			self::debug_log( 'get_banner_script: Banner disabled in settings' );
 			return '';
 		}
 
 		// User verification and trial checks
-		$user_data = get_option( 'cookiebot-user-data', array() );
+		$user_data = self::get_user_data();
 
-		if ( ! empty( $user_data ) ) {
-			// Check unverified user trial
-			if ( isset( $user_data['email_verification_status'] ) &&
-				$user_data['email_verification_status'] === 'unverified' &&
-				isset( $user_data['trial_start_date'] ) ) {
-				self::debug_log( 'Checking unverified user trial...' );
-				self::debug_log( 'Trial start date: ' . $user_data['trial_start_date'] );
-				$trial_start = \DateTime::createFromFormat( 'd-m-Y H:i:s', str_replace( ' T', ' ', $user_data['trial_start_date'] ) );
-				$trial_end   = clone $trial_start;
-				$trial_end   = $trial_end->modify( '+14 days' );
-				self::debug_log( 'Trial end date: ' . $trial_end->format( 'Y-m-d H:i:s' ) );
-				if ( $trial_start && new \DateTime() > $trial_end ) {
-					self::debug_log( 'get_banner_script: Unverified user trial expired' );
-					return '';
-				}
-			}
-
-			// Check trial status
-			if ( isset( $user_data['subscription_status'] ) &&
-				$user_data['subscription_status'] === 'in_trial_non_billable' &&
-				isset( $user_data['trial_end_date'] ) ) {
-				self::debug_log( 'Checking trial status...' );
-				self::debug_log( 'Trial end date: ' . $user_data['trial_end_date'] );
-				$trial_end = \DateTime::createFromFormat( 'd-m-Y H:i:s', str_replace( ' T', ' ', $user_data['trial_end_date'] ) );
-				if ( $trial_end && new \DateTime() > $trial_end ) {
-					self::debug_log( 'get_banner_script: Trial period ended' );
-					return '';
-				}
-			}
-		}
-
-		// Output conditions check
-		$is_multisite     = is_multisite();
-		$network_nooutput = $is_multisite ? get_site_option( 'cookiebot-nooutput', false ) : false;
-		$site_nooutput    = get_option( 'cookiebot-nooutput', false );
-		$can_edit_theme   = self::can_current_user_edit_theme();
-		$output_logged_in = get_option( 'cookiebot-output-logged-in' );
-
-		self::debug_log( 'Output conditions:' );
-		self::debug_log( 'Is multisite: ' . ( $is_multisite ? 'yes' : 'no' ) );
-		self::debug_log( 'Network nooutput: ' . ( $network_nooutput ? 'yes' : 'no' ) );
-		self::debug_log( 'Site nooutput: ' . ( $site_nooutput ? 'yes' : 'no' ) );
-		self::debug_log( 'Can edit theme: ' . ( $can_edit_theme ? 'yes' : 'no' ) );
-		self::debug_log( 'Output logged in: ' . ( $output_logged_in ? 'yes' : 'no' ) );
-
-		if ( $is_multisite && $network_nooutput ||
-			$site_nooutput ||
-			( $can_edit_theme && ! $output_logged_in ) ) {
-			self::debug_log( 'get_banner_script: Output conditions not met' );
+		if ( ! empty( $user_data ) && self::is_trial_expired() ) {
+			self::debug_log( 'get_banner_script: Trial expired' );
 			return '';
 		}
 
+		// Output conditions check
 		self::debug_log( 'get_banner_script: Generating dynamic script' );
 
 		// Build the script HTML
@@ -587,10 +549,16 @@ class Cookiebot_WP {
 		}
 
 		// Add autoblocker if auto mode is enabled
-		$blocking_mode = self::get_cookie_blocking_mode();
+		$blocking_mode           = get_option( 'cookiebot-uc-auto-blocking-mode', '1' );
+		$blocking_mode_cookiebot = get_option( 'cookiebot-cookie-blocking-mode', 'auto' );
+
+		if ( $blocking_mode === '0' || $blocking_mode_cookiebot === 'manual' ) {
+			$blocking_mode = '0';
+		}
+
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 		self::debug_log( 'Blocking mode: ' . $blocking_mode );
-		if ( $blocking_mode === 'auto' ) {
+		if ( $blocking_mode === '1' ) {
 			// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 			$script_html .= sprintf(
 				'<script src="%s"></script>',
@@ -609,5 +577,192 @@ class Cookiebot_WP {
 
 		self::debug_log( 'Final script HTML: ' . $script_html );
 		return $script_html;
+	}
+
+	/**
+	 * Check if the trial has expired by checking various conditions
+	 *
+	 * @return bool True if trial has expired, false otherwise
+	 */
+	public static function is_trial_expired() {
+		$user_data = self::get_user_data();
+
+		if ( empty( $user_data ) ) {
+			self::debug_log( 'is_trial_expired: No user data found' );
+			return false;
+		}
+
+		// Check if there's an active subscription
+		if ( isset( $user_data['subscriptions']['active'] ) ) {
+			$active_subscription = $user_data['subscriptions']['active'];
+
+			// Check subscription status
+			if ( isset( $active_subscription['subscription_status'] ) ) {
+				$status = $active_subscription['subscription_status'];
+				self::debug_log( 'is_trial_expired: Subscription status: ' . $status );
+
+				// For trial statuses, check the trial period
+				if ( in_array( $status, array( 'trial_will_be_billed', 'trial_missing_payment' ), true ) ) {
+					if ( isset( $active_subscription['trial_end_date'] ) && ! empty( $active_subscription['trial_end_date'] ) ) {
+						$trial_end = \DateTime::createFromFormat( 'Y-m-d\TH:i:s.000\Z', $active_subscription['trial_end_date'] );
+
+						if ( $trial_end === false ) {
+							self::debug_log( 'is_trial_expired: Failed to parse trial end date' );
+							return false;
+						}
+
+						$now      = new \DateTime();
+						$interval = $now->diff( $trial_end );
+
+						// If the interval is negative (past the end date) or zero, the trial has expired
+						$is_expired = $interval->invert || $interval->days === 0;
+						self::debug_log( 'is_trial_expired: Is expired? ' . ( $is_expired ? 'yes' : 'no' ) );
+						return $is_expired;
+					}
+				}
+
+				// For active subscriptions, check if it's a trial plan
+				if ( in_array( $status, array( 'active_auto_renew', 'active_no_renew' ), true ) ) {
+					// Not a trial subscription
+					self::debug_log( 'is_trial_expired: Active subscription - not a trial' );
+					return false;
+				}
+
+				// Cancelled subscriptions are considered expired
+				if ( $status === 'cancelled' ) {
+					self::debug_log( 'is_trial_expired: Cancelled subscription - expired' );
+					return true;
+				}
+			}
+		}
+
+		// If we get here and subscription type is Free, consider trial as expired
+		$subscription_type = self::get_subscription_type();
+		if ( $subscription_type === 'Free' ) {
+			self::debug_log( 'is_trial_expired: Free subscription - considered expired' );
+			return true;
+		}
+
+		self::debug_log( 'is_trial_expired: Default case - not expired' );
+		return false;
+	}
+
+	/**
+	 * Check if the user has upgraded from the free plan
+	 *
+	 * @return bool
+	 */
+	public static function has_upgraded() {
+		$user_data = get_option( 'cookiebot-user-data' );
+
+		if ( ! isset( $user_data['subscriptions']['active'] ) ) {
+			return false;
+		}
+
+		$active_subscription = $user_data['subscriptions']['active'];
+		$status              = isset( $active_subscription['subscription_status'] ) ? $active_subscription['subscription_status'] : '';
+		$price_plan          = isset( $active_subscription['price_plan'] ) ? $active_subscription['price_plan'] : '';
+
+		if ( empty( $price_plan ) ) {
+			return false;
+		}
+
+		// Check if the subscription is active (not trial or cancelled)
+		if ( in_array( $status, array( 'active_auto_renew', 'active_no_renew' ), true ) ) {
+			// Map extended plan names to their base names
+			$plan_mapping = array(
+				'FreeExtended'      => 'Free',
+				'EssentialExtended' => 'Essential',
+				'PlusExtended'      => 'Plus',
+				'ProExtended'       => 'Pro',
+				'BusinessExtended'  => 'Business',
+			);
+
+			$base_plan = isset( $plan_mapping[ $price_plan ] ) ? $plan_mapping[ $price_plan ] : $price_plan;
+			return $base_plan !== 'Free';
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get the number of days left in the trial period
+	 *
+	 * @return int Number of days left in the trial, or 0 if trial has expired or no trial exists
+	 */
+	public static function get_trial_days_left() {
+		$user_data = self::get_user_data();
+
+		if ( empty( $user_data ) ) {
+			self::debug_log( 'get_trial_days_left: No user data found' );
+			return 0;
+		}
+
+		// Check if there's an active subscription
+		if ( isset( $user_data['subscriptions']['active'] ) ) {
+			$active_subscription = $user_data['subscriptions']['active'];
+
+			// Check subscription status
+			if ( isset( $active_subscription['subscription_status'] ) ) {
+				$status = $active_subscription['subscription_status'];
+				self::debug_log( 'get_trial_days_left: Subscription status: ' . $status );
+
+				// For trial statuses, calculate days left until trial_end_date
+				if ( in_array( $status, array( 'trial_will_be_billed', 'trial_missing_payment' ), true ) ) {
+					if ( isset( $active_subscription['trial_end_date'] ) && ! empty( $active_subscription['trial_end_date'] ) ) {
+						$trial_end = \DateTime::createFromFormat( 'Y-m-d\TH:i:s.000\Z', $active_subscription['trial_end_date'] );
+
+						if ( $trial_end === false ) {
+							self::debug_log( 'get_trial_days_left: Failed to parse trial end date' );
+							return 0;
+						}
+
+						$now      = new \DateTime();
+						$interval = $now->diff( $trial_end );
+
+						// If the interval is negative (past the end date), return 0
+						if ( $interval->invert ) {
+							self::debug_log( 'get_trial_days_left: Trial has already ended' );
+							return 0;
+						}
+
+						// Add 1 to include the current day
+						$days_left = $interval->days + 1;
+						self::debug_log( 'get_trial_days_left: Days left: ' . $days_left );
+						return $days_left;
+					}
+				}
+
+				// For active subscriptions, no trial days left
+				if ( in_array( $status, array( 'active_auto_renew', 'active_no_renew' ), true ) ) {
+					self::debug_log( 'get_trial_days_left: Active subscription - no trial days' );
+					return 0;
+				}
+			}
+		}
+
+		return 0;
+	}
+
+	/**
+	 * Check if the subscription is in trial status
+	 *
+	 * @return bool True if subscription is in trial status, false otherwise
+	 */
+	public static function is_in_trial() {
+		$user_data = self::get_user_data();
+
+		if ( empty( $user_data ) || ! isset( $user_data['subscriptions']['active']['subscription_status'] ) ) {
+			self::debug_log( 'is_in_trial: No user data or subscription status found' );
+			return false;
+		}
+
+		$status   = $user_data['subscriptions']['active']['subscription_status'];
+		$is_trial = in_array( $status, array( 'trial_will_be_billed', 'trial_missing_payment' ), true );
+
+		self::debug_log( 'is_in_trial: Subscription status: ' . $status );
+		self::debug_log( 'is_in_trial: Is trial? ' . ( $is_trial ? 'yes' : 'no' ) );
+
+		return $is_trial;
 	}
 }

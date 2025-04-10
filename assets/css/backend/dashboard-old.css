@@ -25,9 +25,10 @@
     grid-row-gap: 30px;
 }
 
-.cb-main__dashboard__card {
+.cb-main__dashboard__card:not(:last-child) {
     width: 100%;
     display: grid;
+    margin-bottom: 30px;
 }
 
 .cb-main__card__inner {

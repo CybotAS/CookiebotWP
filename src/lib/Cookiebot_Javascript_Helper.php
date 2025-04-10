@@ -35,55 +35,25 @@ class Cookiebot_Javascript_Helper {
 	}
 
 	private function should_show_banner() {
-		// Simplified banner display check
 		$banner_enabled = get_option( 'cookiebot-banner-enabled', '1' );
-		$user_data      = get_option( 'cookiebot-user-data', array() );
 
-		if ( $banner_enabled === '0' ) {
+		if ( $banner_enabled !== '1' ) {
 			return false;
 		}
+
+		$user_data = get_option( 'cookiebot-user-data' );
 
 		if ( empty( $user_data ) ) {
 			return true;
 		}
 
-		// Check verification and trial status in one pass
-		if ( isset( $user_data['email_verification_status'] ) &&
-			$user_data['email_verification_status'] === 'unverified' ) {
-
-			// Check trial expiration
-			$trial_start = $this->parse_date( isset( $user_data['trial_start_date'] ) ? $user_data['trial_start_date'] : '' );
-			if ( $trial_start ) {
-				$fourteen_days_later = clone $trial_start;
-				$fourteen_days_later->modify( '+14 days' );
-
-				if ( new \DateTime() > $fourteen_days_later ) {
-					return false;
-				}
-			}
-		}
-
-		// Check trial status
-		if ( isset( $user_data['subscription_status'] ) &&
-			$user_data['subscription_status'] === 'in_trial_non_billable' ) {
-			$trial_end = $this->parse_date( isset( $user_data['trial_end_date'] ) ? $user_data['trial_end_date'] : '' );
-			if ( $trial_end && new \DateTime() > $trial_end ) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	// Helper function for date parsing
-	private function parse_date( $date_string ) {
-		if ( empty( $date_string ) ) {
+		// Check if trial has expired using Cookiebot_WP method
+		if ( Cookiebot_WP::is_trial_expired() ) {
+			self::debug_log( 'Trial has expired - banner should not be shown' );
 			return false;
 		}
 
-		$date_string = str_replace( ' T', ' ', $date_string );
-		$date        = \DateTime::createFromFormat( 'd-m-Y H:i:s', $date_string );
-		return $date ? $date : false;
+		return true;
 	}
 
 	private function debug_log( $message ) {
@@ -95,7 +65,7 @@ class Cookiebot_Javascript_Helper {
 
 	public function include_uc_cmp_js( $return_html = false ) {
 		$cbid = Cookiebot_WP::get_cbid();
-		if ( ! empty( $cbid ) && ! defined( 'COOKIEBOT_DISABLE_ON_PAGE' ) ) {
+		if ( ! empty( $cbid ) ) {
 			$this->debug_log( 'CBID exists and COOKIEBOT_DISABLE_ON_PAGE is not defined' );
 
 			// Add verification check
@@ -106,10 +76,7 @@ class Cookiebot_Javascript_Helper {
 			$this->debug_log( 'Banner should be shown' );
 
 			if (
-				// Is multisite - and disabled output is checked as network setting
-				( is_multisite() && get_site_option( 'cookiebot-nooutput', false ) ) ||
-				// Do not show JS - output disabled
-				( get_option( 'cookiebot-nooutput', false ) && ! $return_html )
+				( is_multisite() && ! $return_html )
 			) {
 				return '';
 			}
@@ -185,25 +152,6 @@ class Cookiebot_Javascript_Helper {
 		if ( ! empty( $cbid ) && ! defined( 'COOKIEBOT_DISABLE_ON_PAGE' ) ) {
 			// Add verification check
 			if ( ! $this->should_show_banner() ) {
-				return '';
-			}
-
-			if (
-				// Is multisite - and disabled output is checked as network setting
-				( is_multisite() && get_site_option( 'cookiebot-nooutput', false ) ) ||
-				// Do not show JS - output disabled
-				get_option( 'cookiebot-nooutput', false ) ||
-				// Do not show js if logged in output is disabled
-				(
-					Cookiebot_WP::get_cookie_blocking_mode() === 'auto' &&
-					Cookiebot_WP::can_current_user_edit_theme() &&
-					$return_html === '' &&
-					(
-						get_option( 'cookiebot-output-logged-in' ) === false ||
-						get_option( 'cookiebot-output-logged-in' ) === ''
-					)
-				)
-			) {
 				return '';
 			}
 

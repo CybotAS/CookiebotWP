@@ -14,7 +14,6 @@ async function clearConfigData() {
             method: 'POST',
             body: formData
         });
-        console.log(`clear config data response:`, response);
         window.location.href = 'admin.php?page=cookiebot';
 
     } catch (error) {
@@ -31,7 +30,6 @@ async function clearConfigDataKeepCbid() {
             method: 'POST',
             body: formData
         });
-        console.log(`clear config data response:`, response);
         window.location.href = 'admin.php?page=cookiebot';
 
     } catch (error) {

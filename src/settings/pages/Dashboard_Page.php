@@ -60,16 +60,19 @@ class Dashboard_Page implements Settings_Page_Interface {
 	 */
 	public function display() {
 		// Get all necessary data upfront
-		$cbid            = Cookiebot_WP::get_cbid();
-		$user_data       = Cookiebot_WP::get_user_data();
-		$scan_status     = Cookiebot_WP::get_scan_status();
-		$banner_enabled  = Cookiebot_WP::get_banner_enabled();
-		$gcm_enabled     = Cookiebot_WP::get_gcm_enabled();
-		$subscription    = Cookiebot_WP::get_subscription_type();
-		$legal_framework = Cookiebot_WP::get_legal_framwework();
+		$cbid               = Cookiebot_WP::get_cbid();
+		$auth_token         = Cookiebot_WP::get_auth_token();
+		$user_data          = Cookiebot_WP::get_user_data();
+		$scan_status        = Cookiebot_WP::get_scan_status();
+		$banner_enabled     = Cookiebot_WP::get_banner_enabled();
+		$auto_blocking_mode = Cookiebot_WP::get_auto_blocking_mode();
+		$gcm_enabled        = Cookiebot_WP::get_gcm_enabled();
+		$subscription       = Cookiebot_WP::get_subscription_type();
+		$legal_framework    = Cookiebot_WP::get_legal_framwework();
+		$is_authenticated   = ! empty( Cookiebot_WP::get_auth_token() );
 
 		// Get user data and check if they were onboarded via signup
-		$was_onboarded = isset( $user_data['onboarded_via_signup'] ) && $user_data['onboarded_via_signup'] === true;
+		$was_onboarded = Cookiebot_WP::was_onboarded_via_signup();
 		$user_email    = isset( $user_data['email'] ) ? $user_data['email'] : '';
 
 		// Prepare variables for the template
@@ -83,6 +86,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 			'check_icon'            => CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/check.svg',
 			'link_icon'             => CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/link.svg',
 			'banner_enabled'        => $banner_enabled,
+			'auto_blocking_mode'    => $auto_blocking_mode,
 			'gcm_enabled'           => $gcm_enabled,
 			'preview_link'          => Cookiebot_WP::get_preview_link(),
 			'subscription'          => $subscription,
@@ -97,6 +101,76 @@ class Dashboard_Page implements Settings_Page_Interface {
 			'was_onboarded'         => $was_onboarded,
 			'user_email'            => $user_email,
 		);
+
+		if ( ! $is_authenticated && ! empty( $cbid ) && ! empty( $user_data ) && ! empty( $was_onboarded ) ) {
+			wp_enqueue_style(
+				'cookiebot-dashboard-css',
+				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/css/backend/dashboard.css',
+				array(),
+				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+			);
+
+			wp_enqueue_script(
+				'cookiebot-account-static-js',
+				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account-static.js',
+				array( 'jquery' ),
+				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+				true
+			);
+
+			wp_localize_script(
+				'cookiebot-account-static-js',
+				'cookiebot_account',
+				array(
+					'ajax_url'          => admin_url( 'admin-ajax.php' ),
+					'nonce'             => wp_create_nonce( 'cookiebot-account' ),
+					'cbid'              => $cbid,
+					'has_user_data'     => ! empty( $user_data ),
+					'has_cbid'          => ! empty( $cbid ),
+					'was_onboarded'     => $was_onboarded,
+					'debug'             => defined( 'WP_DEBUG' ) && WP_DEBUG,
+					'auth_expired_flow' => true,
+				)
+			);
+
+			require_once CYBOT_COOKIEBOT_PLUGIN_DIR . 'src/view/admin/common/dashboard-page-session-expired.php';
+			return;
+		}
+
+		// Check if the trial has expired
+		if ( Cookiebot_WP::is_trial_expired() && ! Cookiebot_WP::has_upgraded() ) {
+			wp_enqueue_style(
+				'cookiebot-dashboard-css',
+				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/css/backend/dashboard.css',
+				array(),
+				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+			);
+
+			wp_enqueue_script(
+				'cookiebot-account-js',
+				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account.js',
+				array( 'jquery' ),
+				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+				true
+			);
+
+			wp_localize_script(
+				'cookiebot-account-js',
+				'cookiebot_account',
+				array(
+					'ajax_url'      => admin_url( 'admin-ajax.php' ),
+					'nonce'         => wp_create_nonce( 'cookiebot-account' ),
+					'cbid'          => $cbid,
+					'has_user_data' => ! empty( $user_data ),
+					'has_cbid'      => ! empty( $cbid ),
+					'was_onboarded' => $was_onboarded,
+					'debug'         => defined( 'WP_DEBUG' ) && WP_DEBUG,
+				)
+			);
+
+			require_once CYBOT_COOKIEBOT_PLUGIN_DIR . 'src/view/admin/common/dashboard-trial-expired.php';
+			return;
+		}
 
 		// Modified condition to check for onboarding status
 		if ( ! empty( $cbid ) && ( empty( $user_data ) && ! $was_onboarded ) ) {
@@ -124,6 +198,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 					'cbid'          => $cbid,
 					'has_user_data' => ! empty( $user_data ),
 					'has_cbid'      => ! empty( $cbid ),
+					'was_onboarded' => $was_onboarded,
 					'debug'         => defined( 'WP_DEBUG' ) && WP_DEBUG,
 				)
 			);
@@ -164,6 +239,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 				'cbid'             => $cbid,
 				'has_user_data'    => ! empty( $user_data ),
 				'has_cbid'         => ! empty( $cbid ),
+				'was_onboarded'    => $was_onboarded,
 				'is_authenticated' => ! empty( Cookiebot_WP::get_auth_token() ),
 				'messages'         => array(
 					'success_create' => __( 'Account created successfully!', 'cookiebot' ),
