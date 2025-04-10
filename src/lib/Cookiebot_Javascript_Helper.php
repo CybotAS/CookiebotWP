@@ -37,7 +37,7 @@ class Cookiebot_Javascript_Helper {
 	private function should_show_banner() {
 		$banner_enabled = get_option( 'cookiebot-banner-enabled', '1' );
 
-		if ( $banner_enabled === '0' && ! empty( Cookiebot_WP::get_user_data() ) ) {
+		if ( $banner_enabled !== '1' ) {
 			return false;
 		}
 
@@ -57,8 +57,10 @@ class Cookiebot_Javascript_Helper {
 	}
 
 	private function debug_log( $message ) {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 			// phpcs:ignore
 			error_log( '[Cookiebot] ' . $message );
+		}
 	}
 
 	public function include_uc_cmp_js( $return_html = false ) {

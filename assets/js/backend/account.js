@@ -158,7 +158,6 @@ async function fetchConfigurationDetails(configId) {
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const ucApiCode = urlParams.get('uc_api_code');
-    console.log('cookiebot_account.was_onboarded', cookiebot_account.was_onboarded);
     // For existing users, no account registration workflow is needed 
     if (cookiebot_account.has_cbid && !cookiebot_account.has_user_data && !cookiebot_account.was_onboarded) {
         return;
@@ -348,7 +347,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
         } else {
-            console.log('cai no else', cbid);
             // If we already have a CBID, check if there's an ongoing scan
             const scanDetails = await fetch(cookiebot_account.ajax_url, {
                 method: 'POST',
@@ -361,7 +359,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             // And fetch configuration details 
             await fetchConfigurationDetails(cbid);
-            console.log('cbid indo para o checkUserData', cbid);
             await checkUserData();
         }
 
@@ -441,7 +438,7 @@ document.getElementById('get-started-button')?.addEventListener('click', async (
     try {
         // If multisite is enabled the url might include also the directory for the site
         // e.g.: http://domain/site1/wp-admin/admin.php?page=cookiebot
-        const callbackUrl = window.location.href.substring(0, window.location.href.indexOf('/wp-admin')) + '/wp-admin/admin.php?page=cookiebot';
+        const callbackUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot';
         window.location.href = `${API_BASE_URL}/auth/auth0/authorize?origin=wordpress_plugin&callback_domain=${encodeURIComponent(callbackUrl)}`;
     } catch (error) {
         console.error('Failed to start authentication process:', error);

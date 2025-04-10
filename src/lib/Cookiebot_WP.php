@@ -517,7 +517,7 @@ class Cookiebot_WP {
 		// Banner enabled check
 		$banner_enabled = get_option( 'cookiebot-banner-enabled', '1' );
 		self::debug_log( 'Banner enabled setting: ' . $banner_enabled );
-		if ( $banner_enabled === '0' && ! empty( self::get_user_data() ) ) {
+		if ( $banner_enabled !== '1' ) {
 			self::debug_log( 'get_banner_script: Banner disabled in settings' );
 			return '';
 		}
@@ -561,18 +561,18 @@ class Cookiebot_WP {
 		if ( $blocking_mode === '1' ) {
 			// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 			$script_html .= sprintf(
-				'<script data-sandbox="1" src="%s"></script>',
-				esc_url( 'https://web.cmp.usercentrics-sandbox.eu/modules/autoblocker.js' )
+				'<script src="%s"></script>',
+				esc_url( 'https://web.cmp.usercentrics.eu/modules/autoblocker.js' )
 			);
 		}
 
 		// Add main banner script
 		// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 		$script_html .= sprintf(
-			'<script data-sandbox="1" id="usercentrics-cmp" data-settings-id="%s" data-usercentrics="%s" src="%s" async></script>',
+			'<script id="usercentrics-cmp" data-settings-id="%s" data-usercentrics="%s" src="%s" async></script>',
 			esc_attr( $cbid ),
 			esc_attr( 'Usercentrics Consent Management Platform' ),
-			esc_url( 'https://web.cmp.usercentrics-sandbox.eu/ui/loader.js' )
+			esc_url( 'https://web.cmp.usercentrics.eu/ui/loader.js' )
 		);
 
 		self::debug_log( 'Final script HTML: ' . $script_html );
@@ -727,7 +727,7 @@ class Cookiebot_WP {
 						}
 
 						// Add 1 to include the current day
-						$days_left = $interval->days;
+						$days_left = $interval->days + 1;
 						self::debug_log( 'get_trial_days_left: Days left: ' . $days_left );
 						return $days_left;
 					}

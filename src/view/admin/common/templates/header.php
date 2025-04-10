@@ -19,11 +19,12 @@ use cybot\cookiebot\settings\templates\Main_Tabs;
 
 $main_tabs = new Main_Tabs();
 
-$cbid          = Cookiebot_WP::get_cbid();
-$user_data     = Cookiebot_WP::get_user_data();
-$trial_expired = Cookiebot_WP::is_trial_expired();
-$upgraded      = Cookiebot_WP::has_upgraded();
-$days_left     = Cookiebot_WP::get_trial_days_left();
+$cbid             = Cookiebot_WP::get_cbid();
+$user_data        = Cookiebot_WP::get_user_data();
+$trial_expired    = Cookiebot_WP::is_trial_expired();
+$upgraded         = Cookiebot_WP::has_upgraded();
+$days_left        = Cookiebot_WP::get_trial_days_left();
+$is_authenticated = ! empty( Cookiebot_WP::get_auth_token() );
 
 ?>
 <?php
@@ -34,7 +35,7 @@ if ( ! empty( $_GET['settings-updated'] ) ) :
 <?php endif; ?>
 <?php
 
-if ( Cookiebot_WP::is_in_trial() && ! $trial_expired ) :
+if ( Cookiebot_WP::is_in_trial() && ! $trial_expired && $is_authenticated ) :
 	?>
 	<div class="trial-banner">
 		<div class="trial-info">

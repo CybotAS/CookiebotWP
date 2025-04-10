@@ -57,23 +57,51 @@ class Account_Service {
 			return;
 		}
 
-		wp_enqueue_script(
-			'cookiebot-account-js',
-			CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account.js',
-			array(),
-			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
-			true
-		);
+		$is_authenticated = ! empty( Cookiebot_WP::get_auth_token() );
+		$cbid             = Cookiebot_WP::get_cbid();
+		$user_data        = Cookiebot_WP::get_user_data();
+		$was_onboarded    = Cookiebot_WP::was_onboarded_via_signup();
 
-		wp_localize_script(
-			'cookiebot-account-js',
-			'cookiebot_account',
-			array(
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( 'cookiebot-account' ),
-				'debug'    => true,
-			)
-		);
+		if ( ! $is_authenticated && ! empty( $cbid ) && ! empty( $user_data ) && ! empty( $was_onboarded ) ) {
+			wp_enqueue_script(
+				'cookiebot-account-static-js',
+				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account-static.js',
+				array( 'jquery' ),
+				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+				true
+			);
+
+			wp_localize_script(
+				'cookiebot-account-static-js',
+				'cookiebot_account',
+				array(
+					'ajax_url'          => admin_url( 'admin-ajax.php' ),
+					'nonce'             => wp_create_nonce( 'cookiebot-account' ),
+					'has_user_data'     => ! empty( $user_data ),
+					'has_cbid'          => ! empty( $cbid ),
+					'debug'             => defined( 'WP_DEBUG' ) && WP_DEBUG,
+					'auth_expired_flow' => true,
+				)
+			);
+		} else {
+			wp_enqueue_script(
+				'cookiebot-account-js',
+				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account.js',
+				array(),
+				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+				true
+			);
+
+			wp_localize_script(
+				'cookiebot-account-js',
+				'cookiebot_account',
+				array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'nonce'    => wp_create_nonce( 'cookiebot-account' ),
+					'debug'    => true,
+				)
+			);
+		}
 	}
 
 	public function ajax_store_cbid() {

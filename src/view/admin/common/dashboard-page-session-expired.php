@@ -21,7 +21,7 @@ $header->display();
 	<div class="cb-wrapper">
 		<?php $main_tabs->display( 'dashboard' ); ?>
 
-		<div class="dashboard-grid <?php echo ! empty( $template_args['cbid'] ) ? 'has-cbid' : ''; ?>">
+		<div class="dashboard-grid">
 
 			<!-- Main Content Area -->
 			 <div class="dashboard-grid-row">
@@ -42,7 +42,7 @@ $header->display();
 					<!-- Steps Container -->
 					<div class="steps-container">
 						<!-- Activate your banner step -->
-						<div class="step-box <?php echo ! empty( $template_args['cbid'] ) ? 'completed' : ''; ?>">
+						<div class="step-box">
 							<div class="step-row">
 		
 								<div class="step-icon">
@@ -53,7 +53,6 @@ $header->display();
 								</div>	
 							</div>
 	
-							<?php if ( empty( $template_args['user_data'] ) ) : ?>
 								<div class="banner-preview-container">
 									<div class="divider"></div>
 									<p class="step-description">
@@ -73,7 +72,7 @@ $header->display();
 											class="banner-image">
 									</div>
 									<div class="activate-container">
-										<button id="get-started-button" class="cb-btn cb-primary-btn cb-get-started-btn">
+										<button id="get-started-button-static-dashboard" class="cb-btn cb-primary-btn cb-get-started-btn">
 											<?php echo esc_html__( 'Get Started', 'cookiebot' ); ?>
 										</button>
 										<img src="<?php echo \esc_url( $arrow_url ); ?>"
@@ -81,26 +80,11 @@ $header->display();
 											class="banner-arrow">
 									</div>	
 								</div>
-							<?php endif; ?>
 						</div>
 	
 					</div>
 				</div>	
 			 </div>
-
-			<!-- Help text (only show when user_data doesn't exist) -->
-			<?php if ( empty( $template_args['user_data'] ) ) : ?>
-				<div>
-					<div class="cb-general__info__text">
-						<span class="note-text">Need to manage an existing Cookiebot or Usercentrics account?</span>
-
-						<a href="<?php echo esc_url( add_query_arg( 'page', Settings_Page::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>"
-							class="note-link">
-							<span><?php esc_html_e( 'Go to Settings', 'cookiebot' ); ?></span>
-						</a>
-					</div>
-				</div>
-			<?php endif; ?>
 		</div>
 	</div>
 </div>
