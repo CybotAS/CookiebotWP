@@ -32,9 +32,11 @@ class Cookiebot_Activated {
 		if ( Cookiebot_WP::get_cbid() === '' ) {
 			if ( is_multisite() ) {
 				update_site_option( 'cookiebot-cookie-blocking-mode', 'auto' );
+				update_site_option( 'cookiebot-banner-enabled', '1' );
 				update_site_option( 'cookiebot-nooutput-admin', true );
 			} else {
 				update_option( 'cookiebot-cookie-blocking-mode', 'auto' );
+				update_option( 'cookiebot-banner-enabled', '1' );
 				update_option( 'cookiebot-nooutput-admin', true );
 			}
 		}
