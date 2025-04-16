@@ -1,7 +1,9 @@
 <?php // exit if uninstall constant is not defined
-if (!defined('WP_UNINSTALL_PLUGIN')) exit;
-
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+    exit;
+}
 // All new and legacy config params (except param: 'cookiebot-uc-onboarded-via-signup')
+// phpcs:ignore
 $options = array(
     'cookiebot-cbid',
     'cookiebot-auth-token',
@@ -12,7 +14,6 @@ $options = array(
     'cookiebot-banner-enabled',
     'cookiebot_banner_live_dismissed',
     'cookiebot-uc-auto-blocking-mode',
-
     'cookiebot-ruleset-id',
     'cookiebot-language',
     'cookiebot-front-language',
@@ -48,8 +49,8 @@ $options = array(
     'cookiebot-second-banner-id',
     'cookiebot-multiple-banners',
 );
-
 // Delete all config params
+// phpcs:ignore
 foreach ( $options as $option ) {
     delete_option( $option );
 }
