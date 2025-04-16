@@ -1,9 +1,9 @@
 <?php
 
 /*
-Plugin Name: Cookie banner plugin for WordPress – Cookiebot CMP by Usercentrics
+Plugin Name: Usercentrics Cookiebot - Cookie Banner & Privacy Compliance for GDPR/CCPA/Google Consent Mode
 Plugin URI: https://www.cookiebot.com/
-Description: The Cookiebot CMP WordPress cookie banner and cookie policy help you comply with the major data protection laws (GDPR, ePrivacy, CCPA, LGPD, etc.) in a simple and fully automated way. Secure your website and get peace of mind.
+Description: Install your cookie banner in minutes. Automatically scan and block cookies to comply with the GDPR, CCPA, Google Consent Mode v2. Free plan option.
 Author: Usercentrics A/S
 Version: 4.5.3
 Author URI: https://www.cookiebot.com/
