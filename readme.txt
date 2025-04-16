@@ -162,7 +162,7 @@ View all data processing services detected in your website.
 To repeat a scan, click Start Scan.
 
 ### Trial vs Free Plan - Why am I being offered a trial? ###
-Our free option has standard features and is suitable for up to 1000 sessions, but we offer a trial period to give access to premium features like banner customization. After 14 days, the banner reverts to the standard look, and a session limit of 1,000 applies.
+While a Free plan is available, we offer a 14-day premium trial so you can explore advanced features such as banner customization before choosing a plan. You can switch to a Free or Premium plan at any time during the trial. If you don’t select a plan before the 14 days end, your banner will be deactivated.
 
 For pricing details, check our [pricing page](https://usercentrics.com/pricing/).
 
