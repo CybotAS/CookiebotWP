@@ -3,7 +3,7 @@
 * Tags: cookie banner, cookie consent, cookie notice, gdpr, privacy
 * Requires at least: 4.4
 * Tested up to: 6.8
-* Stable tag: 4.5.3
+* Stable tag: 4.5.4
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
