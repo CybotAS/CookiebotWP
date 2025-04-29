@@ -95,8 +95,14 @@ function renderFormLabels(){
         labelChild.appendChild(labelText);
         labelContainer.appendChild(labelChild);
 
-        if(option.value === '7'){
+        if(option.value === '8'){
             let extraContainer = document.createElement('div');
+            let labelChild = document.createElement('label');
+            let labelText = document.createElement('span');
+            labelText.innerText = 'Tell us more (optional)...';
+            labelChild.appendChild(labelText);
+            extraContainer.appendChild(labelChild);
+
             let extraText = document.createElement('textarea');
             extraContainer.classList.add('cb-review__form--item__custom');
             extraText.setAttribute('id','cb-review__other-description');
@@ -200,7 +206,7 @@ function showOptionalConsent(e) {
     const optionalConsentBox = jQuery('.consent-item');
     const optionalConsent = jQuery('#cb-review__debug-reason');
 
-    if(option!=='7'){
+    if(option!=='8'){
         optionalConsentBox.removeClass('show-consent');
         if(optionalConsent.checked){
             optionalConsent.checked = false;
@@ -220,13 +226,50 @@ function submitSurveyPopup(e){
     if (button.hasClass('disabled')) {
         return;
     }
+    
     const option = jQuery('input[type="radio"]:checked', '#cb-review__form');
     if(0 === option.length){
         jQuery('#cb-review__alert').addClass('show-alert');
         return;
     }
+
+    // Add loading state
+    const loadingOverlay = document.createElement('div');
+    loadingOverlay.className = 'loading-overlay';
+    loadingOverlay.innerHTML = `
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2>Thank you for being part of our journey.</h2>
+            <p>We\'re deactivating the plugin and saving your feedback.</p>
+        </div>
+    `;
+    document.body.classList.add('has-loading-overlay');
+    document.body.appendChild(loadingOverlay);
+
     const otherReason = jQuery('#cb-review__other-description');
     const debugReason = jQuery('#cb-review__debug-reason');
+
+
+    // Load Amplitude SDK and track deactivation
+    const script = document.createElement('script');
+    script.src = 'https://cdn.eu.amplitude.com/script/3573fa11b8c5b4bcf577ec4c8e9d5cb6.js';
+    script.async = true;
+    script.onload = function() {
+        const amplitude = window.amplitude;
+        amplitude.init('3573fa11b8c5b4bcf577ec4c8e9d5cb6', {
+            serverZone: 'EU',
+            fetchRemoteConfig: true,
+            defaultTracking: false
+        });
+
+        // Track deactivation event
+        amplitude.track('Plugin Deactivated', {
+            reason: option.closest('label').text().trim(),
+            additional_info: otherReason.val() ? otherReason.val().trim() : '',
+        });
+    };
+    document.head.appendChild(script);
+
     jQuery.ajax({
         url: cb_ajax.ajax_url,
         type: 'POST',
@@ -235,12 +278,13 @@ function submitSurveyPopup(e){
             reason_id: (0 === option.length) ? null : option.val(),
             reason_text: (0 === option.length) ? 'none' : option.closest('label').text(),
             reason_info: (0 !== otherReason.length) ? otherReason.val().trim() : '',
-            reason_debug: (!debugReason) ? null : debugReason.val(),
+            reason_debug: (debugReason?.length > 0) ? debugReason[0].checked : 'false',
             survey_nonce: cb_survey.survey_nonce,
             survey_check: 'ODUwODA1'
         },
         beforeSend: function() {
             button.addClass('disabled');
+            button.attr('value','Please wait...');
         },
         complete: function(response) {
             const code = JSON.parse(response.responseText).code;
@@ -249,9 +293,9 @@ function submitSurveyPopup(e){
             if(code===400||code===401){
                 jQuery('#cb-review__alert').text(msg).addClass('show-alert');
                 button.removeClass('disabled');
-            }else{
-                window.location.href = deactivateLink;
+                return;
             }
+            window.location.href = deactivateLink;
         }
     });
 }

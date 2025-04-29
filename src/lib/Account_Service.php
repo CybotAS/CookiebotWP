@@ -43,6 +43,7 @@ class Account_Service {
 		add_action( 'wp_ajax_cookiebot_process_auth_code', array( $this, 'ajax_process_auth_code' ) );
 		add_action( 'wp_ajax_cookiebot_dismiss_banner', array( $this, 'ajax_dismiss_banner' ) );
 		add_action( 'wp_ajax_cookiebot_post_user_data', array( $this, 'ajax_post_user_data' ) );
+		add_action( 'wp_ajax_cookiebot_get_user_data', array( $this, 'ajax_get_user_data' ) );
 		add_action( 'wp_ajax_cookiebot_store_scan_details', array( $this, 'ajax_store_scan_details' ) );
 		add_action( 'wp_ajax_cookiebot_get_scan_details', array( $this, 'ajax_get_scan_details' ) );
 		add_action( 'wp_ajax_cookiebot_store_configuration', array( $this, 'ajax_store_configuration' ) );
@@ -138,6 +139,16 @@ class Account_Service {
 		update_option( 'cookiebot-user-data', $data );
 
 		wp_send_json_success( array( 'message' => 'User data stored successfully' ) );
+	}
+
+	public function ajax_get_user_data() {
+		if ( ! check_ajax_referer( 'cookiebot-account', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( 'Unauthorized', 401 );
+			return;
+		}
+
+		$user_data = get_option( 'cookiebot-user-data' );
+		wp_send_json_success( $user_data );
 	}
 
 	public function ajax_store_scan_details() {

@@ -10,17 +10,14 @@ class Cookiebot_Admin_Links {
 	 * @var array
 	 */
 	protected $admin_links;
-	protected $menu_links;
 
 	public function __construct() {
 		$this->admin_links = $this->add_links();
-		$this->menu_links  = $this->add_menu_links();
 	}
 
 	public function register_hooks() {
 		add_filter( 'plugin_action_links_cookiebot/cookiebot.php', array( $this, 'set_settings_action_link' ) );
 		add_action( 'admin_init', array( $this, 'handle_external_redirects' ) );
-		add_action( 'admin_menu', array( $this, 'add_extra_menu' ) );
 	}
 
 	public function handle_external_redirects() {
@@ -28,39 +25,10 @@ class Cookiebot_Admin_Links {
 		if ( empty( $_GET['page'] ) ) {
 			return;
 		}
-
-		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		foreach ( $this->menu_links as $slug => $link ) {
-			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			if ( $slug === $_GET['page'] ) {
-				$link = $link['override'] && $link['condition'] ? $link['over_url'] : $link['url'];
-				//phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
-				wp_redirect( $link );
-				exit;
-			}
-		}
 	}
 
 	public function display() {
 		return true;
-	}
-
-	public function add_extra_menu() {
-		foreach ( $this->menu_links as $slug => $link ) {
-			add_submenu_page(
-				'cookiebot',
-				$link['label'],
-				$link['override'] && $link['condition'] ?
-					// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings,WordPress.WP.I18n.MissingTranslatorsComment
-					esc_html( sprintf( __( '%s', 'cookiebot' ), $link['over_label'] ) ) :
-					// phpcs:ignore WordPress.WP.I18n.NoEmptyStrings,WordPress.WP.I18n.MissingTranslatorsComment
-					esc_html( sprintf( __( '%s', 'cookiebot' ), $link['label'] ) ),
-				'manage_options',
-				$slug,
-				array( $this, 'display' ),
-				20
-			);
-		}
 	}
 
 	public function set_settings_action_link( $actions ) {
@@ -80,17 +48,6 @@ class Cookiebot_Admin_Links {
 		ksort( $actions );
 
 		return $actions;
-	}
-
-	private function add_menu_links() {
-		return array(
-			'cookiebot_upgrade' => array(
-				'url'       => add_query_arg( 'page', 'cookiebot', admin_url( 'admin.php' ) ),
-				'label'     => 'Get Started',
-				'override'  => false,
-				'condition' => false,
-			),
-		);
 	}
 
 	private function add_links() {

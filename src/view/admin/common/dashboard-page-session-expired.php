@@ -49,15 +49,23 @@ $header->display();
 									<div class="empty-circle"></div>
 								</div>
 								<div class="step-content">
-									<h2><?php echo \esc_html__( 'Activate your banner', 'cookiebot' ); ?></h2>
+									<h2><?php echo \esc_html__( 'Get your banner live in seconds', 'cookiebot' ); ?></h2>
 								</div>	
 							</div>
 	
 								<div class="banner-preview-container">
 									<div class="divider"></div>
 									<p class="step-description">
-										<?php echo esc_html__( 'Activate your banner in seconds with easy auto-setup, smart data processing services detection, and consent-first blocking for automated privacy compliance.', 'cookiebot' ); ?>
-									</p>
+											<?php
+											echo wp_kses(
+												__( 'Instant setup with automatic cookie blocking. Try all features free for <strong>14 days</strong> - no card needed.<br> Choose Free or Premium before your trial ends to stay live.', 'cookiebot' ),
+												array(
+													'strong' => array(),
+													'br' => array(),
+												)
+											);
+											?>
+										</p>
 									<div class="banner-images">
 										<?php
 										$banner1_url = CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/banner-getting-started1.png';

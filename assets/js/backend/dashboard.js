@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
     // Handle toggle functionality
+    const userData = cookiebot_dashboard.user_data;
     function handleToggle(toggleId, action, value) {
         const toggle = document.getElementById(toggleId);
         if (!toggle) {
@@ -7,10 +8,17 @@ jQuery(document).ready(function($) {
             return;
         }
 
-        toggle.addEventListener('click', async function(event) {
+        toggle.addEventListener('click', async function() {
             const isEnabled = this.checked;
             const badgeId = toggleId === 'cookiebot-banner-enabled' ? 'cookiebot-banner-badge' : `${toggleId}-badge`;
             const badge = document.getElementById(badgeId);
+           
+            window.amplitude.track('Banner toggle', {
+                Enabled: isEnabled,
+                settingsId: userData.settingsId,
+                subscription: userData.subscriptions['active'].subscription_status
+            });
+
             if (!badge) {
                 console.error(`Badge element not found: ${badgeId}`);
             }

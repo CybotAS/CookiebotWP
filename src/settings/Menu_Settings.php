@@ -3,24 +3,20 @@
 namespace cybot\cookiebot\settings;
 
 use cybot\cookiebot\settings\pages\Dashboard_Page;
-use cybot\cookiebot\settings\pages\Debug_Page;
 use cybot\cookiebot\settings\pages\Gtm_Page;
 use cybot\cookiebot\settings\pages\Iab_Page;
 use cybot\cookiebot\settings\pages\Legislations_Page;
 use cybot\cookiebot\settings\pages\Settings_Page;
 use cybot\cookiebot\settings\pages\Support_Page;
+use cybot\cookiebot\lib\Cookiebot_WP;
 
 class Menu_Settings {
 
 
 	const MENU = array(
 		Dashboard_Page::class,
-		Settings_Page::class,
-	);
-
-	const SUBMENU = array(
 		Support_Page::class,
-		Debug_Page::class,
+		Settings_Page::class,
 	);
 
 	public function add_menu() {
@@ -29,6 +25,7 @@ class Menu_Settings {
 		// Register settings
 		add_action( 'admin_init', array( $this, 'register_cookiebot_settings' ) );
 		add_action( 'register_setting', array( $this, 'set_blocking_mode_to_auto' ), 10, 3 );
+		add_action( 'updated_option', array( $this, 'check_update_option_cbid' ), 10, 3 );
 	}
 
 	public function set_blocking_mode_to_auto( $option_group, $option_name, $args ) {
@@ -43,13 +40,19 @@ class Menu_Settings {
 		}
 	}
 
+	public function check_update_option_cbid( $option_name, $old_value, $option_value ) {
+		$auth_token = Cookiebot_WP::get_auth_token();
+		$user_data  = Cookiebot_WP::get_user_data();
+
+		if ( $option_name === 'cookiebot-cbid' && empty( $option_value ) && ! empty( $auth_token ) && ! empty( $user_data ) ) {
+			Cookiebot_WP::debug_log( 'Account Disconnected: clearing user_data' );
+			delete_option( 'cookiebot-user-data' );
+		}
+	}
+
 	public function load_menu() {
 		foreach ( static::MENU as $menu ) {
 			( new $menu() )->menu();
-		}
-
-		foreach ( static::SUBMENU as $submenu ) {
-			( new $submenu() )->menu();
 		}
 	}
 

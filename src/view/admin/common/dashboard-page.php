@@ -20,6 +20,22 @@ $header->display();
 
 	<!-- Banner container for proper alignment -->
 	<div class="banner-container">
+		<?php if ( Cookiebot_WP::get_subscription_type() === 'Free' ) : ?>
+			<div class="header-top-banners free-plan-banner">
+				<div class="banner-content">
+					<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/bolt.svg' ); ?>" alt="Bolt Icon">
+					<div>
+						<h3><?php echo esc_html__( "You're on the Free plan. Upgrade now to unlock your full site experience.", 'cookiebot' ); ?></h3>
+						<p><?php echo esc_html__( 'Upgrade for higher session limits, custom branding, and features that help you deliver a better experience on your site.', 'cookiebot' ); ?></p>
+					</div>
+				</div>
+				<div class="upgrade-free-plan">
+					<a href="https://account.usercentrics.eu/subscription/<?php echo isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ? esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) . '/' : ''; ?>manage" target="_blank" class="upgrade-now-link">
+						<h3><?php echo esc_html__( 'Upgrade now', 'cookiebot' ); ?> <span class="upgrade-chevron">&rsaquo;</span></h3>
+					</a>
+				</div>
+			</div>
+		<?php endif; ?>
 		<!-- Trial expiration notice -->
 		<?php
 		$trial_expired = Cookiebot_WP::is_trial_expired();
@@ -69,16 +85,24 @@ $header->display();
 		<?php
 		$banner_dismissed = get_option( 'cookiebot_banner_live_dismissed', false );
 
-		if ( ! empty( $template_args['cbid'] ) && ! empty( $template_args['user_data'] ) && ! $banner_dismissed ) :
+		if ( ! empty( $template_args['cbid'] ) && ! empty( $template_args['user_data'] ) && ! $banner_dismissed && ! Cookiebot_WP::has_upgraded() ) :
 			?>
 			<div class="header-top-banners banner-live-banner" id="banner-live-notice">
 				<div class="banner-content">
 					<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/check-white.svg' ); ?>"
 						alt="Check Icon">
 					<div>
+						
+						<!-- <h3>Well done! Your <a href="<?php echo esc_url( site_url() ); ?>" target="_blank" class="banner-live-link" onclick="window.trackAmplitudeEvent('Banner Live Viewed', { settingsId: '<?php echo esc_js( $template_args['cbid'] ); ?>' });">banner is live</a>.</h3> -->
 						<h3>Well done! Your <a href="<?php echo esc_url( site_url() ); ?>" target="_blank" class="banner-live-link">banner is live</a>.</h3>
 						<p>
-							<?php echo esc_html__( 'If you\'ve signed up or logged in for the first time, your banner may take a few seconds to load on your website.', 'cookiebot' ); ?>
+							<?php
+							echo esc_html__( 'Stay live after your trial by choosing a Free or Premium plan.', 'cookiebot' );
+							?>
+							<!-- <a href="https://account.usercentrics.eu/subscription/<?php echo isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ? esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) . '/' : ''; ?>manage" target="_blank" style="text-decoration: underline; color: inherit;" onclick="window.trackAmplitudeEvent('Choose Plan Link Clicked', { price_plan: '<?php echo esc_js( $template_args['user_data']['subscriptions']['active']['price_plan'] ? $template_args['user_data']['subscriptions']['active']['price_plan'] : '' ); ?>', account_id: '<?php echo esc_js( $template_args['cbid'] ); ?>' });"><?php echo esc_html__( 'Choose plan', 'cookiebot' ); ?></a> -->
+							<a href="https://account.usercentrics.eu/subscription/<?php echo isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ? esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) . '/' : ''; ?>manage" target="_blank" style="text-decoration: underline; color: inherit;">
+								<?php echo esc_html__( 'Choose plan', 'cookiebot' ); ?>
+							</a>
 						</p>
 					</div>
 				</div>
@@ -87,6 +111,8 @@ $header->display();
 				</button>
 			</div>
 		<?php endif; ?>
+
+		
 	</div>
 
 	<div class="cb-wrapper">
@@ -95,7 +121,7 @@ $header->display();
 		<div class="dashboard-grid <?php echo ! empty( $template_args['cbid'] ) ? 'has-cbid' : ''; ?>">
 
 			<!-- Main Content Area -->
-			 <div class="dashboard-grid-row">
+			<div class="dashboard-grid-row">
 				<div class="gray-box">
 					<div class="header-section-no-margin">
 						<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/set-up-icon.svg' ); ?>" alt="Usercentrics Logo">
@@ -121,14 +147,14 @@ $header->display();
 							</p>
 						<?php endif; ?>
 					</div>
-	
-	
+
+
 					<!-- Steps Container -->
 					<div class="steps-container">
 						<!-- Activate your banner step -->
 						<div class="step-box <?php echo ! empty( $template_args['cbid'] ) ? 'completed' : ''; ?>">
 							<div class="step-row">
-	
+
 								<?php if ( ! empty( $template_args['cbid'] ) && empty( $template_args['user_data'] ) ) : ?>
 									<div class="step-icon">
 										<div class="empty-circle"></div>
@@ -137,28 +163,28 @@ $header->display();
 										<h2><?php echo \esc_html__( 'Unlock new banner', 'cookiebot' ); ?></h2>
 									</div>
 								<?php endif; ?>
-	
+
 								<?php if ( empty( $template_args['cbid'] ) && empty( $template_args['user_data'] ) ) : ?>
 									<div class="step-icon">
 										<div class="empty-circle"></div>
 									</div>
 									<div class="step-content">
-										<h2><?php echo \esc_html__( 'Activate your banner', 'cookiebot' ); ?></h2>
+										<h2><?php echo \esc_html__( 'Get your banner live in seconds', 'cookiebot' ); ?></h2>
 									</div>
 								<?php endif; ?>
-	
+
 								<?php if ( ! empty( $template_args['cbid'] ) && ! empty( $template_args['user_data'] ) ) : ?>
 									<div class="step-icon">
 										<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/check-mark.svg' ); ?>" alt="Checkmark">
 									</div>
 									<div class="step-content">
-										<h2><?php echo \esc_html__( 'Activate your banner', 'cookiebot' ); ?></h2>
+										<h2><?php echo \esc_html__( 'Get your banner live in seconds', 'cookiebot' ); ?></h2>
 									</div>
 									<span class="done-status">Done!</span>
 								<?php endif; ?>
-	
+
 							</div>
-	
+
 							<?php if ( empty( $template_args['user_data'] ) ) : ?>
 								<div class="banner-preview-container">
 									<div class="divider"></div>
@@ -168,7 +194,15 @@ $header->display();
 										</p>
 									<?php else : ?>
 										<p class="step-description">
-											<?php echo esc_html__( 'Activate your banner in seconds with easy auto-setup, smart data processing services detection, and consent-first blocking for automated privacy compliance.', 'cookiebot' ); ?>
+											<?php
+											echo wp_kses(
+												__( 'Instant setup with automatic cookie blocking. Try all features free for <strong>14 days</strong> - no card needed.<br> Choose Free or Premium before your trial ends to stay live.', 'cookiebot' ),
+												array(
+													'strong' => array(),
+													'br' => array(),
+												)
+											);
+											?>
 										</p>
 									<?php endif; ?>
 									<div class="banner-images">
@@ -192,18 +226,18 @@ $header->display();
 											alt="arrow"
 											class="banner-arrow">
 									</div>
-	
+
 									<?php if ( ! empty( $template_args['cbid'] ) ) : ?>
 										<div class="note-text">
 											<img class="note-icon" src="<?php echo esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/info.svg' ); ?>" />
 											<span>Note: A new account comes with a new banner, which will replace your existing one.</span>
 										</div>
 									<?php endif; ?>
-	
+
 								</div>
 							<?php endif; ?>
 						</div>
-	
+
 						<!-- Scan website step - only show when CBID exists -->
 						<?php if ( ! empty( $template_args['user_data'] ) ) : ?>
 							<div class="step-box">
@@ -243,39 +277,40 @@ $header->display();
 										}
 										?>
 										<?php if ( $template_args['scan_status'] !== 'DONE' ) : ?>
-										<button class="expand-toggle" aria-expanded="false" aria-controls="scan-details">
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-icon">
-												<path d="M7 10l5 5 5-5z" fill="#6B7280" />
-											</svg>
-										</button>
+											<button class="expand-toggle" aria-expanded="false" aria-controls="scan-details">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-icon">
+													<path d="M7 10l5 5 5-5z" fill="#6B7280" />
+												</svg>
+											</button>
 										<?php endif; ?>
 									</div>
 								</div>
-	
+
 								<!-- Scan details section (initially hidden) -->
 								<?php if ( $template_args['scan_status'] !== 'DONE' ) : ?>
-								<div id="scan-details" class="scan-details" style="display: block;">
-									<div class="divider"></div>
-									<p class="scan-message">
-										<?php if ( $template_args['scan_status'] !== 'IN_PROGRESS' ) : ?>
-											Oops! We couldn't start or complete your scan! Try initiating a scan manually via the <a href="https://admin.usercentrics.eu/#/v3/service-settings/dps-scanner?settingsId=<?php echo esc_attr( $template_args['cbid'] ); ?>" target="_blank">Admin Interface</a>.
-										<?php else : ?>
-											We're scanning your website for data processing services. They should appear in 10 minutes, but it may take up to 24 hours. For more information, please review your <a href="https://admin.usercentrics.eu/#/v3/service-settings/dps-scanner?settingsId=<?php echo esc_attr( $template_args['cbid'] ); ?>" target="_blank">service settings</a>.
-										<?php endif; ?>
-									</p>
-								</div>
+									<div id="scan-details" class="scan-details" style="display: block;">
+										<div class="divider"></div>
+										<p class="step-message">
+											<?php if ( $template_args['scan_status'] !== 'IN_PROGRESS' ) : ?>
+												Oops! We couldn't start or complete your scan! Try initiating a scan manually via the <a href="https://admin.usercentrics.eu/#/v3/service-settings/dps-scanner?settingsId=<?php echo esc_attr( $template_args['cbid'] ); ?>" target="_blank">Admin Interface</a>.
+											<?php else : ?>
+												We're scanning your website for data processing services. They should appear in 10 minutes, but it may take up to 24 hours. For more information, please review your <a href="https://admin.usercentrics.eu/#/v3/service-settings/dps-scanner?settingsId=<?php echo esc_attr( $template_args['cbid'] ); ?>" target="_blank">service settings</a>.
+											<?php endif; ?>
+										</p>
+									</div>
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
-	
+
 						<!-- Upgrade your plan step -->
 						<?php if ( ! empty( $template_args['user_data'] ) ) : ?>
 							<div class="step-box">
 								<div class="step-row">
 									<div class="step-icon">
 										<?php
-										$is_upgraded = Cookiebot_WP::has_upgraded();
-										if ( $is_upgraded ) :
+										$is_upgraded       = Cookiebot_WP::has_upgraded();
+										$subscription_type = Cookiebot_WP::get_subscription_type();
+										if ( $is_upgraded && $subscription_type !== 'Free' ) :
 											?>
 											<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/check-mark.svg' ); ?>" alt="Checkmark">
 										<?php else : ?>
@@ -285,21 +320,17 @@ $header->display();
 									<div class="step-content">
 										<h2><?php echo \esc_html__( 'Upgrade your plan', 'cookiebot' ); ?></h2>
 									</div>
-									<?php if ( $is_upgraded ) : ?>
-										<span class="done-status">Done!</span>
-									<?php else : ?>
-										<div class="step-status">
-											<div class="lightning-badge">
-												<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<path d="M7.58333 0.583344L1.75 8.16668H7L6.41667 13.4167L12.25 5.83334H7L7.58333 0.583344Z" fill="#0047FF" />
-												</svg>
-											</div>
+									<div class="step-status">
+										<div class="lightning-badge">
+											<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M7.58333 0.583344L1.75 8.16668H7L6.41667 13.4167L12.25 5.83334H7L7.58333 0.583344Z" fill="#0047FF" />
+											</svg>
 										</div>
-									<?php endif; ?>
+									</div>
 								</div>
 
 								<!-- Upgrade details section -->
-								<?php if ( $is_upgraded ) : ?>
+								<?php if ( $is_upgraded && $subscription_type !== 'Free' ) : ?>
 									<div class="upgrade-details">
 										<div class="divider"></div>
 										<div class="subscription-info">
@@ -309,12 +340,12 @@ $header->display();
 													<h3>You've upgraded to <span class="plan-name"><?php echo esc_html( $template_args['subscription'] ); ?></span>!</h3>
 												</div>
 												<?php if ( isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ) : ?>
-												<a href="https://account.usercentrics.eu/subscription/<?php echo esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ); ?>/manage" class="manage-features-link" target="_blank">
-												<?php else : ?>
-												<a href="https://account.usercentrics.eu/subscription/manage" class="manage-features-link" target="_blank">
-												<?php endif; ?>
-													<p>Manage advanced features</p>
-												</a>
+													<a href="https://account.usercentrics.eu/subscription/<?php echo esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ); ?>/manage" class="manage-features-link" target="_blank">
+													<?php else : ?>
+														<a href="https://account.usercentrics.eu/subscription/manage" class="manage-features-link" target="_blank">
+														<?php endif; ?>
+														<p>Manage advanced features</p>
+														</a>
 											</div>
 											<?php if ( isset( $template_args['user_data']['subscriptions']['active']['next_billing_date'] ) ) : ?>
 												<div class="billing-date">
@@ -332,18 +363,23 @@ $header->display();
 								<?php else : ?>
 									<div class="upgrade-details">
 										<div class="divider"></div>
-										<p class="upgrade-intro">Upgrade to unlock these premium benefits:</p>
+										<div class="trial-countdown">
+										<?php if ( Cookiebot_WP::is_in_trial() && ! $trial_expired ) : ?>
+											<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/clock-icon-blue.svg' ); ?>" alt="Clock Icon">
+											<p class="step-message"><strong>Your trial ends in</strong> <span class="days-highlight"><?php echo absint( Cookiebot_WP::get_trial_days_left() ); ?> days</span>.</p>
+										<?php endif; ?>
+										</div>
+
+										<p class="step-message">Upgrade to get full access to premium features. <br> Premium includes:</p>
 
 										<ul class="upgrade-features">
-											<li><strong>Match your consent banner to your brand</strong> with advanced customization options.</li>
-											<li><strong>Adapt your banner to increase opt-ins</strong> using our consent analytics data.</li>
-											<li><strong>Benefit from higher session limits</strong> and maintain privacy compliance as your traffic grows.</li>
+											<li><strong>Higher session limits</strong> for growing traffic</li>
+											<li><strong>Custom branding</strong> for a seamless site experience</li>
+											<li><strong>Better insights</strong> to optimize your opt-ins</li>
 										</ul>
 
-										<p class="ready-text">Ready to take your consent experience to the next level?</p>
-
 										<div class="upgrade-container">
-											<button id="upgrade-now-button" class="cb-btn cb-primary-btn" onclick="window.open('https://account.usercentrics.eu/subscription/<?php echo isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ? esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) . '/' : ''; ?>manage', '_blank')">
+											<button id="upgrade-now-button" class="cb-btn cb-primary-btn" onclick="/* window.trackAmplitudeEvent('Bottom Upgrade Now Clicked', { settingsId: '<?php echo esc_js( $template_args['cbid'] ); ?>', account_id: '<?php echo esc_js( $template_args['cbid'] ); ?>' }); */ window.open('https://account.usercentrics.eu/subscription/<?php echo isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ? esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) . '/' : ''; ?>manage', '_blank')">
 												<?php echo esc_html__( 'Upgrade now', 'cookiebot' ); ?>
 											</button>
 										</div>
@@ -353,21 +389,26 @@ $header->display();
 						<?php endif; ?>
 					</div>
 				</div>
-	
+
 				<!-- Right Side - Banner Control (only show when CBID exists) -->
 				<?php if ( $template_args['user_data'] ) : ?>
 					<div class="gray-box-overview">
 						<div class="header-section">
 							<div>
 								<div class="top-row">
-									<a href="<?php echo esc_url( site_url() ); ?>" target="_blank" class="dashboard-link"><?php echo esc_html__( 'Preview', 'cookiebot' ); ?></a>
+									<a href="<?php echo esc_url( site_url() ); ?>" target="_blank" class="dashboard-link" onclick="/* window.trackAmplitudeEvent('Preview Link Clicked', { settingsId: '<?php echo esc_js( $template_args['cbid'] ); ?>' }); */"><?php echo esc_html__( 'Preview', 'cookiebot' ); ?></a>
 									<span class="free-badge"><?php echo esc_html( $template_args['subscription'] ); ?></span>
 								</div>
 								<h1><?php echo esc_html__( 'Banner control', 'cookiebot' ); ?></h1>
-								<p class="subtitle"><?php echo esc_html__( 'Choose and control your banner settings and display options.', 'cookiebot' ); ?></p>
+								<p class="subtitle">
+									<?php esc_html_e( 'Need more options? Head to the', 'cookiebot' ); ?>
+									<a href="https://admin.usercentrics.eu/#/v3/configuration/setup?settingsId=<?php echo esc_attr( $template_args['cbid'] ); ?>" target="_blank" style="color: inherit;">
+										<?php esc_html_e( 'Admin Interface', 'cookiebot' ); ?>
+									</a>.
+								</p>
 							</div>
 						</div>
-	
+
 						<div class="banner-options">
 							<!-- Show banner on site option -->
 							<div class="option-group">
@@ -413,24 +454,24 @@ $header->display();
 									</div>
 									<div class="label-wrapper status-badge <?php echo ! empty( $template_args['cbid'] ) && $template_args['auto_blocking_mode'] === '1' ? 'active' : ' inactive'; ?>" id="cookiebot-uc-auto-blocking-mode-badge">
 										<div class="label-2">
-												<?php echo ! empty( $template_args['cbid'] ) && $template_args['auto_blocking_mode'] === '1' ? esc_html__( 'Active', 'cookiebot' ) : esc_html__( 'Inactive', 'cookiebot' ); ?>
+											<?php echo ! empty( $template_args['cbid'] ) && $template_args['auto_blocking_mode'] === '1' ? esc_html__( 'Active', 'cookiebot' ) : esc_html__( 'Inactive', 'cookiebot' ); ?>
 										</div>
 									</div>
 								</div>
 							</div>
-	
+
 							<div class="option-divider"></div>
-	
+
 							<!-- Google Consent Mode option -->
 							<div class="option-group">
 								<div class="option-label-wrapper">
 									<span class="option-label"><?php echo esc_html__( 'Google Consent Mode', 'cookiebot' ); ?></span>
-	
+
 									<div class="tooltip">
 										<span class="tooltiptext">Enable Google Consent Mode to continue running remarketing campaigns and tracking conversions in Google Ads and Google Analytics. Required if you have visitors from the European Economic Area (EEA).</span>
 										<img class="img" src="<?php echo esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/info.svg' ); ?>" />
 									</div>
-	
+
 								</div>
 								<div class="option-controls">
 									<div class="toggle-switch">
@@ -442,7 +483,7 @@ $header->display();
 											 />
 										<label for="cookiebot-gcm" class="toggle-label"></label>
 									</div>
-	
+
 									<div class="label-wrapper status-badge <?php echo ! empty( $template_args['cbid'] ) && $template_args['gcm_enabled'] === '1' ? 'active' : 'inactive'; ?>" id="cookiebot-gcm-badge">
 										<div class="label-2">
 											<?php echo ! empty( $template_args['cbid'] ) && $template_args['gcm_enabled'] === '1' ? esc_html__( 'Active', 'cookiebot' ) : esc_html__( 'Inactive', 'cookiebot' ); ?>
@@ -450,9 +491,9 @@ $header->display();
 									</div>
 								</div>
 							</div>
-	
+
 							<div class="option-divider"></div>
-	
+
 							<!-- Legal framework option -->
 							<div class="option-group">
 								<span class="option-label"><?php echo esc_html__( 'Legal framework', 'cookiebot' ); ?></span>
@@ -461,9 +502,9 @@ $header->display();
 								</div>
 							</div>
 						</div>
-	
+
 						<div class="banner-actions">
-							<button class="cb-btn customize-banner-btn" onclick="window.open('<?php echo esc_url( $template_args['customize_banner_link'] ); ?>', '_blank')"><?php echo esc_html__( 'Customize banner', 'cookiebot' ); ?></button>
+							<button class="cb-btn customize-banner-btn" onclick="/* window.trackAmplitudeEvent('Customize Banner Clicked', { settingsId: '<?php echo esc_js( $template_args['cbid'] ); ?>', plugin_version: '<?php echo esc_js( CYBOT_COOKIEBOT_VERSION ); ?>' }); */ window.open('<?php echo esc_url( $template_args['customize_banner_link'] ); ?>', '_blank')"><?php echo esc_html__( 'Customize banner', 'cookiebot' ); ?></button>
 							<a href="<?php echo esc_url( $template_args['configure_banner_link'] ); ?>" class="configure-link" target="_blank">
 								<img class="material-icons" src="<?php echo esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/link.svg' ); ?>" />
 								<?php echo esc_html__( 'How to configure your banner', 'cookiebot' ); ?>
@@ -471,7 +512,7 @@ $header->display();
 						</div>
 					</div>
 				<?php endif; ?>
-			 </div>
+			</div>
 
 			<!-- Help text (only show when user_data doesn't exist) -->
 			<?php if ( empty( $template_args['user_data'] ) ) : ?>

@@ -102,6 +102,20 @@ class Dashboard_Page implements Settings_Page_Interface {
 			'user_email'            => $user_email,
 		);
 
+		wp_enqueue_script(
+			'cookiebot-amplitude-js',
+			CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/amplitude.js',
+			array( 'jquery' ),
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+			true
+		);
+
+		wp_localize_script(
+			'cookiebot-amplitude-js',
+			'cookiebot_amplitude',
+			array()
+		);
+
 		if ( ! $is_authenticated && ! empty( $cbid ) && ! empty( $user_data ) && ! empty( $was_onboarded ) ) {
 			wp_enqueue_style(
 				'cookiebot-dashboard-css',
@@ -220,6 +234,15 @@ class Dashboard_Page implements Settings_Page_Interface {
 			array( 'jquery' ),
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			true
+		);
+
+		wp_localize_script(
+			'cookiebot-dashboard-js',
+			'cookiebot_dashboard',
+			array(
+				'cbid'      => $cbid,
+				'user_data' => $user_data,
+			)
 		);
 
 		wp_enqueue_script(

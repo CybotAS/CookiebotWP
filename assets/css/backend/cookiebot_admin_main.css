@@ -153,6 +153,16 @@
     color: #ffffff;
 }
 
+.cb-secondary-btn {
+    background-color: white;
+    color: #141414;
+    border: 3px solid #1032cf;
+}
+
+.cb-secondary-btn:hover {
+    color: #141414;
+}
+
 .cb-white-btn, .cb-white-btn:focus {
     background-color: #ffffff;
     color: #141414;
