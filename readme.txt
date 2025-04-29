@@ -202,6 +202,22 @@ Usercentrics Cookiebot is fully integrated with the WP Consent API. When your vi
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
 
+
+### 4.5.4 ###
+Release date: April 29th 2025
+
+Cookiebot CMP version 4.5.4 is out! This release has some new features and bugfixes.
+
+####What's new####
+
+* New page for free plan users
+* Improve activation banner text
+* Improve navigation menus (Support and Settings)
+
+####Bugfixes####
+
+* Fix disconnect flow for user created with the new onboarding process
+
 ### 4.5.3 ###
 Release date: April 10th 2025
 
