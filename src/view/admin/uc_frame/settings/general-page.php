@@ -11,7 +11,11 @@
  * @var bool $network_auto
  */
 
+use cybot\cookiebot\lib\Cookiebot_WP;
 use function cybot\cookiebot\lib\include_view;
+
+// Check if user was onboarded via signup
+$was_onboarded = Cookiebot_WP::was_onboarded_via_signup();
 
 ?>
 <?php include_view( 'admin/common/templates/extra/cbid-disconnect-alert.php' ); ?>
@@ -20,18 +24,39 @@ if ( ! empty( $network_cbid ) ) {
 	include_view( 'admin/common/templates/extra/subsite-disconnect-alert.php' );
 }
 ?>
+
+<div class="cb-settings__tabs">
+</div>
+
 <div class="cb-settings__config__item cb-settings__config__cbid">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
-			<?php esc_html_e( 'Settings ID', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Disconnecting your banner setup?', 'cookiebot' ); ?>
 		</h3>
 		<p class="cb-general__info__text">
-			<?php esc_html_e( 'To disconnect your account, enter your settings ID into the field and confirm with the button.', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Click', 'cookiebot' ); ?>
+			<strong><?php esc_html_e( 'Disconnect account', 'cookiebot' ); ?></strong>
+			<?php esc_html_e( 'to remove this cookie banner from your site. You can add it back at any time using the same ID or a new one.', 'cookiebot' ); ?>
 		</p>
-		<a href="https://support.usercentrics.com/hc/en-us/articles/18097606499100-What-is-a-Settings-ID-and-where-can-I-find-it"
-			target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-			<?php esc_html_e( 'Where to find settings ID', 'cookiebot' ); ?>
-		</a>
+		<p class="cb-general__info__text">
+			<?php esc_html_e( 'Since you signed up through the plugin, disconnecting will remove your login access and clear your plugin data. But don\'t worry, you can still use your ID by copying and pasting it from the Admin Interface.', 'cookiebot' ); ?>
+		</p>
+
+		<?php if ( $was_onboarded ) : ?>
+			<p class="cb-general__info__text">
+				<?php esc_html_e( 'Need more control over your banner?', 'cookiebot' ); ?>
+				<a href="https://admin.usercentrics.eu/#/v3/configuration/setup?settingsId=<?php echo esc_attr( $cbid ); ?>"
+					target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+					<?php esc_html_e( 'Go to full banner settings', 'cookiebot' ); ?>
+				</a>
+			</p>
+		<?php else : ?>
+			<a href="https://support.usercentrics.com/hc/en-us/articles/18097606499100-What-is-a-Settings-ID-and-where-can-I-find-it"
+				target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+				<?php esc_html_e( 'Where to find settings ID', 'cookiebot' ); ?>
+			</a>
+
+		<?php endif; ?>
 	</div>
 	<div class="cb-settings__config__data">
 		<div class="cb-settings__config__data__inner">
@@ -91,57 +116,62 @@ if ( ! empty( $network_cbid ) ) {
 	</div>
 </div>
 
-<div id="cookiebot-ruleset-id-selector" class="cb-settings__config__item hidden">
-	<div class="cb-settings__config__content">
-		<p class="cb-general__info__text">
-			<?php esc_html_e( 'Let us know if your account is set for compliance with a single privacy law (e.g. GDPR) or multiple laws (e.g. GDPR and CCPA) based on user’s location. The default is a single privacy law, so this is likely your setting unless modified.', 'cookiebot' ); ?>
-		</p>
+<?php if ( ! $was_onboarded ) : ?>
+	<div id="cookiebot-ruleset-id-selector" class="cb-settings__config__item hidden">
+		<div class="cb-settings__config__content">
+			<p class="cb-general__info__text">
+				<?php esc_html_e( 'Let us know if your account is set for compliance with a single privacy law (e.g. GDPR) or multiple laws (e.g. GDPR and CCPA) based on user’s location. The default is a single privacy law, so this is likely your setting unless modified.', 'cookiebot' ); ?>
+			</p>
+		</div>
+		<div class="cb-settings__config__data">
+			<div class="cb-settings__config__data__inner">
+				<h3 class="cb-settings__data__subtitle">
+					<?php esc_html_e( 'Your current account setup:', 'cookiebot' ); ?>
+				</h3>
+				<label class="recommended-item">
+					<input <?php checked( 'settings', $ruleset_id ); ?>
+							type="radio"
+							name="cookiebot-ruleset-id"
+							value="settings"/>
+					<?php esc_html_e( 'Compliance with one privacy law', 'cookiebot' ); ?>
+				</label>
+				<label>
+					<input <?php checked( 'ruleset', $ruleset_id ); ?>
+							type="radio"
+							name="cookiebot-ruleset-id"
+							value="ruleset"/>
+					<?php esc_html_e( 'Compliance with multiple privacy laws (geolocation)', 'cookiebot' ); ?>
+				</label>
+			</div>
+		</div>
 	</div>
-	<div class="cb-settings__config__data">
-		<div class="cb-settings__config__data__inner">
-			<h3 class="cb-settings__data__subtitle">
-				<?php esc_html_e( 'Your current account setup:', 'cookiebot' ); ?>
+<?php endif; ?>
+
+<?php if ( ! $was_onboarded ) : ?>
+	<div class="cb-settings__config__item">
+		<div class="cb-settings__config__content">
+			<h3 class="cb-settings__config__subtitle">
+				<?php esc_html_e( 'TCF integration', 'cookiebot' ); ?>
 			</h3>
-			<label class="recommended-item">
-				<input <?php checked( 'settings', $ruleset_id ); ?>
-						type="radio"
-						name="cookiebot-ruleset-id"
-						value="settings"/>
-				<?php esc_html_e( 'Compliance with one privacy law', 'cookiebot' ); ?>
-			</label>
-			<label>
-				<input <?php checked( 'ruleset', $ruleset_id ); ?>
-						type="radio"
-						name="cookiebot-ruleset-id"
-						value="ruleset"/>
-				<?php esc_html_e( 'Compliance with multiple privacy laws (geolocation)', 'cookiebot' ); ?>
-			</label>
+			<p class="cb-general__info__text">
+				<?php esc_html_e( 'Enable the integration with the latest version of IAB TCF.', 'cookiebot' ); ?>
+			</p>
+		</div>
+		<div class="cb-settings__config__data">
+			<div class="cb-settings__config__data__inner">
+				<label class="switch-checkbox" for="cookiebot-iab">
+					<input type="checkbox" name="cookiebot-iab" id="cookiebot-iab" value="1"
+						<?php checked( 1, $cookiebot_iab ); ?>>
+					<div class="switcher"></div>
+					<?php esc_html_e( 'IAB TCF integration', 'cookiebot' ); ?>
+				</label>
+			</div>
 		</div>
 	</div>
-</div>
+<?php endif; ?>
 
-<div class="cb-settings__config__item">
-	<div class="cb-settings__config__content">
-		<h3 class="cb-settings__config__subtitle">
-			<?php esc_html_e( 'TCF integration', 'cookiebot' ); ?>
-		</h3>
-		<p class="cb-general__info__text">
-			<?php esc_html_e( 'Enable the integration with the latest version of IAB TCF.', 'cookiebot' ); ?>
-		</p>
-	</div>
-	<div class="cb-settings__config__data">
-		<div class="cb-settings__config__data__inner">
-			<label class="switch-checkbox" for="cookiebot-iab">
-				<input type="checkbox" name="cookiebot-iab" id="cookiebot-iab" value="1"
-					<?php checked( 1, $cookiebot_iab ); ?>>
-				<div class="switcher"></div>
-				<?php esc_html_e( 'IAB TCF integration', 'cookiebot' ); ?>
-			</label>
-		</div>
-	</div>
-</div>
-
-<div class="cb-settings__config__item">
+<?php if ( ! $was_onboarded ) : ?>
+	<div class="cb-settings__config__item">
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle">
 			<?php esc_html_e( 'Cookie-blocking', 'cookiebot' ); ?>
@@ -181,7 +211,8 @@ if ( ! empty( $network_cbid ) ) {
 			<?php } ?>
 		</div>
 	</div>
-</div>
+	</div>
+<?php endif; ?>
 
 <?php
 $cv       = get_option( 'cookiebot-script-tag-uc-attribute', 'async' );

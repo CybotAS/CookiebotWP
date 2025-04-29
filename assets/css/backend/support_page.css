@@ -1,12 +1,12 @@
 .cb-support__content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-column-gap: 18px;
-    margin-bottom: 50px;
+    margin-bottom: 45px;
 }
 
 .cb-support__info__card {
-    padding: 25px 20px 0;
+    padding: 25px 20px 0 0;
 }
 
 .cb-support__info__title {
@@ -121,4 +121,24 @@
     background-origin: content-box;
     display: inline-block;
     width: 100%;
+}
+
+.cb-debug__code__container {
+    width: 100%;
+    border: 3px solid #d3d3d3;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cb-debug__code__container textarea {
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    border: none;
+    margin: 20px;
+    max-height: 430px;
+    background: transparent;
+}
+
+.cb-debug__code__container textarea:focus, .cb-debug__code__container textarea:active {
+    box-shadow: none;
 }

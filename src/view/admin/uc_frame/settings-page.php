@@ -8,6 +8,8 @@ use cybot\cookiebot\settings\pages\General_Page;
 use cybot\cookiebot\settings\pages\Gtm_Page;
 use cybot\cookiebot\settings\pages\Gcm_Page;
 use cybot\cookiebot\settings\pages\Embeddings_Page;
+use cybot\cookiebot\lib\Cookiebot_WP;
+
 
 /**
  * @var string $cbid
@@ -33,6 +35,9 @@ $main_tabs = new Main_Tabs();
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $active_tab = ! empty( $_GET['tab'] ) ? $_GET['tab'] : false;
 
+// Check if user was onboarded via signup
+$was_onboarded = Cookiebot_WP::was_onboarded_via_signup();
+
 $header->display();
 ?>
 
@@ -45,9 +50,10 @@ $header->display();
 				<?php do_settings_sections( 'cookiebot' ); ?>
 				<div class="cb-settings__header">
 					<h1 class="cb-main__page_title"><?php esc_html_e( 'Settings', 'cookiebot' ); ?></h1>
-					<?php submit_button( __( 'Save changes', 'cookiebot' ) ); ?>
+					<?php submit_button( __( 'Save changes', 'cookiebot' ), $was_onboarded ? 'hidden' : '' ); ?>
 				</div>
 
+				<?php if ( ! $was_onboarded ) : ?>
 				<div class="cb-settings__tabs cb-settings__tabs--uc">
 					<div class="cb-settings__tabs__item <?php echo ! $active_tab || $active_tab === 'general-settings' ? 'active-item' : ''; ?>"
 						data-tab="general-settings">
@@ -70,6 +76,7 @@ $header->display();
 						<?php esc_html_e( 'Privacy Policy Sync', 'cookiebot' ); ?>
 					</div>
 				</div>
+				<?php endif; ?>
 
 				<div class="cb-settings__tabs__content">
 					<div class="cb-settings__tabs__content--item <?php echo ! $active_tab || $active_tab === 'general-settings' ? 'active-item' : ''; ?>"

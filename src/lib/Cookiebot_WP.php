@@ -27,7 +27,7 @@ class Cookiebot_WP {
 		}
 	}
 
-	const COOKIEBOT_PLUGIN_VERSION  = '4.5.3';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.5.4';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -239,8 +239,8 @@ class Cookiebot_WP {
 		$raw_data = get_option( 'cookiebot-user-data', '' );
 
 		if ( empty( $raw_data ) ) {
-			self::debug_log( 'Raw data is empty, returning Free' );
-			return 'Free';
+			self::debug_log( 'Raw data is empty' );
+			return '';
 		}
 
 		// Use the data directly if it's already an array
@@ -248,8 +248,8 @@ class Cookiebot_WP {
 
 		// Check if we have the new subscription structure
 		if ( ! isset( $data['subscriptions']['active'] ) ) {
-			self::debug_log( 'No active subscription found, returning Free' );
-			return 'Free';
+			self::debug_log( 'No active subscription found' );
+			return '';
 		}
 
 		$subscription = $data['subscriptions']['active'];
@@ -263,7 +263,7 @@ class Cookiebot_WP {
 		// Check for trial status first
 		if ( in_array( $status, array( 'trial_will_be_billed', 'trial_missing_payment' ), true ) ) {
 			self::debug_log( 'Trial status detected, returning Premium trial' );
-			return 'Premium trial';
+			return 'Premium Trial';
 		}
 
 		// If not in trial, check active subscriptions
@@ -283,7 +283,7 @@ class Cookiebot_WP {
 		}
 
 		self::debug_log( 'No conditions met, returning Free' );
-		return 'Free';
+		return '';
 	}
 
 	/**
@@ -679,7 +679,7 @@ class Cookiebot_WP {
 			);
 
 			$base_plan = isset( $plan_mapping[ $price_plan ] ) ? $plan_mapping[ $price_plan ] : $price_plan;
-			return $base_plan !== 'Free';
+			return true;
 		}
 
 		return false;

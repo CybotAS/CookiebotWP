@@ -1,6 +1,6 @@
 <?php
 /**
- * @var string $manager_language
+ * @var string $debug_output
  */
 
 use cybot\cookiebot\lib\Cookiebot_Frame;
@@ -20,26 +20,57 @@ $header->display();
 
 			<div class="cb-support__content">
 				<div class="cb-support__info__card">
-					<h2 class="cb-support__info__title"><?php esc_html_e( 'Need help?', 'cookiebot' ); ?></h2>
+					<h2 class="cb-support__info__title"><?php esc_html_e( 'Having trouble or need help?', 'cookiebot' ); ?></h2>
 					<p class="cb-support__info__text">
 						<?php
 						esc_html_e(
-							'Visit our Support Center to find answers to your questions or get help with configuration. If you need further assistance, use the Contact Support button in the top navigation to create a support request. We’ll respond as soon as possible.',
+							'Need help? Visit our Support Center for answers.',
+							'cookiebot'
+						);
+						echo '<br>';
+						esc_html_e(
+							'Still stuck? Click',
+							'cookiebot'
+						);
+						echo '<strong> ';
+						esc_html_e(
+							'Contact Support',
+							'cookiebot'
+						);
+						echo ' </strong>';
+						esc_html_e(
+							'in the top-right corner of the Support Center page.',
+							'cookiebot'
+						);
+						echo '<br>';
+						esc_html_e(
+							'Please include your debug info so we can help faster.',
 							'cookiebot'
 						);
 						?>
 					</p>
-					<a href="https://usercentricsforwordpress.zendesk.com/hc/en-us/sections/19194997558428-FAQ" target="_blank" class="cb-btn cb-main-btn"
+				</div>
+
+				<div class="cb-debug__support__card">
+					<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn" style="border: 3px solid #1032cf"
 						rel="noopener">
-						<?php
-						esc_html_e(
-							'Go to Support Center',
-							'cookiebot'
-						);
-						?>
+						<?php esc_html_e( 'Visit Support Center', 'cookiebot' ); ?>
+					</a>
+					<a href="#" onclick="copyDebugInfo();" class="cb-btn cb-secondary-btn" style="margin-left: 20px;">
+						<?php esc_html_e( 'Copy Debug Info', 'cookiebot' ); ?>
 					</a>
 				</div>
 			</div>
+
+			<div class="cb-debug__code__container">
+				<textarea
+						cols="50"
+						rows="40"
+						id="cookiebot-debug-info"
+						readonly="readonly"
+				><?php echo esc_textarea( $debug_output ); ?></textarea>
+			</div>
+
 		</div>
 	</div>
 </div>

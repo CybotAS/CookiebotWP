@@ -747,14 +747,6 @@
     padding: 0 1.5rem 1.5rem;
 }
 
-.scan-message {
-    color: #1D2327;
-    font-size: 1rem;
-    line-height: 1.5;
-    margin: 1rem 0;
-    padding: 0;
-}
-
 .step-box .divider {
     height: 3px;
     background-color: #F3F4F6;
@@ -826,7 +818,7 @@
     margin: 0 0 1.5rem;
 }
 
-.scan-message {
+.step-message {
     color: #1D2327;
     font-size: 1rem;
     line-height: 1.5;
@@ -893,4 +885,66 @@
 .failed-status svg {
     width: 16px;
     height: 16px;
+}
+
+.trial-countdown {
+    display: flex;
+    align-items: center;
+    text-wrap: nowrap;
+    margin: 0px 0px 10px
+}
+
+.trial-countdown p {
+    margin-left: 10px;
+}
+
+.days-highlight {
+    color: #1032CF;
+    font-weight: bold;
+}
+
+.header-top-banners.free-plan-banner {
+    background-color: #FDECCF;
+    justify-content: space-between;
+}
+
+.header-top-banners.free-plan-banner h3 {
+    color: #1D2327;
+    margin: 0 0 0.25rem;
+    font-size: 1.125rem;
+    line-height: 1.5;
+}
+
+.header-top-banners.free-plan-banner p {
+    color: #4B5563;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin: 0;
+    text-wrap: nowrap;
+}
+
+.upgrade-free-plan {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 1.5rem 2rem;
+}
+
+.upgrade-free-plan h3 {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1D2327;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.upgrade-now-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.upgrade-now-link:hover h3 {
+    color: #92400E;
 }

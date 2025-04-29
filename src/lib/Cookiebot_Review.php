@@ -3,7 +3,7 @@
 namespace cybot\cookiebot\lib;
 
 use WP_REST_SERVER;
-use cybot\cookiebot\settings\pages\Debug_Page;
+use cybot\cookiebot\settings\pages\Support_Page;
 
 class Cookiebot_Review {
 
@@ -68,36 +68,40 @@ class Cookiebot_Review {
 			array(
 				'survey_nonce'       => wp_create_nonce( 'cookiebot_survey_nonce' ),
 				'logo'               => asset_url( 'img/icons/shield_icon.svg' ),
-				'popup_header_title' => __( 'Cookiebot CMP Deactivation', 'cookiebot' ),
-				'first_msg'          => __( 'We are sad to lose you. Take a moment to help us improve?', 'cookiebot' ),
+				'popup_header_title' => __( 'Leaving Usercentrics Cookiebot?', 'cookiebot' ),
+				'first_msg'          => __( 'We\'re sad to see you go. Let us know how we can improve Usercentrics Cookiebot', 'cookiebot' ),
 				'options'            => array(
 					array(
-						'text'  => __( 'The installation is too complicated', 'cookiebot' ),
+						'text'  => __( 'My site stopped working / it conflicted with other plugins', 'cookiebot' ),
 						'value' => '1',
 					),
 					array(
-						'text'  => __( 'I found a plugin that better serves my needs', 'cookiebot' ),
+						'text'  => __( 'Cookies weren’t being blocked correctly', 'cookiebot' ),
 						'value' => '2',
 					),
 					array(
-						'text'  => __( 'Missing features / did not meet my expectations', 'cookiebot' ),
+						'text'  => __( 'I couldn’t find or activate the Free plan', 'cookiebot' ),
 						'value' => '3',
 					),
 					array(
-						'text'  => __( 'I need more customization options', 'cookiebot' ),
+						'text'  => __( 'The Premium plans are too expensive', 'cookiebot' ),
 						'value' => '4',
 					),
 					array(
-						'text'  => __( 'The premium plan is too expensive', 'cookiebot' ),
+						'text'  => __( 'Missing features / didn\'t meet my expectations', 'cookiebot' ),
 						'value' => '5',
 					),
 					array(
-						'text'  => __( 'I’m only deactivating the plugin temporarily', 'cookiebot' ),
+						'text'  => __( 'I found another plugin that fits my needs better', 'cookiebot' ),
 						'value' => '6',
 					),
 					array(
-						'text'  => __( 'Other', 'cookiebot' ),
+						'text'  => __( 'I\'m only deactivating it temporarily', 'cookiebot' ),
 						'value' => '7',
+					),
+					array(
+						'text'  => __( 'Other', 'cookiebot' ),
+						'value' => '8',
 						'extra' => __( 'Please specify here', 'cookiebot' ),
 					),
 				),
@@ -154,8 +158,8 @@ class Cookiebot_Review {
 		);
 
 		if ( ! empty( $_POST['reason_debug'] ) && rest_sanitize_boolean( $_POST['reason_debug'] ) === true ) {
-			$debug_info         = new Debug_Page();
-			$data['debug_info'] = wp_json_encode( $debug_info->prepare_debug_data() );
+			$support            = new Support_Page();
+			$data['debug_info'] = wp_json_encode( $support->prepare_debug_data() );
 		}
 
 		wp_remote_post(

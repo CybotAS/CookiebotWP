@@ -76,6 +76,19 @@ const checkUserData = async () => {
 
         if (!userData) throw new Error('No user data received');
 
+        const storedUserData = await fetch(cookiebot_account.ajax_url, {
+            method: 'POST',
+            body: createFormData('cookiebot_get_user_data'),
+            credentials: 'same-origin'
+        }).then(r => r.json());
+
+        if (storedUserData.data.subscriptions['active'].subscription_status.includes('trial') && !userData.subscriptions['active'].subscription_status.includes('trial')) {
+            // window.trackAmplitudeEvent('Pricing Plan Chosen', {
+            //     plan: userData.subscriptions['active'].price_plan,
+            //     subscription_status: userData.subscriptions['active'].subscription_status
+            // });
+        }
+
         // Store user data
         userResponseData = await fetch(cookiebot_account.ajax_url, {
             method: 'POST',
@@ -158,8 +171,16 @@ async function fetchConfigurationDetails(configId) {
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const ucApiCode = urlParams.get('uc_api_code');
+    // if (!cookiebot_account.has_cbid) {
+    //     window.trackAmplitudeEvent('Get Started Page Visited');
+    // }
     // For existing users, no account registration workflow is needed 
     if (cookiebot_account.has_cbid && !cookiebot_account.has_user_data && !cookiebot_account.was_onboarded) {
+        return;
+    }
+
+    // For previously onboarded users that disconnected the account, no new account registration workflow is needed 
+    if (!cookiebot_account.has_cbid && cookiebot_account.was_onboarded) {
         return;
     }
 
@@ -263,11 +284,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             await checkUserData();
             return;
         }
-
-        // if (!isAuthenticatedCondition && cookiebot_account.has_user_data) {
-        //     const callbackUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot';
-        //     window.location.href = `${API_BASE_URL}/auth/auth0/authorize?origin=wordpress_plugin&callback_domain=${encodeURIComponent(callbackUrl)}`;
-        // }
 
         if (!cbid) {
             try {
@@ -379,6 +395,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (!userData) throw new Error('No user data received');
 
+            // Track account creation in Amplitude
+            // window.trackAmplitudeEvent('Account Created');
+
             // Store user data
             userResponseData = await fetch(cookiebot_account.ajax_url, {
                 method: 'POST',
@@ -426,7 +445,7 @@ document.getElementById('banner-close-btn')?.addEventListener('click', async () 
         });
 
         if (!response.ok) throw new Error(`Failed to dismiss banner: ${response.status}`);
-        const banner = document.getElementById('banner-live-notice')
+        const banner = document.getElementById('banner-live-notice');
         if (banner) banner.remove();
     } catch (error) {
         console.error('Failed to dismiss banner:', error);
@@ -434,11 +453,11 @@ document.getElementById('banner-close-btn')?.addEventListener('click', async () 
 });
 
 document.getElementById('get-started-button')?.addEventListener('click', async (e) => {
+    // window.trackAmplitudeEvent('Sign Up Flow Started');
     e.preventDefault();
     try {
-        // If multisite is enabled the url might include also the directory for the site
-        // e.g.: http://domain/site1/wp-admin/admin.php?page=cookiebot
         const callbackUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot';
+        console.log('callbackUrl', `${API_BASE_URL}/auth/auth0/authorize?origin=wordpress_plugin&callback_domain=${encodeURIComponent(callbackUrl)}`);
         window.location.href = `${API_BASE_URL}/auth/auth0/authorize?origin=wordpress_plugin&callback_domain=${encodeURIComponent(callbackUrl)}`;
     } catch (error) {
         console.error('Failed to start authentication process:', error);

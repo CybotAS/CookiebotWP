@@ -8,7 +8,6 @@
 
 use cybot\cookiebot\settings\pages\Settings_Page;
 use cybot\cookiebot\settings\pages\Support_Page;
-use cybot\cookiebot\settings\pages\Debug_Page;
 use cybot\cookiebot\settings\pages\Plugins_Page;
 use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\settings\templates\Main_Tabs;
@@ -46,9 +45,9 @@ if ( Cookiebot_WP::is_in_trial() && ! $trial_expired && $is_authenticated ) :
 			</span>
 		</div>
 		<?php if ( isset( $user_data['subscriptions']['active']['subscription_id'] ) ) : ?>
-		<a href="https://account.usercentrics.eu/subscription/<?php echo esc_attr( $user_data['subscriptions']['active']['subscription_id'] ); ?>/manage" target="_blank" class="upgrade-button">
+		<a href="https://account.usercentrics.eu/subscription/<?php echo esc_attr( $user_data['subscriptions']['active']['subscription_id'] ); ?>/manage" target="_blank" class="upgrade-button" onclick="/* window.trackAmplitudeEvent('Header Upgrade now button clicked', { trial_start_date: '<?php echo esc_js( $user_data['subscriptions']['active']['trial_start_date'] ? $user_data['subscriptions']['active']['trial_start_date'] : '' ); ?>', trial_end_date: '<?php echo esc_js( $user_data['subscriptions']['active']['trial_end_date'] ? $user_data['subscriptions']['active']['trial_start_date'] : '' ); ?>', account_id: '<?php echo esc_js( $cbid ); ?>' }); */">
 		<?php else : ?>
-		<a href="https://account.usercentrics.eu/subscription/manage" target="_blank" class="upgrade-button">
+		<a href="https://account.usercentrics.eu/subscription/manage" target="_blank" class="upgrade-button" onclick="/* window.trackAmplitudeEvent('Header Upgrade now button clicked', { trial_start_date: '<?php echo esc_js( $user_data['subscriptions']['active']['trial_start_date'] ? $user_data['subscriptions']['active']['trial_start_date'] : '' ); ?>', trial_end_date: '<?php echo esc_js( $user_data['subscriptions']['active']['trial_end_date'] ? $user_data['subscriptions']['active']['trial_start_date'] : '' ); ?>', account_id: '<?php echo esc_js( $cbid ); ?>' }); */">
 		<?php endif; ?>
 			<?php echo esc_html__( 'Upgrade now', 'cookiebot' ); ?>
 			<span class="arrow-icon">→</span>
