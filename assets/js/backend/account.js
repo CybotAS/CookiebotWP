@@ -123,7 +123,7 @@ const isAuthenticated = async () => {
                 body: createFormData('cookiebot_delete_auth_token'),
                 credentials: 'same-origin'
             });
-            if (!window.prevent_default) {
+            if (!window.prevent_default && canReload()) {
                 window.location.reload();
             }
         }
@@ -168,6 +168,32 @@ async function fetchConfigurationDetails(configId) {
     }
 }
 
+function canReload() {    
+    const itemStr = localStorage.getItem('dashboard_reload');
+    const now = new Date();
+    const numTimes = 3;
+    const ttl = 30000;
+    let count = 0;
+
+    if (itemStr) {
+        const item = JSON.parse(itemStr);
+    
+        if (now.getTime() < item.exp) {
+            if (item.count > numTimes) {
+                return false;    
+            }
+            count = item.count + 1;
+        }
+    }
+    
+    const item = {
+        count: count,
+        exp: now.getTime() + ttl,
+    }
+    localStorage.setItem('dashboard_reload', JSON.stringify(item));
+    return true;
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const ucApiCode = urlParams.get('uc_api_code');
@@ -210,10 +236,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }).then(r => r.json()).then(data => data.data);
 
                     if (!response.ok) throw new Error(`Auth failed: ${response.status}`);
-                    const newUrl = new URL(window.location.href);
-                    newUrl.searchParams.delete('uc_api_code');
-                    newUrl.searchParams.delete('is_new_user');
-                    window.location.href = newUrl;
+                    if (canReload()) {
+                        const newUrl = new URL(window.location.href);
+                        newUrl.searchParams.delete('uc_api_code');
+                        newUrl.searchParams.delete('is_new_user');
+                        window.location.href = newUrl;    
+                    }
                     return;
                 } catch (error) {
                     console.error('Failed to process authentication:', error);
@@ -228,9 +256,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                     body: createFormData('cookiebot_process_auth_code', { code: ucApiCode }),
                     credentials: 'same-origin'
                 });
-                const settingsUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot_settings';
-                window.location.href = settingsUrl;
-                return;
+
+                if (canReload()) {
+                    const settingsUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot_settings';
+                    window.location.href = settingsUrl;
+                    return;
+                }
             }
 
             // Add loading state
@@ -393,8 +424,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }).then(r => r.json()).then(data => data[0]);
 
-            if (!userData) throw new Error('No user data received');
-
             // Track account creation in Amplitude
             // window.trackAmplitudeEvent('Account Created');
 
@@ -406,10 +435,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }),
                 credentials: 'same-origin'
             }).then(r => r.json());
-
-            if (!userResponseData.success) {
-                throw new Error('Failed to store user data');
-            }
 
             // Store onboarding status separately
             await fetch(cookiebot_account.ajax_url, {
@@ -425,7 +450,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        if (userResponseData.data) {
+        if (userResponseData.data && canReload()) {
             const newUrl = new URL(window.location.href);
             newUrl.searchParams.delete('uc_api_code');
             window.location.href = newUrl;
@@ -457,7 +482,6 @@ document.getElementById('get-started-button')?.addEventListener('click', async (
     e.preventDefault();
     try {
         const callbackUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot';
-        console.log('callbackUrl', `${API_BASE_URL}/auth/auth0/authorize?origin=wordpress_plugin&callback_domain=${encodeURIComponent(callbackUrl)}`);
         window.location.href = `${API_BASE_URL}/auth/auth0/authorize?origin=wordpress_plugin&callback_domain=${encodeURIComponent(callbackUrl)}`;
     } catch (error) {
         console.error('Failed to start authentication process:', error);

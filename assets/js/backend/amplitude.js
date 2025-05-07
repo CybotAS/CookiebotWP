@@ -13,7 +13,6 @@ document.head.appendChild(script);
 
 // Global tracking function
 window.trackAmplitudeEvent = function (eventName, additionalProperties = {}) {
-    console.log('trackAmplitudeEvent', eventName, additionalProperties);
     try {
         if (window.amplitude?.track) {
             const properties = {

@@ -44,6 +44,10 @@
     pointer-events: initial;
 }
 
+.cb-settings__notabs {
+    margin-bottom: 60px;
+}
+
 .cb-settings__tabs {
     display: grid;
     grid-template-columns: repeat(6, 1fr);

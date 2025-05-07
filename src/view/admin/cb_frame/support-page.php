@@ -29,7 +29,7 @@ $header->display();
 						);
 						?>
 					</p>
-					<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn"
+					<a href="https://support.usercentrics.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn"
 						rel="noopener">
 						<?php
 						esc_html_e(

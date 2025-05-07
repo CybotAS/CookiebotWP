@@ -5,7 +5,7 @@ Plugin Name: Usercentrics Cookiebot - Cookie Banner & Privacy Compliance for GDP
 Plugin URI: https://www.cookiebot.com/
 Description: Install your cookie banner in minutes. Automatically scan and block cookies to comply with the GDPR, CCPA, Google Consent Mode v2. Free plan option.
 Author: Usercentrics A/S
-Version: 4.5.4
+Version: 4.5.5
 Author URI: https://www.cookiebot.com/
 Text Domain: cookiebot
 Domain Path: /langs

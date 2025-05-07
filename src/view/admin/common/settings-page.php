@@ -21,22 +21,6 @@ $header->display();
 ?>
 
 <div class="cb-body">
-	<!-- Banner container for proper alignment -->
-	<div class="banner-container">
-		<div class="header-top-banners banner-live-banner" id="banner-live-notice">
-			<div class="banner-content">
-				<div>
-					<p>
-						<?php echo esc_html__( 'Looks like you\'re already set up on our website. Just paste your configuration ID below to get started.', 'cookiebot' ); ?>
-					</p>
-				</div>
-			</div>
-			<button class="banner-close-btn" aria-label="Close banner" id="banner-close-btn">
-				<span aria-hidden="true">×</span>
-			</button>
-		</div>
-	</div>
-
 	<div class="cb-wrapper">
 		<?php $main_tabs->display( 'settings' ); ?>
 		<div class="cb-main__content">

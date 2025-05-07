@@ -34,7 +34,7 @@ $header->display();
 						);
 						echo '<strong> ';
 						esc_html_e(
-							'Contact Support',
+							'Submit a request',
 							'cookiebot'
 						);
 						echo ' </strong>';
@@ -52,7 +52,7 @@ $header->display();
 				</div>
 
 				<div class="cb-debug__support__card">
-					<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn" style="border: 3px solid #1032cf"
+					<a href="https://usercentricsforwordpress.zendesk.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn" style="border: 3px solid #1032cf"
 						rel="noopener">
 						<?php esc_html_e( 'Visit Support Center', 'cookiebot' ); ?>
 					</a>

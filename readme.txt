@@ -3,7 +3,7 @@
 * Tags: cookie banner, cookie consent, cookie notice, gdpr, privacy
 * Requires at least: 4.4
 * Tested up to: 6.8
-* Stable tag: 4.5.4
+* Stable tag: 4.5.5
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -89,7 +89,7 @@ Watch the video to learn how to install the Cookiebot CMP WordPress plugin. Itâ€
 
 [youtube https://www.youtube.com/watch?v=1-lvuJa42P0]
 
-Need assistance? Visit our [Help Center](https://support.cookiebot.com/hc/en-us) or [contact us](https://usercentricsforwordpress.zendesk.com/hc/en-us/requests/new).
+Need assistance? Visit our [Help Center](https://support.usercentrics.com/hc/en-us) or [contact us](https://usercentricsforwordpress.zendesk.com/hc/en-us/requests/new).
 
 ## Support and updates ##
 
@@ -99,7 +99,7 @@ With industry-leading scanning technology, the platform detects and controls all
 
 Usercentrics Cookiebot CMP and the WordPress Plugin are designed to be used by both technical and non-technical teams that value plug-and-play solutions and reliable scalability. Transform data privacy compliance into a competitive advantage with Usercentrics Cookiebot.
 
-If you have questions or need cookie banner support, visit our [Help Center](https://support.cookiebot.com/hc/en-us) or [contact us](https://usercentricsforwordpress.zendesk.com/hc/en-us/requests/new).
+If you have questions or need cookie banner support, visit our [Help Center](https://support.usercentrics.com/hc/en-us) or [contact us](https://usercentricsforwordpress.zendesk.com/hc/en-us/requests/new).
 
 ## Screenshots ##
 
@@ -202,6 +202,22 @@ Usercentrics Cookiebot is fully integrated with the WP Consent API. When your vi
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
 
+### 4.5.5 ###
+Release date: May 7th 2025
+
+Cookiebot CMP version 4.5.5 is out! This release has some new features and bugfixes.
+
+####What's new####
+
+* Easier setup with clearer consent banner guidance
+* Smoother banner reactivation process
+
+####Bugfixes####
+
+* Fixed support links
+* Improved tooltip info in the dashboard
+* Cleaned up leftover messages after disconnecting account
+* Resolved issue with feedback form on deactivation
 
 ### 4.5.4 ###
 Release date: April 29th 2025

@@ -493,16 +493,20 @@
 }
 
 .note-text {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     line-height: 1.5rem;
     margin-top: 1rem;
     padding: 0;
     color: #6B7280;
 }
 
+.cb-general__info__text {
+    margin-top: 1rem;
+}
+
 .note-link {
     color: #0047FF;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
 }
 
 .top-row {

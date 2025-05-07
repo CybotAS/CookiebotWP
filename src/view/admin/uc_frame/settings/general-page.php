@@ -25,8 +25,10 @@ if ( ! empty( $network_cbid ) ) {
 }
 ?>
 
-<div class="cb-settings__tabs">
-</div>
+<?php if ( $was_onboarded ) : ?>
+	<div class="cb-settings__notabs">
+	</div>
+<?php endif; ?>
 
 <div class="cb-settings__config__item cb-settings__config__cbid">
 	<div class="cb-settings__config__content">
