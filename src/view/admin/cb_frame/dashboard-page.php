@@ -91,7 +91,7 @@ $header->display();
 							<h3 class="cb-main__card__subtitle">
 								<?php echo esc_html__( 'Learn more about how to optimize your Cookiebot CMP setup?', 'cookiebot' ); ?>
 							</h3>
-							<a href="https://support.cookiebot.com/hc/en-us" target="_blank" class="cb-btn cb-link-btn"
+							<a href="https://support.usercentrics.com/hc/en-us" target="_blank" class="cb-btn cb-link-btn"
 								rel="noopener">
 								<?php echo esc_html__( 'Visit Help Center', 'cookiebot' ); ?>
 							</a>

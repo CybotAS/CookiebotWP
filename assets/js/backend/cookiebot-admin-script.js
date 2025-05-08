@@ -9,7 +9,6 @@ function cbInit() {
     jQuery( document ).on( 'click', 'tr[data-slug="cookiebot"] .cb-deactivate-action', event => deactivateCookiebot( event ) );
     jQuery( document ).on( 'click', '#cb-review__close', event => closeSurveyPopup( event ) );
     jQuery( document ).on( 'submit', '#cb-review__form', event => submitSurveyPopup( event ) );
-    jQuery( document ).on( 'change', 'input[name="cookiebot-review-option"]', event => showOptionalConsent( event ) )
     hideSubmitMessage();
     selectorListeners();
 }
@@ -119,6 +118,7 @@ function renderFormLabels(){
 function renderConsentLabel(){
     let labelContainer = document.createElement('div');
     labelContainer.classList.add('consent-item');
+    labelContainer.classList.add('show-consent');
     let consentLabel = document.createElement('label');
     consentLabel.classList.add('cb-review__form--item');
     let consentInput = document.createElement('input');
@@ -195,25 +195,6 @@ function closeSurveyPopup(e) {
     popup.removeClass('cb-opened');
     jQuery('#cb-review__alert').removeClass('show-alert');
     document.getElementById('cb-review__form').reset();
-}
-
-/**
- * Shows optional consent.
- */
-
-function showOptionalConsent(e) {
-    const option = e.target.value;
-    const optionalConsentBox = jQuery('.consent-item');
-    const optionalConsent = jQuery('#cb-review__debug-reason');
-
-    if(option!=='8'){
-        optionalConsentBox.removeClass('show-consent');
-        if(optionalConsent.checked){
-            optionalConsent.checked = false;
-        }
-    }else{
-        optionalConsentBox.addClass('show-consent');
-    }
 }
 
 /**

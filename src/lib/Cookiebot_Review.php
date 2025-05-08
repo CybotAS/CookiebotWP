@@ -62,6 +62,7 @@ class Cookiebot_Review {
 			)
 		);
 
+		// Options 1 and 2 are out of order intentionally just to confirm if the users are choosing the first one shown by default.
 		wp_localize_script(
 			'cookiebot_admin_js',
 			'cb_survey',
@@ -72,15 +73,15 @@ class Cookiebot_Review {
 				'first_msg'          => __( 'We\'re sad to see you go. Let us know how we can improve Usercentrics Cookiebot', 'cookiebot' ),
 				'options'            => array(
 					array(
+						'text'  => __( 'Cookies weren\'t being blocked correctly', 'cookiebot' ),
+						'value' => '2',
+					),
+					array(
 						'text'  => __( 'My site stopped working / it conflicted with other plugins', 'cookiebot' ),
 						'value' => '1',
 					),
 					array(
-						'text'  => __( 'Cookies weren’t being blocked correctly', 'cookiebot' ),
-						'value' => '2',
-					),
-					array(
-						'text'  => __( 'I couldn’t find or activate the Free plan', 'cookiebot' ),
+						'text'  => __( 'I couldn\'t find or activate the Free plan', 'cookiebot' ),
 						'value' => '3',
 					),
 					array(

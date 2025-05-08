@@ -92,7 +92,7 @@ $header->display();
 					<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/check-white.svg' ); ?>"
 						alt="Check Icon">
 					<div>
-						
+
 						<!-- <h3>Well done! Your <a href="<?php echo esc_url( site_url() ); ?>" target="_blank" class="banner-live-link" onclick="window.trackAmplitudeEvent('Banner Live Viewed', { settingsId: '<?php echo esc_js( $template_args['cbid'] ); ?>' });">banner is live</a>.</h3> -->
 						<h3>Well done! Your <a href="<?php echo esc_url( site_url() ); ?>" target="_blank" class="banner-live-link">banner is live</a>.</h3>
 						<p>
@@ -112,7 +112,7 @@ $header->display();
 			</div>
 		<?php endif; ?>
 
-		
+
 	</div>
 
 	<div class="cb-wrapper">
@@ -196,7 +196,7 @@ $header->display();
 										<p class="step-description">
 											<?php
 											echo wp_kses(
-												__( 'Instant setup with automatic cookie blocking. Try all features free for <strong>14 days</strong> - no card needed.<br> Choose Free or Premium before your trial ends to stay live.', 'cookiebot' ),
+												__( 'Instant setup with automatic cookie blocking. Try all features free for 14 days - no credit card needed.<br> Choose Free or Premium before your trial ends to stay live.', 'cookiebot' ),
 												array(
 													'strong' => array(),
 													'br' => array(),
@@ -233,7 +233,16 @@ $header->display();
 											<span>Note: A new account comes with a new banner, which will replace your existing one.</span>
 										</div>
 									<?php endif; ?>
+									<div>
+										<div class="cb-general__info__text">
+											<span class="note-text">Already have a Cookiebot or Usercentrics account?</span>
 
+											<a href="<?php echo esc_url( add_query_arg( 'page', Settings_Page::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>"
+												class="note-link">
+												<span><?php esc_html_e( 'Connect account', 'cookiebot' ); ?></span>
+											</a>
+										</div>
+									</div>
 								</div>
 							<?php endif; ?>
 						</div>
@@ -288,7 +297,7 @@ $header->display();
 
 								<!-- Scan details section (initially hidden) -->
 								<?php if ( $template_args['scan_status'] !== 'DONE' ) : ?>
-									<div id="scan-details" class="scan-details" style="display: block;">
+									<div id="scan-details" class="scan-details" style="display: none;">
 										<div class="divider"></div>
 										<p class="step-message">
 											<?php if ( $template_args['scan_status'] !== 'IN_PROGRESS' ) : ?>
@@ -364,10 +373,10 @@ $header->display();
 									<div class="upgrade-details">
 										<div class="divider"></div>
 										<div class="trial-countdown">
-										<?php if ( Cookiebot_WP::is_in_trial() && ! $trial_expired ) : ?>
-											<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/clock-icon-blue.svg' ); ?>" alt="Clock Icon">
-											<p class="step-message"><strong>Your trial ends in</strong> <span class="days-highlight"><?php echo absint( Cookiebot_WP::get_trial_days_left() ); ?> days</span>.</p>
-										<?php endif; ?>
+											<?php if ( Cookiebot_WP::is_in_trial() && ! $trial_expired ) : ?>
+												<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/clock-icon-blue.svg' ); ?>" alt="Clock Icon">
+												<p class="step-message"><strong>Your trial ends in</strong> <span class="days-highlight"><?php echo absint( Cookiebot_WP::get_trial_days_left() ); ?> days</span>.</p>
+											<?php endif; ?>
 										</div>
 
 										<p class="step-message">Upgrade to get full access to premium features. <br> Premium includes:</p>
@@ -403,8 +412,8 @@ $header->display();
 								<p class="subtitle">
 									<?php esc_html_e( 'Need more options? Head to the', 'cookiebot' ); ?>
 									<a href="https://admin.usercentrics.eu/#/v3/configuration/setup?settingsId=<?php echo esc_attr( $template_args['cbid'] ); ?>" target="_blank" style="color: inherit;">
-										<?php esc_html_e( 'Admin Interface', 'cookiebot' ); ?>
-									</a>.
+										<?php esc_html_e( 'Admin Interface.', 'cookiebot' ); ?>
+									</a>
 								</p>
 							</div>
 						</div>
@@ -438,7 +447,7 @@ $header->display();
 								<div class="option-label-wrapper">
 									<span class="option-label"><?php echo esc_html__( 'Auto blocking mode', 'cookiebot' ); ?></span>
 									<div class="tooltip">
-										<span class="tooltiptext">When active, automatically blocks data-processing services from loading without user consent, without requiring manual tagging of your scripts. Uses your scan results to prevent data collection without consent.</span>
+										<span class="tooltiptext">Blocks cookies automatically until users consent. No script tagging required. Scan results determine what gets blocked.</span>
 										<img class="img" src="<?php echo esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/info.svg' ); ?>" />
 									</div>
 								</div>
@@ -513,20 +522,6 @@ $header->display();
 					</div>
 				<?php endif; ?>
 			</div>
-
-			<!-- Help text (only show when user_data doesn't exist) -->
-			<?php if ( empty( $template_args['user_data'] ) ) : ?>
-				<div>
-					<div class="cb-general__info__text">
-						<span class="note-text">Need to manage an existing Cookiebot or Usercentrics account?</span>
-
-						<a href="<?php echo esc_url( add_query_arg( 'page', Settings_Page::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>"
-							class="note-link">
-							<span><?php esc_html_e( 'Go to Settings', 'cookiebot' ); ?></span>
-						</a>
-					</div>
-				</div>
-			<?php endif; ?>
 		</div>
 	</div>
 </div>

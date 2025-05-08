@@ -58,7 +58,7 @@ $header->display();
 									<p class="step-description">
 											<?php
 											echo wp_kses(
-												__( 'Instant setup with automatic cookie blocking. Try all features free for <strong>14 days</strong> - no card needed.<br> Choose Free or Premium before your trial ends to stay live.', 'cookiebot' ),
+												__( 'Instant setup with automatic cookie blocking. Try all features free for 14 days - no credit card needed.<br> Choose Free or Premium before your trial ends to stay live.', 'cookiebot' ),
 												array(
 													'strong' => array(),
 													'br' => array(),
