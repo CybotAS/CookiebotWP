@@ -50,7 +50,7 @@ async function checkScanStatus(scanId) {
             credentials: 'same-origin'
         });
 
-        if (!response.ok) {
+        if (response.status !== 200 && response.status !== 202 && response.status !== 404 || data.status === 'FAILED') {
             await fetch(cookiebot_account.ajax_url, {
                 method: 'POST',
                 body: createFormData('cookiebot_store_scan_details', {
@@ -362,8 +362,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                         configuration_id: configData.configuration_id
                     })
                 });
-
-                if (!scanResponse.ok) throw new Error(`Scan initiation failed: ${scanResponse.status}`);
 
                 const scanData = await scanResponse.json();
 
