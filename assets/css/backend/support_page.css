@@ -13,7 +13,7 @@
     font-size: 22px;
     line-height: 26px;
     font-weight: 700;
-    margin: 0 0 20px;
+    margin: 30px 0;
 }
 
 .cb-support__info__text {
@@ -128,6 +128,7 @@
     border: 3px solid #d3d3d3;
     border-radius: 8px;
     overflow: hidden;
+    margin-bottom: 45px;
 }
 
 .cb-debug__code__container textarea {

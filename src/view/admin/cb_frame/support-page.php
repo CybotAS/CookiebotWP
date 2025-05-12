@@ -29,16 +29,29 @@ $header->display();
 						);
 						?>
 					</p>
-					<a href="https://support.usercentrics.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn"
-						rel="noopener">
-						<?php
-						esc_html_e(
-							'Visit Cookiebot CMP Help Center',
-							'cookiebot'
-						);
-						?>
-					</a>
 				</div>
+
+				<div class="cb-debug__support__card">
+					<a href="https://usercentricsforwordpress.zendesk.com/hc/en-us" target="_blank" class="cb-btn cb-main-btn" style="border: 3px solid #1032cf"
+						rel="noopener">
+						<?php esc_html_e( 'Visit Support Center', 'cookiebot' ); ?>
+					</a>
+					<a href="#" onclick="copyDebugInfo();" class="cb-btn cb-secondary-btn" style="margin-left: 20px;">
+						<?php esc_html_e( 'Copy Debug Info', 'cookiebot' ); ?>
+					</a>
+				</div>				
+			</div>
+
+			<div class="cb-debug__code__container">
+				<textarea
+						cols="50"
+						rows="40"
+						id="cookiebot-debug-info"
+						readonly="readonly"
+				><?php echo esc_textarea( $debug_output ); ?></textarea>
+			</div>
+
+			<div class="cb-faqs">				
 				<div class="cb-support__video__card">
 					<div class="cb-support__video__inner">
 						<h2 class="cb-support__video__title"><?php esc_html_e( 'Video guide', 'cookiebot' ); ?></h2>
