@@ -1,9 +1,9 @@
-﻿# Usercentrics Cookiebot – Cookie Banner & Privacy Compliance for GDPR/CCPA/Google Consent Mode #
+﻿# Cookie Banner & Privacy Compliance for GDPR/CCPA/Google Consent Mode – Usercentrics Cookiebot #
 * Contributors: cookiebot,phpgeekdk,aytac
-* Tags: cookie banner, cookie consent, cookie notice, gdpr, privacy
+* Tags: cookie banner, cookie consent, cookie notice, GDPR, privacy, cmp, consent‑management‑platform, google‑consent‑mode, compliance, gdpr‑compliance, ccpa, dma
 * Requires at least: 4.4
 * Tested up to: 6.8
-* Stable tag: 4.5.5
+* Stable tag: 4.5.6
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -11,9 +11,7 @@ Install your cookie banner in minutes. Automatically scan and block cookies to c
 
 ## Description ##
 
-Usercentrics Cookiebot provides an **easy to use, fully automated, and highly customizable cookie banner** for WordPress sites. It empowers businesses with a comprehensive solution that turns privacy compliance into a competitive advantage. Simplify your compliance with the GDPR, CCPA, Google Consent Mode v2, and other privacy regulations and frameworks. Meet evolving ad tech requirements while enhancing transparency and trust.
-
-Usercentrics Cookiebot is one of few WordPress cookie consent plugins that smoothly integrates with **Google Tag Manager and Google Consent Mode**. You receive higher quality, consented data. Automate user consent collection and signaling while taking advantage of extensive customization options for seamless user experience.
+Usercentrics Cookiebot CMP is a **Google‑certified** consent management platform (CMP) and cookie consent/banner solution for WordPress. It adds a **fully automated, highly customisable banner** that keeps you compliant with **GDPR, CCPA/CPRA, LGPD**, and other privacy regulations and frameworks while satisfying **Google Consent Mode v2** ad‑tech requirements. Seamlessly integrate with **Google Tag Manager** and Analytics to capture higher‑quality, consented data, automate consent signals, and deliver a transparent experience that boosts trust and conversions—no code required.
 
 ## Features ##
 
@@ -87,7 +85,7 @@ Continue serving ads to users in the European Union, European Economic Area, or 
 
 Watch the video to learn how to install the Cookiebot CMP WordPress plugin. It’s easy! Or read our [step-by-step installation guide](https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress).
 
-[youtube https://www.youtube.com/watch?v=1-lvuJa42P0]
+[youtube https://www.youtube.com/watch?v=JyugmNhPDq8]
 
 Need assistance? Visit our [Help Center](https://support.usercentrics.com/hc/en-us) or [contact us](https://usercentricsforwordpress.zendesk.com/hc/en-us/requests/new).
 
@@ -201,6 +199,19 @@ Usercentrics Cookiebot is fully integrated with the WP Consent API. When your vi
 
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
+
+### 4.5.6 ###
+Release date: May 12th 2025
+
+Cookiebot CMP version 4.5.6 is out! This release has some new features and bugfixes
+
+####What's new####
+
+* Updated plugin description and marketing information to better showcase our features and benefits
+
+####Bugfixes####
+
+* Resolved an issue where debug information was not showing for Cookiebot users on the support page.
 
 ### 4.5.5 ###
 Release date: May 7th 2025
