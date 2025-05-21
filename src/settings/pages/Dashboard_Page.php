@@ -64,12 +64,14 @@ class Dashboard_Page implements Settings_Page_Interface {
 		$auth_token         = Cookiebot_WP::get_auth_token();
 		$user_data          = Cookiebot_WP::get_user_data();
 		$scan_status        = Cookiebot_WP::get_scan_status();
+		$scan_id            = get_option( 'cookiebot-scan-id' );
 		$banner_enabled     = Cookiebot_WP::get_banner_enabled();
 		$auto_blocking_mode = Cookiebot_WP::get_auto_blocking_mode();
 		$gcm_enabled        = Cookiebot_WP::get_gcm_enabled();
 		$subscription       = Cookiebot_WP::get_subscription_type();
 		$legal_framework    = Cookiebot_WP::get_legal_framwework();
 		$is_authenticated   = ! empty( Cookiebot_WP::get_auth_token() );
+		$is_cb_user         = Cookiebot_Frame::is_cb_frame_type();
 
 		// Get user data and check if they were onboarded via signup
 		$was_onboarded = Cookiebot_WP::was_onboarded_via_signup();
@@ -80,6 +82,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 			'cbid'                  => $cbid,
 			'user_data'             => $user_data,
 			'scan_status'           => $scan_status,
+			'scan_id'               => $scan_id,
 			'cb_wp'                 => CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/cb-wp.png',
 			'europe_icon'           => CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/europe.png',
 			'usa_icon'              => CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/usa.png',
@@ -139,6 +142,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 					'ajax_url'          => admin_url( 'admin-ajax.php' ),
 					'nonce'             => wp_create_nonce( 'cookiebot-account' ),
 					'cbid'              => $cbid,
+					'scan_id'           => $scan_id,
 					'has_user_data'     => ! empty( $user_data ),
 					'has_cbid'          => ! empty( $cbid ),
 					'was_onboarded'     => $was_onboarded,
@@ -175,6 +179,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 					'ajax_url'      => admin_url( 'admin-ajax.php' ),
 					'nonce'         => wp_create_nonce( 'cookiebot-account' ),
 					'cbid'          => $cbid,
+					'scan_id'       => $scan_id,
 					'has_user_data' => ! empty( $user_data ),
 					'has_cbid'      => ! empty( $cbid ),
 					'was_onboarded' => $was_onboarded,
@@ -186,8 +191,8 @@ class Dashboard_Page implements Settings_Page_Interface {
 			return;
 		}
 
-		// Modified condition to check for onboarding status
-		if ( ! empty( $cbid ) && ( empty( $user_data ) && ! $was_onboarded ) ) {
+		// Redirect CB users to previous dashboard page
+		if ( ( ! empty( $cbid ) && $is_cb_user ) || ( ! empty( $cbid ) && empty( $user_data ) ) ) {
 			wp_enqueue_style(
 				'cookiebot-dashboard-backup-css',
 				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/css/backend/dashboard-old.css',
@@ -210,6 +215,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 					'ajax_url'      => admin_url( 'admin-ajax.php' ),
 					'nonce'         => wp_create_nonce( 'cookiebot-account' ),
 					'cbid'          => $cbid,
+					'scan_id'       => $scan_id,
 					'has_user_data' => ! empty( $user_data ),
 					'has_cbid'      => ! empty( $cbid ),
 					'was_onboarded' => $was_onboarded,
@@ -260,6 +266,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 				'ajax_url'         => admin_url( 'admin-ajax.php' ),
 				'nonce'            => wp_create_nonce( 'cookiebot-account' ),
 				'cbid'             => $cbid,
+				'scan_id'          => $scan_id,
 				'has_user_data'    => ! empty( $user_data ),
 				'has_cbid'         => ! empty( $cbid ),
 				'was_onboarded'    => $was_onboarded,

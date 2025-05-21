@@ -44,9 +44,19 @@ class Menu_Settings {
 		$auth_token = Cookiebot_WP::get_auth_token();
 		$user_data  = Cookiebot_WP::get_user_data();
 
-		if ( $option_name === 'cookiebot-cbid' && empty( $option_value ) && ! empty( $auth_token ) && ! empty( $user_data ) ) {
+		if ( $option_name === 'cookiebot-cbid' && empty( $option_value ) ) {
 			Cookiebot_WP::debug_log( 'Account Disconnected: clearing user_data' );
+			// Clean up all user data
+			delete_option( 'cookiebot-auth-token' );
 			delete_option( 'cookiebot-user-data' );
+			delete_option( 'cookiebot-configuration' );
+			delete_option( 'cookiebot-scan-id' );
+			delete_option( 'cookiebot-scan-status' );
+			delete_option( 'cookiebot-banner-enabled' );
+			delete_option( 'cookiebot_banner_live_dismissed' );
+			delete_option( 'cookiebot-cookie-blocking-mode' );
+			delete_option( 'cookiebot-uc-auto-blocking-mode' );
+			delete_option( 'cookiebot-uc-onboarded-via-signup' );
 		}
 	}
 

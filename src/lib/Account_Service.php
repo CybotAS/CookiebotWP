@@ -51,6 +51,7 @@ class Account_Service {
 		add_action( 'wp_ajax_cookiebot_clear_config_data_keep_cbid', array( $this, 'ajax_clear_config_data_keep_cbid' ) );
 		add_action( 'wp_ajax_cookiebot_delete_auth_token', array( $this, 'ajax_delete_auth_token' ) );
 		add_action( 'wp_ajax_cookiebot_store_onboarding_status', array( $this, 'ajax_store_onboarding_status' ) );
+		add_action( 'wp_ajax_cookiebot_update_scan_id', array( $this, 'ajax_update_scan_id' ) );
 	}
 
 	public function cookiebot_admin_script( $hook ) {
@@ -119,6 +120,21 @@ class Account_Service {
 		// Store with consistent name
 		update_option( 'cookiebot-cbid', $cbid );
 
+		wp_send_json_success();
+	}
+
+	public function ajax_update_scan_id() {
+		if ( ! check_ajax_referer( 'cookiebot-account', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( 'Unauthorized', 401 );
+		}
+
+		$scan_id = isset( $_POST['scan_id'] ) ? sanitize_text_field( $_POST['scan_id'] ) : '';
+
+		if ( empty( $scan_id ) ) {
+			wp_send_json_error( 'Scan ID is required', 400 );
+		}
+
+		update_option( 'cookiebot-scan-id', $scan_id );
 		wp_send_json_success();
 	}
 

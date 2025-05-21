@@ -36,7 +36,7 @@ $main_tabs = new Main_Tabs();
 $active_tab = ! empty( $_GET['tab'] ) ? $_GET['tab'] : false;
 
 // Check if user was onboarded via signup
-$was_onboarded = Cookiebot_WP::was_onboarded_via_signup();
+$was_onboarded = Cookiebot_WP::was_onboarded_via_signup() && ! empty( Cookiebot_WP::get_auth_token() );
 
 $header->display();
 ?>
