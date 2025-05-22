@@ -30,7 +30,7 @@ $is_authenticated = ! empty( Cookiebot_WP::get_auth_token() );
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 if ( ! empty( $_GET['settings-updated'] ) ) :
 	?>
-	<div class="cb-submit__msg"><?php esc_html_e( 'Changes has been saved', 'cookiebot' ); ?></div>
+	<div class="cb-submit__msg"><?php esc_html_e( 'Changes have been saved', 'cookiebot' ); ?></div>
 <?php endif; ?>
 <?php
 
