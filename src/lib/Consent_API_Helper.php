@@ -51,7 +51,7 @@ class Consent_API_Helper {
 		wp_register_script(
 			'cookiebot-wp-consent-level-api-integration',
 			$is_cb_frame ? asset_url( self::CB_FRAME_SCRIPT_PATH ) : asset_url( self::UC_FRAME_SCRIPT_PATH ),
-			null,
+			array( 'wp-consent-api' ),
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			false
 		);

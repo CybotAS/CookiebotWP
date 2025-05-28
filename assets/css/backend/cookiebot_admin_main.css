@@ -97,6 +97,11 @@
     mask-image: url(../../img/icons/dashboard.svg);
 }
 
+.customize-icon {
+    -webkit-mask-image: url(../../img/icons/customize.svg);
+    mask-image: url(../../img/icons/customize.svg);
+}
+
 .settings-icon {
     -webkit-mask-image: url(../../img/icons/settings.svg);
     mask-image: url(../../img/icons/settings.svg);

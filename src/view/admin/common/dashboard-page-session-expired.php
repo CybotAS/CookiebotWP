@@ -28,11 +28,11 @@ $header->display();
 				<div class="gray-box">
 					<div class="header-section-no-margin">
 						<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/set-up-icon.svg' ); ?>" alt="Usercentrics Logo">
-						<h1><?php echo \esc_html__( 'Set up your consent banner', 'cookiebot' ); ?></h1>
+						<h1><?php echo \esc_html__( 'Set up your cookie banner', 'cookiebot' ); ?></h1>
 					</div>
 					<div class="header-section">
 						<p class="subtitle">
-								<?php echo esc_html__( 'Get your site GDPR-compliant in', 'cookiebot' ); ?>
+								<?php echo esc_html__( 'Get your site GDPR-compliant in ', 'cookiebot' ); ?>
 								<strong><?php echo esc_html__( 'just a few clicks.', 'cookiebot' ); ?></strong>
 								<?php echo esc_html__( 'Enter your email, verify it, and create your password.', 'cookiebot' ); ?>
 						</p>
@@ -56,16 +56,10 @@ $header->display();
 								<div class="banner-preview-container">
 									<div class="divider"></div>
 									<p class="step-description">
-											<?php
-											echo wp_kses(
-												__( 'Instant setup with automatic cookie blocking. Try all features free for 14 days - no credit card needed.<br> Choose Free or Premium before your trial ends to stay live.', 'cookiebot' ),
-												array(
-													'strong' => array(),
-													'br' => array(),
-												)
-											);
-											?>
-										</p>
+										• Instant setup & automatic cookie blocking<br>
+										• 14 days of all-access premium features (no card needed)<br>
+										• Keep it live afterwards on our Free plan or upgrade any time
+									</p>
 									<div class="banner-images">
 										<?php
 										$banner1_url = CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/banner-getting-started1.png';
