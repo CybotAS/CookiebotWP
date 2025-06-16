@@ -45,7 +45,7 @@ $header->display();
 				<div class="gray-box">
 					<div class="header-section-no-margin">
 						<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/set-up-icon.svg' ); ?>" alt="Setup Icon">
-						<h1><?php echo \esc_html__( 'Set up your consent banner', 'cookiebot' ); ?></h1>
+						<h1><?php echo \esc_html__( 'Set up your cookie banner', 'cookiebot' ); ?></h1>
 					</div>
 
 					<!-- Steps Container -->
@@ -70,7 +70,7 @@ $header->display();
 									<div class="empty-circle"></div>
 								</div>
 								<div class="step-content">
-									<h2><?php echo \esc_html__( 'Scan website', 'cookiebot' ); ?></h2>
+									<h2><?php echo \esc_html__( 'Scan your website', 'cookiebot' ); ?></h2>
 								</div>
 							</div>
 						</div>
@@ -107,7 +107,7 @@ $header->display();
 
 								<div class="upgrade-container">
 									<button id="upgrade-now-button" class="cb-btn cb-primary-btn" onclick="window.open('https://account.usercentrics.eu/subscription/<?php echo isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ? esc_attr( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) . '/' : ''; ?>manage', '_blank')">
-										<?php echo esc_html__( 'Upgrade now', 'cookiebot' ); ?>
+										<?php echo esc_html__( 'Choose my plan', 'cookiebot' ); ?>
 									</button>
 								</div>
 							</div>

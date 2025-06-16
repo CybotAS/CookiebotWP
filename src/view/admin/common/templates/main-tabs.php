@@ -26,7 +26,17 @@ $feedback_url  = 'https://form.typeform.com/to/n6ZlunZP';
 			<a href="<?php echo esc_url( add_query_arg( 'page', Dashboard_Page::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>"
 				class="cb-main__tabs__link">
 				<div class="cb-main__tabs__icon dashboard-icon"></div>
-				<span><?php esc_html_e( 'Dashboard', 'cookiebot' ); ?></span>
+				<span><?php esc_html_e( 'View dashboard', 'cookiebot' ); ?></span>
+			</a>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( ! empty( $cbid ) ) : ?>
+		<div class="cb-main__tabs_item <?php echo $active_tab === 'customize' ? 'active-item' : ''; ?>">
+			<a href="https://admin.usercentrics.eu/#/v3/appearance/styling?settingsId=<?php echo esc_attr( $cbid ); ?>"
+				class="cb-main__tabs__link" target="_blank">
+				<div class="cb-main__tabs__icon customize-icon"></div>
+				<span><?php esc_html_e( 'Customize banner', 'cookiebot' ); ?></span>
 			</a>
 		</div>
 	<?php endif; ?>
@@ -40,7 +50,7 @@ $feedback_url  = 'https://form.typeform.com/to/n6ZlunZP';
 				class="cb-main__tabs__link">
 				<?php endif; ?>
 				<div class="cb-main__tabs__icon support-icon"></div>
-				<span><?php esc_html_e( 'Support', 'cookiebot' ); ?></span>
+				<span><?php esc_html_e( 'Get support', 'cookiebot' ); ?></span>
 			</a>
 	</div>
 	<?php if ( $show_plugins ) : ?>
@@ -48,7 +58,7 @@ $feedback_url  = 'https://form.typeform.com/to/n6ZlunZP';
 			<a href="<?php echo esc_url( add_query_arg( 'page', Settings_Config::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>"
 				class="cb-main__tabs__link">
 				<div class="cb-main__tabs__icon plugins-icon"></div>
-				<span><?php esc_html_e( 'Plugins', 'cookiebot' ); ?></span>
+				<span><?php esc_html_e( 'Manage add-ons', 'cookiebot' ); ?></span>
 			</a>
 		</div>
 	<?php endif; ?>
@@ -63,13 +73,13 @@ $feedback_url  = 'https://form.typeform.com/to/n6ZlunZP';
 					class="cb-main__tabs__link">
 					<?php endif; ?>
 					<div class="cb-main__tabs__icon settings-icon"></div>
-					<span><?php esc_html_e( 'Settings', 'cookiebot' ); ?></span>
+					<span><?php esc_html_e( 'Configure settings', 'cookiebot' ); ?></span>
 				</a>
 		</div>
 	<?php endif; ?>
 
 	<div class="cb-feedback_link">
-		<a href="<?php echo esc_url( $feedback_url ); ?>" target="_blank"><?php echo esc_html__( 'Share feedback', 'cookiebot' ); ?></a>
+		<a href="<?php echo esc_url( $feedback_url ); ?>" target="_blank"><?php echo esc_html__( 'Help us improve', 'cookiebot' ); ?></a>
 	</div>
 
 </div>
