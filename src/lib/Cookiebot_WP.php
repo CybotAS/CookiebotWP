@@ -27,7 +27,7 @@ class Cookiebot_WP {
 		}
 	}
 
-	const COOKIEBOT_PLUGIN_VERSION  = '4.5.8';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.5.9';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**

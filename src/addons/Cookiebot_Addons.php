@@ -50,11 +50,7 @@ class Cookiebot_Addons {
 	 */
 	public static function instance() {
 		if ( ! is_a( self::$instance, self::class ) ) {
-			try {
-				self::$instance = new self();
-			} catch ( Exception $e ) {
-				echo 'Could not initialize Cookiebot addons: ' . esc_html( $e->getMessage() );
-			}
+			self::$instance = new self();
 		}
 
 		return self::$instance;
