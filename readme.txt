@@ -101,13 +101,10 @@ If you have questions or need cookie banner support, visit our [Help Center](htt
 
 ## Screenshots ##
 
-1. Set up the Cookiebot CMP plugin using our easy-to-navigate dashboard
-2. Automatically block cookies and trackers until user consent is given
-3. Easily set a Google Tag Manager ID on your site
-4. Activate Google Consent Mode to measure conversions and collect data
-5. Enable the IAB TCF v2.0 on your website with a single click
-6. Set up multiple configurations to enable compliance with two or more privacy regulations at once (e.g. GDPR and CCPA)
-7. Visit our extensive Help Center or contact us for assistance
+1. Install the Usercentrics Cookiebot Wordpress plug-in
+2. Create your Usercentrics CMP account in 3 easy steps
+3. See your banner automatically scanning and blocking cookies live on your website
+4. Visit our Help Center or contact us for assistance
 
 ## Frequently Asked Questions ##
 
