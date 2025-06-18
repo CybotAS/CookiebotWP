@@ -4,7 +4,6 @@ jQuery(document).ready(function($) {
     function handleToggle(toggleId, action, value) {
         const toggle = document.getElementById(toggleId);
         if (!toggle) {
-            console.error(`Toggle element not found: ${toggleId}`);
             return;
         }
 

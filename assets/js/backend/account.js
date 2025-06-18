@@ -331,8 +331,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        if (!cbid && companyId) {
+        if (!cbid) {
             try {
+                if (!companyId) {
+                    // Without company ID we cannot create the other config params, so stop the workflow right here.
+                    return;
+                }
+
                 // Create new configuration
                 const siteDomain = window.location.hostname;
                 const formattedDomain = siteDomain.startsWith('http') ? siteDomain : `https://${siteDomain}`;
@@ -419,8 +424,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 await checkScanStatus(scanDetails.data.scan_id);
             }
             // And fetch configuration details 
-            await fetchConfigurationDetails(cbid);
-            await checkUserData();
+            if (cbid) {
+                await fetchConfigurationDetails(cbid);
+                await checkUserData();
+            }
         }
 
         // Check and fetch user data if needed

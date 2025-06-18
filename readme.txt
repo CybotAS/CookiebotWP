@@ -3,7 +3,7 @@
 * Tags: cookie banner, cookie consent, cookie notice, GDPR, privacy, cmp, consent‑management‑platform, google‑consent‑mode, compliance, gdpr‑compliance, ccpa, dma
 * Requires at least: 4.4
 * Tested up to: 6.8
-* Stable tag: 4.5.8
+* Stable tag: 4.5.9
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -101,13 +101,10 @@ If you have questions or need cookie banner support, visit our [Help Center](htt
 
 ## Screenshots ##
 
-1. Set up the Cookiebot CMP plugin using our easy-to-navigate dashboard
-2. Automatically block cookies and trackers until user consent is given
-3. Easily set a Google Tag Manager ID on your site
-4. Activate Google Consent Mode to measure conversions and collect data
-5. Enable the IAB TCF v2.0 on your website with a single click
-6. Set up multiple configurations to enable compliance with two or more privacy regulations at once (e.g. GDPR and CCPA)
-7. Visit our extensive Help Center or contact us for assistance
+1. Install the Usercentrics Cookiebot Wordpress plug-in
+2. Create your Usercentrics CMP account in 3 easy steps
+3. See your banner automatically scanning and blocking cookies live on your website
+4. Visit our Help Center or contact us for assistance
 
 ## Frequently Asked Questions ##
 
@@ -199,6 +196,22 @@ Usercentrics Cookiebot is fully integrated with the WP Consent API. When your vi
 
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
+
+### 4.5.9 ###
+Release date: June 17th 2025
+
+Cookiebot CMP version 4.5.9 is out! This release has some bugfixes and new features
+
+####What's new####
+
+* Updated language translations
+
+####Bugfixes####
+
+* Fixed country codes on configuration regions.
+* Fixed security vulnerability on Addons page
+* Remove unused API endpoint to clear config data
+* Improve pre-condition validation on configuration endpoint call
 
 ### 4.5.8 ###
 Release date: May 29th 2025

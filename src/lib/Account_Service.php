@@ -47,8 +47,6 @@ class Account_Service {
 		add_action( 'wp_ajax_cookiebot_store_scan_details', array( $this, 'ajax_store_scan_details' ) );
 		add_action( 'wp_ajax_cookiebot_get_scan_details', array( $this, 'ajax_get_scan_details' ) );
 		add_action( 'wp_ajax_cookiebot_store_configuration', array( $this, 'ajax_store_configuration' ) );
-		add_action( 'wp_ajax_cookiebot_clear_config_data', array( $this, 'ajax_clear_config_data' ) );
-		add_action( 'wp_ajax_cookiebot_clear_config_data_keep_cbid', array( $this, 'ajax_clear_config_data_keep_cbid' ) );
 		add_action( 'wp_ajax_cookiebot_delete_auth_token', array( $this, 'ajax_delete_auth_token' ) );
 		add_action( 'wp_ajax_cookiebot_store_onboarding_status', array( $this, 'ajax_store_onboarding_status' ) );
 		add_action( 'wp_ajax_cookiebot_update_scan_id', array( $this, 'ajax_update_scan_id' ) );
@@ -209,6 +207,10 @@ class Account_Service {
 	}
 
 	public function ajax_delete_auth_token() {
+		if ( ! check_ajax_referer( 'cookiebot-account', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( 'Unauthorized', 401 );
+			return;
+		}
 		delete_option( 'cookiebot-auth-token' );
 		wp_send_json_success();
 	}
@@ -227,6 +229,11 @@ class Account_Service {
 	}
 
 	public function ajax_get_cbid() {
+		if ( ! check_ajax_referer( 'cookiebot-account', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( 'Unauthorized', 401 );
+			return;
+		}
+
 		$cbid_req = get_option( 'cookiebot-cbid' );
 		if ( $cbid_req ) {
 			wp_send_json_success( $cbid_req );
@@ -290,8 +297,7 @@ class Account_Service {
 	}
 
 	public function ajax_dismiss_banner() {
-		// Check if user has permission
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! check_ajax_referer( 'cookiebot-account', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( 'Unauthorized', 401 );
 			return;
 		}
@@ -344,41 +350,6 @@ class Account_Service {
 
 		update_option( 'cookiebot-configuration', $data );
 		wp_send_json_success( array( 'message' => 'Configuration stored successfully' ) );
-	}
-
-	public function ajax_clear_config_data() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( 'Unauthorized', 401 );
-			return;
-		}
-
-		// Save option value
-		delete_option( 'cookiebot-cbid' );
-		delete_option( 'cookiebot-auth-token' );
-		delete_option( 'cookiebot-user-data' );
-		delete_option( 'cookiebot-configuration' );
-		delete_option( 'cookiebot-scan-id' );
-		delete_option( 'cookiebot-scan-status' );
-		delete_option( 'cookiebot-banner-enabled' );
-		delete_option( 'cookiebot_banner_live_dismissed' );
-		wp_send_json_success();
-	}
-
-	public function ajax_clear_config_data_keep_cbid() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( 'Unauthorized', 401 );
-			return;
-		}
-
-		// Save option value
-		delete_option( 'cookiebot-auth-token' );
-		delete_option( 'cookiebot-user-data' );
-		delete_option( 'cookiebot-configuration' );
-		delete_option( 'cookiebot-scan-id' );
-		delete_option( 'cookiebot-scan-status' );
-		delete_option( 'cookiebot-banner-enabled' );
-		delete_option( 'cookiebot_banner_live_dismissed' );
-		wp_send_json_success();
 	}
 
 	public function ajax_store_onboarding_status() {
