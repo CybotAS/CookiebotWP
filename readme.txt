@@ -1,9 +1,9 @@
-﻿# Cookie Banner & Privacy Compliance for GDPR/CCPA/Google Consent Mode – Usercentrics Cookiebot #
+﻿# Usercentrics Cookiebot - Automatic Cookie Banner for GDPR/CCPA & Google Consent Mode #
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: cookie banner, cookie consent, cookie notice, GDPR, privacy, cmp, consent‑management‑platform, google‑consent‑mode, compliance, gdpr‑compliance, ccpa, dma
 * Requires at least: 4.4
 * Tested up to: 6.8
-* Stable tag: 4.5.9
+* Stable tag: 4.5.10
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -111,7 +111,7 @@ If you have questions or need cookie banner support, visit our [Help Center](htt
 ### Is Usercentrics Cookiebot free? ###
 Yes, the cookie consent plugin is completely free to use up to a certain number of website visitors. Based on the amount of monthly visitors on your website and if you want to access premium features, your subscription may become subject to a monthly subscription fee.
 
-See all details of Usercentrics CMP [plans and pricing](https://www.cookiebot.com/en/pricing/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner).
+See all details of Usercentrics CMP [plans and pricing](https://usercentrics.com/pricing/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner).
 
 ### My banner is not visible. What should I do? ###
 
@@ -196,6 +196,15 @@ Usercentrics Cookiebot is fully integrated with the WP Consent API. When your vi
 
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
+
+### 4.5.10 ###
+Release date: July 1st 2025
+
+Cookiebot CMP version 4.5.10 is out! This release has a new feature
+
+####What's new####
+
+* Updated plugin name to better reflect our evolving brand identity and provide clearer recognition for users
 
 ### 4.5.9 ###
 Release date: June 17th 2025
