@@ -1,11 +1,11 @@
 <?php
 
 /*
-Plugin Name: Cookie Banner & Privacy Compliance for GDPR/CCPA/Google Consent Mode – Usercentrics Cookiebot
+Plugin Name: Usercentrics Cookiebot - Automatic Cookie Banner for GDPR/CCPA & Google Consent Mode
 Plugin URI: https://www.cookiebot.com/
 Description: Install your cookie banner in minutes. Automatically scan and block cookies to comply with the GDPR, CCPA, Google Consent Mode v2. Free plan option.
 Author: Usercentrics A/S
-Version: 4.5.9
+Version: 4.5.10
 Author URI: https://www.cookiebot.com/
 Text Domain: cookiebot
 Domain Path: /langs
