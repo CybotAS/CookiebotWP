@@ -442,6 +442,11 @@ function remove_account(){
     confirmCta.on('click', function(){
         jQuery('#cookiebot-cbid').val('').removeClass('cbid-active');
         jQuery('#cookiebot-cbid-override').prop('checked',false);
+        
+        // If the account was disconnected set blocking mode to 'auto' and 'Hide cookie popup' to false.
+        jQuery('input[type=radio][name=cookiebot-cookie-blocking-mode][value=auto]').prop('checked', true);
+        jQuery('input[name=cookiebot-nooutput]').prop( 'checked', false )
+    
         jQuery('.cb-settings__header p.submit #submit').click();
     });
     cancelCta.on('click', function(){

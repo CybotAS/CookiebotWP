@@ -65,7 +65,7 @@ class Account_Service {
 		if ( ! $is_authenticated && ! empty( $cbid ) && ! empty( $user_data ) && ! empty( $was_onboarded ) ) {
 			wp_enqueue_script(
 				'cookiebot-account-static-js',
-				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account-static.js',
+				asset_url( 'js/backend/account-static.js' ),
 				array( 'jquery' ),
 				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 				true
@@ -86,7 +86,7 @@ class Account_Service {
 		} else {
 			wp_enqueue_script(
 				'cookiebot-account-js',
-				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account.js',
+				asset_url( 'js/backend/account.js' ),
 				array(),
 				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 				true

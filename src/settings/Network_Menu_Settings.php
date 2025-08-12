@@ -8,6 +8,7 @@ use cybot\cookiebot\settings\pages\Support_Page;
 use InvalidArgumentException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
+use function cybot\cookiebot\lib\logo_url;
 
 class Network_Menu_Settings {
 
@@ -97,7 +98,7 @@ class Network_Menu_Settings {
 		);
 		update_site_option(
 			'cookiebot-cookie-blocking-mode',
-			! empty( $_POST['cookiebot-cookie-blocking-mode'] ) ? $_POST['cookiebot-cookie-blocking-mode'] : 'auto'
+			'manual'
 		);
 
 		wp_safe_redirect(
@@ -120,7 +121,7 @@ class Network_Menu_Settings {
 	 * @version 2.2.0
 	 */
 	public function display() {
-		$cbm = get_site_option( 'cookiebot-cookie-blocking-mode', 'auto' );
+		$cbm = get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
 
 		wp_enqueue_script(
 			'cookiebot-network-settings-page-js',
@@ -147,7 +148,7 @@ class Network_Menu_Settings {
 			Cookiebot_Frame::get_view_path( true ) . 'network-settings-page.php',
 			array(
 				'cookiebot_gdpr_url' => 'https://www.cookiebot.com/' . Cookiebot_WP::get_manager_language() . '/gdpr/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner',
-				'logo'               => CYBOT_COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
+				'logo'               => logo_url(),
 				'cbm'                => $cbm,
 				'ruleset_id'         => ! empty( get_site_option( 'cookiebot-ruleset-id' ) ) ? get_site_option( 'cookiebot-ruleset-id' ) : 'settings',
 			)

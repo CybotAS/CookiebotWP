@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.getElementById('get-started-button-static-dashboard')?.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
-        const callbackUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot';
+        const callbackUrl = window.location.href;
         window.location.href = `https://api.ea.prod.usercentrics.cloud/v1/auth/auth0/authorize?origin=wordpress_plugin&callback_domain=${encodeURIComponent(callbackUrl)}`;
     } catch (error) {
         console.error('Failed to start authentication process:', error);

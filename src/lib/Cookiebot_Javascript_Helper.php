@@ -75,12 +75,6 @@ class Cookiebot_Javascript_Helper {
 			}
 			$this->debug_log( 'Banner should be shown' );
 
-			if (
-				( is_multisite() && ! $return_html )
-			) {
-				return '';
-			}
-
 			// Get the banner script
 			$banner_script = Cookiebot_WP::get_banner_script();
 

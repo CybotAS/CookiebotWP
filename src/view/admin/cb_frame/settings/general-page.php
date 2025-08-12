@@ -200,7 +200,7 @@ if ( ! empty( $network_cbid ) ) {
 						type="radio"
 						name="cookiebot-cookie-blocking-mode"
 						value="auto"
-					<?php echo $is_ms && $network_auto ? ' disabled' : ''; ?>/>
+					/>
 				<?php esc_html_e( 'Automatic', 'cookiebot' ); ?>
 				<span class="recommended-tag"><?php esc_html_e( 'Recommended', 'cookiebot' ); ?></span>
 			</label>
@@ -209,12 +209,9 @@ if ( ! empty( $network_cbid ) ) {
 						type="radio"
 						name="cookiebot-cookie-blocking-mode"
 						value="manual"
-					<?php echo $is_ms && $network_auto ? ' disabled' : ''; ?>/>
+					/>
 				<?php esc_html_e( 'Manual', 'cookiebot' ); ?>
 			</label>
-			<?php if ( $is_ms && $network_auto ) { ?>
-				<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
-			<?php } ?>
 		</div>
 	</div>
 </div>

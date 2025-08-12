@@ -502,7 +502,7 @@ document.getElementById('get-started-button')?.addEventListener('click', async (
     // window.trackAmplitudeEvent('Sign Up Flow Started');
     e.preventDefault();
     try {
-        const callbackUrl = window.location.protocol + '//' + window.location.hostname + '/wp-admin/admin.php?page=cookiebot';
+        const callbackUrl = window.location.href;
         window.location.href = `${API_BASE_URL}/auth/auth0/authorize?origin=wordpress_plugin&callback_domain=${encodeURIComponent(callbackUrl)}`;
     } catch (error) {
         console.error('Failed to start authentication process:', error);

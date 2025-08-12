@@ -14,6 +14,7 @@ use cybot\cookiebot\settings\pages\Support_Page;
 $isnw = is_network_admin();
 
 $cbid          = Cookiebot_WP::get_cbid();
+$auth_token    = get_option( 'cookiebot-auth-token' );
 $user_data     = Cookiebot_WP::get_user_data();
 $show_settings = $active_tab === 'settings' || ! empty( $cbid );
 $show_plugins  = ( ! $isnw && Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) || empty( $user_data );
@@ -31,7 +32,7 @@ $feedback_url  = 'https://form.typeform.com/to/n6ZlunZP';
 		</div>
 	<?php endif; ?>
 
-	<?php if ( ! empty( $cbid ) ) : ?>
+	<?php if ( ! empty( $cbid ) && ! empty( $auth_token ) ) : ?>
 		<div class="cb-main__tabs_item <?php echo $active_tab === 'customize' ? 'active-item' : ''; ?>">
 			<a href="https://admin.usercentrics.eu/#/v3/appearance/styling?settingsId=<?php echo esc_attr( $cbid ); ?>"
 				class="cb-main__tabs__link" target="_blank">
