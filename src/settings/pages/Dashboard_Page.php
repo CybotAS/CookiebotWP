@@ -19,6 +19,7 @@ use function \wp_create_nonce;
 use function \__;
 use function \defined;
 use function \constant;
+use function cybot\cookiebot\lib\asset_url;
 
 // Add constant for WP_DEBUG
 if ( ! defined( 'WP_DEBUG' ) ) {
@@ -83,11 +84,11 @@ class Dashboard_Page implements Settings_Page_Interface {
 			'user_data'             => $user_data,
 			'scan_status'           => $scan_status,
 			'scan_id'               => $scan_id,
-			'cb_wp'                 => CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/cb-wp.png',
-			'europe_icon'           => CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/europe.png',
-			'usa_icon'              => CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/usa.png',
-			'check_icon'            => CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/check.svg',
-			'link_icon'             => CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/link.svg',
+			'cb_wp'                 => asset_url( 'img/cb-wp.png' ),
+			'europe_icon'           => asset_url( 'img/europe.png' ),
+			'usa_icon'              => asset_url( 'img/usa.png' ),
+			'check_icon'            => asset_url( 'img/icons/check.svg' ),
+			'link_icon'             => asset_url( 'img/icons/link.svg' ),
 			'banner_enabled'        => $banner_enabled,
 			'auto_blocking_mode'    => $auto_blocking_mode,
 			'gcm_enabled'           => $gcm_enabled,
@@ -107,7 +108,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 
 		wp_enqueue_script(
 			'cookiebot-amplitude-js',
-			CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/amplitude.js',
+			asset_url( 'js/backend/amplitude.js' ),
 			array( 'jquery' ),
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			true
@@ -122,14 +123,14 @@ class Dashboard_Page implements Settings_Page_Interface {
 		if ( ! $is_authenticated && ! empty( $cbid ) && ! empty( $user_data ) && ! empty( $was_onboarded ) ) {
 			wp_enqueue_style(
 				'cookiebot-dashboard-css',
-				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/css/backend/dashboard.css',
+				asset_url( 'css/backend/dashboard.css' ),
 				array(),
 				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 			);
 
 			wp_enqueue_script(
 				'cookiebot-account-static-js',
-				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account-static.js',
+				asset_url( 'js/backend/account-static.js' ),
 				array( 'jquery' ),
 				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 				true
@@ -159,14 +160,14 @@ class Dashboard_Page implements Settings_Page_Interface {
 		if ( Cookiebot_WP::is_trial_expired() && ! Cookiebot_WP::has_upgraded() ) {
 			wp_enqueue_style(
 				'cookiebot-dashboard-css',
-				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/css/backend/dashboard.css',
+				asset_url( 'css/backend/dashboard.css' ),
 				array(),
 				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 			);
 
 			wp_enqueue_script(
 				'cookiebot-account-js',
-				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account.js',
+				asset_url( 'js/backend/account.js' ),
 				array( 'jquery' ),
 				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 				true
@@ -195,14 +196,14 @@ class Dashboard_Page implements Settings_Page_Interface {
 		if ( ( ! empty( $cbid ) && $is_cb_user ) || ( ! empty( $cbid ) && empty( $user_data ) ) ) {
 			wp_enqueue_style(
 				'cookiebot-dashboard-backup-css',
-				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/css/backend/dashboard-old.css',
+				asset_url( 'css/backend/dashboard-old.css' ),
 				array(),
 				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 			);
 
 			wp_enqueue_script(
 				'cookiebot-account-js',
-				CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account.js',
+				asset_url( 'js/backend/account.js' ),
 				array( 'jquery' ),
 				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 				true
@@ -229,14 +230,14 @@ class Dashboard_Page implements Settings_Page_Interface {
 
 		wp_enqueue_style(
 			'cookiebot-dashboard-css',
-			CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/css/backend/dashboard.css',
+			asset_url( 'css/backend/dashboard.css' ),
 			array(),
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 		);
 
 		wp_enqueue_script(
 			'cookiebot-dashboard-js',
-			CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/dashboard.js',
+			asset_url( 'js/backend/dashboard.js' ),
 			array( 'jquery' ),
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			true
@@ -253,7 +254,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 
 		wp_enqueue_script(
 			'cookiebot-account-js',
-			CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/js/backend/account.js',
+			asset_url( 'js/backend/account.js' ),
 			array( 'jquery' ),
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			true

@@ -103,7 +103,7 @@ $header->display();
 
 						<div>
 							<input type="hidden" name="cookiebot-cookie-blocking-mode"
-									value="<?php echo esc_attr( $cbm ); ?>">
+									value="manual">
 							<input type="hidden" name="cookiebot-script-tag-uc-attribute"
 									value="<?php echo esc_attr( get_site_option( 'cookiebot-script-tag-uc-attribute', 'custom' ) ); ?>">
 							<input type="hidden" name="cookiebot-script-tag-cd-attribute"

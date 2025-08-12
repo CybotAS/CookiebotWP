@@ -4,6 +4,7 @@ use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\settings\templates\Header;
 use cybot\cookiebot\settings\templates\Main_Tabs;
 use cybot\cookiebot\settings\pages\Settings_Page;
+use function cybot\cookiebot\lib\asset_url;
 
 /**
  * @var array $template_args Array containing all template variables
@@ -23,7 +24,7 @@ $header->display();
 		<?php if ( Cookiebot_WP::get_subscription_type() === 'Free' ) : ?>
 			<div class="header-top-banners free-plan-banner">
 				<div class="banner-content">
-					<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/bolt.svg' ); ?>" alt="Bolt Icon">
+					<img src="<?php echo \esc_url( asset_url( 'img/icons/bolt.svg' ) ); ?>" alt="Bolt Icon">
 					<div>
 						<h3><?php echo esc_html__( "You're on the Free plan. Upgrade now to unlock your full site experience.", 'cookiebot' ); ?></h3>
 						<p><?php echo esc_html__( 'Upgrade for higher session limits, custom branding, and features that help you deliver a better experience on your site.', 'cookiebot' ); ?></p>
@@ -45,7 +46,7 @@ $header->display();
 			?>
 			<div class="header-top-banners trial-expired-banner">
 				<div class="banner-content">
-					<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/clock-icon.svg' ); ?>"
+					<img src="<?php echo \esc_url( asset_url( 'img/icons/clock-icon.svg' ) ); ?>"
 						alt="Clock Icon">
 					<div>
 						<h3><?php echo esc_html__( 'Your premium trial is over', 'cookiebot' ); ?></h3>
@@ -70,7 +71,7 @@ $header->display();
 			?>
 			<div class="header-top-banners banner-live-banner" id="banner-live-notice">
 				<div class="banner-content">
-					<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/check-white.svg' ); ?>"
+					<img src="<?php echo \esc_url( asset_url( 'img/icons/check-white.svg' ) ); ?>"
 						alt="Check Icon">
 					<div>
 
@@ -105,7 +106,7 @@ $header->display();
 			<div class="dashboard-grid-row">
 				<div class="gray-box">
 					<div class="header-section-no-margin">
-						<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/set-up-icon.svg' ); ?>" alt="Usercentrics Logo">
+						<img src="<?php echo \esc_url( asset_url( 'img/icons/set-up-icon.svg' ) ); ?>" alt="Usercentrics Logo">
 						<h1><?php echo \esc_html__( 'Set up your cookie banner', 'cookiebot' ); ?></h1>
 					</div>
 					<div class="header-section">
@@ -125,7 +126,7 @@ $header->display();
 							<div class="step-row">
 								<?php if ( ! empty( $template_args['cbid'] ) && ! empty( $template_args['user_data'] ) ) : ?>
 									<div class="step-icon">
-										<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/check-mark.svg' ); ?>" alt="Checkmark">
+										<img src="<?php echo \esc_url( asset_url( 'img/icons/check-mark.svg' ) ); ?>" alt="Checkmark">
 									</div>
 									<div class="step-content">
 										<h2><?php echo \esc_html__( 'Activate your banner', 'cookiebot' ); ?></h2>
@@ -151,9 +152,9 @@ $header->display();
 									</p>
 									<div class="banner-images">
 										<?php
-										$banner1_url = CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/banner-getting-started1.png';
-										$banner2_url = CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/banner-getting-started2.png';
-										$arrow_url   = CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/banner-arrow.png';
+										$banner1_url = asset_url( 'img/banner-getting-started1.png' );
+										$banner2_url = asset_url( 'img/banner-getting-started2.png' );
+										$arrow_url   = asset_url( 'img/banner-arrow.png' );
 										?>
 										<img src="<?php echo \esc_url( $banner1_url ); ?>"
 											alt="Banner Preview 1"
@@ -191,7 +192,7 @@ $header->display();
 								<div class="step-row">
 									<div class="step-icon">
 										<?php if ( $template_args['scan_status'] === 'DONE' ) : ?>
-											<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/check-mark.svg' ); ?>" alt="Checkmark">
+											<img src="<?php echo \esc_url( asset_url( 'img/icons/check-mark.svg' ) ); ?>" alt="Checkmark">
 										<?php else : ?>
 											<div class="empty-circle"></div>
 										<?php endif; ?>
@@ -205,7 +206,7 @@ $header->display();
 											case 'IN_PROGRESS':
 												?>
 												<span class="in-progress-status">
-													<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/clock-icon.svg' ); ?>" alt="Clock Icon">
+													<img src="<?php echo \esc_url( asset_url( 'img/icons/clock-icon.svg' ) ); ?>" alt="Clock Icon">
 													In Progress
 												</span>
 												<?php
@@ -259,7 +260,7 @@ $header->display();
 										$subscription_type = Cookiebot_WP::get_subscription_type();
 										if ( $is_upgraded && $subscription_type !== 'Free' ) :
 											?>
-											<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/check-mark.svg' ); ?>" alt="Checkmark">
+											<img src="<?php echo \esc_url( asset_url( 'img/icons/check-mark.svg' ) ); ?>" alt="Checkmark">
 										<?php else : ?>
 											<div class="empty-circle"></div>
 										<?php endif; ?>
@@ -283,7 +284,7 @@ $header->display();
 										<div class="subscription-info">
 											<div>
 												<div class="upgrade-header">
-													<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/celebration.svg' ); ?>" alt="Celebration" class="celebration-icon">
+													<img src="<?php echo \esc_url( asset_url( 'img/icons/celebration.svg' ) ); ?>" alt="Celebration" class="celebration-icon">
 													<h3>You've upgraded to <span class="plan-name"><?php echo esc_html( $template_args['subscription'] ); ?></span>!</h3>
 												</div>
 												<?php if ( isset( $template_args['user_data']['subscriptions']['active']['subscription_id'] ) ) : ?>
@@ -296,7 +297,7 @@ $header->display();
 											</div>
 											<?php if ( isset( $template_args['user_data']['subscriptions']['active']['next_billing_date'] ) ) : ?>
 												<div class="billing-date">
-													<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/calendar.svg' ); ?>" alt="Calendar" class="calendar-icon">
+													<img src="<?php echo \esc_url( asset_url( 'img/icons/calendar.svg' ) ); ?>" alt="Calendar" class="calendar-icon">
 													<h3><?php echo esc_html__( 'Next billing date: ', 'cookiebot' ) . esc_html( gmdate( 'd/m/Y', strtotime( $template_args['user_data']['subscriptions']['active']['next_billing_date'] ) ) ); ?></h3>
 												</div>
 											<?php endif; ?>
@@ -312,7 +313,7 @@ $header->display();
 										<div class="divider"></div>
 										<div class="trial-countdown">
 											<?php if ( Cookiebot_WP::is_in_trial() && ! $trial_expired ) : ?>
-												<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/clock-icon-blue.svg' ); ?>" alt="Clock Icon">
+												<img src="<?php echo \esc_url( asset_url( 'img/icons/clock-icon-blue.svg' ) ); ?>" alt="Clock Icon">
 												<p class="step-message"><strong>Enjoy all Premium features for</strong> <span class="days-highlight"><?php echo absint( Cookiebot_WP::get_trial_days_left() ); ?> days</span>.</p>
 											<?php endif; ?>
 										</div>
@@ -386,7 +387,7 @@ $header->display();
 									<span class="option-label"><?php echo esc_html__( 'Auto blocking mode', 'cookiebot' ); ?></span>
 									<div class="tooltip">
 										<span class="tooltiptext">Blocks cookies automatically until users consent. No script tagging required. Scan results determine what gets blocked.</span>
-										<img class="img" src="<?php echo esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/info.svg' ); ?>" />
+										<img class="img" src="<?php echo esc_url( asset_url( 'img/icons/info.svg' ) ); ?>" />
 									</div>
 								</div>
 								<div class="option-controls">
@@ -416,7 +417,7 @@ $header->display();
 
 									<div class="tooltip">
 										<span class="tooltiptext">Enable Google Consent Mode to continue running remarketing campaigns and tracking conversions in Google Ads and Google Analytics. Required if you have visitors from the European Economic Area (EEA).</span>
-										<img class="img" src="<?php echo esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/info.svg' ); ?>" />
+										<img class="img" src="<?php echo esc_url( asset_url( 'img/icons/info.svg' ) ); ?>" />
 									</div>
 
 								</div>
@@ -451,9 +452,11 @@ $header->display();
 						</div>
 
 						<div class="banner-actions">
+							<?php if ( ! empty( get_option( 'cookiebot-auth-token' ) ) ) : ?>
 							<button class="cb-btn customize-banner-btn" onclick="/* window.trackAmplitudeEvent('Customize Banner Clicked', { settingsId: '<?php echo esc_js( $template_args['cbid'] ); ?>', plugin_version: '<?php echo esc_js( CYBOT_COOKIEBOT_VERSION ); ?>' }); */ window.open('<?php echo esc_url( $template_args['customize_banner_link'] ); ?>', '_blank')"><?php echo esc_html__( 'Customize banner', 'cookiebot' ); ?></button>
+							<?php endif; ?>
 							<a href="<?php echo esc_url( $template_args['configure_banner_link'] ); ?>" class="configure-link" target="_blank">
-								<img class="material-icons" src="<?php echo esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/link.svg' ); ?>" />
+								<img class="material-icons" src="<?php echo esc_url( asset_url( 'img/icons/link.svg' ) ); ?>" />
 								<?php echo esc_html__( 'How to configure your banner', 'cookiebot' ); ?>
 							</a>
 						</div>

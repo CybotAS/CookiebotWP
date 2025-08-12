@@ -3,6 +3,7 @@
 use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\settings\templates\Header;
 use cybot\cookiebot\settings\templates\Main_Tabs;
+use function cybot\cookiebot\lib\asset_url;
 
 /**
  * @var array $template_args Array containing all template variables
@@ -23,7 +24,7 @@ $header->display();
 			<div class="dashboard-grid-row">
 				<div class="gray-box">
 					<div class="header-section-no-margin">
-						<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/set-up-icon.svg' ); ?>" alt="Usercentrics Logo">
+						<img src="<?php echo \esc_url( asset_url( 'img/icons/set-up-icon.svg' ) ); ?>" alt="Usercentrics Logo">
 						<h1><?php echo \esc_html__( 'Your Consent Management Platform', 'cookiebot' ); ?></h1>
 					</div>
 					<div class="header-section">
@@ -35,8 +36,8 @@ $header->display();
 					<div class="banner-preview-container">
 						<div class="banner-images">
 							<?php
-							$banner1_url = CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/banner-getting-started1.png';
-							$banner2_url = CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/banner-getting-started2.png';
+							$banner1_url = asset_url( 'img/banner-getting-started1.png' );
+							$banner2_url = asset_url( 'img/banner-getting-started2.png' );
 							?>
 							<img src="<?php echo \esc_url( $banner1_url ); ?>"
 								alt="Banner Preview 1"

@@ -17,6 +17,8 @@ class Cookiebot_Activated {
 
 		$this->set_to_mode_auto_when_no_cookiebot_id_is_set();
 
+		$this->set_banner_enabled_by_default();
+
 		$this->set_addons_default_settings();
 
 		// Set a transient to indicate plugin was just activated
@@ -79,6 +81,14 @@ class Cookiebot_Activated {
 				update_option( 'cookiebot-cookie-blocking-mode', 'auto' );
 				update_option( 'cookiebot-nooutput-admin', true );
 			}
+		}
+	}
+
+	private function set_banner_enabled_by_default() {
+		$enabled = get_option( 'cookiebot-banner-enabled', 'default' );
+		if ( $enabled === 'default' ) {
+			$enabled = '1';
+			update_option( 'cookiebot-banner-enabled', $enabled );
 		}
 	}
 

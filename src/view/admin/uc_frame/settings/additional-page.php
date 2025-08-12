@@ -55,7 +55,7 @@
 						<?php
 						checked(
 							1,
-							get_option( 'cookiebot-banner-enabled', false )
+							get_option( 'cookiebot-banner-enabled', '1' )
 						);
 						?>
 					/>

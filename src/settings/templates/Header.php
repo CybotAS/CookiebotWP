@@ -6,6 +6,7 @@ use cybot\cookiebot\lib\Cookiebot_WP;
 use InvalidArgumentException;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
+use function cybot\cookiebot\lib\logo_url;
 
 class Header {
 
@@ -15,7 +16,7 @@ class Header {
 	 */
 	public function display() {
 		$args = array(
-			'cookiebot_logo' => CYBOT_COOKIEBOT_PLUGIN_URL . 'logo.svg',
+			'cookiebot_logo' => logo_url(),
 		);
 
 		$style_sheets = array(

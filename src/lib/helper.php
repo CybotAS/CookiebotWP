@@ -568,12 +568,34 @@ namespace cybot\cookiebot\lib {
 	 * @throws InvalidArgumentException
 	 */
 	function asset_url( $relative_path ) {
+		if ( is_multisite() ) {
+			$url = get_site_url( 1 ) . CYBOT_COOKIEBOT_PLUGIN_NETWORK_DIR . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path;
+			return $url;
+		}
+
 		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path;
 		$url           = esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path );
 		if ( ! file_exists( $absolute_path ) || empty( $url ) ) {
 			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
 		}
+		return $url;
+	}
 
+	/**
+	 * @return string
+	 * @throws InvalidArgumentException
+	 */
+	function logo_url() {
+		if ( is_multisite() ) {
+			$url = get_site_url( 1 ) . CYBOT_COOKIEBOT_PLUGIN_NETWORK_DIR . CYBOT_COOKIEBOT_PLUGIN_LOGO_FILE;
+			return $url;
+		}
+
+		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . CYBOT_COOKIEBOT_PLUGIN_LOGO_FILE;
+		$url           = esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . CYBOT_COOKIEBOT_PLUGIN_LOGO_FILE );
+		if ( ! file_exists( $absolute_path ) || empty( $url ) ) {
+			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
+		}
 		return $url;
 	}
 
@@ -624,5 +646,7 @@ namespace cybot\cookiebot\lib {
 		return Cookiebot_WP::instance();
 	}
 
-	const CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR = 'assets/';
+	const CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR  = 'assets/';
+	const CYBOT_COOKIEBOT_PLUGIN_NETWORK_DIR = '/wp-content/plugins/cookiebot/';
+	const CYBOT_COOKIEBOT_PLUGIN_LOGO_FILE   = 'logo.svg';
 }

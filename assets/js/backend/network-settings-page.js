@@ -87,12 +87,17 @@ function remove_account(){
     const cbidAlert = jQuery('.cb-cbid-alert__msg');
     const confirmCta = jQuery('#cookiebot-cbid-reset');
     const cancelCta = jQuery('#cookiebot-cbid-cancel');
-    removeCta.on('click', function(){
+    removeCta.on('click', function(){    
         cbidAlert.removeClass('hidden');
         removeCta.addClass('disabled');
     });
     confirmCta.on('click', function(){
         jQuery('#cookiebot-cbid').val('').removeClass('cbid-active');
+
+        // If the account was disconnected set blocking mode to 'auto' and 'Hide cookie popup' to false.
+        jQuery('input[type=radio][name=cookiebot-cookie-blocking-mode][value=auto]').prop('checked', true);
+        jQuery('input[name=cookiebot-nooutput]').prop( 'checked', false )
+        
         jQuery('.cb-settings__header p.submit #submit').click();
     });
     cancelCta.on('click', function(){

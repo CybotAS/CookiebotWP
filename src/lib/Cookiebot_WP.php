@@ -27,7 +27,7 @@ class Cookiebot_WP {
 		}
 	}
 
-	const COOKIEBOT_PLUGIN_VERSION  = '4.5.10';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.5.11';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -299,7 +299,7 @@ class Cookiebot_WP {
 	 */
 	public static function get_cookie_blocking_mode() {
 		$allowed_modes   = array( 'auto', 'manual' );
-		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode', 'auto' );
+		$network_setting = (string) get_site_option( 'cookiebot-cookie-blocking-mode', 'manual' );
 		$setting         = $network_setting === 'manual' ?
 			(string) get_option( 'cookiebot-cookie-blocking-mode', $network_setting ) :
 			$network_setting;

@@ -9,6 +9,7 @@ use cybot\cookiebot\lib\Supported_Languages;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\cookiebot_get_language_from_setting;
 use function cybot\cookiebot\lib\include_view;
+use function cybot\cookiebot\lib\logo_url;
 
 class General_Page implements Settings_Page_Interface {
 
@@ -20,7 +21,7 @@ class General_Page implements Settings_Page_Interface {
 			'ruleset_id'               => ! empty( get_option( 'cookiebot-ruleset-id' ) ) ? get_option( 'cookiebot-ruleset-id' ) : 'settings',
 			'is_ms'                    => false,
 			'cookiebot_gdpr_url'       => 'https://www.cookiebot.com/' . Cookiebot_WP::get_manager_language() . '/gdpr',
-			'cookiebot_logo'           => CYBOT_COOKIEBOT_PLUGIN_URL . 'cookiebot-logo.png',
+			'cookiebot_logo'           => logo_url(),
 			'supported_languages'      => Supported_Languages::get(),
 			'current_lang'             => cookiebot_get_language_from_setting( true ),
 			'is_wp_consent_api_active' => $consent_api_helper->is_wp_consent_api_active(),

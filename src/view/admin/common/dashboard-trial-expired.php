@@ -4,6 +4,7 @@ use cybot\cookiebot\settings\templates\Header;
 use cybot\cookiebot\settings\templates\Main_Tabs;
 use cybot\cookiebot\settings\pages\Settings_Page;
 use cybot\cookiebot\lib\Cookiebot_WP;
+use function cybot\cookiebot\lib\asset_url;
 
 /**
  * @var array $template_args Array containing all template variables
@@ -20,7 +21,7 @@ $header->display();
 		<!-- Trial expiration notice -->
 			<div class="header-top-banners trial-expired-banner">
 				<div class="banner-content">
-					<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/clock-icon.svg' ); ?>"
+					<img src="<?php echo \esc_url( asset_url( 'img/icons/clock-icon.svg' ) ); ?>"
 						alt="Clock Icon">
 					<div>
 						<h3><?php echo esc_html__( 'Your premium trial is over', 'cookiebot' ); ?></h3>
@@ -44,7 +45,7 @@ $header->display();
 			<div class="dashboard-grid-row">
 				<div class="gray-box">
 					<div class="header-section-no-margin">
-						<img src="<?php echo \esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . 'assets/img/icons/set-up-icon.svg' ); ?>" alt="Setup Icon">
+						<img src="<?php echo \esc_url( asset_url( 'img/icons/set-up-icon.svg' ) ); ?>" alt="Setup Icon">
 						<h1><?php echo \esc_html__( 'Set up your cookie banner', 'cookiebot' ); ?></h1>
 					</div>
 

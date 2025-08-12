@@ -110,7 +110,7 @@ $header->display();
 							</div>
 						</div>
 
-						<div class="cb-settings__config__item">
+						<!-- <div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
 								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookie-blocking', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__text">
@@ -120,17 +120,16 @@ $header->display();
 							<div class="cb-settings__config__data">
 								<div class="cb-settings__config__data__inner">
 									<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Select cookie-blocking mode', 'cookiebot' ); ?></h3>
-									<label class="recommended-item">
+									<label>
 										<input <?php checked( 'auto', $cbm ); ?>
 												type="radio"
 												name="cookiebot-cookie-blocking-mode"
 												value="auto"
 										/>
 										<?php esc_html_e( 'Automatic', 'cookiebot' ); ?>
-										<span class="recommended-tag"><?php esc_html_e( 'Recommended', 'cookiebot' ); ?></span>
 									</label>
 									<label>
-										<input <?php checked( 'manual', $cbm ); ?>
+										<input <?php checked( 'manual', $cbm, true ); ?>
 												type="radio"
 												name="cookiebot-cookie-blocking-mode"
 												value="manual"
@@ -139,7 +138,7 @@ $header->display();
 									</label>
 								</div>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
