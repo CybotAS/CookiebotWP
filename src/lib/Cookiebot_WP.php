@@ -27,7 +27,7 @@ class Cookiebot_WP {
 		}
 	}
 
-	const COOKIEBOT_PLUGIN_VERSION  = '4.5.11';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.6.0';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -359,9 +359,10 @@ class Cookiebot_WP {
 	 */
 	private function set_default_options() {
 		$options = array(
-			'cookiebot-nooutput-admin' => '1',
-			'cookiebot-gcm'            => '1',
-			'cookiebot-banner-enabled' => '1',
+			'cookiebot-nooutput-admin'       => '1',
+			'cookiebot-gcm'                  => '1',
+			'cookiebot-banner-enabled'       => '1',
+			'cookiebot-cookie-blocking-mode' => 'auto',
 		);
 
 		foreach ( $options as $option => $default ) {
@@ -372,6 +373,12 @@ class Cookiebot_WP {
 			if ( ( get_option( $option ) || get_option( $option ) !== false ) && ! get_option( $option . self::OPTION_FIRST_RUN_SUFFIX ) ) {
 				update_option( $option . self::OPTION_FIRST_RUN_SUFFIX, '1' );
 			}
+		}
+
+		// Safeguard to always garantee the blocking mode has a value.
+		// There is one situation in which this value is cleared after disconnecting an onboarded user account
+		if ( empty( get_option( 'cookiebot-cookie-blocking-mode' ) ) ) {
+			update_option( 'cookiebot-cookie-blocking-mode', 'auto' );
 		}
 
 		self::set_tcf_version();

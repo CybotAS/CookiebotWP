@@ -76,7 +76,7 @@ $header->display();
 								printf(
 								// translators: the first placeholder string will be replaced with a html anchor open tag and the second placeholder string will be replaced by the html anchor closing tag
 									esc_html__( 'Log in to your %1$sCookiebot CMP account%2$s.', 'cookiebot' ),
-									'<a href="https://www.cookiebot.com/en/account/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner" target="_blank" rel="noopener">',
+									'<a href="https://admin.cookiebot.com" target="_blank" rel="noopener">',
 									'</a>'
 								);
 								?>
@@ -85,7 +85,7 @@ $header->display();
 								<?php
 								printf(
 								// translators: the placeholder strings denote the positions of <b>, </b>, <b> and </b> HTML tags
-									esc_html__( 'Go to %1$s"Settings"%2$s and setup your Cookiebot CMP', 'cookiebot' ),
+									esc_html__( 'Go to %1$s"Domains & Aliases"%2$s and setup your Cookiebot CMP', 'cookiebot' ),
 									'<b>',
 									'</b>'
 								);
@@ -95,13 +95,22 @@ $header->display();
 								<?php
 								printf(
 								// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
-									esc_html__( 'Go to the %1$s"Your scripts"%2$s tab', 'cookiebot' ),
+									esc_html__( 'Go to %1$s"Implementation"%2$s and scroll down to the %1$s"Installation guides"%2$s section', 'cookiebot' ),
 									'<b>',
 									'</b>'
 								);
 								?>
 							</li>
-							<li><?php esc_html_e( 'Copy the value inside the data-cid parameter - eg.: abcdef12-3456-7890-abcd-ef1234567890', 'cookiebot' ); ?></li>
+							<li>
+								<?php
+								printf(
+								// translators: the placeholder strings denote the positions of <b> and </b> HTML tags
+									esc_html__( 'Copy the value of %1$s"Domain group ID"%2$s - eg.: abcdef12-3456-7890-abcd-ef1234567890', 'cookiebot' ),
+									'<b>',
+									'</b>'
+								);
+								?>
+							</li>
 							<li>
 								<?php
 								printf(

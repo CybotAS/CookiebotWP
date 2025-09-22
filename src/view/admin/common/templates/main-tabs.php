@@ -16,8 +16,8 @@ $isnw = is_network_admin();
 $cbid          = Cookiebot_WP::get_cbid();
 $auth_token    = get_option( 'cookiebot-auth-token' );
 $user_data     = Cookiebot_WP::get_user_data();
-$show_settings = $active_tab === 'settings' || ! empty( $cbid );
-$show_plugins  = ( ! $isnw && Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) || empty( $user_data );
+$show_settings = true;
+$show_plugins  = ! $isnw && Cookiebot_Frame::is_cb_frame_type() !== 'empty';
 $feedback_url  = 'https://form.typeform.com/to/n6ZlunZP';
 
 ?>

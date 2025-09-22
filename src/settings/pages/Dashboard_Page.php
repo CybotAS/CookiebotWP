@@ -228,6 +228,34 @@ class Dashboard_Page implements Settings_Page_Interface {
 			return;
 		}
 
+		// Redirect new users to cookiebot dashboard page
+		if ( empty( $cbid ) ) {
+			$args = array(
+				'cbid'        => Cookiebot_WP::get_cbid(),
+				'cb_wp'       => asset_url( 'img/cb-wp.png' ),
+				'europe_icon' => asset_url( 'img/europe.png' ),
+				'usa_icon'    => asset_url( 'img/usa.png' ),
+				'check_icon'  => asset_url( 'img/icons/check.svg' ),
+				'link_icon'   => asset_url( 'img/icons/link.svg' ),
+			);
+
+			$style_sheets = array(
+				array( 'cookiebot-dashboard-css', 'css/backend/dashboard-old.css' ),
+			);
+
+			foreach ( $style_sheets as $style ) {
+				wp_enqueue_style(
+					$style[0],
+					asset_url( $style[1] ),
+					null,
+					Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+				);
+			}
+
+			include_view( Cookiebot_Frame::get_view_path() . 'dashboard-cookiebot.php', $args );
+			return;
+		}
+
 		wp_enqueue_style(
 			'cookiebot-dashboard-css',
 			asset_url( 'css/backend/dashboard.css' ),
