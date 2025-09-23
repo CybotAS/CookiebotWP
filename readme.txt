@@ -204,7 +204,12 @@ Cookiebot CMP version 4.6.0 is out! This release has a new feature
 
 ####What's new####
 
-* Change new registrations to Cookiebot CMP accounts
+* Added a new dashboard for new users to improve onboarding.
+* Enabled sign-up through Cookiebot for smoother registration.
+
+####Improved####
+
+* Simplified the account connection process, making it more intuitive.
 
 ### 4.5.11 ###
 Release date: August 12th 2025
