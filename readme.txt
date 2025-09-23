@@ -3,7 +3,7 @@
 * Tags: cookie banner, cookie consent, cookie notice, GDPR, privacy, cmp, consent‑management‑platform, google‑consent‑mode, compliance, gdpr‑compliance, ccpa, dma
 * Requires at least: 4.4
 * Tested up to: 6.8
-* Stable tag: 4.5.11
+* Stable tag: 4.6.0
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -196,6 +196,20 @@ Usercentrics Cookiebot is fully integrated with the WP Consent API. When your vi
 
 ## Changelog ##
 **Cookiebot CMP Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot CMP offers.**
+
+### 4.6.0 ###
+Release date: September 23rd 2025
+
+Cookiebot CMP version 4.6.0 is out! This release has a new feature
+
+####What's new####
+
+* Added a new dashboard for new users to improve onboarding.
+* Enabled sign-up through Cookiebot for smoother registration.
+
+####Improved####
+
+* Simplified the account connection process, making it more intuitive.
 
 ### 4.5.11 ###
 Release date: August 12th 2025

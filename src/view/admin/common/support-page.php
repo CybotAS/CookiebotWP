@@ -56,21 +56,25 @@ $header->display();
 						rel="noopener">
 						<?php esc_html_e( 'Visit Support Center', 'cookiebot' ); ?>
 					</a>
-					<a href="#" onclick="copyDebugInfo();" class="cb-btn cb-secondary-btn" style="margin-left: 20px;">
-						<?php esc_html_e( 'Copy Debug Info', 'cookiebot' ); ?>
-					</a>
+
+					<?php if ( Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) : ?>
+						<a href="#" onclick="copyDebugInfo();" class="cb-btn cb-secondary-btn" style="margin-left: 20px;">
+							<?php esc_html_e( 'Copy Debug Info', 'cookiebot' ); ?>
+						</a>
+					<?php endif; ?>
 				</div>
 			</div>
 
-			<div class="cb-debug__code__container">
-				<textarea
-						cols="50"
-						rows="40"
-						id="cookiebot-debug-info"
-						readonly="readonly"
-				><?php echo esc_textarea( $debug_output ); ?></textarea>
-			</div>
-
+			<?php if ( Cookiebot_Frame::is_cb_frame_type() !== 'empty' ) : ?>
+				<div class="cb-debug__code__container">
+					<textarea
+							cols="50"
+							rows="40"
+							id="cookiebot-debug-info"
+							readonly="readonly"
+					><?php echo esc_textarea( $debug_output ); ?></textarea>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
