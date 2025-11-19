@@ -51,6 +51,9 @@
     text-align: center;
     line-height: initial;
     cursor: pointer;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .cb-settings__tabs__item.nav-tab-active:hover {

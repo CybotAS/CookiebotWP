@@ -87,7 +87,8 @@ class Cookiebot_Javascript_Helper {
 
 			if ( $return_html ) {
 				$this->debug_log( 'Returning HTML' );
-				return wp_kses_post( $banner_script );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Script HTML is generated internally and is safe
+				return $banner_script;
 			} else {
 				$this->debug_log( 'Echoing HTML' );
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Script HTML is generated internally and is safe

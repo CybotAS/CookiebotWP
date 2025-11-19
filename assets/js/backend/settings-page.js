@@ -51,6 +51,7 @@ function show_ruleset_selector() {
     const cbidField = jQuery( '#cookiebot-cbid' );
     const cbidCheck = jQuery( '.cookiebot-cbid-check' );
     const cbidRulesetSelector = jQuery('#cookiebot-ruleset-id-selector');
+    const cbidError = jQuery('.cookiebot-cbid-error');
 
     cbidCheck.removeClass('check-progress');
     cbidField.removeClass('check-progress');
@@ -58,9 +59,23 @@ function show_ruleset_selector() {
     if(!cbidField.val()){
         cbidCheck.removeClass('check-pass');
         cbidRulesetSelector.addClass('hidden');
+        cbidError.addClass('hidden');
         jQuery('.cookiebot-cbid-container p.submit #submit').addClass('disabled');
         return;
     }
+
+    // Validate that the field has exactly 14 or 36 characters
+    const fieldLength = cbidField.val().length;
+    if(fieldLength !== 14 && fieldLength !== 36){
+        cbidCheck.removeClass('check-pass');
+        cbidRulesetSelector.addClass('hidden');
+        cbidError.removeClass('hidden');
+        jQuery('.cookiebot-cbid-container p.submit #submit').addClass('disabled');
+        return;
+    }
+
+    // Valid input - hide error message
+    cbidError.addClass('hidden');
 
     !check_id_frame() ? cbidRulesetSelector.removeClass('hidden') : cbidRulesetSelector.addClass('hidden');
 

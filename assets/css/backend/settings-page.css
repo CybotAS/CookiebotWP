@@ -69,6 +69,9 @@
     font-weight: 600;
     text-align: center;
     cursor: pointer;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .cb-settings__tabs__item.active-item, .cb-settings__tabs__item:hover {

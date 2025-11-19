@@ -124,7 +124,7 @@ class Support_Page implements Settings_Page_Interface {
 			$debug_output .= 'Banner tag: ' . "\n" . $cookiebot_javascript_helper->include_cookiebot_js( true ) . "\n";
 			$debug_output .= 'Declaration tag: ' . Cookiebot_Declaration_Shortcode::show_declaration() . "\n";
 		} else {
-			$debug_output .= 'Banner tag: ' . "\n" . $cookiebot_javascript_helper->include_uc_cmp_js( true ) . "\n";
+			$debug_output .= 'Banner tag: ' . "\n" . $cookiebot_javascript_helper->include_uc_cmp_js( true ) . "\n\n";
 		}
 
 		if ( get_option( 'cookiebot-gtm' ) !== false ) {
