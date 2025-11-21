@@ -146,9 +146,9 @@ $header->display();
 								<div class="banner-preview-container">
 									<div class="divider"></div>
 									<p class="step-description">
-										• Instant setup & automatic cookie blocking<br>
-										• 14 days of all-access premium features (no card needed)<br>
-										• Keep it live afterwards on our Free plan or upgrade any time
+										• <?php echo \esc_html__( 'Instant setup & automatic cookie blocking', 'cookiebot' ); ?><br>
+										• <?php echo \esc_html__( '14 days of all-access premium features (no card needed)', 'cookiebot' ); ?><br>
+										• <?php echo \esc_html__( 'Keep it live afterwards on our Free plan or upgrade any time', 'cookiebot' ); ?>
 									</p>
 									<div class="banner-images">
 										<?php
@@ -174,7 +174,7 @@ $header->display();
 
 									<div>
 										<div class="cb-general__info__text">
-											<span class="note-text">Already have a Cookiebot or Usercentrics account?</span>
+											<span class="note-text"><?php echo esc_html__( 'Already have a Cookiebot or Usercentrics account?', 'cookiebot' ); ?></span>
 
 											<a href="<?php echo esc_url( add_query_arg( 'page', Settings_Page::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>"
 												class="note-link">

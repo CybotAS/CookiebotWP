@@ -27,7 +27,7 @@ class Cookiebot_WP {
 		}
 	}
 
-	const COOKIEBOT_PLUGIN_VERSION  = '4.6.0';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.6.1';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -573,10 +573,12 @@ class Cookiebot_WP {
 			);
 		}
 
+		$data_label = ! empty( get_option( 'cookiebot-ruleset-id' ) ) ? get_option( 'cookiebot-ruleset-id' ) : 'settings';
 		// Add main banner script
 		// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 		$script_html .= sprintf(
-			'<script id="usercentrics-cmp" data-settings-id="%s" data-usercentrics="%s" src="%s" async></script>',
+			'<script id="usercentrics-cmp" data-%s-id="%s" data-usercentrics="%s" src="%s" async></script>',
+			esc_attr( $data_label ),
 			esc_attr( $cbid ),
 			esc_attr( 'Usercentrics Consent Management Platform' ),
 			esc_url( 'https://web.cmp.usercentrics.eu/ui/loader.js' )
