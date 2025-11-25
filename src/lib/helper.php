@@ -6,6 +6,8 @@ namespace cybot\cookiebot\lib {
 	use Exception;
 	use InvalidArgumentException;
 	use RuntimeException;
+	use DOMDocument;
+	use DOMElement;
 
 	/**
 	 * @param string $type
@@ -99,96 +101,79 @@ namespace cybot\cookiebot\lib {
 	 * @since   1.2.0
 	 */
 	function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
-		/**
-		 * normalize potential self-closing script tags
-		 */
-
-		$normalized_buffer = preg_replace( '/(<script(.*?)\/>)/is', '<script$2></script>', $buffer );
-
-		if ( $normalized_buffer !== null ) {
-			$buffer = $normalized_buffer;
+		if ( empty( $buffer ) ) {
+			return $buffer;
 		}
 
-		/**
-		 * Pattern to get all scripts
-		 *
-		 * @version 2.0.4
-		 * @since   1.2.0
-		 */
-		$pattern = '/(<script[^>]*+>)(.*?)(<\/script>)/is';
+		// Use DOMDocument to safely parse and modify the script tag
+		$dom = new DOMDocument();
 
-		/**
-		 * Get all scripts and add cookieconsent if it does match with the criterion
-		 */
-		$updated_scripts = preg_replace_callback(
-			$pattern,
-			function ( $matches ) use ( $keywords ) {
-				$script           = $matches[0]; // the full script html
-				$script_tag_open  = $matches[1]; // only the script open tag with all attributes
-				$script_tag_inner = $matches[2]; // only the script's innerText
-				$script_tag_close = $matches[3]; // only the script closing tag
+		// Suppress errors for partial HTML
+		$libxml_previous_state = libxml_use_internal_errors( true );
 
-				/**
-				 * Check if the script contains the keywords, checks keywords one by one
-				 *
-				 * If one match, then the rest of the keywords will be skipped.
-				 */
-				foreach ( $keywords as $needle => $cookie_type ) {
-					/**
-					 * The script contains the needle
-					 */
-					if ( strpos( $script, $needle ) !== false ) {
-						/**
-						 * replace all single quotes with double quotes in the open tag
-						 * remove previously set data-cookieconsent attribute
-						 * remove type attribute
-						 */
-						$script_tag_open = str_replace( '\'', '"', $script_tag_open );
-						$script_tag_open = preg_replace( '/\sdata-cookieconsent=\"[^"]*+\"/', '', $script_tag_open );
-						$script_tag_open = preg_replace( '/\stype=\"[^"]*+\"/', '', $script_tag_open );
+		// Wrap buffer in a custom tag to ensure correct parsing of fragments (e.g. multiple siblings at root)
+		// This prevents DOMDocument from trying to fix structure by nesting siblings
+		$wrapped_buffer = '<cookiebot-wrapper>' . $buffer . '</cookiebot-wrapper>';
 
-						/**
-						 * set the type attribute to text/plain to prevent javascript execution
-						 * add data-cookieconsent attribute
-						 */
-						$cookie_types = cookiebot_addons_output_cookie_types( $cookie_type );
+		// Load HTML with UTF-8 encoding hack
+		// The mb_convert_encoding is to ensure we don't have encoding issues
+		// We use LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD to avoid adding <html><body> wrappers automatically
+		// Replacement for deprecated mb_convert_encoding(..., 'HTML-ENTITIES', 'UTF-8')
+		$encoded_buffer = mb_encode_numericentity( $wrapped_buffer, array( 0x80, 0x10FFFF, 0, 0x1FFFFF ), 'UTF-8' );
+		$dom->loadHTML( $encoded_buffer, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
 
-						$script_tag_open = str_replace(
-							'<script',
-							sprintf( '<script type="text/plain" data-cookieconsent="%s"', $cookie_types ),
-							$script_tag_open
-						);
+		libxml_use_internal_errors( $libxml_previous_state );
 
-						/**
-						 * reconstruct the script and break the foreach loop
-						 */
-						$script = $script_tag_open . $script_tag_inner . $script_tag_close;
-					}
+		$scripts = $dom->getElementsByTagName( 'script' );
+		$modified = false;
+
+		// Convert DOMNodeList to array to avoid modification issues during iteration
+		$script_nodes = array();
+		foreach ( $scripts as $script ) {
+			$script_nodes[] = $script;
+		}
+
+		foreach ( $script_nodes as $script ) {
+			/** @var DOMElement $script */
+			// Get the full script HTML to check for keywords
+			// We check the outer HTML to include attributes in the search, matching the regex behavior
+			$full_script_content = $dom->saveHTML( $script );
+
+			foreach ( $keywords as $needle => $cookie_type ) {
+				if ( strpos( $full_script_content, $needle ) !== false ) {
+					// Match found
+
+					// Remove existing attributes
+					$script->removeAttribute( 'type' );
+					$script->removeAttribute( 'data-cookieconsent' );
+
+					// Add new attributes
+					$script->setAttribute( 'type', 'text/plain' );
+					$script->setAttribute( 'data-cookieconsent', cookiebot_addons_output_cookie_types( $cookie_type ) );
+
+					$modified = true;
+					// Break inner loop (keywords) as we found a match
+					break;
 				}
-
-				/**
-				 * return the reconstructed script
-				 */
-				return $script;
-			},
-			$buffer
-		);
-
-		/**
-		 * Fallback when the regex fails to work due to PCRE_ERROR_JIT_STACKLIMIT
-		 *
-		 * @version 2.0.4
-		 * @since   2.0.4
-		 */
-		if ( $updated_scripts === null ) {
-			$updated_scripts = $buffer;
-
-			if ( get_option( 'cookiebot_regex_stacklimit' ) === false ) {
-				update_option( 'cookiebot_regex_stacklimit', 1 );
 			}
 		}
 
-		return $updated_scripts;
+		if ( $modified ) {
+			// Save HTML
+			// We extract children of our wrapper
+			$wrapper = $dom->getElementsByTagName( 'cookiebot-wrapper' )->item( 0 );
+			if ( $wrapper ) {
+				$output = '';
+				foreach ( $wrapper->childNodes as $node ) {
+					$output .= $dom->saveHTML( $node );
+				}
+				return $output;
+			}
+			// Fallback if wrapper is missing (should not happen)
+			return $dom->saveHTML();
+		}
+
+		return $buffer;
 	}
 
 	/**

@@ -2,6 +2,9 @@
 
 namespace cybot\cookiebot\lib\script_loader_tag;
 
+use DOMDocument;
+use DOMElement;
+
 class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 
 
@@ -74,27 +77,51 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 * @since 1.2.0
 	 */
 	public function cookiebot_add_consent_attribute_to_tag( $tag, $handle, $src ) {
+		// Check if the handle is in our list of tags to modify
 		if ( array_key_exists( $handle, $this->tags ) && ! empty( $this->tags[ $handle ] ) ) {
+			// If we have a match, we completely replace the tag with our own constructed one
+			// This is safer than parsing for this specific case as we know exactly what we want
 			//phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
-			return '<script src="' . $src . '" type="text/plain" data-cookieconsent="' . implode( ',', $this->tags[ $handle ] ) . '"></script>';
+			return '<script src="' . esc_url( $src ) . '" type="text/plain" data-cookieconsent="' . esc_attr( implode( ',', $this->tags[ $handle ] ) ) . '"></script>';
 		}
 
+		// Check if the script should be ignored
 		if ( $this->check_ignore_script( $src ) ) {
-			return preg_replace_callback(
-				'/<script\s*(?<atts>[^>]*)>/',
-				function ( $tag ) use ( $handle ) {
-					// Prevent modification of the script tags inside the other script tag by validating the ID of the
-					// script and checking if we already set the consent status for the script. This will fix the issue
-					// on Gutenberg editor pages.
-					if ( ! self::validate_attributes_for_consent_ignore( $handle, $tag['atts'] ) ) {
-						return $tag[0];
-					}
+			// Use DOMDocument to safely parse and modify the script tag
+			$dom = new DOMDocument();
+			
+			// Suppress errors for partial HTML
+			$libxml_previous_state = libxml_use_internal_errors( true );
+			
+			// Load HTML with UTF-8 encoding hack
+			// The mb_convert_encoding is to ensure we don't have encoding issues
+			// Replacement for deprecated mb_convert_encoding(..., 'HTML-ENTITIES', 'UTF-8')
+			$encoded_tag = mb_encode_numericentity( $tag, array( 0x80, 0x10FFFF, 0, 0x1FFFFF ), 'UTF-8' );
+			$dom->loadHTML( $encoded_tag, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
+			
+			libxml_use_internal_errors( $libxml_previous_state );
 
-					//phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
-					return str_replace( '<script ', '<script data-cookieconsent="ignore" ', $tag[0] );
-				},
-				$tag
-			);
+			$scripts = $dom->getElementsByTagName( 'script' );
+
+			if ( $scripts->length > 0 ) {
+				/** @var DOMElement $script */
+				$script = $scripts->item( 0 );
+
+				// Validate attributes to ensure we are targeting the right script
+				// This mimics the logic in validate_attributes_for_consent_ignore
+				$id = $script->getAttribute( 'id' );
+				
+				// If validation fails, return original tag
+				if ( ! $this->validate_attributes_for_consent_ignore_dom( $handle, $id, $script ) ) {
+					return $tag;
+				}
+
+				// Add the ignore attribute
+				$script->setAttribute( 'data-cookieconsent', 'ignore' );
+
+				// Save HTML
+				return $dom->saveHTML( $script );
+			}
 		}
 
 		return $tag;
@@ -183,20 +210,49 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	 * Check if the script tag attributes are valid for the injection of the consent ignore attribute.
 	 *
 	 * @param string $script_handle Handle of the enqueued script. Required for identification of the scripts.
-	 * @param string $tag_attributes List of the attributes for the tag.
+	 * @param string $id ID attribute of the script tag.
+	 * @param DOMElement $script The script element.
 	 *
 	 * @return bool True if the attributes are valid for the injection of the consent ignore attribute.
 	 */
-	private static function validate_attributes_for_consent_ignore( $script_handle, $tag_attributes ) {
-		$quoted_handle = preg_quote( $script_handle, '/' );
-
+	private function validate_attributes_for_consent_ignore_dom( $script_handle, $id, $script ) {
 		// Exclude any scripts not related to currently processed script handle. Only script itself and inline block
 		// before/after are supported.
-		if ( ! preg_match( "/id=['\"]$quoted_handle(?:-js(-(after|before))?)?['\"]/", $tag_attributes ) ) {
+		
+		// Construct expected ID pattern logic
+		// Original regex: "/id=['\"]$quoted_handle(?:-js(-(after|before))?)?['\"]/"
+		
+		// Check if ID starts with handle
+		if ( strpos( $id, $script_handle ) !== 0 ) {
+			return false;
+		}
+		
+		// Check if it's an exact match or has valid suffixes
+		$valid_suffixes = [
+			'-js',
+			'-js-after',
+			'-js-before'
+		];
+		
+		$is_valid_id = $id === $script_handle;
+		if ( ! $is_valid_id ) {
+			foreach ( $valid_suffixes as $suffix ) {
+				if ( $id === $script_handle . $suffix ) {
+					$is_valid_id = true;
+					break;
+				}
+			}
+		}
+		
+		if ( ! $is_valid_id ) {
 			return false;
 		}
 
 		// Exclude any scripts already containing the consent ignore attribute.
-		return is_bool( strpos( $tag_attributes, 'data-cookieconsent=' ) );
+		if ( $script->hasAttribute( 'data-cookieconsent' ) ) {
+			return false;
+		}
+
+		return true;
 	}
 }
