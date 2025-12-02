@@ -1,0 +1,126 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '7.4'
+            env:
+              PHPCS: '1'
+            name: 'PHP 7.4 Lint'
+          - php: '8.2'
+            env:
+              PHPUNIT_VERSION: '9.6.7'
+              WP: 'latest'
+            name: 'PHP 8.2 / WP latest'
+          - php: '8.1'
+            env:
+              PHPUNIT_VERSION: '9.6.7'
+              WP: 'latest'
+            name: 'PHP 8.1 / WP latest'
+          - php: '8.0'
+            env:
+              PHPUNIT_VERSION: '9.6.7'
+              WP: 'latest'
+            name: 'PHP 8.0 / WP latest'
+          - php: '7.4'
+            env:
+              PHPUNIT_VERSION: '7.5.20'
+              WP: 'latest'
+            name: 'PHP 7.4 / WP latest'
+          - php: '7.3'
+            env:
+              PHPUNIT_VERSION: '7.5.20'
+              WP: 'latest'
+            name: 'PHP 7.3 / WP latest'
+          - php: '7.2'
+            env:
+              PHPUNIT_VERSION: '7.5.20'
+              WP: 'latest'
+            name: 'PHP 7.2 / WP latest'
+          - php: '7.1'
+            env:
+              PHPUNIT_VERSION: '7.5.20'
+              WP: '6.5.5'
+            name: 'PHP 7.1 / WP 6.5.5'
+          - php: '7.0'
+            env:
+              PHPUNIT_VERSION: '6.5.14'
+              WP: '6.5.5'
+            name: 'PHP 7.0 / WP 6.5.5'
+          - php: '5.6'
+            env:
+              PHPUNIT_VERSION: '5.7.27'
+              WP: '6.2.2'
+            name: 'PHP 5.6 / WP 6.2.2'
+
+    name: ${{ matrix.name }}
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@ec406be512d7077f68eed36e63f4d91bc006edc4 # v2.35.4
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mysql, mysqli, pdo, pdo_mysql, zip, libonig5
+          coverage: none
+          tools: composer:v2
+
+      - name: Install subversion
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y subversion
+
+      - name: Install dependencies (PHPCS)
+        if: matrix.env.PHPCS == '1'
+        run: |
+          cd tests
+          composer install
+
+      - name: Run PHPCS
+        if: matrix.env.PHPCS == '1'
+        run: tests/vendor/bin/phpcs
+
+      - name: Setup Test Environment
+        if: matrix.env.PHPCS != '1'
+        env:
+          PHPUNIT_VERSION: ${{ matrix.env.PHPUNIT_VERSION }}
+          WP_VERSION: ${{ matrix.env.WP }}
+        run: |
+          # Install WP Tests
+          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1:$((3306)) $WP_VERSION
+
+          # Install PHPUnit
+          wget -q https://phar.phpunit.de/phpunit-$PHPUNIT_VERSION.phar -O /tmp/phpunit
+          chmod +x /tmp/phpunit
+
+      - name: Install Polyfills
+        if: matrix.env.PHPCS != '1'
+        run: composer require yoast/phpunit-polyfills
+
+      - name: Run Tests
+        if: matrix.env.PHPCS != '1'
+        run: |
+          /tmp/phpunit
+          WP_MULTISITE=1 /tmp/phpunit
