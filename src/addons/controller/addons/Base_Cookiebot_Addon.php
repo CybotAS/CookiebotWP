@@ -348,7 +348,7 @@ abstract class Base_Cookiebot_Addon {
 
 		if ( ! $body || 200 !== wp_remote_retrieve_response_code( $response ) ) {
 			// Fallback to svn cat if wp_remote_get fails (e.g. 403 Forbidden)
-			$body = shell_exec( 'svn cat ' . escapeshellarg( $url ) );
+			$body = shell_exec( 'svn cat ' . escapeshellarg( $url ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.system_calls_shell_exec
 		}
 
 		return $body;
