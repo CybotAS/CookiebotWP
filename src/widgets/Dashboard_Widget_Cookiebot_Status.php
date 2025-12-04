@@ -43,7 +43,7 @@ class Dashboard_Widget_Cookiebot_Status {
 			echo esc_html__( 'Update your Cookiebot ID', 'cookiebot' );
 			echo '</a></p>';
 		} else {
-			echo '<p>' . esc_html_e( 'Your Cookiebot is working!', 'cookiebot' ) . '</p>';
+			echo '<p>' . esc_html__( 'Your Cookiebot is working!', 'cookiebot' ) . '</p>';
 		}
 	}
 }
