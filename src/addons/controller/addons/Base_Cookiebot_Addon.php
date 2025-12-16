@@ -340,17 +340,7 @@ abstract class Base_Cookiebot_Addon {
 	 */
 	final public static function get_svn_file_content( $path = '' ) {
 		$url      = self::get_svn_url( $path );
-		$args     = array(
-			'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
-		);
-		$response = wp_remote_get( $url, $args );
-		$body     = wp_remote_retrieve_body( $response );
-
-		if ( ! $body || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			// Fallback to svn cat if wp_remote_get fails (e.g. 403 Forbidden)
-			$body = shell_exec( 'svn cat ' . escapeshellarg( $url ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.system_calls_shell_exec
-		}
-
-		return $body;
+		$response = wp_remote_get( $url );
+		return wp_remote_retrieve_body( $response );
 	}
 }

@@ -69,8 +69,8 @@ class Cookiebot_Review {
 			array(
 				'survey_nonce'       => wp_create_nonce( 'cookiebot_survey_nonce' ),
 				'logo'               => asset_url( 'img/icons/shield_icon.svg' ),
-				'popup_header_title' => __( 'Leaving Usercentrics Cookiebot?', 'cookiebot' ),
-				'first_msg'          => __( 'We\'re sad to see you go. Let us know how we can improve Usercentrics Cookiebot', 'cookiebot' ),
+				'popup_header_title' => __( 'Leaving Cookiebot by Usercentrics?', 'cookiebot' ),
+				'first_msg'          => __( 'We\'re sad to see you go. Let us know how we can improve Cookiebot by Usercentrics', 'cookiebot' ),
 				'options'            => array(
 					array(
 						'text'  => __( 'Cookies weren\'t being blocked correctly', 'cookiebot' ),

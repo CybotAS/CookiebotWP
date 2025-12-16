@@ -27,7 +27,7 @@ $header->display();
 				<div class="cb-main__dashboard__card">
 					<div class="cb-main__card__inner <?php echo $cbid ? 'start_card' : 'account_card'; ?>">
 						<h2 class="cb-main__card__title">
-							<?php echo esc_html__( 'Welcome to Usercentrics Cookiebot WordPress Plugin', 'cookiebot' ); ?>
+							<?php echo esc_html__( 'Welcome to Cookiebot by Usercentrics WordPress Plugin', 'cookiebot' ); ?>
 						</h2>
 						<div class="cb-main__card__success">
 							<div class="cb-btn cb-success-btn">
@@ -35,7 +35,7 @@ $header->display();
 								<?php echo esc_html__( 'Account added', 'cookiebot' ); ?>
 							</div>
 							<p class="cb-main__success__text">
-								<?php echo esc_html__( 'You’ve added your settings ID to your Usercentrics Cookiebot WordPress Plugin.', 'cookiebot' ); ?>
+								<?php echo esc_html__( 'You’ve added your settings ID to your Cookiebot by Usercentrics WordPress Plugin.', 'cookiebot' ); ?>
 							</p>
 						</div>
 					</div>
@@ -48,7 +48,7 @@ $header->display();
 								<?php echo esc_html__( 'Your opinion matters', 'cookiebot' ); ?>
 							</h3>
 							<p class="cb-main__review__text">
-								<?php echo esc_html__( 'Are you happy with Usercentrics Cookiebot WordPress Plugin? Your feedback helps us improve it.', 'cookiebot' ); ?>
+								<?php echo esc_html__( 'Are you happy with Cookiebot by Usercentrics WordPress Plugin? Your feedback helps us improve it.', 'cookiebot' ); ?>
 							</p>
 							<a href="https://form.typeform.com/to/n6ZlunZP" target="_blank"
 								class="cb-btn cb-link-btn" rel="noopener">
@@ -61,7 +61,7 @@ $header->display();
 						<div class="cb-main__card__inner start_card">
 							<div class="cb-main__card--content">
 								<h3 class="cb-main__card__subtitle">
-									<?php echo esc_html__( 'How to set up Usercentrics Cookiebot WordPress Plugin', 'cookiebot' ); ?>
+									<?php echo esc_html__( 'How to set up Cookiebot by Usercentrics WordPress Plugin', 'cookiebot' ); ?>
 								</h3>
 								<a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
 									target="_blank" class="cb-btn cb-link-btn" rel="noopener">

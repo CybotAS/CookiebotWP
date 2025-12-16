@@ -50,7 +50,7 @@ function renderPopupHeader() {
     popupHeader.classList.add('cb-review__header');
     headerLogoContainer.classList.add('cb-review__logo');
     headerLogo.setAttribute('src', cb_survey.logo);
-    headerLogo.setAttribute('alt', 'Usercentrics Cookiebot');
+    headerLogo.setAttribute('alt', 'Cookiebot by Usercentrics');
     headerTitle.setAttribute('id', 'cb-review__title');
     headerTitle.innerHTML = cb_survey.popup_header_title;
     headerClose.setAttribute('id', 'cb-review__close');
