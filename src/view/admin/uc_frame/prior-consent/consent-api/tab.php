@@ -30,7 +30,7 @@ use cybot\cookiebot\addons\config\Settings_Config;
 		<p>
 			<?php
 			esc_html_e(
-				'WP Consent API and Usercentrics Cookiebot WordPress Plugin categorize cookies a bit differently. The default settings should fit most needs, but if you need to change the mapping you can do so below.',
+				'WP Consent API and Cookiebot by Usercentrics WordPress Plugin categorize cookies a bit differently. The default settings should fit most needs, but if you need to change the mapping you can do so below.',
 				'cookiebot'
 			);
 			?>
@@ -46,7 +46,7 @@ use cybot\cookiebot\addons\config\Settings_Config;
 			<tbody>
 			<tr>
 				<td class="cb-settings__data__head">
-					<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Usercentrics Cookiebot cookie categories', 'cookiebot' ); ?></h3>
+					<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'Cookiebot by Usercentrics cookie categories', 'cookiebot' ); ?></h3>
 				</td>
 				<td class="cb-settings__data__head">
 					<h3 class="cb-settings__data__subtitle"><?php esc_html_e( 'WP Consent API cookies categories equivalent', 'cookiebot' ); ?></h3>

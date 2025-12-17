@@ -11,7 +11,7 @@
 	<div class="cb-settings__config__content">
 		<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Google Tag Manager', 'cookiebot' ); ?></h3>
 		<p class="cb-general__info__text">
-			<?php esc_html_e( 'Enable Google Tag Manager integration to streamline tracking tags with your Usercentrics Cookiebot WordPress Plugin.', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Enable Google Tag Manager integration to streamline tracking tags with your Cookiebot by Usercentrics WordPress Plugin.', 'cookiebot' ); ?>
 		</p>
 		<a href="https://support.cookiebot.com/hc/en-us/articles/360003784174#3"
 			class="cb-btn cb-link-btn" target="_blank" rel="noopener">

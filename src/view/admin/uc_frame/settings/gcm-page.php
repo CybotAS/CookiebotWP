@@ -14,7 +14,7 @@
 		<?php esc_html_e( 'Integration with Google Consent Mode', 'cookiebot' ); ?>
 	</h2>
 	<p class="cb-general__info__text">
-		<?php esc_html_e( 'The Usercentrics Cookiebot WordPress Plugin and Google Consent Mode integrate seamlessly, providing plug-and-play privacy compliance and effortless use of all Google services in one solution.', 'cookiebot' ); ?>
+		<?php esc_html_e( 'The Cookiebot by Usercentrics WordPress Plugin and Google Consent Mode integrate seamlessly, providing plug-and-play privacy compliance and effortless use of all Google services in one solution.', 'cookiebot' ); ?>
 	</p>
 	<a class="cb-btn cb-link-btn" target="_blank" rel="noopener"
 		href="https://support.cookiebot.com/hc/en-us/articles/360016047000-Implementing-Google-consent-mode#h_01J03HKJ8K2WPB1HJZQQ5BDMQQ">
@@ -28,7 +28,7 @@
 			<?php esc_html_e( 'Google Consent Mode', 'cookiebot' ); ?>
 		</h3>
 		<p class="cb-general__info__text">
-			<?php esc_html_e( 'Enable Google Consent Mode integration within your Usercentrics Cookiebot WordPress Plugin.', 'cookiebot' ); ?>
+			<?php esc_html_e( 'Enable Google Consent Mode integration within your Cookiebot by Usercentrics WordPress Plugin.', 'cookiebot' ); ?>
 		</p>
 	</div>
 	<div class="cb-settings__config__data">
