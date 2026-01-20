@@ -11,7 +11,7 @@ $script_attributes = array(
     'type' => $script_type,
 );
 if ($consent_attribute) {
-    $attributes['data-cookieconsent'] = $consent_attribute;
+    $script_attributes['data-cookieconsent'] = $consent_attribute;
 }
 
 ob_start();
