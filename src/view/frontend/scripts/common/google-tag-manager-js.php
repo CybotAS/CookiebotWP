@@ -6,8 +6,16 @@
  * @var string $script_type
  * @var bool $iab
  */
+
+$script_attributes = array(
+    'type' => $script_type,
+);
+if ($consent_attribute) {
+    $attributes['data-cookieconsent'] = $consent_attribute;
+}
+
+ob_start();
 ?>
-<script type="<?php echo esc_attr( $script_type ); ?>"<?php echo ! $consent_attribute ? '' : ' data-cookieconsent="' . esc_attr( $consent_attribute ) . '"'; ?>>
 	<?php if ( $iab ) : ?>
 	window ["gtag_enable_tcf_support"] = true;
 	<?php endif; ?>
@@ -25,4 +33,6 @@
 		'<?php echo esc_js( $data_layer ); ?>',
 		'<?php echo esc_js( $gtm_id ); ?>'
 	);
-</script>
+
+<?php
+wp_print_inline_script_tag( ob_get_clean(), $script_attributes ); ?>
