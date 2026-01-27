@@ -111,7 +111,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 	public function cookiebot_add_consent_attribute_to_script_tag( $attributes ) {
 		// First, check if this script requires consent (registered via add_tag)
 		$handle = $this->extract_handle_from_attributes( $attributes );
-		
+
 		if ( $handle && array_key_exists( $handle, $this->tags ) && ! empty( $this->tags[ $handle ] ) ) {
 			$attributes['type']               = 'text/plain';
 			$attributes['data-cookieconsent'] = implode( ',', $this->tags[ $handle ] );
@@ -141,7 +141,7 @@ class Script_Loader_Tag implements Script_Loader_Tag_Interface {
 
 		// Check if inline script belongs to a consent-required parent script
 		$base_handle = $this->extract_base_id_from_inline_id( $attributes['id'] );
-		
+
 		if ( $base_handle && array_key_exists( $base_handle, $this->tags ) && ! empty( $this->tags[ $base_handle ] ) ) {
 			$attributes['type']               = 'text/plain';
 			$attributes['data-cookieconsent'] = implode( ',', $this->tags[ $base_handle ] );
