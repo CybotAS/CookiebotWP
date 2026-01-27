@@ -86,9 +86,17 @@ class Cookiebot_Activated {
 
 	private function set_banner_enabled_by_default() {
 		$enabled = get_option( 'cookiebot-banner-enabled', 'default' );
+		$cbid    = Cookiebot_WP::get_cbid();
+		
+		// Set to enabled if it's a fresh install (default)
 		if ( $enabled === 'default' ) {
 			$enabled = '1';
 			update_option( 'cookiebot-banner-enabled', $enabled );
+		}
+		
+		// If banner is disabled but CBID is configured, it was disabled by hosting or plugin update. Re-enable it.
+		if ( $enabled === '0' && ! empty( $cbid ) ) {
+			update_option( 'cookiebot-banner-enabled', '1' );
 		}
 	}
 
