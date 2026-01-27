@@ -13,7 +13,6 @@ class Cookiebot_Deactivated {
 	 */
 	public function run() {
 		$this->run_addons_deactivation_hooks();
-		$this->disable_banner();
 	}
 
 	/**
