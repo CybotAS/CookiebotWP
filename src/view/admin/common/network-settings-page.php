@@ -61,7 +61,7 @@ $header->display();
 									</h3>
 									<div class="cookiebot-cbid-container">
 										<div class="cookiebot-cbid-input">
-											<input placeholder="<14 chars> or <36 chars>"
+											<input placeholder="9, 14 or 36 characters"
 													type="text" id="cookiebot-cbid" class="initial-cbid-setup"
 													name="cookiebot-cbid"
 													value="<?php echo esc_attr( get_site_option( 'cookiebot-cbid', '' ) ); ?>"/>
@@ -69,7 +69,7 @@ $header->display();
 										</div>
 										<?php submit_button( esc_html__( 'Connect account', 'cookiebot' ), 'disabled' ); ?>
 										<div class="cookiebot-cbid-error hidden" style="color: #d63638; margin-top: 8px; font-size: 14px;">
-											<?php esc_html_e( 'Invalid ID length. Please enter a Settings ID (14 characters) or Domain Group ID (36 characters).', 'cookiebot' ); ?>
+											<?php esc_html_e( 'Invalid ID length. Please enter a Settings ID (9 or 14 characters) or Domain Group ID (36 characters).', 'cookiebot' ); ?>
 										</div>
 									</div>
 								</div>
