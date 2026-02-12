@@ -79,9 +79,9 @@ function show_ruleset_selector() {
         return;
     }
 
-    // Validate that the field has exactly 14 or 36 characters
+    // Validate that the field has exactly 9, 14 or 36 characters
     const fieldLength = cbidField.val().length;
-    if(fieldLength !== 14 && fieldLength !== 36){
+    if(fieldLength !== 9 && fieldLength !== 14 && fieldLength !== 36){
         cbidCheck.removeClass('check-pass');
         cbidRulesetSelector.addClass('hidden');
         cbidSubmit.addClass('disabled');

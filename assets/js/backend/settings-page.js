@@ -64,9 +64,9 @@ function show_ruleset_selector() {
         return;
     }
 
-    // Validate that the field has exactly 14 or 36 characters
+    // Validate that the field has exactly 9, 14 or 36 characters
     const fieldLength = cbidField.val().length;
-    if(fieldLength !== 14 && fieldLength !== 36){
+    if(fieldLength !== 9 && fieldLength !== 14 && fieldLength !== 36){
         cbidCheck.removeClass('check-pass');
         cbidRulesetSelector.addClass('hidden');
         cbidError.removeClass('hidden');
@@ -176,7 +176,7 @@ function closeSubmitMsg() {
 }
 
 function submitEnable() {
-    const initialValues = jQuery('input[name!=_wp_http_referer]','form').serialize();
+    const initialValues = jQuery(':input[name!=_wp_http_referer]','form').serialize();
     const events = {
         change: 'input:not([type=text]), select',
         input: 'input[type="text"], textarea'
@@ -192,7 +192,7 @@ function submitEnable() {
 
 function checkValues(initialValues){
     let submitBtn = jQuery('.cb-settings__header p.submit #submit');
-    let newValues = jQuery('input[name!=_wp_http_referer]','form').serialize();
+    let newValues = jQuery(':input[name!=_wp_http_referer]','form').serialize();
     if(newValues !== initialValues) {
         submitBtn.addClass('enabled');
     }else{
@@ -349,7 +349,7 @@ function onVendorSelection() {
 }
 
 function removeRestriction(){
-    const initialValues = jQuery('input[name!=_wp_http_referer]','form').serialize();
+    const initialValues = jQuery(':input[name!=_wp_http_referer]','form').serialize();
     let submitBtn = jQuery('.cb-settings__header p.submit #submit');
     jQuery(document).on('click','.cb-settings__vendor__restrictions .remove__restriction', function(){
         const restriction = jQuery(this).closest( '.cb-settings__vendor__restrictions' );
@@ -368,7 +368,7 @@ function removeRestriction(){
         }else{
             restriction.remove();
         }
-        let newValues = jQuery('input[name!=_wp_http_referer]','form').serialize();
+        let newValues = jQuery(':input[name!=_wp_http_referer]','form').serialize();
         if(newValues !== initialValues) {
             submitBtn.addClass('enabled');
         }else{

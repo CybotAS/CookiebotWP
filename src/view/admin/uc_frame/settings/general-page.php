@@ -100,7 +100,7 @@ if ( ! empty( $network_cbid ) ) {
 			<?php if ( ! empty( $network_cbid ) ) : ?>
 				<div class="cookiebot-cbid-error-container">
 					<div class="cookiebot-cbid-error hidden" style="color: #d63638; margin-top: 8px; font-size: 14px;">
-						<?php esc_html_e( 'Invalid ID length. Please enter a Settings ID (14 characters) or Domain Group ID (36 characters).', 'cookiebot' ); ?>
+						<?php esc_html_e( 'Invalid ID length. Please enter a Settings ID (9 or 14 characters) or Domain Group ID (36 characters).', 'cookiebot' ); ?>
 					</div>
 				</div>
 				<div id="cb-network-id-override">
