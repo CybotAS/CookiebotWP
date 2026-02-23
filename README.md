@@ -7,7 +7,7 @@ so that they can handle their cookie setting code without explicit support for C
 
 https://core.trac.wordpress.org/ticket/44043 
 
-# Travis CI Status 
+# CI Status 
 
 [![Test](https://github.com/CybotAS/CookiebotWP/actions/workflows/test.yml/badge.svg)](https://github.com/CybotAS/CookiebotWP/actions/workflows/test.yml)
 
