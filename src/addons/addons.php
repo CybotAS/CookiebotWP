@@ -29,6 +29,7 @@ namespace cybot\cookiebot\addons {
 	use cybot\cookiebot\addons\controller\addons\pixel_caffeine\Pixel_Caffeine;
 	use cybot\cookiebot\addons\controller\addons\simple_share_buttons_adder\Simple_Share_Buttons_Adder;
 	use cybot\cookiebot\addons\controller\addons\wd_google_analytics\Wd_Google_Analytics;
+	use cybot\cookiebot\addons\controller\addons\woocommerce_sourcebuster\WooCommerce_SourceBuster;
 	use cybot\cookiebot\addons\controller\addons\woocommerce_google_analytics_pro\Woocommerce_Google_Analytics_Pro;
 	use cybot\cookiebot\addons\controller\addons\wp_analytify\Wp_Analytify;
 	use cybot\cookiebot\addons\controller\addons\wp_google_analytics_events\Wp_Google_Analytics_Events;
@@ -58,6 +59,7 @@ namespace cybot\cookiebot\addons {
 		Optinmonster::class,
 		Pixel_Caffeine::class,
 		Woocommerce_Google_Analytics_Pro::class,
+		WooCommerce_SourceBuster::class,
 		Wp_Analytify::class,
 		Wp_Google_Analytics_Events::class,
 		Wp_Mautic::class,
