@@ -18,7 +18,7 @@ class Test_Wp_Mautic extends WP_UnitTestCase {
 	public function test_is_plugin_compatible() {
 		$content = Wp_Mautic::get_svn_file_content();
 
-		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_head\', \'wpmautic_inject_script\' );' ) );
-		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_footer\', \'wpmautic_inject_script\' );' ) );
+		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_head\', array( $this, \'wpmautic_inject_script\' ) );' ) );
+		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_footer\', array( $this, \'wpmautic_inject_script\' ) );' ) );
 	}
 }

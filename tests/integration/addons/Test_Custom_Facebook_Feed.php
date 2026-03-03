@@ -19,7 +19,7 @@ class Test_Custom_Facebook_Feed extends WP_UnitTestCase {
 		$content = Custom_Facebook_Feed::get_svn_file_content( 'inc/Custom_Facebook_Feed.php' );
 
 		$this->assertNotFalse( strpos( $content, 'echo \'var cfflinkhashtags = "\' . $cff_link_hashtags . \'";\';' ) );
-		$this->assertNotFalse( strpos( $content, 'wp_enqueue_script( \'cffscripts\' );' ) );
-		$this->assertNotFalse( strpos( $content, 'add_action( \'wp_footer\', [ self::$instance, \'cff_js\' ] );' ) );
+		$this->assertNotFalse( strpos( $content, 'wp_enqueue_script(\'cffscripts\');' ) );
+		$this->assertNotFalse( strpos( $content, 'add_action(\'wp_footer\', [ self::$instance, \'cff_js\' ]);' ) );
 	}
 }
