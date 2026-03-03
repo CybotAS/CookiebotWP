@@ -33,8 +33,8 @@ trait Class_Constant_Override_Validator_Trait {
 			throw new InvalidClassConstantException(
 				sprintf(
 					'Class constant "%s" should be changed by %s',
-					$fixed_class_constant_name,
-					static::class
+					esc_html( $fixed_class_constant_name ),
+					esc_html( static::class )
 				)
 			);
 		}
@@ -65,8 +65,8 @@ trait Class_Constant_Override_Validator_Trait {
 			throw new InvalidClassConstantException(
 				sprintf(
 					'Class constant "%s" must be a non-empty string in %s',
-					$required_string_constant_name,
-					static::class
+					esc_html( $required_string_constant_name ),
+					esc_html( static::class )
 				)
 			);
 		}
@@ -97,8 +97,8 @@ trait Class_Constant_Override_Validator_Trait {
 			throw new InvalidClassConstantException(
 				sprintf(
 					'Class constant "%s" must be a boolean in %s',
-					$required_boolean_constant_name,
-					static::class
+					esc_html( $required_boolean_constant_name ),
+					esc_html( static::class )
 				)
 			);
 		}
@@ -130,8 +130,8 @@ trait Class_Constant_Override_Validator_Trait {
 			throw new InvalidClassConstantException(
 				sprintf(
 					'Class constant "%s" must be an array in %s',
-					$required_array_constant_name,
-					static::class
+					esc_html( $required_array_constant_name ),
+					esc_html( static::class )
 				)
 			);
 		}
@@ -141,9 +141,9 @@ trait Class_Constant_Override_Validator_Trait {
 					throw new InvalidClassConstantException(
 						sprintf(
 							'Class constant "%s" array items should be one of "%s" in %s',
-							$required_array_constant_name,
-							implode( ', ', $allowed_item_values ),
-							static::class
+							esc_html( $required_array_constant_name ),
+							esc_html( implode( ', ', $allowed_item_values ) ),
+							esc_html( static::class )
 						)
 					);
 				}

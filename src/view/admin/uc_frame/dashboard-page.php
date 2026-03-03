@@ -41,9 +41,10 @@ $header->display();
 					</div>
 				</div>
 
-				<?php if ( $cbid ) : ?>
+			<?php if ( $cbid ) : ?>
+				<div class="cb-main__dashboard__card--row">
 					<div class="cb-main__dashboard__card">
-						<div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
+						<div class="cb-main__card__inner bordered_card">
 							<h3 class="cb-main__card__subtitle">
 								<?php echo esc_html__( 'Your opinion matters', 'cookiebot' ); ?>
 							</h3>
@@ -56,28 +57,30 @@ $header->display();
 							</a>
 						</div>
 					</div>
-
 					<div class="cb-main__dashboard__card">
-						<div class="cb-main__card__inner start_card">
-							<div class="cb-main__card--content">
-								<h3 class="cb-main__card__subtitle">
-									<?php echo esc_html__( 'How to set up Cookiebot by Usercentrics WordPress Plugin', 'cookiebot' ); ?>
-								</h3>
-								<a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
-									target="_blank" class="cb-btn cb-link-btn" rel="noopener">
-									<?php echo esc_html__( 'Learn more', 'cookiebot' ); ?>
-								</a>
-							</div>
+						<div class="cb-main__card__inner bordered_card">
+							<h3 class="cb-main__card__subtitle">
+								<?php echo esc_html__( 'How to set up Cookiebot by Usercentrics WordPress Plugin', 'cookiebot' ); ?>
+							</h3>
+							<a href="https://support.cookiebot.com/hc/en-us/articles/4408356523282-Getting-started"
+								target="_blank" class="cb-btn cb-link-btn" rel="noopener">
+								<?php echo esc_html__( 'Learn more', 'cookiebot' ); ?>
+							</a>
 						</div>
 					</div>
-				<?php endif; ?>
+				</div>
+			<?php endif; ?>
 			</div>
 
-			<div class="cb-main__dashboard__card--container">
-				<div class="cb-main__dashboard__card">
-				</div>
-				<div class="cb-main__dashboard__card">
-					<div class="cb-main__card__inner legislations_card">
+		<?php if ( $cbid ) : ?>
+			<?php include CYBOT_COOKIEBOT_PLUGIN_DIR . 'src/view/admin/common/templates/ppg-banner.php'; ?>
+		<?php endif; ?>
+
+		<div class="cb-main__dashboard__card--container">
+			<div class="cb-main__dashboard__card">
+			</div>
+			<div class="cb-main__dashboard__card">
+				<div class="cb-main__card__inner legislations_card">
 						<div class="cb-main__legislation__item">
 							<div class="cb-main__legislation____icon">
 								<img src="<?php echo esc_html( $europe_icon ); ?>" alt="GDPR">

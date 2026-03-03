@@ -137,14 +137,14 @@ class Cookiebot_Review {
 	 */
 	public function send_uninstall_survey() {
 		global $wpdb;
-		if ( ! check_ajax_referer( 'cookiebot_survey_nonce', 'survey_nonce', false ) ) {
+		if ( ! check_ajax_referer( 'cookiebot_survey_nonce', 'survey_nonce', false ) || ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( esc_html__( 'Sorry you are not allowed to do this.', 'cookiebot' ), 401 );
 		}
 		if ( ! isset( $_POST['reason_id'] ) ) {
 			wp_send_json_error( esc_html__( 'Please select one option', 'cookiebot' ), 400 );
 		}
 		$data = array(
-			'survey_check'   => sanitize_text_field( wp_unslash( $_POST['survey_check'] ) ),
+			'survey_check'   => isset( $_POST['survey_check'] ) ? sanitize_text_field( wp_unslash( $_POST['survey_check'] ) ) : '',
 			'reason_slug'    => sanitize_text_field( wp_unslash( $_POST['reason_id'] ) ),
 			'reason_detail'  => ! empty( $_POST['reason_text'] ) ? sanitize_text_field( wp_unslash( $_POST['reason_text'] ) ) : null,
 			'comments'       => ! empty( $_POST['reason_info'] ) ? sanitize_text_field( wp_unslash( $_POST['reason_info'] ) ) : null,

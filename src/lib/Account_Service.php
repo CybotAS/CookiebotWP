@@ -109,7 +109,7 @@ class Account_Service {
 			wp_send_json_error( 'Unauthorized', 401 );
 		}
 
-		$cbid = isset( $_POST['cbid'] ) ? sanitize_text_field( $_POST['cbid'] ) : '';
+		$cbid = isset( $_POST['cbid'] ) ? sanitize_text_field( wp_unslash( $_POST['cbid'] ) ) : '';
 
 		if ( empty( $cbid ) ) {
 			wp_send_json_error( 'CBID is required', 400 );
@@ -126,7 +126,7 @@ class Account_Service {
 			wp_send_json_error( 'Unauthorized', 401 );
 		}
 
-		$scan_id = isset( $_POST['scan_id'] ) ? sanitize_text_field( $_POST['scan_id'] ) : '';
+		$scan_id = isset( $_POST['scan_id'] ) ? sanitize_text_field( wp_unslash( $_POST['scan_id'] ) ) : '';
 
 		if ( empty( $scan_id ) ) {
 			wp_send_json_error( 'Scan ID is required', 400 );
@@ -142,6 +142,7 @@ class Account_Service {
 			return;
 		}
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON payload validated by json_decode() below.
 		$raw_data = isset( $_POST['data'] ) ? wp_unslash( $_POST['data'] ) : '';
 
 		if ( empty( $raw_data ) ) {
@@ -150,6 +151,10 @@ class Account_Service {
 		}
 
 		$data = json_decode( $raw_data, true );
+		if ( json_last_error() !== JSON_ERROR_NONE ) {
+			wp_send_json_error( 'Invalid user data format', 400 );
+			return;
+		}
 		update_option( 'cookiebot-user-data', $data );
 
 		wp_send_json_success( array( 'message' => 'User data stored successfully' ) );
@@ -171,8 +176,8 @@ class Account_Service {
 			return;
 		}
 
-		$scan_id     = isset( $_POST['scan_id'] ) ? sanitize_text_field( $_POST['scan_id'] ) : '';
-		$scan_status = isset( $_POST['scan_status'] ) ? wp_unslash( $_POST['scan_status'] ) : '';
+		$scan_id     = isset( $_POST['scan_id'] ) ? sanitize_text_field( wp_unslash( $_POST['scan_id'] ) ) : '';
+		$scan_status = isset( $_POST['scan_status'] ) ? sanitize_text_field( wp_unslash( $_POST['scan_status'] ) ) : '';
 
 		update_option( 'cookiebot-scan-id', $scan_id );
 		update_option( 'cookiebot-scan-status', $scan_status );
@@ -186,7 +191,7 @@ class Account_Service {
 			return;
 		}
 
-		$value = isset( $_POST['value'] ) ? trim( $_POST['value'] ) : '';
+		$value = isset( $_POST['value'] ) ? sanitize_text_field( wp_unslash( $_POST['value'] ) ) : '';
 
 		// Save option value
 		update_option( 'cookiebot-banner-enabled', $value );
@@ -199,7 +204,7 @@ class Account_Service {
 			return;
 		}
 
-		$value = isset( $_POST['value'] ) ? trim( $_POST['value'] ) : '';
+		$value = isset( $_POST['value'] ) ? sanitize_text_field( wp_unslash( $_POST['value'] ) ) : '';
 
 		// Save option value
 		update_option( 'cookiebot-uc-auto-blocking-mode', $value );
@@ -221,7 +226,7 @@ class Account_Service {
 			return;
 		}
 
-		$value = isset( $_POST['value'] ) ? trim( $_POST['value'] ) : '';
+		$value = isset( $_POST['value'] ) ? sanitize_text_field( wp_unslash( $_POST['value'] ) ) : '';
 
 		// Save option value
 		update_option( 'cookiebot-gcm', $value );
@@ -258,7 +263,7 @@ class Account_Service {
 			return;
 		}
 
-		$code = isset( $_POST['code'] ) ? sanitize_text_field( $_POST['code'] ) : '';
+		$code = isset( $_POST['code'] ) ? sanitize_text_field( wp_unslash( $_POST['code'] ) ) : '';
 
 		if ( empty( $code ) ) {
 			wp_send_json_error( 'No code provided', 400 );
@@ -335,6 +340,7 @@ class Account_Service {
 			return;
 		}
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON payload validated by json_decode() below.
 		$configuration = isset( $_POST['configuration'] ) ? wp_unslash( $_POST['configuration'] ) : '';
 
 		if ( empty( $configuration ) ) {

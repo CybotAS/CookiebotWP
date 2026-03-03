@@ -180,13 +180,13 @@ class Cookiebot_Addons {
 				);
 				if ( ! is_a( $addon, Base_Cookiebot_Addon::class ) ) {
 					throw new InvalidAddonClassException(
-						sprintf( 'Class %s could not be instantiated', $addon_class )
+						sprintf( 'Class %s could not be instantiated', esc_html( $addon_class ) )
 					);
 				}
 				$this->container->set( $addon_class, $addon );
 			} else {
 				throw new InvalidAddonClassException(
-					sprintf( 'Class %s not found', $addon_class )
+					sprintf( 'Class %s not found', esc_html( $addon_class ) )
 				);
 			}
 		}

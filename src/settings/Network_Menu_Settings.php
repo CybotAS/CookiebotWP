@@ -68,33 +68,37 @@ class Network_Menu_Settings {
 	public function network_settings_save() {
 		check_admin_referer( 'cookiebot-network-settings' );
 
+		if ( ! current_user_can( 'manage_network_options' ) ) {
+			wp_die( esc_html__( 'You do not have permission to manage network options.', 'cookiebot' ), 403 );
+		}
+
 		update_site_option(
 			'cookiebot-cbid',
-			! empty( $_POST['cookiebot-cbid'] ) ? $_POST['cookiebot-cbid'] : ''
+			! empty( $_POST['cookiebot-cbid'] ) ? sanitize_text_field( wp_unslash( $_POST['cookiebot-cbid'] ) ) : ''
 		);
 		update_site_option(
 			'cookiebot-ruleset-id',
-			! empty( $_POST['cookiebot-ruleset-id'] ) ? $_POST['cookiebot-ruleset-id'] : ''
+			! empty( $_POST['cookiebot-ruleset-id'] ) ? sanitize_text_field( wp_unslash( $_POST['cookiebot-ruleset-id'] ) ) : ''
 		);
 		update_site_option(
 			'cookiebot-script-tag-uc-attribute',
-			! empty( $_POST['cookiebot-script-tag-uc-attribute'] ) ? $_POST['cookiebot-script-tag-uc-attribute'] : ''
+			! empty( $_POST['cookiebot-script-tag-uc-attribute'] ) ? sanitize_text_field( wp_unslash( $_POST['cookiebot-script-tag-uc-attribute'] ) ) : ''
 		);
 		update_site_option(
 			'cookiebot-script-tag-cd-attribute',
-			! empty( $_POST['cookiebot-script-tag-cd-attribute'] ) ? $_POST['cookiebot-script-tag-cd-attribute'] : ''
+			! empty( $_POST['cookiebot-script-tag-cd-attribute'] ) ? sanitize_text_field( wp_unslash( $_POST['cookiebot-script-tag-cd-attribute'] ) ) : ''
 		);
 		update_site_option(
 			'cookiebot-autoupdate',
-			! empty( $_POST['cookiebot-autoupdate'] ) ? $_POST['cookiebot-autoupdate'] : ''
+			! empty( $_POST['cookiebot-autoupdate'] ) ? sanitize_text_field( wp_unslash( $_POST['cookiebot-autoupdate'] ) ) : ''
 		);
 		update_site_option(
 			'cookiebot-nooutput',
-			! empty( $_POST['cookiebot-nooutput'] ) ? $_POST['cookiebot-nooutput'] : ''
+			! empty( $_POST['cookiebot-nooutput'] ) ? sanitize_text_field( wp_unslash( $_POST['cookiebot-nooutput'] ) ) : ''
 		);
 		update_site_option(
 			'cookiebot-nooutput-admin',
-			! empty( $_POST['cookiebot-nooutput-admin'] ) ? $_POST['cookiebot-nooutput-admin'] : ''
+			! empty( $_POST['cookiebot-nooutput-admin'] ) ? sanitize_text_field( wp_unslash( $_POST['cookiebot-nooutput-admin'] ) ) : ''
 		);
 		update_site_option(
 			'cookiebot-cookie-blocking-mode',

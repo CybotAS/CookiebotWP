@@ -511,7 +511,7 @@ namespace cybot\cookiebot\lib {
 	 */
 	function cookiebot_get_local_file_contents( $file_path ) {
 		if ( ! file_exists( $file_path ) ) {
-			throw new InvalidArgumentException( 'File ' . $file_path . ' does not exist' );
+			throw new InvalidArgumentException( 'File ' . esc_html( $file_path ) . ' does not exist' );
 		}
 
 		ob_start();
@@ -530,7 +530,7 @@ namespace cybot\cookiebot\lib {
 		}
 		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . 'src/view/' . $relative_path;
 		if ( ! file_exists( $absolute_path ) ) {
-			throw new InvalidArgumentException( 'View could not be loaded from "' . $absolute_path . '"' );
+			throw new InvalidArgumentException( 'View could not be loaded from "' . esc_html( $absolute_path ) . '"' );
 		}
 		// phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 		extract( $view_args );
@@ -556,7 +556,7 @@ namespace cybot\cookiebot\lib {
 	function asset_path( $relative_path ) {
 		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path;
 		if ( ! file_exists( $absolute_path ) ) {
-			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
+			throw new InvalidArgumentException( 'Asset could not be loaded from "' . esc_html( $absolute_path ) . '"' );
 		}
 		return $absolute_path;
 	}
@@ -571,7 +571,7 @@ namespace cybot\cookiebot\lib {
 		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path;
 		$url           = esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . CYBOT_COOKIEBOT_PLUGIN_ASSETS_DIR . $relative_path );
 		if ( ! file_exists( $absolute_path ) || empty( $url ) ) {
-			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
+			throw new InvalidArgumentException( 'Asset could not be loaded from "' . esc_html( $absolute_path ) . '"' );
 		}
 		return $url;
 	}
@@ -584,7 +584,7 @@ namespace cybot\cookiebot\lib {
 		$absolute_path = CYBOT_COOKIEBOT_PLUGIN_DIR . CYBOT_COOKIEBOT_PLUGIN_LOGO_FILE;
 		$url           = esc_url( CYBOT_COOKIEBOT_PLUGIN_URL . CYBOT_COOKIEBOT_PLUGIN_LOGO_FILE );
 		if ( ! file_exists( $absolute_path ) || empty( $url ) ) {
-			throw new InvalidArgumentException( 'Asset could not be loaded from "' . $absolute_path . '"' );
+			throw new InvalidArgumentException( 'Asset could not be loaded from "' . esc_html( $absolute_path ) . '"' );
 		}
 		return $url;
 	}
