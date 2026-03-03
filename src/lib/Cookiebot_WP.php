@@ -11,6 +11,7 @@ use cybot\cookiebot\settings\Network_Menu_Settings;
 use cybot\cookiebot\shortcode\Cookiebot_Embedding_Shortcode;
 use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
 use cybot\cookiebot\lib\Account_Service;
+use cybot\cookiebot\settings\pages\PPG_Page;
 use DomainException;
 use RuntimeException;
 
@@ -27,7 +28,7 @@ class Cookiebot_WP {
 		}
 	}
 
-	const COOKIEBOT_PLUGIN_VERSION  = '4.6.4';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.6.5';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -85,7 +86,7 @@ class Cookiebot_WP {
 				__( 'The Cookiebot plugin requires PHP version %s or greater.', 'cookiebot' ),
 				self::COOKIEBOT_MIN_PHP_VERSION
 			);
-			throw new DomainException( $message );
+			throw new DomainException( esc_html( $message ) );
 		}
 	}
 
@@ -101,6 +102,7 @@ class Cookiebot_WP {
 			( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();
 			( new Cookiebot_Notices() )->register_hooks();
 			( new Cookiebot_Review() )->register_hooks();
+			( new PPG_Page() )->register_ajax_hooks();
 		}
 
 		( new Consent_API_Helper() )->register_hooks();

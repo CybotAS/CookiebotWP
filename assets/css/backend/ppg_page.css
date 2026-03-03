@@ -1,0 +1,70 @@
+.cb-ppg__page-title {
+    font-size: 60px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    color: #141414;
+    margin: 0 0 24px;
+}
+
+.cb-ppg__divider {
+    height: 1px;
+    background-color: #d6d6d6;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.cb-ppg__plugin-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.cb-ppg__plugin-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    min-height: 50px;
+}
+
+.cb-ppg__plugin-name {
+    flex: 1 0 0;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #141414;
+    margin: 0;
+}
+
+.cb-ppg__plugin-actions {
+    flex-shrink: 0;
+}
+
+.cb-ppg__plugin-actions .cb-btn {
+    margin-top: 0;
+}
+
+.cb-ppg__spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.cb-ppg__hero {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.cb-ppg__hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+}

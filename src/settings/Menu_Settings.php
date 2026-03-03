@@ -8,6 +8,7 @@ use cybot\cookiebot\settings\pages\Iab_Page;
 use cybot\cookiebot\settings\pages\Legislations_Page;
 use cybot\cookiebot\settings\pages\Settings_Page;
 use cybot\cookiebot\settings\pages\Support_Page;
+use cybot\cookiebot\settings\pages\PPG_Page;
 use cybot\cookiebot\lib\Cookiebot_WP;
 
 class Menu_Settings {
@@ -17,6 +18,7 @@ class Menu_Settings {
 		Dashboard_Page::class,
 		Support_Page::class,
 		Settings_Page::class,
+		PPG_Page::class,
 	);
 
 	public function add_menu() {

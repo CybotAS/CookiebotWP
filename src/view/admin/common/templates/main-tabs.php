@@ -6,6 +6,7 @@ use cybot\cookiebot\settings\pages\Dashboard_Page;
 use cybot\cookiebot\settings\pages\Settings_Page;
 use cybot\cookiebot\addons\config\Settings_Config;
 use cybot\cookiebot\settings\pages\Support_Page;
+use cybot\cookiebot\settings\pages\PPG_Page;
 
 /**
  * @var string $active_tab
@@ -78,6 +79,17 @@ $feedback_url  = 'https://form.typeform.com/to/n6ZlunZP';
 				</a>
 		</div>
 	<?php endif; ?>
+
+	<div class="cb-main__tabs_separator"></div>
+
+	<div class="cb-main__tabs_item <?php echo $active_tab === 'ppg' ? 'active-item' : ''; ?>">
+		<a href="<?php echo esc_url( add_query_arg( 'page', PPG_Page::ADMIN_SLUG, admin_url( 'admin.php' ) ) ); ?>"
+			class="cb-main__tabs__link">
+			<div class="cb-main__tabs__icon plugins-icon"></div>
+			<span><?php esc_html_e( 'Policy Generator Plugin', 'cookiebot' ); ?></span>
+			<span class="cb-main__tabs__badge"><?php esc_html_e( 'NEW', 'cookiebot' ); ?></span>
+		</a>
+	</div>
 
 	<div class="cb-feedback_link">
 		<a href="<?php echo esc_url( $feedback_url ); ?>" target="_blank"><?php echo esc_html__( 'Help us improve', 'cookiebot' ); ?></a>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Security Sniffs Only">
+	<description>Run only WordPress.Security sniffs for security-focused checks (nonce, sanitization, escaping).</description>
+
+	<config name="installed_paths"
+			value="tests/vendor/wp-coding-standards/wpcs,tests/vendor/phpcompatibility/php-compatibility,tests/vendor/phpcompatibility/phpcompatibility-paragonie,tests/vendor/phpcompatibility/phpcompatibility-wp"
+	/>
+
+	<file>./src</file>
+	<exclude-pattern>/vendor/</exclude-pattern>
+	<exclude-pattern>/node_modules/</exclude-pattern>
+
+	<arg value="sp"/>
+	<arg name="basepath" value="./"/>
+	<arg name="colors"/>
+	<arg name="extensions" value="php"/>
+
+	<rule ref="WordPress.Security"/>
+</ruleset>

@@ -123,13 +123,13 @@ abstract class Base_Cookiebot_Addon {
 	private function validate_alternative_addon_versions() {
 		foreach ( static::ALTERNATIVE_ADDON_VERSIONS as $version_string => $alternative_version_addon_class ) {
 			if ( ! version_compare( $version_string, '0.0.1', '>=' ) ) {
-				throw new InvalidArgumentException( 'Invalid version number "' . $version_string . '"' );
+				throw new InvalidArgumentException( 'Invalid version number "' . esc_html( $version_string ) . '"' );
 			}
 			if ( ! class_exists( $alternative_version_addon_class ) ) {
-				throw new InvalidArgumentException( 'Class not found at "' . $alternative_version_addon_class . '"' );
+				throw new InvalidArgumentException( 'Class not found at "' . esc_html( $alternative_version_addon_class ) . '"' );
 			}
 			if ( ! is_subclass_of( $alternative_version_addon_class, self::class ) ) {
-				throw new InvalidArgumentException( 'Class "' . $alternative_version_addon_class . '" is not a subclass of "' . self::class . '"' );
+				throw new InvalidArgumentException( 'Class "' . esc_html( $alternative_version_addon_class ) . '" is not a subclass of "' . esc_html( self::class ) . '"' );
 			}
 		}
 	}

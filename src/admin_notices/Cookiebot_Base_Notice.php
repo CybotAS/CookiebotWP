@@ -59,10 +59,14 @@ class Cookiebot_Base_Notice {
 	 * @since 2.0.5
 	 */
 	private function save_notice_link() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 		if ( isset( $_GET[ static::COOKIEBOT_NOTICE_OPTION_KEY ] ) ) {
 			foreach ( static::COOKIEBOT_NOTICE_TIMES as $item ) {
 				if ( isset( $_GET[ $item['name'] ] ) &&
-					wp_verify_nonce( $_GET[ $item['name'] ], $item['action'] ) ) {
+					// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce value verified by wp_verify_nonce().
+					wp_verify_nonce( wp_unslash( $_GET[ $item['name'] ] ), $item['action'] ) ) {
 					$option = $item['time'];
 					if ( isset( $item['str'] ) && $item['str'] === true ) {
 						$option = strtotime( $item['time'] );
@@ -90,7 +94,7 @@ class Cookiebot_Base_Notice {
 			}
 			// "Never show again" is clicked
 			if ( array_key_exists( $option, static::COOKIEBOT_NOTICE_TIMES ) ) {
-				throw new LogicException( static::COOKIEBOT_NOTICE_TIMES[ $option ]['msg'] );
+				throw new LogicException( esc_html( static::COOKIEBOT_NOTICE_TIMES[ $option ]['msg'] ) );
 			} elseif ( is_numeric( $option ) ) {
 				if ( ! self::notice_check_option_date( $option ) ) {
 					throw new LogicException( 'Show me after some time' );

@@ -55,9 +55,10 @@ $header->display();
 					</div>
 				</div>
 
-				<?php if ( $cbid ) : ?>
+			<?php if ( $cbid ) : ?>
+				<div class="cb-main__dashboard__card--row">
 					<div class="cb-main__dashboard__card">
-						<div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
+						<div class="cb-main__card__inner bordered_card">
 							<h3 class="cb-main__card__subtitle">
 								<?php echo esc_html__( 'Your opinion matters', 'cookiebot' ); ?>
 							</h3>
@@ -70,24 +71,8 @@ $header->display();
 							</a>
 						</div>
 					</div>
-				<?php endif; ?>
-
-				<div class="cb-main__dashboard__card">
-					<div class="cb-main__card__inner  <?php echo $cbid ? 'start_card' : 'new_card'; ?>">
-						<?php if ( ! $cbid ) : ?>
-							<div class="cb-main__card__content">
-								<p class="cb-main__card__label">
-									<?php echo esc_html__( 'Get started', 'cookiebot' ); ?>
-								</p>
-								<h2 class="cb-main__card__title">
-									<?php echo esc_html__( 'Create a new Cookiebot CMP account', 'cookiebot' ); ?>
-								</h2>
-								<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
-									target="_blank" class="cb-btn cb-white-btn" rel="noopener">
-									<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
-								</a>
-							</div>
-						<?php else : ?>
+					<div class="cb-main__dashboard__card">
+						<div class="cb-main__card__inner bordered_card">
 							<h3 class="cb-main__card__subtitle">
 								<?php echo esc_html__( 'Learn more about how to optimize your Cookiebot CMP setup?', 'cookiebot' ); ?>
 							</h3>
@@ -95,15 +80,37 @@ $header->display();
 								rel="noopener">
 								<?php echo esc_html__( 'Visit Help Center', 'cookiebot' ); ?>
 							</a>
-						<?php endif; ?>
+						</div>
 					</div>
 				</div>
+			<?php else : ?>
+				<div class="cb-main__dashboard__card">
+					<div class="cb-main__card__inner new_card">
+						<div class="cb-main__card__content">
+							<p class="cb-main__card__label">
+								<?php echo esc_html__( 'Get started', 'cookiebot' ); ?>
+							</p>
+							<h2 class="cb-main__card__title">
+								<?php echo esc_html__( 'Create a new Cookiebot CMP account', 'cookiebot' ); ?>
+							</h2>
+							<a href="https://admin.cookiebot.com/signup/?utm_source=wordpress&utm_medium=referral&utm_campaign=banner"
+								target="_blank" class="cb-btn cb-white-btn" rel="noopener">
+								<?php echo esc_html__( 'Create a new account', 'cookiebot' ); ?>
+							</a>
+						</div>
+					</div>
+				</div>
+			<?php endif; ?>
 			</div>
 
-			<div class="cb-main__dashboard__card--container">
-				<div class="cb-main__dashboard__card">
-					<div class="cb-main__card__inner start_card">
-						<div class="cb-main__video">
+		<?php if ( $cbid ) : ?>
+			<?php include CYBOT_COOKIEBOT_PLUGIN_DIR . 'src/view/admin/common/templates/ppg-banner.php'; ?>
+		<?php endif; ?>
+
+		<div class="cb-main__dashboard__card--container">
+			<div class="cb-main__dashboard__card">
+				<div class="cb-main__card__inner start_card">
+					<div class="cb-main__video">
 							<iframe src="https://www.youtube.com/embed/1-lvuJa42P0"
 									title="Cookiebot WordPress Installation"
 									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

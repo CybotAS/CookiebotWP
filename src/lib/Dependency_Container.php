@@ -30,7 +30,7 @@ class Dependency_Container {
 	 */
 	public function set( $key, $dependency ) {
 		if ( isset( $this->dependencies[ $key ] ) ) {
-			throw new InvalidArgumentException( 'Dependency key ' . $key . ' already exists' );
+			throw new InvalidArgumentException( 'Dependency key ' . esc_html( $key ) . ' already exists' );
 		}
 		$this->dependencies[ $key ] = $dependency;
 	}
@@ -43,7 +43,7 @@ class Dependency_Container {
 	 */
 	public function get( $key ) {
 		if ( ! isset( $this->dependencies[ $key ] ) ) {
-			throw new InvalidArgumentException( 'Dependency key ' . $key . ' does not exists' );
+			throw new InvalidArgumentException( 'Dependency key ' . esc_html( $key ) . ' does not exist' );
 		}
 
 		return $this->dependencies[ $key ];

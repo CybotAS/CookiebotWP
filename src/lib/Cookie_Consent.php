@@ -34,7 +34,7 @@ class Cookie_Consent implements Cookie_Consent_Interface {
 	 * @version 2.4.1
 	 */
 	public function __construct( $default_cookie = null ) {
-		$this->cookie = ( isset( $_COOKIE['CookieConsent'] ) ) ? $_COOKIE['CookieConsent'] : $default_cookie;
+		$this->cookie = ( isset( $_COOKIE['CookieConsent'] ) ) ? sanitize_text_field( wp_unslash( $_COOKIE['CookieConsent'] ) ) : $default_cookie;
 
 		$this->scan_cookie();
 	}
