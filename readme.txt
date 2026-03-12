@@ -1,9 +1,9 @@
-﻿# Cookiebot by Usercentrics - Automatic Cookie Banner for GDPR/CCPA & Google Consent Mode #
+# Cookiebot by Usercentrics - Automatic Cookie Banner for GDPR/CCPA & Google Consent Mode #
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: cookie banner, cookie consent, cookie notice, GDPR, privacy, cmp, consent‑management‑platform, google‑consent‑mode, compliance, gdpr‑compliance, ccpa, dma
 * Requires at least: 4.4
 * Tested up to: 6.8
-* Stable tag: 4.6.5
+* Stable tag: 4.6.6
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -163,6 +163,15 @@ Usercentrics Cookiebot is fully integrated with the WP Consent API. When your vi
 ## Changelog ##
 **Cookiebot by Usercentrics Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot by Usercentrics offers.**
 
+
+### 4.6.6 ###
+Release date: March 12th 2026
+
+Cookiebot by Usercentrics version 4.6.6 is out! This release includes an improvement.
+
+####Improvements####
+
+* Improved tracking for PPG redirect — the redirect URL with tracking parameters is now available in all PPG page states, not only when the plugin is inactive
 
 ### 4.6.5 ###
 Release date: March 3rd 2026
