@@ -138,10 +138,10 @@ class PPG_Page implements Settings_Page_Interface {
 		}
 
 		$args = array(
-			'hero_image'        => asset_url( 'img/ppg-hero.png' ),
-			'is_installed'      => $is_installed,
-			'is_active'         => $is_active,
-			'ppg_redirect_url'  => $ppg_redirect_url,
+			'hero_image'       => asset_url( 'img/ppg-hero.png' ),
+			'is_installed'     => $is_installed,
+			'is_active'        => $is_active,
+			'ppg_redirect_url' => $ppg_redirect_url,
 		);
 
 		include_view( 'admin/common/ppg-page.php', $args );
