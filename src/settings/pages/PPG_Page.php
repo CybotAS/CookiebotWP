@@ -50,6 +50,9 @@ class PPG_Page implements Settings_Page_Interface {
 			wp_send_json_error( array( 'message' => $result->get_error_message() ), 500 );
 		}
 
+		// Prevent PPG's own activation redirect from stripping our ppg_ref query param.
+		delete_transient( 'ppguc_activation_redirect' );
+
 		wp_send_json_success();
 	}
 
@@ -100,6 +103,14 @@ class PPG_Page implements Settings_Page_Interface {
 		$is_installed = self::is_plugin_installed();
 		$is_active    = self::is_plugin_active();
 
+		$ppg_redirect_url = add_query_arg(
+			array(
+				'page'    => 'privacy-policy-usercentrics',
+				'ppg_ref' => 'content-distribution',
+			),
+			admin_url( 'admin.php' )
+		);
+
 		if ( ! $is_active ) {
 			wp_enqueue_script(
 				'cookiebot-ppg-page-js',
@@ -107,14 +118,6 @@ class PPG_Page implements Settings_Page_Interface {
 				array(),
 				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 				true
-			);
-
-			$ppg_redirect_url = add_query_arg(
-				array(
-					'page'    => 'privacy-policy-usercentrics',
-					'ppg_ref' => 'content-distribution',
-				),
-				admin_url( 'admin.php' )
 			);
 
 			wp_localize_script(
@@ -135,9 +138,10 @@ class PPG_Page implements Settings_Page_Interface {
 		}
 
 		$args = array(
-			'hero_image'   => asset_url( 'img/ppg-hero.png' ),
-			'is_installed' => $is_installed,
-			'is_active'    => $is_active,
+			'hero_image'       => asset_url( 'img/ppg-hero.png' ),
+			'is_installed'     => $is_installed,
+			'is_active'        => $is_active,
+			'ppg_redirect_url' => $ppg_redirect_url,
 		);
 
 		include_view( 'admin/common/ppg-page.php', $args );
