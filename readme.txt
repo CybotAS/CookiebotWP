@@ -3,7 +3,7 @@
 * Tags: cookie banner, cookie consent, cookie notice, GDPR, privacy, cmp, consent‑management‑platform, google‑consent‑mode, compliance, gdpr‑compliance, ccpa, dma
 * Requires at least: 4.4
 * Tested up to: 6.8
-* Stable tag: 4.6.6
+* Stable tag: 4.6.7
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -11,83 +11,75 @@ Install your cookie banner in minutes. Automatically scan and block cookies to c
 
 ## Description ##
 
-**Cookiebot by Usercentrics** is a **Google-certified CMP (consent management platform)** that automates cookie compliance. It detects cookies and trackers, pauses non-essential ones until a choice is made, records consent for audit, and passes consent to Google via **Consent Mode v2**—helping you meet **GDPR, CCPA/CPRA, LGPD, ePrivacy** and more.
+### **The world’s most trusted cookie consent platform — now on WordPress.**
 
-**Why it matters:** basic banners that don’t control scripts can leave tracking running without permission—raising compliance risk and reducing measurement accuracy because valid consent isn’t signaled. **Cookiebot by Usercentrics** handles consent correctly, keeps cookie information up to date automatically, and preserves analytics and ads—with less manual effort.
+Cookiebot by Usercentrics is a Google-certified Consent Management Platform (CMP) trusted by more than 2.4 million websites globally. Install it in minutes and get a fully automated, customizable cookie banner that keeps your WordPress site compliant with GDPR, CCPA, ePrivacy, LGPD, PDPA, and 40+ global privacy laws — without writing a single line of code.
 
-**Trusted at scale:** **2.3M+ site scans/month**, **7B+ consents**, **600,000+ websites**, **60 languages**.  
-Set up in minutes. No code required.
+Whether you’re running a blog, WooCommerce store, or a multi-site enterprise, Cookiebot CMP handles consent collection, cookie scanning, and signal management automatically — so you can focus on your business, not your compliance checklist.
 
+## Why 2.4 million websites choose Cookiebot CMP ##
 
-## Features ##
+### **Set up in under 5 minutes**
 
-#### **✅ Fully customizable cookie banner**
+Install the plugin, connect your free Cookiebot account, and your consent banner goes live immediately. No coding required. No complicated configuration.
 
-* Multiple layouts and color themes to match your design
+### **Automatic cookie scanning & declaration**
 
-* “Accept all”, “Reject all”, or granular choices by purpose
+Cookiebot crawls your website and automatically detects and categorizes all cookies and trackers — even those added by third-party scripts. Your cookie declaration stays up to date with every scan.
 
-* 60+ languages and auto-language detection
+### **Prior-consent cookie blocking**
 
-* Revisit Consent button for easy withdrawal or updates
+Cookies are blocked before consent is given — exactly as GDPR requires. Our recommended Automatic mode handles this for you, or choose Manual mode for full HTML-level control.
 
-#### **🔍 Best-in-class cookie scan**
+### **Fully customizable consent banner**
 
-* Deep scanning detects all cookies, trackers, and web technologies in use
+Match the banner to your brand with custom colors, logos, fonts, and layouts. Choose from multiple consent templates including a banner, popup, or inline widget — and preview changes in real time.
 
-* Automatic categorization and update of your cookie declaration page
+### **Global cookie repository**
 
-* Continuous re-scanning to stay current with site changes
+Powered by Cookiebot™ continuously updated library of known cookies and trackers, so your declarations are accurate from day one.
 
-#### **🌐 Global cookie repository**
+### **Google Consent Mode v2 ready**
 
-* Backed by Cookiebot’s constantly updated library of thousands of cookies and trackers
+Certified by Google, Cookiebot CMP supports Google Consent Mode v2 out of the box — protecting your Google Ads and Analytics data while staying privacy-compliant. Essential for maintaining ad measurement in a post-cookie world.
 
-* Automatically pulls accurate service descriptions for your policy page
+### **Seamless integrations**
 
-#### **🧾 Automated cookie declaration**
+Works with Google Tag Manager, Google Analytics, WooCommerce, Shopify, HubSpot, Mailchimp, and dozens more. One plugin. Your entire stack.
 
-* Cookie information automatically embedded into your site’s cookie policy
+### **IAB TCF 2.2 certified**
 
-* Always up to date with latest scan results and repository data
+Cookiebot CMP is officially certified under the IAB Transparency & Consent Framework, making it the right choice for publishers and advertisers managing programmatic consent.
 
-#### **🚫 Effortless blocking & signaling**
+### **Consent storage & audit log**
 
-* Blocks non-essential cookies and trackers until user consent is given
+Store end-user consents for up to 12 months with a full, auditable record — ready for regulatory review or legal proceedings.
 
-* Sends real-time signals to Google Consent Mode v2 for Ads and Analytics
+### **Support when you need it**
 
-* Helps you comply with GDPR, ePrivacy, CCPA/CPRA, LGPD and other frameworks
+Access our Help Center directly from the plugin dashboard. Need more? Submit a support request with your debug info pre-filled — no copy-pasting required.
 
-#### **🔒 Secure consent storage**
+### Compliance Coverage
 
-* Proof of consent stored securely in the EU for 12 months
+Cookiebot CMP helps your site comply with:
 
-* Exportable logs for audits and data access requests
+* GDPR (EU/EEA) & ePrivacy Directive
+* CCPA / CPRA (California)
+* LGPD (Brazil)
+* PDPA (Thailand & others)
+* PIPEDA (Canada)
+* And 40+ additional privacy laws worldwide
 
-#### **🔗 Easy and flexible integrations**
+### **Free Plan — No Credit Card Required**
 
-* Works seamlessly with Google Tag Manager, Google Analytics, and other tools
+Start free with up to 1 domain and 50 subpages. Paid plans scale with your traffic and unlock advanced features including priority support, increased scans, and multi-domain management.
 
-* Automatically detects and controls common WordPress plugins and third-party scripts
+### **Getting Started**
 
-* Ready-made out-of-the-box integrations for Wix, Shopify, Webflow, Joomla and more
-
-### Compliance coverage
-
-Cookiebot helps you operationalize consent for major privacy frameworks including **GDPR/ePrivacy (EU, UK-GDPR/PECR)**, **CCPA/CPRA**, **LGPD**, **POPIA**, **VCDPA**, and more. It also supports **IAB TCF v2.2** for publishers and advertisers. As regulations and platform requirements evolve, Cookiebot’s rules and content are updated so your experience stays aligned.
-
-### **Why WordPress users choose Cookiebot by Usercentrics**
-
-* Google-certified CMP ready for Consent Mode v2
-
-* Trusted by global brands and 100,000+ websites
-
-* Runs automatic cookie scans to keep you compliant
-
-* Simple setup — no code, no guesswork
-
-* EU-based secure data storage
+1. Install and activate the plugin
+2. Create a free Cookiebot account (or connect an existing one)
+3. Paste your Domain Group ID in the plugin settings
+4. Your compliant cookie banner is live
 
 
 ## Support and updates ##
@@ -115,10 +107,11 @@ Cookiebot helps you operationalize consent for major privacy frameworks includin
 
 ## Screenshots ##
 
-1. Install the Cookiebot by Usercentrics Wordpress plug-in
-2. Create your Usercentrics CMP account in 3 easy steps
-3. See your banner automatically scanning and blocking cookies live on your website
-4. Visit our Help Center or contact us for assistance
+1. Create a new account or connect an existing one to get your cookie banner running in minutes.
+2. Link your Cookiebot CMP account to WordPress by entering your Domain Group ID.
+3. Once your Domain Group ID is added, your cookie consent banner goes live automatically.
+4. Manage all your compliance settings including cookie blocking, Google Consent Mode, and IAB TCF from one place.
+5. Access the Support Center in one click with debug info pre-loaded for faster assistance.
 
 
 ## Frequently Asked Questions ##
@@ -163,6 +156,15 @@ Usercentrics Cookiebot is fully integrated with the WP Consent API. When your vi
 ## Changelog ##
 **Cookiebot by Usercentrics Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot by Usercentrics offers.**
 
+
+### 4.6.7 ###
+Release date: April 6th 2026
+
+Cookiebot by Usercentrics version 4.6.7 is out! This release includes an improvement.
+
+####Improvements####
+
+* Updated plugin description and documentation for clarity and improved user guidance
 
 ### 4.6.6 ###
 Release date: March 12th 2026
