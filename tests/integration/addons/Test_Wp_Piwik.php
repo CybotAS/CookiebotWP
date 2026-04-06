@@ -18,6 +18,6 @@ class Test_Wp_Piwik extends WP_UnitTestCase {
 	public function test_is_plugin_compatible() {
 		$content = Wp_Piwik::get_svn_file_content( 'classes/WP_Piwik.php' );
 
-		$this->assertNotFalse( strpos( $content, '\'disableCookies\' => self::$settings->getGlobalOption ( \'disable_cookies\' ) ? 1 : 0' ) );
+		$this->assertNotFalse( strpos( $content, '\'disableCookies\'  => self::$settings->get_global_option ( \'disable_cookies\' ) ? 1 : 0' ) );
 	}
 }

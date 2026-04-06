@@ -298,19 +298,19 @@ TEXT;
 		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/class-facebookwordpresswpforms.php' );
 		$snippets[] = <<<TEXT
 add_action(
-            'wp_footer',
-            array( __CLASS__, 'injectLeadEvent' ),
-            20
-        );
+			'wp_footer',
+			array( __CLASS__, 'injectLeadEvent' ),
+			20
+		);
 TEXT;
 
 		$snippets[] = <<<TEXT
 add_action(
-            'wpforms_process_before',
-            array( __CLASS__, 'trackEvent' ),
-            20,
-            2
-        );
+			'wpforms_process_before',
+			array( __CLASS__, 'trackEvent' ),
+			20,
+			2
+		);
 TEXT;
 
 		foreach ( $snippets as $snippet ) {
