@@ -296,7 +296,7 @@ TEXT;
 	 */
 	public function test_official_facebook_pixel_wp_forms() {
 		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/class-facebookwordpresswpforms.php' );
-  $snippets[] = 'trackEvent';
+		$snippets[] = 'trackEvent';
 		$snippets[] = 'wpforms_process_before';
 
 		foreach ( $snippets as $snippet ) {
