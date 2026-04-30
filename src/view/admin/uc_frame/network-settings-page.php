@@ -36,7 +36,7 @@ $header->display();
 								<?php esc_html_e( 'Are you sure?', 'cookiebot' ); ?>
 							</h3>
 							<p class="cb-general__info__text">
-								<?php esc_html_e( 'You will need to add a new ID before updating other network settings. If any subsite is using its own account disconnecting this account won’t affect it.', 'cookiebot' ); ?>
+								<?php esc_html_e( 'You will need to add a new ID before updating other network settings. If any subsite is using its own account disconnecting this account won\'t affect it.', 'cookiebot' ); ?>
 							</p>
 							<div class="new-account-actions">
 								<div id="cookiebot-cbid-cancel" class="cb-btn cb-white-btn">
@@ -84,7 +84,7 @@ $header->display();
 						<div id="cookiebot-ruleset-id-selector" class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Let us know if your account is set for compliance with a single privacy law (e.g. GDPR) or multiple laws (e.g. GDPR and CCPA) based on user’s location. The default is a single privacy law, so this is likely your setting unless modified.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Let us know if your account is set for compliance with a single privacy law (e.g. GDPR) or multiple laws (e.g. GDPR and CCPA) based on user\'s location. The default is a single privacy law, so this is likely your setting unless modified.', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">
@@ -110,11 +110,11 @@ $header->display();
 							</div>
 						</div>
 
-						<!-- <div class="cb-settings__config__item">
+						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
 								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookie-blocking', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Choose the type of your cookie-blocking mode. Select automatic to automatically block all cookies except those strictly necessary to use before user gives consent. Manual mode lets you adjust your cookie settings within your website’s HTML.', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Choose the type of your cookie-blocking mode. Select automatic to automatically block all cookies except those strictly necessary to use before user gives consent. Manual mode lets you adjust your cookie settings within your website\'s HTML.', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">
@@ -138,7 +138,7 @@ $header->display();
 									</label>
 								</div>
 							</div>
-						</div> -->
+						</div>
 
 						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">

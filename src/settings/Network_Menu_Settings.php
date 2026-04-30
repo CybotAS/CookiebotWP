@@ -96,9 +96,13 @@ class Network_Menu_Settings {
 			'cookiebot-nooutput-admin',
 			! empty( $_POST['cookiebot-nooutput-admin'] ) ? $_POST['cookiebot-nooutput-admin'] : ''
 		);
+		$allowed_blocking_modes = array( 'auto', 'manual' );
+		$blocking_mode          = isset( $_POST['cookiebot-cookie-blocking-mode'] )
+			? sanitize_key( $_POST['cookiebot-cookie-blocking-mode'] )
+			: 'manual';
 		update_site_option(
 			'cookiebot-cookie-blocking-mode',
-			'manual'
+			in_array( $blocking_mode, $allowed_blocking_modes, true ) ? $blocking_mode : 'manual'
 		);
 
 		wp_safe_redirect(
