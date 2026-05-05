@@ -35,7 +35,7 @@ $header->display();
 								<?php esc_html_e( 'Are you sure?', 'cookiebot' ); ?>
 							</h3>
 							<p class="cb-general__info__text">
-								<?php esc_html_e( 'You will need to add a new ID before updating other network settings. If any subsite is using its own account disconnecting this account won’t affect it.', 'cookiebot' ); ?>
+								<?php esc_html_e( 'You will need to add a new ID before updating other network settings. If any subsite is using its own account disconnecting this account won\'t affect it.', 'cookiebot' ); ?>
 							</p>
 							<div class="new-account-actions">
 								<div id="cookiebot-cbid-cancel" class="cb-btn cb-white-btn">
@@ -74,11 +74,11 @@ $header->display();
 							</div>
 						</div>
 
-						<!-- <div class="cb-settings__config__item">
+						<div class="cb-settings__config__item">
 							<div class="cb-settings__config__content">
 								<h3 class="cb-settings__config__subtitle"><?php esc_html_e( 'Cookie-blocking', 'cookiebot' ); ?></h3>
 								<p class="cb-general__info__text">
-									<?php esc_html_e( 'Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:', 'cookiebot' ); ?>
+									<?php esc_html_e( 'Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for \'strictly necessary\' cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:', 'cookiebot' ); ?>
 								</p>
 							</div>
 							<div class="cb-settings__config__data">
@@ -102,7 +102,7 @@ $header->display();
 									</label>
 								</div>
 							</div>
-						</div> -->
+						</div>
 
 						<div class="cb-settings__config__item secondary__item" id="declaration-tag">
 							<div class="cb-settings__config__content">
