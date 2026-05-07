@@ -12,6 +12,7 @@ use cybot\cookiebot\shortcode\Cookiebot_Embedding_Shortcode;
 use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
 use cybot\cookiebot\lib\Account_Service;
 use cybot\cookiebot\settings\pages\PPG_Page;
+use cybot\cookiebot\abilities\Cookiebot_Abilities_Registrar;
 use DomainException;
 use RuntimeException;
 
@@ -28,7 +29,7 @@ class Cookiebot_WP {
 		}
 	}
 
-	const COOKIEBOT_PLUGIN_VERSION  = '4.6.7';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.7.0';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -112,6 +113,14 @@ class Cookiebot_WP {
 		( new Widgets() )->register_hooks();
 		( new Cookiebot_Gutenberg_Declaration_Block() )->register_hooks();
 		( new WP_Rocket_Helper() )->register_hooks();
+		( new Cookiebot_Abilities_Registrar() )->register_hooks();
+
+		if ( defined( 'WP_CLI' ) && \WP_CLI ) {
+			\WP_CLI::add_command(
+				'cookiebot',
+				\cybot\cookiebot\cli\Cookiebot_CLI_Command::class
+			);
+		}
 
 		$this->set_default_options();
 		( new Cookiebot_Admin_Links() )->register_hooks();
