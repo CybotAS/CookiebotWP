@@ -66,7 +66,7 @@ class Cookiebot_Abilities_Registrar {
 	 * @since 4.8.0
 	 */
 	public function register() {
-		$logger = $this->logger;
+		$logger    = $this->logger;
 		$abilities = array(
 			new Get_Status_Ability(),
 			new Verify_Setup_Ability(),

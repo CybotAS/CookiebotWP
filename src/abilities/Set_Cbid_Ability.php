@@ -92,7 +92,7 @@ class Set_Cbid_Ability implements Cookiebot_Ability_Interface {
 				),
 				'additionalProperties' => false,
 			),
-			'execute_callback'    => function( $input ) use ( $logger ) {
+			'execute_callback'    => function ( $input ) use ( $logger ) {
 				$cbid = isset( $input['cbid'] ) ? $input['cbid'] : '';
 
 				if ( empty( $cbid ) || ! preg_match( '/' . self::CBID_PATTERN . '/', $cbid ) ) {
@@ -113,7 +113,7 @@ class Set_Cbid_Ability implements Cookiebot_Ability_Interface {
 					'success'      => true,
 				);
 			},
-			'permission_callback' => function() {
+			'permission_callback' => function () {
 				return current_user_can( 'manage_options' );
 			},
 			'meta'                => array(

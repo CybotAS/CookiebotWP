@@ -41,7 +41,7 @@ if ( Cookiebot_WP::is_in_trial() && ! $trial_expired && $is_authenticated ) :
 			<span class="trial-icon"></span>
 			<span class="trial-text">
 				<span class="trial-label"><?php echo esc_html__( 'Premium Trial:', 'cookiebot' ); ?></span>
-				<span class="days-left"><?php /* translators: %d is replaced with "integer" */ echo sprintf( esc_html__( '%d days left', 'cookiebot' ), absint( $days_left ) ); ?></span>
+				<span class="days-left"><?php /* translators: %d is replaced with "integer" */ printf( esc_html__( '%d days left', 'cookiebot' ), absint( $days_left ) ); ?></span>
 			</span>
 		</div>
 		<?php if ( isset( $user_data['subscriptions']['active']['subscription_id'] ) ) : ?>

@@ -43,15 +43,24 @@ class Install_Ppg_Ability implements Cookiebot_Ability_Interface {
 			'description'         => __( 'Installs and activates the Privacy Policy Generator plugin (privacy-policy-usercentrics). Idempotent — returns immediately if already active. After install, direct the user to admin_url to complete policy setup.', 'cookiebot' ),
 			'category'            => 'cookiebot',
 			'output_schema'       => array(
-				'type'       => 'object',
-				'properties' => array(
-					'was_already_active' => array( 'type' => 'boolean', 'description' => 'True if plugin was already active.' ),
-					'success'            => array( 'type' => 'boolean', 'description' => 'Whether the operation succeeded.' ),
-					'admin_url'          => array( 'type' => 'string',  'description' => 'WP admin URL for the PPG settings page.' ),
+				'type'                 => 'object',
+				'properties'           => array(
+					'was_already_active' => array(
+						'type'        => 'boolean',
+						'description' => 'True if plugin was already active.',
+					),
+					'success'            => array(
+						'type'        => 'boolean',
+						'description' => 'Whether the operation succeeded.',
+					),
+					'admin_url'          => array(
+						'type'        => 'string',
+						'description' => 'WP admin URL for the PPG settings page.',
+					),
 				),
 				'additionalProperties' => false,
 			),
-			'execute_callback'    => function() use ( $logger ) {
+			'execute_callback'    => function () use ( $logger ) {
 				if ( ! function_exists( 'is_plugin_active' ) ) {
 					require_once ABSPATH . 'wp-admin/includes/plugin.php';
 				}
@@ -60,7 +69,11 @@ class Install_Ppg_Ability implements Cookiebot_Ability_Interface {
 
 				if ( is_plugin_active( PPG_Page::PPG_PLUGIN_SLUG ) ) {
 					$logger->log( 'cookiebot/install-ppg', 'already_active', 'already_active' );
-					return array( 'was_already_active' => true, 'success' => true, 'admin_url' => $admin_url );
+					return array(
+						'was_already_active' => true,
+						'success'            => true,
+						'admin_url'          => $admin_url,
+					);
 				}
 
 				if ( ! function_exists( 'get_plugins' ) ) {
@@ -74,7 +87,11 @@ class Install_Ppg_Ability implements Cookiebot_Ability_Interface {
 						return new \WP_Error( 'cookiebot_ppg_install_failed', $result->get_error_message() );
 					}
 					$logger->log( 'cookiebot/install-ppg', 'installed_inactive', 'activated' );
-					return array( 'was_already_active' => false, 'success' => true, 'admin_url' => $admin_url );
+					return array(
+						'was_already_active' => false,
+						'success'            => true,
+						'admin_url'          => $admin_url,
+					);
 				}
 
 				require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -115,13 +132,21 @@ class Install_Ppg_Ability implements Cookiebot_Ability_Interface {
 
 				delete_transient( 'ppguc_activation_redirect' );
 				$logger->log( 'cookiebot/install-ppg', 'not_installed', 'installed_activated' );
-				return array( 'was_already_active' => false, 'success' => true, 'admin_url' => $admin_url );
+				return array(
+					'was_already_active' => false,
+					'success'            => true,
+					'admin_url'          => $admin_url,
+				);
 			},
-			'permission_callback' => function() {
+			'permission_callback' => function () {
 				return current_user_can( 'manage_options' ) && current_user_can( 'install_plugins' );
 			},
 			'meta'                => array(
-				'annotations'  => array( 'readonly' => false, 'destructive' => false, 'idempotent' => true ),
+				'annotations'  => array(
+					'readonly'    => false,
+					'destructive' => false,
+					'idempotent'  => true,
+				),
 				'show_in_rest' => true,
 			),
 		);

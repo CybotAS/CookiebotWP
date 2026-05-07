@@ -32,9 +32,12 @@ class Test_Install_Ppg_Ability extends WP_UnitTestCase {
 	}
 
 	public function test_returns_was_already_active_when_plugin_active() {
-		add_filter( 'pre_option_active_plugins', function() {
-			return array( 'privacy-policy-usercentrics/privacy-policy-usercentrics.php' );
-		} );
+		add_filter(
+			'pre_option_active_plugins',
+			function () {
+				return array( 'privacy-policy-usercentrics/privacy-policy-usercentrics.php' );
+			}
+		);
 		$args   = ( new Install_Ppg_Ability( $this->logger ) )->get_args();
 		$result = call_user_func( $args['execute_callback'] );
 		$this->assertTrue( $result['was_already_active'] );
@@ -43,9 +46,12 @@ class Test_Install_Ppg_Ability extends WP_UnitTestCase {
 	}
 
 	public function test_writes_audit_log_when_already_active() {
-		add_filter( 'pre_option_active_plugins', function() {
-			return array( 'privacy-policy-usercentrics/privacy-policy-usercentrics.php' );
-		} );
+		add_filter(
+			'pre_option_active_plugins',
+			function () {
+				return array( 'privacy-policy-usercentrics/privacy-policy-usercentrics.php' );
+			}
+		);
 		$args = ( new Install_Ppg_Ability( $this->logger ) )->get_args();
 		call_user_func( $args['execute_callback'] );
 		$log = get_option( 'cookiebot-ai-action-log', array() );
@@ -58,12 +64,18 @@ class Test_Install_Ppg_Ability extends WP_UnitTestCase {
 		// and returns [] without finding privacy-policy-usercentrics.
 		wp_cache_set( 'plugins', array( '' => array() ), 'plugins' );
 		// Ensure plugin is not active.
-		add_filter( 'pre_option_active_plugins', function() {
-			return array();
-		} );
-		add_filter( 'plugins_api', function() {
-			return new \WP_Error( 'api_error', 'Connection failed.' );
-		} );
+		add_filter(
+			'pre_option_active_plugins',
+			function () {
+				return array();
+			}
+		);
+		add_filter(
+			'plugins_api',
+			function () {
+				return new \WP_Error( 'api_error', 'Connection failed.' );
+			}
+		);
 		$args   = ( new Install_Ppg_Ability( $this->logger ) )->get_args();
 		$result = call_user_func( $args['execute_callback'] );
 		$this->assertInstanceOf( 'WP_Error', $result );

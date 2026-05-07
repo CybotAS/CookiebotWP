@@ -25,7 +25,7 @@ $header->display();
 		<div class="dashboard-grid">
 
 			<!-- Main Content Area -->
-			 <div class="dashboard-grid-row">
+			<div class="dashboard-grid-row">
 				<div class="gray-box">
 					<div class="header-section-no-margin">
 						<img src="<?php echo \esc_url( asset_url( 'img/icons/set-up-icon.svg' ) ); ?>" alt="Usercentrics Logo">
@@ -87,7 +87,7 @@ $header->display();
 	
 					</div>
 				</div>	
-			 </div>
+			</div>
 		</div>
 	</div>
 </div>

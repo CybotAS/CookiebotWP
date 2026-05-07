@@ -41,17 +41,33 @@ class Verify_Setup_Ability implements Cookiebot_Ability_Interface {
 			'description'         => __( 'Checks that the Domain Group ID is configured, Google Consent Mode v2 is enabled, and cookie blocking mode is set to auto. Returns an issues[] list — empty means all checks passed.', 'cookiebot' ),
 			'category'            => 'cookiebot',
 			'output_schema'       => array(
-				'type'       => 'object',
-				'properties' => array(
-					'cbid_configured'         => array( 'type' => 'boolean', 'description' => 'Whether a Domain Group ID is configured.' ),
-					'configured_domain'       => array( 'type' => 'string',  'description' => 'The WordPress site home URL.' ),
-					'gcm_enabled'             => array( 'type' => 'boolean', 'description' => 'Whether Google Consent Mode v2 is enabled.' ),
-					'blocking_mode_automatic' => array( 'type' => 'boolean', 'description' => 'Whether cookie blocking mode is set to auto.' ),
-					'issues'                  => array( 'type' => 'array', 'items' => array( 'type' => 'string' ), 'description' => 'Configuration issues found. Empty = setup complete.' ),
+				'type'                 => 'object',
+				'properties'           => array(
+					'cbid_configured'         => array(
+						'type'        => 'boolean',
+						'description' => 'Whether a Domain Group ID is configured.',
+					),
+					'configured_domain'       => array(
+						'type'        => 'string',
+						'description' => 'The WordPress site home URL.',
+					),
+					'gcm_enabled'             => array(
+						'type'        => 'boolean',
+						'description' => 'Whether Google Consent Mode v2 is enabled.',
+					),
+					'blocking_mode_automatic' => array(
+						'type'        => 'boolean',
+						'description' => 'Whether cookie blocking mode is set to auto.',
+					),
+					'issues'                  => array(
+						'type'        => 'array',
+						'items'       => array( 'type' => 'string' ),
+						'description' => 'Configuration issues found. Empty = setup complete.',
+					),
 				),
 				'additionalProperties' => false,
 			),
-			'execute_callback'    => function() {
+			'execute_callback'    => function () {
 				$cbid            = Cookiebot_WP::get_cbid();
 				$gcm_enabled     = Cookiebot_WP::get_gcm_enabled() === '1';
 				$is_automatic    = Cookiebot_WP::get_cookie_blocking_mode() === 'auto';
@@ -76,11 +92,15 @@ class Verify_Setup_Ability implements Cookiebot_Ability_Interface {
 					'issues'                  => $issues,
 				);
 			},
-			'permission_callback' => function() {
+			'permission_callback' => function () {
 				return current_user_can( 'manage_options' );
 			},
 			'meta'                => array(
-				'annotations'  => array( 'readonly' => true, 'destructive' => false, 'idempotent' => true ),
+				'annotations'  => array(
+					'readonly'    => true,
+					'destructive' => false,
+					'idempotent'  => true,
+				),
 				'show_in_rest' => true,
 			),
 		);

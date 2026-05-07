@@ -18,7 +18,7 @@ class Test_Wp_Google_Analytics_Events extends WP_UnitTestCase {
 	public function test_is_plugin_compatible() {
 		$content = Wp_Google_Analytics_Events::get_svn_file_content();
 
-		$wp_head_snippet = <<<TEXT
+		$wp_head_snippet = <<<'TEXT'
 add_action('wp_head',
                 array('GAESnippets', 'add_snippet_to_header'),
                 0);

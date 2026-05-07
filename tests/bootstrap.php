@@ -30,7 +30,7 @@ require_once "{$cybot_cookiebot_tests_dir}/includes/functions.php";
 tests_add_filter(
 	'muplugins_loaded',
 	function () {
-		require_once dirname( dirname( __FILE__ ) ) . '/cookiebot.php';
+		require_once dirname( __DIR__ ) . '/cookiebot.php';
 	}
 );
 

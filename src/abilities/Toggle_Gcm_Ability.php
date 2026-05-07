@@ -70,15 +70,24 @@ class Toggle_Gcm_Ability implements Cookiebot_Ability_Interface {
 				'additionalProperties' => false,
 			),
 			'output_schema'       => array(
-				'type'       => 'object',
-				'properties' => array(
-					'old_value' => array( 'type' => 'boolean', 'description' => 'Previous GCM enabled state.' ),
-					'new_value' => array( 'type' => 'boolean', 'description' => 'New GCM enabled state.' ),
-					'success'   => array( 'type' => 'boolean', 'description' => 'Whether the update succeeded.' ),
+				'type'                 => 'object',
+				'properties'           => array(
+					'old_value' => array(
+						'type'        => 'boolean',
+						'description' => 'Previous GCM enabled state.',
+					),
+					'new_value' => array(
+						'type'        => 'boolean',
+						'description' => 'New GCM enabled state.',
+					),
+					'success'   => array(
+						'type'        => 'boolean',
+						'description' => 'Whether the update succeeded.',
+					),
 				),
 				'additionalProperties' => false,
 			),
-			'execute_callback'    => function( $input ) use ( $logger ) {
+			'execute_callback'    => function ( $input ) use ( $logger ) {
 				$enabled   = isset( $input['enabled'] ) ? (bool) $input['enabled'] : true;
 				$old_value = get_option( 'cookiebot-gcm', '1' ) === '1';
 				update_option( 'cookiebot-gcm', $enabled ? '1' : '0' );
@@ -89,11 +98,15 @@ class Toggle_Gcm_Ability implements Cookiebot_Ability_Interface {
 					'success'   => true,
 				);
 			},
-			'permission_callback' => function() {
+			'permission_callback' => function () {
 				return current_user_can( 'manage_options' );
 			},
 			'meta'                => array(
-				'annotations'  => array( 'readonly' => false, 'destructive' => false, 'idempotent' => true ),
+				'annotations'  => array(
+					'readonly'    => false,
+					'destructive' => false,
+					'idempotent'  => true,
+				),
 				'show_in_rest' => true,
 			),
 		);

@@ -487,7 +487,7 @@ class Cookiebot_WP {
 
 		wp_enqueue_script(
 			'cookiebot-helper',
-			plugins_url( 'js/cookiebot-helper.js', dirname( __FILE__ ) ),
+			plugins_url( 'js/cookiebot-helper.js', __DIR__ ),
 			array( 'jquery' ),
 			CYBOT_COOKIEBOT_VERSION,
 			true
@@ -495,7 +495,7 @@ class Cookiebot_WP {
 
 		wp_enqueue_script(
 			'cookiebot-admin',
-			plugins_url( 'js/cookiebot-admin.js', dirname( __FILE__ ) ),
+			plugins_url( 'js/cookiebot-admin.js', __DIR__ ),
 			array( 'jquery' ),
 			CYBOT_COOKIEBOT_VERSION,
 			true

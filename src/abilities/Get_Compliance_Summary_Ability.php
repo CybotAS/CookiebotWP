@@ -41,16 +41,29 @@ class Get_Compliance_Summary_Ability implements Cookiebot_Ability_Interface {
 			'description'         => __( 'Returns the privacy regulations covered by Cookiebot CMP on this site, plus the current scan status and plan type.', 'cookiebot' ),
 			'category'            => 'cookiebot',
 			'output_schema'       => array(
-				'type'       => 'object',
-				'properties' => array(
-					'regulations_covered'   => array( 'type' => 'array', 'items' => array( 'type' => 'string' ), 'description' => 'Privacy regulations covered by Cookiebot CMP.' ),
-					'scan_status'           => array( 'type' => 'string',  'description' => 'Current cookie scan status.' ),
-					'consent_log_available' => array( 'type' => 'boolean', 'description' => 'Whether a consent log exists (requires CBID to be configured).' ),
-					'plan_type'             => array( 'type' => 'string',  'description' => 'Detected plan type: free, premium, or unknown.' ),
+				'type'                 => 'object',
+				'properties'           => array(
+					'regulations_covered'   => array(
+						'type'        => 'array',
+						'items'       => array( 'type' => 'string' ),
+						'description' => 'Privacy regulations covered by Cookiebot CMP.',
+					),
+					'scan_status'           => array(
+						'type'        => 'string',
+						'description' => 'Current cookie scan status.',
+					),
+					'consent_log_available' => array(
+						'type'        => 'boolean',
+						'description' => 'Whether a consent log exists (requires CBID to be configured).',
+					),
+					'plan_type'             => array(
+						'type'        => 'string',
+						'description' => 'Detected plan type: free, premium, or unknown.',
+					),
 				),
 				'additionalProperties' => false,
 			),
-			'execute_callback'    => function() {
+			'execute_callback'    => function () {
 				$cbid      = Cookiebot_WP::get_cbid();
 				$user_data = Cookiebot_WP::get_user_data();
 				$plan_type = 'unknown';
@@ -75,11 +88,15 @@ class Get_Compliance_Summary_Ability implements Cookiebot_Ability_Interface {
 					'plan_type'             => $plan_type,
 				);
 			},
-			'permission_callback' => function() {
+			'permission_callback' => function () {
 				return current_user_can( 'manage_options' );
 			},
 			'meta'                => array(
-				'annotations'  => array( 'readonly' => true, 'destructive' => false, 'idempotent' => true ),
+				'annotations'  => array(
+					'readonly'    => true,
+					'destructive' => false,
+					'idempotent'  => true,
+				),
 				'show_in_rest' => true,
 			),
 		);
