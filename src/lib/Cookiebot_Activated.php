@@ -29,7 +29,7 @@ class Cookiebot_Activated {
 		// Add script to track activation on next page load
 		add_action(
 			'admin_head',
-			function() {
+			function () {
 				if ( get_transient( 'cookiebot_just_activated' ) ) {
 					delete_transient( 'cookiebot_just_activated' );
 					?>

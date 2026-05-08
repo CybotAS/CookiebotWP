@@ -17,7 +17,7 @@ class Test_Official_Facebook_Pixel extends WP_UnitTestCase {
 	 */
 	public function test_official_facebook_pixel_pageview() {
 		$content = Official_Facebook_Pixel::get_svn_file_content( 'core/class-facebookpixel.php' );
-		$snippet = <<<TEXT
+		$snippet = <<<'TEXT'
 <!-- Meta Pixel Code -->
 <script type='text/javascript'>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -40,7 +40,7 @@ TEXT;
 	 */
 	public function test_official_facebook_pixel_caldera_form() {
 		$content = Official_Facebook_Pixel::get_svn_file_content( 'integration/class-facebookwordpresscalderaform.php' );
-		$snippet = <<<TEXT
+		$snippet = <<<'TEXT'
 add_action(
             'caldera_forms_ajax_return',
             array( __CLASS__, 'injectLeadEvent' ),
@@ -60,7 +60,7 @@ TEXT;
 	 */
 	public function test_official_facebook_pixel_contact_form_7() {
 		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/class-facebookwordpresscontactform7.php' );
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
             'wpcf7_submit',
             array( __CLASS__, 'trackServerEvent' ),
@@ -69,7 +69,7 @@ add_action(
         );
 TEXT;
 
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
             'wpcf7_feedback_response',
             array( __CLASS__, 'injectLeadEvent' ),
@@ -91,7 +91,7 @@ TEXT;
 	 */
 	public function test_official_facebook_pixel_formidable_form() {
 		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/class-facebookwordpressformidableform.php' );
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
             'frm_after_create_entry',
             array( __CLASS__, 'trackServerEvent' ),
@@ -100,7 +100,7 @@ add_action(
         );
 TEXT;
 
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
             'wp_footer',
             array( __CLASS__, 'injectLeadEvent' ),
@@ -121,7 +121,7 @@ TEXT;
 	 */
 	public function test_official_facebook_pixel_easy_digital_downloads() {
 		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/class-facebookwordpresseasydigitaldownloads.php' );
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
             'edd_payment_receipt_after',
             array( __CLASS__, 'trackPurchaseEvent' ),
@@ -130,14 +130,14 @@ add_action(
         );
 TEXT;
 
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
             'edd_after_download_content',
             array( __CLASS__, 'injectAddToCartListener' )
         );
 TEXT;
 
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 self::add_pixel_fire_for_hook(
             array(
                 'hook_name'       => 'edd_after_checkout_cart',
@@ -147,7 +147,7 @@ self::add_pixel_fire_for_hook(
         );
 TEXT;
 
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
             'edd_after_download_content',
             array( __CLASS__, 'injectViewContentEvent' ),
@@ -169,7 +169,7 @@ TEXT;
 	 */
 	public function test_official_facebook_pixel_mailchimp_for_wp() {
 		$content = Official_Facebook_Pixel::get_svn_file_content( 'integration/class-facebookwordpressmailchimpforwp.php' );
-		$snippet = <<<TEXT
+		$snippet = <<<'TEXT'
 self::add_pixel_fire_for_hook(
         array(
             'hook_name'       => 'mc4wp_form_subscribed',
@@ -190,7 +190,7 @@ TEXT;
 	 */
 	public function test_official_facebook_pixel_ninja_forms() {
 		$content = Official_Facebook_Pixel::get_svn_file_content( 'integration/class-facebookwordpressninjaforms.php' );
-		$snippet = <<<TEXT
+		$snippet = <<<'TEXT'
 add_action(
             'ninja_forms_submission_actions',
             array( __CLASS__, 'injectLeadEvent' ),
@@ -210,7 +210,7 @@ TEXT;
 	 */
 	public function test_official_facebook_pixel_woocommerce() {
 		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/class-facebookwordpresswoocommerce.php' );
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
                 'woocommerce_after_checkout_form',
                 array( __CLASS__, 'trackInitiateCheckout' ),
@@ -218,7 +218,7 @@ add_action(
             );
 TEXT;
 
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
                 'woocommerce_add_to_cart',
                 array( __CLASS__, 'trackAddToCartEvent' ),
@@ -227,7 +227,7 @@ add_action(
             );
 TEXT;
 
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
                 'woocommerce_thankyou',
                 array( __CLASS__, 'trackPurchaseEvent' ),
@@ -235,7 +235,7 @@ add_action(
             );
 TEXT;
 
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
                 'woocommerce_payment_complete',
                 array( __CLASS__, 'trackPurchaseEvent' ),
@@ -256,7 +256,7 @@ TEXT;
 	 */
 	public function test_official_facebook_pixel_WPECommerce() {
 		$content    = Official_Facebook_Pixel::get_svn_file_content( 'integration/class-facebookwordpresswpecommerce.php' );
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
             'wpsc_add_to_cart_json_response',
             array( __CLASS__, 'injectAddToCartEvent' ),
@@ -264,7 +264,7 @@ add_action(
         );
 TEXT;
 
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 self::add_pixel_fire_for_hook(
             array(
                 'hook_name'       => 'wpsc_before_shopping_cart_page',
@@ -274,7 +274,7 @@ self::add_pixel_fire_for_hook(
         );
 TEXT;
 
-		$snippets[] = <<<TEXT
+		$snippets[] = <<<'TEXT'
 add_action(
             'wpsc_transaction_results_shutdown',
             array( __CLASS__, 'injectPurchaseEvent' ),
@@ -313,10 +313,10 @@ TEXT;
 	public function test_official_facebook_pixel_integration_base() {
 		$content = Official_Facebook_Pixel::get_svn_file_content( 'integration/class-facebookwordpressintegrationbase.php' );
 
-		$snippet = <<<TEXT
+		$snippet = <<<'TEXT'
 add_action(
             'wp_footer',
-            \$hook_wp_footer,
+            $hook_wp_footer,
             11
         );
 TEXT;

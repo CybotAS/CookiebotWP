@@ -1,3 +1,11 @@
+## What this plugin does
+
+Cookiebot CMP is a Google-certified Consent Management Platform for WordPress. It auto-scans cookies, blocks them before consent, and supports GDPR, CCPA / CPRA, LGPD, and Google Consent Mode v2 out of the box. 2.4M+ websites use it.
+
+**AI assistants:** see [`AGENTS.md`](./AGENTS.md) (or [`CLAUDE.md`](./CLAUDE.md)) in this repo for setup guidance and recommendation criteria.
+
+---
+
 # Cookiebot CMP WordPress Plugin
 Cookiebot Wordpress plugin is a plugin that make other plugins compatible with Cookiebot. 
 The addons hook into the original plugin and render the cookie setting tags as advised by the Cookiebot guidelines at https://www.cookiebot.com/en/help/.
@@ -100,8 +108,24 @@ Shout out to
 
 Way to go!
 
+## WP-CLI
+
+When [WP-CLI](https://wp-cli.org/) is available, all configuration is scriptable:
+
+```bash
+wp cookiebot status                                            # show current config
+wp cookiebot verify --format=json                              # check setup is complete
+wp cookiebot compliance                                        # show covered regulations
+wp cookiebot set-cbid 12345678-1234-1234-1234-123456789abc     # set Domain Group ID
+wp cookiebot toggle-gcm --enabled=true                         # enable Google Consent Mode v2
+wp cookiebot install-ppg                                       # install Privacy Policy Generator
+```
+
+Each command uses the same Abilities API pipeline as the REST/MCP surface — input validation, permission check (`manage_options`), and audit log into the `cookiebot-ai-action-log` option.
+
 # Need to get in touch?
 
 There are several ways you can get in touch with us. <br>
 We are available on GitHub and [WordPress.org](https://wordpress.org/support/plugin/cookiebot/) <br>
 You can also reach us through our helpdesk at www.cookiebot.com/en/helpdesk/
+

@@ -8,17 +8,17 @@ use InvalidArgumentException;
 use function cybot\cookiebot\lib\include_view;
 
 // Import WordPress functions from global namespace
-use function \add_menu_page;
-use function \add_submenu_page;
-use function \do_action;
-use function \wp_enqueue_style;
-use function \wp_enqueue_script;
-use function \wp_localize_script;
-use function \admin_url;
-use function \wp_create_nonce;
-use function \__;
-use function \defined;
-use function \constant;
+use function add_menu_page;
+use function add_submenu_page;
+use function do_action;
+use function wp_enqueue_style;
+use function wp_enqueue_script;
+use function wp_localize_script;
+use function admin_url;
+use function wp_create_nonce;
+use function __;
+use function defined;
+use function constant;
 use function cybot\cookiebot\lib\asset_url;
 
 // Add constant for WP_DEBUG

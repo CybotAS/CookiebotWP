@@ -306,10 +306,10 @@ TEXT;
 
 		$changed_header = cookiebot_addons_manipulate_script( $buffer, $keywords );
 
-		$expected_replacements[] = <<<TEXT
+		$expected_replacements[] = <<<'TEXT'
 <script type="text/plain" data-cookieconsent="marketing">{'@context':'https:\/\/schema.org','@type':'Person','url':'https:\/\/www.ursula-sandner.com\/','sameAs':['https:\/\/www.facebook.com\/SandnerMindConsulting','https:\/\/instagram.com\/ursula.sandner','https:\/\/twitter.com\/psihotimisoara'],'@id':'#person','name':'Ursula Yvonne Sandner'}</script>
 TEXT;
-		$expected_replacements[] = <<<TEXT
+		$expected_replacements[] = <<<'TEXT'
 <script type='text/plain' data-cfasync='false' data-cookieconsent='statistics'>
 TEXT;
 		// phpcs:disable
@@ -317,7 +317,7 @@ TEXT;
 <script type="text/plain" data-cookieconsent="statistics" src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 TEXT;
 		// phpcs:enable
-		$expected_replacements[] = <<<TEXT
+		$expected_replacements[] = <<<'TEXT'
 <script type="text/plain" data-cookieconsent="statistics">
 TEXT;
 
