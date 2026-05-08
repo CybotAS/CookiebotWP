@@ -116,7 +116,7 @@ class Test_Get_Compliance_Summary_Ability extends WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_plan_type_free_detected() {
-		update_option( 'cookiebot-user-data', json_encode( array( 'subscription' => array( 'plan' => 'Free Plan' ) ) ) );
+		update_option( 'cookiebot-user-data', wp_json_encode( array( 'subscription' => array( 'plan' => 'Free Plan' ) ) ) );
 		$args   = ( new Get_Compliance_Summary_Ability() )->get_args();
 		$result = call_user_func( $args['execute_callback'] );
 		$this->assertSame( 'free', $result['plan_type'] );
@@ -128,7 +128,7 @@ class Test_Get_Compliance_Summary_Ability extends WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_plan_type_premium_detected() {
-		update_option( 'cookiebot-user-data', json_encode( array( 'subscription' => array( 'plan' => 'Premium' ) ) ) );
+		update_option( 'cookiebot-user-data', wp_json_encode( array( 'subscription' => array( 'plan' => 'Premium' ) ) ) );
 		$args   = ( new Get_Compliance_Summary_Ability() )->get_args();
 		$result = call_user_func( $args['execute_callback'] );
 		$this->assertSame( 'premium', $result['plan_type'] );

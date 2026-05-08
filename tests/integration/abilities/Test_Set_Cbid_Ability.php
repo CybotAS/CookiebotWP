@@ -66,9 +66,9 @@ class Test_Set_Cbid_Ability extends WP_UnitTestCase {
 		$log = get_option( 'cookiebot-ai-action-log', array() );
 		$this->assertCount( 1, $log );
 		$this->assertSame( 'cookiebot/set-cbid', $log[0]['ability'] );
-		// Audit log must NOT store raw CBID values.
-		$this->assertNotContains( 'AABBCCDD-1111-2222-3333-AABBCCDDEEFF', $log[0] );
-		$this->assertNotContains( '11111111-1111-1111-1111-111111111111', $log[0] );
+		// Audit log must NOT store raw CBID values — verify safe placeholder strings are logged.
+		$this->assertSame( 'was_set', $log[0]['old'] );
+		$this->assertSame( 'set', $log[0]['new'] );
 	}
 
 	public function test_returns_wp_error_on_invalid_uuid() {

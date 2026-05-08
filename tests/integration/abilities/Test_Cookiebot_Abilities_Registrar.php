@@ -36,6 +36,9 @@ class Test_Cookiebot_Abilities_Registrar extends WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_all_six_abilities_are_registered_after_hooks_fire() {
+		if ( ! function_exists( 'wp_has_ability' ) ) {
+			$this->markTestSkipped( 'WP Abilities API not available in this WordPress version.' );
+		}
 		$expected = array(
 			'cookiebot/get-status',
 			'cookiebot/verify-setup',

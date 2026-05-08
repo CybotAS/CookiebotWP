@@ -42,6 +42,7 @@ class Fake_Output implements Output_Adapter {
  *
  * @since 4.8.0
  */
+// phpcs:ignore Generic.Files.OneObjectStructurePerFile.MultipleFound -- Fake_Output is an intentional test helper.
 class Test_Cookiebot_CLI_Command extends WP_UnitTestCase {
 
 	/**
@@ -60,7 +61,14 @@ class Test_Cookiebot_CLI_Command extends WP_UnitTestCase {
 		update_option( 'cookiebot-banner-enabled', '1' );
 	}
 
+	private function skip_if_abilities_api_unavailable() {
+		if ( ! function_exists( 'wp_get_ability' ) ) {
+			$this->markTestSkipped( 'WP Abilities API not available in this WordPress version.' );
+		}
+	}
+
 	public function test_status_calls_get_status_ability_and_outputs_one_row() {
+		$this->skip_if_abilities_api_unavailable();
 		$output  = new Fake_Output();
 		$command = new Cookiebot_CLI_Command( $output );
 
@@ -86,6 +94,7 @@ class Test_Cookiebot_CLI_Command extends WP_UnitTestCase {
 	}
 
 	public function test_set_cbid_with_valid_uuid_calls_success() {
+		$this->skip_if_abilities_api_unavailable();
 		$output  = new Fake_Output();
 		$command = new Cookiebot_CLI_Command( $output );
 
