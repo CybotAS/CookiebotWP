@@ -5,6 +5,7 @@
 	registerBlockType(
 		'cookiebot/cookie-declaration',
 		{
+			apiVersion: 3,
 			title: 'Cookie Declaration',
 			keywords: ['cookiebot'],
 			icon: 'media-spreadsheet',
@@ -15,6 +16,9 @@
 					{},
 					'Cookiebot Cookie Declaration'
 				);
+			},
+			save: function() {
+				return null;
 			},
 		}
 	);
