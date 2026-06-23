@@ -65,7 +65,7 @@ class Test_Verify_Setup_Ability extends WP_UnitTestCase {
 		$result = call_user_func( $args['execute_callback'] );
 		$this->assertFalse( $result['cbid_configured'] );
 		$this->assertNotEmpty( $result['issues'] );
-		$this->assertStringContainsString( 'Domain Group ID', implode( ' ', $result['issues'] ) );
+		$this->assertTrue( strpos( implode( ' ', $result['issues'] ), 'Domain Group ID' ) !== false );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Test_Verify_Setup_Ability extends WP_UnitTestCase {
 	public function test_configured_domain_is_string() {
 		$args   = ( new Verify_Setup_Ability() )->get_args();
 		$result = call_user_func( $args['execute_callback'] );
-		$this->assertIsString( $result['configured_domain'] );
+		$this->assertTrue( is_string( $result['configured_domain'] ) );
 		$this->assertNotEmpty( $result['configured_domain'] );
 	}
 
@@ -117,7 +117,7 @@ class Test_Verify_Setup_Ability extends WP_UnitTestCase {
 		$result = call_user_func( $args['execute_callback'] );
 		$this->assertFalse( $result['gcm_enabled'] );
 		$this->assertNotEmpty( $result['issues'] );
-		$this->assertStringContainsString( 'Google Consent Mode', implode( ' ', $result['issues'] ) );
+		$this->assertTrue( strpos( implode( ' ', $result['issues'] ), 'Google Consent Mode' ) !== false );
 	}
 
 	/**
