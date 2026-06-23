@@ -40,14 +40,14 @@ jobs:
             name: 'PHP 7.4 / WP latest'
           - php: '7.3'
             env:
-              PHPUNIT_VERSION: '7.5.20'
-              WP: 'latest'
-            name: 'PHP 7.3 / WP latest'
+              PHPUNIT_VERSION: '6.5.14'
+              WP: '6.5.5'
+            name: 'PHP 7.3 / WP 6.5.5'
           - php: '7.2'
             env:
-              PHPUNIT_VERSION: '7.5.20'
-              WP: 'latest'
-            name: 'PHP 7.2 / WP latest'
+              PHPUNIT_VERSION: '6.5.14'
+              WP: '6.5.5'
+            name: 'PHP 7.2 / WP 6.5.5'
           - php: '7.1'
             env:
               PHPUNIT_VERSION: '7.5.20'
