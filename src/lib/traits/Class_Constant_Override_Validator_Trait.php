@@ -121,7 +121,7 @@ trait Class_Constant_Override_Validator_Trait {
 	 *
 	 * @throws Exception
 	 */
-	protected function validate_required_array_class_constant( $required_array_constant_name, array $allowed_item_values = null ) {
+	protected function validate_required_array_class_constant( $required_array_constant_name, $allowed_item_values = null ) {
 		if ( ! is_string( $required_array_constant_name ) ) {
 			throw new InvalidArgumentException();
 		}
