@@ -51,6 +51,18 @@ class Embed_Autocorrect extends Base_Cookiebot_Other_Addon {
 			1000
 		); // Ensure it is executed as the last filter
 
+		// add filters to handle autocorrection in Advanced Custom Fields (ACF) WYSIWYG-content fields
+		if(! class_exists('ACF') )  {
+			add_filter(
+				'acf_the_content',
+				array(
+					$this,
+					'cookiebot_addon_embed_autocorrect_content',
+				),
+				1000
+			); // Ensure it is executed as the last filter
+		}
+		
 		// add filters to handle autocorrection in widget text
 		add_filter(
 			'widget_text',
