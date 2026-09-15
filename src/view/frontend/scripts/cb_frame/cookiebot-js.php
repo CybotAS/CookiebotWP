@@ -7,37 +7,39 @@
  * @var array $data_regions
  * @var string|bool $tcf
  */
-?>
-<script type="text/javascript"
-		id="Cookiebot"
-		src="https://consent.cookiebot.com/uc.js"
-		data-implementation="wp"
-		data-cbid="<?php echo esc_attr( $cbid ); ?>"
-	<?php if ( $tcf ) : ?>
-		data-framework="<?php echo esc_attr( $tcf ); ?>"
-	<?php endif; ?>
-	<?php
-	if ( $data_regions ) {
-		echo 'data-georegions="';
-		foreach ( $data_regions as $cbid => $regions ) {
-			echo '{\'region\':\'' . esc_attr( $regions ) . '\',\'cbid\':\'' . esc_attr( $cbid ) . '\'}';
-			end( $data_regions );
-			if ( $cbid !== key( $data_regions ) ) {
-				echo ',';
-			}
-		}
-		echo '"';
+
+$script_attributes = array(
+	'type'                 => 'text/javascript',
+	'id'                   => 'Cookiebot',
+	'src'                  => 'https://consent.cookiebot.com/uc.js',
+	'data-implementation' => 'wp',
+	'data-cbid'            => $cbid,
+);
+
+if ( $tcf ) {
+	$script_attributes['data-framework'] = $tcf;
+}
+
+if ( $data_regions ) {
+	$georegions = array();
+	foreach ( $data_regions as $cbid => $regions ) {
+		$georegions[] = '{\'region\':\'' . esc_attr( $regions ) . '\',\'cbid\':\'' . esc_attr( $cbid ) . '\'}';
 	}
-	?>
-	<?php if ( (bool) get_option( 'cookiebot-gtm' ) !== false && ! empty( get_option( 'cookiebot-data-layer' ) ) ) : ?>
-		data-layer-name="<?php echo esc_attr( get_option( 'cookiebot-data-layer' ) ); ?>"
-	<?php endif; ?>
-	<?php if ( ! empty( $lang ) ) : ?>
-		data-culture="<?php echo esc_attr( strtoupper( $lang ) ); ?>"
-	<?php endif; ?>
-	<?php if ( $cookie_blocking_mode === 'auto' ) : ?>
-		data-blockingmode="auto"
-	<?php else : ?>
-		<?php echo esc_attr( $tag_attr ); ?>
-	<?php endif; ?>
-></script>
+	$script_attributes['data-georegions'] = implode( ',', $georegions );
+}
+
+if ( (bool) get_option( 'cookiebot-gtm' ) !== false && ! empty( get_option( 'cookiebot-data-layer' ) ) ) {
+	$script_attributes['data-layer-name'] = get_option( 'cookiebot-data-layer' );
+}
+
+if ( ! empty( $lang ) ) {
+	$script_attributes['data-culture'] = strtoupper( $lang );
+}
+
+if ( $cookie_blocking_mode === 'auto' ) {
+	$script_attributes['data-blockingmode'] = 'auto';
+} elseif ( ! empty( $tag_attr ) ) {
+	$script_attributes[ $tag_attr ] = true;
+}
+
+wp_print_script_tag( $script_attributes );
