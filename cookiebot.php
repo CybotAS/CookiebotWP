@@ -20,6 +20,7 @@ define( 'CYBOT_COOKIEBOT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/src/lib/helper.php';
+require_once __DIR__ . '/src/lib/global-deprecations-class.php';
 require_once __DIR__ . '/src/lib/global-deprecations.php';
 
 try {

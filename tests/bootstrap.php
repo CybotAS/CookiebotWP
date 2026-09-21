@@ -1,12 +1,11 @@
 <?php
-
-namespace cybot\cookiebot\tests;
-
 /**
  * PHPUnit bootstrap file.
  *
  * @package Cookiebot
  */
+
+namespace cybot\cookiebot\tests;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/./helpers.php';

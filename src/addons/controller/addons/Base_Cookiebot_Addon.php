@@ -100,6 +100,7 @@ abstract class Base_Cookiebot_Addon {
 	 * @return Base_Cookiebot_Addon
 	 * @throws Exception
 	 */
+	// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- params are forwarded via func_get_args() to the constructor below.
 	final public static function get_instance(
 		Settings_Service_Interface $settings,
 		Script_Loader_Tag_Interface $script_loader_tag,

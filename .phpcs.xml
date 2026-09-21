@@ -48,4 +48,10 @@
 			<property name="text_domain" type="array" value="cookiebot"/>
 		</properties>
 	</rule>
+	<rule ref="WordPress.WP.Capabilities">
+		<properties>
+			<!-- network_settings_page is a custom capability registered by this plugin, not a WordPress core capability. -->
+			<property name="custom_capabilities" type="array" value="network_settings_page"/>
+		</properties>
+	</rule>
 </ruleset>

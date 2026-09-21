@@ -36,26 +36,26 @@ interface Settings_Service_Interface {
 	/**
 	 * Returns all cookie type for given addon
 	 *
-	 * @param $addon    string  option name
-	 * @param $default  array   default cookie types
+	 * @param $addon          string  option name
+	 * @param $default_value  array   default cookie types
 	 *
 	 * @return array
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_cookie_types( $addon, $default = array() );
+	public function get_cookie_types( $addon, $default_value = array() );
 
 	/**
 	 * Returns regex for given addon
 	 *
-	 * @param $addon    string  option name
-	 * @param $default  string   default regex
+	 * @param $addon          string  option name
+	 * @param $default_value  string   default regex
 	 *
 	 * @return string
 	 *
 	 * @since 2.4.5
 	 */
-	public function get_addon_regex( $addon, $default = '' );
+	public function get_addon_regex( $addon, $default_value = '' );
 
 	/**
 	 * Returns addons one by one through a generator

@@ -245,7 +245,7 @@ $auto_disabled = $cookie_blocking_mode === 'auto' ? ' disabled__item' : '';
 			<label>
 				<?php
 				$disabled = false;
-				if ( $is_ms && get_site_option( 'cookiebot-nooutput' ) || $is_ms && $network_auto ) {
+				if ( ( $is_ms && get_site_option( 'cookiebot-nooutput' ) ) || ( $is_ms && $network_auto ) ) {
 					$disabled = true;
 					if ( ! $network_auto ) {
 						echo '<input type="checkbox" checked disabled />';
@@ -265,7 +265,7 @@ $auto_disabled = $cookie_blocking_mode === 'auto' ? ' disabled__item' : '';
 				<?php } ?>
 				<?php esc_html_e( 'Hide the cookie popup banner', 'cookiebot' ); ?>
 			</label>
-			<?php if ( $is_ms && get_site_option( 'cookiebot-nooutput' ) || $is_ms && $network_auto ) { ?>
+			<?php if ( ( $is_ms && get_site_option( 'cookiebot-nooutput' ) ) || ( $is_ms && $network_auto ) ) { ?>
 				<p class="cb-general__info__note"><?php esc_html_e( 'Disabled by active setting in Network Settings', 'cookiebot' ); ?></p>
 			<?php } ?>
 		</div>

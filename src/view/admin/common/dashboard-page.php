@@ -142,7 +142,7 @@ $header->display();
 								<?php endif; ?>
 							</div>
 
-							<?php if ( empty( $template_args['user_data'] ) || empty( $template_args['cbid'] ) && ! empty( $template_args['scan_id'] ) ) : ?>
+							<?php if ( empty( $template_args['user_data'] ) || ( empty( $template_args['cbid'] ) && ! empty( $template_args['scan_id'] ) ) ) : ?>
 								<div class="banner-preview-container">
 									<div class="divider"></div>
 									<p class="step-description">
