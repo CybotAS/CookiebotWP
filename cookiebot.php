@@ -7,6 +7,8 @@ Description: Install your cookie banner in minutes. Automatically scan and block
 Author: Usercentrics A/S
 Version: 4.7.3
 Author URI: https://www.cookiebot.com/
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cookiebot
 Domain Path: /langs
 */

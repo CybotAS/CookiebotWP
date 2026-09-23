@@ -2,7 +2,7 @@
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: cookie banner, cookie consent, cookie notice, GDPR, privacy, cmp, consent‑management‑platform, google‑consent‑mode, compliance, gdpr‑compliance, ccpa, dma, ai assistant, llm, agents, automation
 * Requires at least: 4.4
-* Tested up to: 7.0
+* Tested up to: 7.1
 * Stable tag: 4.7.3
 * Requires PHP: 5.6
 * License: GPLv2 or later
