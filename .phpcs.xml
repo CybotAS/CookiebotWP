@@ -3,7 +3,7 @@
 	<description>Generally-applicable sniffs for WordPress plugins.</description>
 
 	<config name="installed_paths"
-			value="tests/vendor/wp-coding-standards/wpcs,tests/vendor/phpcompatibility/php-compatibility,tests/vendor/phpcompatibility/phpcompatibility-paragonie,tests/vendor/phpcompatibility/phpcompatibility-wp"
+			value="tests/vendor/wp-coding-standards/wpcs,tests/vendor/phpcompatibility/php-compatibility,tests/vendor/phpcompatibility/phpcompatibility-paragonie,tests/vendor/phpcompatibility/phpcompatibility-wp,tests/vendor/phpcsstandards/phpcsutils,tests/vendor/phpcsstandards/phpcsextra"
 	/>
 	<!-- What to scan -->
 	<file>.</file>
@@ -33,7 +33,7 @@
         <exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
         <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
         <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
-		<exclude name="WordPress.WhiteSpace.PrecisionAlignment.Found"/>
+		<exclude name="Universal.WhiteSpace.PrecisionAlignment.Found"/>
     </rule>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<exclude-pattern>/src/view/</exclude-pattern>
@@ -48,9 +48,10 @@
 			<property name="text_domain" type="array" value="cookiebot"/>
 		</properties>
 	</rule>
-	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
+	<rule ref="WordPress.WP.Capabilities">
 		<properties>
-			<property name="blank_line_check" value="true"/>
+			<!-- network_settings_page is a custom capability registered by this plugin, not a WordPress core capability. -->
+			<property name="custom_capabilities" type="array" value="network_settings_page"/>
 		</properties>
 	</rule>
 </ruleset>

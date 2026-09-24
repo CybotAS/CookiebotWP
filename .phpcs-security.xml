@@ -3,7 +3,7 @@
 	<description>Run only WordPress.Security sniffs for security-focused checks (nonce, sanitization, escaping).</description>
 
 	<config name="installed_paths"
-			value="tests/vendor/wp-coding-standards/wpcs,tests/vendor/phpcompatibility/php-compatibility,tests/vendor/phpcompatibility/phpcompatibility-paragonie,tests/vendor/phpcompatibility/phpcompatibility-wp"
+			value="tests/vendor/wp-coding-standards/wpcs,tests/vendor/phpcompatibility/php-compatibility,tests/vendor/phpcompatibility/phpcompatibility-paragonie,tests/vendor/phpcompatibility/phpcompatibility-wp,tests/vendor/phpcsstandards/phpcsutils,tests/vendor/phpcsstandards/phpcsextra"
 	/>
 
 	<file>./src</file>

@@ -10,11 +10,10 @@ use cybot\cookiebot\lib\Cookiebot_Javascript_Helper;
 use cybot\cookiebot\lib\Settings_Service_Interface;
 use cybot\cookiebot\lib\Cookiebot_WP;
 use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
-
 use InvalidArgumentException;
+use Exception;
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
-use Exception;
 
 class Support_Page implements Settings_Page_Interface {
 

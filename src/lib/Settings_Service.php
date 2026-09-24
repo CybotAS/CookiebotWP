@@ -45,41 +45,41 @@ class Settings_Service implements Settings_Service_Interface {
 	/**
 	 * Returns all cookie type for given addon
 	 *
-	 * @param $addon    string  option name
-	 * @param $default  array   default cookie types
+	 * @param $addon          string  option name
+	 * @param $default_value  array   default cookie types
 	 *
 	 * @return array
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_cookie_types( $addon, $default = array() ) {
+	public function get_cookie_types( $addon, $default_value = array() ) {
 		$option = get_option( static::OPTION_NAME );
 
 		if ( isset( $option[ $addon ]['cookie_type'] ) && is_array( $option[ $addon ]['cookie_type'] ) ) {
 			return $option[ $addon ]['cookie_type'];
 		}
 
-		return $default;
+		return $default_value;
 	}
 
 	/**
 	 * Returns regex for given addon
 	 *
-	 * @param $addon    string  option name
-	 * @param $default  string   default regex
+	 * @param $addon          string  option name
+	 * @param $default_value  string   default regex
 	 *
 	 * @return string
 	 *
 	 * @since 2.4.5
 	 */
-	public function get_addon_regex( $addon, $default = '' ) {
+	public function get_addon_regex( $addon, $default_value = '' ) {
 		$option = get_option( static::OPTION_NAME );
 
 		if ( isset( $option[ $addon ]['regex'] ) ) {
 			return $option[ $addon ]['regex'];
 		}
 
-		return $default;
+		return $default_value;
 	}
 
 	/**
@@ -121,20 +121,20 @@ class Settings_Service implements Settings_Service_Interface {
 	 *
 	 * @param       $option_key
 	 * @param       $widget
-	 * @param array      $default
+	 * @param array      $default_value
 	 *
 	 * @return array
 	 *
 	 * @since 1.3.0
 	 */
-	public function get_widget_cookie_types( $option_key, $widget, $default = array() ) {
+	public function get_widget_cookie_types( $option_key, $widget, $default_value = array() ) {
 		$option = get_option( $option_key );
 
 		if ( isset( $option[ $widget ]['cookie_type'] ) && is_array( $option[ $widget ]['cookie_type'] ) ) {
 			return $option[ $widget ]['cookie_type'];
 		}
 
-		return $default;
+		return $default_value;
 	}
 
 	/**

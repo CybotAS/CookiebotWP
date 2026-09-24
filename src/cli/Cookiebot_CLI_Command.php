@@ -39,12 +39,12 @@ class Cookiebot_CLI_Command {
 	 * Validate and return the requested output format, or emit an error and return null.
 	 *
 	 * @param array  $assoc_args WP-CLI named arguments.
-	 * @param string $default    Default format when not specified.
+	 * @param string $default_format Default format when not specified.
 	 * @return string|null  One of table|json|yaml|csv, or null on invalid input.
 	 */
-	private function get_format( $assoc_args, $default = 'table' ) {
+	private function get_format( $assoc_args, $default_format = 'table' ) {
 		$allowed = array( 'table', 'json', 'yaml', 'csv' );
-		$format  = isset( $assoc_args['format'] ) ? $assoc_args['format'] : $default;
+		$format  = isset( $assoc_args['format'] ) ? $assoc_args['format'] : $default_format;
 		if ( ! in_array( $format, $allowed, true ) ) {
 			$this->output->error( sprintf( 'Invalid --format "%s". Allowed: table, json, yaml, csv.', $format ) );
 			return null;
@@ -230,10 +230,9 @@ class Cookiebot_CLI_Command {
 	 *     wp cookiebot set-cbid AbCdEfGhIjKlMn
 	 *
 	 * @subcommand set-cbid
-	 * @param array $args       Positional arguments.
-	 * @param array $assoc_args Named arguments.
+	 * @param array $args Positional arguments.
 	 */
-	public function set_cbid( $args, $assoc_args ) {
+	public function set_cbid( $args ) {
 		if ( empty( $args[0] ) ) {
 			$this->output->error( 'CBID is required. Usage: wp cookiebot set-cbid <cbid>' );
 			return;
@@ -313,10 +312,8 @@ class Cookiebot_CLI_Command {
 	 *     wp cookiebot install-ppg
 	 *
 	 * @subcommand install-ppg
-	 * @param array $args       Positional arguments.
-	 * @param array $assoc_args Named arguments.
 	 */
-	public function install_ppg( $args, $assoc_args ) {
+	public function install_ppg() {
 		$ability = $this->get_ability( 'cookiebot/install-ppg' );
 		if ( ! $ability ) {
 			return;
