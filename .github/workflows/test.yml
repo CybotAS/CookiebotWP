@@ -64,11 +64,13 @@ jobs:
               PHPUNIT_VERSION: '7.5.20'
               WP: 'latest'
             name: 'PHP 7.4 / WP latest'
+          # WP 6.9 is the last WP that supports PHP 7.2 and 7.3.
+          # It runs the CLI tests, which need PHPUnit 7.5+ (assertStringNotContainsString).
           - php: '7.3'
             env:
-              PHPUNIT_VERSION: '6.5.14'
-              WP: '6.5.5'
-            name: 'PHP 7.3 / WP 6.5.5'
+              PHPUNIT_VERSION: '7.5.20'
+              WP: '6.9'
+            name: 'PHP 7.3 / WP 6.9'
           - php: '7.2'
             env:
               PHPUNIT_VERSION: '6.5.14'
