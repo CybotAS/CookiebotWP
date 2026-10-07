@@ -18,6 +18,11 @@ jobs:
             env:
               PHPCS: '1'
             name: 'PHP 7.4 Lint'
+          - php: '8.3'
+            env:
+              PHPUNIT_VERSION: '9.6.38'
+              WP: 'latest'
+            name: 'PHP 8.3 / WP latest'
           - php: '8.2'
             env:
               PHPUNIT_VERSION: '9.6.38'
