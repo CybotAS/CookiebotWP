@@ -73,9 +73,9 @@ jobs:
             name: 'PHP 7.3 / WP 6.9'
           - php: '7.2'
             env:
-              PHPUNIT_VERSION: '6.5.14'
-              WP: '6.5.5'
-            name: 'PHP 7.2 / WP 6.5.5'
+              PHPUNIT_VERSION: '7.5.20'
+              WP: '6.9'
+            name: 'PHP 7.2 / WP 6.9'
           - php: '7.1'
             env:
               PHPUNIT_VERSION: '7.5.20'
