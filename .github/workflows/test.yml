@@ -18,6 +18,12 @@ jobs:
             env:
               PHPCS: '1'
             name: 'PHP 7.4 Lint'
+          - php: '8.4'
+            env:
+              PHPUNIT_VERSION: '9.6.38'
+              WP: 'nightly'
+            name: 'PHP 8.4 / WP nightly'
+            experimental: true
           - php: '8.5'
             env:
               PHPUNIT_VERSION: '9.6.38'
@@ -85,6 +91,8 @@ jobs:
             name: 'PHP 5.6 / WP 6.2.2'
 
     name: ${{ matrix.name }}
+    # WP nightly is an early warning for the next WP release, it does not block merges.
+    continue-on-error: ${{ matrix.experimental == true }}
 
     services:
       mysql:
