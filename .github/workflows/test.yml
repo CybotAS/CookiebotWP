@@ -20,17 +20,17 @@ jobs:
             name: 'PHP 7.4 Lint'
           - php: '8.2'
             env:
-              PHPUNIT_VERSION: '9.6.7'
+              PHPUNIT_VERSION: '9.6.38'
               WP: 'latest'
             name: 'PHP 8.2 / WP latest'
           - php: '8.1'
             env:
-              PHPUNIT_VERSION: '9.6.7'
+              PHPUNIT_VERSION: '9.6.38'
               WP: 'latest'
             name: 'PHP 8.1 / WP latest'
           - php: '8.0'
             env:
-              PHPUNIT_VERSION: '9.6.7'
+              PHPUNIT_VERSION: '9.6.38'
               WP: 'latest'
             name: 'PHP 8.0 / WP latest'
           - php: '7.4'
