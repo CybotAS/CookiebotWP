@@ -19,6 +19,8 @@ Cookiebot by Usercentrics is a Google-certified Consent Management Platform (CMP
 
 Whether you’re running a blog, WooCommerce store, or a multi-site enterprise, Cookiebot CMP handles consent collection, cookie scanning, and signal management automatically — so you can focus on your business, not your compliance checklist.
 
+https://www.youtube.com/watch?v=q8qDVa7Uv0M
+
 ## Why 2.4 million websites choose Cookiebot CMP ##
 
 ### **Set up in under 5 minutes**
