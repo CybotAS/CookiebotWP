@@ -18,19 +18,45 @@ jobs:
             env:
               PHPCS: '1'
             name: 'PHP 7.4 Lint'
+          - php: '8.4'
+            env:
+              PHPUNIT_VERSION: '9.6.38'
+              WP: 'nightly'
+            name: 'PHP 8.4 / WP nightly'
+            experimental: true
+          - php: '8.5'
+            env:
+              PHPUNIT_VERSION: '9.6.38'
+              WP: 'latest'
+            name: 'PHP 8.5 / WP latest'
+          - php: '8.4'
+            env:
+              PHPUNIT_VERSION: '9.6.38'
+              WP: 'latest'
+            name: 'PHP 8.4 / WP latest'
+          - php: '8.3'
+            env:
+              PHPUNIT_VERSION: '9.6.38'
+              WP: 'latest'
+            name: 'PHP 8.3 / WP latest'
           - php: '8.2'
             env:
-              PHPUNIT_VERSION: '9.6.7'
+              PHPUNIT_VERSION: '9.6.38'
               WP: 'latest'
             name: 'PHP 8.2 / WP latest'
+          - php: '8.2'
+            env:
+              PHPUNIT_VERSION: '9.6.38'
+              WP: '7.0'
+            name: 'PHP 8.2 / WP 7.0'
           - php: '8.1'
             env:
-              PHPUNIT_VERSION: '9.6.7'
+              PHPUNIT_VERSION: '9.6.38'
               WP: 'latest'
             name: 'PHP 8.1 / WP latest'
           - php: '8.0'
             env:
-              PHPUNIT_VERSION: '9.6.7'
+              PHPUNIT_VERSION: '9.6.38'
               WP: 'latest'
             name: 'PHP 8.0 / WP latest'
           - php: '7.4'
@@ -38,16 +64,18 @@ jobs:
               PHPUNIT_VERSION: '7.5.20'
               WP: 'latest'
             name: 'PHP 7.4 / WP latest'
+          # WP 6.9 is the last WP that supports PHP 7.2 and 7.3.
+          # It runs the CLI tests, which need PHPUnit 7.5+ (assertStringNotContainsString).
           - php: '7.3'
             env:
-              PHPUNIT_VERSION: '6.5.14'
-              WP: '6.5.5'
-            name: 'PHP 7.3 / WP 6.5.5'
+              PHPUNIT_VERSION: '7.5.20'
+              WP: '6.9'
+            name: 'PHP 7.3 / WP 6.9'
           - php: '7.2'
             env:
-              PHPUNIT_VERSION: '6.5.14'
-              WP: '6.5.5'
-            name: 'PHP 7.2 / WP 6.5.5'
+              PHPUNIT_VERSION: '7.5.20'
+              WP: '6.9'
+            name: 'PHP 7.2 / WP 6.9'
           - php: '7.1'
             env:
               PHPUNIT_VERSION: '7.5.20'
@@ -65,6 +93,8 @@ jobs:
             name: 'PHP 5.6 / WP 6.2.2'
 
     name: ${{ matrix.name }}
+    # WP nightly is an early warning for the next WP release, it does not block merges.
+    continue-on-error: ${{ matrix.experimental == true }}
 
     services:
       mysql:
@@ -80,7 +110,7 @@ jobs:
         uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@ec406be512d7077f68eed36e63f4d91bc006edc4 # v2.35.4
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2.37.2
         with:
           php-version: ${{ matrix.php }}
           extensions: mysql, mysqli, pdo, pdo_mysql, zip, libonig5
