@@ -106,7 +106,13 @@ class Iab_Page implements Settings_Page_Interface {
 	}
 
 	private function get_extra_providers() {
-		$get_info = array_map( 'str_getcsv', file( self::IAB_GAD_EXTRA_PROVIDERS ) );
+		$get_info = array_map(
+			function ( $line ) {
+				// Pass $escape explicitly, relying on its default is deprecated since PHP 8.4.
+				return str_getcsv( $line, ',', '"', '\\' );
+			},
+			file( self::IAB_GAD_EXTRA_PROVIDERS )
+		);
 
 		if ( ! $get_info ) {
 			return false;
