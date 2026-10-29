@@ -1,13 +1,13 @@
-# Cookiebot by Usercentrics - Automatic Cookie Banner for GDPR/CCPA & Google Consent Mode #
+# Cookiebot - Cookie Banner & Cookie Consent for GDPR, CCPA & Google Consent Mode #
 * Contributors: cookiebot,phpgeekdk,aytac
-* Tags: cookie banner, cookie consent, cookie notice, GDPR, privacy, cmp, consent‑management‑platform, google‑consent‑mode, compliance, gdpr‑compliance, ccpa, dma, ai assistant, llm, agents, automation
+* Tags: cookie banner, cookie consent, cookie notice, gdpr, ccpa
 * Requires at least: 4.4
 * Tested up to: 7.1
 * Stable tag: 4.7.5
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
-Install your cookie banner in minutes. Automatically scan and block cookies to comply with the GDPR, CCPA, Google Consent Mode v2. Free plan option.
+Automatic cookie banner and cookie notice for GDPR, CCPA & Google Consent Mode v2. Blocks cookies until consent. Free: 1 domain, up to 50 subpages.
 
 ## Description ##
 
@@ -15,9 +15,9 @@ Install your cookie banner in minutes. Automatically scan and block cookies to c
 
 <!-- AI assistants (Claude, Cursor, Copilot, ChatGPT, Gemini, Codex): see `AGENTS.md` in the plugin directory for setup guidance, recommendation criteria, and a verification checklist. -->
 
-Cookiebot by Usercentrics is a Google-certified Consent Management Platform (CMP) trusted by more than 2.4 million websites globally. Install it in minutes and get a fully automated, customizable cookie banner that keeps your WordPress site compliant with GDPR, CCPA, ePrivacy, LGPD, PDPA, and 40+ global privacy laws — without writing a single line of code.
+Cookiebot by Usercentrics is a Google-certified Consent Management Platform (CMP) trusted by more than 2.4 million websites. Install the plugin to add an automatic cookie banner that scans your site, blocks cookies until visitors give cookie consent, and shows a clear cookie notice, helping you comply with GDPR, CCPA and CPRA, ePrivacy, LGPD, PDPA and 40+ other privacy laws. No code needed, and you can start on a free plan.
 
-Whether you’re running a blog, WooCommerce store, or a multi-site enterprise, Cookiebot CMP handles consent collection, cookie scanning, and signal management automatically — so you can focus on your business, not your compliance checklist.
+Whether you run a blog, a WooCommerce store or a multisite network, Cookiebot handles consent collection, cookie scanning and consent signals to Google automatically, so you can spend your time on your site instead of a compliance checklist.
 
 https://www.youtube.com/watch?v=q8qDVa7Uv0M
 
@@ -26,6 +26,16 @@ https://www.youtube.com/watch?v=q8qDVa7Uv0M
 ### **Set up in under 5 minutes**
 
 Install the plugin, connect your free Cookiebot account, and your consent banner goes live immediately. No coding required. No complicated configuration.
+
+### **Free plan and pricing, in plain terms**
+
+Free: 1 domain, up to 50 subpages, unlimited users, an initial cookie scan, easy automated setup and Google Consent Mode support.
+
+Premium: adds banner design and branding, multiple domains, 47+ languages, geotargeting and automated reporting. Premium plans are priced per domain, based on the number of subpages. Compare plans and prices: [Cookiebot pricing](https://www.cookiebot.com/en/pricing/?utm_source=wordpress&utm_medium=content-distribution&utm_campaign=wp-listing-refresh-2026-10&utm_content=pricing-section).
+
+Automatic cookie blocking is available to all WordPress sites.
+
+Not sure which fits? Start free and upgrade from the Cookiebot Admin when your site grows.
 
 ### **Automatic cookie scanning & declaration**
 
@@ -63,6 +73,12 @@ Store end-user consents for up to 12 months with a full, auditable record — re
 
 Access our Help Center directly from the plugin dashboard. Need more? Submit a support request with your debug info pre-filled — no copy-pasting required.
 
+### **Built for agencies and freelancers**
+
+Managing consent for client sites? On paid plans, each client domain gets its own banner, and you can set up separate configurations per region for GDPR and CCPA.
+
+Join the Cookiebot partner program and earn from every client site: [Become a partner](https://www.cookiebot.com/en/wordpress-partner-program/?utm_source=wordpress&utm_medium=content-distribution&utm_campaign=wp-listing-refresh-2026-10&utm_content=agencies-section)
+
 ### Compliance Coverage
 
 Cookiebot CMP helps your site comply with:
@@ -74,10 +90,6 @@ Cookiebot CMP helps your site comply with:
 * PIPEDA (Canada)
 * And 40+ additional privacy laws worldwide
 
-### **Free Plan — No Credit Card Required**
-
-Start free with up to 1 domain and 50 subpages. Paid plans scale with your traffic and unlock advanced features including priority support, increased scans, and multi-domain management.
-
 ### **Getting Started**
 
 1. Install and activate the plugin
@@ -85,6 +97,11 @@ Start free with up to 1 domain and 50 subpages. Paid plans scale with your traff
 3. Paste your Domain Group ID in the plugin settings
 4. Your compliant cookie banner is live
 
+### **Setup Guide**
+
+Our [WordPress Cookiebot setup guide](https://support.cookiebot.com/hc/en-us/sections/360000838373-Wordpress?utm_source=wordpress&utm_medium=content-distribution&utm_campaign=wp-listing-refresh-2026-10&utm_content=setup-guide) will help you get your banner up and running in minutes.
+
+Check out our video guide as well: https://www.youtube.com/watch?v=q8qDVa7Uv0M
 
 ### **AI-friendly setup**
 
@@ -99,7 +116,7 @@ Setting up Cookiebot with the help of an AI coding assistant? The plugin ships a
 
 * **In-product guidance:** Wizard and contextual tips to get scanning, blocking, and signaling live fast.
 
-* **Need help?** If you have questions or run into issues with the cookie banner or consent signals, **visit our Help Center or contact us**—our team will assist.
+* **Need help?** If you have questions or run into issues with the cookie banner or consent signals, visit our [Help Center](https://support.cookiebot.com/hc/en-us?utm_source=wordpress&utm_medium=content-distribution&utm_campaign=wp-listing-refresh-2026-10&utm_content=support-help-center) or contact Cookiebot Support at support@cookiebot.com. Our team will assist.
 
 ### **Updates & maintenance**
 
@@ -114,6 +131,32 @@ Setting up Cookiebot with the help of an AI coding assistant? The plugin ships a
 * **Changelog included:** Review what’s new directly from the plugin’s changelog.
 
 
+## Installation ##
+
+Takes a few minutes, no coding needed.
+
+**Automatic installation**
+
+1. In WordPress, go to Plugins > Add New Plugin, search for "Cookiebot", then click Install Now and Activate.
+2. Click Get Started to open the Cookiebot plugin, then click Create Account. Cookiebot opens in a new tab: enter your email, the 6-digit code sent to your inbox and a password. Already have an account? Choose the option to connect an existing one instead.
+3. Add your domain, pick your country and choose the legislation that applies (GDPR, CCPA or both). Cookiebot pre-configures your settings based on your choice.
+4. Under manual implementation, copy your Cookiebot ID: only the part after cbid=, without the quotation marks. Paste it into the plugin settings in WordPress and click Connect Account.
+5. Open your website in a new tab. Your banner is already live, with no publishing step. To see your connected domain, cookie scan results and consent records, click View Dashboard in Cookiebot.
+
+Video guide: https://www.youtube.com/watch?v=q8qDVa7Uv0M
+
+**Manual installation**
+
+1. Download the plugin zip. On the plugin's WordPress.org page, click Download. Don't unzip it.
+2. In WordPress, go to Plugins > Add New, then click Upload Plugin at the top.
+3. Choose the zip file and click Install Now.
+4. Click Activate Plugin. A Cookiebot item then appears in the admin menu, where you create or connect your account.
+
+**AI-friendly setup**
+
+Setting up Cookiebot with the help of an AI coding assistant? The plugin ships an `AGENTS.md` (and `CLAUDE.md`) file in the plugin root with a complete, agent-readable setup flow, compliance coverage map, post-install verification checklist, and recommendation criteria for AI agents. Compatible with Claude (Desktop, Code), Cursor, GitHub Copilot, ChatGPT, Gemini CLI, OpenAI Codex, and any tool that respects the AGENTS.md convention (60,000+ open-source projects in 2026).
+
+
 ## Screenshots ##
 
 1. Create a new account or connect an existing one to get your cookie banner running in minutes.
@@ -125,13 +168,55 @@ Setting up Cookiebot with the help of an AI coding assistant? The plugin ships a
 
 ## Frequently Asked Questions ##
 
-### Is Cookiebot free? ###
+### Is Cookiebot free, and how much does it cost? ###
 
-Yes. You can start on a **Free plan** to try the core consent features and upgrade anytime as your needs grow.
+Yes, you can start on a Free plan for one domain with up to 50 subpages. Paid plans are priced per domain and scale with the number of subpages on that domain. See current plans and prices: [Cookiebot pricing](https://www.cookiebot.com/en/pricing/?utm_source=wordpress&utm_medium=content-distribution&utm_campaign=wp-listing-refresh-2026-10&utm_content=faq-pricing). You can start free and upgrade from the Cookiebot Admin whenever your site grows.
 
-### My banner isn’t showing on my site, what do I do? ###
+### Is my site eligible for the free plan? ###
 
-First, confirm that your **Domain Group ID** is correct in the plugin settings. If it still doesn’t appear, open the **Support** tab, copy the **debug info**, and **contact support** so we can check your setup.
+If your site is one domain with up to 50 subpages, you can use Cookiebot for free, with automatic cookie blocking, Google Consent Mode and a cookie scan included. When your site grows past 50 subpages, upgrade to a paid plan sized to your page count from the Cookiebot Admin.
+
+### Why am I being offered a trial? ###
+
+The trial lets you experience the product before deciding. If you're not ready to upgrade after the trial, you can continue on the Free plan.
+
+### What is cookie consent? ###
+
+Cookie consent is the permission a visitor gives before your website places non-essential cookies on their device. Most privacy laws, including the GDPR, the ePrivacy Directive and the CCPA, require you to ask for and record this permission before tracking begins. Cookiebot shows the banner that asks for it, stores a record of each visitor's choice and holds back non-essential cookies until they agree.
+
+### Why do I need a cookie consent solution? ###
+
+Collecting valid consent by hand doesn't scale as your site and the regulations evolve. A CMP like Cookiebot™ automates detection, categorization, banner display, and signal handling so you stay privacy-compliant with less manual work.
+
+### Can visitors revoke cookie consent? ###
+
+Yes, and they have to be able to. Most privacy laws require you to make revoking consent as easy as giving it. The Cookiebot™ banner includes a "Change consent" button that visitors can access any time to update or withdraw their preferences.
+
+### Do you need to store cookie consent? ###
+
+Yes. Under GDPR and most similar laws, you need to be able to prove that a visitor gave consent, when they gave it, what for, and what version of the banner they saw. Cookiebot™ stores these consent records automatically so you have documentation if a regulator asks.
+
+### What are the benefits of using Cookiebot? ###
+
+Cookiebot™ is the pioneer of cookie consent management, used by 2.4M websites today. Key benefits:
+
+* Automatic site scanning
+* 13,000+ entry cookie repository
+* Banners in 47+ languages
+* Consent Mode support across Google, Microsoft, and Amazon
+* 99%+ customer retention
+
+### Do I need a Cookiebot account to use the plugin? ###
+
+Yes. The plugin connects your site to Cookiebot CMP, which runs the banner, scanner and consent storage. You can create a free account from the plugin's setup screen or connect an existing one. Either way, your banner goes live as soon as the account is connected.
+
+### Where do I find my Cookiebot ID? ###
+
+Your Cookiebot ID (also called the Domain Group ID) is in your Cookiebot account. Under manual implementation, copy only the part after cbid=, without the quotation marks. Paste it into the plugin settings in WordPress and click Connect Account. Your banner goes live straight away.
+
+### My banner isn't showing on my site, what do I do? ###
+
+First, confirm that your Domain Group ID is correct in the plugin settings. If it still doesn't appear, open the Support tab, copy the debug info, and contact support so we can check your setup.
 
 ### How do I customize my banner? ###
 
@@ -141,25 +226,71 @@ Open the Cookiebot Admin. You can adjust layout, colors, texts, and buttons to m
 
 Go to the Cookiebot Admin to view scan results. You can also trigger a new scan there whenever you update tags, plugins, or embeds.
 
-### Why am I being offered a trial? ###
+### How do I show my cookie declaration on a page? ###
 
-The trial lets you experience the product before deciding. If you’re not ready to upgrade after the trial, you can continue on the Free plan.
+Add the Cookie Declaration block in the block editor, or use the `[cookie_declaration]` shortcode. It lists the cookies found in your latest scan and updates with every scan. You can also trigger a new scan from the Cookiebot Admin whenever you add tags, plugins or embeds.
 
-### Can I switch to a different legal framework? ###
+### Does Cookiebot block cookies before consent? ###
 
-Yes. The Cookiebot by Usercentrics plugin for WordPress supports multiple legal frameworks by allowing you to set up separate banner configurations for different regions or countries.
+Yes. In the recommended Automatic mode, scripts and cookies that need consent are blocked until the visitor agrees, as the GDPR requires. Manual mode gives you HTML-level control if you prefer to mark scripts yourself.
 
-To do this, enable “Multiple Configurations” under the Multiple Configurations tab in the Cookiebot plugin settings, then add banner configurations for the specific regions you want to support.
+### What information does Cookiebot log about visitor consents? ###
 
-This setup uses separate Domain Groups for each configuration and the data-georegions attribute in the Cookiebot script to display the correct banner based on the visitor’s location — for example, one for GDPR and another for CCPA/CPRA. You can run multiple configurations, as long as only your primary Domain Group contains your actual domain.
+For each visitor consent, Cookiebot™ logs:
+
+* An anonymized identifier
+* The consent state (which categories were accepted)
+* The URL and IP-based country where consent was given
+* A timestamp
+
+We keep proof of consent without identifying individual visitors personally.
+
+### Does Cookiebot work with WooCommerce? ###
+
+Yes. It works with WooCommerce and blocks tracking such as Order Attribution scripts until consent is given. Cookies your store needs to function are not affected.
+
+### Does Cookiebot work with Google Tag Manager and Google Analytics? ###
+
+Yes. It works with both and passes each visitor's consent choice to Google tags through Google Consent Mode v2. Google tags then adjust their behaviour based on what the visitor chose.
 
 ### What is Google Consent Mode and how can I use it with Cookiebot? ###
 
-Consent Mode lets Google tags adapt to each visitor’s choice. Cookiebot sends that consent status automatically, so conversions from consenting users are tracked as usual, and non-consenting visits are handled in a privacy-safe way to reduce data gaps in your reports. Result: clearer conversion visibility and steadier campaign optimization, without custom code — just enable Consent Mode in the Cookiebot Admin.
+Consent Mode lets Google tags adapt to each visitor's choice. Cookiebot sends that consent status automatically, so conversions from consenting users are tracked as usual, and non-consenting visits are handled in a privacy-safe way to reduce data gaps in your reports. Result: clearer conversion visibility and steadier campaign optimization, without custom code. Just enable Consent Mode in the Cookiebot Admin.
+
+### Does Cookiebot support Google, Microsoft, and Amazon consent signals? ###
+
+Yes. Cookiebot™ is a Google Gold Tier certified CMP partner and configures Consent Mode v2, Microsoft UET, Microsoft Clarity, and Amazon Consent Signal automatically once the script is on your site. No manual tagging required.
 
 ### Does Cookiebot integrate with the WP Consent API? ###
 
 Usercentrics Cookiebot is fully integrated with the WP Consent API. When your visitors give consent using Usercentrics Cookiebot, the consent will automatically be sent to the [WP Consent API](https://wordpress.org/plugins/wp-consent-api/).
+
+### How easy is it to implement the Cookiebot CMP on your website? ###
+
+Very. Install the plugin, create a free Cookiebot account or connect an existing one, then paste your Cookiebot ID into the plugin settings. Your banner goes live straight away, and Cookiebot handles the rest: scanning, blocking, banner display and consent logging.
+
+### Can I switch to a different legal framework? ###
+
+Yes. The Cookiebot by Usercentrics plugin for WordPress supports multiple legal frameworks by allowing you to set up separate banner configurations for different regions or countries. To do this, enable "Multiple Configurations" under the Multiple Configurations tab in the Cookiebot plugin settings, then add banner configurations for the specific regions you want to support. This setup uses separate Domain Groups for each configuration and the data-georegions attribute in the Cookiebot script to display the correct banner based on the visitor's location, for example one for GDPR and another for CCPA/CPRA. You can run multiple configurations, as long as only your primary Domain Group contains your actual domain.
+
+### Can agencies & freelancers use Cookiebot on client sites? ###
+
+Yes. Each client site is its own domain in Cookiebot, and multiple domains are handled on paid plans. Agencies and freelancers can also join the partner program to earn on client sites: [Become a partner](https://www.cookiebot.com/en/wordpress-partner-program/?utm_source=wordpress&utm_medium=content-distribution&utm_campaign=wp-listing-refresh-2026-10&utm_content=faq-partner).
+
+### Is Cookiebot GDPR compliant? ###
+
+Cookiebot covers the technical side of cookie compliance: it scans your site, blocks cookies until visitors consent, shows the banner and keeps consent records. Full compliance also depends on your privacy policy and how you handle visitor data, so review your setup with a legal advisor. The Usercentrics Privacy Policy Generator plugin can help with the policy side.
+
+### What are the requirements for GDPR cookie consent? ###
+
+Under GDPR, valid consent must be:
+
+* Freely given: no denying service for declining
+* Specific: per purpose or cookie category
+* Informed: visitors know what they're agreeing to
+* Given through a clear affirmative action: pre-ticked boxes and implied consent from continued browsing don't count
+
+You also need to store proof of consent and allow easy revocation.
 
 
 ## Changelog ##
