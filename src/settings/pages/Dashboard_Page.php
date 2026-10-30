@@ -2,8 +2,11 @@
 
 namespace cybot\cookiebot\settings\pages;
 
+use cybot\cookiebot\lib\Cbid_Checker;
 use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\lib\Cookiebot_WP;
+use cybot\cookiebot\lib\Dashboard_Setup_Ajax;
+use cybot\cookiebot\lib\Setup_Offer;
 use InvalidArgumentException;
 use function cybot\cookiebot\lib\include_view;
 
@@ -192,67 +195,15 @@ class Dashboard_Page implements Settings_Page_Interface {
 			return;
 		}
 
-		// Redirect CB users to previous dashboard page
-		if ( ( ! empty( $cbid ) && $is_cb_user ) || ( ! empty( $cbid ) && empty( $user_data ) ) ) {
-			wp_enqueue_style(
-				'cookiebot-dashboard-backup-css',
-				asset_url( 'css/backend/dashboard-old.css' ),
-				array(),
-				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
-			);
-
-			wp_enqueue_script(
-				'cookiebot-account-js',
-				asset_url( 'js/backend/account.js' ),
-				array( 'jquery' ),
-				Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
-				true
-			);
-
-			wp_localize_script(
-				'cookiebot-account-js',
-				'cookiebot_account',
-				array(
-					'ajax_url'      => admin_url( 'admin-ajax.php' ),
-					'nonce'         => wp_create_nonce( 'cookiebot-account' ),
-					'cbid'          => $cbid,
-					'scan_id'       => $scan_id,
-					'has_user_data' => ! empty( $user_data ),
-					'has_cbid'      => ! empty( $cbid ),
-					'was_onboarded' => $was_onboarded,
-					'debug'         => defined( 'WP_DEBUG' ) && WP_DEBUG,
-				)
-			);
-
-			require_once CYBOT_COOKIEBOT_PLUGIN_DIR . 'src/view/admin/common/dashboard-page-old.php';
+		// No ID yet: new welcome/setup view.
+		if ( empty( $cbid ) ) {
+			$this->render_welcome();
 			return;
 		}
 
-		// Redirect new users to cookiebot dashboard page
-		if ( empty( $cbid ) ) {
-			$args = array(
-				'cbid'        => Cookiebot_WP::get_cbid(),
-				'cb_wp'       => asset_url( 'img/cb-wp.png' ),
-				'europe_icon' => asset_url( 'img/europe.png' ),
-				'usa_icon'    => asset_url( 'img/usa.png' ),
-				'check_icon'  => asset_url( 'img/icons/check.svg' ),
-				'link_icon'   => asset_url( 'img/icons/link.svg' ),
-			);
-
-			$style_sheets = array(
-				array( 'cookiebot-dashboard-css', 'css/backend/dashboard-old.css' ),
-			);
-
-			foreach ( $style_sheets as $style ) {
-				wp_enqueue_style(
-					$style[0],
-					asset_url( $style[1] ),
-					null,
-					Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
-				);
-			}
-
-			include_view( Cookiebot_Frame::get_view_path() . 'dashboard-cookiebot.php', $args );
+		// Cookiebot (CB) accounts and sites without account data: new connected view.
+		if ( true === $is_cb_user || empty( $user_data ) ) {
+			$this->render_connected();
 			return;
 		}
 
@@ -311,5 +262,112 @@ class Dashboard_Page implements Settings_Page_Interface {
 		);
 
 		require_once CYBOT_COOKIEBOT_PLUGIN_DIR . 'src/view/admin/common/dashboard-page.php';
+	}
+
+	/**
+	 * Build the args for the welcome view.
+	 *
+	 * @return array
+	 */
+	public function get_welcome_args() {
+		return array(
+			'domain'         => Cbid_Checker::get_site_host(),
+			'signup_clicked' => get_option( Dashboard_Setup_Ajax::OPTION_SIGNUP_CLICKED ) === '1',
+			'offer_active'   => Setup_Offer::is_active(),
+			'signup_url'     => Setup_Offer::get_signup_url(),
+			'support_url'    => admin_url( 'admin.php?page=cookiebot_support' ),
+		);
+	}
+
+	/**
+	 * Build the args for the connected view. Consumes the just-connected transient.
+	 *
+	 * @return array
+	 */
+	public function get_connected_args() {
+		$cbid           = Cookiebot_WP::get_cbid();
+		$id_type        = Cbid_Checker::get_type( $cbid );
+		$just_connected = (bool) get_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED );
+
+		if ( $just_connected ) {
+			delete_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED );
+		}
+
+		if ( $just_connected || Cbid_Checker::TYPE_SETTINGS === $id_type ) {
+			$check_result = Cbid_Checker::RESULT_MATCH;
+		} else {
+			$check_result = Cbid_Checker::check( $cbid );
+		}
+
+		return array(
+			'cbid'           => $cbid,
+			'id_type'        => $id_type,
+			'domain'         => Cbid_Checker::get_site_host(),
+			'check_result'   => $check_result,
+			'just_connected' => $just_connected,
+			'banner_enabled' => Cookiebot_WP::get_banner_enabled() === '1',
+			'is_network_id'  => '' === (string) get_option( 'cookiebot-cbid', '' ),
+			'preview_url'    => home_url( '/' ),
+			'support_url'    => admin_url( 'admin.php?page=cookiebot_support' ),
+		);
+	}
+
+	private function render_welcome() {
+		wp_enqueue_style(
+			'cookiebot-dashboard-revamp-css',
+			asset_url( 'css/backend/dashboard-revamp.css' ),
+			array(),
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+		);
+
+		wp_enqueue_script(
+			'cookiebot-dashboard-setup-js',
+			asset_url( 'js/backend/dashboard-setup.js' ),
+			array( 'jquery' ),
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+			true
+		);
+
+		wp_localize_script(
+			'cookiebot-dashboard-setup-js',
+			'cookiebot_setup',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( Dashboard_Setup_Ajax::NONCE_ACTION ),
+				'i18n'     => array(),
+			)
+		);
+
+		include_view( 'admin/common/dashboard/welcome.php', $this->get_welcome_args() );
+	}
+
+	private function render_connected() {
+		wp_enqueue_style(
+			'cookiebot-dashboard-revamp-css',
+			asset_url( 'css/backend/dashboard-revamp.css' ),
+			array(),
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
+		);
+
+		wp_enqueue_script(
+			'cookiebot-dashboard-connected-js',
+			asset_url( 'js/backend/dashboard-connected.js' ),
+			array( 'jquery' ),
+			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
+			true
+		);
+
+		wp_localize_script(
+			'cookiebot-dashboard-connected-js',
+			'cookiebot_connected',
+			array(
+				'ajax_url'      => admin_url( 'admin-ajax.php' ),
+				'nonce'         => wp_create_nonce( Dashboard_Setup_Ajax::NONCE_ACTION ),
+				'account_nonce' => wp_create_nonce( 'cookiebot-account' ),
+				'i18n'          => array(),
+			)
+		);
+
+		include_view( 'admin/common/dashboard/connected.php', $this->get_connected_args() );
 	}
 }
