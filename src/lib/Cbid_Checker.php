@@ -42,28 +42,35 @@ class Cbid_Checker {
 	/**
 	 * Trim an ID. Non-strings normalize to an empty string.
 	 *
+	 * 36-character (Domain Group) IDs are lowercased: Cookiebot_Frame only
+	 * recognises lowercase UUIDs, so an uppercase ID would load the wrong script.
+	 * Settings IDs are case-sensitive and keep their case.
+	 *
 	 * @param mixed $id Raw ID.
 	 * @return string
 	 */
 	public static function normalize( $id ) {
-		return is_string( $id ) ? trim( $id ) : '';
+		$id = is_string( $id ) ? trim( $id ) : '';
+
+		return 36 === strlen( $id ) ? strtolower( $id ) : $id;
 	}
 
 	/**
-	 * Classify an ID by length: 36 chars is a Domain Group ID, 9 or 14 chars
-	 * is a Usercentrics Settings ID, anything else is invalid.
+	 * Classify an ID by length: 36 chars is a Domain Group ID, 9 or 14
+	 * alphanumeric chars is a Usercentrics Settings ID, anything else is invalid.
 	 *
 	 * @param mixed $id Raw ID.
 	 * @return string One of the TYPE_* constants.
 	 */
 	public static function get_type( $id ) {
-		$length = strlen( self::normalize( $id ) );
+		$id     = self::normalize( $id );
+		$length = strlen( $id );
 
 		if ( 36 === $length ) {
 			return self::TYPE_DOMAIN_GROUP;
 		}
 
-		if ( 9 === $length || 14 === $length ) {
+		if ( ( 9 === $length || 14 === $length ) && preg_match( '/^[A-Za-z0-9]+$/', $id ) ) {
 			return self::TYPE_SETTINGS;
 		}
 

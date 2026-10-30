@@ -96,6 +96,28 @@ class Test_Cbid_Checker extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Domain Group IDs are lowercased: the front end only recognises lowercase UUIDs as Cookiebot IDs.
+	 * Settings IDs are case-sensitive and keep their case.
+	 *
+	 * @return void
+	 */
+	public function test_normalize_lowercases_domain_group_id_only() {
+		$this->assertSame( 'aabbccdd-1111-2222-3333-aabbccddeeff', Cbid_Checker::normalize( ' AABBCCDD-1111-2222-3333-AABBCCDDEEFF ' ) );
+		$this->assertSame( 'Ab12Cd34Ef56Gh', Cbid_Checker::normalize( 'Ab12Cd34Ef56Gh' ) );
+	}
+
+	/**
+	 * Settings IDs must be alphanumeric; a right-length value with punctuation is invalid.
+	 *
+	 * @return void
+	 */
+	public function test_settings_id_with_punctuation_is_invalid() {
+		$this->assertSame( Cbid_Checker::TYPE_INVALID, Cbid_Checker::get_type( 'abc-defgh' ) );
+		$this->assertSame( Cbid_Checker::TYPE_INVALID, Cbid_Checker::get_type( 'abcdefg hijklm' ) );
+		$this->assertSame( Cbid_Checker::TYPE_SETTINGS, Cbid_Checker::get_type( 'Ab12Cd34Ef56Gh' ) );
+	}
+
+	/**
 	 * Test get_type by length.
 	 *
 	 * @return void

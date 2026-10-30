@@ -277,6 +277,33 @@ class Test_Dashboard_Setup_Ajax extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
+	 * An uppercase Domain Group ID is checked and saved in lowercase.
+	 *
+	 * @return void
+	 */
+	public function test_connect_saves_domain_group_id_lowercase() {
+		$this->stub_body( 'window.CookieConsent={};' );
+
+		$response = $this->run_ajax( 'cookiebot_connect_cbid', array( 'cbid' => strtoupper( self::DOMAIN_GROUP_ID ) ) );
+
+		$this->assertTrue( $response['success'] );
+		$this->assertSame( strtolower( self::DOMAIN_GROUP_ID ), get_option( 'cookiebot-cbid' ) );
+	}
+
+	/**
+	 * A 9-character Settings ID with punctuation is rejected as invalid.
+	 *
+	 * @return void
+	 */
+	public function test_connect_settings_id_with_punctuation_is_invalid() {
+		$response = $this->run_ajax( 'cookiebot_connect_cbid', array( 'cbid' => 'abc-defgh' ) );
+
+		$this->assertFalse( $response['success'] );
+		$this->assertSame( 'invalid', $response['data']['code'] );
+		$this->assertSame( '', (string) get_option( 'cookiebot-cbid', '' ) );
+	}
+
+	/**
 	 * Connecting the same ID twice succeeds (update_option returns false).
 	 *
 	 * @return void
