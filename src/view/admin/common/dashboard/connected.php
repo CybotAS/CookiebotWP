@@ -4,6 +4,7 @@ use cybot\cookiebot\lib\Cbid_Checker;
 use cybot\cookiebot\settings\templates\Header;
 use cybot\cookiebot\settings\templates\Main_Tabs;
 use function cybot\cookiebot\lib\asset_url;
+use function cybot\cookiebot\lib\include_view;
 
 /**
  * @var string $cbid
@@ -188,6 +189,12 @@ $header->display();
 		</div>
 	</div>
 </div>
+
+<?php
+if ( ! $is_network_id ) {
+	include_view( 'admin/common/dashboard/partials/disconnect-modal.php', array( 'domain' => $domain ) );
+}
+?>
 
 <?php if ( $just_connected ) : ?>
 	<div class="cb-dash-toast" role="status" data-cb-toast>

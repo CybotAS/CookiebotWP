@@ -49,8 +49,53 @@
 		}
 	}
 
+	// Confirm dialog: Cancel, close icon, backdrop click and Esc all cancel; focus returns to "Disconnect".
+	function initDisconnect() {
+		var $trigger = $( '[data-cb-disconnect]' );
+		var dialog = $( '[data-cb-disconnect-dialog]' ).get( 0 );
+		if ( ! $trigger.length || ! dialog || typeof dialog.showModal !== 'function' ) {
+			return;
+		}
+		var $confirm = $( dialog ).find( '[data-cb-dialog-confirm]' );
+
+		$trigger.on( 'click', function () {
+			dialog.showModal();
+		} );
+		$( dialog ).find( '[data-cb-dialog-cancel]' ).on( 'click', function () {
+			dialog.close();
+		} );
+		// A click on the dialog element itself (not its content) is a click on the backdrop.
+		$( dialog ).on( 'click', function ( event ) {
+			if ( event.target === dialog ) {
+				dialog.close();
+			}
+		} );
+		$( dialog ).on( 'close', function () {
+			$trigger.trigger( 'focus' );
+		} );
+
+		$confirm.on( 'click', function () {
+			$confirm.prop( 'disabled', true );
+			$.post( cookiebot_connected.ajax_url, {
+				action: 'cookiebot_disconnect_cbid',
+				nonce: cookiebot_connected.nonce
+			} )
+				.done( function ( response ) {
+					if ( response && response.success && response.data && response.data.redirect ) {
+						window.location = response.data.redirect;
+						return;
+					}
+					$confirm.prop( 'disabled', false );
+				} )
+				.fail( function () {
+					$confirm.prop( 'disabled', false );
+				} );
+		} );
+	}
+
 	$( function () {
 		initBannerToggle();
 		initSuccessMoment();
+		initDisconnect();
 	} );
 })( jQuery );
