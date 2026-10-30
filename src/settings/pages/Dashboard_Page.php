@@ -16,6 +16,7 @@ use function add_submenu_page;
 use function do_action;
 use function wp_enqueue_style;
 use function wp_enqueue_script;
+use function wp_register_script;
 use function wp_localize_script;
 use function admin_url;
 use function wp_create_nonce;
@@ -361,6 +362,9 @@ class Dashboard_Page implements Settings_Page_Interface {
 	}
 
 	private function render_connected() {
+		$args = $this->get_connected_args();
+		$deps = array( 'jquery' );
+
 		wp_enqueue_style(
 			'cookiebot-dashboard-revamp-css',
 			asset_url( 'css/backend/dashboard-revamp.css' ),
@@ -368,10 +372,22 @@ class Dashboard_Page implements Settings_Page_Interface {
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 		);
 
+		// Confetti only plays once, right after a successful connect.
+		if ( $args['just_connected'] ) {
+			wp_register_script(
+				'cookiebot-confetti-js',
+				asset_url( 'js/backend/lib/confetti.browser.min.js' ),
+				array(),
+				'1.9.3',
+				true
+			);
+			$deps[] = 'cookiebot-confetti-js';
+		}
+
 		wp_enqueue_script(
 			'cookiebot-dashboard-connected-js',
 			asset_url( 'js/backend/dashboard-connected.js' ),
-			array( 'jquery' ),
+			$deps,
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION,
 			true
 		);
@@ -387,6 +403,6 @@ class Dashboard_Page implements Settings_Page_Interface {
 			)
 		);
 
-		include_view( 'admin/common/dashboard/connected.php', $this->get_connected_args() );
+		include_view( 'admin/common/dashboard/connected.php', $args );
 	}
 }
