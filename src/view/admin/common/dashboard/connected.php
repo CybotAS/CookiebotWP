@@ -128,7 +128,62 @@ $header->display();
 							</div>
 						</div>
 					</div>
+
+					<?php if ( ! $cb_dash_is_settings_id ) : ?>
+						<div class="cb-dash__connection-footer">
+							<hr class="cb-dash__divider">
+							<div class="cb-dash__footer-link">
+								<img src="<?php echo esc_url( asset_url( 'img/dashboard/dashboard-customize.svg' ) ); ?>" width="20" height="20" alt="">
+								<div class="cb-dash__footer-text">
+									<p class="cb-dash__h4"><?php esc_html_e( 'Do more in Cookiebot', 'cookiebot' ); ?></p>
+									<p class="cb-dash__body"><?php esc_html_e( 'Customize your banner and manage your plan in your Cookiebot account.', 'cookiebot' ); ?></p>
+								</div>
+								<a class="cb-dash__btn cb-dash__btn--ghost" href="https://admin.cookiebot.com/?utm_source=wordpress&utm_medium=referral&utm_campaign=plugin_dashboard&utm_content=do_more_card" target="_blank" rel="noopener">
+									<?php esc_html_e( 'Go to Cookiebot', 'cookiebot' ); ?>
+									<img src="<?php echo esc_url( asset_url( 'img/dashboard/launch-blue-24.svg' ) ); ?>" width="24" height="24" alt="">
+									<span class="screen-reader-text"><?php esc_html_e( '(opens in a new tab)', 'cookiebot' ); ?></span>
+								</a>
+							</div>
+						</div>
+					<?php endif; ?>
 				</section>
+
+				<hr class="cb-dash__divider">
+
+				<section class="cb-dash__more">
+					<h2 class="cb-dash__h2"><?php esc_html_e( 'More from Cookiebot', 'cookiebot' ); ?></h2>
+					<div class="cb-dash__promo-cards">
+						<div class="cb-dash__promo cb-dash__promo--partner">
+							<div class="cb-dash__promo-text">
+								<h3 class="cb-dash__h3"><?php esc_html_e( 'Join the Cookiebot Partner Program', 'cookiebot' ); ?></h3>
+								<p class="cb-dash__body"><?php esc_html_e( 'Earn commission on every client site you set up with Cookiebot, plus partner perks and support.', 'cookiebot' ); ?></p>
+							</div>
+							<a class="cb-dash__btn cb-dash__btn--primary" href="https://www.cookiebot.com/en/wordpress-partner-program/?utm_source=wordpress&utm_medium=referral&utm_campaign=plugin_dashboard&utm_content=partner_card" target="_blank" rel="noopener">
+								<?php esc_html_e( 'Become a Partner', 'cookiebot' ); ?>
+								<img src="<?php echo esc_url( asset_url( 'img/dashboard/launch-white.svg' ) ); ?>" width="24" height="24" alt="">
+								<span class="screen-reader-text"><?php esc_html_e( '(opens in a new tab)', 'cookiebot' ); ?></span>
+							</a>
+						</div>
+						<div class="cb-dash__promo cb-dash__promo--review">
+							<h3 class="cb-dash__h3"><?php esc_html_e( 'Your opinion matters', 'cookiebot' ); ?></h3>
+							<p class="cb-dash__body"><?php esc_html_e( 'Are you happy with our WordPress plugin? Your feedback will help us make our product better for you.', 'cookiebot' ); ?></p>
+							<a class="cb-dash__link cb-dash__link--underline" href="https://wordpress.org/support/plugin/cookiebot/reviews/#new-post" target="_blank" rel="noopener">
+								<?php esc_html_e( 'Write a review', 'cookiebot' ); ?>
+							</a>
+						</div>
+					</div>
+				</section>
+
+				<p class="cb-dash__body cb-dash__help-line">
+					<?php
+					printf(
+						/* translators: 1: "Watch the setup guide" link, 2: "Get support" link. */
+						esc_html__( 'Need help? %1$s or %2$s', 'cookiebot' ),
+						'<a class="cb-dash__link" href="https://www.youtube.com/watch?v=q8qDVa7Uv0M" target="_blank" rel="noopener">' . esc_html__( 'Watch the setup guide', 'cookiebot' ) . '</a>',
+						'<a class="cb-dash__link" href="' . esc_url( $support_url ) . '">' . esc_html__( 'Get support', 'cookiebot' ) . '</a>'
+					);
+					?>
+				</p>
 			</div>
 		</div>
 	</div>

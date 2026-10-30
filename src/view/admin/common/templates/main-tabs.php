@@ -94,9 +94,12 @@ $feedback_url  = 'https://form.typeform.com/to/n6ZlunZP';
 	<div class="cb-main__tabs_item">
 		<a href="https://www.cookiebot.com/en/wordpress-partner-program/?utm_source=wordpress&amp;utm_medium=referral&amp;utm_campaign=plugin_dashboard&amp;utm_content=side_menu"
 			class="cb-main__tabs__link" target="_blank" rel="noopener">
-			<div class="cb-main__tabs__icon plugins-icon"></div>
-			<span><?php esc_html_e( 'Become a Partner', 'cookiebot' ); ?></span>
-			<img src="<?php echo esc_url( \cybot\cookiebot\lib\asset_url( 'img/icons/link.svg' ) ); ?>" alt="" class="cb-main__tabs__external" width="14" height="14">
+			<div class="cb-main__tabs__icon partner-icon"></div>
+			<span class="cb-main__tabs__label-external">
+				<?php esc_html_e( 'Become a Partner', 'cookiebot' ); ?>
+				<img src="<?php echo esc_url( \cybot\cookiebot\lib\asset_url( 'img/dashboard/launch-outlined.svg' ) ); ?>" alt="" width="18" height="18">
+				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new tab)', 'cookiebot' ); ?></span>
+			</span>
 		</a>
 	</div>
 

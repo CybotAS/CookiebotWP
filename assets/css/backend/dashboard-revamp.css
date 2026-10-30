@@ -920,3 +920,97 @@
         padding-top: 0;
     }
 }
+
+/* Connection card footer: "Do more in Cookiebot" (Domain Group IDs only) */
+.cb-dash__connection-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.cb-dash__footer-link {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.cb-dash__footer-link > img {
+    flex-shrink: 0;
+}
+
+.cb-dash__footer-text {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* More from Cookiebot */
+.cb-dash__more {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cb-dash__promo-cards {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.cb-dash__promo {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 32px;
+    border-radius: 16px;
+}
+
+/* Partner card: CB "_Base / Dashboard / Activation" background (two radial blue glows on #EFF2F5). */
+.cb-dash__promo--partner {
+    flex: 1 0 0;
+    justify-content: center;
+    gap: 32px;
+    padding: 32px 40px;
+    background:
+        radial-gradient(ellipse 60% 120% at 100% 100%, rgba(0, 125, 212, 0.6), rgba(255, 255, 255, 0) 70%),
+        radial-gradient(ellipse 45% 90% at 0% 0%, rgba(0, 125, 212, 0.8), rgba(255, 255, 255, 0) 60%),
+        #eff2f5;
+}
+
+.cb-dash__promo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 585px;
+}
+
+.cb-dash__promo--partner .cb-dash__body {
+    color: #595959;
+}
+
+.cb-dash__promo--review {
+    flex: 0 0 320px;
+    border: 1px solid var(--cb-dash-line);
+}
+
+.cb-dash__link--underline {
+    text-decoration: underline;
+}
+
+.cb-dash__help-line .cb-dash__link {
+    display: inline;
+}
+
+@media screen and (max-width: 782px) {
+    .cb-dash__footer-link,
+    .cb-dash__promo-cards {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cb-dash__promo--review {
+        flex-basis: auto;
+    }
+}

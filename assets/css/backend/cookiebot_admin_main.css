@@ -124,6 +124,18 @@
     mask-image: url(../../img/icons/plugins.svg);
 }
 
+.partner-icon {
+    -webkit-mask-image: url(../../img/icons/waving-hand.svg);
+    mask-image: url(../../img/icons/waving-hand.svg);
+}
+
+/* "Become a Partner": external-link icon sits right after the label. */
+.cb-main__tabs__label-external {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+}
+
 .support-icon {
     -webkit-mask-image: url(../../img/icons/support.svg);
     mask-image: url(../../img/icons/support.svg);
