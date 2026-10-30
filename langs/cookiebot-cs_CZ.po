@@ -4,19 +4,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookie Banner & Privacy Compliance for GDPR/CCPA/Google Consent Mode – Cookiebot by Usercentrics 4.5.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-plugin\n"
+"POT-Creation-Date: 2026-10-30T10:32:43+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-04T10:59:44+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: cookiebot\n"
 
 #. Plugin Name of the plugin
 #: cookiebot.php
-msgid "Cookie Banner & Privacy Compliance for GDPR/CCPA/Google Consent Mode – Cookiebot by Usercentrics"
+msgid "Cookiebot by Usercentrics - Automatic Cookie Banner for GDPR/CCPA & Google Consent Mode"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -33,6 +34,86 @@ msgstr ""
 #. Author of the plugin
 #: cookiebot.php
 msgid "Usercentrics A/S"
+msgstr ""
+
+#: src/abilities/Cookiebot_Abilities_Registrar.php:55
+msgid "Cookiebot CMP"
+msgstr ""
+
+#: src/abilities/Cookiebot_Abilities_Registrar.php:56
+msgid "Abilities for reading and configuring the Cookiebot CMP plugin."
+msgstr ""
+
+#: src/abilities/Get_Compliance_Summary_Ability.php:40
+msgid "Get Compliance Summary"
+msgstr ""
+
+#: src/abilities/Get_Compliance_Summary_Ability.php:41
+msgid "Returns the privacy regulations covered by Cookiebot CMP on this site, plus the current scan status and plan type."
+msgstr ""
+
+#: src/abilities/Get_Status_Ability.php:40
+msgid "Get Cookiebot Status"
+msgstr ""
+
+#: src/abilities/Get_Status_Ability.php:41
+msgid "Returns the current Cookiebot CMP plugin configuration: whether a Domain Group ID is set, GCM v2 status, cookie blocking mode, banner state, and plugin version."
+msgstr ""
+
+#: src/abilities/Install_Ppg_Ability.php:42
+msgid "Install Privacy Policy Generator"
+msgstr ""
+
+#: src/abilities/Install_Ppg_Ability.php:43
+msgid "Installs and activates the Privacy Policy Generator plugin (privacy-policy-usercentrics). Idempotent — returns immediately if already active. After install, direct the user to admin_url to complete policy setup."
+msgstr ""
+
+#: src/abilities/Install_Ppg_Ability.php:115
+msgid "Unexpected plugin data returned from WordPress.org."
+msgstr ""
+
+#: src/abilities/Install_Ppg_Ability.php:118
+msgid "Plugin download URL does not originate from WordPress.org."
+msgstr ""
+
+#: src/abilities/Install_Ppg_Ability.php:125 src/settings/pages/PPG_Page.php:89
+msgid "Plugin installation failed."
+msgstr ""
+
+#: src/abilities/Set_Cbid_Ability.php:62
+msgid "Set Domain Group ID"
+msgstr ""
+
+#: src/abilities/Set_Cbid_Ability.php:63
+msgid "Sets the Domain Group ID (CBID). For Cookiebot accounts this is a UUID (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) found under Implementation in the Cookiebot Admin. For Usercentrics accounts this is a Settings ID (9 or 14 characters) found in the Usercentrics Admin. Changes take effect immediately."
+msgstr ""
+
+#: src/abilities/Set_Cbid_Ability.php:71
+msgid "The Domain Group ID: a UUID for Cookiebot accounts (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) or a Settings ID for Usercentrics accounts (9 or 14 alphanumeric characters)."
+msgstr ""
+
+#: src/abilities/Set_Cbid_Ability.php:101
+msgid "Invalid ID. Provide a Cookiebot Domain Group ID (UUID: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) or a Usercentrics Settings ID (9 or 14 alphanumeric characters)."
+msgstr ""
+
+#: src/abilities/Toggle_Gcm_Ability.php:58
+msgid "Toggle Google Consent Mode v2"
+msgstr ""
+
+#: src/abilities/Toggle_Gcm_Ability.php:59
+msgid "Enables or disables Google Consent Mode v2. GCM v2 is required for Google Ads and Analytics in the EU/EEA and is enabled by default. Only disable if explicitly requested by the user."
+msgstr ""
+
+#: src/abilities/Toggle_Gcm_Ability.php:66
+msgid "True to enable Google Consent Mode v2, false to disable."
+msgstr ""
+
+#: src/abilities/Verify_Setup_Ability.php:40
+msgid "Verify Cookiebot Setup"
+msgstr ""
+
+#: src/abilities/Verify_Setup_Ability.php:41
+msgid "Checks that the Domain Group ID is configured, Google Consent Mode v2 is enabled, and cookie blocking mode is set to auto. Returns an issues[] list — empty means all checks passed."
 msgstr ""
 
 #: src/addons/config/Settings_Config.php:90
@@ -64,6 +145,7 @@ msgstr "Šablona není aktivována."
 
 #. translators: %s is replaced with the category name
 #: src/addons/config/Settings_Config.php:674
+#, php-format
 msgid "Category: %s"
 msgstr ""
 
@@ -135,6 +217,10 @@ msgstr "Plugin OptinMonster API pro připojení webu využívajícího systém W
 msgid "Blocks Simple Share Buttons Adder."
 msgstr "Blokuje plugin Simple Share Buttons Adder."
 
+#: src/addons/controller/addons/woocommerce/WooCommerce.php:30
+msgid "Blocks WooCommerce Order Attribution Tracking scripts (SourceBuster) before consent is accepted."
+msgstr ""
+
 #: src/addons/controller/addons/wpforms/Wpforms.php:62
 msgid "If the user gives correct consent, IP and Unique User ID will be saved on form submissions, otherwise not."
 msgstr "Pokud uživatel udělí správný souhlas, v odeslaných formulářích se uloží adresa IP a jedinečné ID uživatele, v opačném případě ne."
@@ -176,6 +262,7 @@ msgid "Cookiebot CMP Plugin will soon no longer support PHP 5. If your website s
 msgstr ""
 
 #: src/lib/Cookiebot_Admin_Links.php:74
+#, php-format
 msgid "%s"
 msgstr ""
 
@@ -235,8 +322,7 @@ msgstr ""
 msgid "The information will be kept for no longer than 90 days. You may revoke this consent at any time, e.g. by sending an email to "
 msgstr ""
 
-#: src/lib/Cookiebot_Review.php:120
-#: src/lib/Cookiebot_Review.php:144
+#: src/lib/Cookiebot_Review.php:120 src/lib/Cookiebot_Review.php:144
 msgid "Please select one option"
 msgstr "Vyberte jednu možnost"
 
@@ -253,17 +339,17 @@ msgid "Sorry you are not allowed to do this."
 msgstr ""
 
 #. translators: The placeholder is for the COOKIEBOT_MIN_PHP_VERSION constant
-#: src/lib/Cookiebot_WP.php:85
+#: src/lib/Cookiebot_WP.php:87
+#, php-format
 msgid "The Cookiebot plugin requires PHP version %s or greater."
 msgstr "Plugin Cookiebot™ vyžaduje PHP verzi %s nebo vyšší."
 
-#: src/lib/Cookiebot_WP.php:389
-#: src/settings/pages/Dashboard_Page.php:49
+#: src/lib/Cookiebot_WP.php:408 src/settings/pages/Dashboard_Page.php:56
+#: src/view/admin/common/dashboard/connected.php:42
 msgid "Dashboard"
 msgstr "Ovládací panel"
 
-#: src/lib/helper.php:245
-#: src/lib/helper.php:343
+#: src/lib/helper.php:245 src/lib/helper.php:343
 #: src/view/admin/cb_frame/prior-consent/consent-api/tab.php:91
 #: src/view/admin/cb_frame/prior-consent/consent-api/tab.php:167
 #: src/view/admin/cb_frame/settings/gcm-page.php:127
@@ -273,8 +359,7 @@ msgstr "Ovládací panel"
 msgid "marketing"
 msgstr "marketing"
 
-#: src/lib/helper.php:248
-#: src/lib/helper.php:342
+#: src/lib/helper.php:248 src/lib/helper.php:342
 #: src/view/admin/cb_frame/prior-consent/consent-api/tab.php:88
 #: src/view/admin/cb_frame/prior-consent/consent-api/tab.php:134
 #: src/view/admin/cb_frame/settings/gcm-page.php:119
@@ -283,8 +368,7 @@ msgstr "marketing"
 msgid "statistics"
 msgstr "statistika"
 
-#: src/lib/helper.php:251
-#: src/lib/helper.php:341
+#: src/lib/helper.php:251 src/lib/helper.php:341
 #: src/view/admin/cb_frame/prior-consent/consent-api/tab.php:85
 #: src/view/admin/cb_frame/prior-consent/consent-api/tab.php:118
 #: src/view/admin/cb_frame/settings/gcm-page.php:111
@@ -300,71 +384,85 @@ msgstr "nezbytné"
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:367
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:372
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable tracking."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] soubory cookie, abyste umožnili sledování."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:377
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Social Share buttons."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] soubory cookie, abyste mohli povolit tlačítka pro sdílení na sociálních sítích."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:382
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to view this element."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies pro zobrazení tohoto prvku."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:387
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to watch this video."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies pro sledování tohoto videa."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:392
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Services."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies, abyste mohli využívat služby Google."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:397
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable facebook shopping feature."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies, abyste mohli používat funkci facebook shopping."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:402
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to track for google analytics."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies pro sledování pro Google Analytics."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:407
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Google Analytics."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies, abyste mohli používat službu Google Analytics."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:412
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable instagram feed."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies pro povolení instagramového feedu."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:417
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable Facebook Pixel."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies pro povolení Facebook Pixel."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:422
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to Social Share buttons."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies k tlačítkům pro sdílení na sociálních sítích."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:427
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to allow Matomo statistics."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies, abyste umožnili statistiky Matomo."
 
 #. translators: %cookie_types refers to the list of cookie types assigned to the addon placeholder
 #: src/lib/helper.php:432
+#, php-format
 msgid "Please accept [renew_consent]%cookie_types[/renew_consent] cookies to enable saving user information."
 msgstr "Přijměte prosím [renew_consent]%cookie_types[/renew_consent] cookies, abyste mohli ukládat informace o uživateli."
 
@@ -1564,17 +1662,17 @@ msgstr "Zimbabwe"
 msgid "Åland Islands"
 msgstr "Ålandy"
 
-#: src/settings/Network_Menu_Settings.php:37
-#: src/settings/pages/Dashboard_Page.php:38
+#: src/settings/Network_Menu_Settings.php:38
+#: src/settings/pages/Dashboard_Page.php:45
 msgid "Cookiebot"
 msgstr "Cookiebot"
 
-#: src/settings/Network_Menu_Settings.php:45
+#: src/settings/Network_Menu_Settings.php:46
 #: src/settings/pages/Settings_Page.php:24
 msgid "Cookiebot Settings"
 msgstr "Nastavení Cookiebot"
 
-#: src/settings/Network_Menu_Settings.php:46
+#: src/settings/Network_Menu_Settings.php:47
 #: src/settings/pages/Settings_Page.php:25
 #: src/view/admin/cb_frame/settings-page.php:50
 #: src/view/admin/common/settings-page.php:31
@@ -1582,41 +1680,77 @@ msgstr "Nastavení Cookiebot"
 msgid "Settings"
 msgstr ""
 
-#: src/settings/Network_Menu_Settings.php:53
+#: src/settings/Network_Menu_Settings.php:54
 #: src/settings/pages/Support_Page.php:27
 msgid "Cookiebot Support"
 msgstr "Podpora Cookiebot"
 
-#: src/settings/Network_Menu_Settings.php:54
+#: src/settings/Network_Menu_Settings.php:55
 #: src/settings/pages/Support_Page.php:28
-#: src/view/admin/cb_frame/support-page.php:19
+#: src/view/admin/cb_frame/support-page.php:16
 #: src/view/admin/common/support-page.php:19
 #: src/view/admin/uc_frame/support-page.php:19
 msgid "Support"
 msgstr "Podpora"
 
-#: src/settings/pages/Dashboard_Page.php:48
+#: src/settings/Network_Menu_Settings.php:72
+msgid "You do not have permission to manage network options."
+msgstr ""
+
+#: src/settings/pages/Dashboard_Page.php:55
 msgid "Cookiebot Dashboard"
 msgstr "Ovládací panel Cookiebot"
 
-#: src/settings/pages/Dashboard_Page.php:275
+#: src/settings/pages/Dashboard_Page.php:258
 msgid "Account created successfully!"
 msgstr "Účet byl úspěšně vytvořen!"
 
-#: src/settings/pages/Dashboard_Page.php:276
+#: src/settings/pages/Dashboard_Page.php:259
 msgid "Failed to create account."
 msgstr "Vytvoření účtu se nezdařilo."
 
-#: src/settings/pages/Dashboard_Page.php:277
+#: src/settings/pages/Dashboard_Page.php:260
 msgid "CBID verified successfully!"
 msgstr "Identifikátor CBID byl úspěšně ověřen!"
 
-#: src/settings/pages/Dashboard_Page.php:278
+#: src/settings/pages/Dashboard_Page.php:261
 msgid "Invalid CBID."
 msgstr "Neplatný identifikátor CBID."
 
-#: src/settings/pages/Iab_Page.php:21
-#: src/settings/pages/Iab_Page.php:22
+#: src/settings/pages/Dashboard_Page.php:343
+#: src/view/admin/common/dashboard/partials/connect-step.php:53
+msgid "Connect"
+msgstr "Připojit"
+
+#: src/settings/pages/Dashboard_Page.php:344
+msgid "Connecting…"
+msgstr "Připojování…"
+
+#: src/settings/pages/Dashboard_Page.php:345
+msgid "Connect anyway"
+msgstr "Přesto připojit"
+
+#: src/settings/pages/Dashboard_Page.php:346
+msgid "Try again"
+msgstr "Zkusit znovu"
+
+#: src/settings/pages/Dashboard_Page.php:347
+msgid "That doesn’t look like a valid ID. IDs have 9, 14 or 36 characters."
+msgstr "Toto nevypadá jako platné ID. ID má 9, 14 nebo 36 znaků."
+
+#. translators: %s: URL of the plugin's Get support page.
+#: src/settings/pages/Dashboard_Page.php:351
+#, php-format
+msgid "We couldn’t save this ID. Try again, or <a href=\"%s\">get support</a>."
+msgstr "Toto ID se nepodařilo uložit. Zkuste to znovu, nebo <a href=\"%s\">kontaktujte podporu</a>."
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/settings/pages/Dashboard_Page.php:356
+#, php-format
+msgid "This ID isn’t set up for %1$s. Check you copied the ID for this site, or add %1$s to your domain group in Cookiebot."
+msgstr "Toto ID není nastaveno pro %1$s. Zkontrolujte, zda jste zkopírovali ID pro tento web, nebo přidejte %1$s do své skupiny domén v Cookiebotu."
+
+#: src/settings/pages/Iab_Page.php:21 src/settings/pages/Iab_Page.php:22
 msgid "IAB"
 msgstr "IAB"
 
@@ -1728,6 +1862,40 @@ msgstr "Používání přesných geolokačních dat"
 msgid "Actively scan device characteristics for identification"
 msgstr "Aktivní skenování vlastností zařízení za účelem identifikace"
 
+#: src/settings/pages/PPG_Page.php:18 src/settings/pages/PPG_Page.php:19
+#: src/view/admin/common/templates/main-tabs.php:89
+msgid "Policy Generator Plugin"
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:36
+msgid "You do not have permission to activate plugins."
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:44
+msgid "Plugin is not installed."
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:63
+msgid "You do not have permission to install plugins."
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:131
+msgid "Installing..."
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:132 src/view/admin/common/ppg-page.php:40
+#: src/view/admin/common/templates/ppg-banner.php:41
+msgid "Install Now"
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:133
+msgid "Activating..."
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:134 src/view/admin/common/ppg-page.php:36
+msgid "Activate"
+msgstr ""
+
 #: src/shortcode/Cookiebot_Declaration_Shortcode.php:55
 msgid "Please add your Cookiebot ID to show Cookie Declarations"
 msgstr "Prohlášení o souborech cookie se zobrazí po zadání Cookiebot ID"
@@ -1737,136 +1905,115 @@ msgid "Please add a service ID into the shortcode \"service\" parameter."
 msgstr ""
 
 #: src/view/admin/cb_frame/dashboard-page.php:33
-#: src/view/admin/common/dashboard-page-old.php:30
 msgid "I already have a Cookiebot CMP account"
 msgstr "Už mám účet Cookiebot CMP"
 
 #: src/view/admin/cb_frame/dashboard-page.php:37
-#: src/view/admin/common/dashboard-page-old.php:34
 msgid "Connect my existing account"
 msgstr "Připojit stávající účet"
 
 #: src/view/admin/cb_frame/dashboard-page.php:42
-#: src/view/admin/common/dashboard-page-old.php:39
 msgid "Your Cookiebot CMP for WordPress solution"
 msgstr "Váš plugin Cookiebot CMP pro řešení WordPress"
 
 #: src/view/admin/cb_frame/dashboard-page.php:47
-#: src/view/admin/common/dashboard-page-old.php:44
 #: src/view/admin/uc_frame/dashboard-page.php:35
 msgid "Account added"
 msgstr ""
 
 #: src/view/admin/cb_frame/dashboard-page.php:50
-#: src/view/admin/common/dashboard-page-old.php:47
 msgid "Congratulations!"
 msgstr "Gratulujeme!"
 
 #: src/view/admin/cb_frame/dashboard-page.php:51
-#: src/view/admin/common/dashboard-page-old.php:48
 msgid "You have added your Domain Group ID to WordPress. You are all set!"
 msgstr "Do systému WordPress jste přidali ID skupiny domény. Vše je připraveno!"
 
-#: src/view/admin/cb_frame/dashboard-page.php:62
-#: src/view/admin/common/dashboard-page-old.php:59
-#: src/view/admin/uc_frame/dashboard-page.php:48
+#: src/view/admin/cb_frame/dashboard-page.php:63
+#: src/view/admin/common/dashboard/connected.php:169
+#: src/view/admin/uc_frame/dashboard-page.php:49
 msgid "Your opinion matters"
 msgstr "Na vašem názoru záleží"
 
-#: src/view/admin/cb_frame/dashboard-page.php:65
-#: src/view/admin/common/dashboard-page-old.php:62
+#: src/view/admin/cb_frame/dashboard-page.php:66
+#: src/view/admin/common/dashboard/connected.php:170
 msgid "Are you happy with our WordPress plugin? Your feedback will help us make our product better for you."
 msgstr "Jste s naším pluginem pro WordPress spokojeni? Vaše zpětná vazba nám pomůže tento produkt dále vylepšit."
 
-#: src/view/admin/cb_frame/dashboard-page.php:69
-#: src/view/admin/common/dashboard-page-old.php:66
+#: src/view/admin/cb_frame/dashboard-page.php:70
+#: src/view/admin/common/dashboard/connected.php:172
 msgid "Write a review"
 msgstr "Napsat recenzi"
 
-#: src/view/admin/cb_frame/dashboard-page.php:80
-#: src/view/admin/common/dashboard-page-old.php:77
-msgid "Get started"
-msgstr "Začínáme"
-
-#: src/view/admin/cb_frame/dashboard-page.php:83
-#: src/view/admin/common/dashboard-page-old.php:80
-msgid "Create a new Cookiebot CMP account"
-msgstr "Vytvoření nového účtu Cookiebot CMP"
-
-#: src/view/admin/cb_frame/dashboard-page.php:87
-#: src/view/admin/common/dashboard-page-old.php:84
-msgid "Create a new account"
-msgstr "Vytvořit nový účet"
-
-#: src/view/admin/cb_frame/dashboard-page.php:92
-#: src/view/admin/common/dashboard-page-old.php:89
+#: src/view/admin/cb_frame/dashboard-page.php:77
 msgid "Learn more about how to optimize your Cookiebot CMP setup?"
 msgstr "Další informace o optimalizaci nastavení pluginu Cookiebot"
 
-#: src/view/admin/cb_frame/dashboard-page.php:96
-#: src/view/admin/common/dashboard-page-old.php:93
+#: src/view/admin/cb_frame/dashboard-page.php:81
 msgid "Visit Help Center"
 msgstr "Navštivte centrum nápovědy"
 
-#: src/view/admin/cb_frame/dashboard-page.php:113
-#: src/view/admin/cb_frame/support-page.php:57
-#: src/view/admin/common/dashboard-page-old.php:111
+#: src/view/admin/cb_frame/dashboard-page.php:91
+msgid "Get started"
+msgstr "Začínáme"
+
+#: src/view/admin/cb_frame/dashboard-page.php:94
+msgid "Create a new Cookiebot CMP account"
+msgstr "Vytvoření nového účtu Cookiebot CMP"
+
+#: src/view/admin/cb_frame/dashboard-page.php:98
+#: src/view/admin/common/dashboard/welcome.php:44
+msgid "Create a new account"
+msgstr "Vytvořit nový účet"
+
+#: src/view/admin/cb_frame/dashboard-page.php:120
+#: src/view/admin/cb_frame/support-page.php:54
 msgid "Video guide"
 msgstr "Videoprůvodce"
 
-#: src/view/admin/cb_frame/dashboard-page.php:115
-#: src/view/admin/common/dashboard-page-old.php:113
+#: src/view/admin/cb_frame/dashboard-page.php:122
 msgid "How to get started with Cookiebot CMP"
 msgstr "Jak začít s pluginem Cookiebot CMP"
 
-#: src/view/admin/cb_frame/dashboard-page.php:119
-#: src/view/admin/common/dashboard-page-old.php:117
+#: src/view/admin/cb_frame/dashboard-page.php:126
+#: src/view/admin/common/dashboard/partials/need-help.php:16
 msgid "Learn more about Cookiebot CMP"
 msgstr "Další informace o pluginu Cookiebot CMP"
 
-#: src/view/admin/cb_frame/dashboard-page.php:131
-#: src/view/admin/common/dashboard-page-old.php:129
-#: src/view/admin/uc_frame/dashboard-page.php:86
+#: src/view/admin/cb_frame/dashboard-page.php:138
+#: src/view/admin/uc_frame/dashboard-page.php:89
 #: src/view/admin/uc_frame/settings/embeddings-page.php:33
 msgid "GDPR"
 msgstr "GDPR"
 
-#: src/view/admin/cb_frame/dashboard-page.php:134
-#: src/view/admin/common/dashboard-page-old.php:132
-#: src/view/admin/uc_frame/dashboard-page.php:89
+#: src/view/admin/cb_frame/dashboard-page.php:141
+#: src/view/admin/uc_frame/dashboard-page.php:92
 msgid "Europe"
 msgstr "Evropa"
 
-#: src/view/admin/cb_frame/dashboard-page.php:138
-#: src/view/admin/cb_frame/dashboard-page.php:140
-#: src/view/admin/cb_frame/dashboard-page.php:155
-#: src/view/admin/cb_frame/dashboard-page.php:157
-#: src/view/admin/common/dashboard-page-old.php:136
-#: src/view/admin/common/dashboard-page-old.php:138
-#: src/view/admin/common/dashboard-page-old.php:153
-#: src/view/admin/common/dashboard-page-old.php:155
-#: src/view/admin/uc_frame/dashboard-page.php:93
-#: src/view/admin/uc_frame/dashboard-page.php:95
-#: src/view/admin/uc_frame/dashboard-page.php:110
-#: src/view/admin/uc_frame/dashboard-page.php:112
+#: src/view/admin/cb_frame/dashboard-page.php:145
+#: src/view/admin/cb_frame/dashboard-page.php:147
+#: src/view/admin/cb_frame/dashboard-page.php:162
+#: src/view/admin/cb_frame/dashboard-page.php:164
+#: src/view/admin/uc_frame/dashboard-page.php:96
+#: src/view/admin/uc_frame/dashboard-page.php:98
+#: src/view/admin/uc_frame/dashboard-page.php:113
+#: src/view/admin/uc_frame/dashboard-page.php:115
 msgid "Learn More"
 msgstr "Další informace"
 
-#: src/view/admin/cb_frame/dashboard-page.php:148
-#: src/view/admin/common/dashboard-page-old.php:146
-#: src/view/admin/uc_frame/dashboard-page.php:103
+#: src/view/admin/cb_frame/dashboard-page.php:155
+#: src/view/admin/uc_frame/dashboard-page.php:106
 msgid "CCPA"
 msgstr "CCPA"
 
-#: src/view/admin/cb_frame/dashboard-page.php:151
-#: src/view/admin/common/dashboard-page-old.php:149
-#: src/view/admin/uc_frame/dashboard-page.php:106
+#: src/view/admin/cb_frame/dashboard-page.php:158
+#: src/view/admin/uc_frame/dashboard-page.php:109
 msgid "North America"
 msgstr "Severní Amerika"
 
-#: src/view/admin/cb_frame/dashboard-page.php:162
-#: src/view/admin/common/dashboard-page-old.php:160
-#: src/view/admin/uc_frame/dashboard-page.php:117
+#: src/view/admin/cb_frame/dashboard-page.php:169
+#: src/view/admin/uc_frame/dashboard-page.php:120
 msgid "See other legislations"
 msgstr "Viz další právní předpisy"
 
@@ -1877,23 +2024,25 @@ msgid "Network Settings"
 msgstr "Nastavení sítě"
 
 #: src/view/admin/cb_frame/network-settings-page.php:35
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:11
 #: src/view/admin/common/templates/extra/cbid-disconnect-alert.php:3
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:3
 #: src/view/admin/uc_frame/network-settings-page.php:36
 msgid "Are you sure?"
-msgstr ""
+msgstr "Jste si jisti?"
 
 #: src/view/admin/cb_frame/network-settings-page.php:38
 #: src/view/admin/uc_frame/network-settings-page.php:39
-msgid "You will need to add a new ID before updating other network settings. If any subsite is using its own account disconnecting this account won’t affect it."
+msgid "You will need to add a new ID before updating other network settings. If any subsite is using its own account disconnecting this account won't affect it."
 msgstr ""
 
 #: src/view/admin/cb_frame/network-settings-page.php:42
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:28
 #: src/view/admin/common/templates/extra/cbid-disconnect-alert.php:10
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:10
 #: src/view/admin/uc_frame/network-settings-page.php:43
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #: src/view/admin/cb_frame/network-settings-page.php:45
 #: src/view/admin/cb_frame/network-settings-page.php:71
@@ -1925,118 +2074,111 @@ msgid "Add your Domain Group ID"
 msgstr "Přidat ID skupiny domén"
 
 #: src/view/admin/cb_frame/network-settings-page.php:79
-#: src/view/admin/cb_frame/settings/general-page.php:175
+#: src/view/admin/cb_frame/settings/general-page.php:180
 #: src/view/admin/uc_frame/network-settings-page.php:115
-#: src/view/admin/uc_frame/settings/general-page.php:179
+#: src/view/admin/uc_frame/settings/general-page.php:184
 msgid "Cookie-blocking"
 msgstr ""
 
 #: src/view/admin/cb_frame/network-settings-page.php:81
-msgid "Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:"
-msgstr "Zde vyberte režim blokování souborů cookie. Režim automatického blokování souborů cookie automaticky zablokuje všechny soubory cookie (s výjimkou „nezbytně nutných“ souborů cookie), dokud uživatel nevyjádří souhlas. Režim ručního blokování souborů cookie vyžaduje ruční úpravy skriptů pro nastavení souborů cookie. Níže naleznete naše průvodce implementací:"
+msgid "Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for 'strictly necessary' cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:"
+msgstr ""
 
 #: src/view/admin/cb_frame/network-settings-page.php:86
-#: src/view/admin/cb_frame/settings/general-page.php:196
+#: src/view/admin/cb_frame/settings/general-page.php:201
 #: src/view/admin/uc_frame/network-settings-page.php:122
-#: src/view/admin/uc_frame/settings/general-page.php:192
+#: src/view/admin/uc_frame/settings/general-page.php:197
 msgid "Select cookie-blocking mode"
 msgstr ""
 
 #: src/view/admin/cb_frame/network-settings-page.php:93
-#: src/view/admin/cb_frame/settings/general-page.php:204
+#: src/view/admin/cb_frame/settings/general-page.php:209
 #: src/view/admin/uc_frame/network-settings-page.php:129
-#: src/view/admin/uc_frame/settings/general-page.php:200
+#: src/view/admin/uc_frame/settings/general-page.php:205
 msgid "Automatic"
 msgstr ""
 
-#: src/view/admin/cb_frame/network-settings-page.php:94
-#: src/view/admin/cb_frame/settings/general-page.php:205
-#: src/view/admin/uc_frame/network-settings-page.php:130
-#: src/view/admin/uc_frame/settings/general-page.php:201
-msgid "Recommended"
-msgstr ""
-
-#: src/view/admin/cb_frame/network-settings-page.php:102
-#: src/view/admin/cb_frame/network-settings-page.php:152
-#: src/view/admin/cb_frame/network-settings-page.php:199
-#: src/view/admin/uc_frame/network-settings-page.php:138
+#: src/view/admin/cb_frame/network-settings-page.php:101
+#: src/view/admin/cb_frame/network-settings-page.php:151
+#: src/view/admin/cb_frame/network-settings-page.php:198
+#: src/view/admin/uc_frame/network-settings-page.php:137
 msgid "Choose per subsite"
 msgstr "Vyberte možnost podle dílčího webu"
 
-#: src/view/admin/cb_frame/network-settings-page.php:110
-#: src/view/admin/cb_frame/settings/general-page.php:235
+#: src/view/admin/cb_frame/network-settings-page.php:109
+#: src/view/admin/cb_frame/settings/general-page.php:237
 msgid "Cookiebot™ script tag"
 msgstr "Značka skriptu Cookiebot™"
 
-#: src/view/admin/cb_frame/network-settings-page.php:112
+#: src/view/admin/cb_frame/network-settings-page.php:111
 msgid "Add async or defer attribute to Cookie banner script tag. Default: Choose per subsite"
 msgstr "Přidat asynchronní nebo odložit atribut na značku skriptu pro banner o souborech cookie. Výchozí: Vyberte pro jednotlivé dílčí weby"
 
-#: src/view/admin/cb_frame/network-settings-page.php:115
+#: src/view/admin/cb_frame/network-settings-page.php:114
 msgid "This feature is only available when not using Auto Blocking"
 msgstr "Tato funkce je k dispozici pouze v případě, že nepoužíváte Automatické blokování"
 
-#: src/view/admin/cb_frame/network-settings-page.php:118
-#: src/view/admin/cb_frame/network-settings-page.php:162
-#: src/view/admin/cb_frame/network-settings-page.php:235
-#: src/view/admin/uc_frame/network-settings-page.php:174
+#: src/view/admin/cb_frame/network-settings-page.php:117
+#: src/view/admin/cb_frame/network-settings-page.php:161
+#: src/view/admin/cb_frame/network-settings-page.php:234
+#: src/view/admin/uc_frame/network-settings-page.php:173
 msgid "Setting will apply for all subsites. Subsites will not be able to override."
 msgstr "Nastavení bude platit pro všechny dílčí weby. Dílčí weby ho nebudou moci přepsat."
 
-#: src/view/admin/cb_frame/network-settings-page.php:131
-#: src/view/admin/cb_frame/network-settings-page.php:178
+#: src/view/admin/cb_frame/network-settings-page.php:130
+#: src/view/admin/cb_frame/network-settings-page.php:177
 #: src/view/admin/cb_frame/settings/additional-page.php:99
-#: src/view/admin/cb_frame/settings/general-page.php:251
+#: src/view/admin/cb_frame/settings/general-page.php:253
 msgid "None"
 msgstr "Žádné"
 
-#: src/view/admin/cb_frame/network-settings-page.php:160
+#: src/view/admin/cb_frame/network-settings-page.php:159
 msgid "Cookiebot declaration script tag"
 msgstr "Značka skriptu Cookiebot pro prohlášení o souborech cookie"
 
-#: src/view/admin/cb_frame/network-settings-page.php:165
+#: src/view/admin/cb_frame/network-settings-page.php:164
 msgid "Add async or defer attribute to Cookie declaration script tag. Default: Choose per subsite"
 msgstr "Přidat asynchronní nebo odložit atribut na značku skriptu pro prohlášení o souborech cookie. Výchozí: Vyberte pro jednotlivé dílčí weby"
 
-#: src/view/admin/cb_frame/network-settings-page.php:207
+#: src/view/admin/cb_frame/network-settings-page.php:206
 #: src/view/admin/cb_frame/settings/additional-page.php:10
-#: src/view/admin/uc_frame/network-settings-page.php:146
+#: src/view/admin/uc_frame/network-settings-page.php:145
 #: src/view/admin/uc_frame/settings/additional-page.php:10
 msgid "Automatic updates"
 msgstr ""
 
-#: src/view/admin/cb_frame/network-settings-page.php:209
+#: src/view/admin/cb_frame/network-settings-page.php:208
 #: src/view/admin/cb_frame/settings/additional-page.php:13
-#: src/view/admin/uc_frame/network-settings-page.php:148
+#: src/view/admin/uc_frame/network-settings-page.php:147
 #: src/view/admin/uc_frame/settings/additional-page.php:13
 msgid "Enable automatic updates whenever we release a new version of the plugin."
 msgstr ""
 
-#: src/view/admin/cb_frame/network-settings-page.php:225
+#: src/view/admin/cb_frame/network-settings-page.php:224
 #: src/view/admin/cb_frame/settings/additional-page.php:28
-#: src/view/admin/uc_frame/network-settings-page.php:164
+#: src/view/admin/uc_frame/network-settings-page.php:163
 #: src/view/admin/uc_frame/settings/additional-page.php:28
 msgid "Automatically update to new version"
 msgstr ""
 
-#: src/view/admin/cb_frame/network-settings-page.php:233
-#: src/view/admin/cb_frame/settings/general-page.php:277
-#: src/view/admin/uc_frame/network-settings-page.php:172
-#: src/view/admin/uc_frame/settings/general-page.php:232
+#: src/view/admin/cb_frame/network-settings-page.php:232
+#: src/view/admin/cb_frame/settings/general-page.php:279
+#: src/view/admin/uc_frame/network-settings-page.php:171
+#: src/view/admin/uc_frame/settings/general-page.php:234
 msgid "Hide cookie popup"
 msgstr "Skrýt vyskakovací okno o souborech cookie"
 
-#: src/view/admin/cb_frame/network-settings-page.php:238
-#: src/view/admin/cb_frame/settings/general-page.php:283
-#: src/view/admin/uc_frame/network-settings-page.php:177
-#: src/view/admin/uc_frame/settings/general-page.php:238
+#: src/view/admin/cb_frame/network-settings-page.php:237
+#: src/view/admin/cb_frame/settings/general-page.php:285
+#: src/view/admin/uc_frame/network-settings-page.php:176
+#: src/view/admin/uc_frame/settings/general-page.php:240
 msgid "This will remove the cookie consent banner from your website. The cookie declaration shortcode will still be available if you are using Google Tag Manager (or equal), you need to add the Cookiebot script in your Tag Manager."
 msgstr ""
 
-#: src/view/admin/cb_frame/network-settings-page.php:254
-#: src/view/admin/cb_frame/settings/general-page.php:309
-#: src/view/admin/uc_frame/network-settings-page.php:193
-#: src/view/admin/uc_frame/settings/general-page.php:264
+#: src/view/admin/cb_frame/network-settings-page.php:253
+#: src/view/admin/cb_frame/settings/general-page.php:311
+#: src/view/admin/uc_frame/network-settings-page.php:192
+#: src/view/admin/uc_frame/settings/general-page.php:266
 msgid "Hide the cookie popup banner"
 msgstr "Skrýt vyskakovací banner o souborech cookie"
 
@@ -2100,7 +2242,7 @@ msgstr "Správce značek Google"
 
 #: src/view/admin/cb_frame/settings-page.php:69
 #: src/view/admin/cb_frame/settings/gcm-page.php:50
-#: src/view/admin/common/dashboard-page.php:415
+#: src/view/admin/common/dashboard-page.php:416
 #: src/view/admin/uc_frame/settings-page.php:72
 #: src/view/admin/uc_frame/settings/gcm-page.php:28
 #: src/view/admin/uc_frame/settings/gcm-page.php:43
@@ -2118,7 +2260,7 @@ msgstr "Více konfigurací"
 
 #: src/view/admin/cb_frame/settings/additional-page.php:37
 #: src/view/admin/cb_frame/settings/additional-page.php:66
-#: src/view/admin/common/dashboard-page.php:362
+#: src/view/admin/common/dashboard-page.php:363
 #: src/view/admin/uc_frame/settings/additional-page.php:37
 #: src/view/admin/uc_frame/settings/additional-page.php:66
 msgid "Show banner on site"
@@ -2142,11 +2284,9 @@ msgid "Select the cookie declaration script loading setting"
 msgstr "Vyberte nastavení načtení skriptu pro prohlášení o souborech cookie"
 
 #: src/view/admin/cb_frame/settings/additional-page.php:116
-#: src/view/admin/cb_frame/settings/general-page.php:216
-#: src/view/admin/cb_frame/settings/general-page.php:268
-#: src/view/admin/cb_frame/settings/general-page.php:312
-#: src/view/admin/uc_frame/settings/general-page.php:212
-#: src/view/admin/uc_frame/settings/general-page.php:267
+#: src/view/admin/cb_frame/settings/general-page.php:270
+#: src/view/admin/cb_frame/settings/general-page.php:314
+#: src/view/admin/uc_frame/settings/general-page.php:269
 msgid "Disabled by active setting in Network Settings"
 msgstr "Deaktivováno aktivním nastavením v Nastavení sítě"
 
@@ -2221,10 +2361,10 @@ msgid "Select the cookie types that need to be consented for the Google Consent 
 msgstr "Vyberte typy souborů cookie, které je třeba odsouhlasit pro skript Google Consent Mode"
 
 #: src/view/admin/cb_frame/settings/gcm-page.php:94
-#: src/view/admin/cb_frame/settings/general-page.php:241
-#: src/view/admin/cb_frame/settings/general-page.php:280
+#: src/view/admin/cb_frame/settings/general-page.php:243
+#: src/view/admin/cb_frame/settings/general-page.php:282
 #: src/view/admin/cb_frame/settings/gtm-page.php:80
-#: src/view/admin/uc_frame/settings/general-page.php:235
+#: src/view/admin/uc_frame/settings/general-page.php:237
 msgid "This feature is only available when using Manual Blocking"
 msgstr "Tato funkce je k dispozici pouze při použití manuálního blokování"
 
@@ -2259,82 +2399,93 @@ msgid "Using network account"
 msgstr ""
 
 #: src/view/admin/cb_frame/settings/general-page.php:78
-#: src/view/admin/common/dashboard-page.php:180
+#: src/view/admin/common/dashboard-page.php:181
 #: src/view/admin/common/network-settings-page.php:70
 #: src/view/admin/common/settings-page.php:74
 #: src/view/admin/uc_frame/settings/general-page.php:97
 msgid "Connect account"
 msgstr "Připojit účet"
 
-#: src/view/admin/cb_frame/settings/general-page.php:94
-#: src/view/admin/uc_frame/settings/general-page.php:113
+#: src/view/admin/cb_frame/settings/general-page.php:84
+#: src/view/admin/common/network-settings-page.php:72
+#: src/view/admin/common/settings-page.php:76
+#: src/view/admin/uc_frame/settings/general-page.php:103
+msgid "Invalid ID length. Please enter a Settings ID (9 or 14 characters) or Domain Group ID (36 characters)."
+msgstr ""
+
+#: src/view/admin/cb_frame/settings/general-page.php:99
+#: src/view/admin/uc_frame/settings/general-page.php:118
 msgid "Do not use Network Settings ID"
 msgstr ""
 
-#: src/view/admin/cb_frame/settings/general-page.php:105
+#: src/view/admin/cb_frame/settings/general-page.php:110
 msgid "Language:"
 msgstr "Jazyk:"
 
-#: src/view/admin/cb_frame/settings/general-page.php:107
+#: src/view/admin/cb_frame/settings/general-page.php:112
 msgid "Select your main language here."
 msgstr "Zde vyberte svůj hlavní jazyk."
 
-#: src/view/admin/cb_frame/settings/general-page.php:112
+#: src/view/admin/cb_frame/settings/general-page.php:117
 msgid "Select the language"
 msgstr "Vyberte jazyk"
 
-#: src/view/admin/cb_frame/settings/general-page.php:116
+#: src/view/admin/cb_frame/settings/general-page.php:121
 msgid "Default (Autodetect)"
 msgstr "Výchozí (automatické rozpoznání)"
 
-#: src/view/admin/cb_frame/settings/general-page.php:120
+#: src/view/admin/cb_frame/settings/general-page.php:125
 msgid "Use WordPress Language"
 msgstr "Použít jazyk WordPress"
 
-#: src/view/admin/cb_frame/settings/general-page.php:141
+#: src/view/admin/cb_frame/settings/general-page.php:146
 msgid "If enabled, Cookiebot™ will use the current location to set the banner and cookie declaration language."
 msgstr "Pokud je tato volba povolena, Cookiebot™ použije aktuální lokalizaci pro nastavení jazyka banneru a deklarace cookies."
 
-#: src/view/admin/cb_frame/settings/general-page.php:144
+#: src/view/admin/cb_frame/settings/general-page.php:149
 msgid "Please make sure that all languages in use have been added in the Cookiebot™ Manager."
 msgstr "Ujistěte se prosím, že všechny používané jazyky byly přidány také do Cookiebot™ Managera."
 
-#: src/view/admin/cb_frame/settings/general-page.php:146
+#: src/view/admin/cb_frame/settings/general-page.php:151
 msgid "This feature disables the main language selector."
 msgstr "Tato funkce deaktivuje hlavní výběr jazyka."
 
-#: src/view/admin/cb_frame/settings/general-page.php:147
+#: src/view/admin/cb_frame/settings/general-page.php:152
 msgid "If you have already set a language in the cookie declaration shortcode, this feature will not change it."
 msgstr "Pokud jste již nastavili jazyk ve shortcode deklarace souborů cookie, tato funkce jej nezmění."
 
-#: src/view/admin/cb_frame/settings/general-page.php:150
+#: src/view/admin/cb_frame/settings/general-page.php:155
 msgid "Read more on how to add languages"
 msgstr "Další informace o přidávání jazyků"
 
-#: src/view/admin/cb_frame/settings/general-page.php:165
+#: src/view/admin/cb_frame/settings/general-page.php:170
 msgid "Use website location to set language"
 msgstr "Použijte lokalizaci webových stránek k nastavení jazyka"
 
-#: src/view/admin/cb_frame/settings/general-page.php:178
-#: src/view/admin/uc_frame/network-settings-page.php:117
-#: src/view/admin/uc_frame/settings/general-page.php:182
+#: src/view/admin/cb_frame/settings/general-page.php:183
+#: src/view/admin/uc_frame/settings/general-page.php:187
 msgid "Choose the type of your cookie-blocking mode. Select automatic to automatically block all cookies except those strictly necessary to use before user gives consent. Manual mode lets you adjust your cookie settings within your website’s HTML."
 msgstr ""
 
-#: src/view/admin/cb_frame/settings/general-page.php:183
+#: src/view/admin/cb_frame/settings/general-page.php:188
 msgid "Guide to auto cookie-blocking"
 msgstr "Průvodce automatickým blokováním souborů cookie"
 
-#: src/view/admin/cb_frame/settings/general-page.php:189
+#: src/view/admin/cb_frame/settings/general-page.php:194
 msgid "Guide to manual cookie-blocking"
 msgstr "Průvodce ručním blokováním souborů cookie"
 
-#: src/view/admin/cb_frame/settings/general-page.php:213
-#: src/view/admin/uc_frame/settings/general-page.php:209
+#: src/view/admin/cb_frame/settings/general-page.php:210
+#: src/view/admin/uc_frame/settings/general-page.php:206
+msgid "Recommended"
+msgstr ""
+
+#: src/view/admin/cb_frame/settings/general-page.php:218
+#: src/view/admin/uc_frame/settings/general-page.php:214
 msgid "Manual"
 msgstr ""
 
-#: src/view/admin/cb_frame/settings/general-page.php:238
+#: src/view/admin/cb_frame/settings/general-page.php:240
 msgid "Add async or defer attribute to cookie declaration script tag"
 msgstr "Přidat asynchronní nebo odložit atribut na značku skriptu pro prohlášení o souborech cookie"
 
@@ -2500,6 +2651,8 @@ msgid "To enable a different configuration, create a separate DomainGroup withou
 msgstr "Jinou konfiguraci povolíte tak, že vytvoříte samostatnou skupinu domén bez přidání domény do této skupiny a její ID vložíte níže. Poté vyberete země, ve kterých chcete tuto konfiguraci zobrazovat. Pokud je například vaše hlavní skupina domén definována jako banner odpovídající požadavkům GDPR, můžete přidat další skupinu domén pro návštěvníky z Kalifornie. Počet dalších konfigurací je momentálně omezen na jednu."
 
 #: src/view/admin/cb_frame/settings/multiple-configuration/page.php:57
+#: src/view/admin/common/dashboard/partials/connect-step.php:35
+#: src/view/admin/common/dashboard/partials/where-is-it.php:21
 msgid "Domain Group ID"
 msgstr "ID skupiny domén"
 
@@ -2515,186 +2668,195 @@ msgstr "Primární skupina domén"
 msgid "Add banner"
 msgstr "Přidat banner"
 
-#: src/view/admin/cb_frame/support-page.php:23
+#: src/view/admin/cb_frame/support-page.php:20
 msgid "Need help with your configuration?"
 msgstr "Potřebujete s konfigurací poradit?"
 
-#: src/view/admin/cb_frame/support-page.php:26
+#: src/view/admin/cb_frame/support-page.php:23
 msgid "In our Help Center you find all the answers to your questions. If you have additional questions, create a support request and our Support Team will help out as soon as possible."
 msgstr "V našem centru nápovědy naleznete všechny odpovědi na vaše dotazy. Pokud vás bude zajímat něco dalšího, vyplňte formulář podpory a náš tým podpory vám co nejdříve pokusí pomoci."
 
-#: src/view/admin/cb_frame/support-page.php:37
+#: src/view/admin/cb_frame/support-page.php:34
 #: src/view/admin/common/support-page.php:57
 #: src/view/admin/uc_frame/support-page.php:57
 msgid "Visit Support Center"
 msgstr "Navštívit centrum podpory"
 
-#: src/view/admin/cb_frame/support-page.php:40
-#: src/view/admin/common/support-page.php:60
+#: src/view/admin/cb_frame/support-page.php:37
+#: src/view/admin/common/support-page.php:62
 #: src/view/admin/uc_frame/support-page.php:60
 msgid "Copy Debug Info"
 msgstr "Kopírovat informace o ladění"
 
-#: src/view/admin/cb_frame/support-page.php:72
+#: src/view/admin/cb_frame/support-page.php:69
 msgid "How to find my Cookiebot™ ID"
 msgstr "Jak najdu Cookiebot™ ID"
 
 #. translators: the first placeholder string will be replaced with a html anchor open tag and the second placeholder string will be replaced by the html anchor closing tag
-#: src/view/admin/cb_frame/support-page.php:81
+#: src/view/admin/cb_frame/support-page.php:78
+#, php-format
 msgid "Log in to your %1$sCookiebot CMP account%2$s."
 msgstr "Přihlaste se %1$sk účtu Cookiebot CMP%2$s."
 
 #. translators: the placeholder strings denote the positions of <b>, </b>, <b> and </b> HTML tags
-#: src/view/admin/cb_frame/support-page.php:91
+#: src/view/admin/cb_frame/support-page.php:88
+#, php-format
 msgid "Go to %1$s\"Domains & Aliases\"%2$s and setup your Cookiebot CMP"
 msgstr "Přejděte do %1$s\"Domény a Aliasy\"%2$s a nastavte svůj Cookiebot CMP"
 
 #. translators: the placeholder strings denote the positions of <b> and </b> HTML tags
-#: src/view/admin/cb_frame/support-page.php:101
+#: src/view/admin/cb_frame/support-page.php:98
+#, php-format
 msgid "Go to %1$s\"Implementation\"%2$s and scroll down to the %1$s\"Installation guides\"%2$s section"
 msgstr "Přejděte do %1$s\"Implementace\"%2$s a posuňte se dolů do sekce %1$s\"Instalační příručky\"%2$s"
 
 #. translators: the placeholder strings denote the positions of <b> and </b> HTML tags
-#: src/view/admin/cb_frame/support-page.php:107
+#: src/view/admin/cb_frame/support-page.php:108
+#, php-format
 msgid "Copy the value of %1$s\"Domain group ID\"%2$s - eg.: abcdef12-3456-7890-abcd-ef1234567890"
 msgstr "Zkopírujte hodnotu %1$s\"ID skupiny domén\"%2$s - např.: abcdef12-3456-7890-abcd-ef1234567890"
 
 #. translators: the placeholder strings denote the positions of <b> and </b> HTML tags
-#: src/view/admin/cb_frame/support-page.php:112
+#: src/view/admin/cb_frame/support-page.php:118
+#, php-format
 msgid "Add %1$s[cookie_declaration]%2$s shortcode to a page to show the declaration"
 msgstr "Pokud chcete zobrazit prohlášení, přidejte do stránky zkrácený kód %1$s[cookie_declaration]%2$s"
 
-#: src/view/admin/cb_frame/support-page.php:118
+#: src/view/admin/cb_frame/support-page.php:124
 msgid "Remember to change your scripts as described below"
 msgstr "Nezapomeňte změnit skripty podle níže uvedeného postupu"
 
-#: src/view/admin/cb_frame/support-page.php:125
+#: src/view/admin/cb_frame/support-page.php:131
 msgid "Add the Cookie Declaration to your website"
 msgstr "Přidejte si na web prohlášení o souborech cookie"
 
 #. translators: the placeholder strings denote the positions of <b> and </b> HTML tags
-#: src/view/admin/cb_frame/support-page.php:132
+#: src/view/admin/cb_frame/support-page.php:138
+#, php-format
 msgid "Use the shortcode %1$s[cookie_declaration]%2$s to add the cookie declaration to a page or post. The cookie declaration will always show the latest version from Cookiebot CMP."
 msgstr "Použijte zkrácený kód %1$s[cookie_declaration]%2$spro přidání prohlášení o souborech cookie na stránku nebo příspěvek. Prohlášení o souborech cookie bude vždy zobrazovat nejnovější verzi z platformy pro správu souhlasu Cookiebot CMP."
 
 #. translators: the placeholder strings denote the positions of <i>, </i>, <b> and </b> HTML tags
-#: src/view/admin/cb_frame/support-page.php:142
+#: src/view/admin/cb_frame/support-page.php:148
+#, php-format
 msgid "If you want to show the cookie declaration in a specific language, you can add the %1$s\"lang\"%2$s attribute, e.g. %3$s[cookie_declaration lang=\"de\"]%4$s."
 msgstr "Pokud budete chtít zobrazit prohlášení o souborech cookie v určitém jazyce, můžete přidat atribut %1$s”lang”%2$s, např. %3$s[cookie_declaration lang=“de”]%4$s."
 
-#: src/view/admin/cb_frame/support-page.php:154
+#: src/view/admin/cb_frame/support-page.php:160
 msgid "Update your script tags"
 msgstr "Aktualizujte značky skriptu"
 
-#: src/view/admin/cb_frame/support-page.php:159
+#: src/view/admin/cb_frame/support-page.php:165
 msgid "To enable prior consent, apply the attribute \"data-cookieconsent\" to cookie-setting script tags on your website. Set the comma-separated value to one or more of the cookie categories \"preferences\", \"statistics\" and/or \"marketing\" in accordance with the types of cookies being set by each script. Finally, change the attribute \"type\" from \"text/javascript\" to \"text/plain\"."
 msgstr "Pokud budete chtít povolit předchozí souhlas, použijte atribut “data-cookieconsent” pro značky skriptu pro nastavení souborů cookie na vašem webu. Nastavte hodnotu oddělenou čárkou pro jednu nebo více kategorií souborů cookie „preference“, „statistika“ nebo „marketing“ v souladu s typy souborů cookie nastavených jednotlivými skripty. Nakonec změňte atribut “type” z “text/javascript” na “text/plain”."
 
 #. translators: the placeholder strings denote the positions of <i>, </i>, <b> and </b> HTML tags
-#: src/view/admin/cb_frame/support-page.php:169
+#: src/view/admin/cb_frame/support-page.php:175
+#, php-format
 msgid "Example on modifying an existing Google Analytics Universal script tag can be found %1$shere in step 4%2$s."
 msgstr "Příklad úpravy stávající značky skriptu pro Google Analytics naleznete %1$szde v kroku 4%2$s."
 
-#: src/view/admin/cb_frame/support-page.php:189
+#: src/view/admin/cb_frame/support-page.php:195
 msgid "Helper function to update your scripts"
 msgstr "Pomocná funkce pro aktualizaci skriptů"
 
-#: src/view/admin/cb_frame/support-page.php:194
+#: src/view/admin/cb_frame/support-page.php:200
 msgid "You can update your scripts yourself. However, Cookiebot CMP also offers a small helper function that can make the work easier."
 msgstr "Skripty můžete aktualizovat sami. Plugin Cookiebot CMP však také nabízí malou pomocnou funkci, která vám to usnadní."
 
-#: src/view/admin/cb_frame/support-page.php:201
+#: src/view/admin/cb_frame/support-page.php:207
 msgid "Update your script tags this way:"
 msgstr "Značky skriptu aktualizujete takto:"
 
 #. translators: %1$s refers to the original script tag HTML, and %2$s refers to its replacement
-#: src/view/admin/cb_frame/support-page.php:206
+#: src/view/admin/cb_frame/support-page.php:212
+#, php-format
 msgid "%1$s to %2$s"
 msgstr "%1$s až %2$s"
 
-#: src/view/admin/common/dashboard-page-session-expired.php:31
-#: src/view/admin/common/dashboard-page.php:109
-#: src/view/admin/common/dashboard-trial-expired.php:48
+#: src/view/admin/common/dashboard-page-session-expired.php:32
+#: src/view/admin/common/dashboard-page.php:110
+#: src/view/admin/common/dashboard-trial-expired.php:49
 msgid "Set up your cookie banner"
 msgstr "Nastavte banner souborů cookie"
 
-#: src/view/admin/common/dashboard-page-session-expired.php:35
+#: src/view/admin/common/dashboard-page-session-expired.php:36
 msgid "Get your site GDPR-compliant in "
 msgstr ""
 
-#: src/view/admin/common/dashboard-page-session-expired.php:36
-#: src/view/admin/common/dashboard-page.php:115
+#: src/view/admin/common/dashboard-page-session-expired.php:37
+#: src/view/admin/common/dashboard-page.php:116
 msgid "just a few clicks."
 msgstr "pomocí pár kliknutí."
 
-#: src/view/admin/common/dashboard-page-session-expired.php:37
-#: src/view/admin/common/dashboard-page.php:116
+#: src/view/admin/common/dashboard-page-session-expired.php:38
+#: src/view/admin/common/dashboard-page.php:117
 msgid "Enter your email, verify it, and create your password."
 msgstr "Zadejte svůj e-mail, ověřte jej a vytvořte si heslo."
 
-#: src/view/admin/common/dashboard-page-session-expired.php:52
-#: src/view/admin/common/dashboard-page.php:139
+#: src/view/admin/common/dashboard-page-session-expired.php:53
+#: src/view/admin/common/dashboard-page.php:140
 msgid "Get your banner live in seconds"
 msgstr "Zprovozněte svůj banner během několika sekund"
 
-#: src/view/admin/common/dashboard-page-session-expired.php:78
+#: src/view/admin/common/dashboard-page-session-expired.php:79
 msgid "Get Started"
 msgstr "Začínáme"
 
-#: src/view/admin/common/dashboard-page-static.php:27
+#: src/view/admin/common/dashboard-page-static.php:28
 msgid "Your Consent Management Platform"
 msgstr "Vaše platforma pro správu souhlasů"
 
-#: src/view/admin/common/dashboard-page-static.php:31
+#: src/view/admin/common/dashboard-page-static.php:32
 msgid "Set up your consent banner in seconds with easy auto-setup, smart data processing services detection, and consent-first blocking for automated privacy compliance."
 msgstr "Nastavte svůj banner souhlasu během několika sekund pomocí snadného automatického nastavení, detekce služeb inteligentního zpracování dat a blokování se souhlasem pro automatizované dodržování předpisů o ochraně osobních údajů."
 
-#: src/view/admin/common/dashboard-page-static.php:52
+#: src/view/admin/common/dashboard-page-static.php:53
 msgid "Login to continue"
 msgstr "Pokračujte přihlášením"
 
-#: src/view/admin/common/dashboard-page.php:28
+#: src/view/admin/common/dashboard-page.php:29
 msgid "You're on the Free plan. Upgrade now to unlock your full site experience."
 msgstr "Máte bezplatný tarif. Upgradujte nyní a odemkněte si kompletní možnosti pro web."
 
-#: src/view/admin/common/dashboard-page.php:29
+#: src/view/admin/common/dashboard-page.php:30
 msgid "Upgrade for higher session limits, custom branding, and features that help you deliver a better experience on your site."
 msgstr "Upgradujte pro vyšší limity relací, vlastní branding a funkce, které vám pomohou zajistit lepší zážitek na vašem webu."
 
-#: src/view/admin/common/dashboard-page.php:34
+#: src/view/admin/common/dashboard-page.php:35
 #: src/view/admin/common/templates/header.php:52
 msgid "Upgrade now"
 msgstr "Upgradovat nyní"
 
-#: src/view/admin/common/dashboard-page.php:51
-#: src/view/admin/common/dashboard-trial-expired.php:26
+#: src/view/admin/common/dashboard-page.php:52
+#: src/view/admin/common/dashboard-trial-expired.php:27
 msgid "Your premium trial is over"
 msgstr "Vaše zkušební verze Premium skončila"
 
-#: src/view/admin/common/dashboard-page.php:53
+#: src/view/admin/common/dashboard-page.php:54
 msgid "Reactive your banner to regain full access to your account and display the cookie banner on your website."
 msgstr "Znovu aktivujte banner pro získání plného přístupu k vašemu účtu a zobrazení banneru k souborům cookie na vašem webu."
 
-#: src/view/admin/common/dashboard-page.php:59
-#: src/view/admin/common/dashboard-trial-expired.php:34
-#: src/view/admin/common/dashboard-trial-expired.php:133
+#: src/view/admin/common/dashboard-page.php:60
+#: src/view/admin/common/dashboard-trial-expired.php:35
+#: src/view/admin/common/dashboard-trial-expired.php:134
 msgid "Reactivate banner"
 msgstr "Znovu aktivujte banner"
 
-#: src/view/admin/common/dashboard-page.php:81
+#: src/view/admin/common/dashboard-page.php:82
 msgid "Choose your plan to stay live: pick our Free plan or upgrade to Premium for full control."
 msgstr "Vyberte si svůj tarif, abyste neztratili funkčnost: Zvolte náš bezplatný tarif nebo upgradujte na Premium pro plnou kontrolu."
 
-#: src/view/admin/common/dashboard-page.php:83
-#: src/view/admin/common/dashboard-page.php:85
+#: src/view/admin/common/dashboard-page.php:84
+#: src/view/admin/common/dashboard-page.php:86
 msgid "Choose plan"
 msgstr "Zvolit tarif"
 
-#: src/view/admin/common/dashboard-page.php:114
+#: src/view/admin/common/dashboard-page.php:115
 msgid "Get your site GDPR-compliant in"
 msgstr "Zajistěte kompatibilitu svého webu s nařízením GDPR"
 
-#: src/view/admin/common/dashboard-page.php:131
+#: src/view/admin/common/dashboard-page.php:132
 msgid "Activate your banner"
 msgstr "Aktivujte banner"
 
@@ -2710,97 +2872,367 @@ msgstr "14denní přístup ke všem prémiovým funkcím (nevyžaduje se karta)"
 msgid "Keep it live afterwards on our Free plan or upgrade any time"
 msgstr "Neztraťte po zkušební době funkčnost díky našemu našem bezplatnému tarifu nebo kdykoli upgradujte"
 
+#: src/view/admin/common/dashboard-page.php:168
+msgid "Activate free banner"
+msgstr "Aktivujte bezplatný banner"
+
 #: src/view/admin/common/dashboard-page.php:177
 msgid "Already have a Cookiebot or Usercentrics account?"
 msgstr "Již máte účet u Cookiebotu nebo Usercentricsu?"
 
-#: src/view/admin/common/dashboard-page.php:167
-msgid "Activate free banner"
-msgstr "Aktivujte bezplatný banner"
-
-#: src/view/admin/common/dashboard-page.php:200
-#: src/view/admin/common/dashboard-trial-expired.php:73
+#: src/view/admin/common/dashboard-page.php:201
+#: src/view/admin/common/dashboard-trial-expired.php:74
 msgid "Scan your website"
 msgstr "Nechte si zkontrolovat web"
 
-#: src/view/admin/common/dashboard-page.php:268
+#: src/view/admin/common/dashboard-page.php:269
 msgid "Choose your plan"
 msgstr "Vyberte si svůj tarif"
 
-#: src/view/admin/common/dashboard-page.php:300
+#: src/view/admin/common/dashboard-page.php:301
 msgid "Next billing date: "
 msgstr ""
 
-#: src/view/admin/common/dashboard-page.php:305
+#: src/view/admin/common/dashboard-page.php:306
 msgid "Manage subscription"
 msgstr "Spravovat předplatné"
 
-#: src/view/admin/common/dashboard-page.php:330
-#: src/view/admin/common/dashboard-trial-expired.php:110
+#: src/view/admin/common/dashboard-page.php:331
+#: src/view/admin/common/dashboard-trial-expired.php:111
 msgid "Choose my plan"
 msgstr "Zvolit můj tarif"
 
-#: src/view/admin/common/dashboard-page.php:346
+#: src/view/admin/common/dashboard-page.php:347
 msgid "Preview"
 msgstr "Náhled"
 
-#: src/view/admin/common/dashboard-page.php:349
-#: src/view/admin/common/dashboard-trial-expired.php:126
+#: src/view/admin/common/dashboard-page.php:350
+#: src/view/admin/common/dashboard-trial-expired.php:127
 msgid "Banner control"
 msgstr "Ovládání banneru"
 
-#: src/view/admin/common/dashboard-page.php:351
+#: src/view/admin/common/dashboard-page.php:352
 msgid "Need more options? Head to the"
 msgstr "Potřebujete další možnosti? Zamiřte do"
 
-#: src/view/admin/common/dashboard-page.php:353
+#: src/view/admin/common/dashboard-page.php:354
 msgid "Admin Interface."
 msgstr "rozhraní pro správce."
 
-#: src/view/admin/common/dashboard-page.php:375
-#: src/view/admin/common/dashboard-page.php:404
-#: src/view/admin/common/dashboard-page.php:436
+#: src/view/admin/common/dashboard-page.php:376
+#: src/view/admin/common/dashboard-page.php:405
+#: src/view/admin/common/dashboard-page.php:437
+#: src/view/admin/common/ppg-page.php:32
 msgid "Active"
 msgstr "Aktivní"
 
-#: src/view/admin/common/dashboard-page.php:375
-#: src/view/admin/common/dashboard-page.php:404
-#: src/view/admin/common/dashboard-page.php:436
+#: src/view/admin/common/dashboard-page.php:376
+#: src/view/admin/common/dashboard-page.php:405
+#: src/view/admin/common/dashboard-page.php:437
 msgid "Inactive"
 msgstr "Neaktivní"
 
-#: src/view/admin/common/dashboard-page.php:386
+#: src/view/admin/common/dashboard-page.php:387
 msgid "Auto blocking mode"
 msgstr "Režim automatického blokování"
 
-#: src/view/admin/common/dashboard-page.php:446
+#: src/view/admin/common/dashboard-page.php:447
 msgid "Legal framework"
 msgstr "Právní rámec"
 
-#: src/view/admin/common/dashboard-page.php:454
-#: src/view/admin/common/templates/main-tabs.php:39
+#: src/view/admin/common/dashboard-page.php:456
+#: src/view/admin/common/templates/main-tabs.php:41
 msgid "Customize banner"
 msgstr "Přizpůsobit banner"
 
-#: src/view/admin/common/dashboard-page.php:457
+#: src/view/admin/common/dashboard-page.php:460
 msgid "How to configure your banner"
 msgstr "Jak nakonfigurovat banner"
 
-#: src/view/admin/common/dashboard-trial-expired.php:28
+#: src/view/admin/common/dashboard-trial-expired.php:29
 msgid "To stay compliant, reactivate your banner by choosing a plan. Start with Free or unlock more features by upgrading."
 msgstr "Pokud chcete zachovat soulad s předpisy, aktivujte banner výběrem tarifu. Začněte zdarma nebo odemkněte další funkce upgradováním."
 
-#: src/view/admin/common/dashboard-trial-expired.php:60
+#: src/view/admin/common/dashboard-trial-expired.php:61
 msgid "Reactivate your banner"
 msgstr "Znovu aktivujte banner"
 
-#: src/view/admin/common/dashboard-trial-expired.php:85
+#: src/view/admin/common/dashboard-trial-expired.php:86
 msgid "Upgrade your plan"
 msgstr "Upgradujte svůj tarif"
 
-#: src/view/admin/common/dashboard-trial-expired.php:127
+#: src/view/admin/common/dashboard-trial-expired.php:128
 msgid "Your banner is currently inactive. Reactivate it below to keep your site compliant."
 msgstr "Váš banner je momentálně neaktivní. Znovu ho aktivujte níže, aby si vaše stránka zachovala soulad s předpisy."
+
+#: src/view/admin/common/dashboard/connected.php:25
+msgid "Connected through your Cookiebot account, but your banner may not be showing on this site."
+msgstr "Připojeno přes váš účet Cookiebot, ale váš banner se na tomto webu nemusí zobrazovat."
+
+#: src/view/admin/common/dashboard/connected.php:27
+msgid "Connected to this WordPress site through your Usercentrics account."
+msgstr "Připojeno k tomuto webu WordPress přes váš účet Usercentrics."
+
+#: src/view/admin/common/dashboard/connected.php:29
+msgid "Connected to this WordPress site through your Cookiebot account."
+msgstr "Připojeno k tomuto webu WordPress přes váš účet Cookiebot."
+
+#: src/view/admin/common/dashboard/connected.php:47
+msgid "Your cookie banner"
+msgstr "Váš cookie banner"
+
+#: src/view/admin/common/dashboard/connected.php:55
+msgid "Website"
+msgstr "Web"
+
+#: src/view/admin/common/dashboard/connected.php:60
+msgid "Preview banner"
+msgstr "Náhled banneru"
+
+#: src/view/admin/common/dashboard/connected.php:62
+#: src/view/admin/common/dashboard/connected.php:145
+#: src/view/admin/common/dashboard/connected.php:165
+#: src/view/admin/common/dashboard/partials/new-account-step.php:56
+#: src/view/admin/common/templates/main-tabs.php:101
+msgid "(opens in a new tab)"
+msgstr "(otevře se na nové kartě)"
+
+#: src/view/admin/common/dashboard/connected.php:72
+msgid "Show cookie banner on this site"
+msgstr "Zobrazovat cookie banner na tomto webu"
+
+#: src/view/admin/common/dashboard/connected.php:73
+msgid "Turn off to hide the banner while you make changes. Visitors aren’t asked for consent when it’s off."
+msgstr "Vypněte, chcete-li banner během úprav skrýt. Když je vypnutý, návštěvníci nejsou žádáni o souhlas."
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/view/admin/common/dashboard/connected.php:83
+#, php-format
+msgid "Your cookie banner is off. Visitors to %s won’t see it or be asked for consent until you turn it back on."
+msgstr "Váš cookie banner je vypnutý. Návštěvníci %s ho neuvidí a nebudou žádáni o souhlas, dokud ho znovu nezapnete."
+
+#: src/view/admin/common/dashboard/connected.php:97
+msgid "Settings ID"
+msgstr "ID nastavení"
+
+#: src/view/admin/common/dashboard/connected.php:99
+msgid "Cookiebot Domain Group ID"
+msgstr "ID skupiny domén Cookiebot"
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/view/admin/common/dashboard/connected.php:112
+#, php-format
+msgid "Your banner may not show on %s. This ID isn’t set up for this site in Cookiebot."
+msgstr "Váš banner se na %s nemusí zobrazovat. Toto ID není v Cookiebotu pro tento web nastaveno."
+
+#: src/view/admin/common/dashboard/connected.php:119
+msgid "To connect a different ID, disconnect this one first."
+msgstr "Chcete-li připojit jiné ID, nejprve odpojte toto."
+
+#: src/view/admin/common/dashboard/connected.php:125
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:31
+msgid "Disconnect"
+msgstr "Odpojit"
+
+#: src/view/admin/common/dashboard/connected.php:139
+msgid "Do more in Cookiebot"
+msgstr "Více možností v Cookiebotu"
+
+#: src/view/admin/common/dashboard/connected.php:140
+msgid "Customize your banner and manage your plan in your Cookiebot account."
+msgstr "Přizpůsobte si banner a spravujte svůj tarif ve svém účtu Cookiebot."
+
+#: src/view/admin/common/dashboard/connected.php:143
+msgid "Go to Cookiebot"
+msgstr "Přejít do Cookiebotu"
+
+#: src/view/admin/common/dashboard/connected.php:155
+msgid "More from Cookiebot"
+msgstr "Další od Cookiebotu"
+
+#: src/view/admin/common/dashboard/connected.php:159
+msgid "Join the Cookiebot Partner Program"
+msgstr "Připojte se k partnerskému programu Cookiebot"
+
+#: src/view/admin/common/dashboard/connected.php:160
+msgid "Earn commission on every client site you set up with Cookiebot, plus partner perks and support."
+msgstr "Získejte provizi z každého klientského webu, který nastavíte s Cookiebotem, a k tomu partnerské výhody a podporu."
+
+#: src/view/admin/common/dashboard/connected.php:163
+#: src/view/admin/common/templates/main-tabs.php:99
+msgid "Become a Partner"
+msgstr "Staňte se partnerem"
+
+#. translators: 1: "Watch the setup guide" link, 2: "Get support" link.
+#: src/view/admin/common/dashboard/connected.php:182
+#, php-format
+msgid "Need help? %1$s or %2$s"
+msgstr "Potřebujete pomoc? %1$s nebo %2$s"
+
+#: src/view/admin/common/dashboard/connected.php:183
+#: src/view/admin/common/dashboard/partials/need-help.php:11
+msgid "Watch the setup guide"
+msgstr "Podívejte se na průvodce nastavením"
+
+#: src/view/admin/common/dashboard/connected.php:184
+#: src/view/admin/common/templates/main-tabs.php:55
+msgid "Get support"
+msgstr "Získejte podporu"
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/view/admin/common/dashboard/connected.php:206
+#, php-format
+msgid "Connected. Your cookie banner is now set up on %s."
+msgstr "Připojeno. Váš cookie banner je nyní nastaven na %s."
+
+#: src/view/admin/common/dashboard/connected.php:213
+msgid "Dismiss"
+msgstr "Zavřít"
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:25
+msgid "Connect Cookiebot to this site"
+msgstr "Připojte Cookiebot k tomuto webu"
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:27
+msgid "Copy your Domain Group ID from Cookiebot (Implementation page) and paste it below."
+msgstr "Zkopírujte ID skupiny domén z Cookiebotu (stránka Implementation) a vložte ho níže."
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:36
+msgid "or Settings ID"
+msgstr "nebo ID nastavení"
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:41
+msgid "e.g. 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+msgstr "např. 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:61
+msgid "How to find your Domain Group ID"
+msgstr "Jak najít ID skupiny domén"
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:65
+msgid "Using Usercentrics CMP? You can enter your Settings ID instead."
+msgstr "Používáte Usercentrics CMP? Místo toho můžete zadat ID nastavení."
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:67
+msgid "How to find it"
+msgstr "Jak ho najít"
+
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:14
+msgid "Close"
+msgstr "Zavřít"
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:21
+#, php-format
+msgid "Your cookie banner will stop showing on %s until you connect the Domain Group ID or Settings ID."
+msgstr "Váš cookie banner se na %s přestane zobrazovat, dokud nepřipojíte ID skupiny domén nebo ID nastavení."
+
+#: src/view/admin/common/dashboard/partials/need-help.php:8
+msgid "Need help?"
+msgstr "Potřebujete pomoc?"
+
+#: src/view/admin/common/dashboard/partials/need-help.php:12
+msgid "A short video that walks you through connecting Cookiebot to WordPress."
+msgstr "Krátké video, které vás provede připojením Cookiebotu k WordPressu."
+
+#: src/view/admin/common/dashboard/partials/need-help.php:25
+msgid "Play the setup guide video"
+msgstr "Přehrát video s průvodcem nastavením"
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:16
+msgid "STEP 1 OF 2"
+msgstr "KROK 1 ZE 2"
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:17
+msgid "Create your Cookiebot account"
+msgstr "Vytvořte si účet Cookiebot"
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:19
+msgid "Sign up on Cookiebot to create your consent banner. The sign-up opens in a new tab."
+msgstr "Zaregistrujte se v Cookiebotu a vytvořte si banner pro souhlas. Registrace se otevře na nové kartě."
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:22
+#: src/view/admin/common/dashboard/partials/new-account-step.php:48
+msgid "See pricing"
+msgstr "Zobrazit ceny"
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/view/admin/common/dashboard/partials/new-account-step.php:30
+#, php-format
+msgid "When Cookiebot asks for your website, enter %s. It must match this site, or your banner won’t appear."
+msgstr "Když se vás Cookiebot zeptá na web, zadejte %s. Musí odpovídat tomuto webu, jinak se banner nezobrazí."
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:44
+msgid "20% off your first year"
+msgstr "Sleva 20 % na první rok"
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:45
+msgid "Applied automatically when you sign up."
+msgstr "Uplatní se automaticky při registraci."
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:54
+msgid "Create account"
+msgstr "Vytvořit účet"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:11
+msgid "Where is it?"
+msgstr "Kde ho najdu?"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:16
+msgid "Where to find your ID"
+msgstr "Kde najdete své ID"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:19
+msgid "Cookiebot › Implementation"
+msgstr "Cookiebot › Implementation"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:20
+msgid "Scroll down the page to find:"
+msgstr "Sjeďte na stránce dolů a najděte:"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:28
+msgid "Or in your Cookiebot script"
+msgstr "Nebo ve skriptu Cookiebotu"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:29
+msgid "Copy only the highlighted ID:"
+msgstr "Zkopírujte pouze zvýrazněné ID:"
+
+#: src/view/admin/common/dashboard/welcome.php:25
+msgid "Welcome"
+msgstr "Vítejte"
+
+#: src/view/admin/common/dashboard/welcome.php:29
+msgid "Let’s get your cookie banner set up"
+msgstr "Pojďme nastavit váš cookie banner"
+
+#: src/view/admin/common/dashboard/welcome.php:31
+msgid "Easy implementation in 2 steps. Most setups take less than 5 minutes."
+msgstr "Snadná implementace ve 2 krocích. Většina nastavení zabere méně než 5 minut."
+
+#: src/view/admin/common/dashboard/welcome.php:34
+msgid "Connect your existing Cookiebot account in 1 step. Most setups take less than 5 minutes."
+msgstr "Připojte svůj stávající účet Cookiebot v 1 kroku. Většina nastavení zabere méně než 5 minut."
+
+#: src/view/admin/common/dashboard/welcome.php:40
+msgid "How do you want to set up?"
+msgstr "Jak chcete nastavení provést?"
+
+#: src/view/admin/common/dashboard/welcome.php:45
+msgid "New site or new client"
+msgstr "Nový web nebo nový klient"
+
+#: src/view/admin/common/dashboard/welcome.php:51
+msgid "Connect an existing account"
+msgstr "Připojit stávající účet"
+
+#: src/view/admin/common/dashboard/welcome.php:52
+msgid "You already have an ID for this site"
+msgstr "Pro tento web už máte ID"
+
+#: src/view/admin/common/dashboard/welcome.php:73
+msgid "STEP 2 OF 2"
+msgstr "KROK 2 ZE 2"
 
 #: src/view/admin/common/network-settings-page.php:36
 #: src/view/admin/common/settings-page.php:42
@@ -2833,31 +3265,42 @@ msgstr ""
 msgid "Settings ID or Domain Group ID"
 msgstr "ID nastavení nebo ID skupiny domén"
 
-#: src/view/admin/common/network-settings-page.php:78
-#: src/view/admin/uc_frame/network-settings-page.php:87
-#: src/view/admin/uc_frame/settings/general-page.php:125
+#: src/view/admin/common/network-settings-page.php:81
+#: src/view/admin/uc_frame/settings/general-page.php:130
 msgid "Let us know if your account is set for compliance with a single privacy law (e.g. GDPR) or multiple laws (e.g. GDPR and CCPA) based on user’s location. The default is a single privacy law, so this is likely your setting unless modified."
 msgstr ""
 
-#: src/view/admin/common/network-settings-page.php:84
-#: src/view/admin/common/settings-page.php:88
+#: src/view/admin/common/network-settings-page.php:87
+#: src/view/admin/common/settings-page.php:91
 #: src/view/admin/uc_frame/network-settings-page.php:93
-#: src/view/admin/uc_frame/settings/general-page.php:131
+#: src/view/admin/uc_frame/settings/general-page.php:136
 msgid "Your current account setup:"
 msgstr ""
 
-#: src/view/admin/common/network-settings-page.php:91
-#: src/view/admin/common/settings-page.php:95
+#: src/view/admin/common/network-settings-page.php:94
+#: src/view/admin/common/settings-page.php:98
 #: src/view/admin/uc_frame/network-settings-page.php:100
-#: src/view/admin/uc_frame/settings/general-page.php:138
+#: src/view/admin/uc_frame/settings/general-page.php:143
 msgid "Compliance with one privacy law"
 msgstr ""
 
-#: src/view/admin/common/network-settings-page.php:98
-#: src/view/admin/common/settings-page.php:102
+#: src/view/admin/common/network-settings-page.php:101
+#: src/view/admin/common/settings-page.php:105
 #: src/view/admin/uc_frame/network-settings-page.php:107
-#: src/view/admin/uc_frame/settings/general-page.php:145
+#: src/view/admin/uc_frame/settings/general-page.php:150
 msgid "Compliance with multiple privacy laws (geolocation)"
+msgstr ""
+
+#: src/view/admin/common/ppg-page.php:20
+msgid "Explore our plugins"
+msgstr ""
+
+#: src/view/admin/common/ppg-page.php:27
+msgid "Usercentrics Privacy Policy Generator"
+msgstr ""
+
+#: src/view/admin/common/ppg-page.php:48
+msgid "Usercentrics Privacy Policy Generator - Generate your privacy policy in minutes"
 msgstr ""
 
 #: src/view/admin/common/prior-consent/available-addons/tab.php:26
@@ -2936,7 +3379,8 @@ msgstr "Nedostupné pluginy"
 msgid "The following addons are unavailable. This is because the corresponding plugin is not installed or activated."
 msgstr "Následující doplňky nejsou k dispozici. Není totiž nainstalován nebo aktivován odpovídající plugin."
 
-#: src/view/admin/common/settings-page.php:82
+#: src/view/admin/common/settings-page.php:85
+#: src/view/admin/uc_frame/network-settings-page.php:87
 msgid "Let us know if your account is set for compliance with a single privacy law (e.g. GDPR) or multiple laws (e.g. GDPR and CCPA) based on user's location. The default is a single privacy law, so this is likely your setting unless modified."
 msgstr "Dejte nám vědět, jestli máte účet nastavený tak, aby byl v souladu s jedním zákonem o ochraně osobních údajů (např. GDPR) nebo několika zákony (např. GDPR a CCPA) na základě polohy uživatele. Výchozí nastavení je jeden zákon o ochraně osobních údajů, takže nejspíš platí i pro vás, pokud jste nic neměnili."
 
@@ -2992,28 +3436,45 @@ msgstr "Zkušební verze Premium:"
 
 #. translators: %d is replaced with "integer"
 #: src/view/admin/common/templates/header.php:44
+#, php-format
 msgid "%d days left"
 msgstr "Zbývá dnů: %d"
 
-#: src/view/admin/common/templates/main-tabs.php:29
+#: src/view/admin/common/templates/main-tabs.php:31
 msgid "View dashboard"
 msgstr "Zobrazit ovládací panel"
 
-#: src/view/admin/common/templates/main-tabs.php:53
-msgid "Get support"
-msgstr "Získejte podporu"
-
-#: src/view/admin/common/templates/main-tabs.php:61
+#: src/view/admin/common/templates/main-tabs.php:63
 msgid "Manage add-ons"
 msgstr "Správa doplňků"
 
-#: src/view/admin/common/templates/main-tabs.php:76
+#: src/view/admin/common/templates/main-tabs.php:78
 msgid "Configure settings"
 msgstr "Konfigurace nastavení"
 
-#: src/view/admin/common/templates/main-tabs.php:82
+#: src/view/admin/common/templates/main-tabs.php:90
+msgid "NEW"
+msgstr ""
+
+#: src/view/admin/common/templates/main-tabs.php:107
 msgid "Help us improve"
 msgstr "Pomozte nám zlepšit se"
+
+#: src/view/admin/common/templates/ppg-banner.php:19
+msgid "Explore more plugins from Cookiebot"
+msgstr ""
+
+#: src/view/admin/common/templates/ppg-banner.php:24
+msgid "Privacy Policy Generator"
+msgstr ""
+
+#: src/view/admin/common/templates/ppg-banner.php:30
+msgid "Generate your privacy policy in minutes"
+msgstr ""
+
+#: src/view/admin/common/templates/ppg-banner.php:33
+msgid "Automatically create compliant privacy policies for your WordPress website."
+msgstr ""
 
 #: src/view/admin/notices/cookiebot-recommendation-notice-links.php:13
 msgid "Absolutely, you deserve it!"
@@ -3035,21 +3496,21 @@ msgstr ""
 msgid "You’ve added your settings ID to your Cookiebot by Usercentrics WordPress Plugin."
 msgstr ""
 
-#: src/view/admin/uc_frame/dashboard-page.php:51
+#: src/view/admin/uc_frame/dashboard-page.php:52
 msgid "Are you happy with Cookiebot by Usercentrics WordPress Plugin? Your feedback helps us improve it."
 msgstr ""
 
-#: src/view/admin/uc_frame/dashboard-page.php:55
+#: src/view/admin/uc_frame/dashboard-page.php:56
 msgid "Share feedback"
 msgstr "Poskytnout zpětnou vazbu"
 
-#: src/view/admin/uc_frame/dashboard-page.php:64
+#: src/view/admin/uc_frame/dashboard-page.php:63
 msgid "How to set up Cookiebot by Usercentrics WordPress Plugin"
 msgstr ""
 
-#: src/view/admin/uc_frame/dashboard-page.php:68
+#: src/view/admin/uc_frame/dashboard-page.php:67
 #: src/view/admin/uc_frame/settings/gcm-page.php:21
-#: src/view/admin/uc_frame/settings/general-page.php:186
+#: src/view/admin/uc_frame/settings/general-page.php:191
 #: src/view/admin/uc_frame/settings/gtm-page.php:18
 msgid "Learn more"
 msgstr "Další informace"
@@ -3066,6 +3527,10 @@ msgstr "Kde najít ID nastavení"
 #: src/view/admin/uc_frame/network-settings-page.php:69
 #: src/view/admin/uc_frame/settings/general-page.php:66
 msgid "Your settings ID"
+msgstr ""
+
+#: src/view/admin/uc_frame/network-settings-page.php:117
+msgid "Choose the type of your cookie-blocking mode. Select automatic to automatically block all cookies except those strictly necessary to use before user gives consent. Manual mode lets you adjust your cookie settings within your website's HTML."
 msgstr ""
 
 #: src/view/admin/uc_frame/prior-consent/consent-api/tab.php:23
@@ -3209,15 +3674,15 @@ msgstr "Potřebujete větší kontrolu nad bannerem?"
 msgid "Go to full banner settings"
 msgstr "Přejděte na plné nastavení banneru"
 
-#: src/view/admin/uc_frame/settings/general-page.php:156
+#: src/view/admin/uc_frame/settings/general-page.php:161
 msgid "TCF integration"
 msgstr ""
 
-#: src/view/admin/uc_frame/settings/general-page.php:159
+#: src/view/admin/uc_frame/settings/general-page.php:164
 msgid "Enable the integration with the latest version of IAB TCF."
 msgstr ""
 
-#: src/view/admin/uc_frame/settings/general-page.php:168
+#: src/view/admin/uc_frame/settings/general-page.php:173
 msgid "IAB TCF integration"
 msgstr ""
 
@@ -3268,3 +3733,6 @@ msgstr "Aktualizujte si Cookiebot™ ID"
 #: src/widgets/Dashboard_Widget_Cookiebot_Status.php:46
 msgid "Your Cookiebot is working!"
 msgstr "Nástroj Cookiebot™ funguje!"
+
+#~ msgid "Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for ‘strictly necessary’ cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:"
+#~ msgstr "Zde vyberte režim blokování souborů cookie. Režim automatického blokování souborů cookie automaticky zablokuje všechny soubory cookie (s výjimkou „nezbytně nutných“ souborů cookie), dokud uživatel nevyjádří souhlas. Režim ručního blokování souborů cookie vyžaduje ruční úpravy skriptů pro nastavení souborů cookie. Níže naleznete naše průvodce implementací:"
