@@ -321,6 +321,85 @@
     outline-offset: 2px;
 }
 
+/* Popover floats below the trigger; caret sits 400px from its left edge (frame 02). */
+.cb-dash__popover {
+    position: absolute;
+    z-index: 100;
+    top: 100%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    width: 640px;
+    max-width: calc(100vw - 40px);
+    padding-top: 4px;
+    transform: translateX(-400px);
+}
+
+.cb-dash__popover-caret {
+    position: relative;
+    z-index: 2;
+    margin: 0 0 -1px 390px;
+}
+
+.cb-dash__popover-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid var(--cb-dash-muted);
+    border-radius: 8px;
+    background: #ffffff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.cb-dash__popover-examples {
+    display: flex;
+    gap: 12px;
+}
+
+.cb-dash__popover-example {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--cb-dash-surface);
+}
+
+.cb-dash__popover-id {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.cb-dash .cb-dash__code,
+.cb-dash__popover-id .cb-dash__code-mark {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 13px;
+}
+
+.cb-dash .cb-dash__code {
+    display: block;
+    padding: 0;
+    background: none;
+    color: var(--cb-dash-ink);
+    line-height: 1.4;
+    white-space: pre;
+}
+
+.cb-dash__code-mark {
+    padding: 2px;
+    border-radius: 4px;
+    background: #ffeda8;
+    color: var(--cb-dash-ink);
+}
+
+.cb-dash__popover-id .cb-dash__code-mark {
+    padding: 2px 6px;
+}
+
 /* ID field + button */
 .cb-dash__field-row {
     display: flex;
@@ -619,5 +698,24 @@
 
     .cb-dash__video {
         width: 100%;
+    }
+
+    .cb-dash__where {
+        position: static;
+    }
+
+    .cb-dash__popover {
+        left: 0;
+        width: 100%;
+        max-width: none;
+        transform: none;
+    }
+
+    .cb-dash__popover-caret {
+        display: none;
+    }
+
+    .cb-dash__popover-examples {
+        flex-direction: column;
     }
 }

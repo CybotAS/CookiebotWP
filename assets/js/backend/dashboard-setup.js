@@ -137,7 +137,47 @@
 		} );
 	}
 
+	// "Where is it?" help: opens on hover, keyboard focus or tap; stays open while the pointer is over it.
+	function initWhereIsIt( $where ) {
+		var $trigger = $where.find( '[data-cb-where-trigger]' );
+		var $popover = $where.find( '[data-cb-where-popover]' );
+
+		function toggle( open ) {
+			$popover.prop( 'hidden', ! open );
+			$trigger.attr( 'aria-expanded', open ? 'true' : 'false' );
+		}
+
+		$where.on( 'mouseenter', function () {
+			toggle( true );
+		} );
+		$where.on( 'mouseleave', function () {
+			toggle( false );
+		} );
+		$trigger.on( 'focus', function () {
+			toggle( true );
+		} );
+		// Tap on touch devices; a mouse click lands after focus already opened it.
+		$trigger.on( 'click', function () {
+			toggle( true );
+		} );
+		$where.on( 'focusout', function ( event ) {
+			if ( ! $.contains( $where[ 0 ], event.relatedTarget ) ) {
+				toggle( false );
+			}
+		} );
+		$where.on( 'keydown', function ( event ) {
+			if ( event.key === 'Escape' && ! $popover.prop( 'hidden' ) ) {
+				event.stopPropagation();
+				toggle( false );
+			}
+		} );
+	}
+
 	$( function () {
+		$( '[data-cb-where]' ).each( function () {
+			initWhereIsIt( $( this ) );
+		} );
+
 		$( '[data-cb-signup]' ).on( 'click', unlockConnectStep );
 
 		$( '[data-cb-connect]' ).each( function () {
