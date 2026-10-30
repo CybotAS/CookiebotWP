@@ -1,1 +1,295 @@
-/* Dashboard revamp styles. */
+/* Dashboard revamp (CMS-3174). Values follow the Figma "WordPress" FINAL frames. */
+
+.cb-dash {
+    --cb-dash-ink: #141414;
+    --cb-dash-muted: #666666;
+    --cb-dash-line: #d6d6d6;
+    --cb-dash-surface: #f2f2f2;
+    --cb-dash-blue: #1032cf;
+    --cb-dash-blue-50: #eceffe;
+    --cb-dash-blue-100: #c6d0fb;
+
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    color: var(--cb-dash-ink);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.cb-dash *,
+.cb-dash *::before,
+.cb-dash *::after {
+    box-sizing: border-box;
+}
+
+.cb-dash p,
+.cb-dash h1,
+.cb-dash h2,
+.cb-dash h3 {
+    margin: 0;
+    padding: 0;
+    color: inherit;
+}
+
+/* Type scale */
+.cb-dash__title {
+    font-size: 60px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.cb-dash__h2 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.cb-dash__h3 {
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.cb-dash__h4 {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+}
+
+.cb-dash__body {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+}
+
+.cb-dash__small {
+    color: var(--cb-dash-muted);
+    font-size: 13.13px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+}
+
+.cb-dash__divider {
+    width: 100%;
+    height: 1px;
+    margin: 0;
+    border: 0;
+    background: var(--cb-dash-line);
+}
+
+.cb-dash [hidden] {
+    display: none !important;
+}
+
+/* Links */
+.cb-dash__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--cb-dash-blue);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+    text-decoration: none;
+}
+
+.cb-dash__link:hover,
+.cb-dash__link:focus {
+    color: var(--cb-dash-blue);
+    text-decoration: underline;
+}
+
+.cb-dash__link img {
+    flex-shrink: 0;
+}
+
+/* Intro */
+.cb-dash__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Setup card: path options + steps */
+.cb-dash__setup {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.cb-dash__paths {
+    display: flex;
+    gap: 16px;
+    margin: 0;
+    padding: 1px;
+    border: 0;
+}
+
+.cb-dash__path {
+    position: relative;
+    display: flex;
+    flex: 1 0 0;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 20px 24px;
+    border: 1px solid var(--cb-dash-line);
+    border-radius: 8px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.cb-dash__path:has(input:checked) {
+    padding: 19px 23px;
+    border: 2px solid var(--cb-dash-blue);
+}
+
+.cb-dash__path input[type="radio"] {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    border: 0;
+    border-radius: 50%;
+    background: url("../../img/dashboard/radio-normal.svg") center / 24px 24px no-repeat;
+    box-shadow: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.cb-dash__path:hover input[type="radio"]:not(:checked) {
+    background-image: url("../../img/dashboard/radio-hover.svg");
+}
+
+.cb-dash__path input[type="radio"]:checked {
+    background-image: url("../../img/dashboard/radio-checked.svg");
+}
+
+.cb-dash__path input[type="radio"]:checked::before {
+    content: none;
+}
+
+.cb-dash__path input[type="radio"]:focus-visible {
+    outline: 2px solid var(--cb-dash-blue);
+    outline-offset: 2px;
+}
+
+.cb-dash__path-text {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cb-dash__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Grey card used by setup steps and the video guide */
+.cb-dash__card {
+    padding: 32px;
+    border-radius: 16px;
+    background: var(--cb-dash-surface);
+}
+
+/* Need help */
+.cb-dash__need-help {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cb-dash__video-card {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.cb-dash__video-text {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.cb-dash__video-text .cb-dash__link {
+    padding-top: 8px;
+}
+
+.cb-dash__video {
+    position: relative;
+    flex-shrink: 0;
+    width: 352px;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #000000;
+}
+
+.cb-dash__video-play {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.cb-dash__video-play:focus-visible {
+    outline: 2px solid var(--cb-dash-blue);
+    outline-offset: 2px;
+}
+
+.cb-dash__video-thumb {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cb-dash__video-play-bg,
+.cb-dash__video-play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Play-button shadow is 80px around the 64px icon, offset 2px down (Figma inset -9.38%/-15.63%). */
+.cb-dash__video-play-bg {
+    margin-top: 2px;
+}
+
+.cb-dash__video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+@media screen and (max-width: 782px) {
+    .cb-dash__title {
+        font-size: 40px;
+    }
+
+    .cb-dash__paths,
+    .cb-dash__video-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cb-dash__video {
+        width: 100%;
+    }
+}
