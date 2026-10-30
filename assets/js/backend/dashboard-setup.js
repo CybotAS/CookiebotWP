@@ -21,7 +21,113 @@
 		$video.empty().append( $iframe );
 	}
 
+	var i18n = ( window.cookiebot_setup && window.cookiebot_setup.i18n ) || {};
+
+	/**
+	 * One connect form: idle → connecting → (redirect | invalid | save_failed | not_set_up).
+	 * The server decides validity; the client never short-circuits an empty field.
+	 */
+	function ConnectForm( $root ) {
+		this.$root = $root;
+		this.$form = $root.find( '[data-cb-connect-form]' );
+		this.$input = $root.find( '[data-cb-connect-input]' );
+		this.$button = $root.find( '[data-cb-connect-button]' );
+		this.$label = $root.find( '[data-cb-connect-button-label]' );
+		this.$spinner = $root.find( '.cb-dash__spinner' );
+		this.$message = $root.find( '[data-cb-connect-message]' );
+		this.$messageText = $root.find( '[data-cb-connect-message-text]' );
+		this.$status = $root.find( '[data-cb-connect-status]' );
+		this.force = false;
+
+		this.$form.on( 'submit', this.submit.bind( this ) );
+		this.$input.on( 'input', this.reset.bind( this ) );
+	}
+
+	ConnectForm.prototype.setButton = function ( label ) {
+		this.$label.text( label );
+	};
+
+	ConnectForm.prototype.showMessage = function ( kind, text, isHtml ) {
+		this.$root.removeClass( 'is-error is-warning' ).addClass( 'is-' + kind );
+		if ( isHtml ) {
+			this.$messageText.html( text );
+		} else {
+			this.$messageText.text( text );
+		}
+		this.$message.prop( 'hidden', false );
+	};
+
+	ConnectForm.prototype.reset = function () {
+		if ( this.$root.hasClass( 'is-connecting' ) ) {
+			return;
+		}
+		this.force = false;
+		this.$root.removeClass( 'is-error is-warning' );
+		this.$message.prop( 'hidden', true );
+		this.$messageText.empty();
+		this.setButton( i18n.connect );
+	};
+
+	ConnectForm.prototype.setConnecting = function ( connecting ) {
+		this.$root.toggleClass( 'is-connecting', connecting );
+		this.$input.prop( 'disabled', connecting );
+		this.$button.prop( 'disabled', connecting );
+		this.$spinner.prop( 'hidden', ! connecting );
+		this.$status.text( connecting ? i18n.connecting : '' );
+		if ( connecting ) {
+			this.setButton( i18n.connecting );
+		}
+	};
+
+	ConnectForm.prototype.submit = function ( event ) {
+		var self = this;
+		event.preventDefault();
+		if ( this.$root.hasClass( 'is-connecting' ) ) {
+			return;
+		}
+
+		this.setConnecting( true );
+		$.post( cookiebot_setup.ajax_url, {
+			action: 'cookiebot_connect_cbid',
+			nonce: cookiebot_setup.nonce,
+			cbid: this.$input.val(),
+			force: this.force ? '1' : ''
+		} )
+			.done( function ( response ) {
+				if ( response && response.success && response.data && response.data.redirect ) {
+					window.location = response.data.redirect;
+					return;
+				}
+				self.setConnecting( false );
+				self.handleError( response && response.data ? response.data : {} );
+			} )
+			.fail( function () {
+				self.setConnecting( false );
+				self.handleError( { code: 'save_failed' } );
+			} );
+	};
+
+	ConnectForm.prototype.handleError = function ( data ) {
+		if ( data.code === 'invalid' ) {
+			this.force = false;
+			this.showMessage( 'error', i18n.invalid, false );
+			this.setButton( i18n.connect );
+		} else if ( data.code === 'not_set_up' ) {
+			this.force = true;
+			this.showMessage( 'warning', i18n.not_set_up.split( '%1$s' ).join( data.domain || '' ), false );
+			this.setButton( i18n.connect_anyway );
+		} else {
+			this.showMessage( 'error', i18n.save_failed_html, true );
+			this.setButton( i18n.try_again );
+		}
+		this.$input.trigger( 'focus' );
+	};
+
 	$( function () {
+		$( '[data-cb-connect]' ).each( function () {
+			new ConnectForm( $( this ) );
+		} );
+
 		// "Create a new account" is the default on every visit, even if the browser restored another choice.
 		$( '[data-cb-path][value="new"]' ).prop( 'checked', true );
 		showPath( 'new' );

@@ -28,7 +28,6 @@
 .cb-dash h3 {
     margin: 0;
     padding: 0;
-    color: inherit;
 }
 
 /* Type scale */
@@ -199,6 +198,293 @@
     background: var(--cb-dash-surface);
 }
 
+/* Setup step: number + content */
+.cb-dash__step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.cb-dash__step-num {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1.33px solid var(--cb-dash-blue);
+    border-radius: 50%;
+    background: var(--cb-dash-blue);
+    color: #ffffff;
+    font-size: 10.67px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.cb-dash__step[data-cb-connect-locked="1"] .cb-dash__step-num {
+    border-color: var(--cb-dash-line);
+    background: #ffffff;
+    color: var(--cb-dash-ink);
+}
+
+.cb-dash__step-body {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+.cb-dash__step-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cb-dash__step-label {
+    color: var(--cb-dash-muted);
+    font-size: 13.13px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.25px;
+}
+
+.cb-dash__help-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 8px;
+    align-items: center;
+}
+
+/* "Where is it?" trigger (popover in where-is-it.php) */
+.cb-dash__where {
+    position: relative;
+    display: inline-flex;
+}
+
+.cb-dash__where-trigger {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--cb-dash-blue);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+    cursor: help;
+}
+
+.cb-dash__where-trigger:focus-visible {
+    outline: 2px solid var(--cb-dash-blue);
+    outline-offset: 2px;
+}
+
+/* ID field + button */
+.cb-dash__field-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin: 0;
+}
+
+.cb-dash__field {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.cb-dash__label {
+    color: var(--cb-dash-ink);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+}
+
+.cb-dash__label-muted {
+    color: var(--cb-dash-muted);
+    font-weight: 400;
+}
+
+.cb-dash .cb-dash__input {
+    width: 100%;
+    min-height: 50px;
+    margin: 0;
+    padding: 12px 16px 12px 20px;
+    border: 2px solid var(--cb-dash-line);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: none;
+    color: var(--cb-dash-ink);
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+}
+
+.cb-dash .cb-dash__input::placeholder {
+    color: var(--cb-dash-muted);
+}
+
+.cb-dash .cb-dash__input:focus {
+    border-color: var(--cb-dash-blue);
+    outline: none;
+    box-shadow: none;
+}
+
+.cb-dash .cb-dash__input:disabled {
+    background: var(--cb-dash-surface);
+    color: var(--cb-dash-muted);
+}
+
+/* Locked step (before "Create account") keeps a white field, frame 01. */
+.cb-dash__step[data-cb-connect-locked="1"] .cb-dash__input:disabled {
+    background: #ffffff;
+}
+
+.cb-dash__step.is-error .cb-dash__input {
+    border-color: #e86868;
+}
+
+.cb-dash__step.is-warning .cb-dash__input {
+    border-color: #ad6f07;
+}
+
+/* Button sits level with the input: label height (24px) + gap (8px) - 1px. */
+.cb-dash__field-action {
+    flex-shrink: 0;
+    padding-top: 31px;
+}
+
+.cb-dash__btn {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    min-width: 132px;
+    height: 50px;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.cb-dash__btn--primary {
+    background: var(--cb-dash-blue);
+    color: #ffffff;
+}
+
+.cb-dash__btn--primary:hover,
+.cb-dash__btn--primary:focus {
+    background: #0c27a3;
+    color: #ffffff;
+}
+
+.cb-dash__btn:focus-visible {
+    outline: 2px solid var(--cb-dash-blue);
+    outline-offset: 2px;
+}
+
+.cb-dash__btn:disabled {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--cb-dash-muted);
+    cursor: not-allowed;
+}
+
+/* Fits "Connecting…" so the field doesn't shrink when the label changes. */
+.cb-dash__btn--connect {
+    min-width: 162px;
+}
+
+.cb-dash__step.is-connecting .cb-dash__btn--connect {
+    background: var(--cb-dash-blue);
+    color: #ffffff;
+    cursor: progress;
+}
+
+.cb-dash__spinner {
+    animation: cb-dash-spin 0.8s linear infinite;
+    transform-origin: 10px 10px;
+}
+
+@keyframes cb-dash-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cb-dash__spinner {
+        animation-duration: 2.4s;
+    }
+}
+
+/* Error / warning under the field */
+.cb-dash__message {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+}
+
+.cb-dash__message-icon {
+    display: none;
+    flex-shrink: 0;
+}
+
+.cb-dash__step.is-error .cb-dash__message {
+    color: #9f1818;
+}
+
+.cb-dash__step.is-warning .cb-dash__message {
+    color: #7c4f05;
+}
+
+.cb-dash__step.is-error .cb-dash__message-icon--error,
+.cb-dash__step.is-warning .cb-dash__message-icon--warning {
+    display: block;
+}
+
+.cb-dash__message a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+/* Help links under the field */
+.cb-dash__help-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.cb-dash__help-fallback {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
+
+.cb-dash__link--small {
+    font-size: 13.13px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.25px;
+}
+
 /* Need help */
 .cb-dash__need-help {
     display: flex;
@@ -284,6 +570,7 @@
     }
 
     .cb-dash__paths,
+    .cb-dash__field-row,
     .cb-dash__video-card {
         flex-direction: column;
         align-items: stretch;

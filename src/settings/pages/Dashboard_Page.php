@@ -20,6 +20,8 @@ use function wp_localize_script;
 use function admin_url;
 use function wp_create_nonce;
 use function __;
+use function esc_url;
+use function wp_kses_post;
 use function defined;
 use function constant;
 use function cybot\cookiebot\lib\asset_url;
@@ -313,6 +315,8 @@ class Dashboard_Page implements Settings_Page_Interface {
 	}
 
 	private function render_welcome() {
+		$args = $this->get_welcome_args();
+
 		wp_enqueue_style(
 			'cookiebot-dashboard-revamp-css',
 			asset_url( 'css/backend/dashboard-revamp.css' ),
@@ -334,11 +338,26 @@ class Dashboard_Page implements Settings_Page_Interface {
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( Dashboard_Setup_Ajax::NONCE_ACTION ),
-				'i18n'     => array(),
+				'i18n'     => array(
+					'connect'          => __( 'Connect', 'cookiebot' ),
+					'connecting'       => __( 'Connecting…', 'cookiebot' ),
+					'connect_anyway'   => __( 'Connect anyway', 'cookiebot' ),
+					'try_again'        => __( 'Try again', 'cookiebot' ),
+					'invalid'          => __( 'That doesn’t look like a valid ID. IDs have 9, 14 or 36 characters.', 'cookiebot' ),
+					'save_failed_html' => wp_kses_post(
+						sprintf(
+							/* translators: %s: URL of the plugin's Get support page. */
+							__( 'We couldn’t save this ID. Try again, or <a href="%s">get support</a>.', 'cookiebot' ),
+							esc_url( $args['support_url'] )
+						)
+					),
+					/* translators: %s: the site's domain, e.g. clientsite.com. */
+					'not_set_up'       => __( 'This ID isn’t set up for %1$s. Check you copied the ID for this site, or add %1$s to your domain group in Cookiebot.', 'cookiebot' ),
+				),
 			)
 		);
 
-		include_view( 'admin/common/dashboard/welcome.php', $this->get_welcome_args() );
+		include_view( 'admin/common/dashboard/welcome.php', $args );
 	}
 
 	private function render_connected() {
