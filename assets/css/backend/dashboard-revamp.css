@@ -221,7 +221,8 @@
     line-height: 1.5;
 }
 
-.cb-dash__step[data-cb-connect-locked="1"] .cb-dash__step-num {
+.cb-dash__step[data-cb-connect-locked="1"] .cb-dash__step-num,
+.cb-dash__step[data-cb-step-done="1"] .cb-dash__step-num {
     border-color: var(--cb-dash-line);
     background: #ffffff;
     color: var(--cb-dash-ink);
@@ -254,6 +255,46 @@
     flex-wrap: wrap;
     gap: 0 8px;
     align-items: center;
+}
+
+.cb-dash__body strong {
+    font-weight: 600;
+}
+
+/* Step 1: offer callout + Create account */
+.cb-dash__action {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.cb-dash__offer {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+    padding: 16px 20px 16px 16px;
+    border-radius: 8px;
+    background: var(--cb-dash-blue-50);
+}
+
+.cb-dash__offer-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--cb-dash-blue-100);
+}
+
+.cb-dash__offer-text {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 2px;
 }
 
 /* "Where is it?" trigger (popover in where-is-it.php) */

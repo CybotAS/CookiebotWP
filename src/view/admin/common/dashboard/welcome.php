@@ -59,9 +59,10 @@ $header->display();
 						include_view(
 							'admin/common/dashboard/partials/new-account-step.php',
 							array(
-								'domain'       => $domain,
-								'offer_active' => $offer_active,
-								'signup_url'   => $signup_url,
+								'domain'         => $domain,
+								'offer_active'   => $offer_active,
+								'signup_url'     => $signup_url,
+								'signup_clicked' => $signup_clicked,
 							)
 						);
 						include_view(

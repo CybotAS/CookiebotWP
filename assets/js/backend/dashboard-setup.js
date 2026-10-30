@@ -123,7 +123,23 @@
 		this.$input.trigger( 'focus' );
 	};
 
+	// "Create account" opens the sign-up in a new tab (default link behaviour) and unlocks step 2.
+	function unlockConnectStep() {
+		var $steps = $( this ).closest( '[data-cb-steps]' );
+		$steps.find( '[data-cb-new-account]' ).attr( 'data-cb-step-done', '1' );
+		$steps.find( '[data-cb-connect][data-cb-connect-locked="1"]' ).each( function () {
+			$( this ).attr( 'data-cb-connect-locked', '0' )
+				.find( '[data-cb-connect-input], [data-cb-connect-button]' ).prop( 'disabled', false );
+		} );
+		$.post( cookiebot_setup.ajax_url, {
+			action: 'cookiebot_signup_clicked',
+			nonce: cookiebot_setup.nonce
+		} );
+	}
+
 	$( function () {
+		$( '[data-cb-signup]' ).on( 'click', unlockConnectStep );
+
 		$( '[data-cb-connect]' ).each( function () {
 			new ConnectForm( $( this ) );
 		} );
