@@ -319,8 +319,8 @@ class Dashboard_Page implements Settings_Page_Interface {
 		$args = $this->get_welcome_args();
 
 		wp_enqueue_style(
-			'cookiebot-dashboard-revamp-css',
-			asset_url( 'css/backend/dashboard-revamp.css' ),
+			'cookiebot-dashboard-cookiebot-css',
+			asset_url( 'css/backend/dashboard-cookiebot.css' ),
 			array(),
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 		);
@@ -366,8 +366,8 @@ class Dashboard_Page implements Settings_Page_Interface {
 		$deps = array( 'jquery' );
 
 		wp_enqueue_style(
-			'cookiebot-dashboard-revamp-css',
-			asset_url( 'css/backend/dashboard-revamp.css' ),
+			'cookiebot-dashboard-cookiebot-css',
+			asset_url( 'css/backend/dashboard-cookiebot.css' ),
 			array(),
 			Cookiebot_WP::COOKIEBOT_PLUGIN_VERSION
 		);
