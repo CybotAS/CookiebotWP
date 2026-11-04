@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cookie Banner & Privacy Compliance for GDPR/CCPA/Google Consent Mode – Cookiebot by Usercentrics 4.5.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-plugin\n"
-"POT-Creation-Date: 2026-10-30T10:32:43+00:00\n"
+"POT-Creation-Date: 2026-11-03T16:29:30+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #. Plugin Name of the plugin
 #: cookiebot.php
-msgid "Cookiebot by Usercentrics - Automatic Cookie Banner for GDPR/CCPA & Google Consent Mode"
+msgid "Cookiebot - Cookie Banner & Cookie Consent for GDPR, CCPA & Google Consent Mode"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -1681,12 +1681,12 @@ msgid "Settings"
 msgstr "Paramètres"
 
 #: src/settings/Network_Menu_Settings.php:54
-#: src/settings/pages/Support_Page.php:27
+#: src/settings/pages/Support_Page.php:26
 msgid "Cookiebot Support"
 msgstr "Cookiebot Assistance"
 
 #: src/settings/Network_Menu_Settings.php:55
-#: src/settings/pages/Support_Page.php:28
+#: src/settings/pages/Support_Page.php:27
 #: src/view/admin/cb_frame/support-page.php:16
 #: src/view/admin/common/support-page.php:19
 #: src/view/admin/uc_frame/support-page.php:19
@@ -1754,111 +1754,111 @@ msgstr "Cet ID n’est pas configuré pour %1$s. Vérifiez que vous avez copié 
 msgid "IAB"
 msgstr "IAB"
 
-#: src/settings/pages/Iab_Page.php:131
+#: src/settings/pages/Iab_Page.php:137
 msgid "Purposes of data use"
 msgstr "Finalités du traitement des données"
 
-#: src/settings/pages/Iab_Page.php:132
+#: src/settings/pages/Iab_Page.php:138
 msgid "Inform your users how you’ll use their data. We’ll show this on the second layer of your consent banner, where users interested in more granular detail about data processing can view it."
 msgstr "Informez vos utilisateurs sur la manière dont leurs données vont être utilisées. Les utilisateurs désireux d’obtenir plus de détails sur le traitement de leur données trouveront cette information dans la deuxième section de votre bandeau de consentement."
 
-#: src/settings/pages/Iab_Page.php:139
+#: src/settings/pages/Iab_Page.php:145
 msgid "Special purposes of data use"
 msgstr "Finalités spécifiques du traitement des données"
 
-#: src/settings/pages/Iab_Page.php:140
+#: src/settings/pages/Iab_Page.php:146
 msgid "Inform your users about special purposes of using their data. We’ll show this on the second layer of your consent banner."
 msgstr "Informez vos utilisateurs sur les finalités spécifiques d’utilisation de leurs données. Cette information se trouvera sur la deuxième section de votre bandeau de consentement."
 
-#: src/settings/pages/Iab_Page.php:147
+#: src/settings/pages/Iab_Page.php:153
 msgid "Features required for data processing"
 msgstr "Fonctionnalités nécessaires au traitement des données"
 
-#: src/settings/pages/Iab_Page.php:148
+#: src/settings/pages/Iab_Page.php:154
 msgid "Inform users about the features necessary for processing their personal data. We’ll list the selected features on the second layer of your consent banner."
 msgstr "Informez vos utilisateurs des fonctionnalités indispensables au traitement de leurs données personnelles. Celles-ci seront répertoriées sur la deuxième section de votre bandeau de consentement."
 
-#: src/settings/pages/Iab_Page.php:155
+#: src/settings/pages/Iab_Page.php:161
 msgid "Special features required for data processing"
 msgstr "Fonctionnalités spécifiques nécessaires au traitement des données"
 
-#: src/settings/pages/Iab_Page.php:156
+#: src/settings/pages/Iab_Page.php:162
 msgid "Inform users about any specially categorized features required for processing their personal data. We’ll list the selected features on the second layer of your consent banner, offering options for users to enable or disable them."
 msgstr "Informez vos utilisateurs des fonctionnalités spécifiques requises pour le traitement de leurs données personnelles. Ces fonctionnalités seront répertoriées dans la deuxième section de votre bandeau de consentement, permettant ainsi aux utilisateurs de les activer ou de les désactiver selon leurs préférences."
 
-#: src/settings/pages/Iab_Page.php:163
+#: src/settings/pages/Iab_Page.php:169
 msgid "TCF listed vendors"
 msgstr "Fournisseurs répertoriés dans le TCF"
 
-#: src/settings/pages/Iab_Page.php:184
+#: src/settings/pages/Iab_Page.php:190
 msgid "Store and/or access information on a device"
 msgstr "Collecte et stockage d’informations sur un appareil"
 
-#: src/settings/pages/Iab_Page.php:188
+#: src/settings/pages/Iab_Page.php:194
 msgid "Use limited data to select advertising"
 msgstr "Utilisation restreinte de données pour la sélection de la publicité"
 
-#: src/settings/pages/Iab_Page.php:192
+#: src/settings/pages/Iab_Page.php:198
 msgid "Create profiles for personalised advertising"
 msgstr "Création de profils pour la personnalisation des publicités"
 
-#: src/settings/pages/Iab_Page.php:196
+#: src/settings/pages/Iab_Page.php:202
 msgid "Use profiles to select personalised advertising"
 msgstr "Utilisation de profils pour la sélection de publicités personnalisées"
 
-#: src/settings/pages/Iab_Page.php:200
+#: src/settings/pages/Iab_Page.php:206
 msgid "Create profiles to personalise content"
 msgstr "Création de profils pour la personnalisation du contenu"
 
-#: src/settings/pages/Iab_Page.php:204
+#: src/settings/pages/Iab_Page.php:210
 msgid "Use profiles to select personalised content"
 msgstr "Utilisation de profils pour la personnalisation du contenu"
 
-#: src/settings/pages/Iab_Page.php:208
+#: src/settings/pages/Iab_Page.php:214
 msgid "Measure advertising performance"
 msgstr "Évaluation de la performance publicitaire"
 
-#: src/settings/pages/Iab_Page.php:212
+#: src/settings/pages/Iab_Page.php:218
 msgid "Measure content performance"
 msgstr "Évaluation de la performance du contenu"
 
-#: src/settings/pages/Iab_Page.php:216
+#: src/settings/pages/Iab_Page.php:222
 msgid "Understand audiences through statistics or combinations of data from different sources"
 msgstr "Analyse des audiences à travers des statistiques ou des agrégations de données provenant de diverses sources"
 
-#: src/settings/pages/Iab_Page.php:220
+#: src/settings/pages/Iab_Page.php:226
 msgid "Develop and improve services"
 msgstr "Développement ou amélioration de services"
 
-#: src/settings/pages/Iab_Page.php:224
+#: src/settings/pages/Iab_Page.php:230
 msgid "Use limited data to select content"
 msgstr "Utilisation restreinte de données pour la sélection de contenu"
 
-#: src/settings/pages/Iab_Page.php:230
+#: src/settings/pages/Iab_Page.php:236
 msgid "Ensure security, prevent and detect fraud, and fix errors"
 msgstr "Sécurité, prévention et détection de la fraude, et correction des erreurs"
 
-#: src/settings/pages/Iab_Page.php:234
+#: src/settings/pages/Iab_Page.php:240
 msgid "Deliver and present advertising and content"
 msgstr "Diffusion et présentation de la publicité et du contenu"
 
-#: src/settings/pages/Iab_Page.php:240
+#: src/settings/pages/Iab_Page.php:246
 msgid "Match and combine data from other data sources"
 msgstr "Association et croisement de données provenant d’autres sources"
 
-#: src/settings/pages/Iab_Page.php:244
+#: src/settings/pages/Iab_Page.php:250
 msgid "Link different devices"
 msgstr "Appariement de différents appareils"
 
-#: src/settings/pages/Iab_Page.php:248
+#: src/settings/pages/Iab_Page.php:254
 msgid "Identify devices based on information transmitted automatically"
 msgstr "Identification d’appareils en fonction des informations transmises automatiquement"
 
-#: src/settings/pages/Iab_Page.php:254
+#: src/settings/pages/Iab_Page.php:260
 msgid "Use precise geolocation data"
 msgstr "Utilisation de données de géolocalisation précises"
 
-#: src/settings/pages/Iab_Page.php:258
+#: src/settings/pages/Iab_Page.php:264
 msgid "Actively scan device characteristics for identification"
 msgstr "Analyse active des caractéristiques de l’appareil pour son identification"
 
@@ -2024,7 +2024,7 @@ msgid "Network Settings"
 msgstr "Paramètres réseau"
 
 #: src/view/admin/cb_frame/network-settings-page.php:35
-#: src/view/admin/common/dashboard/partials/disconnect-modal.php:11
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:12
 #: src/view/admin/common/templates/extra/cbid-disconnect-alert.php:3
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:3
 #: src/view/admin/uc_frame/network-settings-page.php:36
@@ -2037,7 +2037,7 @@ msgid "You will need to add a new ID before updating other network settings. If 
 msgstr ""
 
 #: src/view/admin/cb_frame/network-settings-page.php:42
-#: src/view/admin/common/dashboard/partials/disconnect-modal.php:28
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:29
 #: src/view/admin/common/templates/extra/cbid-disconnect-alert.php:10
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:10
 #: src/view/admin/uc_frame/network-settings-page.php:43
@@ -3030,7 +3030,7 @@ msgid "To connect a different ID, disconnect this one first."
 msgstr "Pour connecter un autre ID, déconnectez d’abord celui-ci."
 
 #: src/view/admin/common/dashboard/connected.php:125
-#: src/view/admin/common/dashboard/partials/disconnect-modal.php:31
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:32
 msgid "Disconnect"
 msgstr "Déconnecter"
 
@@ -3117,12 +3117,12 @@ msgstr "Vous utilisez Usercentrics CMP ? Vous pouvez saisir votre ID de paramèt
 msgid "How to find it"
 msgstr "Comment le trouver"
 
-#: src/view/admin/common/dashboard/partials/disconnect-modal.php:14
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:15
 msgid "Close"
 msgstr "Fermer"
 
 #. translators: %s: the site's domain, e.g. clientsite.com.
-#: src/view/admin/common/dashboard/partials/disconnect-modal.php:21
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:22
 #, php-format
 msgid "Your cookie banner will stop showing on %s until you connect the Domain Group ID or Settings ID."
 msgstr "Votre bannière de cookies ne s’affichera plus sur %s tant que vous n’aurez pas connecté l’ID de groupe de domaines ou l’ID de paramètres."

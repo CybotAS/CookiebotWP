@@ -1,22 +1,22 @@
 # Copyright (C) 2026 Usercentrics A/S
-# This file is distributed under the same license as the Cookiebot by Usercentrics - Automatic Cookie Banner for GDPR/CCPA & Google Consent Mode plugin.
+# This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cookiebot by Usercentrics - Automatic Cookie Banner for GDPR/CCPA & Google Consent Mode 4.7.2\n"
+"Project-Id-Version: Cookiebot - Cookie Banner & Cookie Consent for GDPR, CCPA & Google Consent Mode 4.7.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-30T10:32:43+00:00\n"
+"POT-Creation-Date: 2026-11-03T16:29:30+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: cookiebot\n"
 
 #. Plugin Name of the plugin
 #: cookiebot.php
-msgid "Cookiebot by Usercentrics - Automatic Cookie Banner for GDPR/CCPA & Google Consent Mode"
+msgid "Cookiebot - Cookie Banner & Cookie Consent for GDPR, CCPA & Google Consent Mode"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -1686,12 +1686,12 @@ msgid "Settings"
 msgstr ""
 
 #: src/settings/Network_Menu_Settings.php:54
-#: src/settings/pages/Support_Page.php:27
+#: src/settings/pages/Support_Page.php:26
 msgid "Cookiebot Support"
 msgstr ""
 
 #: src/settings/Network_Menu_Settings.php:55
-#: src/settings/pages/Support_Page.php:28
+#: src/settings/pages/Support_Page.php:27
 #: src/view/admin/cb_frame/support-page.php:16
 #: src/view/admin/common/support-page.php:19
 #: src/view/admin/uc_frame/support-page.php:19
@@ -1760,111 +1760,111 @@ msgstr ""
 msgid "IAB"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:131
+#: src/settings/pages/Iab_Page.php:137
 msgid "Purposes of data use"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:132
+#: src/settings/pages/Iab_Page.php:138
 msgid "Inform your users how you’ll use their data. We’ll show this on the second layer of your consent banner, where users interested in more granular detail about data processing can view it."
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:139
+#: src/settings/pages/Iab_Page.php:145
 msgid "Special purposes of data use"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:140
+#: src/settings/pages/Iab_Page.php:146
 msgid "Inform your users about special purposes of using their data. We’ll show this on the second layer of your consent banner."
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:147
+#: src/settings/pages/Iab_Page.php:153
 msgid "Features required for data processing"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:148
+#: src/settings/pages/Iab_Page.php:154
 msgid "Inform users about the features necessary for processing their personal data. We’ll list the selected features on the second layer of your consent banner."
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:155
+#: src/settings/pages/Iab_Page.php:161
 msgid "Special features required for data processing"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:156
+#: src/settings/pages/Iab_Page.php:162
 msgid "Inform users about any specially categorized features required for processing their personal data. We’ll list the selected features on the second layer of your consent banner, offering options for users to enable or disable them."
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:163
+#: src/settings/pages/Iab_Page.php:169
 msgid "TCF listed vendors"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:184
+#: src/settings/pages/Iab_Page.php:190
 msgid "Store and/or access information on a device"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:188
+#: src/settings/pages/Iab_Page.php:194
 msgid "Use limited data to select advertising"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:192
+#: src/settings/pages/Iab_Page.php:198
 msgid "Create profiles for personalised advertising"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:196
+#: src/settings/pages/Iab_Page.php:202
 msgid "Use profiles to select personalised advertising"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:200
+#: src/settings/pages/Iab_Page.php:206
 msgid "Create profiles to personalise content"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:204
+#: src/settings/pages/Iab_Page.php:210
 msgid "Use profiles to select personalised content"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:208
+#: src/settings/pages/Iab_Page.php:214
 msgid "Measure advertising performance"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:212
+#: src/settings/pages/Iab_Page.php:218
 msgid "Measure content performance"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:216
+#: src/settings/pages/Iab_Page.php:222
 msgid "Understand audiences through statistics or combinations of data from different sources"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:220
+#: src/settings/pages/Iab_Page.php:226
 msgid "Develop and improve services"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:224
+#: src/settings/pages/Iab_Page.php:230
 msgid "Use limited data to select content"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:230
+#: src/settings/pages/Iab_Page.php:236
 msgid "Ensure security, prevent and detect fraud, and fix errors"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:234
+#: src/settings/pages/Iab_Page.php:240
 msgid "Deliver and present advertising and content"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:240
+#: src/settings/pages/Iab_Page.php:246
 msgid "Match and combine data from other data sources"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:244
+#: src/settings/pages/Iab_Page.php:250
 msgid "Link different devices"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:248
+#: src/settings/pages/Iab_Page.php:254
 msgid "Identify devices based on information transmitted automatically"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:254
+#: src/settings/pages/Iab_Page.php:260
 msgid "Use precise geolocation data"
 msgstr ""
 
-#: src/settings/pages/Iab_Page.php:258
+#: src/settings/pages/Iab_Page.php:264
 msgid "Actively scan device characteristics for identification"
 msgstr ""
 
@@ -2033,7 +2033,7 @@ msgid "Network Settings"
 msgstr ""
 
 #: src/view/admin/cb_frame/network-settings-page.php:35
-#: src/view/admin/common/dashboard/partials/disconnect-modal.php:11
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:12
 #: src/view/admin/common/templates/extra/cbid-disconnect-alert.php:3
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:3
 #: src/view/admin/uc_frame/network-settings-page.php:36
@@ -2046,7 +2046,7 @@ msgid "You will need to add a new ID before updating other network settings. If 
 msgstr ""
 
 #: src/view/admin/cb_frame/network-settings-page.php:42
-#: src/view/admin/common/dashboard/partials/disconnect-modal.php:28
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:29
 #: src/view/admin/common/templates/extra/cbid-disconnect-alert.php:10
 #: src/view/admin/common/templates/extra/subsite-disconnect-alert.php:10
 #: src/view/admin/uc_frame/network-settings-page.php:43
@@ -3039,7 +3039,7 @@ msgid "To connect a different ID, disconnect this one first."
 msgstr ""
 
 #: src/view/admin/common/dashboard/connected.php:125
-#: src/view/admin/common/dashboard/partials/disconnect-modal.php:31
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:32
 msgid "Disconnect"
 msgstr ""
 
@@ -3126,12 +3126,12 @@ msgstr ""
 msgid "How to find it"
 msgstr ""
 
-#: src/view/admin/common/dashboard/partials/disconnect-modal.php:14
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:15
 msgid "Close"
 msgstr ""
 
 #. translators: %s: the site's domain, e.g. clientsite.com.
-#: src/view/admin/common/dashboard/partials/disconnect-modal.php:21
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:22
 #, php-format
 msgid "Your cookie banner will stop showing on %s until you connect the Domain Group ID or Settings ID."
 msgstr ""
