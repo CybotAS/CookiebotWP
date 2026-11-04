@@ -134,6 +134,19 @@ class Test_Cbid_Checker extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Test that a 36-character ID must be a UUID to count as a Domain Group ID.
+	 *
+	 * @return void
+	 */
+	public function test_get_type_requires_uuid_for_domain_group_id() {
+		$this->assertSame( Cbid_Checker::TYPE_DOMAIN_GROUP, Cbid_Checker::get_type( strtoupper( self::DOMAIN_GROUP_ID ) ) );
+		$this->assertSame( Cbid_Checker::TYPE_INVALID, Cbid_Checker::get_type( str_repeat( 'a', 36 ) ) );
+		$this->assertSame( Cbid_Checker::TYPE_INVALID, Cbid_Checker::get_type( 'aabbccdd-1111-2222-3333-aabbccddeefg' ) );
+		$this->assertSame( Cbid_Checker::TYPE_INVALID, Cbid_Checker::get_type( 'aabbccdd11112222333344445555666677ff' ) );
+		$this->assertSame( Cbid_Checker::RESULT_INVALID, Cbid_Checker::check( str_repeat( 'a', 36 ) ) );
+	}
+
+	/**
 	 * Test get_site_host strips port and path and lowercases.
 	 *
 	 * @return void

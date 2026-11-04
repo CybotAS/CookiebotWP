@@ -56,7 +56,7 @@ class Cbid_Checker {
 	}
 
 	/**
-	 * Classify an ID by length: 36 chars is a Domain Group ID, 9 or 14
+	 * Classify an ID: a 36-char UUID is a Domain Group ID, 9 or 14
 	 * alphanumeric chars is a Usercentrics Settings ID, anything else is invalid.
 	 *
 	 * @param mixed $id Raw ID.
@@ -66,7 +66,8 @@ class Cbid_Checker {
 		$id     = self::normalize( $id );
 		$length = strlen( $id );
 
-		if ( 36 === $length ) {
+		// Domain Group IDs are UUIDs; normalize() has already lowercased them.
+		if ( 36 === $length && preg_match( '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', $id ) ) {
 			return self::TYPE_DOMAIN_GROUP;
 		}
 

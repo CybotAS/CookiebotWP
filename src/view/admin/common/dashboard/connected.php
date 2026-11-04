@@ -103,7 +103,7 @@ $header->display();
 										?>
 									</label>
 									<input type="text" class="cb-dash__input" id="cb-dash-cbid" value="<?php echo esc_attr( $cbid ); ?>" readonly
-										aria-describedby="cb-dash-cbid-help">
+										<?php echo ( $cb_dash_not_set_up || ! $is_network_id ) ? 'aria-describedby="cb-dash-cbid-help"' : ''; ?>>
 									<?php if ( $cb_dash_not_set_up ) : ?>
 										<div class="cb-dash__message" id="cb-dash-cbid-help">
 											<img class="cb-dash__message-icon cb-dash__message-icon--warning" src="<?php echo esc_url( asset_url( 'img/dashboard/warning.svg' ) ); ?>" width="24" height="24" alt="">
