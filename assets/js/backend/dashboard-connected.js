@@ -38,7 +38,7 @@
 			close();
 		} );
 
-		var reduceMotion = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+		var reduceMotion = window.matchMedia?.( '(prefers-reduced-motion: reduce)' ).matches;
 		if ( typeof window.confetti === 'function' && ! reduceMotion ) {
 			// Three large cannons: bottom corners aimed up and inward, plus one from the bottom middle straight up.
 			// Velocity scales with the viewport so the confetti reaches the top on large screens too.
@@ -82,7 +82,7 @@
 				nonce: cookiebot_connected.nonce
 			} )
 				.done( function ( response ) {
-					if ( response && response.success && response.data && response.data.redirect ) {
+					if ( response?.success && response.data?.redirect ) {
 						window.location = response.data.redirect;
 						return;
 					}

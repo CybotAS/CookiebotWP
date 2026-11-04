@@ -21,7 +21,7 @@
 		$video.empty().append( $iframe );
 	}
 
-	var i18n = ( window.cookiebot_setup && window.cookiebot_setup.i18n ) || {};
+	var i18n = window.cookiebot_setup?.i18n || {};
 
 	/**
 	 * One connect form: idle → connecting → (redirect | invalid | save_failed | not_set_up).
@@ -80,7 +80,6 @@
 	};
 
 	ConnectForm.prototype.submit = function ( event ) {
-		var self = this;
 		event.preventDefault();
 		if ( this.$root.hasClass( 'is-connecting' ) ) {
 			return;
@@ -93,17 +92,17 @@
 			cbid: this.$input.val(),
 			force: this.force ? '1' : ''
 		} )
-			.done( function ( response ) {
-				if ( response && response.success && response.data && response.data.redirect ) {
+			.done( ( response ) => {
+				if ( response?.success && response.data?.redirect ) {
 					window.location = response.data.redirect;
 					return;
 				}
-				self.setConnecting( false );
-				self.handleError( response && response.data ? response.data : {} );
+				this.setConnecting( false );
+				this.handleError( response?.data || {} );
 			} )
-			.fail( function () {
-				self.setConnecting( false );
-				self.handleError( { code: 'save_failed' } );
+			.fail( () => {
+				this.setConnecting( false );
+				this.handleError( { code: 'save_failed' } );
 			} );
 	};
 
@@ -181,7 +180,7 @@
 		$( '[data-cb-signup]' ).on( 'click', unlockConnectStep );
 
 		$( '[data-cb-connect]' ).each( function () {
-			new ConnectForm( $( this ) );
+			$( this ).data( 'cbConnectForm', new ConnectForm( $( this ) ) );
 		} );
 
 		// "Create a new account" is the default on every visit, even if the browser restored another choice.
