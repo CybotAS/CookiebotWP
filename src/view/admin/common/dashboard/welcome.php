@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 use cybot\cookiebot\settings\templates\Header;
 use cybot\cookiebot\settings\templates\Main_Tabs;
 use function cybot\cookiebot\lib\include_view;

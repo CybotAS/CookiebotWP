@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 use function cybot\cookiebot\lib\asset_url;
 
 /**

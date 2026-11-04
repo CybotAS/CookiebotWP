@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 use function cybot\cookiebot\lib\asset_url;
 use function cybot\cookiebot\lib\include_view;
 
