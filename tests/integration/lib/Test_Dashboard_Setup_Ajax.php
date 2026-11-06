@@ -8,6 +8,7 @@
 
 namespace cybot\cookiebot\tests\integration\lib;
 
+use cybot\cookiebot\lib\Cbid_Checker;
 use cybot\cookiebot\lib\Dashboard_Setup_Ajax;
 use WP_Ajax_UnitTestCase;
 use WP_Error;
@@ -189,14 +190,46 @@ class Test_Dashboard_Setup_Ajax extends WP_Ajax_UnitTestCase {
 	 * @return void
 	 */
 	public function test_connect_trims_and_saves_match() {
-		$this->stub_body( 'window.CookieConsent={};' );
+		$this->stub_body( '// 2.143.0\n!function(){var HIDDEN_CLASS="CybotCookiebotHidden"}();' );
 
 		$response = $this->run_ajax( 'cookiebot_connect_cbid', array( 'cbid' => '  ' . self::DOMAIN_GROUP_ID . ' ' ) );
 
 		$this->assertTrue( $response['success'] );
 		$this->assertSame( admin_url( 'admin.php?page=cookiebot' ), $response['data']['redirect'] );
 		$this->assertSame( self::DOMAIN_GROUP_ID, get_option( 'cookiebot-cbid' ) );
-		$this->assertSame( '1', get_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED ) );
+		$this->assertSame( Cbid_Checker::fingerprint( self::DOMAIN_GROUP_ID ), get_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED ) );
+	}
+
+	/**
+	 * An unrecognised response still saves, but without the celebration.
+	 *
+	 * @return void
+	 */
+	public function test_connect_unrecognised_body_saves_without_celebration() {
+		$this->stub_body( '<html>maintenance</html>' );
+
+		$response = $this->run_ajax( 'cookiebot_connect_cbid', array( 'cbid' => self::DOMAIN_GROUP_ID ) );
+
+		$this->assertTrue( $response['success'] );
+		$this->assertSame( self::DOMAIN_GROUP_ID, get_option( 'cookiebot-cbid' ) );
+		$this->assertFalse( get_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED ) );
+	}
+
+	/**
+	 * Disconnect drops the cached check for the old ID.
+	 *
+	 * @return void
+	 */
+	public function test_disconnect_forgets_cached_check() {
+		$this->stub_body( '// 2.143.0\n!function(){var HIDDEN_CLASS="CybotCookiebotHidden"}();' );
+		update_option( 'cookiebot-cbid', self::DOMAIN_GROUP_ID );
+		Cbid_Checker::check_cached( self::DOMAIN_GROUP_ID );
+		$calls = $this->http_calls;
+
+		$this->run_ajax( 'cookiebot_disconnect_cbid' );
+		Cbid_Checker::check_cached( self::DOMAIN_GROUP_ID );
+
+		$this->assertSame( $calls + 1, $this->http_calls );
 	}
 
 	/**
@@ -282,7 +315,7 @@ class Test_Dashboard_Setup_Ajax extends WP_Ajax_UnitTestCase {
 	 * @return void
 	 */
 	public function test_connect_saves_domain_group_id_lowercase() {
-		$this->stub_body( 'window.CookieConsent={};' );
+		$this->stub_body( '// 2.143.0\n!function(){var HIDDEN_CLASS="CybotCookiebotHidden"}();' );
 
 		$response = $this->run_ajax( 'cookiebot_connect_cbid', array( 'cbid' => strtoupper( self::DOMAIN_GROUP_ID ) ) );
 
@@ -321,7 +354,7 @@ class Test_Dashboard_Setup_Ajax extends WP_Ajax_UnitTestCase {
 	 * @return void
 	 */
 	public function test_connect_same_id_twice_succeeds() {
-		$this->stub_body( 'window.CookieConsent={};' );
+		$this->stub_body( '// 2.143.0\n!function(){var HIDDEN_CLASS="CybotCookiebotHidden"}();' );
 
 		$first  = $this->run_ajax( 'cookiebot_connect_cbid', array( 'cbid' => self::DOMAIN_GROUP_ID ) );
 		$second = $this->run_ajax( 'cookiebot_connect_cbid', array( 'cbid' => self::DOMAIN_GROUP_ID ) );

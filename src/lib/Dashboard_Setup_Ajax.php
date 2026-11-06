@@ -55,6 +55,8 @@ class Dashboard_Setup_Ajax {
 			wp_send_json_error( array( 'code' => 'invalid' ) );
 		}
 
+		$result = Cbid_Checker::RESULT_UNKNOWN;
+
 		if ( ! $force ) {
 			$result = Cbid_Checker::check( $id );
 
@@ -79,8 +81,11 @@ class Dashboard_Setup_Ajax {
 			wp_send_json_error( array( 'code' => 'save_failed' ) );
 		}
 
-		if ( ! $force ) {
-			set_transient( self::TRANSIENT_JUST_CONNECTED, '1', 300 );
+		Cbid_Checker::remember( $id, $result );
+
+		// Celebrate only a verified connect, and only for this ID.
+		if ( Cbid_Checker::RESULT_MATCH === $result ) {
+			set_transient( self::TRANSIENT_JUST_CONNECTED, Cbid_Checker::fingerprint( $id ), 300 );
 		}
 
 		$this->send_redirect();
@@ -96,6 +101,7 @@ class Dashboard_Setup_Ajax {
 	public function ajax_disconnect() {
 		$this->authorize();
 
+		Cbid_Checker::forget( get_option( 'cookiebot-cbid', '' ) );
 		update_option( 'cookiebot-cbid', '' );
 		delete_option( 'cookiebot-cbid-override' );
 

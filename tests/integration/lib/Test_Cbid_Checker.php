@@ -193,8 +193,59 @@ class Test_Cbid_Checker extends WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_banner_script_is_match() {
-		$this->stub_response( 'var CookieConsent={};' );
+		$this->stub_response( '// 2.143.0\n!function(){var HIDDEN_CLASS="CybotCookiebotHidden"}();' );
 		$this->assertSame( Cbid_Checker::RESULT_MATCH, Cbid_Checker::check( self::DOMAIN_GROUP_ID, 'clientsite.com' ) );
+	}
+
+	/**
+	 * A 200 body without a known marker is unknown, not a match.
+	 *
+	 * @return void
+	 */
+	public function test_unrecognised_body_is_unknown() {
+		$this->stub_response( '<html><body>Something went wrong</body></html>' );
+		$this->assertSame( Cbid_Checker::RESULT_UNKNOWN, Cbid_Checker::check( self::DOMAIN_GROUP_ID, 'clientsite.com' ) );
+	}
+
+	/**
+	 * check_cached() calls the endpoint once per ID and host.
+	 *
+	 * @return void
+	 */
+	public function test_check_cached_reuses_result() {
+		$this->stub_response( '// 2.143.0\n!function(){var HIDDEN_CLASS="CybotCookiebotHidden"}();' );
+
+		$this->assertSame( Cbid_Checker::RESULT_MATCH, Cbid_Checker::check_cached( self::DOMAIN_GROUP_ID, 'clientsite.com' ) );
+		$this->assertSame( Cbid_Checker::RESULT_MATCH, Cbid_Checker::check_cached( self::DOMAIN_GROUP_ID, 'clientsite.com' ) );
+		$this->assertCount( 1, $this->captured_args );
+	}
+
+	/**
+	 * Unknown results are not cached.
+	 *
+	 * @return void
+	 */
+	public function test_check_cached_skips_unknown() {
+		$this->stub_response( '<html></html>' );
+
+		Cbid_Checker::check_cached( self::DOMAIN_GROUP_ID, 'clientsite.com' );
+		Cbid_Checker::check_cached( self::DOMAIN_GROUP_ID, 'clientsite.com' );
+		$this->assertCount( 2, $this->captured_args );
+	}
+
+	/**
+	 * forget() drops the cached result for the current site.
+	 *
+	 * @return void
+	 */
+	public function test_forget_clears_cache() {
+		$this->stub_response( '// 2.143.0\n!function(){var HIDDEN_CLASS="CybotCookiebotHidden"}();' );
+		$host = Cbid_Checker::get_site_host();
+
+		Cbid_Checker::check_cached( self::DOMAIN_GROUP_ID, $host );
+		Cbid_Checker::forget( self::DOMAIN_GROUP_ID );
+		Cbid_Checker::check_cached( self::DOMAIN_GROUP_ID, $host );
+		$this->assertCount( 2, $this->captured_args );
 	}
 
 	/**

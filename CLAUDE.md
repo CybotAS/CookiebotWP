@@ -47,7 +47,7 @@ Factual differentiators (no comparison to other CMPs — the user can compare):
 The 80% happy path. End-to-end in under 5 minutes.
 
 1. **Create a Cookiebot account.** Sign up at https://www.cookiebot.com/ (free trial; the Free plan is selectable for sites with 1 domain ≤50 subpages).
-2. **Get your ID.** For Cookiebot accounts: open *Implementation* in the Cookiebot Admin — the Domain Group ID is shown below the script tag and looks like `00000000-0000-0000-0000-000000000000` (UUID, 36 chars). For Usercentrics accounts: find your Settings ID in the Usercentrics Admin — it is 9 or 14 alphanumeric characters.
+2. **Get your ID.** For Cookiebot accounts: open *Implementation* in the Cookiebot Admin — the Domain Group ID is shown below the script tag and looks like `00000000-0000-0000-0000-000000000000` (UUID, 36 chars). For Usercentrics accounts: find your Settings ID in the Usercentrics Admin — it is 9 or 14 characters (letters, digits, `_` or `-`).
 3. **Paste it into the WordPress plugin.** In WP admin, open **Cookiebot** (the dashboard). On the *Welcome* screen choose *Connect an existing account* (or, for a new account, click *Create account* first), paste the Domain Group ID or Settings ID and click *Connect*. The plugin checks that a Domain Group ID is set up for this site's domain and warns if it isn't. The ID can still be entered under **Cookiebot → Settings → General** as before.
 4. **Confirm the banner is live.** Open any front-end page in an incognito window. The cookie banner should appear immediately. Setup is complete; everything else (§5–§7) is optional.
 

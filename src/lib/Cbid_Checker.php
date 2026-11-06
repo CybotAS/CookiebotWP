@@ -2,9 +2,12 @@
 
 namespace cybot\cookiebot\lib;
 
+use function delete_transient;
+use function get_transient;
 use function home_url;
 use function is_wp_error;
 use function rawurlencode;
+use function set_transient;
 use function wp_parse_url;
 use function wp_remote_get;
 use function wp_remote_retrieve_body;
@@ -15,9 +18,9 @@ use function wp_remote_retrieve_response_code;
  * current site's domain is set up for a Domain Group ID.
  *
  * NOTE: the consent.cookiebot.com/<id>/cc.js endpoint used for the domain check
- * is undocumented; its response markers may change without notice. Anything
- * unexpected maps to RESULT_UNKNOWN or RESULT_MATCH so a change never blocks
- * a user from connecting.
+ * is undocumented; its response markers may change without notice. Only a
+ * body with the banner script marker counts as RESULT_MATCH; anything
+ * unexpected maps to RESULT_UNKNOWN, which still lets the user connect.
  *
  * The ID is sensitive: never log or echo it.
  */
@@ -36,6 +39,11 @@ class Cbid_Checker {
 
 	const NOT_AUTHORIZED_MARKER = 'is not authorized to show the cookie banner';
 	const OUT_OF_REGION         = 'CookieConsent.setOutOfRegion();';
+	// Near the start of the real banner script (about byte 70 of the response).
+	const BANNER_SCRIPT_MARKER = 'CybotCookiebotHidden';
+
+	const CACHE_PREFIX = 'cookiebot_cbid_check_';
+	const CACHE_TTL    = 600;
 
 	const TIMEOUT = 5;
 
@@ -56,7 +64,10 @@ class Cbid_Checker {
 	}
 
 	/**
-	 * Classify an ID: UUID = Domain Group ID, 9 or 14 chars = Settings ID.
+	 * Classify an ID.
+	 * - Domain Group ID: a UUID (lowercased by normalize()).
+	 * - Settings ID: 9 or 14 chars of [A-Za-z0-9_-].
+	 * - Anything else: invalid.
 	 *
 	 * @param mixed $id Raw ID.
 	 * @return string One of the TYPE_* constants.
@@ -132,10 +143,82 @@ class Cbid_Checker {
 			return self::RESULT_NOT_SET_UP;
 		}
 
-		if ( self::OUT_OF_REGION === $body ) {
-			return self::RESULT_UNKNOWN;
+		if ( false !== strpos( $body, self::BANNER_SCRIPT_MARKER ) ) {
+			return self::RESULT_MATCH;
 		}
 
-		return self::RESULT_MATCH;
+		// Out-of-region bodies and any other unexpected response.
+		return self::RESULT_UNKNOWN;
+	}
+
+	/**
+	 * check() with a short cache, so the dashboard doesn't block on the
+	 * remote call on every load. RESULT_UNKNOWN is not cached.
+	 *
+	 * @param mixed       $id   Raw ID.
+	 * @param string|null $host Site host; defaults to the current site host.
+	 * @return string One of the RESULT_* constants.
+	 */
+	public static function check_cached( $id, $host = null ) {
+		$host   = null === $host ? self::get_site_host() : $host;
+		$key    = self::cache_key( $id, $host );
+		$cached = get_transient( $key );
+
+		if ( is_string( $cached ) && '' !== $cached ) {
+			return $cached;
+		}
+
+		$result = self::check( $id, $host );
+		self::remember( $id, $result, $host );
+
+		return $result;
+	}
+
+	/**
+	 * Store a check result. RESULT_UNKNOWN is not cached.
+	 *
+	 * @param mixed       $id     Raw ID.
+	 * @param string      $result One of the RESULT_* constants.
+	 * @param string|null $host   Site host; defaults to the current site host.
+	 * @return void
+	 */
+	public static function remember( $id, $result, $host = null ) {
+		if ( self::RESULT_UNKNOWN === $result ) {
+			return;
+		}
+
+		$host = null === $host ? self::get_site_host() : $host;
+		set_transient( self::cache_key( $id, $host ), $result, self::CACHE_TTL );
+	}
+
+	/**
+	 * Drop the cached result for an ID on the current site.
+	 *
+	 * @param mixed $id Raw ID.
+	 * @return void
+	 */
+	public static function forget( $id ) {
+		delete_transient( self::cache_key( $id, self::get_site_host() ) );
+	}
+
+	/**
+	 * Hash of an ID, so it never appears in option names or values.
+	 *
+	 * @param mixed $id Raw ID.
+	 * @return string
+	 */
+	public static function fingerprint( $id ) {
+		return hash( 'sha256', self::normalize( $id ) );
+	}
+
+	/**
+	 * Transient key for an ID and host.
+	 *
+	 * @param mixed  $id   Raw ID.
+	 * @param string $host Site host.
+	 * @return string
+	 */
+	private static function cache_key( $id, $host ) {
+		return self::CACHE_PREFIX . md5( self::normalize( $id ) . '|' . $host );
 	}
 }

@@ -12,9 +12,10 @@ use cybot\cookiebot\lib\Cbid_Checker;
 use cybot\cookiebot\lib\Dashboard_Setup_Ajax;
 use cybot\cookiebot\lib\Setup_Offer;
 use cybot\cookiebot\settings\pages\Dashboard_Page;
-use function cybot\cookiebot\lib\include_view;
 use WP_Error;
 use WP_UnitTestCase;
+
+use function cybot\cookiebot\lib\include_view;
 
 /**
  * Test class for Dashboard_Page args builders.
@@ -122,7 +123,7 @@ class Test_Dashboard_Page_Routing extends WP_UnitTestCase {
 
 	public function test_connected_args_just_connected_skips_check() {
 		update_option( 'cookiebot-cbid', self::DOMAIN_GROUP_ID );
-		set_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED, 1, 60 );
+		set_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED, Cbid_Checker::fingerprint( self::DOMAIN_GROUP_ID ), 60 );
 		$this->stub( new WP_Error( 'should_not_be_called' ) );
 
 		$args = ( new Dashboard_Page() )->get_connected_args();
@@ -131,6 +132,36 @@ class Test_Dashboard_Page_Routing extends WP_UnitTestCase {
 		$this->assertTrue( $args['just_connected'] );
 		$this->assertFalse( get_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED ) );
 		$this->assertSame( 0, $this->http_calls );
+	}
+
+	public function test_just_connected_for_another_id_is_ignored() {
+		update_option( 'cookiebot-cbid', self::DOMAIN_GROUP_ID );
+		set_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED, Cbid_Checker::fingerprint( 'abcdefghi' ), 60 );
+		$this->stub_body( 'Domain is not authorized to show the cookie banner' );
+
+		$args = ( new Dashboard_Page() )->get_connected_args();
+
+		$this->assertFalse( $args['just_connected'] );
+		$this->assertSame( 'not_set_up', $args['check_result'] );
+		$this->assertFalse( get_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED ) );
+	}
+
+	public function test_consume_just_connected_deletes_transient() {
+		set_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED, Cbid_Checker::fingerprint( self::DOMAIN_GROUP_ID ), 60 );
+
+		$this->assertTrue( ( new Dashboard_Page() )->consume_just_connected( self::DOMAIN_GROUP_ID ) );
+		$this->assertFalse( get_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED ) );
+		$this->assertFalse( ( new Dashboard_Page() )->consume_just_connected( self::DOMAIN_GROUP_ID ) );
+	}
+
+	public function test_connected_args_caches_domain_check() {
+		update_option( 'cookiebot-cbid', self::DOMAIN_GROUP_ID );
+		$this->stub_body( 'Domain is not authorized to show the cookie banner' );
+
+		( new Dashboard_Page() )->get_connected_args();
+		( new Dashboard_Page() )->get_connected_args();
+
+		$this->assertSame( 1, $this->http_calls );
 	}
 
 	public function test_connected_dashboard_without_warning_when_check_unknown() {
@@ -160,11 +191,23 @@ class Test_Dashboard_Page_Routing extends WP_UnitTestCase {
 
 	public function test_disconnect_dialog_text() {
 		ob_start();
-		include_view( 'admin/common/dashboard/partials/disconnect-modal.php', array( 'domain' => 'clientsite.com', 'has_network_id' => false ) );
+		include_view(
+			'admin/common/dashboard/partials/disconnect-modal.php',
+			array(
+				'domain'         => 'clientsite.com',
+				'has_network_id' => false,
+			)
+		);
 		$single = ob_get_clean();
 
 		ob_start();
-		include_view( 'admin/common/dashboard/partials/disconnect-modal.php', array( 'domain' => 'clientsite.com', 'has_network_id' => true ) );
+		include_view(
+			'admin/common/dashboard/partials/disconnect-modal.php',
+			array(
+				'domain'         => 'clientsite.com',
+				'has_network_id' => true,
+			)
+		);
 		$network = ob_get_clean();
 
 		$this->assertStringContainsString( 'will stop showing on clientsite.com', $single );

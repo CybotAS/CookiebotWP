@@ -78,6 +78,20 @@ class Test_Set_Cbid_Ability extends WP_UnitTestCase {
 		$this->assertSame( 'cookiebot_invalid_cbid', $result->get_error_code() );
 	}
 
+	public function test_accepts_settings_id_with_underscore_and_dash() {
+		$args   = ( new Set_Cbid_Ability( $this->logger ) )->get_args();
+		$result = call_user_func( $args['execute_callback'], array( 'cbid' => 'Ab1-Cd34Ef56G_' ) );
+		$this->assertTrue( $result['success'] );
+		$this->assertSame( 'Ab1-Cd34Ef56G_', get_option( 'cookiebot-cbid' ) );
+		$this->assertSame( 1, preg_match( '/' . Set_Cbid_Ability::CBID_PATTERN . '/', 'Ab1-Cd34Ef56G_' ) );
+	}
+
+	public function test_rejects_settings_id_with_other_punctuation() {
+		$args   = ( new Set_Cbid_Ability( $this->logger ) )->get_args();
+		$result = call_user_func( $args['execute_callback'], array( 'cbid' => 'abc.defgh' ) );
+		$this->assertInstanceOf( 'WP_Error', $result );
+	}
+
 	public function test_returns_wp_error_on_empty_cbid() {
 		$args   = ( new Set_Cbid_Ability( $this->logger ) )->get_args();
 		$result = call_user_func( $args['execute_callback'], array( 'cbid' => '' ) );

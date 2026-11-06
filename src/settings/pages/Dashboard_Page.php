@@ -80,6 +80,9 @@ class Dashboard_Page implements Settings_Page_Interface {
 		$is_authenticated   = ! empty( Cookiebot_WP::get_auth_token() );
 		$is_cb_user         = Cookiebot_Frame::is_cb_frame_type();
 
+		// Consumed before any branch, so it can't linger behind another screen.
+		$just_connected = $this->consume_just_connected( $cbid );
+
 		// Get user data and check if they were onboarded via signup
 		$was_onboarded = Cookiebot_WP::was_onboarded_via_signup();
 		$user_email    = isset( $user_data['email'] ) ? $user_data['email'] : '';
@@ -206,7 +209,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 
 		// Cookiebot (CB) accounts and sites without account data: new connected view.
 		if ( true === $is_cb_user || empty( $user_data ) ) {
-			$this->render_connected();
+			$this->render_connected( $just_connected );
 			return;
 		}
 
@@ -283,23 +286,42 @@ class Dashboard_Page implements Settings_Page_Interface {
 	}
 
 	/**
-	 * Build the args for the connected view. Consumes the just-connected transient.
+	 * Read and delete the just-connected transient. True only if it was set
+	 * for this ID.
 	 *
+	 * @param string $cbid The active ID.
+	 * @return bool
+	 */
+	public function consume_just_connected( $cbid ) {
+		$stored = get_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED );
+
+		if ( false === $stored ) {
+			return false;
+		}
+
+		delete_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED );
+
+		return '' !== (string) $cbid && hash_equals( (string) $stored, Cbid_Checker::fingerprint( $cbid ) );
+	}
+
+	/**
+	 * Build the args for the connected view.
+	 *
+	 * @param bool|null $just_connected From consume_just_connected(); null reads it here.
 	 * @return array
 	 */
-	public function get_connected_args() {
-		$cbid           = Cookiebot_WP::get_cbid();
-		$id_type        = Cbid_Checker::get_type( $cbid );
-		$just_connected = (bool) get_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED );
+	public function get_connected_args( $just_connected = null ) {
+		$cbid    = Cookiebot_WP::get_cbid();
+		$id_type = Cbid_Checker::get_type( $cbid );
 
-		if ( $just_connected ) {
-			delete_transient( Dashboard_Setup_Ajax::TRANSIENT_JUST_CONNECTED );
+		if ( null === $just_connected ) {
+			$just_connected = $this->consume_just_connected( $cbid );
 		}
 
 		if ( $just_connected || Cbid_Checker::TYPE_SETTINGS === $id_type ) {
 			$check_result = Cbid_Checker::RESULT_MATCH;
 		} else {
-			$check_result = Cbid_Checker::check( $cbid );
+			$check_result = Cbid_Checker::check_cached( $cbid );
 		}
 
 		return array(
@@ -362,8 +384,8 @@ class Dashboard_Page implements Settings_Page_Interface {
 		include_view( 'admin/common/dashboard/welcome.php', $args );
 	}
 
-	private function render_connected() {
-		$args = $this->get_connected_args();
+	private function render_connected( $just_connected = null ) {
+		$args = $this->get_connected_args( $just_connected );
 		$deps = array( 'jquery' );
 
 		wp_enqueue_style(
