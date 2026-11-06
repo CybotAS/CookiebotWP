@@ -219,6 +219,6 @@ class Cbid_Checker {
 	 * @return string
 	 */
 	private static function cache_key( $id, $host ) {
-		return self::CACHE_PREFIX . md5( self::normalize( $id ) . '|' . $host );
+		return self::CACHE_PREFIX . hash( 'sha256', self::normalize( $id ) . '|' . $host );
 	}
 }
