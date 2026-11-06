@@ -46,7 +46,7 @@ use function cybot\cookiebot\lib\asset_url;
 						<span class="cb-dash__h4"><?php esc_html_e( '20% off your first year', 'cookiebot' ); ?></span>
 						<span class="cb-dash__small"><?php esc_html_e( 'Applied automatically when you sign up.', 'cookiebot' ); ?></span>
 					</span>
-					<a class="cb-dash__link cb-dash__link--small" href="https://www.cookiebot.com/en/pricing/?utm_source=wordpress&utm_medium=referral&utm_campaign=plugin_dashboard&utm_content=offer_callout" target="_blank" rel="noopener">
+					<a class="cb-dash__link cb-dash__link--small" href="https://www.cookiebot.com/en/pricing/?coupon=WPPLUGIN20&utm_source=wordpress&utm_medium=referral&utm_campaign=plugin_dashboard&utm_content=offer_callout" target="_blank" rel="noopener">
 						<?php esc_html_e( 'See pricing', 'cookiebot' ); ?>
 						<img src="<?php echo esc_url( asset_url( 'img/dashboard/launch-outlined.svg' ) ); ?>" width="14" height="14" alt="">
 					</a>
