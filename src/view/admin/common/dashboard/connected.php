@@ -16,6 +16,7 @@ use function cybot\cookiebot\lib\include_view;
  * @var bool   $just_connected
  * @var bool   $banner_enabled
  * @var bool   $is_network_id  ID inherited from the multisite network; can't be disconnected here.
+ * @var bool   $has_network_id The multisite network has its own ID.
  * @var string $preview_url
  * @var string $support_url
  */
@@ -194,7 +195,13 @@ $header->display();
 
 <?php
 if ( ! $is_network_id ) {
-	include_view( 'admin/common/dashboard/partials/disconnect-modal.php', array( 'domain' => $domain ) );
+	include_view(
+		'admin/common/dashboard/partials/disconnect-modal.php',
+		array(
+			'domain'         => $domain,
+			'has_network_id' => ! empty( $has_network_id ),
+		)
+	);
 }
 ?>
 

@@ -6,6 +6,7 @@ use function cybot\cookiebot\lib\asset_url;
 
 /**
  * @var string $domain
+ * @var bool   $has_network_id After disconnect the network ID is used.
  */
 ?>
 <dialog class="cb-dash-dialog" aria-labelledby="cb-dash-disconnect-title" aria-describedby="cb-dash-disconnect-text" data-cb-disconnect-dialog>
@@ -19,11 +20,15 @@ use function cybot\cookiebot\lib\asset_url;
 		</div>
 		<p class="cb-dash-dialog__text" id="cb-dash-disconnect-text">
 			<?php
-			printf(
-				/* translators: %s: the site's domain, e.g. clientsite.com. */
-				esc_html__( 'Your cookie banner will stop showing on %s until you connect the Domain Group ID or Settings ID.', 'cookiebot' ),
-				esc_html( $domain )
-			);
+			if ( ! empty( $has_network_id ) ) {
+				esc_html_e( 'If there is a network settings ID connected it will be used for this subsite, if not you will need to add a new ID before updating other settings', 'cookiebot' );
+			} else {
+				printf(
+					/* translators: %s: the site's domain, e.g. clientsite.com. */
+					esc_html__( 'Your cookie banner will stop showing on %s until you connect the Domain Group ID or Settings ID.', 'cookiebot' ),
+					esc_html( $domain )
+				);
+			}
 			?>
 		</p>
 		<div class="cb-dash-dialog__actions">

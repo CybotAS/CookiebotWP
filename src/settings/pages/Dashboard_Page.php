@@ -310,6 +310,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 			'just_connected' => $just_connected,
 			'banner_enabled' => Cookiebot_WP::get_banner_enabled() === '1',
 			'is_network_id'  => '' === (string) get_option( 'cookiebot-cbid', '' ),
+			'has_network_id' => is_multisite() && '' !== (string) get_site_option( 'cookiebot-cbid', '' ),
 			'preview_url'    => home_url( '/' ),
 			'support_url'    => admin_url( 'admin.php?page=cookiebot_support' ),
 		);

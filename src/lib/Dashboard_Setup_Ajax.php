@@ -6,6 +6,7 @@ use function add_action;
 use function admin_url;
 use function check_ajax_referer;
 use function current_user_can;
+use function delete_option;
 use function get_option;
 use function sanitize_text_field;
 use function set_transient;
@@ -88,6 +89,7 @@ class Dashboard_Setup_Ajax {
 	/**
 	 * Clear the site's ID. update_option (not delete_option) so that the
 	 * updated_option cleanup hook fires. The network option is untouched.
+	 * The subsite override flag is cleared, as on Settings > General.
 	 *
 	 * @return void
 	 */
@@ -95,6 +97,7 @@ class Dashboard_Setup_Ajax {
 		$this->authorize();
 
 		update_option( 'cookiebot-cbid', '' );
+		delete_option( 'cookiebot-cbid-override' );
 
 		$this->send_redirect();
 	}

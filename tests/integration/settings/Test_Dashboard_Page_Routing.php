@@ -12,6 +12,7 @@ use cybot\cookiebot\lib\Cbid_Checker;
 use cybot\cookiebot\lib\Dashboard_Setup_Ajax;
 use cybot\cookiebot\lib\Setup_Offer;
 use cybot\cookiebot\settings\pages\Dashboard_Page;
+use function cybot\cookiebot\lib\include_view;
 use WP_Error;
 use WP_UnitTestCase;
 
@@ -140,6 +141,36 @@ class Test_Dashboard_Page_Routing extends WP_UnitTestCase {
 
 		$this->assertSame( Cbid_Checker::RESULT_UNKNOWN, $args['check_result'] );
 		$this->assertFalse( $args['just_connected'] );
+	}
+
+	public function test_connected_args_has_network_id() {
+		update_option( 'cookiebot-cbid', 'abcdefghi' );
+
+		$args = ( new Dashboard_Page() )->get_connected_args();
+
+		if ( ! is_multisite() ) {
+			$this->assertFalse( $args['has_network_id'] );
+			return;
+		}
+
+		update_site_option( 'cookiebot-cbid', self::DOMAIN_GROUP_ID );
+		$args = ( new Dashboard_Page() )->get_connected_args();
+		$this->assertTrue( $args['has_network_id'] );
+	}
+
+	public function test_disconnect_dialog_text() {
+		ob_start();
+		include_view( 'admin/common/dashboard/partials/disconnect-modal.php', array( 'domain' => 'clientsite.com', 'has_network_id' => false ) );
+		$single = ob_get_clean();
+
+		ob_start();
+		include_view( 'admin/common/dashboard/partials/disconnect-modal.php', array( 'domain' => 'clientsite.com', 'has_network_id' => true ) );
+		$network = ob_get_clean();
+
+		$this->assertStringContainsString( 'will stop showing on clientsite.com', $single );
+		$this->assertStringNotContainsString( 'network settings ID', $single );
+		$this->assertStringContainsString( 'network settings ID connected it will be used', $network );
+		$this->assertStringNotContainsString( 'will stop showing', $network );
 	}
 
 	public function test_connected_args_settings_id() {

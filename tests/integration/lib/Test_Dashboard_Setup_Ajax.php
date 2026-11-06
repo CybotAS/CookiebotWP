@@ -346,6 +346,20 @@ class Test_Dashboard_Setup_Ajax extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
+	 * Disconnect clears the subsite override flag.
+	 *
+	 * @return void
+	 */
+	public function test_disconnect_clears_override() {
+		update_option( 'cookiebot-cbid', self::DOMAIN_GROUP_ID );
+		update_option( 'cookiebot-cbid-override', '1' );
+
+		$this->run_ajax( 'cookiebot_disconnect_cbid' );
+
+		$this->assertFalse( get_option( 'cookiebot-cbid-override' ) );
+	}
+
+	/**
 	 * Disconnect leaves the network option alone.
 	 *
 	 * @return void
