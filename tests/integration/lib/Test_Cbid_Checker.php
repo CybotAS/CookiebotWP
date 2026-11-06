@@ -107,13 +107,28 @@ class Test_Cbid_Checker extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Settings IDs must be alphanumeric; a right-length value with punctuation is invalid.
+	 * Settings IDs may contain "_" and "-".
 	 *
 	 * @return void
 	 */
-	public function test_settings_id_with_punctuation_is_invalid() {
-		$this->assertSame( Cbid_Checker::TYPE_INVALID, Cbid_Checker::get_type( 'abc-defgh' ) );
+	public function test_settings_id_allows_underscore_and_dash() {
+		$this->assertSame( Cbid_Checker::TYPE_SETTINGS, Cbid_Checker::get_type( 'Ab12Cd34Ef56G_' ) );
+		$this->assertSame( Cbid_Checker::TYPE_SETTINGS, Cbid_Checker::get_type( 'Ab12Cd34Ef56-G' ) );
+		$this->assertSame( Cbid_Checker::TYPE_SETTINGS, Cbid_Checker::get_type( 'Ab1-Cd34Ef56Gh' ) );
+		$this->assertSame( Cbid_Checker::TYPE_SETTINGS, Cbid_Checker::get_type( 'abc-defg_' ) );
+		$this->assertSame( Cbid_Checker::RESULT_MATCH, Cbid_Checker::check( 'Ab1-Cd34Ef56Gh' ) );
+	}
+
+	/**
+	 * Other punctuation is invalid.
+	 *
+	 * @return void
+	 */
+	public function test_settings_id_with_other_punctuation_is_invalid() {
 		$this->assertSame( Cbid_Checker::TYPE_INVALID, Cbid_Checker::get_type( 'abcdefg hijklm' ) );
+		$this->assertSame( Cbid_Checker::TYPE_INVALID, Cbid_Checker::get_type( 'abc.defgh' ) );
+		$this->assertSame( Cbid_Checker::TYPE_INVALID, Cbid_Checker::get_type( 'abcdefghijkl/m' ) );
+		$this->assertSame( Cbid_Checker::TYPE_INVALID, Cbid_Checker::get_type( 'abcd<efgh' ) );
 		$this->assertSame( Cbid_Checker::TYPE_SETTINGS, Cbid_Checker::get_type( 'Ab12Cd34Ef56Gh' ) );
 	}
 

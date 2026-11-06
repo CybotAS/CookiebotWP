@@ -291,16 +291,28 @@ class Test_Dashboard_Setup_Ajax extends WP_Ajax_UnitTestCase {
 	}
 
 	/**
-	 * A 9-character Settings ID with punctuation is rejected as invalid.
+	 * A Settings ID with invalid punctuation is rejected.
 	 *
 	 * @return void
 	 */
 	public function test_connect_settings_id_with_punctuation_is_invalid() {
-		$response = $this->run_ajax( 'cookiebot_connect_cbid', array( 'cbid' => 'abc-defgh' ) );
+		$response = $this->run_ajax( 'cookiebot_connect_cbid', array( 'cbid' => 'abc.defgh' ) );
 
 		$this->assertFalse( $response['success'] );
 		$this->assertSame( 'invalid', $response['data']['code'] );
 		$this->assertSame( '', (string) get_option( 'cookiebot-cbid', '' ) );
+	}
+
+	/**
+	 * A Settings ID with "_" or "-" connects.
+	 *
+	 * @return void
+	 */
+	public function test_connect_settings_id_with_dash_and_underscore() {
+		$response = $this->run_ajax( 'cookiebot_connect_cbid', array( 'cbid' => 'Ab1-Cd34Ef56Gh' ) );
+
+		$this->assertTrue( $response['success'] );
+		$this->assertSame( 'Ab1-Cd34Ef56Gh', get_option( 'cookiebot-cbid' ) );
 	}
 
 	/**
