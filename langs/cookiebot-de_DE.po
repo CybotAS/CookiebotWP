@@ -3268,3 +3268,483 @@ msgstr "Aktualisieren Sie Ihre Cookiebot-ID"
 #: src/widgets/Dashboard_Widget_Cookiebot_Status.php:46
 msgid "Your Cookiebot is working!"
 msgstr "Ihr Cookiebot funktioniert!"
+
+#. Plugin Name of the plugin
+#: cookiebot.php
+msgid "Cookiebot - Cookie Banner & Cookie Consent for GDPR, CCPA & Google Consent Mode"
+msgstr ""
+
+#: src/abilities/Cookiebot_Abilities_Registrar.php:55
+msgid "Cookiebot CMP"
+msgstr ""
+
+#: src/abilities/Cookiebot_Abilities_Registrar.php:56
+msgid "Abilities for reading and configuring the Cookiebot CMP plugin."
+msgstr ""
+
+#: src/abilities/Get_Compliance_Summary_Ability.php:40
+msgid "Get Compliance Summary"
+msgstr ""
+
+#: src/abilities/Get_Compliance_Summary_Ability.php:41
+msgid "Returns the privacy regulations covered by Cookiebot CMP on this site, plus the current scan status and plan type."
+msgstr ""
+
+#: src/abilities/Get_Status_Ability.php:40
+msgid "Get Cookiebot Status"
+msgstr ""
+
+#: src/abilities/Get_Status_Ability.php:41
+msgid "Returns the current Cookiebot CMP plugin configuration: whether a Domain Group ID is set, GCM v2 status, cookie blocking mode, banner state, and plugin version."
+msgstr ""
+
+#: src/abilities/Install_Ppg_Ability.php:42
+msgid "Install Privacy Policy Generator"
+msgstr ""
+
+#: src/abilities/Install_Ppg_Ability.php:43
+msgid "Installs and activates the Privacy Policy Generator plugin (privacy-policy-usercentrics). Idempotent — returns immediately if already active. After install, direct the user to admin_url to complete policy setup."
+msgstr ""
+
+#: src/abilities/Install_Ppg_Ability.php:115
+msgid "Unexpected plugin data returned from WordPress.org."
+msgstr ""
+
+#: src/abilities/Install_Ppg_Ability.php:118
+msgid "Plugin download URL does not originate from WordPress.org."
+msgstr ""
+
+#: src/abilities/Install_Ppg_Ability.php:125
+#: src/settings/pages/PPG_Page.php:89
+msgid "Plugin installation failed."
+msgstr ""
+
+#: src/abilities/Set_Cbid_Ability.php:63
+msgid "Set Domain Group ID"
+msgstr ""
+
+#: src/abilities/Set_Cbid_Ability.php:64
+msgid "Sets the Domain Group ID (CBID). For Cookiebot accounts this is a UUID (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) found under Implementation in the Cookiebot Admin. For Usercentrics accounts this is a Settings ID (9 or 14 characters) found in the Usercentrics Admin. Changes take effect immediately."
+msgstr ""
+
+#: src/abilities/Set_Cbid_Ability.php:72
+msgid "The Domain Group ID: a UUID for Cookiebot accounts (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) or a Settings ID for Usercentrics accounts (9 or 14 characters: letters, digits, \"_\" or \"-\")."
+msgstr ""
+
+#: src/abilities/Set_Cbid_Ability.php:103
+msgid "Invalid ID. Provide a Cookiebot Domain Group ID (UUID: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) or a Usercentrics Settings ID (9 or 14 characters: letters, digits, \"_\" or \"-\")."
+msgstr ""
+
+#: src/abilities/Toggle_Gcm_Ability.php:58
+msgid "Toggle Google Consent Mode v2"
+msgstr ""
+
+#: src/abilities/Toggle_Gcm_Ability.php:59
+msgid "Enables or disables Google Consent Mode v2. GCM v2 is required for Google Ads and Analytics in the EU/EEA and is enabled by default. Only disable if explicitly requested by the user."
+msgstr ""
+
+#: src/abilities/Toggle_Gcm_Ability.php:66
+msgid "True to enable Google Consent Mode v2, false to disable."
+msgstr ""
+
+#: src/abilities/Verify_Setup_Ability.php:40
+msgid "Verify Cookiebot Setup"
+msgstr ""
+
+#: src/abilities/Verify_Setup_Ability.php:41
+msgid "Checks that the Domain Group ID is configured, Google Consent Mode v2 is enabled, and cookie blocking mode is set to auto. Returns an issues[] list — empty means all checks passed."
+msgstr ""
+
+#: src/addons/controller/addons/woocommerce/WooCommerce.php:30
+msgid "Blocks WooCommerce Order Attribution Tracking scripts (SourceBuster) before consent is accepted."
+msgstr ""
+
+#: src/settings/Network_Menu_Settings.php:72
+msgid "You do not have permission to manage network options."
+msgstr ""
+
+#: src/settings/pages/Dashboard_Page.php:366
+#: src/view/admin/common/dashboard/partials/connect-step.php:55
+msgid "Connect"
+msgstr "Verbinden"
+
+#: src/settings/pages/Dashboard_Page.php:367
+msgid "Connecting…"
+msgstr "Wird verbunden…"
+
+#: src/settings/pages/Dashboard_Page.php:368
+msgid "Connect anyway"
+msgstr "Trotzdem verbinden"
+
+#: src/settings/pages/Dashboard_Page.php:369
+msgid "Try again"
+msgstr "Erneut versuchen"
+
+#: src/settings/pages/Dashboard_Page.php:370
+msgid "That doesn’t look like a valid ID. IDs have 9, 14 or 36 characters."
+msgstr "Diese ID scheint ungültig zu sein. IDs bestehen aus 9, 14 oder 36 Zeichen."
+
+#. translators: %s: URL of the plugin's Get support page.
+#: src/settings/pages/Dashboard_Page.php:374
+#, php-format
+msgid "We couldn’t save this ID. Try again, or <a href=\"%s\">get support</a>."
+msgstr "Diese ID konnte nicht gespeichert werden. Versuchen Sie es erneut oder <a href=\"%s\">wenden Sie sich an den Support</a>."
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/settings/pages/Dashboard_Page.php:379
+#, php-format
+msgid "This ID isn’t set up for %1$s. Check you copied the ID for this site, or add %1$s to your domain group in Cookiebot."
+msgstr "Diese ID ist nicht für %1$s eingerichtet. Prüfen Sie, ob Sie die ID für diese Website kopiert haben, oder fügen Sie %1$s in Cookiebot zu Ihrer Domain-Gruppe hinzu."
+
+#: src/settings/pages/PPG_Page.php:18
+#: src/settings/pages/PPG_Page.php:19
+#: src/view/admin/common/templates/main-tabs.php:89
+msgid "Policy Generator Plugin"
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:36
+msgid "You do not have permission to activate plugins."
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:44
+msgid "Plugin is not installed."
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:63
+msgid "You do not have permission to install plugins."
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:131
+msgid "Installing..."
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:132
+#: src/view/admin/common/ppg-page.php:40
+#: src/view/admin/common/templates/ppg-banner.php:41
+msgid "Install Now"
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:133
+msgid "Activating..."
+msgstr ""
+
+#: src/settings/pages/PPG_Page.php:134
+#: src/view/admin/common/ppg-page.php:36
+msgid "Activate"
+msgstr ""
+
+#: src/view/admin/cb_frame/network-settings-page.php:38
+#: src/view/admin/uc_frame/network-settings-page.php:39
+msgid "You will need to add a new ID before updating other network settings. If any subsite is using its own account disconnecting this account won't affect it."
+msgstr ""
+
+#: src/view/admin/cb_frame/network-settings-page.php:81
+msgid "Select your cookie-blocking mode here. Auto cookie-blocking mode will automatically block all cookies (except for 'strictly necessary' cookies) until a user has given consent. Manual cookie-blocking mode requests manual adjustments to the cookie-setting scripts. Please find our implementation guides below:"
+msgstr ""
+
+#: src/view/admin/cb_frame/settings/general-page.php:84
+#: src/view/admin/common/network-settings-page.php:72
+#: src/view/admin/common/settings-page.php:76
+#: src/view/admin/uc_frame/settings/general-page.php:103
+msgid "Invalid ID length. Please enter a Settings ID (9 or 14 characters) or Domain Group ID (36 characters)."
+msgstr ""
+
+#: src/view/admin/common/dashboard/connected.php:28
+msgid "Connected through your Cookiebot account, but your banner may not be showing on this site."
+msgstr "Über Ihr Cookiebot-Konto verbunden. Ihr Banner wird auf dieser Website möglicherweise jedoch nicht angezeigt."
+
+#: src/view/admin/common/dashboard/connected.php:30
+msgid "Connected to this WordPress site through your Usercentrics account."
+msgstr "Über Ihr Usercentrics-Konto mit dieser WordPress-Website verbunden."
+
+#: src/view/admin/common/dashboard/connected.php:32
+msgid "Connected to this WordPress site through your Cookiebot account."
+msgstr "Über Ihr Cookiebot-Konto mit dieser WordPress-Website verbunden."
+
+#: src/view/admin/common/dashboard/connected.php:50
+msgid "Your cookie banner"
+msgstr "Ihr Cookie-Banner"
+
+#: src/view/admin/common/dashboard/connected.php:58
+msgid "Website"
+msgstr "Website"
+
+#: src/view/admin/common/dashboard/connected.php:63
+msgid "Preview banner"
+msgstr "Banner-Vorschau"
+
+#: src/view/admin/common/dashboard/connected.php:65
+#: src/view/admin/common/dashboard/connected.php:148
+#: src/view/admin/common/dashboard/connected.php:168
+#: src/view/admin/common/dashboard/partials/new-account-step.php:58
+#: src/view/admin/common/templates/main-tabs.php:101
+msgid "(opens in a new tab)"
+msgstr ""
+
+#: src/view/admin/common/dashboard/connected.php:75
+msgid "Show cookie banner on this site"
+msgstr "Cookie-Banner auf dieser Website anzeigen"
+
+#: src/view/admin/common/dashboard/connected.php:76
+msgid "Turn off to hide the banner while you make changes. Visitors aren’t asked for consent when it’s off."
+msgstr "Deaktivieren Sie diese Option, um das Banner während der Bearbeitung auszublenden. Solange es deaktiviert ist, werden Besucher:innen nicht um ihre Einwilligung gebeten."
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/view/admin/common/dashboard/connected.php:86
+#, php-format
+msgid "Your cookie banner is off. Visitors to %s won’t see it or be asked for consent until you turn it back on."
+msgstr "Ihr Cookie-Banner ist deaktiviert. Besucher:innen von %s sehen es nicht und werden nicht um ihre Einwilligung gebeten, bis Sie es wieder aktivieren."
+
+#: src/view/admin/common/dashboard/connected.php:100
+msgid "Settings ID"
+msgstr "Einstellungs-ID"
+
+#: src/view/admin/common/dashboard/connected.php:102
+msgid "Cookiebot Domain Group ID"
+msgstr "Cookiebot Domain-Gruppen-ID"
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/view/admin/common/dashboard/connected.php:115
+#, php-format
+msgid "Your banner may not show on %s. This ID isn’t set up for this site in Cookiebot."
+msgstr "Ihr Banner wird auf %s möglicherweise nicht angezeigt. Diese ID ist in Cookiebot nicht für diese Website eingerichtet."
+
+#: src/view/admin/common/dashboard/connected.php:122
+msgid "To connect a different ID, disconnect this one first."
+msgstr "Um eine andere ID zu verbinden, müssen Sie zuerst die aktuelle Verbindung trennen."
+
+#: src/view/admin/common/dashboard/connected.php:128
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:39
+msgid "Disconnect"
+msgstr "Verbindung trennen"
+
+#: src/view/admin/common/dashboard/connected.php:142
+msgid "Do more in Cookiebot"
+msgstr "Entdecken Sie weitere Möglichkeiten mit Cookiebot"
+
+#: src/view/admin/common/dashboard/connected.php:143
+msgid "Customize your banner and manage your plan in your Cookiebot account."
+msgstr "Passen Sie Ihr Banner an und verwalten Sie Ihr Paket in Ihrem Cookiebot-Konto."
+
+#: src/view/admin/common/dashboard/connected.php:146
+msgid "Go to Cookiebot"
+msgstr "Zu Cookiebot"
+
+#: src/view/admin/common/dashboard/connected.php:158
+msgid "More from Cookiebot"
+msgstr "Mehr von Cookiebot"
+
+#: src/view/admin/common/dashboard/connected.php:162
+msgid "Join the Cookiebot Partner Program"
+msgstr "Dem Cookiebot-Partnerprogramm beitreten"
+
+#: src/view/admin/common/dashboard/connected.php:163
+msgid "Earn commission on every client site you set up with Cookiebot, plus partner perks and support."
+msgstr "Erhalten Sie eine Provision für jede Kundenwebsite, die Sie mit Cookiebot einrichten, und profitieren Sie von exklusiven Partnervorteilen und Support."
+
+#: src/view/admin/common/dashboard/connected.php:166
+#: src/view/admin/common/templates/main-tabs.php:99
+msgid "Become a Partner"
+msgstr "Partnerprogramm beitreten"
+
+#. translators: 1: "Watch the setup guide" link, 2: "Get support" link.
+#: src/view/admin/common/dashboard/connected.php:185
+#, php-format
+msgid "Need help? %1$s or %2$s"
+msgstr "Brauchen Sie Hilfe? %1$s oder %2$s."
+
+#: src/view/admin/common/dashboard/connected.php:186
+#: src/view/admin/common/dashboard/partials/need-help.php:13
+msgid "Watch the setup guide"
+msgstr "Sehen Sie sich die Einrichtungsanleitung an"
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/view/admin/common/dashboard/connected.php:215
+#, php-format
+msgid "Connected. Your cookie banner is now set up on %s."
+msgstr "Verbunden. Ihr Cookie-Banner ist jetzt auf %s eingerichtet."
+
+#: src/view/admin/common/dashboard/connected.php:222
+msgid "Dismiss"
+msgstr ""
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:27
+msgid "Connect Cookiebot to this site"
+msgstr "Cookiebot mit dieser Website verbinden"
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:29
+msgid "Copy your Domain Group ID from Cookiebot (Implementation page) and paste it below."
+msgstr "Kopieren Sie Ihre Domain-Gruppen-ID aus Cookiebot (Seite „Implementierung“) und fügen Sie sie unten ein."
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:38
+msgid "or Settings ID"
+msgstr "oder Einstellungs-ID"
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:43
+msgid "e.g. 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+msgstr "z. B. 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:63
+msgid "How to find your Domain Group ID"
+msgstr "So finden Sie Ihre Domain-Gruppen-ID"
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:67
+msgid "Using Usercentrics CMP? You can enter your Settings ID instead."
+msgstr "Sie verwenden Usercentrics CMP? Dann können Sie stattdessen Ihre Einstellungs-ID eingeben."
+
+#: src/view/admin/common/dashboard/partials/connect-step.php:69
+msgid "How to find it"
+msgstr "So finden Sie die ID"
+
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:18
+msgid "Close"
+msgstr ""
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/view/admin/common/dashboard/partials/disconnect-modal.php:28
+#, php-format
+msgid "Your cookie banner will stop showing on %s until you connect the Domain Group ID or Settings ID."
+msgstr "Ihr Cookie-Banner wird auf %s nicht mehr angezeigt, bis Sie die Domain-Gruppen-ID oder Einstellungs-ID erneut verbinden."
+
+#: src/view/admin/common/dashboard/partials/need-help.php:10
+msgid "Need help?"
+msgstr "Brauchen Sie Hilfe?"
+
+#: src/view/admin/common/dashboard/partials/need-help.php:14
+msgid "A short video that walks you through connecting Cookiebot to WordPress."
+msgstr "In diesem kurzen Video erfahren Sie Schritt für Schritt, wie Sie Cookiebot mit WordPress verbinden."
+
+#: src/view/admin/common/dashboard/partials/need-help.php:27
+msgid "Play the setup guide video"
+msgstr ""
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:18
+msgid "STEP 1 OF 2"
+msgstr "SCHRITT 1 VON 2"
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:19
+msgid "Create your Cookiebot account"
+msgstr "Cookiebot-Konto erstellen"
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:21
+msgid "Sign up on Cookiebot to create your consent banner. The sign-up opens in a new tab."
+msgstr "Registrieren Sie sich bei Cookiebot, um Ihr Consent-Banner zu erstellen. Die Registrierungsseite öffnet sich in einem neuen Tab."
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:24
+#: src/view/admin/common/dashboard/partials/new-account-step.php:50
+msgid "See pricing"
+msgstr "Preise ansehen"
+
+#. translators: %s: the site's domain, e.g. clientsite.com.
+#: src/view/admin/common/dashboard/partials/new-account-step.php:32
+#, php-format
+msgid "When Cookiebot asks for your website, enter %s. It must match this site, or your banner won’t appear."
+msgstr "Wenn Sie bei Cookiebot nach Ihrer Website gefragt werden, geben Sie %s ein. Die Domain muss mit dieser Website übereinstimmen, damit Ihr Banner angezeigt wird."
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:46
+msgid "20% off your first year"
+msgstr "20 % Rabatt im ersten Jahr"
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:47
+msgid "Applied automatically when you sign up."
+msgstr "Wird bei der Registrierung automatisch angewendet."
+
+#: src/view/admin/common/dashboard/partials/new-account-step.php:56
+msgid "Create account"
+msgstr "Konto erstellen"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:13
+msgid "Where is it?"
+msgstr "Wo finde ich sie?"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:18
+msgid "Where to find your ID"
+msgstr "Wo Sie Ihre ID finden"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:21
+msgid "Cookiebot › Implementation"
+msgstr "Cookiebot › Implementierung"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:22
+msgid "Scroll down the page to find:"
+msgstr "Scrollen Sie nach unten zu:"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:30
+msgid "Or in your Cookiebot script"
+msgstr "Oder in Ihrem Cookiebot-Skript"
+
+#: src/view/admin/common/dashboard/partials/where-is-it.php:31
+msgid "Copy only the highlighted ID:"
+msgstr "Kopieren Sie nur die hervorgehobene ID:"
+
+#: src/view/admin/common/dashboard/welcome.php:27
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: src/view/admin/common/dashboard/welcome.php:31
+msgid "Let’s get your cookie banner set up"
+msgstr "Richten wir Ihr Cookie-Banner ein"
+
+#: src/view/admin/common/dashboard/welcome.php:33
+msgid "Easy implementation in 2 steps. Most setups take less than 5 minutes."
+msgstr "Einfache Einrichtung in 2 Schritten. Die meisten Setups sind in weniger als 5 Minuten erledigt."
+
+#: src/view/admin/common/dashboard/welcome.php:36
+msgid "Connect your existing Cookiebot account in 1 step. Most setups take less than 5 minutes."
+msgstr "Verbinden Sie Ihr bestehendes Cookiebot-Konto in nur einem Schritt. Die meisten Setups sind in weniger als 5 Minuten erledigt."
+
+#: src/view/admin/common/dashboard/welcome.php:42
+msgid "How do you want to set up?"
+msgstr ""
+
+#: src/view/admin/common/dashboard/welcome.php:47
+msgid "New site or new client"
+msgstr "Neue Website oder neuer Kundenauftrag"
+
+#: src/view/admin/common/dashboard/welcome.php:53
+msgid "Connect an existing account"
+msgstr "Bestehendes Konto verbinden"
+
+#: src/view/admin/common/dashboard/welcome.php:54
+msgid "You already have an ID for this site"
+msgstr "Sie haben bereits eine ID für diese Website"
+
+#: src/view/admin/common/dashboard/welcome.php:75
+msgid "STEP 2 OF 2"
+msgstr "SCHRITT 2 VON 2"
+
+#: src/view/admin/common/ppg-page.php:20
+msgid "Explore our plugins"
+msgstr ""
+
+#: src/view/admin/common/ppg-page.php:27
+msgid "Usercentrics Privacy Policy Generator"
+msgstr ""
+
+#: src/view/admin/common/ppg-page.php:48
+msgid "Usercentrics Privacy Policy Generator - Generate your privacy policy in minutes"
+msgstr ""
+
+#: src/view/admin/common/templates/main-tabs.php:90
+msgid "NEW"
+msgstr ""
+
+#: src/view/admin/common/templates/ppg-banner.php:19
+msgid "Explore more plugins from Cookiebot"
+msgstr ""
+
+#: src/view/admin/common/templates/ppg-banner.php:24
+msgid "Privacy Policy Generator"
+msgstr ""
+
+#: src/view/admin/common/templates/ppg-banner.php:30
+msgid "Generate your privacy policy in minutes"
+msgstr ""
+
+#: src/view/admin/common/templates/ppg-banner.php:33
+msgid "Automatically create compliant privacy policies for your WordPress website."
+msgstr ""
+
+#: src/view/admin/uc_frame/network-settings-page.php:117
+msgid "Choose the type of your cookie-blocking mode. Select automatic to automatically block all cookies except those strictly necessary to use before user gives consent. Manual mode lets you adjust your cookie settings within your website's HTML."
+msgstr ""
