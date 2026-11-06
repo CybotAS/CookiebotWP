@@ -1,0 +1,1128 @@
+/* Cookiebot dashboard: welcome/setup and connected screens (CMS-3174). Values follow the Figma "WordPress" FINAL frames. */
+
+.cb-dash {
+    --cb-dash-ink: #141414;
+    --cb-dash-muted: #666666;
+    --cb-dash-line: #d6d6d6;
+    --cb-dash-surface: #f2f2f2;
+    --cb-dash-blue: #1032cf;
+    --cb-dash-blue-50: #eceffe;
+    --cb-dash-blue-100: #c6d0fb;
+
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    color: var(--cb-dash-ink);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.cb-dash *,
+.cb-dash *::before,
+.cb-dash *::after {
+    box-sizing: border-box;
+}
+
+.cb-dash p,
+.cb-dash h1,
+.cb-dash h2,
+.cb-dash h3 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Type scale */
+.cb-dash__title {
+    font-size: 60px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.cb-dash__h2 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.cb-dash__h3 {
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.cb-dash__h4 {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+}
+
+.cb-dash__body {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+}
+
+.cb-dash__small {
+    color: var(--cb-dash-muted);
+    font-size: 13.13px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+}
+
+.cb-dash__divider {
+    width: 100%;
+    height: 1px;
+    margin: 0;
+    border: 0;
+    background: var(--cb-dash-line);
+}
+
+.cb-dash [hidden] {
+    display: none !important;
+}
+
+/* Links */
+.cb-dash__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--cb-dash-blue);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+    text-decoration: none;
+}
+
+.cb-dash__link:hover,
+.cb-dash__link:focus {
+    color: var(--cb-dash-blue);
+    text-decoration: underline;
+}
+
+.cb-dash__link img {
+    flex-shrink: 0;
+}
+
+/* Intro */
+.cb-dash__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Setup card: path options + steps */
+.cb-dash__setup {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.cb-dash__paths {
+    display: flex;
+    gap: 16px;
+    margin: 0;
+    padding: 1px;
+    border: 0;
+}
+
+.cb-dash__path {
+    position: relative;
+    display: flex;
+    flex: 1 0 0;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 20px 24px;
+    border: 1px solid var(--cb-dash-line);
+    border-radius: 8px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.cb-dash__path:has(input:checked) {
+    padding: 19px 23px;
+    border: 2px solid var(--cb-dash-blue);
+}
+
+.cb-dash__path input[type="radio"] {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    border: 0;
+    border-radius: 50%;
+    background: url("../../img/dashboard/radio-normal.svg") center / 24px 24px no-repeat;
+    box-shadow: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.cb-dash__path:hover input[type="radio"]:not(:checked) {
+    background-image: url("../../img/dashboard/radio-hover.svg");
+}
+
+.cb-dash__path input[type="radio"]:checked {
+    background-image: url("../../img/dashboard/radio-checked.svg");
+}
+
+.cb-dash__path input[type="radio"]:checked::before {
+    content: none;
+}
+
+.cb-dash__path input[type="radio"]:focus-visible {
+    outline: 2px solid var(--cb-dash-blue);
+    outline-offset: 2px;
+}
+
+.cb-dash__path-text {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cb-dash__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Grey card used by setup steps and the video guide */
+.cb-dash__card {
+    padding: 32px;
+    border-radius: 16px;
+    background: var(--cb-dash-surface);
+}
+
+/* Setup step: number + content */
+.cb-dash__step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.cb-dash__step-num {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1.33px solid var(--cb-dash-blue);
+    border-radius: 50%;
+    background: var(--cb-dash-blue);
+    color: #ffffff;
+    font-size: 10.67px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.cb-dash__step[data-cb-connect-locked="1"] .cb-dash__step-num,
+.cb-dash__step[data-cb-step-done="1"] .cb-dash__step-num {
+    border-color: var(--cb-dash-line);
+    background: #ffffff;
+    color: var(--cb-dash-ink);
+}
+
+.cb-dash__step-body {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+.cb-dash__step-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cb-dash__step-label {
+    color: var(--cb-dash-muted);
+    font-size: 13.13px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.25px;
+}
+
+.cb-dash__help-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 8px;
+    align-items: center;
+}
+
+.cb-dash__body strong {
+    font-weight: 600;
+}
+
+/* Step 1: offer callout + Create account */
+.cb-dash__action {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.cb-dash__offer {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+    padding: 16px 20px 16px 16px;
+    border-radius: 8px;
+    background: var(--cb-dash-blue-50);
+}
+
+.cb-dash__offer-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--cb-dash-blue-100);
+}
+
+.cb-dash__offer-text {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* "Where is it?" trigger (popover in where-is-it.php) */
+.cb-dash__where {
+    position: relative;
+    display: inline-flex;
+}
+
+.cb-dash__where-trigger {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--cb-dash-blue);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+    cursor: help;
+}
+
+.cb-dash__where-trigger:focus-visible {
+    outline: 2px solid var(--cb-dash-blue);
+    outline-offset: 2px;
+}
+
+/* Popover floats below the trigger; caret sits 400px from its left edge (frame 02). */
+.cb-dash__popover {
+    position: absolute;
+    z-index: 100;
+    top: 100%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    width: 640px;
+    max-width: calc(100vw - 40px);
+    padding-top: 4px;
+    transform: translateX(-400px);
+}
+
+.cb-dash__popover-caret {
+    position: relative;
+    z-index: 2;
+    margin: 0 0 -1px 390px;
+}
+
+.cb-dash__popover-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid var(--cb-dash-muted);
+    border-radius: 8px;
+    background: #ffffff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.cb-dash__popover-examples {
+    display: flex;
+    gap: 12px;
+}
+
+.cb-dash__popover-example {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--cb-dash-surface);
+}
+
+.cb-dash__popover-id {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.cb-dash .cb-dash__code,
+.cb-dash__popover-id .cb-dash__code-mark {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 13px;
+}
+
+.cb-dash .cb-dash__code {
+    display: block;
+    padding: 0;
+    background: none;
+    color: var(--cb-dash-ink);
+    line-height: 1.4;
+    white-space: pre;
+}
+
+.cb-dash__code-mark {
+    padding: 2px;
+    border-radius: 4px;
+    background: #ffeda8;
+    color: var(--cb-dash-ink);
+}
+
+.cb-dash__popover-id .cb-dash__code-mark {
+    padding: 2px 6px;
+}
+
+/* ID field + button */
+.cb-dash__field-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin: 0;
+}
+
+.cb-dash__field {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.cb-dash__label {
+    color: var(--cb-dash-ink);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+}
+
+.cb-dash__label-muted {
+    color: var(--cb-dash-muted);
+    font-weight: 400;
+}
+
+.cb-dash .cb-dash__input {
+    width: 100%;
+    min-height: 50px;
+    margin: 0;
+    padding: 12px 16px 12px 20px;
+    border: 2px solid var(--cb-dash-line);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: none;
+    color: var(--cb-dash-ink);
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+}
+
+.cb-dash .cb-dash__input::placeholder {
+    color: var(--cb-dash-muted);
+}
+
+.cb-dash .cb-dash__input:focus {
+    border-color: var(--cb-dash-blue);
+    outline: none;
+    box-shadow: none;
+}
+
+.cb-dash .cb-dash__input:disabled {
+    background: var(--cb-dash-surface);
+    color: var(--cb-dash-muted);
+}
+
+/* Locked step (before "Create account") keeps a white field, frame 01. */
+.cb-dash__step[data-cb-connect-locked="1"] .cb-dash__input:disabled {
+    background: #ffffff;
+}
+
+.cb-dash__step.is-error .cb-dash__input {
+    border-color: #e86868;
+}
+
+.cb-dash__step.is-warning .cb-dash__input,
+.cb-dash__connection-group.is-warning .cb-dash__input {
+    border-color: #ad6f07;
+}
+
+/* Button sits level with the input: label height (24px) + gap (8px) - 1px. */
+.cb-dash__field-action {
+    flex-shrink: 0;
+    padding-top: 31px;
+}
+
+.cb-dash__btn {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    min-width: 132px;
+    height: 50px;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.cb-dash__btn--primary {
+    background: var(--cb-dash-blue);
+    color: #ffffff;
+}
+
+.cb-dash__btn--primary:hover,
+.cb-dash__btn--primary:focus {
+    background: #0c27a3;
+    color: #ffffff;
+}
+
+.cb-dash__btn:focus-visible {
+    outline: 2px solid var(--cb-dash-blue);
+    outline-offset: 2px;
+}
+
+.cb-dash__btn:disabled {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--cb-dash-muted);
+    cursor: not-allowed;
+}
+
+/* Fits "Connecting…" so the field doesn't shrink when the label changes. */
+.cb-dash__btn--connect {
+    min-width: 162px;
+}
+
+.cb-dash__step.is-connecting .cb-dash__btn--connect {
+    background: var(--cb-dash-blue);
+    color: #ffffff;
+    cursor: progress;
+}
+
+.cb-dash__spinner {
+    animation: cb-dash-spin 0.8s linear infinite;
+    transform-origin: 10px 10px;
+}
+
+@keyframes cb-dash-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cb-dash__spinner {
+        animation-duration: 2.4s;
+    }
+}
+
+/* Error / warning under the field */
+.cb-dash__message {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+}
+
+.cb-dash__message-icon {
+    display: none;
+    flex-shrink: 0;
+}
+
+.cb-dash__step.is-error .cb-dash__message {
+    color: #9f1818;
+}
+
+.cb-dash__step.is-warning .cb-dash__message,
+.cb-dash__connection-group.is-warning .cb-dash__message {
+    color: #7c4f05;
+}
+
+.cb-dash__step.is-error .cb-dash__message-icon--error,
+.cb-dash__step.is-warning .cb-dash__message-icon--warning,
+.cb-dash__connection-group.is-warning .cb-dash__message-icon--warning {
+    display: block;
+}
+
+.cb-dash__message a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+/* Help links under the field */
+.cb-dash__help-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.cb-dash__help-fallback {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
+
+.cb-dash__link--small {
+    font-size: 13.13px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.25px;
+}
+
+/* Need help */
+.cb-dash__need-help {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cb-dash__video-card {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.cb-dash__video-text {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.cb-dash__video-text .cb-dash__link {
+    padding-top: 8px;
+}
+
+.cb-dash__video {
+    position: relative;
+    flex-shrink: 0;
+    width: 352px;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #000000;
+}
+
+.cb-dash__video-play {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.cb-dash__video-play:focus-visible {
+    outline: 2px solid var(--cb-dash-blue);
+    outline-offset: 2px;
+}
+
+.cb-dash__video-thumb {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cb-dash__video-play-bg,
+.cb-dash__video-play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Play-button shadow is 80px around the 64px icon, offset 2px down (Figma inset -9.38%/-15.63%). */
+.cb-dash__video-play-bg {
+    margin-top: 2px;
+}
+
+.cb-dash__video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+@media screen and (max-width: 782px) {
+    .cb-dash__title {
+        font-size: 40px;
+    }
+
+    .cb-dash__paths,
+    .cb-dash__field-row,
+    .cb-dash__video-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cb-dash__video {
+        width: 100%;
+    }
+
+    .cb-dash__where {
+        position: static;
+    }
+
+    .cb-dash__popover {
+        left: 0;
+        width: 100%;
+        max-width: none;
+        transform: none;
+    }
+
+    .cb-dash__popover-caret {
+        display: none;
+    }
+
+    .cb-dash__popover-examples {
+        flex-direction: column;
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* Connected dashboard (frames 06–11)                                  */
+/* ------------------------------------------------------------------ */
+
+.cb-dash__connection {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 32px 24px;
+}
+
+.cb-dash__connection-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cb-dash__connection-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.cb-dash__connection-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cb-dash__readonly-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.cb-dash__field--fixed {
+    flex: 0 1 520px;
+}
+
+.cb-dash .cb-dash__input[readonly] {
+    background: #ffffff;
+    color: var(--cb-dash-ink);
+}
+
+.cb-dash .cb-dash__input[readonly]:focus {
+    border-color: var(--cb-dash-line);
+}
+
+.cb-dash__readonly-row .cb-dash__field-action {
+    padding-top: 32px;
+}
+
+/* Transparent button; label left-aligned so "Preview banner" and "Disconnect" share a left edge. */
+.cb-dash__btn--ghost {
+    justify-content: flex-start;
+    background: transparent;
+    color: var(--cb-dash-blue);
+}
+
+.cb-dash__btn--ghost:hover,
+.cb-dash__btn--ghost:focus {
+    background: rgba(16, 50, 207, 0.06);
+    color: var(--cb-dash-blue);
+}
+
+/* Show-banner switch (CB Toggles, 56×32) */
+.cb-dash__switch-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.cb-dash .cb-dash__switch {
+    flex-shrink: 0;
+    width: 56px;
+    height: 32px;
+    margin: 0;
+    border: 0;
+    border-radius: 16px;
+    background: url("../../img/dashboard/toggle-off.svg") center / 56px 32px no-repeat;
+    box-shadow: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.cb-dash .cb-dash__switch:checked {
+    background-image: url("../../img/dashboard/toggle-on.svg");
+}
+
+.cb-dash .cb-dash__switch:checked::before {
+    content: none;
+}
+
+.cb-dash .cb-dash__switch:focus-visible {
+    outline: 2px solid var(--cb-dash-blue);
+    outline-offset: 2px;
+}
+
+.cb-dash__switch-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+}
+
+/* Inline notice (Setup / Inline notice, Type=Warning) */
+.cb-dash__notice {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 16px 20px;
+    border-radius: 8px;
+}
+
+.cb-dash__notice img {
+    flex-shrink: 0;
+}
+
+.cb-dash__notice--warning {
+    border: 1px solid #eb6435;
+    background: #fdecd4;
+}
+
+/* Success toast, bottom centre (frame 06) */
+.cb-dash-toast {
+    position: fixed;
+    z-index: 100000;
+    bottom: 72px;
+    left: 50%;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    width: 468px;
+    max-width: calc(100vw - 32px);
+    padding: 24px;
+    border-radius: 8px;
+    background: #076646;
+    box-shadow: 0 8px 24px rgba(20, 20, 20, 0.25);
+    color: #ffffff;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    transform: translateX(-50%);
+}
+
+.cb-dash-toast[hidden] {
+    display: none;
+}
+
+/* Exported check is #141414; the toast renders it white. Centred in a 24px slot. */
+.cb-dash-toast__check {
+    flex-shrink: 0;
+    margin: 5px 3px;
+    filter: brightness(0) invert(1);
+}
+
+.cb-dash-toast__text {
+    flex: 1 0 0;
+    margin: 0;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+}
+
+.cb-dash-toast__close {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.cb-dash-toast__close:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+@media screen and (max-width: 782px) {
+    .cb-dash__readonly-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cb-dash__field--fixed {
+        flex-basis: auto;
+    }
+
+    .cb-dash__readonly-row .cb-dash__field-action {
+        padding-top: 0;
+    }
+}
+
+/* Connection card footer: "Do more in Cookiebot" (Domain Group IDs only) */
+.cb-dash__connection-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.cb-dash__footer-link {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.cb-dash__footer-link > img {
+    flex-shrink: 0;
+}
+
+.cb-dash__footer-text {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* More from Cookiebot */
+.cb-dash__more {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cb-dash__promo-cards {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.cb-dash__promo {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 32px;
+    border-radius: 16px;
+}
+
+/* Partner card: CB "_Base / Dashboard / Activation" background (two radial blue glows on #EFF2F5). */
+.cb-dash__promo--partner {
+    flex: 1 0 0;
+    justify-content: center;
+    gap: 32px;
+    padding: 32px 40px;
+    background:
+        radial-gradient(ellipse 60% 120% at 100% 100%, rgba(0, 125, 212, 0.6), rgba(255, 255, 255, 0) 70%),
+        radial-gradient(ellipse 45% 90% at 0% 0%, rgba(0, 125, 212, 0.8), rgba(255, 255, 255, 0) 60%),
+        #eff2f5;
+}
+
+.cb-dash__promo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 585px;
+}
+
+.cb-dash__promo--partner .cb-dash__body {
+    color: #595959;
+}
+
+.cb-dash__promo--review {
+    flex: 0 0 320px;
+    border: 1px solid var(--cb-dash-line);
+}
+
+.cb-dash__link--underline {
+    text-decoration: underline;
+}
+
+.cb-dash__help-line .cb-dash__link {
+    display: inline;
+}
+
+@media screen and (max-width: 782px) {
+    .cb-dash__footer-link,
+    .cb-dash__promo-cards {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cb-dash__promo--review {
+        flex-basis: auto;
+    }
+}
+
+/* Disconnect confirmation (Setup / Confirm dialog, frame 09) */
+.cb-dash-dialog {
+    width: 560px;
+    max-width: calc(100vw - 32px);
+    margin-top: 300px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.16);
+    color: #141414;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Padding lives on the body so a click anywhere inside the box never reads as a backdrop click. */
+.cb-dash-dialog__body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 28px 32px 32px;
+}
+
+.cb-dash-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.cb-dash-dialog__header {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.cb-dash-dialog__title {
+    flex: 1 0 0;
+    margin: 0;
+    padding: 0;
+    color: #141414;
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.cb-dash-dialog__close {
+    display: flex;
+    flex-shrink: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.cb-dash-dialog__text {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+}
+
+.cb-dash-dialog__actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    padding-top: 8px;
+}
+
+.cb-dash-dialog__btn {
+    min-width: 132px;
+    height: 50px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+    cursor: pointer;
+}
+
+.cb-dash-dialog__btn--secondary {
+    border: 2px solid #1032cf;
+    background: #ffffff;
+    color: #141414;
+}
+
+.cb-dash-dialog__btn--danger {
+    border: 0;
+    background: #9f1818;
+    color: #ffffff;
+}
+
+.cb-dash-dialog__btn--danger:hover,
+.cb-dash-dialog__btn--danger:focus {
+    background: #7f1313;
+}
+
+.cb-dash-dialog__btn:disabled {
+    cursor: progress;
+    opacity: 0.7;
+}
+
+.cb-dash-dialog__close:focus-visible,
+.cb-dash-dialog__btn:focus-visible {
+    outline: 2px solid #1032cf;
+    outline-offset: 2px;
+}
+
+@media screen and (max-width: 782px) {
+    .cb-dash-dialog {
+        margin-top: 120px;
+    }
+}

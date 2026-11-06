@@ -51,6 +51,7 @@ $options = array(
 	'cookiebot-second-banner-regions',
 	'cookiebot-second-banner-id',
 	'cookiebot-multiple-banners',
+	'cookiebot-signup-clicked',
 );
 // Delete all config params
 // phpcs:ignore

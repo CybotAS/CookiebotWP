@@ -8,6 +8,7 @@
 
 namespace cybot\cookiebot\abilities;
 
+use cybot\cookiebot\lib\Cbid_Checker;
 use cybot\cookiebot\lib\Cookiebot_WP;
 
 /**
@@ -17,7 +18,7 @@ use cybot\cookiebot\lib\Cookiebot_WP;
  */
 class Set_Cbid_Ability implements Cookiebot_Ability_Interface {
 
-	const CBID_PATTERN = '^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[a-zA-Z0-9]{9}|[a-zA-Z0-9]{14})$';
+	const CBID_PATTERN = '^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[a-zA-Z0-9_-]{9}|[a-zA-Z0-9_-]{14})$';
 
 	/**
 	 * Audit logger instance.
@@ -68,7 +69,7 @@ class Set_Cbid_Ability implements Cookiebot_Ability_Interface {
 					'cbid' => array(
 						'type'        => 'string',
 						'pattern'     => self::CBID_PATTERN,
-						'description' => __( 'The Domain Group ID: a UUID for Cookiebot accounts (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) or a Settings ID for Usercentrics accounts (9 or 14 alphanumeric characters).', 'cookiebot' ),
+						'description' => __( 'The Domain Group ID: a UUID for Cookiebot accounts (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) or a Settings ID for Usercentrics accounts (9 or 14 characters: letters, digits, "_" or "-").', 'cookiebot' ),
 					),
 				),
 				'required'             => array( 'cbid' ),
@@ -93,12 +94,13 @@ class Set_Cbid_Ability implements Cookiebot_Ability_Interface {
 				'additionalProperties' => false,
 			),
 			'execute_callback'    => function ( $input ) use ( $logger ) {
-				$cbid = isset( $input['cbid'] ) ? $input['cbid'] : '';
+				$cbid = isset( $input['cbid'] ) && is_string( $input['cbid'] ) ? trim( $input['cbid'] ) : '';
 
-				if ( empty( $cbid ) || ! preg_match( '/' . self::CBID_PATTERN . '/', $cbid ) ) {
+				// Same rule as the dashboard (Cbid_Checker::get_type()).
+				if ( Cbid_Checker::TYPE_INVALID === Cbid_Checker::get_type( $cbid ) ) {
 					return new \WP_Error(
 						'cookiebot_invalid_cbid',
-						__( 'Invalid ID. Provide a Cookiebot Domain Group ID (UUID: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) or a Usercentrics Settings ID (9 or 14 alphanumeric characters).', 'cookiebot' )
+						__( 'Invalid ID. Provide a Cookiebot Domain Group ID (UUID: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX) or a Usercentrics Settings ID (9 or 14 characters: letters, digits, "_" or "-").', 'cookiebot' )
 					);
 				}
 

@@ -216,7 +216,7 @@ class Cookiebot_CLI_Command {
 	/**
 	 * Set the Domain Group ID (CBID).
 	 *
-	 * Accepts a Cookiebot UUID (36 chars) or a Usercentrics Settings ID (9 or 14 alphanumeric chars).
+	 * Accepts a Cookiebot UUID (36 chars) or a Usercentrics Settings ID (9 or 14 chars: letters, digits, "_" or "-").
 	 *
 	 * ## OPTIONS
 	 *
