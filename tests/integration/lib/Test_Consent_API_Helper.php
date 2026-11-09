@@ -35,16 +35,22 @@ class Test_Consent_API_Helper extends WP_UnitTestCase {
 
 	/**
 	 * Filter is already registered after plugin bootstrap (before Site Health runs).
+	 *
+	 * Checks the exact callback, so it fails if the registration is missing or replaced.
 	 */
 	public function test_registered_at_plugin_load() {
 		$hook = 'wp_consent_api_registered_' . Consent_API_Helper::get_plugin_basename();
-		$this->assertTrue( apply_filters( $hook, false ) );
+		$this->assertNotFalse( has_filter( $hook, '__return_true' ) );
 	}
 
 	/**
 	 * register_hooks() declares compliance even when WP Consent API is not active.
+	 *
+	 * Forces WP Consent API to look inactive, so the test does not depend on the environment.
 	 */
 	public function test_register_hooks_declares_compliance_without_consent_api() {
+		add_filter( 'pre_option_active_plugins', '__return_empty_array' );
+
 		$helper = new Consent_API_Helper();
 		$hook   = 'wp_consent_api_registered_' . Consent_API_Helper::get_plugin_basename();
 		remove_all_filters( $hook );
