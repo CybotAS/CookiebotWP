@@ -3,7 +3,7 @@
 * Tags: cookie banner, cookie consent, cookie notice, gdpr, ccpa
 * Requires at least: 4.4
 * Tested up to: 7.1
-* Stable tag: 4.7.5
+* Stable tag: 4.8.0
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -296,6 +296,23 @@ You also need to store proof of consent and allow easy revocation.
 ## Changelog ##
 **Cookiebot by Usercentrics Plugin will soon no longer support PHP 5. If your website still runs on this version we recommend upgrading so you can continue enjoying the features Cookiebot by Usercentrics offers.**
 
+
+### 4.8.0 ###
+Release date: November 9th 2026
+
+Cookiebot by Usercentrics version 4.8.0 is out! This release includes improvements.
+
+####Improvements####
+
+* New dashboard with a welcome screen where you choose how to set up Cookiebot
+* Connect an existing Cookiebot or Usercentrics account by entering your Domain Group ID or Settings ID, with validation and a check that the ID is set up for this site
+* Create a new account from the plugin, with a first-year offer
+* New connected dashboard with a connection card, a banner toggle, and "Do more in Cookiebot" and "More from Cookiebot" sections
+* Added a "Where is it?" help popover to find your ID
+* Disconnect an ID from the dashboard, with a confirmation dialog
+* Dashboard translations
+* Cookiebot logo in the plugin header
+* Refreshed the WordPress.org listing copy, tags and FAQ
 
 ### 4.7.5 ###
 Release date: October 8th 2026
