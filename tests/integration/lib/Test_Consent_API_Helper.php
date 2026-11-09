@@ -19,10 +19,18 @@ use WP_UnitTestCase;
 class Test_Consent_API_Helper extends WP_UnitTestCase {
 
 	/**
-	 * Basename must point at the main plugin file.
+	 * Basename must be the value WordPress derives for the main plugin file.
+	 *
+	 * That is the format stored in active_plugins, which is what the WP Consent API Site Health test looks up.
+	 * Inside the test bootstrap the plugin is loaded from the checkout, so the value is not <folder>/cookiebot.php here.
 	 */
-	public function test_plugin_basename_points_to_main_file() {
-		$this->assertSame( 'cookiebot.php', basename( Consent_API_Helper::get_plugin_basename() ) );
+	public function test_plugin_basename_matches_wordpress_format() {
+		$basename = Consent_API_Helper::get_plugin_basename();
+
+		$this->assertSame( plugin_basename( CYBOT_COOKIEBOT_PLUGIN_DIR . 'cookiebot.php' ), $basename );
+		$this->assertStringEndsWith( 'cookiebot.php', $basename );
+		$this->assertNotSame( '/', substr( $basename, 0, 1 ), 'Basename must be relative to the plugins directory.' );
+		$this->assertFalse( strpos( $basename, '\\' ), 'Basename must use forward slashes.' );
 	}
 
 	/**
