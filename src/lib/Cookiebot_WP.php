@@ -97,7 +97,7 @@ class Cookiebot_WP {
 
 		if ( is_admin() ) {
 			( new Menu_Settings() )->add_menu();
-			if ( is_multisite() && is_plugin_active_for_network( 'cookiebot/cookiebot.php' ) ) {
+			if ( is_multisite() && is_plugin_active_for_network( get_plugin_basename() ) ) {
 				( new Network_Menu_Settings() )->add_menu();
 			}
 			( new Dashboard_Widget_Cookiebot_Status() )->register_hooks();

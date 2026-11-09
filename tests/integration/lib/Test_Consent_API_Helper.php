@@ -10,6 +10,7 @@ namespace cybot\cookiebot\tests\integration\lib;
 
 use cybot\cookiebot\lib\Consent_API_Helper;
 use WP_UnitTestCase;
+use function cybot\cookiebot\lib\get_plugin_basename;
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- The hook is owned by WP Consent API and built from the plugin basename.
 
@@ -25,7 +26,7 @@ class Test_Consent_API_Helper extends WP_UnitTestCase {
 	 * Inside the test bootstrap the plugin is loaded from the checkout, so the value is not <folder>/cookiebot.php here.
 	 */
 	public function test_plugin_basename_matches_wordpress_format() {
-		$basename = Consent_API_Helper::get_plugin_basename();
+		$basename = get_plugin_basename();
 
 		$this->assertSame( plugin_basename( CYBOT_COOKIEBOT_PLUGIN_DIR . 'cookiebot.php' ), $basename );
 		$this->assertStringEndsWith( 'cookiebot.php', $basename );
@@ -39,7 +40,7 @@ class Test_Consent_API_Helper extends WP_UnitTestCase {
 	 * Checks the exact callback, so it fails if the registration is missing or replaced.
 	 */
 	public function test_registered_at_plugin_load() {
-		$hook = 'wp_consent_api_registered_' . Consent_API_Helper::get_plugin_basename();
+		$hook = 'wp_consent_api_registered_' . get_plugin_basename();
 		$this->assertNotFalse( has_filter( $hook, '__return_true' ) );
 	}
 
@@ -52,7 +53,7 @@ class Test_Consent_API_Helper extends WP_UnitTestCase {
 		add_filter( 'pre_option_active_plugins', '__return_empty_array' );
 
 		$helper = new Consent_API_Helper();
-		$hook   = 'wp_consent_api_registered_' . Consent_API_Helper::get_plugin_basename();
+		$hook   = 'wp_consent_api_registered_' . get_plugin_basename();
 		remove_all_filters( $hook );
 
 		$this->assertFalse( $helper->is_wp_consent_api_active() );

@@ -16,7 +16,7 @@ class Cookiebot_Review {
 
 	public function register_hooks() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'cookiebot_admin_script' ), 9999 );
-		add_filter( 'plugin_action_links_cookiebot/cookiebot.php', array( $this, 'plugin_action_links' ) );
+		add_filter( 'plugin_action_links_' . get_plugin_basename(), array( $this, 'plugin_action_links' ) );
 		add_filter( 'network_admin_plugin_action_links', array( $this, 'plugin_action_links' ) );
 		add_action( 'wp_ajax_cb_submit_survey', array( $this, 'send_uninstall_survey' ) );
 	}

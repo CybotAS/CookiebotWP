@@ -16,7 +16,7 @@ class Cookiebot_Admin_Links {
 	}
 
 	public function register_hooks() {
-		add_filter( 'plugin_action_links_cookiebot/cookiebot.php', array( $this, 'set_settings_action_link' ) );
+		add_filter( 'plugin_action_links_' . get_plugin_basename(), array( $this, 'set_settings_action_link' ) );
 		add_action( 'admin_init', array( $this, 'handle_external_redirects' ) );
 	}
 
