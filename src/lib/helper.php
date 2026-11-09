@@ -590,6 +590,17 @@ function logo_url() {
 }
 
 /**
+ * Plugin basename as WordPress stores it in active_plugins, e.g. cookiebot/cookiebot.php.
+ *
+ * Built at runtime so it follows the real plugin folder name.
+ *
+ * @return string
+ */
+function get_plugin_basename() {
+	return plugin_basename( CYBOT_COOKIEBOT_PLUGIN_DIR . 'cookiebot.php' );
+}
+
+/**
  * Helper function to update your scripts
  *
  * @param string|string[] $type

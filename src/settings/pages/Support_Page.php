@@ -13,6 +13,7 @@ use cybot\cookiebot\shortcode\Cookiebot_Declaration_Shortcode;
 use InvalidArgumentException;
 use Exception;
 use function cybot\cookiebot\lib\asset_url;
+use function cybot\cookiebot\lib\get_plugin_basename;
 use function cybot\cookiebot\lib\include_view;
 
 class Support_Page implements Settings_Page_Interface {
@@ -299,7 +300,7 @@ class Support_Page implements Settings_Page_Interface {
 		$output = "\n--- Activated Plugins ---\n";
 
 		foreach ( $active_plugins as $plugin_key ) {
-			if ( $plugin_key !== 'cookiebot/cookiebot.php' ) {
+			if ( get_plugin_basename() !== $plugin_key ) {
 				$output .= $plugins[ $plugin_key ]['Name'] . ' (Version: ' . $plugins[ $plugin_key ]['Version'] . ")\n";
 			}
 		}

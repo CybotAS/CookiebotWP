@@ -7,6 +7,10 @@ use InvalidArgumentException;
 class Consent_API_Helper {
 
 	public function register_hooks() {
+		// Declare compliance with the WP Consent API (read by its Site Health test).
+		// Does nothing when WP Consent API is not installed, so no is_plugin_active() check is needed.
+		add_filter( 'wp_consent_api_registered_' . get_plugin_basename(), '__return_true' );
+
 		// Include integration to WP Consent Level API if available
 		if ( $this->is_wp_consent_api_active() ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'cookiebot_enqueue_consent_api_scripts' ) );
