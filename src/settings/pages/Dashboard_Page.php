@@ -2,6 +2,7 @@
 
 namespace cybot\cookiebot\settings\pages;
 
+use cybot\cookiebot\lib\Account_Service;
 use cybot\cookiebot\lib\Cbid_Checker;
 use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\lib\Cookiebot_WP;
@@ -78,7 +79,6 @@ class Dashboard_Page implements Settings_Page_Interface {
 		$subscription       = Cookiebot_WP::get_subscription_type();
 		$legal_framework    = Cookiebot_WP::get_legal_framwework();
 		$is_authenticated   = ! empty( Cookiebot_WP::get_auth_token() );
-		$is_cb_user         = Cookiebot_Frame::is_cb_frame_type();
 
 		// Consumed before any branch, so it can't linger behind another screen.
 		$just_connected = $this->consume_just_connected( $cbid );
@@ -208,7 +208,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 		}
 
 		// Cookiebot (CB) accounts and sites without account data: new connected view.
-		if ( true === $is_cb_user || empty( $user_data ) ) {
+		if ( Account_Service::shows_connected_view( $cbid, $user_data ) ) {
 			$this->render_connected( $just_connected );
 			return;
 		}

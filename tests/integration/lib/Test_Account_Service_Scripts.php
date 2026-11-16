@@ -62,6 +62,29 @@ class Test_Account_Service_Scripts extends WP_UnitTestCase {
 		$this->enqueue();
 
 		$this->assertFalse( wp_script_is( 'cookiebot-account-js', 'enqueued' ) );
+		$this->assertFalse( wp_script_is( 'cookiebot-account-static-js', 'enqueued' ) );
+	}
+
+	public function test_session_expired_still_loads_static_account_script() {
+		update_option( 'cookiebot-cbid', self::SETTINGS_ID );
+		update_option( 'cookiebot-user-data', array( 'email' => 'user@example.com' ) );
+		update_option( 'cookiebot-uc-onboarded-via-signup', true );
+
+		$this->enqueue();
+
+		$this->assertTrue( wp_script_is( 'cookiebot-account-static-js', 'enqueued' ) );
+		$this->assertFalse( wp_script_is( 'cookiebot-account-js', 'enqueued' ) );
+	}
+
+	public function test_shows_connected_view_uses_the_given_id() {
+		// The stored ID is ignored: only the arguments decide.
+		update_option( 'cookiebot-cbid', self::SETTINGS_ID );
+		$user_data = array( 'email' => 'user@example.com' );
+
+		$this->assertTrue( Account_Service::shows_connected_view( self::DOMAIN_GROUP_ID, $user_data ) );
+		$this->assertFalse( Account_Service::shows_connected_view( self::SETTINGS_ID, $user_data ) );
+		$this->assertTrue( Account_Service::shows_connected_view( self::SETTINGS_ID, '' ) );
+		$this->assertFalse( Account_Service::shows_connected_view( '', '' ) );
 	}
 
 	public function test_settings_id_without_user_data_does_not_load_account_script() {

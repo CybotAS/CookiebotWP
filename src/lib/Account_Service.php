@@ -111,8 +111,9 @@ class Account_Service {
 	}
 
 	/**
-	 * Whether the dashboard renders the connected view for this ID.
-	 * Mirrors the routing in Dashboard_Page::display().
+	 * Whether the dashboard renders the connected view for this ID: a
+	 * Cookiebot ID, or any ID without UC account data. Dashboard_Page::display()
+	 * uses this for its routing too.
 	 *
 	 * @param string       $cbid      The active ID.
 	 * @param array|string $user_data Stored UC account data.
@@ -123,7 +124,7 @@ class Account_Service {
 			return false;
 		}
 
-		return true === Cookiebot_Frame::is_cb_frame_type() || empty( $user_data );
+		return 1 === preg_match( Cookiebot_Frame::CB_FRAME_REGEX, $cbid ) || empty( $user_data );
 	}
 
 	public function ajax_store_cbid() {
