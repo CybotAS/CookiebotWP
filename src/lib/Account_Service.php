@@ -62,6 +62,12 @@ class Account_Service {
 		$user_data        = Cookiebot_WP::get_user_data();
 		$was_onboarded    = Cookiebot_WP::was_onboarded_via_signup();
 
+		// The connected view (Cookiebot ID, or no UC account data) does not use
+		// the account flow. Loading it there calls the EA API without a token.
+		if ( self::shows_connected_view( $cbid, $user_data ) ) {
+			return;
+		}
+
 		if ( ! $is_authenticated && ! empty( $cbid ) && ! empty( $user_data ) && ! empty( $was_onboarded ) ) {
 			wp_enqueue_script(
 				'cookiebot-account-static-js',
@@ -102,6 +108,22 @@ class Account_Service {
 				)
 			);
 		}
+	}
+
+	/**
+	 * Whether the dashboard renders the connected view for this ID.
+	 * Mirrors the routing in Dashboard_Page::display().
+	 *
+	 * @param string       $cbid      The active ID.
+	 * @param array|string $user_data Stored UC account data.
+	 * @return bool
+	 */
+	public static function shows_connected_view( $cbid, $user_data ) {
+		if ( empty( $cbid ) ) {
+			return false;
+		}
+
+		return true === Cookiebot_Frame::is_cb_frame_type() || empty( $user_data );
 	}
 
 	public function ajax_store_cbid() {
