@@ -9,6 +9,8 @@
 namespace cybot\cookiebot\tests\integration\lib;
 
 use cybot\cookiebot\lib\Account_Service;
+use cybot\cookiebot\lib\Cookiebot_Frame;
+use cybot\cookiebot\settings\pages\Dashboard_Page;
 use WP_UnitTestCase;
 
 /**
@@ -76,15 +78,67 @@ class Test_Account_Service_Scripts extends WP_UnitTestCase {
 		$this->assertFalse( wp_script_is( 'cookiebot-account-js', 'enqueued' ) );
 	}
 
+	/**
+	 * Run the enqueue callback, then render the dashboard, as a real request does.
+	 *
+	 * @return void
+	 */
+	private function enqueue_and_render_dashboard() {
+		$this->enqueue();
+		ob_start();
+		( new Dashboard_Page() )->display();
+		ob_end_clean();
+	}
+
+	/**
+	 * Number of account scripts enqueued.
+	 *
+	 * @return int
+	 */
+	private function enqueued_account_scripts() {
+		return (int) wp_script_is( 'cookiebot-account-js', 'enqueued' )
+			+ (int) wp_script_is( 'cookiebot-account-static-js', 'enqueued' );
+	}
+
+	public function test_cookiebot_id_session_expired_loads_only_static_account_script() {
+		update_option( 'cookiebot-cbid', self::DOMAIN_GROUP_ID );
+		update_option( 'cookiebot-user-data', array( 'email' => 'user@example.com' ) );
+		update_option( 'cookiebot-uc-onboarded-via-signup', true );
+
+		$this->enqueue_and_render_dashboard();
+
+		$this->assertTrue( wp_script_is( 'cookiebot-account-static-js', 'enqueued' ) );
+		$this->assertSame( 1, $this->enqueued_account_scripts() );
+	}
+
+	public function test_cookiebot_id_trial_expired_loads_only_account_script() {
+		update_option( 'cookiebot-cbid', self::DOMAIN_GROUP_ID );
+		update_option( 'cookiebot-auth-token', 'token' );
+		update_option(
+			'cookiebot-user-data',
+			array(
+				'email'         => 'user@example.com',
+				'subscriptions' => array(
+					'active' => array( 'subscription_status' => 'cancelled' ),
+				),
+			)
+		);
+
+		$this->enqueue_and_render_dashboard();
+
+		$this->assertTrue( wp_script_is( 'cookiebot-account-js', 'enqueued' ) );
+		$this->assertSame( 1, $this->enqueued_account_scripts() );
+	}
+
 	public function test_shows_connected_view_uses_the_given_id() {
 		// The stored ID is ignored: only the arguments decide.
 		update_option( 'cookiebot-cbid', self::SETTINGS_ID );
 		$user_data = array( 'email' => 'user@example.com' );
 
-		$this->assertTrue( Account_Service::shows_connected_view( self::DOMAIN_GROUP_ID, $user_data ) );
-		$this->assertFalse( Account_Service::shows_connected_view( self::SETTINGS_ID, $user_data ) );
-		$this->assertTrue( Account_Service::shows_connected_view( self::SETTINGS_ID, '' ) );
-		$this->assertFalse( Account_Service::shows_connected_view( '', '' ) );
+		$this->assertTrue( Cookiebot_Frame::shows_connected_view( self::DOMAIN_GROUP_ID, $user_data ) );
+		$this->assertFalse( Cookiebot_Frame::shows_connected_view( self::SETTINGS_ID, $user_data ) );
+		$this->assertTrue( Cookiebot_Frame::shows_connected_view( self::SETTINGS_ID, '' ) );
+		$this->assertFalse( Cookiebot_Frame::shows_connected_view( '', '' ) );
 	}
 
 	public function test_settings_id_without_user_data_does_not_load_account_script() {

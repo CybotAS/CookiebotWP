@@ -2,7 +2,6 @@
 
 namespace cybot\cookiebot\settings\pages;
 
-use cybot\cookiebot\lib\Account_Service;
 use cybot\cookiebot\lib\Cbid_Checker;
 use cybot\cookiebot\lib\Cookiebot_Frame;
 use cybot\cookiebot\lib\Cookiebot_WP;
@@ -208,7 +207,7 @@ class Dashboard_Page implements Settings_Page_Interface {
 		}
 
 		// Cookiebot (CB) accounts and sites without account data: new connected view.
-		if ( Account_Service::shows_connected_view( $cbid, $user_data ) ) {
+		if ( Cookiebot_Frame::shows_connected_view( $cbid, $user_data ) ) {
 			$this->render_connected( $just_connected );
 			return;
 		}

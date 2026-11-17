@@ -64,7 +64,10 @@ class Account_Service {
 
 		// The connected view (Cookiebot ID, or no UC account data) does not use
 		// the account flow. Loading it there calls the EA API without a token.
-		if ( self::shows_connected_view( $cbid, $user_data ) ) {
+		// Dashboard_Page::display() checks session-expired and trial-expired
+		// before this rule. Those views enqueue their own account script, so
+		// skipping here does not leave them without one.
+		if ( Cookiebot_Frame::shows_connected_view( $cbid, $user_data ) ) {
 			return;
 		}
 
@@ -108,23 +111,6 @@ class Account_Service {
 				)
 			);
 		}
-	}
-
-	/**
-	 * Whether the dashboard renders the connected view for this ID: a
-	 * Cookiebot ID, or any ID without UC account data. Dashboard_Page::display()
-	 * uses this for its routing too.
-	 *
-	 * @param string       $cbid      The active ID.
-	 * @param array|string $user_data Stored UC account data.
-	 * @return bool
-	 */
-	public static function shows_connected_view( $cbid, $user_data ) {
-		if ( empty( $cbid ) ) {
-			return false;
-		}
-
-		return 1 === preg_match( Cookiebot_Frame::CB_FRAME_REGEX, $cbid ) || empty( $user_data );
 	}
 
 	public function ajax_store_cbid() {
