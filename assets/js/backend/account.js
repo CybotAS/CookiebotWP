@@ -315,6 +315,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
 
+        // Without a token every EA API call below fails with 401, so stop here.
+        if (!authToken) {
+            return;
+        }
+
         // Check for existing CBID
         const cbid = await fetch(cookiebot_account.ajax_url, {
             method: 'POST',

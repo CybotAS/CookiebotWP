@@ -62,6 +62,15 @@ class Account_Service {
 		$user_data        = Cookiebot_WP::get_user_data();
 		$was_onboarded    = Cookiebot_WP::was_onboarded_via_signup();
 
+		// The connected view (Cookiebot ID, or no UC account data) does not use
+		// the account flow. Loading it there calls the EA API without a token.
+		// Dashboard_Page::display() checks session-expired and trial-expired
+		// before this rule. Those views enqueue their own account script, so
+		// skipping here does not leave them without one.
+		if ( Cookiebot_Frame::shows_connected_view( $cbid, $user_data ) ) {
+			return;
+		}
+
 		if ( ! $is_authenticated && ! empty( $cbid ) && ! empty( $user_data ) && ! empty( $was_onboarded ) ) {
 			wp_enqueue_script(
 				'cookiebot-account-static-js',
