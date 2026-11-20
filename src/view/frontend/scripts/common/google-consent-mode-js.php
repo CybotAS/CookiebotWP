@@ -6,8 +6,15 @@
  * @var string $script_type
  */
 
+$script_attributes = array(
+    'type' => $script_type,
+);
+if ($consent_attribute) {
+    $script_attributes['data-cookieconsent'] = $consent_attribute;
+}
+
+ob_start();
 ?>
-<script type="<?php echo esc_attr( $script_type ); ?>"<?php echo ! $consent_attribute ? '' : ' data-cookieconsent="' . esc_attr( $consent_attribute ) . '"'; ?>>
 	window.<?php echo esc_js( $data_layer ); ?> = window.<?php echo esc_js( $data_layer ); ?> || [];
 
 	function gtag() {
@@ -31,4 +38,5 @@
 			'gtag("set", "url_passthrough", true);' . PHP_EOL;
 	}
 	?>
-</script>
+
+<?php wp_print_inline_script_tag( ob_get_clean(), $script_attributes ); ?>
